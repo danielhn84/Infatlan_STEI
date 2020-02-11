@@ -14,7 +14,7 @@
                     <li class="breadcrumb-item active">Dashboard</li>
                 </ol>
                 <button type="button" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Mantenimiento Agencias</button>
-            </div>
+            </div> 
         </div>
     </div>
     <div class="card-group">
