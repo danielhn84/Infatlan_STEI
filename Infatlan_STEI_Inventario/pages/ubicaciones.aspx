@@ -21,6 +21,14 @@
     </asp:UpdateProgress>
 
     <div class="card">
+        <div class="card-body collapse show">
+            <h4 class="card-title">Special title treatment</h4>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        </div>
+    </div>
+
+
+    <div class="card">
         <div class="card-body">
             <h4 class="card-title">Búsqueda</h4>
             <div class="row"> 
