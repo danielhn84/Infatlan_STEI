@@ -15,6 +15,23 @@
     <link href="/assets/node_module/toast-master/css/jquery.toast.css" rel="stylesheet">
     <link href="/css/style.min.css" rel="stylesheet">
     <link href="/css/pages/dashboard1.css" rel="stylesheet">
+
+    <script type="text/javascript"> 
+        infatlan = {
+            showNotification: function (from, align, mensaje, tipo) {
+                color = Math.floor((Math.random() * 4) + 1);
+                $.notify({
+                    icon: "pe - 7s - gift",
+                    message: mensaje
+                }, {
+                        type: tipo,
+                        timer: 4000,
+                        placement: { from: from, align: align }
+                    });
+            }
+        }
+    </script>
+
     <asp:ContentPlaceHolder ID="Head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -249,7 +266,6 @@
         </aside>
 
         <div class="page-wrapper">
-
             <div class="container-fluid">
                 <form id="FormaPrincipal" runat="server">
                     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
@@ -258,7 +274,6 @@
                         </asp:ContentPlaceHolder>
                     </div>
                 </form>
-
             </div>
         </div>
 
@@ -285,6 +300,16 @@
     <script src="/assets/node_module/toast-master/js/jquery.toast.js"></script>
     <script src="/js/dashboard1.js"></script>
     <script src="/assets/node_module/toast-master/js/jquery.toast.js"></script>
+
+
+    <script src="/js/off-canvas.js"></script>
+    <script src="/js/hoverable-collapse.js"></script>
+    <script src="/js/template.js"></script>
+    <script src="/js/dashboard.js"></script>
+    <script src="/js/data-table.js"></script>
+    <script src="/js/jquery.dataTables.js"></script>
+    <script src="/js/dataTables.bootstrap4.js"></script>
+    <script src="/js/bootstrap-notify.js"></script>
 
     <asp:ContentPlaceHolder ID="Script" runat="server">
     </asp:ContentPlaceHolder>

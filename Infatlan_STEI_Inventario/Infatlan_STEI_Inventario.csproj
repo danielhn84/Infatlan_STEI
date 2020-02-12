@@ -3289,12 +3289,14 @@
     <Content Include="css\style.css" />
     <Content Include="css\style.min.css" />
     <Content Include="default.aspx" />
+    <Content Include="js\bootstrap-notify.js" />
     <Content Include="js\custom.js" />
     <Content Include="js\custom.min.js" />
     <Content Include="js\dashboard1.js" />
     <Content Include="js\dashboard2.js" />
     <Content Include="js\dashboard3.js" />
     <Content Include="js\dashboard4.js" />
+    <Content Include="js\hoverable-collapse.js" />
     <Content Include="js\pages\chat.js" />
     <Content Include="js\pages\flot-data.js" />
     <Content Include="js\pages\footable-init.js" />
