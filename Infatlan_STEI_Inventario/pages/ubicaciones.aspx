@@ -12,8 +12,10 @@
 
     <script type="text/javascript">
         function openModal() { $('#ModalUbicaciones').modal('show'); }
+        function closeModal() { $('#ModalUbicaciones').modal('hide'); }
+        function ModalConfirmar() { $('#ModalConfirmar').modal('show'); }
     </script>
-
+    <script src="../js/bootstrap-notify.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
     <asp:UpdateProgress ID="UpdateProgress1" runat="server">
@@ -30,20 +32,16 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Ubicaciones</h4>
-                    <h6 class="card-subtitle">Lugar donde se encuentra el inventario de equipo.</h6>
+                    <h6 class="card-subtitle">Lugar donde se encuentra el equipo.</h6>
                     <br />
-                    <div class="row col-8"> 
-                        <label class="col-2">Búsqueda</label>
-                        <div class="col-7">
-                            <asp:TextBox runat="server" ID="TxBusqueda" AutoPostBack="true" OnTextChanged="TxBusqueda_TextChanged" CssClass="form-control"></asp:TextBox>
+                    <div class="row col-7"> 
+                        <label class="col-2 col-form-label">Búsqueda</label>
+                        <div class="col-8">
+                            <asp:TextBox runat="server" PlaceHolder="Ingrese texto y presione Enter" ID="TxBusqueda" AutoPostBack="true" OnTextChanged="TxBusqueda_TextChanged" CssClass="form-control"></asp:TextBox>
                         </div>
-                        <asp:Button runat="server" ID="BtnNuevo" CssClass="btn btn-success" Text="Nuevo" OnClick="BtnNuevo_Click"/>
+                        <asp:Button runat="server" ID="BtnNuevo" CssClass="btn btn-success" Text="Nuevo" OnClick="BtnNuevo_Click" />
                     </div>
-                </div>
-            </div>
-    
-            <div class="card">
-                <div class="card-body">
+
                     <div class="table-responsive m-t-40">
                         <asp:GridView ID="GVBusqueda" runat="server"
                             CssClass="table table-bordered"
@@ -52,14 +50,13 @@
                             RowStyle-CssClass="rows"
                             AutoGenerateColumns="false"
                             AllowPaging="true"
-                            GridLines="None"
+                            GridLines="None" OnRowCommand="GVBusqueda_RowCommand"
                             PageSize="10" OnPageIndexChanging="GVBusqueda_PageIndexChanging">
                             <Columns>
                                 <asp:BoundField DataField="idUbicacion" HeaderText="No." />
+                                <asp:BoundField DataField="tipo" HeaderText="Tipo" />
                                 <asp:BoundField DataField="codigo" HeaderText="Código" />
                                 <asp:BoundField DataField="direccion" HeaderText="Dirección"/>
-                                <asp:BoundField DataField="ciudad" HeaderText="Ciudad" />
-                                <asp:BoundField DataField="zona" HeaderText="Zona" />
                                 <asp:TemplateField HeaderText="Seleccione" HeaderStyle-Width="13%">
                                     <ItemTemplate>
                                         <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-info mr-2" CommandArgument='<%# Eval("idUbicacion") %>' CommandName="EditarUbicacion">
@@ -67,7 +64,7 @@
                                         </asp:LinkButton>
                             
                                         <asp:LinkButton ID="BtnEditar2" runat="server" class="btn btn-primary mr-2" CommandArgument='<%# Eval("idUbicacion") %>' CommandName="EliminarUbicacion">
-                                            <i class="icon-trash" ></i>
+                                            <i class="icon-trash"></i>
                                         </asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
@@ -79,17 +76,15 @@
         </ContentTemplate>
     </asp:UpdatePanel>
             
-
     <%--MODAL DE MODIFICACION--%>
     <div class="modal bs-example-modal-lg" id="ModalUbicaciones" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="ModalLabelModificacion">
                         <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                             <ContentTemplate>
-                                Gestionar Puesto
-                                <asp:Label ID="LbModPuesto" runat="server" Text=""></asp:Label>
+                                <asp:Label ID="LbIdUbicacion" runat="server" Text=""></asp:Label>
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </h4>
@@ -104,57 +99,63 @@
                                 <div class="col-md-12">
                                     <div class="form-group row">
                                         <div class="col-2" style="margin-left:5%">
-                                            <label class="col-form-label">Código</label>
+                                            <label class="col-form-label">Tipo</label>
                                         </div>
                                         <div class="col-sm-9">
-                                            <asp:TextBox ID="TxCodigo" placeholder="" class="form-control" runat="server"></asp:TextBox>
+                                            <asp:DropDownList ID="DDLTipo" runat="server" class="form-control"></asp:DropDownList>
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <div class="col-3" style="margin-left:5%">
+                                            <label class="col-form-label">Departamento</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <asp:DropDownList ID="DDLDepartamento" AutoPostBack="true" runat="server" class="form-control" OnSelectedIndexChanged="DDLDepartamento_SelectedIndexChanged"></asp:DropDownList>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <div class="col-2" style="margin-left:5%">
+                                            <label class="col-form-label">Municipio</label>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <asp:DropDownList ID="DDLMunicipio" runat="server" class="form-control"></asp:DropDownList>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <div class="col-2" style="margin-left:5%">
+                                            <label class="col-form-label">Código</label>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <asp:TextBox ID="TxCodigo" class="form-control text-uppercase" runat="server"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="col-md-12">
                                     <div class="form-group row">
                                         <div class="col-2" style="margin-left:5%">
                                             <label class="col-form-label">Dirección</label>
                                         </div>
                                         <div class="col-sm-9">
-                                            <asp:TextBox ID="TxDireccion" placeholder="" class="form-control" runat="server"></asp:TextBox>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group row">
-                                        <div class="col-2" style="margin-left:5%">
-                                            <label class="col-form-label">Ciudad</label>
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <asp:DropDownList ID="DDLCuidad" runat="server" class="form-control">
-                                                <asp:ListItem Value="0" Text="Seleccione"></asp:ListItem>
-                                                <asp:ListItem Value="1" Text="Tegucigalpa"></asp:ListItem>
-                                                <asp:ListItem Value="2" Text="San Pedro Sula"></asp:ListItem>
-                                            </asp:DropDownList>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12">
-                                    <div class="form-group row">
-                                        <div class="col-2" style="margin-left:5%">
-                                            <label class="col-form-label">Zona</label>
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <asp:DropDownList ID="DDLZona" runat="server" class="form-control">
-                                                <asp:ListItem Value="0" Text="Seleccione"></asp:ListItem>
-                                                <asp:ListItem Value="1" Text="CENTRO SUR"></asp:ListItem>
-                                                <asp:ListItem Value="2" Text="NOROCCIDENTE"></asp:ListItem>
-                                                <asp:ListItem Value="3" Text="LITORAL"></asp:ListItem>
-                                            </asp:DropDownList>
+                                            <asp:TextBox ID="TxDireccion" TextMode="MultiLine" class="form-control" runat="server"></asp:TextBox>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="col-md-12" runat="server" id="DivEstado" visible="false">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label">Estado</label>
+                                        <div class="col-2" style="margin-left:5%">
+                                            <label class="col-form-label">Estado</label>
+                                        </div>
                                         <div class="col-sm-9">
                                             <asp:DropDownList ID="DDLEstado" runat="server" class="form-control">
                                                 <asp:ListItem Value="1" Text="Activo"></asp:ListItem>
@@ -162,6 +163,10 @@
                                             </asp:DropDownList>
                                         </div>
                                     </div>
+                                </div>
+
+                                <div class="col-12" runat="server" id="DivMensaje" visible="false" style="display: flex; background-color:tomato; justify-content:center">
+                                    <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbAdvertencia"></asp:Label>
                                 </div>
                             </div>
                         </ContentTemplate>
@@ -179,9 +184,33 @@
         </div>
     </div>
 
+    <%--MODAL DE CONFIRMACION--%>
+    <div class="modal fade" id="ModalConfirmar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                        <ContentTemplate>
+                            <h4 class="modal-title" id="ModalLabelConfirmar">
+                                <b><asp:Label runat="server" ID="LbTitulo" CssClass="col-form-label"></asp:Label></b>
+                            </h4>
+                            <asp:Label runat="server" ID="LbMensaje" CssClass="col-form-label"></asp:Label>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+                <div class="modal-footer">
+                    <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                        <ContentTemplate>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <asp:Button ID="BtnConfirmar" runat="server" Text="Aceptar" class="btn btn-danger" OnClick="BtnConfirmar_Click"/>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 </asp:Content>
 
-
 <asp:Content ID="Content3" ContentPlaceHolderID="Script" runat="server">
-
 </asp:Content>

@@ -13,7 +13,7 @@ using System.Configuration;
 
 namespace Infatlan_STEI_Inventario.pages
 {
-    public partial class proveedores : System.Web.UI.Page
+    public partial class marcas : System.Web.UI.Page
     {
         db vConexion = new db();
         protected void Page_Load(object sender, EventArgs e){
@@ -27,13 +27,13 @@ namespace Infatlan_STEI_Inventario.pages
 
         private void cargarDatos() {
             try{
-                String vQuery = "[STEISP_INVENTARIO_Generales] 4";
+                String vQuery = "[STEISP_INVENTARIO_Generales] 5";
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
 
                 if (vDatos.Rows.Count > 0){
                     GVBusqueda.DataSource = vDatos;
                     GVBusqueda.DataBind();
-                    Session["INV_PROVEEDORES"] = vDatos;
+                    Session["INV_MARCAS"] = vDatos;
                 }
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);
@@ -48,7 +48,7 @@ namespace Infatlan_STEI_Inventario.pages
             try{
                 cargarDatos();
                 String vBusqueda = TxBusqueda.Text;
-                DataTable vDatos = (DataTable)Session["INV_PROVEEDORES"];
+                DataTable vDatos = (DataTable)Session["INV_MARCAS"];
                 if (vBusqueda.Equals("")){
                     GVBusqueda.DataSource = vDatos;
                     GVBusqueda.DataBind();
@@ -61,32 +61,26 @@ namespace Infatlan_STEI_Inventario.pages
                     if (isNumeric){
                         if (filtered.Count() == 0){
                             filtered = vDatos.AsEnumerable().Where(r =>
-                                Convert.ToInt32(r["idProveedor"]) == Convert.ToInt32(vBusqueda));
+                                Convert.ToInt32(r["idMarca"]) == Convert.ToInt32(vBusqueda));
                         }
                     }
 
                     DataTable vDatosFiltrados = new DataTable();
-                    vDatosFiltrados.Columns.Add("idProveedor");
+                    vDatosFiltrados.Columns.Add("idMarca");
                     vDatosFiltrados.Columns.Add("nombre");
-                    vDatosFiltrados.Columns.Add("direccion");
-                    vDatosFiltrados.Columns.Add("telefono");
-                    vDatosFiltrados.Columns.Add("responsable");
                     vDatosFiltrados.Columns.Add("estado");
 
                     foreach (DataRow item in filtered){
                         vDatosFiltrados.Rows.Add(
-                            item["idProveedor"].ToString(),
+                            item["idMarca"].ToString(),
                             item["nombre"].ToString(),
-                            item["direccion"].ToString(),
-                            item["telefono"].ToString(),
-                            item["responsable"].ToString(),
                             item["estado"].ToString()
                             );
                     }
 
                     GVBusqueda.DataSource = vDatosFiltrados;
                     GVBusqueda.DataBind();
-                    Session["INV_PROVEEDORES"] = vDatosFiltrados;
+                    Session["INV_MARCAS"] = vDatosFiltrados;
                 }
 
             }catch (Exception ex){
@@ -97,7 +91,7 @@ namespace Infatlan_STEI_Inventario.pages
         protected void GVBusqueda_PageIndexChanging(object sender, GridViewPageEventArgs e){
             try{
                 GVBusqueda.PageIndex = e.NewPageIndex;
-                GVBusqueda.DataSource = (DataTable)Session["INV_PROVEEDORES"];
+                GVBusqueda.DataSource = (DataTable)Session["INV_MARCAS"];
                 GVBusqueda.DataBind();
 
             }catch (Exception ex){
@@ -108,9 +102,9 @@ namespace Infatlan_STEI_Inventario.pages
         protected void BtnNuevo_Click(object sender, EventArgs e){
             try{
                 limpiarModal();
-                LbIdProveedor.Text = "Crear Nuevo Proveedor";
+                LbIdMarca.Text = "Crear Nueva Marca";
                 DivEstado.Visible = false;
-                Session["INV_PROV_ID"] = null;
+                Session["INV_MARCA_ID"] = null;
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal();", true);
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);
@@ -120,23 +114,21 @@ namespace Infatlan_STEI_Inventario.pages
         protected void BtnAceptar_Click(object sender, EventArgs e){
             try{
                 validarDatos();
-                String vMensaje = "";
+                String vQuery = "", vMensaje = "";
                 int vInfo;
                 DataTable vDatos = new DataTable();
-                String vQuery = "STEISP_INVENTARIO_Proveedores {0}" +
-                                ",'" + TxNombre.Text.ToUpper() + "'" +
-                                ",'" + TxDireccion.Text + "'" +
-                                ",'" + TxTelefono.Text + "'" +
-                                ",'" + TxResponsable.Text + "'{1}";
+                vQuery = "STEISP_INVENTARIO_Marcas {0}" +
+                        ",'" + TxNombre.Text.ToUpper() + "'" +
+                        ",'',{1}";
 
-                if (HttpContext.Current.Session["INV_PROV_ID"] == null){
-                    vQuery = string.Format(vQuery, "3","");
+                if (HttpContext.Current.Session["INV_MARCA_ID"] == null){
+                    vQuery = string.Format(vQuery, "3","1");
                     vInfo = vConexion.ejecutarSql(vQuery);
-                    vMensaje = "Proveedor registrado con éxito";
+                    vMensaje = "Marca registrada con éxito";
                 }else{
-                    vQuery = string.Format(vQuery, "4," + Session["INV_PROV_ID"].ToString(), "," + DDLEstado.SelectedValue);
+                    vQuery = string.Format(vQuery, "4", DDLEstado.SelectedValue + "," + Session["INV_MARCA_ID"].ToString());
                     vInfo = vConexion.ejecutarSql(vQuery);
-                    vMensaje = "Proveedor actualizado con éxito";
+                    vMensaje = "Marca actualizada con éxito";
                 }
 
                 if (vInfo == 1){
@@ -148,26 +140,16 @@ namespace Infatlan_STEI_Inventario.pages
             catch (Exception ex){
                 LbAdvertencia.Text = ex.Message;
                 DivMensaje.Visible = true;
-                //Mensaje(ex.Message, WarningType.Danger);
             }
         }
 
         private void validarDatos(){
             if (TxNombre.Text == "" || TxNombre.Text == string.Empty)
-                throw new Exception("Favor ingrese el nombre del proveedor.");
-            if (TxDireccion.Text == "" || TxDireccion.Text == string.Empty)
-                throw new Exception("Favor ingrese la dirección del proveedor.");
-            if (TxTelefono.Text == "" || TxTelefono.Text == string.Empty)
-                throw new Exception("Favor ingrese el teléfono del proveedor.");
-            if (TxResponsable.Text == "" || TxResponsable.Text == string.Empty)
-                throw new Exception("Favor ingrese la persona responsable.");
+                throw new Exception("Favor ingrese el nombre de la marca.");
         }
 
         void limpiarModal(){
             TxNombre.Text = string.Empty;
-            TxDireccion.Text = string.Empty;
-            TxTelefono.Text = string.Empty;
-            TxResponsable.Text = string.Empty;
             DivMensaje.Visible = false;
         }
 
@@ -175,25 +157,22 @@ namespace Infatlan_STEI_Inventario.pages
             try{
                 DataTable vDatos = new DataTable();
                 String vQuery = "";
-                string vIdProveedor = e.CommandArgument.ToString();
+                string vIdMarca = e.CommandArgument.ToString();
                 
-                if (e.CommandName == "EditarProveedor"){
+                if (e.CommandName == "EditarMarca"){
                     DivMensaje.Visible = false;
-                    LbIdProveedor.Text = "Editar Articulo " + vIdProveedor;
-                    Session["INV_PROV_ID"] = vIdProveedor;
+                    LbIdMarca.Text = "Editar Marca " + vIdMarca;
+                    Session["INV_MARCA_ID"] = vIdMarca;
                     DivEstado.Visible = true;
-                    vQuery = "[STEISP_INVENTARIO_Proveedores] 2," + vIdProveedor + "";
+                    vQuery = "[STEISP_INVENTARIO_Marcas] 2," + vIdMarca + "";
                     vDatos = vConexion.obtenerDataTable(vQuery);
 
                     for (int i = 0; i < vDatos.Rows.Count; i++){
                         TxNombre.Text = vDatos.Rows[i]["nombre"].ToString();
-                        TxDireccion.Text = vDatos.Rows[i]["direccion"].ToString();
-                        TxTelefono.Text = vDatos.Rows[i]["telefono"].ToString();
-                        TxResponsable.Text = vDatos.Rows[i]["responsable"].ToString();
                     }
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
-                }else if (e.CommandName == "EliminarProveedor"){
-                    LbTitulo.Text = "Eliminar Articulo?";
+                }else if (e.CommandName == "EliminarMarca"){
+                    LbTitulo.Text = "Eliminar Marca?";
                     LbMensaje.Text = "No podrá reversar los cambios.";
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "ModalConfirmar();", true);
                 }
