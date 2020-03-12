@@ -11,7 +11,7 @@ namespace Infatlan_STEI_Inventario.pages
 {
 
 
-    public partial class proveedores
+    public partial class marcas
     {
 
         /// <summary>
@@ -69,13 +69,13 @@ namespace Infatlan_STEI_Inventario.pages
         protected global::System.Web.UI.UpdatePanel UpdatePanel2;
 
         /// <summary>
-        /// Control LbIdProveedor.
+        /// Control LbIdMarca.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LbIdProveedor;
+        protected global::System.Web.UI.WebControls.Label LbIdMarca;
 
         /// <summary>
         /// Control UpdatePanelModal.
@@ -94,33 +94,6 @@ namespace Infatlan_STEI_Inventario.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TxNombre;
-
-        /// <summary>
-        /// Control TxResponsable.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxResponsable;
-
-        /// <summary>
-        /// Control TxTelefono.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxTelefono;
-
-        /// <summary>
-        /// Control TxDireccion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxDireccion;
 
         /// <summary>
         /// Control DivEstado.

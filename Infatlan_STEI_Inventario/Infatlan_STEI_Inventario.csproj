@@ -3256,6 +3256,7 @@
     <Content Include="assets\node_module\x-editable\dist\jqueryui-editable\img\loading.gif" />
     <Content Include="assets\node_module\x-editable\dist\jqueryui-editable\js\jqueryui-editable.js" />
     <Content Include="assets\node_module\x-editable\dist\jqueryui-editable\js\jqueryui-editable.min.js" />
+    <Content Include="css\animate.min.css" />
     <Content Include="css\pages\bootstrap-switch.css" />
     <Content Include="css\pages\breadcrumb-page.css" />
     <Content Include="css\pages\chat-app-page.css" />
@@ -3312,6 +3313,7 @@
     <Content Include="js\perfect-scrollbar.jquery.min.js" />
     <Content Include="js\sidebarmenu.js" />
     <Content Include="js\waves.js" />
+    <Content Include="pages\marcas.aspx" />
     <Content Include="pages\ubicaciones.aspx" />
     <Content Include="pages\articulos.aspx" />
     <Content Include="pages\inventarios.aspx" />
@@ -3341,6 +3343,13 @@
     </Compile>
     <Compile Include="main.Master.designer.cs">
       <DependentUpon>main.Master</DependentUpon>
+    </Compile>
+    <Compile Include="pages\marcas.aspx.cs">
+      <DependentUpon>marcas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\marcas.aspx.designer.cs">
+      <DependentUpon>marcas.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\ubicaciones.aspx.cs">
       <DependentUpon>ubicaciones.aspx</DependentUpon>
