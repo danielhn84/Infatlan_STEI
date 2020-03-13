@@ -56,7 +56,7 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
                 //Obtener Materiales
                 try
                 {
-                    String vQuery = "STEISP_CABLESTRUCTURADO_Datos 6, " + ddlMateriales.SelectedValue;
+                    String vQuery = "STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 6, " + ddlMateriales.SelectedValue;
                     DataTable vDatos = vConexion.obtenerDataTable(vQuery);
                     DataTable vData = (DataTable)Session["CE_CABLEADO"];
 
@@ -81,7 +81,7 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
                 //Obtener todos las Agencias.
                 try
                 {
-                    String vQuery = "STEISP_CABLESTRUCTURADO_Datos 1";
+                    String vQuery = "STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 1";
                     DataTable vDatos = vConexion.obtenerDataTable(vQuery);
 
                     ddlAgencia.Items.Clear();
@@ -100,7 +100,7 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
                 //Obtener todos los Responsables.
                 try
                 {
-                    String vQuery = "STEISP_CABLESTRUCTURADO_Datos 2";
+                    String vQuery = "STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 2";
 
                     DataTable vDatos = vConexion.obtenerDataTable(vQuery);
 
@@ -120,7 +120,7 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
                 //Obtener materiales
                 try
                 {
-                    String vQuery = "STEISP_CABLESTRUCTURADO_Datos 4";
+                    String vQuery = "STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 7";
 
                     DataTable vDatos = vConexion.obtenerDataTable(vQuery);
 
@@ -145,7 +145,7 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         {
             try
             { 
-                String vQuery = "STEISP_CABLESTRUCTURADO_CrearEstudio 3, '" + ddlResponsable.SelectedValue + "'";
+                String vQuery = "STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 3, '" + ddlResponsable.SelectedValue + "'";
 
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
                 Session["CE_IDRESPONSABLE"] = vDatos.Rows[0]["idUsuario"].ToString();
@@ -162,7 +162,7 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         {
             try
             {
-                String vQuery = "STEISP_CABLESTRUCTURADO_CrearEstudio 1, '" + ddlAgencia.SelectedValue + "'";
+                String vQuery = "STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 1, '" + ddlAgencia.SelectedValue + "'";
 
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
                 Session["CE_IDAGENCIA"] = vDatos.Rows[0]["idAgencia"].ToString();
@@ -180,7 +180,7 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         {
             try
             {
-                String vQuery = "STEISP_CABLESTRUCTURADO_CrearEstudio 4, '" + ddlMateriales.SelectedValue + "'";
+                String vQuery = "STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 4, '" + ddlMateriales.SelectedValue + "'";
               
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
                 Session["CE_IDMATERIAL"] = vDatos.Rows[0]["  idMaterial"].ToString();
@@ -411,7 +411,7 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
             try
             {
                 DataTable vDatos = new DataTable();
-                vDatos = vConexion.obtenerDataTable("STEISP_CABLESTRUCTURADO_CrearEstudio 5 ");
+                vDatos = vConexion.obtenerDataTable("STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 5 ");
 
                 GVContabilidad.DataSource = vDatos;
                 GVContabilidad.DataBind();
@@ -434,7 +434,7 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
                     txtModProveedor.Text = vContabilidad;
 
                     DataTable vDatos = new DataTable();
-                    vDatos = vConexion.obtenerDataTable("STEISP_CABLESTRUCTURADO_CrearEstudio 6, '" + vContabilidad + "'");
+                    vDatos = vConexion.obtenerDataTable("STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 6, '" + vContabilidad + "'");
 
                     foreach (DataRow item in vDatos.Rows)
                     {
@@ -539,7 +539,7 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
                 {
                     string vMensaje = "";
 
-                    String vQuery = "STEISP_CABLESTRUCTURADO_CrearEstudio 9," + txtModIdInventario.Text + "," +
+                    String vQuery = "STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 9," + txtModIdInventario.Text + "," +
 
                                                                      "'" + txtModProveedor.Text + "'," +
                                                                      "'" + txtModMarca.Text + "'," +
@@ -640,13 +640,53 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
             }
         }
 
-        protected void btnEnviarAprobacion_Click(object sender, EventArgs e)
+        protected void btnEnviar_Click(object sender, EventArgs e)
         {
             ValidarFormDatosGenerales();
             ValidarFormMateriales();
             //ValidarFormEstudioPrevio();
             ValidarFormEstimacionRecursos();
             ValidarFormAprobacion();
+
+
+            try
+            {
+                String vQuery = "STEISP_CABLESTRUCTURADO_IngresarDatosEstudio 1,  " + Session["CE_IDEPARTAMENTO"] + "," +
+                                                                                "'" + Session["CE_IDAGENCIA"] + "'," +
+                                                                                "'" + Session["CE_IDRESPONSABLE"] + "'," +
+                                                                                "'" + Session["CE_IDMATERIAL"] + "'," +
+                                                                                "'" + txtFechaEstudio.Text + "'," +
+                                                                                "'" + txtFechaEnvio.Text + "'," +
+                                                                                "'" + txtHorasTrabajo.Text + "'," +
+                                                                                "'" + txtParticipantes.Text + "'," +
+                                                                                "'" + rblALimentación.SelectedValue + "'," +
+                                                                                "'" + rblTranporte.SelectedValue + "'," +
+                                                                                "'" + txtObservaciones.Text + "'," +
+                                                                                "'" + rblAprobada.Text + "'," +
+                                                                                "'" + txtObservacionesAprobacion.Text+ "'";
+
+                Int32 vInformacion = vConexion.ejecutarSql(vQuery);
+                if (vInformacion == 1)
+                {
+                //    String vActivo = CBxPermisos.Checked ? "1" : "0";
+
+                //    vQuery = "[RSP_IngresarEmpleados] 4," + LbModNoEmpleado.Text + ",'" + vActivo + "'";
+                //    vInformacion = vConexion.ejecutarSql(vQuery);
+
+                    if (vInformacion == 1)
+                    {
+                        Mensaje("Actualizado con Exito!", WarningType.Success);
+                        //CerrarModal("EmpleadoModal");
+                        //CargarEmpleados();
+                        //UpdateGridView.Update();
+                    }
+                }
+                else
+                {
+                    Mensaje("No se pudo actualizar!", WarningType.Success);
+                }
+            }
+            catch (Exception Ex) { Mensaje(Ex.Message, WarningType.Danger); }
         }
     }
 }

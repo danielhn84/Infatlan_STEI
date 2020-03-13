@@ -534,7 +534,7 @@
                                                         <asp:UpdatePanel ID="updAprobacion" runat="server">
                                                             <ContentTemplate>
                                                                 <div class="row col-12">
-                                                                    <asp:Button ID="btnEnviarAprobacion" runat="server" Text="Enviar Aprobación" type="button" class="waves-light btn-outline-info" OnClick="btnEnviarAprobacion_Click" />
+                                                                    <asp:Button ID="btnEnviar" runat="server" Text="Enviar" type="button" class="waves-light btn-outline-info" OnClick="btnEnviar_Click" />
                                                                 </div>
                                                             </ContentTemplate>
                                                         </asp:UpdatePanel>

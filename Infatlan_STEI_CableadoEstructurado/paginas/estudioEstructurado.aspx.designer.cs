@@ -420,13 +420,13 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         protected global::System.Web.UI.UpdatePanel updAprobacion;
 
         /// <summary>
-        /// Control btnEnviarAprobacion.
+        /// Control btnEnviar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEnviarAprobacion;
+        protected global::System.Web.UI.WebControls.Button btnEnviar;
 
         /// <summary>
         /// Control UpdatePanel7.
