@@ -12,7 +12,7 @@
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
             <h2 class="text-themecolor">Creación de Notificación</h2>
-                        <div class="mr-md-3 mr-xl-5">
+                        <div class="mr-md-3 mr-xl-5"> 
                 <p class="mb-md-0">Soporte Técnico y Comunicaciones</p>
             </div>
         </div>
@@ -193,7 +193,7 @@
                                                                 <i class="icon-trash"></i>
                                                             </asp:LinkButton>
                                                         </ItemTemplate>
-                                                        <ItemStyle Width="10%" />
+                                                        <ItemStyle Width="5%" />
                                                     </asp:TemplateField>
                                                     <asp:BoundField DataField="idUsuario" HeaderText="Usuario" ItemStyle-Width="25%" />
                                                     <asp:BoundField DataField="nombre" HeaderText="Nombre" ItemStyle-Width="25%" />
@@ -210,31 +210,71 @@
                                 <br>
                                 <h5 class="card-title">-Jefes de Agencia </h5>
 
-                                <div class="col-md-12">
-                                    <div class="form-group row">
-                                      <%--  <label class="col-sm-1 col-form-label">Correo:</label>--%>
-                                        <div class="col-sm-11">
-                                            <%--<asp:TextBox ID="TxCorreo" runat="server" placeholder="usuario@bancatlan.hn" class="form-control" AutoPostBack="true" ReadOnly="true"></asp:TextBox>--%>
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="ti-email"></i></span>
-                                                </div>
-                                                <asp:TextBox ID="TxCorreo" runat="server" placeholder="usuario@bancatlan.hn" class="form-control" AutoPostBack="true" ReadOnly="true"></asp:TextBox>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-1">
-                                            <%--<asp:Button ID="btnAgregar" runat="server" Text="Agregar" class="btn btn-success" OnClick="btnAgregar_Click" />--%>
-                                            <asp:LinkButton ID="LBAgregar" runat="server" CssClass="btn btn-success" OnClick="btnAgregar_Click" Enabled="false" >
-                                                                <i class="icon-user-follow"></i>
-                                            </asp:LinkButton>
+                                <div class="row col-12">
+                                    <asp:TextBox runat="server"  ID="txtbuscarJefeNotif"   CssClass="form-control col-6"></asp:TextBox>
+                                    <asp:LinkButton runat="server" ID="btnBuscarJefe" OnClick="btnBuscarJefe_Click" CssClass="btn btn-info mr-2"><i class="fa fa-search"></i></asp:LinkButton>
+                                </div>
+
+                                <asp:GridView ID="GVJefesAD" runat="server"
+                                    CssClass="table table-bordered"
+                                    PagerStyle-CssClass="pgr"
+                                    HeaderStyle-CssClass="table"
+                                    RowStyle-CssClass="rows"
+                                    AutoGenerateColumns="false"
+                                    AllowPaging="true"
+                                    GridLines="None"  OnRowCommand="GVJefesAD_RowCommand"
+                                    PageSize="10" OnPageIndexChanging="GVJefesAD_PageIndexChanging"
+                                    Style="margin: 30px 0px 20px 0px">
+                                    <Columns>
+                                        <asp:TemplateField HeaderStyle-Width="60px">
+                                            <ItemTemplate>
+                                                <asp:LinkButton runat="server" ID="btnCorreoJefe" Text="" CssClass="btn btn-info mr-2" CommandArgument='<%# Eval("mail") %>' CommandName="correos"><i class="fa fa-plus"></asp:LinkButton>
+                                                <%-- <asp:Button ID="BtnUsuarioModificar" runat="server" Text="Modificar" CssClass="btn btn-rounded btn-block btn-success" CommandArgument='<%# Eval("codATM") %>' CommandName="Modificar" />--%>
+                                            </ItemTemplate>
+                                            <ItemStyle Width="10%" />
+                                        </asp:TemplateField>
+                                        <asp:BoundField DataField="givenName" HeaderText="Nombre" />
+                                        <asp:BoundField DataField="sn" HeaderText="Apellido" />
+                                        <asp:BoundField DataField="mail" HeaderText="Correo" />
+                                    </Columns>
+                                </asp:GridView>
 
 
-                                        </div>
-                                    </div>
+                                <asp:GridView ID="GVjefesAgencias" runat="server"
+                                    CssClass="table table-bordered"
+                                    PagerStyle-CssClass="pgr"
+                                    HeaderStyle-CssClass="table"
+                                    RowStyle-CssClass="rows"
+                                    AutoGenerateColumns="true"
+                                    AllowPaging="true"
+                                    GridLines="None"
+                                    PageSize="10"  OnRowCommand="GVjefesAgencias_RowCommand"
+                                    Style="margin: 30px 0px 20px 0px">
+                                    <Columns>
+                                        <asp:TemplateField HeaderStyle-Width="60px">
+                                            <ItemTemplate>
+                                                <!--<button id="btnBorrarGrid" class="btn btn-danger waves-effect waves-light" type="button"><span class="btn-label"><i class="fa fa-trash"></i></span></button>
+                                                <!-- <button type="button" class="btn btn-rounded btn-block btn-danger btn-sm"><i class="fa fa-minus-circle"></i></button>-->
+                                                <asp:LinkButton ID="Btnseleccionar" OnClick="Btnseleccionar_Click" Enabled="true" runat="server" Text="" class="btn btn-danger mr-2" CommandArgument='<%# Eval("Correo") %>' CommandName="eliminar"><i class="icon-trash"></i></asp:LinkButton>
+                                            </ItemTemplate>
+                                            <ItemStyle Width="10%" />
+                                        </asp:TemplateField>
+
+                                    </Columns>
+                                </asp:GridView>
+
+
+
+
+
+
+
+
+
                                 </div>
 
 
-                                <div class="row col-12">
+<%--                                <div class="row col-12">
                                     <div class="col-12 grid-margin stretch-card">
                                         <div class="table-responsive">
                                             <asp:GridView ID="GVCorreoJefeAgencia" runat="server"
@@ -260,7 +300,7 @@
                                             </asp:GridView>
                                         </div>
                                     </div>
-                                </div>
+                                </div>--%>
 
                                 <br>
                                 <br>
@@ -272,36 +312,120 @@
 
                         <asp:UpdatePanel ID="UpdatePrincipalBotones" runat="server">
                             <ContentTemplate>
-                                <div class="row col-12 text-center">
-                                    <div class="col text-center">
-                                        <asp:Button ID="BtnEnviarNotificacion" class="btn btn-block btn-lg btn-info" runat="server" Text="Enviar " OnClick="BtnEnviarNotificacion_Click" />
+
+                        <div class=" modal-footer col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                        
+                                <div class="row col-8 ">
+                                    <div class="col text-center col-lg-2 col-md-4">
+                                        <asp:Button ID="BtnEnviarNotificacion" class="btn btn-block btn-lg btn-success" runat="server" Text="Enviar " OnClick="BtnEnviarNotificacion_Click" />
+
                                     </div>
-                                    <div class="col text-center">
+                                    <div class="col text-center col-lg-2 col-md-4">
                                         <asp:Button ID="BtnCancelarNotificacion" class="btn btn-block btn-lg btn-danger " runat="server" Text="Cancelar" OnClick="BtnCancelarNotificacion_Click" />
                                     </div>
 
-
-
-
-
                                 </div>
-                                <%--<div class="col text-center">
-                                    <asp:Button ID="BtnEnviarNotificacion" class="btn btn-block btn-lg btn-info" runat="server" Text="Enviar " OnClick="BtnEnviarNotificacion_Click" />
-                                <asp:Button ID="BtnCancelarNotificacion" class="btn btn-block btn-lg btn-info " runat="server"  Text ="Cancelar"/>
-                                
-                                </div>--%>
+                            </div>
+
+                        </div>
+            
                             </ContentTemplate>
                         </asp:UpdatePanel>
 
+<%-- Inicio Modal --%>
+    <div class="modal fade" id="modalnotoficacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="width: 600px; top: 320px; left: 50%; transform: translate(-50%, -50%);">
+                <div class="modal-header modal-colored-header bg-success">
+                    <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
+                        <ContentTemplate>
+                            <h4 class="modal-title">Crear Notificación</h4>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
 
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
 
+                </div>
+                <div class="modal-body">
+                    <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                        <ContentTemplate>
+                            <div class="form-group row">
+                                <div class="col-md-12" runat="server">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Fecha:</label>
+                                        <div class="col-sm-9">
+                                      <asp:TextBox ID="TxFecha" class="form-control" runat="server" ReadOnly="true"></asp:TextBox> 
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12" runat="server">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Lugar:</label>
+                                        <div class="col-sm-9">
+                                            <asp:TextBox ID="TxLugar" class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12" runat="server">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Responsable:</label>
+                                        <div class="col-sm-9">
+                                            <asp:TextBox ID="TxResponsable" class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12" runat="server">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Hora Inicio:</label>
+                                        <div class="col-sm-9">
+                                            <asp:TextBox ID="TxHrInicioModal" class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12" runat="server">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Hora Fin:</label>
+                                        <div class="col-sm-9">
+                                            <asp:TextBox ID="TxHrFinModal" class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                     <div class="col-md-12">                                   
+                                    <label style="color: black; text-align:justify"; ><strong>Si esta seguro que desea crear la notificación dar clic en el botón "Crear"  </strong></label>                                                                                                                                                        
+                                </div>
+
+                </div>
+                <div class="modal-footer">
+                    <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+                        <ContentTemplate>
+                             <button type="button" class="btn btn-light"
+                    data-dismiss="modal">Close</button>
+                            <%--<asp:Button runat="server" ID="btnModalEnviarNotificacion" OnClick="btnModalEnviarNotificacion_Click" CssClass="btn btn-block btn-lg  btn-success" Text="Si" />--%>
+                            <asp:Button ID="btnModalEnviarNotificacion" runat="server" Text="Crear" class="btn btn-success" OnClick="btnModalEnviarNotificacion_Click" />
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+            </div>
+        </div>
+    </div>
                    
 
                         <!-- Modal asegurar notificacion -->
-                        <div class="modal bs-example-modal-lg" id="modalnotoficacion" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
-                            <div class="modal-dialog modal-xl">
+                      <%--  <div class="modal bs-example-modal-lg" id="modalnotoficacion" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+                            <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <div class="modal-header">
+                                    <div class="modal-header modal-colored-header  bg-success">
                                         <h4 class="modal-title" id="myLargeModalLabel">¿Esta seguro que desea enviar la notificación?</h4>
                                     </div>
 
@@ -310,7 +434,7 @@
                                             <div class="modal-footer col-12">
 
                                                 <div class="row col-6">
-                                                    <asp:Button runat="server" ID="btnModalEnviarNotificacion" OnClick="btnModalEnviarNotificacion_Click" CssClass="btn btn-block btn-lg btn-info" Text="Si" />
+                                                    <asp:Button runat="server" ID="btnModalEnviarNotificacion" OnClick="btnModalEnviarNotificacion_Click" CssClass="btn btn-block btn-lg  btn-success" Text="Si" />
                                                 </div>
                                                 <div class="row col-6">
                                                     <asp:Button runat="server" ID="btnModalCerrarNotificacion" OnClick="btnModalCerrarNotificacion_Click" CssClass="btn btn-block btn-lg btn-danger" Text="No" />
@@ -328,7 +452,7 @@
                                 <!-- /.modal-content -->
                             </div>
                             <!--/.modal-dialog -->
-                        </div>
+                        </div>--%>
                         <!-- /asegurar notificacion -->
 
                     </div>

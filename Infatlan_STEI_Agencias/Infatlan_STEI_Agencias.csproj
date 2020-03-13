@@ -46,6 +46,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.ComponentModel" />
     <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.DirectoryServices.Protocols" />
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Management" />
     <Reference Include="System.Transactions" />
@@ -3298,10 +3301,12 @@
     <Content Include="paginasAgencia\ListaVerificacion.aspx" />
     <Content Include="paginasAgencia\lvPendientesCompletar.aspx" />
     <Content Include="paginasAgencia\lvIndividual.aspx" />
+    <Content Include="paginasAgencia\reprogramarMantenimiento.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="classes\db.cs" />
+    <Compile Include="classes\LdapService.cs" />
     <Compile Include="default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3375,6 +3380,13 @@
     </Compile>
     <Compile Include="paginasAgencia\lvIndividual.aspx.designer.cs">
       <DependentUpon>lvIndividual.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="paginasAgencia\reprogramarMantenimiento.aspx.cs">
+      <DependentUpon>reprogramarMantenimiento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginasAgencia\reprogramarMantenimiento.aspx.designer.cs">
+      <DependentUpon>reprogramarMantenimiento.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -115,7 +115,7 @@
     <div class="modal fade" id="ModalAprobacionNotificacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="width: 600px; top: 320px; left: 50%; transform: translate(-50%, -50%);">
-                <div class="modal-header">
+                <div class="modal-header modal-colored-header bg-success">
                     <asp:UpdatePanel ID="UpdateLabelPermiso" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
                             <h4 class="modal-title" id="ModalLabelUsuario">Aprobar Notificación</h4>
@@ -180,6 +180,7 @@
                 <div class="modal-footer">
                     <asp:UpdatePanel ID="UpdateUsuarioBotones" runat="server">
                         <ContentTemplate>
+                            <button type="button" class="btn btn-light"data-dismiss="modal">Cerrar</button>
                             <asp:Button ID="btnModalAprobarNotificacion" runat="server" Text="Aprobar Notificación" class="btn btn-success" OnClick="btnModalAprobarNotificacion_Click" />
                         </ContentTemplate>
                     </asp:UpdatePanel>
@@ -192,7 +193,7 @@
     <div class="modal fade" id="ModalCancelacionNotificacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="width: 600px; top: 320px; left: 50%; transform: translate(-50%, -50%);">
-                <div class="modal-header">
+                <div class="modal-header  modal-colored-header bg-danger">
                     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
                             <h4 class="modal-title">Cancelar Notificación</h4>
@@ -255,11 +256,15 @@
                 <div class="modal-footer">
                     <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                         <ContentTemplate>
-
-                            <asp:Button ID="BtnCancelarNoti" runat="server" Text="Enviar" class="btn btn-success" OnClick="BtnCancelarNoti_Click" />
+                            <button type="button" class="btn btn-light"data-dismiss="modal">Cerrar</button>
+                            <asp:Button ID="BtnCancelarNoti" runat="server" Text="Cancelar Notificación" class="btn btn-danger" OnClick="BtnCancelarNoti_Click" />
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
+
+       
+
+
             </div>
         </div>
     </div>
