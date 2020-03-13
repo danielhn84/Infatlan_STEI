@@ -26,7 +26,15 @@ namespace Infatlan_STEI_ATM.clases
         }
         public void Vista()
         {
+            try
+            {
 
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
         public DataTable ObtenerTabla(string vQuery)
         {
