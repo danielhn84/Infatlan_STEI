@@ -193,7 +193,7 @@
                                                                 <i class="icon-trash"></i>
                                                             </asp:LinkButton>
                                                         </ItemTemplate>
-                                                        <ItemStyle Width="10%" />
+                                                        <ItemStyle Width="5%" />
                                                     </asp:TemplateField>
                                                     <asp:BoundField DataField="idUsuario" HeaderText="Usuario" ItemStyle-Width="25%" />
                                                     <asp:BoundField DataField="nombre" HeaderText="Nombre" ItemStyle-Width="25%" />
@@ -210,31 +210,71 @@
                                 <br>
                                 <h5 class="card-title">-Jefes de Agencia </h5>
 
-                                <div class="col-md-12">
-                                    <div class="form-group row">
-                                      <%--  <label class="col-sm-1 col-form-label">Correo:</label>--%>
-                                        <div class="col-sm-11">
-                                            <%--<asp:TextBox ID="TxCorreo" runat="server" placeholder="usuario@bancatlan.hn" class="form-control" AutoPostBack="true" ReadOnly="true"></asp:TextBox>--%>
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="ti-email"></i></span>
-                                                </div>
-                                                <asp:TextBox ID="TxCorreo" runat="server" placeholder="usuario@bancatlan.hn" class="form-control" AutoPostBack="true" ReadOnly="true"></asp:TextBox>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-1">
-                                            <%--<asp:Button ID="btnAgregar" runat="server" Text="Agregar" class="btn btn-success" OnClick="btnAgregar_Click" />--%>
-                                            <asp:LinkButton ID="LBAgregar" runat="server" CssClass="btn btn-success" OnClick="btnAgregar_Click" Enabled="false" >
-                                                                <i class="icon-user-follow"></i>
-                                            </asp:LinkButton>
+                                <div class="row col-12">
+                                    <asp:TextBox runat="server"  ID="txtbuscarJefeNotif"   CssClass="form-control col-6"></asp:TextBox>
+                                    <asp:LinkButton runat="server" ID="btnBuscarJefe" OnClick="btnBuscarJefe_Click" CssClass="btn btn-info mr-2"><i class="fa fa-search"></i></asp:LinkButton>
+                                </div>
+
+                                <asp:GridView ID="GVJefesAD" runat="server"
+                                    CssClass="table table-bordered"
+                                    PagerStyle-CssClass="pgr"
+                                    HeaderStyle-CssClass="table"
+                                    RowStyle-CssClass="rows"
+                                    AutoGenerateColumns="false"
+                                    AllowPaging="true"
+                                    GridLines="None"  OnRowCommand="GVJefesAD_RowCommand"
+                                    PageSize="10" OnPageIndexChanging="GVJefesAD_PageIndexChanging"
+                                    Style="margin: 30px 0px 20px 0px">
+                                    <Columns>
+                                        <asp:TemplateField HeaderStyle-Width="60px">
+                                            <ItemTemplate>
+                                                <asp:LinkButton runat="server" ID="btnCorreoJefe" Text="" CssClass="btn btn-info mr-2" CommandArgument='<%# Eval("mail") %>' CommandName="correos"><i class="fa fa-plus"></asp:LinkButton>
+                                                <%-- <asp:Button ID="BtnUsuarioModificar" runat="server" Text="Modificar" CssClass="btn btn-rounded btn-block btn-success" CommandArgument='<%# Eval("codATM") %>' CommandName="Modificar" />--%>
+                                            </ItemTemplate>
+                                            <ItemStyle Width="10%" />
+                                        </asp:TemplateField>
+                                        <asp:BoundField DataField="givenName" HeaderText="Nombre" />
+                                        <asp:BoundField DataField="sn" HeaderText="Apellido" />
+                                        <asp:BoundField DataField="mail" HeaderText="Correo" />
+                                    </Columns>
+                                </asp:GridView>
 
 
-                                        </div>
-                                    </div>
+                                <asp:GridView ID="GVjefesAgencias" runat="server"
+                                    CssClass="table table-bordered"
+                                    PagerStyle-CssClass="pgr"
+                                    HeaderStyle-CssClass="table"
+                                    RowStyle-CssClass="rows"
+                                    AutoGenerateColumns="true"
+                                    AllowPaging="true"
+                                    GridLines="None"
+                                    PageSize="10"  OnRowCommand="GVjefesAgencias_RowCommand"
+                                    Style="margin: 30px 0px 20px 0px">
+                                    <Columns>
+                                        <asp:TemplateField HeaderStyle-Width="60px">
+                                            <ItemTemplate>
+                                                <!--<button id="btnBorrarGrid" class="btn btn-danger waves-effect waves-light" type="button"><span class="btn-label"><i class="fa fa-trash"></i></span></button>
+                                                <!-- <button type="button" class="btn btn-rounded btn-block btn-danger btn-sm"><i class="fa fa-minus-circle"></i></button>-->
+                                                <asp:LinkButton ID="Btnseleccionar" OnClick="Btnseleccionar_Click" Enabled="true" runat="server" Text="" class="btn btn-danger mr-2" CommandArgument='<%# Eval("Correo") %>' CommandName="eliminar"><i class="icon-trash"></i></asp:LinkButton>
+                                            </ItemTemplate>
+                                            <ItemStyle Width="10%" />
+                                        </asp:TemplateField>
+
+                                    </Columns>
+                                </asp:GridView>
+
+
+
+
+
+
+
+
+
                                 </div>
 
 
-                                <div class="row col-12">
+<%--                                <div class="row col-12">
                                     <div class="col-12 grid-margin stretch-card">
                                         <div class="table-responsive">
                                             <asp:GridView ID="GVCorreoJefeAgencia" runat="server"
@@ -260,7 +300,7 @@
                                             </asp:GridView>
                                         </div>
                                     </div>
-                                </div>
+                                </div>--%>
 
                                 <br>
                                 <br>
