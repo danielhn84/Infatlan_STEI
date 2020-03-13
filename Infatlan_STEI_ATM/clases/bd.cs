@@ -24,6 +24,10 @@ namespace Infatlan_STEI_ATM.clases
         {
             vConexion = new SqlConnection(ConfigurationManager.AppSettings["SQLServer"]);
         }
+        public void Vista()
+        {
+
+        }
         public DataTable ObtenerTabla(string vQuery)
         {
             DataTable vDatos = new DataTable();
