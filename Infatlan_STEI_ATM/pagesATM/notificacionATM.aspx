@@ -221,14 +221,14 @@
                                     AutoGenerateColumns="false"
                                     AllowPaging="true"
                                     GridLines="None"
-                                    PageSize="10"
+                                    PageSize="10" OnRowCommand="GVBusqueda_RowCommand"
                                     style="margin: 30px 0px 20px 0px">
                                     <Columns>
                                         <asp:TemplateField HeaderStyle-Width="60px">
                                             <ItemTemplate>
                                                 <!--<button id="btnBorrarGrid" class="btn btn-danger waves-effect waves-light" type="button"><span class="btn-label"><i class="fa fa-trash"></i></span></button>
                                                 <!-- <button type="button" class="btn btn-rounded btn-block btn-danger btn-sm"><i class="fa fa-minus-circle"></i></button>-->
-                                                           <asp:Button ID="Btnseleccionar" OnClick="Btnseleccionar_Click" Enabled="true" runat="server" Text="Eliminar" class="btn btn-danger mr-2" />
+                                                           <asp:LinkButton ID="Btnseleccionar" OnClick="Btnseleccionar_Click" Enabled="true" runat="server" Text="" class="btn btn-danger mr-2" CommandArgument='<%# Eval("idUsuario") %>' CommandName="eliminar"><i class="icon-trash"></i></asp:LinkButton>
                                             </ItemTemplate>
                                             <ItemStyle Width="10%" />
                                         </asp:TemplateField>
@@ -258,7 +258,7 @@
                                 <asp:Label runat="server" Visible="false" class="col-form-label col-12" ID="lbJefeAgencia">Jefes de agencias</asp:Label>
                                 <div class="row col-12">
                                     <asp:TextBox runat="server" UseSubmitBehavior="False" ID="txtbuscarJefeNotif" OnTextChanged="txtbuscarJefeNotif_TextChanged" CssClass="form-control col-6"></asp:TextBox>
-                                    <asp:Button runat="server" ID="btnBuscarJefe" OnClick="btnBuscarJefe_Click" CssClass="btn btn-info mr-2" Text="Buscar" />
+                                    <asp:LinkButton runat="server" ID="btnBuscarJefe" OnClick="btnBuscarJefe_Click" CssClass="btn btn-info mr-2" ><i class="fa fa-search"></i></asp:LinkButton>
                                 </div>
                             </div>
                             <br />
@@ -287,7 +287,7 @@
                                     <Columns>
                                         <asp:TemplateField HeaderStyle-Width="60px">
                                                <ItemTemplate>                                                               
-                                                       <asp:LinkButton runat="server" ID="btnCorreoJefe" Text="Seleccionar" CssClass="btn btn-info mr-2" CommandArgument='<%# Eval("mail") %>' CommandName="Aprobar"></asp:LinkButton>
+                                                       <asp:LinkButton runat="server" ID="btnCorreoJefe" Text="" CssClass="btn btn-info mr-2" CommandArgument='<%# Eval("mail") %>' CommandName="correos"><i class="fa fa-plus"></asp:LinkButton>
                                                                 <%-- <asp:Button ID="BtnUsuarioModificar" runat="server" Text="Modificar" CssClass="btn btn-rounded btn-block btn-success" CommandArgument='<%# Eval("codATM") %>' CommandName="Modificar" />--%>
                                                </ItemTemplate>
                                             <ItemStyle Width="10%" />
@@ -314,14 +314,14 @@
                                     AutoGenerateColumns="true"
                                     AllowPaging="true"
                                     GridLines="None"
-                                    PageSize="10"
+                                    PageSize="10" OnRowCommand="GVjefesAgencias_RowCommand"
                                     style="margin: 30px 0px 20px 0px">
                                     <Columns>
                                         <asp:TemplateField HeaderStyle-Width="60px">
                                             <ItemTemplate>
                                                 <!--<button id="btnBorrarGrid" class="btn btn-danger waves-effect waves-light" type="button"><span class="btn-label"><i class="fa fa-trash"></i></span></button>
                                                 <!-- <button type="button" class="btn btn-rounded btn-block btn-danger btn-sm"><i class="fa fa-minus-circle"></i></button>-->
-                                                           <asp:Button ID="BtnseleccionarJefes" Enabled="true" runat="server" Text="Eliminar" class="btn btn-danger mr-2" />
+                                                          <asp:LinkButton ID="Btnseleccionar" OnClick="Btnseleccionar_Click" Enabled="true" runat="server" Text="" class="btn btn-danger mr-2" CommandArgument='<%# Eval("Correo") %>' CommandName="eliminar"><i class="icon-trash"></i></asp:LinkButton>
                                             </ItemTemplate>
                                             <ItemStyle Width="10%" />
                                         </asp:TemplateField>

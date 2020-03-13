@@ -3264,6 +3264,7 @@
     <Content Include="css\pages\widget-page.css" />
     <Content Include="css\style.css" />
     <Content Include="css\style.min.css" />
+    <Content Include="defaultATM.aspx" />
     <Content Include="dist\css\smart_wizard.css" />
     <Content Include="dist\css\smart_wizard.min.css" />
     <Content Include="dist\css\smart_wizard_theme_arrows.css" />
@@ -3323,6 +3324,13 @@
   <ItemGroup>
     <Compile Include="clases\bd.cs" />
     <Compile Include="clases\LdapService.cs" />
+    <Compile Include="defaultATM.aspx.cs">
+      <DependentUpon>defaultATM.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="defaultATM.aspx.designer.cs">
+      <DependentUpon>defaultATM.aspx</DependentUpon>
+    </Compile>
     <Compile Include="pagesATM\addATM.aspx.cs">
       <DependentUpon>addATM.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
