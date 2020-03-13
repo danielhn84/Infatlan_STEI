@@ -12,7 +12,7 @@
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
             <h2 class="text-themecolor">Creación de Notificación</h2>
-                        <div class="mr-md-3 mr-xl-5">
+                        <div class="mr-md-3 mr-xl-5"> 
                 <p class="mb-md-0">Soporte Técnico y Comunicaciones</p>
             </div>
         </div>
@@ -272,36 +272,120 @@
 
                         <asp:UpdatePanel ID="UpdatePrincipalBotones" runat="server">
                             <ContentTemplate>
-                                <div class="row col-12 text-center">
-                                    <div class="col text-center">
-                                        <asp:Button ID="BtnEnviarNotificacion" class="btn btn-block btn-lg btn-info" runat="server" Text="Enviar " OnClick="BtnEnviarNotificacion_Click" />
+
+                        <div class=" modal-footer col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                        
+                                <div class="row col-8 ">
+                                    <div class="col text-center col-lg-2 col-md-4">
+                                        <asp:Button ID="BtnEnviarNotificacion" class="btn btn-block btn-lg btn-success" runat="server" Text="Enviar " OnClick="BtnEnviarNotificacion_Click" />
+
                                     </div>
-                                    <div class="col text-center">
+                                    <div class="col text-center col-lg-2 col-md-4">
                                         <asp:Button ID="BtnCancelarNotificacion" class="btn btn-block btn-lg btn-danger " runat="server" Text="Cancelar" OnClick="BtnCancelarNotificacion_Click" />
                                     </div>
 
-
-
-
-
                                 </div>
-                                <%--<div class="col text-center">
-                                    <asp:Button ID="BtnEnviarNotificacion" class="btn btn-block btn-lg btn-info" runat="server" Text="Enviar " OnClick="BtnEnviarNotificacion_Click" />
-                                <asp:Button ID="BtnCancelarNotificacion" class="btn btn-block btn-lg btn-info " runat="server"  Text ="Cancelar"/>
-                                
-                                </div>--%>
+                            </div>
+
+                        </div>
+            
                             </ContentTemplate>
                         </asp:UpdatePanel>
 
+<%-- Inicio Modal --%>
+    <div class="modal fade" id="modalnotoficacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="width: 600px; top: 320px; left: 50%; transform: translate(-50%, -50%);">
+                <div class="modal-header modal-colored-header bg-success">
+                    <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
+                        <ContentTemplate>
+                            <h4 class="modal-title">Crear Notificación</h4>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
 
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
 
+                </div>
+                <div class="modal-body">
+                    <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                        <ContentTemplate>
+                            <div class="form-group row">
+                                <div class="col-md-12" runat="server">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Fecha:</label>
+                                        <div class="col-sm-9">
+                                      <asp:TextBox ID="TxFecha" class="form-control" runat="server" ReadOnly="true"></asp:TextBox> 
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12" runat="server">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Lugar:</label>
+                                        <div class="col-sm-9">
+                                            <asp:TextBox ID="TxLugar" class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12" runat="server">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Responsable:</label>
+                                        <div class="col-sm-9">
+                                            <asp:TextBox ID="TxResponsable" class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12" runat="server">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Hora Inicio:</label>
+                                        <div class="col-sm-9">
+                                            <asp:TextBox ID="TxHrInicioModal" class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12" runat="server">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Hora Fin:</label>
+                                        <div class="col-sm-9">
+                                            <asp:TextBox ID="TxHrFinModal" class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                     <div class="col-md-12">                                   
+                                    <label style="color: black; text-align:justify"; ><strong>Si esta seguro que desea crear la notificación dar clic en el botón "Crear"  </strong></label>                                                                                                                                                        
+                                </div>
+
+                </div>
+                <div class="modal-footer">
+                    <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+                        <ContentTemplate>
+                             <button type="button" class="btn btn-light"
+                    data-dismiss="modal">Close</button>
+                            <%--<asp:Button runat="server" ID="btnModalEnviarNotificacion" OnClick="btnModalEnviarNotificacion_Click" CssClass="btn btn-block btn-lg  btn-success" Text="Si" />--%>
+                            <asp:Button ID="btnModalEnviarNotificacion" runat="server" Text="Crear" class="btn btn-success" OnClick="btnModalEnviarNotificacion_Click" />
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+            </div>
+        </div>
+    </div>
                    
 
                         <!-- Modal asegurar notificacion -->
-                        <div class="modal bs-example-modal-lg" id="modalnotoficacion" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
-                            <div class="modal-dialog modal-xl">
+                      <%--  <div class="modal bs-example-modal-lg" id="modalnotoficacion" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+                            <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <div class="modal-header">
+                                    <div class="modal-header modal-colored-header  bg-success">
                                         <h4 class="modal-title" id="myLargeModalLabel">¿Esta seguro que desea enviar la notificación?</h4>
                                     </div>
 
@@ -310,7 +394,7 @@
                                             <div class="modal-footer col-12">
 
                                                 <div class="row col-6">
-                                                    <asp:Button runat="server" ID="btnModalEnviarNotificacion" OnClick="btnModalEnviarNotificacion_Click" CssClass="btn btn-block btn-lg btn-info" Text="Si" />
+                                                    <asp:Button runat="server" ID="btnModalEnviarNotificacion" OnClick="btnModalEnviarNotificacion_Click" CssClass="btn btn-block btn-lg  btn-success" Text="Si" />
                                                 </div>
                                                 <div class="row col-6">
                                                     <asp:Button runat="server" ID="btnModalCerrarNotificacion" OnClick="btnModalCerrarNotificacion_Click" CssClass="btn btn-block btn-lg btn-danger" Text="No" />
@@ -328,7 +412,7 @@
                                 <!-- /.modal-content -->
                             </div>
                             <!--/.modal-dialog -->
-                        </div>
+                        </div>--%>
                         <!-- /asegurar notificacion -->
 
                     </div>

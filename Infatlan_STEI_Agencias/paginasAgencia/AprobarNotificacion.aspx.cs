@@ -184,11 +184,10 @@ namespace Infatlan_STEI_Agencias.paginasAgencia
 
         protected void BtnCancelarNoti_Click(object sender, EventArgs e)
         {
-
             try
             {
                 validaciones();
-                String vQuery = "STEISP_AGENCIA_AprobarNotificacion  4," + Session["AGENCIA_ID_MANTENIMIENTO"] +"," +Session["USUARIO"];
+                String vQuery = "STEISP_AGENCIA_AprobarNotificacion  4," + Session["AGENCIA_ID_MANTENIMIENTO"] +"," +Session["USUARIO"]+ DDLMotivo.SelectedItem.Text+ TxDetalle.Text;
                 Int32 vInfo = vConexion.ejecutarSql(vQuery);
 
                 if (vInfo == 1)

@@ -58,6 +58,9 @@ namespace Infatlan_STEI_Agencias.paginasAgencia{
                 String vTest = TextBox1.Text;
                 String v2 = Convert.ToDateTime(vTest).ToString("yyyy-MM-dd");
 
+               
+
+
                 // DataTable vDatos = vConexion.obtenerDataTable("RSP_ObtenerRelojes 2," + vDuo);
                 // String vQuery = "SELECT A.idMantenimiento, B.nombre ,A.idAgencia  FROM Agencias_Mantenimiento  A INNER JOIN [dbo].[Agencias_Principal] B ON A.idMantenimiento=B.codigoAgencia   WHERE fechaMantenimiento ='2020-03-01' ";
                 // DataTable vDatos = vConexion.obtenerDataTable(vQuery);
@@ -103,6 +106,7 @@ namespace Infatlan_STEI_Agencias.paginasAgencia{
         {
             try
             {
+                TxLugar.Text = DDLCodigoAgencia.SelectedItem.Text;
                 String vQuery = "STEISP_AGENCIA_CreacionNotificacion 2," + DDLCodigoAgencia.SelectedValue;
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
                 TxArea.Text = vDatos.Rows[0]["nombre"].ToString();
@@ -265,6 +269,14 @@ namespace Infatlan_STEI_Agencias.paginasAgencia{
         protected void BtnEnviarNotificacion_Click(object sender, EventArgs e){
             try{
                 validaciones();
+
+                TxLugar.Text = DDLCodigoAgencia.SelectedItem.Text;
+                TxFecha.Text = TextBox1.Text;
+                TxHrInicioModal.Text = TxHoraInicio.Text;
+                TxHrFinModal.Text = TxHoraFin.Text;
+                TxResponsable.Text = DDLNombreResponsable.SelectedItem.Text;
+
+
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal();", true);
 
             }catch (Exception ex){

@@ -3298,6 +3298,7 @@
     <Content Include="paginasAgencia\ListaVerificacion.aspx" />
     <Content Include="paginasAgencia\lvPendientesCompletar.aspx" />
     <Content Include="paginasAgencia\lvIndividual.aspx" />
+    <Content Include="paginasAgencia\reprogramarMantenimiento.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -3375,6 +3376,13 @@
     </Compile>
     <Compile Include="paginasAgencia\lvIndividual.aspx.designer.cs">
       <DependentUpon>lvIndividual.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="paginasAgencia\reprogramarMantenimiento.aspx.cs">
+      <DependentUpon>reprogramarMantenimiento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginasAgencia\reprogramarMantenimiento.aspx.designer.cs">
+      <DependentUpon>reprogramarMantenimiento.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
