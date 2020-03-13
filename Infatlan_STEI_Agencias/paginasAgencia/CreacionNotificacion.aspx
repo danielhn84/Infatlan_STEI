@@ -193,7 +193,7 @@
                                                                 <i class="icon-trash"></i>
                                                             </asp:LinkButton>
                                                         </ItemTemplate>
-                                                        <ItemStyle Width="10%" />
+                                                        <ItemStyle Width="5%" />
                                                     </asp:TemplateField>
                                                     <asp:BoundField DataField="idUsuario" HeaderText="Usuario" ItemStyle-Width="25%" />
                                                     <asp:BoundField DataField="nombre" HeaderText="Nombre" ItemStyle-Width="25%" />
