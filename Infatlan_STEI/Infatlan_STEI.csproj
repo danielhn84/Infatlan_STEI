@@ -44,6 +44,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -3309,6 +3310,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="classes\generales.cs" />
+    <Compile Include="classes\LdapService.cs" />
     <Compile Include="classes\roles.cs" />
     <Compile Include="default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>

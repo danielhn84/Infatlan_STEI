@@ -187,7 +187,7 @@ namespace Infatlan_STEI_Agencias.paginasAgencia
             try
             {
                 validaciones();
-                String vQuery = "STEISP_AGENCIA_AprobarNotificacion  4," + Session["AGENCIA_ID_MANTENIMIENTO"] +"," +Session["USUARIO"]+ DDLMotivo.SelectedItem.Text+ TxDetalle.Text;
+                String vQuery = "STEISP_AGENCIA_AprobarNotificacion  4," + Session["AGENCIA_ID_MANTENIMIENTO"] +"," +Session["USUARIO"]+ "," + "'"+  DDLMotivo.SelectedItem.Text+ "'"+ "," + "'"+ TxDetalle.Text + "'";
                 Int32 vInfo = vConexion.ejecutarSql(vQuery);
 
                 if (vInfo == 1)

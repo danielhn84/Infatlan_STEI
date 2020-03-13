@@ -177,31 +177,40 @@ namespace Infatlan_STEI_Agencias.paginasAgencia
         protected global::System.Web.UI.WebControls.GridView GVBusqueda;
 
         /// <summary>
-        /// Control TxCorreo.
+        /// Control txtbuscarJefeNotif.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxCorreo;
+        protected global::System.Web.UI.WebControls.TextBox txtbuscarJefeNotif;
 
         /// <summary>
-        /// Control LBAgregar.
+        /// Control btnBuscarJefe.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LBAgregar;
+        protected global::System.Web.UI.WebControls.LinkButton btnBuscarJefe;
 
         /// <summary>
-        /// Control GVCorreoJefeAgencia.
+        /// Control GVJefesAD.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GVCorreoJefeAgencia;
+        protected global::System.Web.UI.WebControls.GridView GVJefesAD;
+
+        /// <summary>
+        /// Control GVjefesAgencias.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GVjefesAgencias;
 
         /// <summary>
         /// Control UpdatePrincipalBotones.

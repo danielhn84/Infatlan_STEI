@@ -84,8 +84,8 @@ namespace Infatlan_STEI_Agencias.paginasAgencia{
                     TxHoraFin.ReadOnly = false;
                     DDLNombreResponsable.Enabled = true;
                     DDLNombreParticipantes.Enabled = true;
-                    TxCorreo.ReadOnly = false;
-                    LBAgregar.Enabled = true;
+                    //TxCorreo.ReadOnly = false;
+                    //LBAgregar.Enabled = true;
 
                     TxMantEquipoComu.Text = "Si";
                     UpdatePanel1.Update();
@@ -181,77 +181,77 @@ namespace Infatlan_STEI_Agencias.paginasAgencia{
 
 
 
-        protected void btnAgregar_Click(object sender, EventArgs e)
-        {
-            try
-            {             
-                if (TxCorreo.Text.Equals(""))
-                    throw new Exception("Por favor llene el campo de correo.");
+        //protected void btnAgregar_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {             
+        //        if (TxCorreo.Text.Equals(""))
+        //            throw new Exception("Por favor llene el campo de correo.");
 
-                foreach (GridViewRow item in GVCorreoJefeAgencia.Rows)
-                {
-                    if (item.Cells[1].Text.Equals(TxCorreo.Text))
-                    {
-                        throw new Exception("Ya existe este correo.");
-                    }
-                }
+        //        foreach (GridViewRow item in GVCorreoJefeAgencia.Rows)
+        //        {
+        //            if (item.Cells[1].Text.Equals(TxCorreo.Text))
+        //            {
+        //                throw new Exception("Ya existe este correo.");
+        //            }
+        //        }
 
-                DataTable vDatos = new DataTable();
-                vDatos.Columns.Add("CorreoJefeAgencia");
-                if (HttpContext.Current.Session["CORREOS"] == null)
-                {
-                    vDatos.Rows.Add(TxCorreo.Text);
-                }
-                else
-                {
-                    vDatos = (DataTable)Session["CORREOS"];                  
-                    vDatos.Rows.Add(new Object[] { TxCorreo.Text });
-                }
-                GVCorreoJefeAgencia.DataSource = vDatos;
-                GVCorreoJefeAgencia.DataBind();
-                Session["CORREOS"] = vDatos;
-                UpdatePanel1.Update();
-                TxCorreo.Text = String.Empty;
-            }
-            catch (Exception Ex) { Mensaje(Ex.Message, WarningType.Danger); }
-        }
-
-
-        protected void GVCorreoJefeAgencia_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            try
-            {
-                GVCorreoJefeAgencia.DataSource = (DataTable)Session["CORREOS"];
-                GVCorreoJefeAgencia.PageIndex = e.NewPageIndex;
-                GVCorreoJefeAgencia.DataBind();
-            }
-            catch (Exception ex)
-            {
-                Mensaje(ex.Message, WarningType.Danger);
-            }
-        }
+        //        DataTable vDatos = new DataTable();
+        //        vDatos.Columns.Add("CorreoJefeAgencia");
+        //        if (HttpContext.Current.Session["CORREOS"] == null)
+        //        {
+        //            vDatos.Rows.Add(TxCorreo.Text);
+        //        }
+        //        else
+        //        {
+        //            vDatos = (DataTable)Session["CORREOS"];                  
+        //            vDatos.Rows.Add(new Object[] { TxCorreo.Text });
+        //        }
+        //        GVCorreoJefeAgencia.DataSource = vDatos;
+        //        GVCorreoJefeAgencia.DataBind();
+        //        Session["CORREOS"] = vDatos;
+        //        UpdatePanel1.Update();
+        //        TxCorreo.Text = String.Empty;
+        //    }
+        //    catch (Exception Ex) { Mensaje(Ex.Message, WarningType.Danger); }
+        //}
 
 
-        protected void GVCorreoJefeAgencia_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            DataTable vDatos = (DataTable)Session["CORREOS"];
-            if (e.CommandName == "Eliminar")
-            {
-                String vCorreo = e.CommandArgument.ToString();
-                if (Session["CORREOS"] != null)
-                {
-                    DataRow[] result = vDatos.Select("CorreoJefeAgencia = '" + vCorreo + "'");
-                    foreach (DataRow row in result)
-                    {
-                        if (row["CorreoJefeAgencia"].ToString().Contains(vCorreo))
-                            vDatos.Rows.Remove(row);
-                    }
-                }
-            }
-            GVCorreoJefeAgencia.DataSource = vDatos;
-            GVCorreoJefeAgencia.DataBind();
-            Session["CORREOS"] = vDatos;
-        }
+        //protected void GVCorreoJefeAgencia_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        //{
+        //    try
+        //    {
+        //        GVCorreoJefeAgencia.DataSource = (DataTable)Session["CORREOS"];
+        //        GVCorreoJefeAgencia.PageIndex = e.NewPageIndex;
+        //        GVCorreoJefeAgencia.DataBind();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Mensaje(ex.Message, WarningType.Danger);
+        //    }
+        //}
+
+
+        //protected void GVCorreoJefeAgencia_RowCommand(object sender, GridViewCommandEventArgs e)
+        //{
+        //    DataTable vDatos = (DataTable)Session["CORREOS"];
+        //    if (e.CommandName == "Eliminar")
+        //    {
+        //        String vCorreo = e.CommandArgument.ToString();
+        //        if (Session["CORREOS"] != null)
+        //        {
+        //            DataRow[] result = vDatos.Select("CorreoJefeAgencia = '" + vCorreo + "'");
+        //            foreach (DataRow row in result)
+        //            {
+        //                if (row["CorreoJefeAgencia"].ToString().Contains(vCorreo))
+        //                    vDatos.Rows.Remove(row);
+        //            }
+        //        }
+        //    }
+        //    GVCorreoJefeAgencia.DataSource = vDatos;
+        //    GVCorreoJefeAgencia.DataBind();
+        //    Session["CORREOS"] = vDatos;
+        //}
 
         private void validaciones(){
             if (TextBox1.Text == "" || TextBox1.Text == string.Empty)
@@ -260,8 +260,8 @@ namespace Infatlan_STEI_Agencias.paginasAgencia{
                 throw new Exception("Favor seleccione Código/Lugar Agencia.");
             if (TxSysAid.Text == "" || TxSysAid.Text == string.Empty)
                 throw new Exception("Favor ingrese número de SysAid.");
-            if (GVCorreoJefeAgencia.Rows.Count==0)
-                throw new Exception("Favor ingrese correo de jefe de agencia.");
+            //if (GVCorreoJefeAgencia.Rows.Count==0)
+            //    throw new Exception("Favor ingrese correo de jefe de agencia.");
             if (DDLNombreResponsable.SelectedValue.Equals("0"))
                 throw new Exception("Favor seleccione tecnico responsable."); 
         }
@@ -400,8 +400,8 @@ namespace Infatlan_STEI_Agencias.paginasAgencia{
             TxHoraFin.ReadOnly = true;
             DDLNombreResponsable.Enabled = false;
             DDLNombreParticipantes.Enabled = false;
-            TxCorreo.ReadOnly = true;
-            LBAgregar.Enabled = false;
+            //TxCorreo.ReadOnly = true;
+            //LBAgregar.Enabled = false;
             UpdatePanel1.Update();
         }
 
@@ -434,8 +434,8 @@ namespace Infatlan_STEI_Agencias.paginasAgencia{
             GVBusqueda.DataSource = null;
             GVBusqueda.DataBind();
 
-            GVCorreoJefeAgencia.DataSource = null;
-            GVCorreoJefeAgencia.DataBind();
+            //GVCorreoJefeAgencia.DataSource = null;
+            //GVCorreoJefeAgencia.DataBind();
 
             UpdatePanel1.Update();
 
@@ -446,6 +446,119 @@ namespace Infatlan_STEI_Agencias.paginasAgencia{
             Limpiar();
             Mensaje("Notificación cancelada con exito", WarningType.Info);
             BloquearCampos();
+        }
+
+        protected void btnBuscarJefe_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txtbuscarJefeNotif.Text != "" || txtbuscarJefeNotif.Text != string.Empty)
+                {
+                    // Session["NotifJefeAgenciaATM"] = null;
+                    classes.LdapService vService = new classes.LdapService();
+                    DataTable vDatos = vService.GetDatosUsuario("adbancat.hn", txtbuscarJefeNotif.Text);
+
+
+                    GVJefesAD.DataSource = vDatos;
+                    GVJefesAD.DataBind();
+                    Session["CORREO_JEFE_AD"] = vDatos;
+                    UpdatePanel2.Update();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        protected void GVJefesAD_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            try
+            {
+                GVJefesAD.PageIndex = e.NewPageIndex;
+                GVJefesAD.DataSource = (DataTable)Session["CORREO_JEFE_AD"];
+                GVJefesAD.DataBind();
+            }
+            catch (Exception Ex)
+            {
+
+            }
+        }
+
+        protected void GVJefesAD_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+
+            string correoJefe = e.CommandArgument.ToString();
+
+            if (e.CommandName == "correos")
+            {
+                try
+                {
+                    foreach (GridViewRow item in GVjefesAgencias.Rows)
+                    {
+                        if (item.Cells[1].Text.Equals(correoJefe))
+                        {
+                            throw new Exception("Ya existe jefe de agencia.");
+
+                        }
+                    }
+
+                    DataTable vData = new DataTable();
+                    DataTable vDatos = (DataTable)Session["NotifJefeAgenciaATM"];
+                    string CorreoJefe = correoJefe;
+
+                    vData.Columns.Add("Correo");
+                    if (vDatos == null)
+                        vDatos = vData.Clone();
+                    if (vDatos != null)
+                    {
+                        vDatos.Rows.Add(CorreoJefe);
+
+                    }
+                    GVjefesAgencias.DataSource = vDatos;
+                    GVjefesAgencias.DataBind();
+                    Session["NotifJefeAgenciaATM"] = vDatos;
+                    UpdatePanel1.Update();
+                }
+                catch (Exception Ex)
+                {
+
+                    // DLLTecnicoParticipante.SelectedValue = "0";
+                    Mensaje(Ex.Message, WarningType.Danger);
+                }
+            }
+
+
+
+        }
+
+        protected void GVjefesAgencias_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            DataTable vDatos = (DataTable)Session["NotifJefeAgenciaATM"];
+            if (e.CommandName == "eliminar")
+            {
+                String vCorreo = e.CommandArgument.ToString();
+                if (Session["NotifJefeAgenciaATM"] != null)
+                {
+
+                    DataRow[] result = vDatos.Select("Correo = '" + vCorreo + "'");
+                    foreach (DataRow row in result)
+                    {
+                        if (row["Correo"].ToString().Contains(vCorreo))
+                            vDatos.Rows.Remove(row);
+                    }
+                }
+            }
+            GVjefesAgencias.DataSource = vDatos;
+            GVjefesAgencias.DataBind();
+            Session["NotifJefeAgenciaATM"] = vDatos;
+
+        }
+
+        protected void Btnseleccionar_Click(object sender, EventArgs e)
+        {
+
         }
     }
 
