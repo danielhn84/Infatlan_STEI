@@ -37,7 +37,7 @@ namespace Infatlan_STEI_Agencias.paginasAgencia
 
                 GVBusqueda.DataSource = vDatos;
                 GVBusqueda.DataBind();
-                Session["MANTENIMIENTOS_PENDIENTES_APROBAR"] = vDatos;
+                Session["AG_CN_MANTENIMIENTOS_PENDIENTES_APROBAR"] = vDatos;
                 
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);
@@ -51,48 +51,55 @@ namespace Infatlan_STEI_Agencias.paginasAgencia
 
         protected void GVBusqueda_RowCommand(object sender, GridViewCommandEventArgs e){
             if (e.CommandName == "Aprobar"){
-
+                limpiarModalAprobarNotificacion();
                 string vIdMantenimiento = e.CommandArgument.ToString();
-                Session["AGENCIA_ID_MANTENIMIENTO"] = vIdMantenimiento;
+                Session["AG_CN_ID_MANTENIMIENTO"] = vIdMantenimiento;
 
                 String vQuery = "STEISP_AGENCIA_AprobarNotificacion 3," + vIdMantenimiento;
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
 
                 foreach (DataRow item in vDatos.Rows)
                 {
+                    string vIdMantenimientoSelect = item["id_Mantenimiento"].ToString();
                     string vLugar = item["Lugar"].ToString();
                     string vFecha = item["fecha"].ToString();
                     string vResponsable = item["Responsable"].ToString();
+                    string vArea = item["Area"].ToString();
 
-
+                    TxIdMant.Text = vIdMantenimientoSelect;
                     TxLugar.Text = vLugar;
                     TxFecha.Text = vFecha;
                     TxTecnicoResponsable.Text = vResponsable;
-
+                    TxArea.Text = vArea;
                 }
-                
+
+                String vQuery2 = "STEISP_AGENCIA_AprobarNotificacion 5," + vIdMantenimiento;
+                DataTable vDatos2 = vConexion.obtenerDataTable(vQuery2);
+                foreach (DataRow item in vDatos2.Rows)
+                {
+                    string vTecnicoParticipantes = item["Participantes"].ToString();                    
+                    TxParticipantes.Text = TxParticipantes.Text + vTecnicoParticipantes + "\n";                
+                }
+
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal();", true);
 
                
             }else if(e.CommandName == "Cancelar"){
-
+                limpiarModalCancelarNotificacion();
                 string vIdMantenimiento = e.CommandArgument.ToString();
-                Session["AGENCIA_ID_MANTENIMIENTO"] = vIdMantenimiento;
-
+                Session["AG_CN_ID_MANTENIMIENTO"] = vIdMantenimiento;
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModalCancelacion();", true);
-
-
             }
 
         }
 
         protected void btnModalAprobarNotificacion_Click(object sender, EventArgs e){
             try{
-                String vQuery = "STEISP_AGENCIA_AprobarNotificacion 2," + Session["AGENCIA_ID_MANTENIMIENTO"];
+                String vQuery = "STEISP_AGENCIA_AprobarNotificacion 2," + Session["AG_CN_ID_MANTENIMIENTO"] +"," + Session["USUARIO"];
                 Int32 vInfo = vConexion.ejecutarSql(vQuery);
 
                 if (vInfo == 1){
-                    Mensaje("Notificacón aprobada con exito", WarningType.Success);
+                    Mensaje("Notificación aprobada con exito. ", WarningType.Success);
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
                 }
 
@@ -106,10 +113,8 @@ namespace Infatlan_STEI_Agencias.paginasAgencia
         {
             try
             {
-    
-
                 String vBusqueda = TxBuscarAgencia.Text;
-                DataTable vDatos = (DataTable)Session["MANTENIMIENTOS_PENDIENTES_APROBAR"];
+                DataTable vDatos = (DataTable)Session["AG_CN_MANTENIMIENTOS_PENDIENTES_APROBAR"];
 
                 if (vBusqueda.Equals(""))
                 {
@@ -160,7 +165,7 @@ namespace Infatlan_STEI_Agencias.paginasAgencia
 
                     GVBusqueda.DataSource = vDatosFiltrados;
                     GVBusqueda.DataBind();
-                    Session["MANTENIMIENTOS_PENDIENTES_APROBAR"] = vDatosFiltrados;
+                    Session["AG_CN_MANTENIMIENTOS_PENDIENTES_APROBAR"] = vDatosFiltrados;
                     UPGvBusqueda.Update();
                 }
 
@@ -176,9 +181,11 @@ namespace Infatlan_STEI_Agencias.paginasAgencia
         private void validaciones()
         {           
             if (DDLMotivo.SelectedValue.Equals("0"))
-                throw new Exception("Favor seleccione motivo de cancelación.");
+                throw new Exception("Falta completar datos, Favor seleccionar un motivo de cancelación del mantenimiento. ");
+            
             if (TxDetalle.Text.Equals(""))
-                throw new Exception("Favor ingrese detalle de la cancelación.");
+                throw new Exception("Falta completar datos, Favor ingrese detalle de la cancelación del mantenimiento. ");
+          
         }
 
 
@@ -187,12 +194,15 @@ namespace Infatlan_STEI_Agencias.paginasAgencia
             try
             {
                 validaciones();
-                String vQuery = "STEISP_AGENCIA_AprobarNotificacion  4," + Session["AGENCIA_ID_MANTENIMIENTO"] +"," +Session["USUARIO"]+ "," + "'"+  DDLMotivo.SelectedItem.Text+ "'"+ "," + "'"+ TxDetalle.Text + "'";
+                String vQuery = "STEISP_AGENCIA_AprobarNotificacion  4," + Session["AG_CN_ID_MANTENIMIENTO"] +"," +Session["USUARIO"]+ "," + "'"+  DDLMotivo.SelectedItem.Text+ "'"+ "," + "'"+ TxDetalle.Text + "'";
                 Int32 vInfo = vConexion.ejecutarSql(vQuery);
+
+                String vQuery1 = "STEISP_AGENCIA_AprobarNotificacion  6," + Session["AG_CN_ID_MANTENIMIENTO"] ;
+                Int32 vInfo1 = vConexion.ejecutarSql(vQuery1);
 
                 if (vInfo == 1)
                 {
-                    Mensaje("Notificacón cancelada con exito", WarningType.Success);
+                    Mensaje("Notificacón cancelada con exito, esta pendiente que el jefe o suplente reprogramen el mantenimiento", WarningType.Success);
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModalCancelacion();", true);
                 }
                 cargarDatos();
@@ -200,9 +210,28 @@ namespace Infatlan_STEI_Agencias.paginasAgencia
             catch (Exception ex)
             {
                 LbMensajeModalError.Text = ex.Message;
-                //UpdateModal.Update();
-                //Mensaje(ex.Message, WarningType.Danger);
+                UpdateModal.Visible = true;
+                UpdateModal.Update();
+               
             }
+        }
+
+
+        private void limpiarModalAprobarNotificacion()
+        {
+            TxIdMant.Text = string.Empty;
+            TxLugar.Text = string.Empty;
+            TxArea.Text = string.Empty;
+            TxFecha.Text = string.Empty;
+            TxTecnicoResponsable.Text = string.Empty;
+            TxParticipantes.Text = string.Empty;
+        }
+
+        private void limpiarModalCancelarNotificacion()
+        {
+            DDLMotivo.SelectedIndex = -1;
+            TxDetalle.Text = string.Empty;
+            UpdateModal.Visible = false;
         }
     }
 }

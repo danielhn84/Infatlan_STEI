@@ -71,7 +71,7 @@
                                 <asp:GridView ID="GVBusqueda" runat="server"
                                     CssClass="table table-bordered"
                                     PagerStyle-CssClass="pgr"
-                                    HeaderStyle-CssClass="table"
+                                    HeaderStyle-CssClass="table" HeaderStyle-HorizontalAlign="center"
                                     RowStyle-CssClass="rows"
                                     AutoGenerateColumns="false"
                                     AllowPaging="true"
@@ -91,7 +91,7 @@
                                             </ItemTemplate>
                                             <ItemStyle Width="10%" />
                                         </asp:TemplateField>
-                                        <asp:BoundField DataField="id_Mantenimiento" HeaderText="Id Mantenimiento" />
+                                        <asp:BoundField DataField="id_Mantenimiento" HeaderText="Id" />
                                         <asp:BoundField DataField="fecha" HeaderText="Fecha"  />
                                         <asp:BoundField DataField="Hr_Inicio" HeaderText="Hora Inicio" />
                                         <asp:BoundField DataField="Hr_Fin" HeaderText="Hora Fin" />
@@ -116,28 +116,26 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="width: 600px; top: 320px; left: 50%; transform: translate(-50%, -50%);">
                 <div class="modal-header modal-colored-header bg-success">
-                    <asp:UpdatePanel ID="UpdateLabelPermiso" runat="server" UpdateMode="Conditional">
-                        <ContentTemplate>
-                            <h4 class="modal-title" id="ModalLabelUsuario">Aprobar Notificación</h4>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-
+                    <h4 class="modal-title" id="ModalLabelUsuario" style="color: white"><i class="icon-check"></i> Aprobar Notificación</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-
                 </div>
+
                 <div class="modal-body">
                     <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                         <ContentTemplate>
-                            <%--                            <div class="form-group row">
-                                <div class="col-sm-12">
-                                    <asp:Label ID="LbInformacionNotificación" AutoPostBack="true" runat="server"></asp:Label>
-
-                                </div>
-                            </div>--%>
-
+                        
                             <div class="form-group row">
+                                <div class="col-md-12" runat="server">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Id Mantenimiento:</label>
+                                        <div class="col-sm-9">
+                                            <asp:TextBox ID="TxIdMant" class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="col-md-12" runat="server">
                                     <div class="form-group row">
                                         <label class="col-sm-3 col-form-label">Lugar:</label>
@@ -146,6 +144,16 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="col-md-12" runat="server">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Area:</label>
+                                        <div class="col-sm-9">
+                                            <asp:TextBox ID="TxArea" class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+
 
                                 <div class="col-md-12" runat="server">
                                     <div class="form-group row">
@@ -159,16 +167,26 @@
 
                                 <div class="col-md-12" runat="server">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label">Tecnico Responsable:</label>
+                                        <label class="col-sm-3 col-form-label">Técnico Responsable:</label>
                                         <div class="col-sm-9">
                                             <asp:TextBox ID="TxTecnicoResponsable" class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-md-12">                                   
-                                    <label style="color:firebrick; text-align:center";  ><strong>Nota:Una vez aprobada la notificación el tecnico responsable recibirá un correo para que complete la lista de verificación. </strong></label>                                                                                         
-                                </div>  
+                                <div class="col-md-12" runat="server">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Técnicos Participantes:</label>
+                                        <div class="col-sm-9">
+                                            <asp:TextBox ID="TxParticipantes" class="form-control" runat="server" ReadOnly="true" TextMode="MultiLine" Rows="4"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-12">
+                                    <label style="color: firebrick; text-align: center"><strong>Nota:Una vez aprobada la notificación el técnico responsable recibirá un correo para que complete la lista de verificación. </strong></label>
+                                </div>
 
                             </div>
 
@@ -180,7 +198,7 @@
                 <div class="modal-footer">
                     <asp:UpdatePanel ID="UpdateUsuarioBotones" runat="server">
                         <ContentTemplate>
-                            <button type="button" class="btn btn-light"data-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-light" data-dismiss="modal">Cerrar</button>
                             <asp:Button ID="btnModalAprobarNotificacion" runat="server" Text="Aprobar Notificación" class="btn btn-success" OnClick="btnModalAprobarNotificacion_Click" />
                         </ContentTemplate>
                     </asp:UpdatePanel>
@@ -194,24 +212,24 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="width: 600px; top: 320px; left: 50%; transform: translate(-50%, -50%);">
                 <div class="modal-header  modal-colored-header bg-danger">
-                    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
-                        <ContentTemplate>
-                            <h4 class="modal-title">Cancelar Notificación</h4>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-
+                    <h4 class="modal-title" style="color: white"><i class="icon-close"></i> Cancelar Notificación</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-
                 </div>
+
                 <div class="modal-body">
                     <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                         <ContentTemplate>
                             <div class="form-group row">
                                 <div class="col-md-12" runat="server">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label">*Motivo:</label>
+                                        <div class="col-md-3">
+                                            <label class="control-label   text-danger">*</label><label class="control-label">Motivo:</label></label>
+                                        <%--<asp:TextBox ID="TextBox1" AutoPostBack="true" runat="server" TextMode="Date" OnTextChanged="TextBox1_TextChanged" class="form-control"></asp:TextBox>--%>
+                                        </div>
+
+                                        
                                         <div class="col-sm-9">
                                             <asp:DropDownList ID="DDLMotivo" runat="server" class="form-control">
                                                 <asp:ListItem Value="0" Text="Seleccione motivo..."></asp:ListItem>
@@ -225,7 +243,13 @@
 
                                 <div class="col-md-12" runat="server">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label">*Detalle:</label>
+
+                                        <div class="col-md-3">
+                                            <label class="control-label   text-danger">*</label><label class="control-label">Detalle:</label></label>
+                                        <%--<asp:TextBox ID="TextBox1" AutoPostBack="true" runat="server" TextMode="Date" OnTextChanged="TextBox1_TextChanged" class="form-control"></asp:TextBox>--%>
+                                        </div>
+
+                                        
                                         <div class="col-sm-9">
                                             <asp:TextBox ID="TxDetalle" class="form-control" runat="server" TextMode="MultiLine" Rows="5"></asp:TextBox>
                                         </div>
@@ -238,16 +262,19 @@
                                  
                                 </div>
 
-                                <asp:UpdatePanel ID="UpdateModal" runat="server" UpdateMode="Always">
+                                <asp:UpdatePanel ID="UpdateModal" runat="server" UpdateMode="Conditional" Visible ="false" >
                                     <ContentTemplate>
-                                        <div class="col-md-12   align-self-center" style="margin-left: auto; margin-right: auto">
-                                            <asp:Label ID="LbMensajeModalError" runat="server" Text="" Style="color: indianred; display:inline-block" CssClass="StrongText"></asp:Label>
-                                        </div>
-
+                                        <div class="col-md-12" style="align-self: center" >
+                                            <div class="alert alert-warning   align-content-md-center">
+                                                <h3 class="text-warning" style="text-align: center"><i class="fa fa-exclamation-triangle"></i>Warning</h3>
+                                                <asp:Label ID="LbMensajeModalError" runat="server" Text="" Width="100%" ></asp:Label>
+                                            </div>                                        
+                                        </div>                                                                                     
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
 
-                            </div>
+
+                            </div> 
                         </ContentTemplate>
                     </asp:UpdatePanel>
 
