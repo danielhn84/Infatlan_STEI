@@ -50,7 +50,7 @@ namespace Infatlan_STEI_ATM.pagesATM
                 vDatos = vConexion.ObtenerTabla("STEISP_ATM_Generales 16, '" + Session["codNotificacion"] + "'");
                 GVBusqueda.DataSource = vDatos;
                 GVBusqueda.DataBind();
-                Session["NotifTecParticipantes"] = vDatos;
+                Session["ATM_NOTIF_TECNICOS"] = vDatos;
                 Session["UPDATEATM"] = 1;
 
             }
@@ -65,7 +65,7 @@ namespace Infatlan_STEI_ATM.pagesATM
                 vDatos = vConexion.ObtenerTabla("STEISP_ATM_Generales 17, '" + Session["codNotificacion"] + "'");
                 GVLlenaJefeApruebaNotif.DataSource = vDatos;
                 GVLlenaJefeApruebaNotif.DataBind();
-                Session["NotifJefesAgencias"] = vDatos;
+                Session["ATM_NOTIFJEFESAGEN"] = vDatos;
                 Session["UPDATEATM"] = 1;
 
             }

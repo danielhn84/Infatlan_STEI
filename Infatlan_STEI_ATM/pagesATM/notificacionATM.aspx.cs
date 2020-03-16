@@ -63,7 +63,7 @@ namespace Infatlan_STEI_ATM.pagesATM
         {
             if (DLLtecResponsable.SelectedValue == "0")
                 throw new Exception("Favor seleccione técnico responsable.");
-            if (DLLTecnicoParticipante.SelectedValue == "0")
+            if (Session["ATM_EMPLEADOS"] == null)
                 throw new Exception("Favor seleccione técnicos participantes.");
             //if (DDLmantemientoPendiente.SelectedValue == "0")
             //    throw new Exception("Favor seleccione ATM.");          

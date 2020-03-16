@@ -97,7 +97,7 @@
     <%--TERMINAN LAS TARGETAS--%>
      <div class="card" >
              <br />
-    <div class="row col-12">
+    <div class="col-md-12 align-self-center" style="margin-left:auto; margin-right:auto">
          <div class="table-responsive">
         <asp:GridView ID="GVMantenimiento" runat="server"
                                     CssClass="table table-bordered"

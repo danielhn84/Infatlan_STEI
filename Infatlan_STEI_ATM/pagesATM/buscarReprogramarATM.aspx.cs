@@ -33,8 +33,8 @@ namespace Infatlan_STEI_ATM.pagesATM
                 vDatos = vConexion.ObtenerTabla("STEISP_ATM_Generales 18, 1");
                 GVBusqueda.DataSource = vDatos;
                 GVBusqueda.DataBind();
-                Session["ReprogramacionATM"] = vDatos;
-                Session["UPDATEATM"] = 1;
+                Session["ATM_REPROGRAMAR_CARGAR"] = vDatos;
+                //Session["UPDATEATM"] = 1;
 
             }
             catch (Exception Ex)
@@ -51,7 +51,7 @@ namespace Infatlan_STEI_ATM.pagesATM
                 cargarData();
 
                 String vBusqueda = TxBuscarTecnicoATM.Text;
-                DataTable vDatos = (DataTable)Session["ReprogramacionATM"];
+                DataTable vDatos = (DataTable)Session["ATM_REPROGRAMAR_CARGAR"];
 
                 if (vBusqueda.Equals(""))
                 {
@@ -86,7 +86,7 @@ namespace Infatlan_STEI_ATM.pagesATM
 
                     GVBusqueda.DataSource = vDatosFiltrados;
                     GVBusqueda.DataBind();
-                    Session["ReprogramacionATM"] = vDatosFiltrados;
+                    Session["ATM_REPROGRAMAR_CARGAR"] = vDatosFiltrados;
                     UpdateGridView.Update();
                 }
 
@@ -103,7 +103,7 @@ namespace Infatlan_STEI_ATM.pagesATM
             try
             {
                 GVBusqueda.PageIndex = e.NewPageIndex;
-                GVBusqueda.DataSource = (DataTable)Session["ReprogramacionATM"];
+                GVBusqueda.DataSource = (DataTable)Session["ATM_REPROGRAMAR_CARGAR"];
                 GVBusqueda.DataBind();
             }
             catch (Exception Ex)
@@ -118,7 +118,7 @@ namespace Infatlan_STEI_ATM.pagesATM
             txtNewFechaInicio.Text = string.Empty;
             try
             {
-                DataTable vDataaaa = (DataTable)Session["ReprogramacionATM"];
+                DataTable vDataaaa = (DataTable)Session["ATM_REPROGRAMAR_CARGAR"];
                 string codReprogramacion = e.CommandArgument.ToString();
 
                 if (e.CommandName == "Aprobar")

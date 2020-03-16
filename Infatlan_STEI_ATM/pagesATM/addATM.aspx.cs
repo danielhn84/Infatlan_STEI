@@ -16,7 +16,7 @@ namespace Infatlan_STEI_ATM.pagesATM
         bd vConexion = new bd();
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["ATM"] = null;
+            Session["ATM_ADD"] = null;
             if (!Page.IsPostBack)
             {
                 //Limpiar();
@@ -34,7 +34,7 @@ namespace Infatlan_STEI_ATM.pagesATM
             //DDLTipoATM.Items.Clear();
             // DDLModeloATM.Items.Clear();
             //SUCURSALES
-            if (HttpContext.Current.Session["ATM"] == null)
+            if (HttpContext.Current.Session["ATM_ADD"] == null)
             { 
                 try
                 {              
@@ -246,7 +246,7 @@ namespace Infatlan_STEI_ATM.pagesATM
             {
                 throw;
             }
-                Session["ATM"] = "1";
+                Session["ATM_ADD"] = "1";
                 }
             }
 
@@ -268,7 +268,7 @@ namespace Infatlan_STEI_ATM.pagesATM
     }
 
         void Limpiar(){
-            Session["ATM"] = null;
+            Session["ATM_ADD"] = null;
             txtcodATM.Text = string.Empty;
             DDLsucursalATM.Items.Clear();
             DDLUbicacionATM.Items.Clear();

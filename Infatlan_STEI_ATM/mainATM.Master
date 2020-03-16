@@ -136,7 +136,7 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav"> 
-                        <li><a  href="../pagesATM/buscarReprogramarATM.aspx" aria-expanded="false"><i class="ti-home"></i><span class="hide-menu">Dashboard</span></a></li>
+                        <li><a  href="../defaultATM.aspx" aria-expanded="false"><i class="ti-home"></i><span class="hide-menu">Dashboard</span></a></li>
                          <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-desktop"></i><span class="hide-menu">ATM<span class="badge badge-pill badge-cyan ml-auto">13</span></span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="../pagesATM/addATM.aspx">Agregar ATM</a></li>
@@ -156,7 +156,7 @@
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="../pagesATM/notificacionATM.aspx">Crear Notificación</a></li>
                                 <li><a href="../pagesATM/buscarAprobarNotificacionATM.aspx">Aprobar Notificación</a></li>
-                                <li><a href="../pagesATM/verificacionATM.aspx">Crear Verificación</a></li>   
+                                <li><a href="../pagesATM/buscarVerificacionATM.aspx">Crear Verificación</a></li>   
                                 <li><a href="../pagesATM/aprobarVerificacionATM.aspx">Aprobar Verificación</a></li>
                             </ul>
                         </li>

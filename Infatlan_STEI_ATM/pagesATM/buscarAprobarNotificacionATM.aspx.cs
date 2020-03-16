@@ -52,7 +52,7 @@ namespace Infatlan_STEI_ATM.pagesATM
                 vDatos = vConexion.ObtenerTabla("STEISP_ATM_Generales 14, 1");
                 GVBusqueda.DataSource = vDatos;
                 GVBusqueda.DataBind();
-                Session["AprobNotifATM"] = vDatos;
+                Session["ATM_APROBNOTIF_CARGAR"] = vDatos;
                 Session["UPDATEATM"] = 1;
 
             }
@@ -68,7 +68,7 @@ namespace Infatlan_STEI_ATM.pagesATM
             try
             {
                 GVBusqueda.PageIndex = e.NewPageIndex;
-                GVBusqueda.DataSource = (DataTable)Session["AprobNotifATM"];
+                GVBusqueda.DataSource = (DataTable)Session["ATM_APROBNOTIF_CARGAR"];
                 GVBusqueda.DataBind();
             }
             catch (Exception Ex)
@@ -81,7 +81,7 @@ namespace Infatlan_STEI_ATM.pagesATM
         {
             try
             {
-                DataTable vDataaaa = (DataTable)Session["AprobNotifATM"];
+                DataTable vDataaaa = (DataTable)Session["ATM_APROBNOTIF_CARGAR"];
                 string codNotificacion = e.CommandArgument.ToString();             
 
                 if (e.CommandName == "Aprobar")
@@ -136,7 +136,7 @@ namespace Infatlan_STEI_ATM.pagesATM
                 cargarData();
 
                 String vBusqueda = TxBuscarTecnicoATM.Text;
-                DataTable vDatos = (DataTable)Session["AprobNotifATM"];
+                DataTable vDatos = (DataTable)Session["ATM_APROBNOTIF_CARGAR"];
 
                 if (vBusqueda.Equals(""))
                 {
@@ -171,7 +171,7 @@ namespace Infatlan_STEI_ATM.pagesATM
 
                     GVBusqueda.DataSource = vDatosFiltrados;
                     GVBusqueda.DataBind();
-                    Session["AprobNotifATM"] = vDatosFiltrados;
+                    Session["ATM_APROBNOTIF_CARGAR"] = vDatosFiltrados;
                     UpdateGridView.Update();
                 }
 
