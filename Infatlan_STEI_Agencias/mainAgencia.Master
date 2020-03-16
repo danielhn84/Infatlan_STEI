@@ -86,8 +86,8 @@
                     <div class="user-pro-body">
                         <div>
 
-                            <img src="/assets/images/users/usuario.png" alt="user-img" class="img-circle"></div>
-                        <div class="dropdown">
+                            <%--<img src="/assets/images/users/usuario.png" alt="user-img" class="img-circle"></div>--%>
+<%--                        <div class="dropdown">
                             <a href="javascript:void(0)" class="dropdown-toggle u-dropdown link hide-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuario <span class="caret"></span></a>
                             <div class="dropdown-menu animated flipInY">
 
@@ -98,7 +98,7 @@
                                 <!-- text-->
                                 <a href="login.html" class="dropdown-item"><i class="fa fa-power-off"></i>Logout</a>
                                 <!-- text-->
-                            </div>
+                            </div>--%>
                         </div>
                     </div>
                 </div>

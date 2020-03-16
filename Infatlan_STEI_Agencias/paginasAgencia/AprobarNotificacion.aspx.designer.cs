@@ -69,15 +69,6 @@ namespace Infatlan_STEI_Agencias.paginasAgencia
         protected global::System.Web.UI.WebControls.GridView GVBusqueda;
 
         /// <summary>
-        /// Control UpdateLabelPermiso.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdateLabelPermiso;
-
-        /// <summary>
         /// Control UpdatePanel3.
         /// </summary>
         /// <remarks>
@@ -87,6 +78,15 @@ namespace Infatlan_STEI_Agencias.paginasAgencia
         protected global::System.Web.UI.UpdatePanel UpdatePanel3;
 
         /// <summary>
+        /// Control TxIdMant.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxIdMant;
+
+        /// <summary>
         /// Control TxLugar.
         /// </summary>
         /// <remarks>
@@ -94,6 +94,15 @@ namespace Infatlan_STEI_Agencias.paginasAgencia
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TxLugar;
+
+        /// <summary>
+        /// Control TxArea.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxArea;
 
         /// <summary>
         /// Control TxFecha.
@@ -114,6 +123,15 @@ namespace Infatlan_STEI_Agencias.paginasAgencia
         protected global::System.Web.UI.WebControls.TextBox TxTecnicoResponsable;
 
         /// <summary>
+        /// Control TxParticipantes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxParticipantes;
+
+        /// <summary>
         /// Control UpdateUsuarioBotones.
         /// </summary>
         /// <remarks>
@@ -130,15 +148,6 @@ namespace Infatlan_STEI_Agencias.paginasAgencia
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnModalAprobarNotificacion;
-
-        /// <summary>
-        /// Control UpdatePanel1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
 
         /// <summary>
         /// Control UpdatePanel2.
