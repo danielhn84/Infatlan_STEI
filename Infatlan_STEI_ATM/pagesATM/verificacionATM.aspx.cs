@@ -13,14 +13,7 @@ namespace Infatlan_STEI_ATM
     {
        
 
-        void limpiarModalVerificacion()
-        {
-            dropMantPendiente.SelectedValue = "0";
-            dropMotivo.SelectedValue = "0";
-            dropcambioPor.SelectedValue = "0";
-            dropNewTecnico.SelectedValue = "0";
-            txtdetalleCancela.Text = string.Empty;
-        }
+       
 
         bd vConexion = new bd();
         protected void Page_Load(object sender, EventArgs e)
@@ -30,10 +23,71 @@ namespace Infatlan_STEI_ATM
             {
                 //limpiarModalVerificacion();
                 CargarVerificacion();
+                llenarForm();
             }
         }
+        public void Mensaje(string vMensaje, WarningType type)
+        {
+            ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
+        }
 
-       
+        void llenarForm()
+        {
+            txtcodATM.Text = Session["ATM_CODATM_VERIF_CREAR"].ToString();
+            txtnomATM.Text = Session["ATM_NOMATM_VERIF_CREAR"].ToString();
+            txtdireccion.Text = Session["ATM_DIRECCION_VERIF_CREAR"].ToString();
+            txtip.Text = Session["ATM_IP_VERIF_CREAR"].ToString();
+            txtpuertoVerif.Text = Session["ATM_PUERTOATM_VERIF_CREAR"].ToString();
+            DDLtipoTeclado.SelectedIndex= CargarInformacionDDL(DDLtipoTeclado, Session["ATM_TECLADO_VERIF_CREAR"].ToString()); 
+            DDLtipoProc.SelectedIndex= CargarInformacionDDL(DDLtipoProc, Session["ATM_PROCESADOR_VERIF_CREAR"].ToString()); 
+            DDLtipoCargaVerif.SelectedIndex= CargarInformacionDDL(DDLtipoCargaVerif, Session["ATM_TIPOCARGA_VERIF_CREAR"].ToString()); 
+            DDLmarcaDiscoDuro.SelectedIndex= CargarInformacionDDL(DDLmarcaDiscoDuro, Session["ATM_MARCA_VERIF_CREAR"].ToString());
+            txtSerieDiscoDuro.Text = Session["ATM_SERIEDISCO_VERIF_CREAR"].ToString();
+            txtserieATM.Text = Session["ATM_SERIEATM_VERIF_CREAR"].ToString();
+            txtcapacidadDiscoVerif.Text = Session["ATM_CAPACIDADDISCO_VERIF_CREAR"].ToString();
+            txtinventarioVerif.Text = Session["ATM_INVENTARIO_VERIF_CREAR"].ToString();
+            txtramVerif.Text = Session["ATM_RAM_VERIF_CREAR"].ToString();
+            txtlatitudATM.Text = Session["ATM_LATITUD_VERIF_CREAR"].ToString();
+            txtlongitudATM.Text = Session["ATM_LONGITUD_VERIF_CREAR"].ToString();
+            txtUbicacionATM.Text = Session["ATM_UBICACION_VERIF_CREAR"].ToString();
+            //Session["ATM_IDUBI_VERIF_CREAR"] 
+            txtsucursal.Text = Session["ATM_SUCURSAL_VERIF_CREAR"].ToString();
+            //Session["ATM_DEPTO_VERIF_CREAR"] 
+            txtzonaVerif.Text = Session["ATM_ZONA_VERIF_CREAR"].ToString();
+            //Session["ATM_IDMANT_VERIF_CREAR"]
+            //Session["ATM_ESTADO_VERIF_CREAR"] 
+            //Session["ATM_FECHAMANT_VERIF_CREAR"]
+            //Session["ATM_HRINICIO_VERIF_CREAR"]
+            //Session["ATM_HRFIN_VERIF_CREAR"] 
+            //Session["ATM_AUTORIZADO_VERIF_CREAR"] 
+            txtsysaid.Text = Session["ATM_SYSAID_VERIF_CREAR"].ToString();
+            txtTecnicoResponsable.Text = Session["ATM_TECNICO_VERIF_CREAR"].ToString();
+            //Session["ATM_USUARIO_VERIF_CREAR"] 
+            txtidentidad.Text = Session["ATM_IDENTIDAD_VERIF_CREAR"].ToString();
+            txtsoVerif.Text = Session["ATM_SO_VERIF_CREAR"].ToString();
+            txtversionswVerif.Text = Session["ATM_VERSIONSW_VERIF_CREAR"].ToString();
+            //txtcodATM.Text = Session["codATM"].ToString();
+            // DDLsucursalATM.SelectedIndex = CargarInformacionDDL(DDLsucursalATM, Session["sucursalATM"].ToString());
+        }
+
+        int CargarInformacionDDL(DropDownList vList, String vValue)
+        {
+            int vIndex = 0;
+            try
+            {
+                int vContador = 0;
+                foreach (ListItem item in vList.Items)
+                {
+                    if (item.Value.Equals(vValue))
+                    {
+                        vIndex = vContador;
+                    }
+                    vContador++;
+                }
+            }
+            catch { throw; }
+            return vIndex;
+        }
 
         void CargarVerificacion()
         {
@@ -45,10 +99,10 @@ namespace Infatlan_STEI_ATM
                     //{
                     String vQuery = "STEISP_ATM_Generales 6,1";
                     DataTable vDatos = vConexion.ObtenerTabla(vQuery);
-                    droptipoTeclado.Items.Add(new ListItem { Value = "0", Text = "Seleccione sucursal..." });
+                    DDLtipoTeclado.Items.Add(new ListItem { Value = "0", Text = "Seleccione teclado..." });
                     foreach (DataRow item in vDatos.Rows)
                     {
-                        droptipoTeclado.Items.Add(new ListItem { Value = item["idTecladoATM"].ToString(), Text = item["nombreTecladoATM"].ToString() });
+                        DDLtipoTeclado.Items.Add(new ListItem { Value = item["idTecladoATM"].ToString(), Text = item["nombreTecladoATM"].ToString() });
                         //}
                         //    Session["SUCURSAL"] = "1";
                     }
@@ -59,22 +113,7 @@ namespace Infatlan_STEI_ATM
                     throw;
                 }
 
-                try
-                {
-                    dropNewTecnico.Items.Clear();
-                    String vQuery = "STEISP_AGENCIA_CreacionNotificacion 5";
-                    DataTable vDatos = vConexion.ObtenerTabla(vQuery);
-                    dropNewTecnico.Items.Add(new ListItem { Value = "0", Text = "Seleccione nuevo técnico..." });
-                    foreach (DataRow item in vDatos.Rows)
-                    {
-                        dropNewTecnico.Items.Add(new ListItem { Value = item["idUsuario"].ToString(), Text = item["nombre"].ToString() });
-                    }
-                }
-                catch (Exception ex)
-                {
-
-                    throw;
-                }
+                
 
                 try
                 {
@@ -101,10 +140,10 @@ namespace Infatlan_STEI_ATM
                     //{
                     String vQuery = "STEISP_ATM_Generales 5,1";
                     DataTable vDatos = vConexion.ObtenerTabla(vQuery);
-                    droptipoProc.Items.Add(new ListItem { Value = "0", Text = "Seleccione tipo de procesador..." });
+                    DDLtipoProc.Items.Add(new ListItem { Value = "0", Text = "Seleccione tipo de procesador..." });
                     foreach (DataRow item in vDatos.Rows)
                     {
-                        droptipoProc.Items.Add(new ListItem { Value = item["idProcesadorATM"].ToString(), Text = item["nombreProcesadorATM"].ToString() });
+                        DDLtipoProc.Items.Add(new ListItem { Value = item["idProcesadorATM"].ToString(), Text = item["nombreProcesadorATM"].ToString() });
                         //    }
                         //    Session["PROCESADOR"] = "1";
                     }
@@ -199,36 +238,13 @@ namespace Infatlan_STEI_ATM
 
         protected void btnmodal_Click(object sender, EventArgs e)
         {
-            limpiarModalVerificacion();
+            
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal();", true);
             
         }
 
-        public void Mensaje(string vMensaje, WarningType type)
-        {
-            ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
-        }
-
-        protected void btnMantSinRealizar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (txtdetalleCancela.Text != "")
-                {
-                    limpiarModalVerificacion();
-                }
-                else
-                {
-                    Mensaje("No deje campos vacios", WarningType.Warning);
-                   
-                }
-            }
-            catch (Exception EX)
-            {
-                Mensaje(EX.Message, WarningType.Danger);
-            }
-           
-        }
+       
+       
 
         protected void ddlenergia_TextChanged(object sender, EventArgs e)
         {

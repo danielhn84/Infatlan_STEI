@@ -3283,6 +3283,7 @@
     <Content Include="pagesATM\aprobarVerificacionATM.aspx" />
     <Content Include="pagesATM\buscarAprobarNotificacionATM.aspx" />
     <Content Include="pagesATM\buscarReprogramarATM.aspx" />
+    <Content Include="pagesATM\cancelarVerificacionATM.aspx" />
     <Content Include="pagesATM\detalleModeloATM.aspx" />
     <Content Include="pagesATM\mantenimientosATM.aspx" />
     <Content Include="pagesATM\marcasATM.aspx" />
@@ -3373,6 +3374,13 @@
     </Compile>
     <Compile Include="pagesATM\buscarReprogramarATM.aspx.designer.cs">
       <DependentUpon>buscarReprogramarATM.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pagesATM\cancelarVerificacionATM.aspx.cs">
+      <DependentUpon>cancelarVerificacionATM.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pagesATM\cancelarVerificacionATM.aspx.designer.cs">
+      <DependentUpon>cancelarVerificacionATM.aspx</DependentUpon>
     </Compile>
     <Compile Include="pagesATM\detalleModeloATM.aspx.cs">
       <DependentUpon>detalleModeloATM.aspx</DependentUpon>

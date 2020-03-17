@@ -69,13 +69,13 @@ namespace Infatlan_STEI_ATM
         protected global::System.Web.UI.WebControls.TextBox TxFechaRegreso;
 
         /// <summary>
-        /// Control droplugar.
+        /// Control txtnomATM.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList droplugar;
+        protected global::System.Web.UI.WebControls.TextBox txtnomATM;
 
         /// <summary>
         /// Control txtsysaid.
@@ -114,13 +114,13 @@ namespace Infatlan_STEI_ATM
         protected global::System.Web.UI.WebControls.TextBox txtdireccion;
 
         /// <summary>
-        /// Control txtdepto.
+        /// Control txtsucursal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtdepto;
+        protected global::System.Web.UI.WebControls.TextBox txtsucursal;
 
         /// <summary>
         /// Control txtip.
@@ -132,13 +132,13 @@ namespace Infatlan_STEI_ATM
         protected global::System.Web.UI.WebControls.TextBox txtip;
 
         /// <summary>
-        /// Control tztzonaVerif.
+        /// Control txtzonaVerif.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tztzonaVerif;
+        protected global::System.Web.UI.WebControls.TextBox txtzonaVerif;
 
         /// <summary>
         /// Control txtimpacto.
@@ -159,22 +159,22 @@ namespace Infatlan_STEI_ATM
         protected global::System.Web.UI.WebControls.TextBox txtmotivoVerif;
 
         /// <summary>
-        /// Control DropDownList1.
+        /// Control txtTecnicoResponsable.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        protected global::System.Web.UI.WebControls.TextBox txtTecnicoResponsable;
 
         /// <summary>
-        /// Control TextBox1.
+        /// Control txtidentidad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox txtidentidad;
 
         /// <summary>
         /// Control ckpasos1.
@@ -231,22 +231,22 @@ namespace Infatlan_STEI_ATM
         protected global::System.Web.UI.WebControls.TextBox txtpuertoVerif;
 
         /// <summary>
-        /// Control droptipoTeclado.
+        /// Control DDLtipoTeclado.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList droptipoTeclado;
+        protected global::System.Web.UI.WebControls.DropDownList DDLtipoTeclado;
 
         /// <summary>
-        /// Control droptipoProc.
+        /// Control DDLtipoProc.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList droptipoProc;
+        protected global::System.Web.UI.WebControls.DropDownList DDLtipoProc;
 
         /// <summary>
         /// Control DDLtipoCargaVerif.
@@ -267,13 +267,13 @@ namespace Infatlan_STEI_ATM
         protected global::System.Web.UI.WebControls.DropDownList DDLmarcaDiscoDuro;
 
         /// <summary>
-        /// Control txtiddiscoDuro.
+        /// Control txtSerieDiscoDuro.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtiddiscoDuro;
+        protected global::System.Web.UI.WebControls.TextBox txtSerieDiscoDuro;
 
         /// <summary>
         /// Control txtcapacidadDiscoVerif.
@@ -499,77 +499,5 @@ namespace Infatlan_STEI_ATM
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnEnviarVerif;
-
-        /// <summary>
-        /// Control UPModal.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UPModal;
-
-        /// <summary>
-        /// Control dropMantPendiente.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dropMantPendiente;
-
-        /// <summary>
-        /// Control dropMotivo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dropMotivo;
-
-        /// <summary>
-        /// Control dropcambioPor.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dropcambioPor;
-
-        /// <summary>
-        /// Control dropNewTecnico.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dropNewTecnico;
-
-        /// <summary>
-        /// Control txtdetalleCancela.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtdetalleCancela;
-
-        /// <summary>
-        /// Control UpdatePanel4.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel4;
-
-        /// <summary>
-        /// Control btnMantSinRealizar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnMantSinRealizar;
     }
 }

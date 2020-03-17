@@ -87,14 +87,13 @@
                 <div class="row col-6">
                     <label class="col-form-label col-6">Lugar(Nombre)</label>
                     <div class="row col-12">
-                        <asp:DropDownList runat="server" ID="droplugar" CssClass="form-control">                         
-                        </asp:DropDownList>
+                       <asp:TextBox runat="server" CssClass="form-control" ID="txtnomATM" Enabled="false"></asp:TextBox>
                     </div>
                 </div>
                 <div class="row col-6">
                     <label class="col-form-label col-6">SysAid</label>
                     <div class="row col-12">
-                        <asp:TextBox CssClass="form-control" ID="txtsysaid" runat="server"></asp:TextBox>
+                        <asp:TextBox CssClass="form-control" ID="txtsysaid" runat="server" Enabled="false"></asp:TextBox>
                     </div>
                 </div>
             </div>
@@ -124,9 +123,9 @@
                     </div>
                 </div>
                 <div class="row col-6">
-                    <label class="col-form-label col-6">Departamento</label>
+                    <label class="col-form-label col-6">Sucursal</label>
                     <div class="row col-12">
-                        <asp:TextBox CssClass="form-control" ID="txtdepto" runat="server" Enabled="false"></asp:TextBox>
+                        <asp:TextBox CssClass="form-control" ID="txtsucursal" runat="server" Enabled="false"></asp:TextBox>
                     </div>
                 </div>
             </div>
@@ -142,7 +141,7 @@
                 <div class="row col-6">
                     <label class="col-form-label col-6">Zona</label>
                     <div class="row col-12">
-                        <asp:TextBox CssClass="form-control" ID="tztzonaVerif" runat="server" Enabled="false"></asp:TextBox>
+                        <asp:TextBox CssClass="form-control" ID="txtzonaVerif" runat="server" Enabled="false"></asp:TextBox>
                     </div>
                 </div>
             </div>
@@ -178,16 +177,15 @@
                 <div class="row col-6">
                     <label class="col-form-label col-6">Técnico Responsable</label>
                     <div class="row col-12">
-                        <asp:DropDownList ID="DropDownList1" CssClass="form-control" runat="server">
-                            <asp:ListItem Value="0" Text="Seleccione técnico..."></asp:ListItem>
-                        </asp:DropDownList>
+                       <asp:TextBox runat="server" CssClass="form-control" ID="txtTecnicoResponsable" Enabled="false"></asp:TextBox>
+                      
                     </div>
                 </div>
 
                 <div class="row col-6">
                     <label class=" col-form-label col-6">Identidad</label>
                     <div class="row col-12">
-                        <asp:TextBox CssClass="form-control" ID="TextBox1" runat="server" Enabled="false"></asp:TextBox>
+                        <asp:TextBox CssClass="form-control" ID="txtidentidad" runat="server" Enabled="false"></asp:TextBox>
                     </div>
                 </div>
             </div>
@@ -276,7 +274,7 @@
                         <div class="row col-4">
                             <label class="col-form-label col-12">Tipo de Teclado</label>
                             <div class="row col-12">
-                                <asp:DropDownList ID="droptipoTeclado" CssClass="form-control" runat="server">
+                                <asp:DropDownList ID="DDLtipoTeclado" CssClass="form-control" runat="server">
                                   
                                 </asp:DropDownList>
                             </div>
@@ -284,7 +282,7 @@
                         <div class="row col-4">
                             <label class="col-form-label col-12">Tipo de Procesador</label>
                             <div class="row col-12">
-                                <asp:DropDownList ID="droptipoProc" CssClass="form-control" runat="server">
+                                <asp:DropDownList ID="DDLtipoProc" CssClass="form-control" runat="server">
                                     
                                 </asp:DropDownList>
                             </div>
@@ -311,7 +309,7 @@
                         <div class="row col-4">
                             <label class="col-form-label col-12">Número Serie de Disco Duro</label>
                             <div class="row col-12">
-                                <asp:TextBox runat="server" ID="txtiddiscoDuro" CssClass="form-control"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtSerieDiscoDuro" CssClass="form-control"></asp:TextBox>
                             </div>
                         </div>
                           <div class="row col-4">
@@ -547,81 +545,7 @@
         <br />
     </div>
 
-    <!-- Modal al no realizar trabajo -->
-    <div class="modal bs-example-modal-lg" id="modalverificacion" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myLargeModalLabel">Motivo por el que se canceló el mantenimiento</h4>
-                    <button type="button" id="btnexitModal" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-                </div>
-
-                <asp:UpdatePanel runat="server" ID="UPModal">
-                    <ContentTemplate>
-                        <div class="modal-body">
-                            <div>
-                                <asp:Label runat="server">Mantenimientos Pendientes</asp:Label>
-                            </div>
-                            <div>
-                                <asp:DropDownList ID="dropMantPendiente" runat="server" CssClass="form-control col-12">
-                                    <asp:ListItem Value="0" Text="Seleccione mantnimiento pendiente...."></asp:ListItem>
-                                </asp:DropDownList>
-                            </div>
-                            <br />
-                            <div>
-                                <asp:Label runat="server">Motivo de Cancelación de Mantenimiento</asp:Label>
-                            </div>
-                            <div>
-                                <asp:DropDownList ID="dropMotivo" runat="server" CssClass="form-control col-12">
-                                    <asp:ListItem Value="0" Text="Seleccione motivo de cancelación...."></asp:ListItem>
-                                </asp:DropDownList>
-                            </div>
-                            <br />
-                            <div>Cambio realizado por</div>
-                            <div>
-                                <asp:DropDownList ID="dropcambioPor" runat="server" CssClass="form-control col-12">
-                                    <asp:ListItem Value="0" Text="Seleccione personal responsable...."></asp:ListItem>
-                                    <asp:ListItem Value="1" Text="Técnico Responsable"></asp:ListItem>
-                                    <asp:ListItem Value="2" Text="Jefe de soporte de zona"></asp:ListItem>
-                                    <asp:ListItem Value="3" Text="Suplente jefe de zona"></asp:ListItem>
-                                </asp:DropDownList>
-                            </div>
-                            <br />
-                            <div>
-                                <label>Nuevo Técnico Responsable</label>
-                            </div>
-                            
-                            <div>
-                                <asp:DropDownList ID="dropNewTecnico" runat="server" CssClass="form-control col-12">
-                                    <asp:ListItem Value="0" Text="Seleccione nuevo personal responsable...."></asp:ListItem>
-                                </asp:DropDownList>
-                            </div>
-                            <br />
-                            <div>
-                                <asp:Label runat="server">Detalle de motivo de cancelación</asp:Label>
-                            </div>
-                            <div>
-                                <asp:TextBox ID="txtdetalleCancela" runat="server" TextMode="Multiline" Rows="5" CssClass="form-control col-12"></asp:TextBox>
-                            </div>
-                        </div>
-
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-
-                <asp:UpdatePanel ID="UpdatePanel4" runat="server">
-                    <ContentTemplate>
-                        <div class="modal-footer">
-                            <asp:Button runat="server" ID="btnMantSinRealizar" OnClick="btnMantSinRealizar_Click" CssClass="btn btn-rounded btn-block btn-outline-success" Text="Enviar" />
-                        </div>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!--/.modal-dialog -->
-    </div>
-    <!-- /Modal al no realizar trabajo -->
+   
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="Script" runat="server">

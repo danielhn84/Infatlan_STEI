@@ -53,7 +53,7 @@
                                             <p class="text-muted">Mantenimientos realizados</p>
                                         </div>
                                         <div class="ml-auto">
-                                            <h2 runat="server" id="H2MantRealizado" class="counter text-cyan">169</h2>
+                                            <h2 runat="server" id="H2MantRealizado" class="counter text-cyan"></h2>
                                         </div>
                                     </div>
                                 </div>

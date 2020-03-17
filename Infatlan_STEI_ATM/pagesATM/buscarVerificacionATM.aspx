@@ -17,11 +17,11 @@
     </script>
     <script type="text/javascript">
         function openModal() {
-            $('#modalReprograma').modal('show');
+            $('#modalverificacion').modal('show');
         }
 
         function closeModal() {
-            $('#modalReprograma').modal('hide');
+            $('#modalverificacion').modal('hide');
         }
 
         var url = document.location.toString();
@@ -113,6 +113,7 @@
                                                         <asp:TemplateField HeaderText="Selección" ItemStyle-HorizontalAlign="center">
                                                             <ItemTemplate>                                                               
                                                                 <asp:LinkButton runat="server" ID="btnVerifATM" Text="Crear lista" CssClass="btn btn-info mr-2" CommandArgument='<%# Eval("ID") %>' CommandName="Aprobar"></asp:LinkButton>
+                                                                 <asp:LinkButton runat="server" ID="btnReprogramar" Text="Reprogramar" CssClass="btn btn-danger mr-2" CommandArgument='<%# Eval("ID") %>' CommandName="Reprogramar"></asp:LinkButton>
                                                                 <%-- <asp:Button ID="BtnUsuarioModificar" runat="server" Text="Modificar" CssClass="btn btn-rounded btn-block btn-success" CommandArgument='<%# Eval("codATM") %>' CommandName="Modificar" />--%>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
@@ -136,56 +137,82 @@
             </ContentTemplate>
         </asp:UpdatePanel>
         <!--/DATAGRID-->
-          <!-- Modal asegurar notificacion -->
-       <%-- <div class="modal bs-example-modal-lg" id="modalReprograma" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
-            <div class="modal-dialog modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="myLargeModalLabel2">¿Seguro que reprogramará mantenimiento?</h4>                       
-                    </div>
-                    <asp:UpdatePanel ID="UpdatePanel2" Runat="server">
-            <ContentTemplate>                           
-                 
-                <div class="row col-12">
-                        <asp:label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Código de ATM: </strong></asp:label>
-                        <asp:label runat="server" BorderStyle="None" ID="lbModalCodATM" class="col form-control col-6"></asp:label>
-                    </div>
-                <div class="row col-12">
-                        <asp:label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Nombre ATM: </strong>  </asp:label>
-                        <asp:label runat="server" BorderStyle="None" ID="lbModalNomATM" class="col form-control col-6"></asp:label>
-                    </div>
-                  <div class="row col-12">
-                        <asp:label runat="server" borderstyle="none" class="col form-control col-6"><strong>Fecha de mantenimiento: </strong></asp:label>
-                        <asp:label runat="server" borderstyle="none" id="lbModalFechaMan" class="col form-control col-6"></asp:label>
-                    </div>             
-                <div class="row col-12">
-                        <asp:label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Nueva fecha mantenimiento: </strong></asp:label>
-                        <asp:TextBox ID="txtNewFechaInicio" AutoPostBack="true" placeholder="1900-12-31" CssClass="form-control col-6" runat="server" TextMode="Date"></asp:TextBox>
-                    </div> 
-                <div class="col-md-12 align-self-center" style="margin-left:auto; margin-right:auto">
-                    <asp:label runat="server" style="color:red;" Visible="false"  borderstyle="none" ID="lbReprogra1" CssClass="col form-control" ><strong></strong></asp:label>
-                    </div>
-                </ContentTemplate>
-                         </asp:UpdatePanel>
-                    <asp:UpdatePanel ID="UpdatePanel3" runat="server">
-                        <ContentTemplate>
-                            <div class="modal-footer col-12">
-                                <div class="row col-6">
-                                <asp:Button runat="server" ID="btnReprogramarNotif" OnClick="btnReprogramarNotif_Click"  CssClass="btn btn-rounded btn-block btn-outline-success" Text="Enviar" />
-                                </div>
-                                 <div class="row col-6">
-                                <asp:Button runat="server" ID="btnCerrarReprogramarNotif" OnClick="btnCerrarReprogramarNotif_Click"  CssClass="btn btn-rounded btn-block btn-outline-danger" Text="Cancelar" />
-                                </div>
-                                </div>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-
+         <!-- Modal al no realizar trabajo -->
+    <div class="modal bs-example-modal-lg" id="modalverificacion" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myLargeModalLabel">Motivo por el que se canceló el mantenimiento</h4>
+                    <button type="button" id="btnexitModal" class="close" data-dismiss="modal" aria-hidden="true">X</button>
                 </div>
-                <!-- /.modal-content -->
+
+                <asp:UpdatePanel runat="server" ID="UPModal">
+                    <ContentTemplate>
+                        <div class="modal-body">
+                            <div>
+                                <asp:Label runat="server">Mantenimiento a reprogramar</asp:Label>
+                            </div>
+                            <div>
+                                <asp:TextBox runat="server" CssClass="form-control" ID="txtModalATM" Enabled="false"></asp:TextBox>
+                            </div>
+                            <br />
+                            <div>
+                                <asp:Label runat="server">Motivo de Cancelación de Mantenimiento</asp:Label>
+                            </div>
+                            <div>
+                                <asp:DropDownList ID="DDLModalMotivo" runat="server" CssClass="form-control col-12">
+                                    <asp:ListItem Value="0" Text="Seleccione motivo de cancelación...."></asp:ListItem>
+                                </asp:DropDownList>
+                            </div>
+                            <br />
+                            <div>Cambio realizado por</div>
+                            <div>
+                                <asp:DropDownList ID="DDLModalcambioPor" runat="server" CssClass="form-control col-12">
+                                    <asp:ListItem Value="0" Text="Seleccione personal responsable...."></asp:ListItem>
+                                    <asp:ListItem Value="1" Text="Técnico Responsable"></asp:ListItem>
+                                    <asp:ListItem Value="2" Text="Jefe de soporte de zona"></asp:ListItem>
+                                    <asp:ListItem Value="3" Text="Suplente jefe de zona"></asp:ListItem>
+                                </asp:DropDownList>
+                            </div>
+                            <br />
+                            <div>
+                                <label>Nuevo Técnico Responsable</label>
+                            </div>
+                            
+                            <div>
+                                <asp:DropDownList ID="DDLModalNewTecnico" runat="server" CssClass="form-control col-12">
+                                    <asp:ListItem Value="0" Text="Seleccione nuevo personal responsable...."></asp:ListItem>
+                                </asp:DropDownList>
+                            </div>
+                            <br />
+                            <div>
+                                <asp:Label runat="server">Detalle de motivo de cancelación</asp:Label>
+                            </div>
+                            <div>
+                                <asp:TextBox ID="txtdetalleCancela" runat="server" TextMode="Multiline" Rows="5" CssClass="form-control col-12"></asp:TextBox>
+                            </div>
+                            <div class="col-md-6 align-self-center" style="margin-left:auto; margin-right:auto">
+                                <asp:Label runat="server" BorderStyle="None" style="color:red;" Visible="false" ID="lbValidarModal" CssClass="col form-control"></asp:Label>
+                            </div>
+                        </div>
+
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+
+                <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                    <ContentTemplate>
+                        <div class="modal-footer">
+                            <asp:Button runat="server" ID="btnMantSinRealizar" OnClick="btnMantSinRealizar_Click" CssClass="btn btn-success col-12" Text="Enviar" />
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+
             </div>
-            <!--/.modal-dialog -->
-        </div>--%>
-        <!-- /asegurar notificacion -->
+            <!-- /.modal-content -->
+        </div>
+        <!--/.modal-dialog -->
+    </div>
+    <!-- /Modal al no realizar trabajo -->
     </div>
     <br />
 </asp:Content>

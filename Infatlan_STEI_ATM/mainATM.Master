@@ -150,6 +150,7 @@
                                 <li><a href="../pagesATM/soATM.aspx">Sistema Operativo</a></li>
                                 <li><a href="../pagesATM/versionSwATM.aspx">Versión Software</a></li>
                                 <li><a href="../pagesATM/marcasATM.aspx">Marcas de Disco</a></li>
+                                <li><a href="../pagesATM/cancelarVerificacionATM.aspx">Motivo cancelar</a></li>
                             </ul>
                         </li>
                         <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-wrench"></i><span class="hide-menu">Mantenimiento Preventivo ATM<span class="badge badge-pill badge-cyan ml-auto">4</span></span></a>
