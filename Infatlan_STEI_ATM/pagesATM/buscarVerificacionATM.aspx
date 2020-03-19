@@ -113,7 +113,7 @@
                                                         <asp:TemplateField HeaderText="Selección" ItemStyle-HorizontalAlign="center">
                                                             <ItemTemplate>                                                               
                                                                 <asp:LinkButton runat="server" ID="btnVerifATM" Text="Crear lista" CssClass="btn btn-info mr-2" CommandArgument='<%# Eval("ID") %>' CommandName="Aprobar"></asp:LinkButton>
-                                                                 <asp:LinkButton runat="server" ID="btnReprogramar" Text="Reprogramar" CssClass="btn btn-danger mr-2" CommandArgument='<%# Eval("ID") %>' CommandName="Reprogramar"></asp:LinkButton>
+                                                                 <asp:LinkButton runat="server" ID="btnReprogramar" Text="Cancelar" CssClass="btn btn-danger mr-2" CommandArgument='<%# Eval("ID") %>' CommandName="Reprogramar"></asp:LinkButton>
                                                                 <%-- <asp:Button ID="BtnUsuarioModificar" runat="server" Text="Modificar" CssClass="btn btn-rounded btn-block btn-success" CommandArgument='<%# Eval("codATM") %>' CommandName="Modificar" />--%>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
@@ -160,28 +160,23 @@
                                 <asp:Label runat="server">Motivo de Cancelación de Mantenimiento</asp:Label>
                             </div>
                             <div>
-                                <asp:DropDownList ID="DDLModalMotivo" runat="server" CssClass="form-control col-12">
-                                    <asp:ListItem Value="0" Text="Seleccione motivo de cancelación...."></asp:ListItem>
+                                <asp:DropDownList ID="DDLModalMotivo" OnSelectedIndexChanged="DDLModalMotivo_SelectedIndexChanged" AutoPostBack="true" runat="server" CssClass="form-control col-12">                                 
                                 </asp:DropDownList>
                             </div>
                             <br />
                             <div>Cambio realizado por</div>
                             <div>
                                 <asp:DropDownList ID="DDLModalcambioPor" runat="server" CssClass="form-control col-12">
-                                    <asp:ListItem Value="0" Text="Seleccione personal responsable...."></asp:ListItem>
-                                    <asp:ListItem Value="1" Text="Técnico Responsable"></asp:ListItem>
-                                    <asp:ListItem Value="2" Text="Jefe de soporte de zona"></asp:ListItem>
-                                    <asp:ListItem Value="3" Text="Suplente jefe de zona"></asp:ListItem>
+                                   
                                 </asp:DropDownList>
                             </div>
                             <br />
                             <div>
-                                <label>Nuevo Técnico Responsable</label>
+                                <label runat="server" visible="false" id="lbnewTecnico">Nuevo Técnico Responsable</label>
                             </div>
                             
                             <div>
-                                <asp:DropDownList ID="DDLModalNewTecnico" runat="server" CssClass="form-control col-12">
-                                    <asp:ListItem Value="0" Text="Seleccione nuevo personal responsable...."></asp:ListItem>
+                                <asp:DropDownList ID="DDLModalNewTecnico" Visible="false" runat="server" CssClass="form-control col-12">                                  
                                 </asp:DropDownList>
                             </div>
                             <br />

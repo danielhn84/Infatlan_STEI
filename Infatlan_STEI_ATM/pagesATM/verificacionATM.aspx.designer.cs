@@ -15,24 +15,6 @@ namespace Infatlan_STEI_ATM
     {
 
         /// <summary>
-        /// Control UpdatePanel3.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel3;
-
-        /// <summary>
-        /// Control btnmodal.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnmodal;
-
-        /// <summary>
         /// Control txthsalidaInfa.
         /// </summary>
         /// <remarks>
@@ -186,13 +168,13 @@ namespace Infatlan_STEI_ATM
         protected global::System.Web.UI.WebControls.CheckBoxList ckpasos1;
 
         /// <summary>
-        /// Control CheckBoxList1.
+        /// Control ckpasos2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList CheckBoxList1;
+        protected global::System.Web.UI.WebControls.CheckBoxList ckpasos2;
 
         /// <summary>
         /// Control UpdatePanel2.
@@ -348,85 +330,94 @@ namespace Infatlan_STEI_ATM
         protected global::System.Web.UI.WebControls.TextBox txtantiSkimming;
 
         /// <summary>
-        /// Control imgdiscoDuro.
+        /// Control FUDiscoDuro.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload imgdiscoDuro;
+        protected global::System.Web.UI.WebControls.FileUpload FUDiscoDuro;
 
         /// <summary>
-        /// Control imgATMdesarmado.
+        /// Control FUATMDesarmadoPS.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload imgATMdesarmado;
+        protected global::System.Web.UI.WebControls.FileUpload FUATMDesarmadoPS;
 
         /// <summary>
-        /// Control imgATMinferior.
+        /// Control FUATMDesarmadoPI.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload imgATMinferior;
+        protected global::System.Web.UI.WebControls.FileUpload FUATMDesarmadoPI;
 
         /// <summary>
-        /// Control imgdispVendor.
+        /// Control FUDispositivoVendor.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload imgdispVendor;
+        protected global::System.Web.UI.WebControls.FileUpload FUDispositivoVendor;
 
         /// <summary>
-        /// Control imgSysteminfo.
+        /// Control FUSYSTEMINFO.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload imgSysteminfo;
+        protected global::System.Web.UI.WebControls.FileUpload FUSYSTEMINFO;
 
         /// <summary>
-        /// Control imgantiskimming.
+        /// Control FUAntiskimmin.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload imgantiskimming;
+        protected global::System.Web.UI.WebControls.FileUpload FUAntiskimmin;
 
         /// <summary>
-        /// Control imgmonitorFiltro.
+        /// Control FUMonitorFiltro.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload imgmonitorFiltro;
+        protected global::System.Web.UI.WebControls.FileUpload FUMonitorFiltro;
 
         /// <summary>
-        /// Control FileUpload5.
+        /// Control FUPadlewheel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FileUpload5;
+        protected global::System.Web.UI.WebControls.FileUpload FUPadlewheel;
 
         /// <summary>
-        /// Control imgDispDesarmados.
+        /// Control FUDispDesarmado.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload imgDispDesarmados;
+        protected global::System.Web.UI.WebControls.FileUpload FUDispDesarmado;
+
+        /// <summary>
+        /// Control FUTeclado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload FUTeclado;
 
         /// <summary>
         /// Control UpdatePanel1.
@@ -456,22 +447,40 @@ namespace Infatlan_STEI_ATM
         protected global::System.Web.UI.WebControls.DropDownList ddlenergia;
 
         /// <summary>
-        /// Control imgclimatizacion.
+        /// Control DIVImg11.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload imgclimatizacion;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DIVImg11;
 
         /// <summary>
-        /// Control imgproteccionEnergia.
+        /// Control FUClimatizacion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload imgproteccionEnergia;
+        protected global::System.Web.UI.WebControls.FileUpload FUClimatizacion;
+
+        /// <summary>
+        /// Control DIVImg12.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DIVImg12;
+
+        /// <summary>
+        /// Control FUEnergia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload FUEnergia;
 
         /// <summary>
         /// Control txtobseracionesVerif.
@@ -499,5 +508,86 @@ namespace Infatlan_STEI_ATM
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnEnviarVerif;
+
+        /// <summary>
+        /// Control UpdatePanel3.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel3;
+
+        /// <summary>
+        /// Control lbcodATM.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbcodATM;
+
+        /// <summary>
+        /// Control lbNombreATM.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbNombreATM;
+
+        /// <summary>
+        /// Control lbsucursalATM.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbsucursalATM;
+
+        /// <summary>
+        /// Control lbInventarioATM.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbInventarioATM;
+
+        /// <summary>
+        /// Control lbtecnico.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbtecnico;
+
+        /// <summary>
+        /// Control UpdatePanel4.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel4;
+
+        /// <summary>
+        /// Control btnModalVerif.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnModalVerif;
+
+        /// <summary>
+        /// Control btnModalCerrarVerif.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnModalCerrarVerif;
     }
 }

@@ -16,6 +16,7 @@ namespace Infatlan_STEI_ATM.pagesATM
         bd vConexion = new bd();
         protected void Page_Load(object sender, EventArgs e)
         {
+            Session["CANCELARVERIF_ATM"] = null;
             if (!Page.IsPostBack)
             {
                 cargarData();
@@ -28,21 +29,24 @@ namespace Infatlan_STEI_ATM.pagesATM
         }
         void cargarData()
         {
-            try
+            if (HttpContext.Current.Session["CANCELARVERIF_ATM"] == null)
             {
-                DataTable vDatos = new DataTable();
-                vDatos = vConexion.ObtenerTabla("STEISP_ATM_Generales 20, 1");
-                GVBusqueda.DataSource = vDatos;
-                GVBusqueda.DataBind();
-                Session["MotivoCancelarATM"] = vDatos;
-                Session["UPDATEATM"] = 1;
+                try
+                {
+                    DataTable vDatos = new DataTable();
+                    vDatos = vConexion.ObtenerTabla("STEISP_ATM_Generales 20, 1");
+                    GVBusqueda.DataSource = vDatos;
+                    GVBusqueda.DataBind();
+                    Session["MotivoCancelarATM"] = vDatos;
 
+
+                }
+                catch (Exception Ex)
+                {
+
+                }
+                Session["CANCELARVERIF_ATM"] = 1;
             }
-            catch (Exception Ex)
-            {
-
-            }
-
         }
 
         protected void btnCancelarVerif_Click(object sender, EventArgs e)
@@ -147,7 +151,7 @@ namespace Infatlan_STEI_ATM.pagesATM
                         lbmotivo2.Visible = false;
                         txtNewMotivoCancelATM.Text = string.Empty;
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal2();", true);
-                        Mensaje("Marca creada con éxito", WarningType.Success);
+                        Mensaje("Motivo de cancelación creada con éxito", WarningType.Success);
                         UpdateGridView.Update();
                         cargarData();
 

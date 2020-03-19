@@ -105,6 +105,15 @@ namespace Infatlan_STEI_ATM
         protected global::System.Web.UI.WebControls.DropDownList DDLModalcambioPor;
 
         /// <summary>
+        /// Control lbnewTecnico.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbnewTecnico;
+
+        /// <summary>
         /// Control DDLModalNewTecnico.
         /// </summary>
         /// <remarks>

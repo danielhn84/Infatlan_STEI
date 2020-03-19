@@ -14,9 +14,199 @@
 
     <!--PARA LLAMAR MODAL-->
     <script type="text/javascript">
-        function openModal() { $('#modalverificacion').modal('show'); }
+        function openModal() { $('#modalVerifATM').modal('show'); }
     </script>
+     <!--PARA CERRAR MODAL-->
+    <script type="text/javascript">
+        function closeModal() { $('#modalVerifATM').modal('hide'); }
+    </script>
+   
+     <script src="http://code.jquery.com/jquery-1.10.2.min.js" type="text/javascript"></script>
+     <%--IMAGENES--%>
+    <script type="text/javascript">
+        //IMAGEN1
+        function img1(input) {
 
+            if (input.files && input.files[0]) {
+                //PRIMERA IMAGEN
+                var reader = new FileReader();
+                reader.onload = function (e) {                  
+                    $('#imgDiscoDuro').css('visibility', 'visible');
+                    $('#imgDiscoDuro').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+                 //PRIMERA IMAGEN              
+            }
+        }
+        //IMAGEN1
+        //IMAGEN2
+        function img2(input) {
+
+            if (input.files && input.files[0]) {
+                //PRIMERA IMAGEN
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgATMDesarmadoPS').css('visibility', 'visible');
+                    $('#imgATMDesarmadoPS').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+                //PRIMERA IMAGEN              
+            }
+        }
+        //IMAGEN2
+        //IMAGEN3
+        function img3(input) {
+
+            if (input.files && input.files[0]) {
+                //PRIMERA IMAGEN
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgATMDesarmadoPI').css('visibility', 'visible');
+                    $('#imgATMDesarmadoPI').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+                //PRIMERA IMAGEN              
+            }
+        }
+        //IMAGEN3
+        //IMAGEN4
+        function img4(input) {
+
+            if (input.files && input.files[0]) {
+                //PRIMERA IMAGEN
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgDispositivoVendor').css('visibility', 'visible');
+                    $('#imgDispositivoVendor').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+                //PRIMERA IMAGEN              
+            }
+        }
+        //IMAGEN4
+        //IMAGEN5
+        function img5(input) {
+
+            if (input.files && input.files[0]) {
+                //PRIMERA IMAGEN
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgSYSTEMINFO').css('visibility', 'visible');
+                    $('#imgSYSTEMINFO').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+                //PRIMERA IMAGEN              
+            }
+        }
+        //IMAGEN5   
+        //IMAGEN6
+        function img6(input) {
+
+            if (input.files && input.files[0]) {
+                //PRIMERA IMAGEN
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgAntiskimmin').css('visibility', 'visible');
+                    $('#imgAntiskimmin').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+                //PRIMERA IMAGEN              
+            }
+        }
+        //IMAGEN6  
+        //IMAGEN7
+        function img7(input) {
+
+            if (input.files && input.files[0]) {
+                //PRIMERA IMAGEN
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgMonitorFiltro').css('visibility', 'visible');
+                    $('#imgMonitorFiltro').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+                //PRIMERA IMAGEN              
+            }
+        }
+        //IMAGEN7
+        //IMAGEN8
+        function img8(input) {
+
+            if (input.files && input.files[0]) {
+                //PRIMERA IMAGEN
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgPadlewheel').css('visibility', 'visible');
+                    $('#imgPadlewheel').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+                //PRIMERA IMAGEN              
+            }
+        }
+        //IMAGEN8
+        //IMAGEN9
+        function img9(input) {
+
+            if (input.files && input.files[0]) {
+                //PRIMERA IMAGEN
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgDispDesarmado').css('visibility', 'visible');
+                    $('#imgDispDesarmado').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+                //PRIMERA IMAGEN              
+            }
+        }
+        //IMAGEN9
+        //IMAGEN10
+        function img10(input) {
+
+            if (input.files && input.files[0]) {
+                //PRIMERA IMAGEN
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgTeclado').css('visibility', 'visible');
+                    $('#imgTeclado').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+                //PRIMERA IMAGEN              
+            }
+        }
+        //IMAGEN10
+        //IMAGEN11
+        function img11(input) {
+
+            if (input.files && input.files[0]) {
+                //PRIMERA IMAGEN
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgClimatizacion').css('visibility', 'visible');
+                    $('#imgClimatizacion').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+                //PRIMERA IMAGEN              
+            }
+        }
+        //IMAGEN11
+        //IMAGEN12
+        function img12(input) {
+
+            if (input.files && input.files[0]) {
+                //PRIMERA IMAGEN
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgEnergia').css('visibility', 'visible');
+                    $('#imgEnergia').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+                //PRIMERA IMAGEN              
+            }
+        }
+        //IMAGEN12
+        
+    </script>
+     <%--IMAGENES--%>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
@@ -26,15 +216,7 @@
         </div>       
         <div class="col-md-7 align-self-center text-right">
             <div class="d-flex justify-content-end align-items-center">
-                <asp:UpdatePanel ID="UpdatePanel3" runat="server">
-                    <ContentTemplate>
-                        <!--   <button type="button" class="btn btn-info d-none d-lg-block m-l-15" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-minus-circle"></i>Mantenimiento ATMs sin realizar</button>-->
-                        <asp:Button runat="server" ID="btnmodal" OnClick="btnmodal_Click" class="btn btn-info d-none d-lg-block m-l-15" Text="Mantenimiento ATMs sin realizar"></asp:Button>
-
-                        
-
-                    </ContentTemplate>
-                </asp:UpdatePanel>
+               
 
             </div>
         </div>
@@ -71,13 +253,13 @@
 
                     <label class="col-form-label col-6">Inicio de mantenimiento</label>
                     <div class="row col-12">
-                        <asp:TextBox ID="TxFechaInicio" placeholder="1900-12-31" class="form-control" runat="server" TextMode="Time"></asp:TextBox>
+                        <asp:TextBox ID="TxFechaInicio" placeholder="00:00:00" class="form-control" runat="server" TextMode="Time"></asp:TextBox>
                     </div>
                 </div>
                 <div class="row col-6">
                     <label class=" col-form-label col-6">Finaliza mantenimiento</label>
                     <div class="row col-12">
-                        <asp:TextBox ID="TxFechaRegreso" placeholder="1900-12-31" class="form-control" runat="server" TextMode="Time"></asp:TextBox>
+                        <asp:TextBox ID="TxFechaRegreso" placeholder="00:00:00" class="form-control" runat="server" TextMode="Time"></asp:TextBox>
                     </div>
                 </div>
             </div>
@@ -205,30 +387,30 @@
                 <br />
                 <div class="row col-5">
                     <asp:CheckBoxList ID="ckpasos1" runat="server" class="check green" data-checkbox="icheckbox_flat-green">
-                        <asp:ListItem Value="0" Text="1. Verificar que ATM este en servicio antes de apagarlo"></asp:ListItem>
-                        <asp:ListItem Value="1" Text="2. Solicitar al encargado del ATM sacar contadores"></asp:ListItem>
-                        <asp:ListItem Value="2" Text="3. Solicitar al encargado del ATM sacar maleta"></asp:ListItem>
-                        <asp:ListItem Value="3" Text="4. Apagar ATM de forma correcta"></asp:ListItem>
-                        <asp:ListItem Value="4" Text="5. Retirar CPU"></asp:ListItem>
-                        <asp:ListItem Value="5" Text="6. Retirar Monitor"></asp:ListItem>
-                        <asp:ListItem Value="6" Text="7. Retirar la lectora"></asp:ListItem>
-                        <asp:ListItem Value="7" Text="8. Retirar presentador"></asp:ListItem>
-                        <asp:ListItem Value="8" Text="9. Limpieza de stacker"></asp:ListItem>
-                        <asp:ListItem Value="9" Text="10. Limpieza de pickers"></asp:ListItem>
+                        <asp:ListItem Value="1" Text="1. Verificar que ATM este en servicio antes de apagarlo"></asp:ListItem>
+                        <asp:ListItem Value="2" Text="2. Solicitar al encargado del ATM sacar contadores"></asp:ListItem>
+                        <asp:ListItem Value="3" Text="3. Solicitar al encargado del ATM sacar maleta"></asp:ListItem>
+                        <asp:ListItem Value="4" Text="4. Apagar ATM de forma correcta"></asp:ListItem>
+                        <asp:ListItem Value="5" Text="5. Retirar CPU"></asp:ListItem>
+                        <asp:ListItem Value="6" Text="6. Retirar Monitor"></asp:ListItem>
+                        <asp:ListItem Value="7" Text="7. Retirar la lectora"></asp:ListItem>
+                        <asp:ListItem Value="8" Text="8. Retirar presentador"></asp:ListItem>
+                        <asp:ListItem Value="9" Text="9. Limpieza de stacker"></asp:ListItem>
+                        <asp:ListItem Value="10" Text="10. Limpieza de pickers"></asp:ListItem>
                     </asp:CheckBoxList>
                 </div>
                 <div class="row col-7">
-                    <asp:CheckBoxList ID="CheckBoxList1" runat="server" class="check green" data-checkbox="icheckbox_flat-green">
-                        <asp:ListItem Value="10" Text="11. Sopletear todos los dispositivos"></asp:ListItem>
-                        <asp:ListItem Value="11" Text="12. Limpieza general por cada dispositivo"></asp:ListItem>
-                        <asp:ListItem Value="12" Text="13. Limpieza de pantalla con espuma"></asp:ListItem>
-                        <asp:ListItem Value="13" Text="14. Realizar cambios de repuesto"></asp:ListItem>
-                        <asp:ListItem Value="14" Text="15. Armar ATM"></asp:ListItem>
-                        <asp:ListItem Value="15" Text="16. Encender ATM"></asp:ListItem>
-                        <asp:ListItem Value="16" Text="17. Solicitar que ingresen maletas"></asp:ListItem>
-                        <asp:ListItem Value="17" Text="18. Pruebas con los dospositivos(en el vendor)"></asp:ListItem>
-                        <asp:ListItem Value="18" Text="19. Dejar en servicio el ATM"></asp:ListItem>
-                        <asp:ListItem Value="19" Text="20. Contractarse con personal de ATM para verificar que camaras están en linea"></asp:ListItem>
+                    <asp:CheckBoxList ID="ckpasos2" runat="server" class="check green" data-checkbox="icheckbox_flat-green">
+                        <asp:ListItem Value="11" Text="11. Sopletear todos los dispositivos"></asp:ListItem>
+                        <asp:ListItem Value="12" Text="12. Limpieza general por cada dispositivo"></asp:ListItem>
+                        <asp:ListItem Value="13" Text="13. Limpieza de pantalla con espuma"></asp:ListItem>
+                        <asp:ListItem Value="14" Text="14. Realizar cambios de repuesto"></asp:ListItem>
+                        <asp:ListItem Value="15" Text="15. Armar ATM"></asp:ListItem>
+                        <asp:ListItem Value="16" Text="16. Encender ATM"></asp:ListItem>
+                        <asp:ListItem Value="17" Text="17. Solicitar que ingresen maletas"></asp:ListItem>
+                        <asp:ListItem Value="18" Text="18. Pruebas con los dospositivos(en el vendor)"></asp:ListItem>
+                        <asp:ListItem Value="19" Text="19. Dejar en servicio el ATM"></asp:ListItem>
+                        <asp:ListItem Value="20" Text="20. Contractarse con personal de ATM y verificar que camaras están en linea"></asp:ListItem>
                     </asp:CheckBoxList>
                 </div>
             </div>
@@ -313,9 +495,9 @@
                             </div>
                         </div>
                           <div class="row col-4">
-                            <label class="col-form-label col-12">Capacidad de disco duro</label>
+                            <label class="col-form-label col-12">Capacidad de disco duro(GB)</label>
                             <div class="row col-12">
-                                <asp:TextBox runat="server" ID="txtcapacidadDiscoVerif" CssClass="form-control" ></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtcapacidadDiscoVerif" CssClass="form-control" TextMode="Number"></asp:TextBox>
                             </div>
                         </div>
                     </div>
@@ -333,13 +515,13 @@
                           <div class="row col-4">
                             <label class="col-form-label col-12">Inventario ATM</label>
                             <div class="row col-12">
-                               <asp:TextBox runat="server" ID="txtinventarioVerif" CssClass="form-control"></asp:TextBox>
+                               <asp:TextBox runat="server" ID="txtinventarioVerif"  CssClass="form-control"></asp:TextBox>
                             </div>
                         </div>
                           <div class="row col-4">
-                            <label class="col-form-label col-12">RAM</label>
+                            <label class="col-form-label col-12">RAM(GB)</label>
                             <div class="row col-12">
-                                <asp:TextBox runat="server" ID="txtramVerif" CssClass="form-control" ></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtramVerif" CssClass="form-control" TextMode="Number"></asp:TextBox>
                             </div>
                         </div>
                     </div>
@@ -350,14 +532,14 @@
                         <div class="row col-4">
                             <label class="col-form-label col-12">Latitud ATM</label>
                             <div class="row col-12">
-                               <asp:TextBox runat="server" ID="txtlatitudATM" CssClass="form-control"></asp:TextBox>
+                               <asp:TextBox runat="server" ID="txtlatitudATM" Enabled="false" CssClass="form-control"></asp:TextBox>
                             </div>
                         </div>
 
                         <div class="row col-4">
                             <label class="col-form-label col-12">Longitud ATM</label>
                             <div class="row col-12">
-                                <asp:TextBox runat="server" ID="txtlongitudATM" CssClass="form-control" ></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtlongitudATM" Enabled="false" CssClass="form-control" ></asp:TextBox>
                             </div>
                         </div>
                     </div>
@@ -397,27 +579,31 @@
         <br />
         <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
             <div class="row col-12">
-
                 <div class="card row col-4">
-                    <div class="card-body">
-                        <label for="input-file-now">Disco Duro</label>
-                        <asp:FileUpload ID="imgdiscoDuro" runat="server" class="dropify" />
+                     <label for="input-file-now">Disco Duro</label><br />
+                    <div class="card-body">                      
+                        <img id="imgDiscoDuro" height="300" width="300" src="" style="border-width: 0px; visibility: hidden;" />
+                        <asp:FileUpload ID="FUDiscoDuro" runat="server" onchange="img1(this);" />
                     </div>
                 </div>
 
 
                 <div class="card row col-4">
+                       <label for="input-file-now">ATM desarmado parte superior (limpiar)</label><br />
                     <div class="card-body">
-                        <label for="input-file-now">ATM desarmado parte superior (limpiar)</label>
-                        <asp:FileUpload ID="imgATMdesarmado" runat="server" class="dropify" />
+                       
+                       <img id="imgATMDesarmadoPS" height="300" width="300" src="" style="border-width: 0px; visibility: hidden;" />
+                        <asp:FileUpload ID="FUATMDesarmadoPS" runat="server" onchange="img2(this);" />
                     </div>
                 </div>
 
 
                 <div class="card row col-4">
+                       <label for="input-file-now">ATM desarmado parte inferior (limpiar)</label><br />
                     <div class="card-body">
-                        <label for="input-file-now">ATM desarmado parte inferior (limpiar)</label>
-                        <asp:FileUpload ID="imgATMinferior" runat="server" class="dropify" />
+                       
+                        <img id="imgATMDesarmadoPI" height="300" width="300" src="" style="border-width: 0px; visibility: hidden;" />
+                        <asp:FileUpload ID="FUATMDesarmadoPI" runat="server" onchange="img3(this);" />
                     </div>
                 </div>
 
@@ -428,21 +614,27 @@
         <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
             <div class="row col-12">
                 <div class="card row col-4">
+                         <label for="input-file-now" class="col row-4">Dispositivo modo diagnostico de vendor en linea</label><br />
                     <div class="card-body">
-                        <label for="input-file-now">Dispositivo en modo diagnostico de vendor que esten en linea</label>
-                        <asp:FileUpload ID="imgdispVendor" runat="server" class="dropify" />
+                       
+                        <img id="imgDispositivoVendor" height="300" width="300" src="" style="border-width: 0px; visibility: hidden;" />
+                        <asp:FileUpload ID="FUDispositivoVendor" runat="server" onchange="img4(this);" />
                     </div>
                 </div>
                 <div class="card row col-4">
+                       <label class="col row-4">Tipo de procesador con el comando "SYSTEMINFO"</label><br />
                     <div class="card-body">
-                        <label for="input-file-now">Tipo de procesador con el comando "SYSTEMINFO"</label><br />
-                        <asp:FileUpload ID="imgSysteminfo" runat="server" class="dropify" />
+                        
+                        <img id="imgSYSTEMINFO" height="300" width="300" src="" style="border-width: 0px; visibility: hidden;" />
+                        <asp:FileUpload ID="FUSYSTEMINFO" runat="server" onchange="img5(this);" />
                     </div>
                 </div>
                 <div class="card row col-4">
+                     <label class="col row-4">Lectora con el antiskimming desarmado y limpio</label><br />
                     <div class="card-body">
-                        <label for="input-file-now">Lectora con el antiskimming desarmado y limpio</label>
-                        <asp:FileUpload ID="imgantiskimming" runat="server" class="dropify" />
+                       
+                          <img id="imgAntiskimmin" height="300" width="300" src="" style="border-width: 0px; visibility: hidden;" />
+                        <asp:FileUpload ID="FUAntiskimmin" runat="server" onchange="img6(this);" />
                     </div>
                 </div>
             </div>
@@ -452,27 +644,44 @@
         <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
             <div class="row col-12">
                 <div class="card row col-4">
-                    <div class="card-body">
-                        <label for="input-file-now">Monitor con el filtro</label>
-                        <asp:FileUpload ID="imgmonitorFiltro" runat="server" class="dropify" />
+                    <label for="input-file-now">Monitor con el filtro</label><br />
+                    <div class="card-body">                        
+                        <img id="imgMonitorFiltro" height="300" width="300" src="" style="border-width: 0px; visibility: hidden;" />
+                        <asp:FileUpload ID="FUMonitorFiltro" runat="server" onchange="img7(this);" />
                     </div>
                 </div>
                 <div class="card row col-4">
+                    <label for="input-file-now">PadleWheel(rueda de paletas)</label><br />
                     <div class="card-body">
-                        <label for="input-file-now">PadleWheel(rueda de paletas)</label><br />
-                        <asp:FileUpload ID="FileUpload5" runat="server" class="dropify" />
+                        
+                        <img id="imgPadlewheel" height="300" width="300" src="" style="border-width: 0px; visibility: hidden;" />
+                        <asp:FileUpload ID="FUPadlewheel" runat="server" onchange="img8(this);" />
                     </div>
                 </div>
                 <div class="card row col-4">
+                     <label for="input-file-now">Dispositivos desarmado</label><br />
                     <div class="card-body">
-                        <label for="input-file-now">Dispositivos desarmado</label>
-                        <asp:FileUpload ID="imgDispDesarmados" runat="server" class="dropify" />
+                       
+                       <img id="imgDispDesarmado" height="300" width="300" src="" style="border-width: 0px; visibility: hidden;" />
+                        <asp:FileUpload ID="FUDispDesarmado" runat="server" onchange="img9(this);" />
                     </div>
                 </div>
 
             </div>
         </div>
         <!--TERCERA FILA DE IMAGENES-->
+        <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
+            <div class="row col-12">
+                <div class="card row col-4">
+                    <label for="input-file-now">Teclado</label><br />
+                    <div class="card-body">                        
+                        <img id="imgTeclado" height="300" width="300" src="" style="border-width: 0px; visibility: hidden;" />
+                        <asp:FileUpload ID="FUTeclado" runat="server" onchange="img10(this);" />
+                    </div>
+                </div>
+                </div>
+            </div>
+        <!--CUARTA FILA DE IMAGENES-->
         <br />
         <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
             <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-fax" style="margin-left: 10px"></i>Condiciones de Sítio</h3>
@@ -480,9 +689,10 @@
         <br />
         <hr />
         <br />
-        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-            <ContentTemplate>
+        
                 <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+            <ContentTemplate>
                     <!--PRIMERA FILA-->
                     <div class="row col-12">
                         <!--PRIMERA COLUMNA-->
@@ -509,21 +719,31 @@
                         </div>
                     </div>
                     <!--SEGUNDA FILA-->
+                   
                     <div class="row col-12">
-                        <div class="card row col-6">
-                            <div class="card-body">
-                                <asp:FileUpload ID="imgclimatizacion" runat="server"  Visible="false" />
+                       
+                        <div runat="server" visible="false" id="DIVImg11" class="card row col-6">
+                            <div class="card-body row col-6">
+                                 
+                                <img id="imgClimatizacion"  height="300" width="300" src="" style="border-width: 0px; visibility: hidden;" />
+                        <asp:FileUpload ID="FUClimatizacion" runat="server" onchange="img11(this);" />
+                                  
                             </div>
                         </div>
-                        <div class="card row col-6">
-                            <div class="card-body">
-                                <asp:FileUpload ID="imgproteccionEnergia" runat="server" Visible="false"/>
+                              
+                        <div runat="server" visible="false" id="DIVImg12" class="card row col-6">
+                            <div class="card-body row col-6">
+                               <img id="imgEnergia" class="col row-6" height="300" width="300" src="" style="border-width: 0px; visibility: hidden;" />
+                        <asp:FileUpload ID="FUEnergia" runat="server" onchange="img12(this);" />
                             </div>
                         </div>
-                    </div>
+                                
+                               
+                   </div>
+                        </ContentTemplate>
+        </asp:UpdatePanel>       
                 </div>
-            </ContentTemplate>
-        </asp:UpdatePanel>
+            
 
         <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
             <label class="col-form-label">Observaciones y Comentarios</label>
@@ -537,12 +757,68 @@
         <asp:UpdatePanel ID="UPEnviarVerif" Runat="server">
             <ContentTemplate>
         <div class="col-md-4 align-self-center" style="margin-left:auto; margin-right:auto">           
-            <asp:Button runat="server" OnClick="btnEnviarVerif_Click" ID="btnEnviarVerif" CssClass="btn btn-rounded btn-block btn-outline-success" Text="Enviar" />
+            <asp:Button runat="server" OnClick="btnEnviarVerif_Click" ID="btnEnviarVerif" CssClass="btn btn-rounded btn-block btn-outline-success" Text="Enviar"  />
         </div>
+              
                  </ContentTemplate>
+               
             </asp:UpdatePanel>
         <br />
         <br />
+         <!--MODAL VERIF ATM -->
+        <div class="modal bs-example-modal-lg" id="modalVerifATM" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myLargeModalLabel">¿Seguro que guardará lista de verificación?</h4>                       
+                    </div>
+                     <asp:UpdatePanel ID="UpdatePanel3" Runat="server">
+            <ContentTemplate>
+                    <div class="row col-12">
+                        <asp:label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Código de ATM: </strong></asp:label>
+                        <asp:label runat="server" BorderStyle="None" ID="lbcodATM" class="col form-control col-6"></asp:label>
+                    </div>
+                 <div class="row col-12">
+                        <asp:label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Nombre de ATM: </strong></asp:label>
+                        <asp:label runat="server" BorderStyle="None" ID="lbNombreATM" class="col form-control col-6"></asp:label>
+                    </div>
+                <div class="row col-12">
+                        <asp:label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Sucursal de ATM: </strong></asp:label>
+                        <asp:label runat="server" BorderStyle="None" ID="lbsucursalATM" class="col form-control col-6"></asp:label>
+                    </div>
+                
+                 <div class="row col-12">
+                        <asp:label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Inventario de ATM: </strong>  </asp:label>
+                        <asp:label runat="server" BorderStyle="None" ID="lbInventarioATM" class="col form-control col-6"></asp:label>
+                    </div>
+                <div class="row col-12">
+                        <asp:label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Técnico responsable: </strong>  </asp:label>
+                        <asp:label runat="server" BorderStyle="None" ID="lbtecnico" class="col form-control col-6"></asp:label>
+                    </div>
+                </ContentTemplate>
+                         </asp:UpdatePanel>
+                    <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                        <ContentTemplate>
+                            <div class="modal-footer col-12">
+                                <div class="row col-6">
+                                <asp:Button runat="server" ID="btnModalVerif" OnClick="btnModalVerif_Click"  CssClass="btn btn-rounded btn-block btn-outline-success" Text="Enviar" />
+                                </div>
+                                 <div class="row col-6">
+                                <asp:Button runat="server" ID="btnModalCerrarVerif" OnClick="btnModalCerrarVerif_Click"  CssClass="btn btn-rounded btn-block btn-outline-danger" Text="Cancelar" />
+                                </div>
+                                </div>
+                        </ContentTemplate>
+                         <Triggers>
+                         <asp:PostBackTrigger ControlID="btnEnviarVerif" />
+                        </Triggers>
+                    </asp:UpdatePanel>
+
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!--/.modal-dialog -->
+        </div>
+        <!-- /MODAL VERIF ATM -->
     </div>
 
    

@@ -16,9 +16,10 @@ namespace Infatlan_STEI_ATM
         bd vConexion = new bd();
         protected void Page_Load(object sender, EventArgs e)
         {
+            Session["ModalVerif"] = null;
             if (!Page.IsPostBack)
             {
-                cargarData();
+               cargarData();
             }
         }
         public void Mensaje(string vMensaje, WarningType type)
@@ -70,6 +71,42 @@ namespace Infatlan_STEI_ATM
 
                     throw;
                 }
+              
+                    try
+                    {
+
+                        String vQuery = "STEISP_ATM_Generales 20,1";
+                        DataTable vDatos = vConexion.ObtenerTabla(vQuery);
+                        DDLModalMotivo.Items.Add(new ListItem { Value = "0", Text = "Seleccione motivo..." });
+                        foreach (DataRow item in vDatos.Rows)
+                        {
+                            DDLModalMotivo.Items.Add(new ListItem { Value = item["idCancelMant"].ToString(), Text = item["nombreCancelar"].ToString() });
+
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        throw;
+                    }
+
+                try
+                {
+
+                    String vQuery = "STEISP_ATM_Generales 21,1";
+                    DataTable vDatos = vConexion.ObtenerTabla(vQuery);
+                    DDLModalcambioPor.Items.Add(new ListItem { Value = "0", Text = "Cambio realizado por..." });
+                    foreach (DataRow item in vDatos.Rows)
+                    {
+                        DDLModalcambioPor.Items.Add(new ListItem { Value = item["id"].ToString(), Text = item["nombre"].ToString() });
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+
+
                 Session["ModalVerif"] = 1;
             }
 
@@ -144,6 +181,8 @@ namespace Infatlan_STEI_ATM
 
         protected void GVBusqueda_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            lbnewTecnico.Visible = false;
+            DDLModalNewTecnico.Visible = false;
             limpiarModalVerificacion();
             lbValidarModal.Visible = false;
             string usu = "acedillo";
@@ -217,7 +256,7 @@ namespace Infatlan_STEI_ATM
                         foreach (DataRow item in vDatos2.Rows)
                         {                            
                             txtModalATM.Text = item["NomATM"].ToString();
-                            //Session["ATM_DIRECCION_VERIF_CREAR"] = item["Direccion"].ToString();
+                            Session["ATM_ID_CANCELAR_VERIF_MODAL"] = item["IDMant"].ToString();
                             //Session["ATM_IP_VERIF_CREAR"] = item["IP"].ToString();                           
                         }
                         TxBuscarTecnicoATM.Text = string.Empty;                       
@@ -240,6 +279,7 @@ namespace Infatlan_STEI_ATM
 
         protected void btnMantSinRealizar_Click(object sender, EventArgs e)
         {
+            string usu = "acedillo";
             try
             {
                 if (txtdetalleCancela.Text == "" || DDLModalMotivo.SelectedValue=="0"|| DDLModalcambioPor.SelectedValue=="0")
@@ -250,7 +290,58 @@ namespace Infatlan_STEI_ATM
                 }
                 else
                 {
-                    limpiarModalVerificacion();
+                    if (DDLModalMotivo.SelectedValue == "5")
+                    {
+                        try
+                        {
+                            string vQuery = "STEISP_ATM_CancelarVerificacion 2, '" + Session["ATM_ID_CANCELAR_VERIF_MODAL"] + "','" + DDLModalMotivo.SelectedValue + "','" + DDLModalcambioPor.SelectedValue + "','" + usu + "', '" + DDLModalNewTecnico.SelectedValue + "','" + txtdetalleCancela.Text + "'";
+                            Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                            if (vInfo == 1)
+                            {
+                                lbValidarModal.Visible = false;
+                                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
+                                Mensaje("Verificación cancelada con éxito", WarningType.Success);
+                                UpdateGridView.Update();
+                                limpiarModalVerificacion();
+                                cargarData();
+                            }
+                            else
+                            {
+                                lbValidarModal.Text = "No se pudo realizar la acción";
+                                lbValidarModal.Visible = true;
+                            }
+                        }
+                        catch (Exception Ex)
+                        {
+                            throw;
+                        }
+                    }
+                    else
+                    {
+                        try
+                        {
+                            string vQuery = "STEISP_ATM_CancelarVerificacion 1, '" + Session["ATM_ID_CANCELAR_VERIF_MODAL"] + "','" + DDLModalMotivo.SelectedValue + "','" + DDLModalcambioPor.SelectedValue + "','" + usu + "', '" + DDLModalNewTecnico.SelectedValue + "','" + txtdetalleCancela.Text + "'";
+                            Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                            if (vInfo == 1)
+                            {
+                                lbValidarModal.Visible = false;
+                                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
+                                Mensaje("Verificación cancelada con éxito", WarningType.Success);
+                                UpdateGridView.Update();
+                                limpiarModalVerificacion();
+                                cargarData();
+                            }
+                            else
+                            {
+                                lbValidarModal.Text = "No se pudo realizar la acción";
+                                lbValidarModal.Visible = true;
+                            }
+                        }
+                        catch (Exception Ex)
+                        {
+                            throw;
+                        }
+                    }
                     lbValidarModal.Visible = false;
                     
 
@@ -259,6 +350,21 @@ namespace Infatlan_STEI_ATM
             catch (Exception EX)
             {
                 Mensaje(EX.Message, WarningType.Danger);
+            }
+        }
+
+        protected void DDLModalMotivo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DDLModalNewTecnico.SelectedValue = "0";
+            if (DDLModalMotivo.SelectedValue == "5")
+            {
+                lbnewTecnico.Visible = true;
+                DDLModalNewTecnico.Visible = true;
+            }
+            else
+            {
+                lbnewTecnico.Visible = false;
+                DDLModalNewTecnico.Visible = false;
             }
         }
     }

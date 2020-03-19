@@ -16,7 +16,11 @@ namespace Infatlan_STEI_ATM.pagesATM
         bd vConexion = new bd();
         protected void Page_Load(object sender, EventArgs e)
         {
-            cargarData();
+            Session["TIPO_ATM"] = null;
+            if (!Page.IsPostBack)
+            {
+                cargarData();
+            }
         }
 
         public void Mensaje(string vMensaje, WarningType type)
@@ -25,22 +29,24 @@ namespace Infatlan_STEI_ATM.pagesATM
         }
         void cargarData()
         {
-            //lbNoCrearTipo.Visible = false;
-            try
+            if (HttpContext.Current.Session["TIPO_ATM"] == null)
             {
-                DataTable vDatos = new DataTable();
-                vDatos = vConexion.ObtenerTabla("STEISP_ATM_Generales 1, 1");
-                GVBusqueda.DataSource = vDatos;
-                GVBusqueda.DataBind();
-                Session["tipoATM"] = vDatos;
-                Session["UPDATEATM"] = 1;
+                try
+                {
+                    DataTable vDatos = new DataTable();
+                    vDatos = vConexion.ObtenerTabla("STEISP_ATM_Generales 1, 1");
+                    GVBusqueda.DataSource = vDatos;
+                    GVBusqueda.DataBind();
+                    Session["tipoATM"] = vDatos;
 
+
+                }
+                catch (Exception Ex)
+                {
+
+                }
+                Session["TIPO_ATM"] = 1;
             }
-            catch (Exception Ex)
-            {
-
-            }
-
         }
         protected void GVBusqueda_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {

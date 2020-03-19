@@ -16,7 +16,11 @@ namespace Infatlan_STEI_ATM.pagesATM
         bd vConexion = new bd();
         protected void Page_Load(object sender, EventArgs e)
         {
-            cargarData();
+            Session["DETALLE_MODELO_ATM"] = null;
+            if (!Page.IsPostBack)
+            {
+                cargarData();
+            }
         }
         public void Mensaje(string vMensaje, WarningType type)
         {
@@ -42,9 +46,11 @@ namespace Infatlan_STEI_ATM.pagesATM
         }
         void cargarData()
         {
-            //lbdetalle1.Visible = false;
-            //lbdetalle2.Visible = false;
-            string det ="";
+            if (HttpContext.Current.Session["DETALLE_MODELO_ATM"] == null)
+            {
+                //lbdetalle1.Visible = false;
+                //lbdetalle2.Visible = false;
+                string det ="";
             string usu = "acedillo";
             try
             {
@@ -60,8 +66,7 @@ namespace Infatlan_STEI_ATM.pagesATM
             {
 
             }
-            if (HttpContext.Current.Session["ATM"] == null)
-            {
+           
                 try
                 {
                     String vQuery = "STEISP_ATM_Generales 2,1";
@@ -78,7 +83,7 @@ namespace Infatlan_STEI_ATM.pagesATM
                 {
                     throw;
                 }
-                Session["ATM"] = "1";
+                Session["DETALLE_MODELO_ATM"] = "1";
             }
 
         }
