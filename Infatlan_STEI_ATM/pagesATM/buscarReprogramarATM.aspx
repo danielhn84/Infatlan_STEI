@@ -170,11 +170,11 @@
                     <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                         <ContentTemplate>
                             <div class="modal-footer col-12">
-                                <div class="row col-6">
-                                <asp:Button runat="server" ID="btnReprogramarNotif" OnClick="btnReprogramarNotif_Click"  CssClass="btn btn-rounded btn-block btn-outline-success" Text="Enviar" />
+                                <div class="row col-3">
+                                <asp:Button runat="server" ID="btnReprogramarNotif" OnClick="btnReprogramarNotif_Click"  CssClass="btn btn-success mr-3" Text="Reprogramar" />
                                 </div>
-                                 <div class="row col-6">
-                                <asp:Button runat="server" ID="btnCerrarReprogramarNotif" OnClick="btnCerrarReprogramarNotif_Click"  CssClass="btn btn-rounded btn-block btn-outline-danger" Text="Cancelar" />
+                                 <div class="row col-3">
+                                <asp:Button runat="server" ID="btnCerrarReprogramarNotif" OnClick="btnCerrarReprogramarNotif_Click"  CssClass="btn btn-danger mr-3" Text="Cancelar" />
                                 </div>
                                 </div>
                         </ContentTemplate>

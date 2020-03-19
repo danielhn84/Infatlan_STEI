@@ -275,7 +275,7 @@
                 <div class="row col-md-12 align-self-center" style="margin-left:auto; margin-right:auto">
                     <div class="modal-footer col-12">
                         <div class="row col-6">
-                        <asp:Button runat="server" ID="btnEnviarAprobNotif" OnClick="btnEnviarAprobNotif_Click" CssClass="btn btn-rounded btn-block btn-outline-success" class="btn btn-info d-none d-lg-block m-l-15" Text="Enviar" />
+                        <asp:Button runat="server" ID="btnEnviarAprobNotif" OnClick="btnEnviarAprobNotif_Click" CssClass="btn btn-rounded btn-block btn-outline-success" class="btn btn-info d-none d-lg-block m-l-15" Text="Aprobar" />
                         </div>
                          <div class="row col-6">
                         <asp:Button runat="server" ID="btnCancelarAprobNotif" OnClick="btnCancelarAprobNotif_Click" CssClass="btn btn-rounded btn-block btn-outline-danger" class="btn btn-info d-none d-lg-block m-l-15" Text="Reprogramar" />

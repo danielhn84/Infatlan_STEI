@@ -516,8 +516,8 @@ namespace Infatlan_STEI_ATM
                     Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                     if (vInfo == 1)
                     {
-                        Mensaje("antiskimming creada con éxito", WarningType.Success);
-                    }
+                    Mensaje("Lista de verificación ingresada con éxito", WarningType.Success);
+                }
 
                 }
                 catch (Exception Ex)
