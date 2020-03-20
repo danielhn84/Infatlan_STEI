@@ -22,15 +22,15 @@
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
             <h4 class="text-themecolor">Completar lista de verificación de ATMs</h4>
-        </div>       
+        </div>
         <div class="col-md-7 align-self-center text-right">
             <div class="d-flex justify-content-end align-items-center">
                 <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                     <ContentTemplate>
                         <!--   <button type="button" class="btn btn-info d-none d-lg-block m-l-15" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-minus-circle"></i>Mantenimiento ATMs sin realizar</button>-->
-                        <asp:Button runat="server" ID="btnmodal"  class="btn btn-info d-none d-lg-block m-l-15" Text="Mantenimiento ATMs sin realizar"></asp:Button>
+                        <asp:Button runat="server" ID="btnmodal" class="btn btn-info d-none d-lg-block m-l-15" Text="Mantenimiento ATMs sin realizar"></asp:Button>
 
-                        
+
 
                     </ContentTemplate>
                 </asp:UpdatePanel>
@@ -47,7 +47,7 @@
         <hr />
         <br />
         <div class="row col-12" style="margin: 10px 10px 10px 10px">
-           
+
             <!--SEGUNDA FILA-->
             <div class="row col-12">
                 <div class="row col-6">
@@ -150,12 +150,12 @@
             <!--OCTAVA FILA-->
             <div class="row col-12">
                 <div class="row col-6">
-                <label class="col-form-label col-6">Impacto</label>
-                <div class="row col-12">
-                    <asp:TextBox CssClass="form-control" ID="txtimpacto" runat="server" Enabled="false" Text="Durante la ventana de mantenimiento el ATM estará fuera de linea"></asp:TextBox>
-                </div>
+                    <label class="col-form-label col-6">Impacto</label>
+                    <div class="row col-12">
+                        <asp:TextBox CssClass="form-control" ID="txtimpacto" runat="server" Enabled="false" Text="Durante la ventana de mantenimiento el ATM estará fuera de linea"></asp:TextBox>
                     </div>
-                 <div class="row col-6">
+                </div>
+                <div class="row col-6">
                     <label class="col-form-label col-6">Motivo</label>
                     <div class="row col-12">
                         <asp:TextBox CssClass="form-control" ID="txtmotivoVerif" runat="server" Enabled="false" Text="Realizar acciones pro activas para prevenir la falla"></asp:TextBox>
@@ -178,7 +178,7 @@
                 <div class="row col-6">
                     <label class="col-form-label col-6">Técnico Responsable</label>
                     <div class="row col-12">
-                        <asp:DropDownList ID="DropDownList1" CssClass="form-control" runat="server">                          
+                        <asp:DropDownList ID="DropDownList1" CssClass="form-control" runat="server">
                         </asp:DropDownList>
                     </div>
                 </div>
@@ -245,12 +245,12 @@
                 <div class="row col-12" style="margin: 10px 10px 10px 10px">
                     <h5 class="text-themecolor" style="color: #808080;"><i class="fa fa-check-square" style="margin-left: 10px"></i>Datos de ATM</h5>
                     <br />
-                     <!--PRIMERA FILA DESHABILITADA-->
-                     <div class="row col-12">
+                    <!--PRIMERA FILA DESHABILITADA-->
+                    <div class="row col-12">
                         <div class="row col-4">
                             <label class="col-form-label col-12">Sistema Operativo</label>
                             <div class="row col-12">
-                               <asp:TextBox runat="server" ID="txtsoVerif" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtsoVerif" CssClass="form-control" Enabled="false"></asp:TextBox>
                             </div>
                         </div>
 
@@ -261,7 +261,7 @@
                             </div>
                         </div>
 
-                         <div class="row col-4">
+                        <div class="row col-4">
                             <label class="col-form-label col-12">Puerto</label>
                             <div class="row col-12">
                                 <asp:TextBox runat="server" ID="txtpuertoVerif" CssClass="form-control" Enabled="false"></asp:TextBox>
@@ -276,7 +276,6 @@
                             <label class="col-form-label col-12">Tipo de Teclado</label>
                             <div class="row col-12">
                                 <asp:DropDownList ID="droptipoTeclado" CssClass="form-control" runat="server">
-                                  
                                 </asp:DropDownList>
                             </div>
                         </div>
@@ -284,15 +283,13 @@
                             <label class="col-form-label col-12">Tipo de Procesador</label>
                             <div class="row col-12">
                                 <asp:DropDownList ID="droptipoProc" CssClass="form-control" runat="server">
-                                    
                                 </asp:DropDownList>
                             </div>
                         </div>
-                         <div class="row col-4">
+                        <div class="row col-4">
                             <label class="col-form-label col-12">Tipo de Carga</label>
                             <div class="row col-12">
                                 <asp:DropDownList ID="DDLtipoCargaVerif" CssClass="form-control" runat="server">
-                                   
                                 </asp:DropDownList>
                             </div>
                         </div>
@@ -303,7 +300,7 @@
                         <div class="row col-4">
                             <label class="col-form-label col-12">Marca del disco duro</label>
                             <div class="row col-12">
-                               <asp:DropDownList AutoPostBack="true" ID="DDLmarcaDiscoDuro" CssClass="form-control col-12" runat="server">                                  
+                                <asp:DropDownList AutoPostBack="true" ID="DDLmarcaDiscoDuro" CssClass="form-control col-12" runat="server">
                                 </asp:DropDownList>
                             </div>
                         </div>
@@ -313,62 +310,62 @@
                                 <asp:TextBox runat="server" ID="txtiddiscoDuro" CssClass="form-control"></asp:TextBox>
                             </div>
                         </div>
-                          <div class="row col-4">
+                        <div class="row col-4">
                             <label class="col-form-label col-12">Capacidad de disco duro</label>
                             <div class="row col-12">
-                                <asp:TextBox runat="server" ID="txtcapacidadDiscoVerif" CssClass="form-control" ></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtcapacidadDiscoVerif" CssClass="form-control"></asp:TextBox>
                             </div>
                         </div>
                     </div>
-                    <!--/SEGUNDA FILA-->                  
+                    <!--/SEGUNDA FILA-->
                     <!--QUINTA FILA-->
-                     <div class="row col-12">
-                       
+                    <div class="row col-12">
+
 
                         <div class="row col-4">
                             <label class="col-form-label col-12">Serie ATM</label>
                             <div class="row col-12">
-                                <asp:TextBox runat="server" ID="txtserieATM" CssClass="form-control" ></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtserieATM" CssClass="form-control"></asp:TextBox>
                             </div>
                         </div>
-                          <div class="row col-4">
+                        <div class="row col-4">
                             <label class="col-form-label col-12">Inventario ATM</label>
                             <div class="row col-12">
-                               <asp:TextBox runat="server" ID="txtinventarioVerif" CssClass="form-control"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtinventarioVerif" CssClass="form-control"></asp:TextBox>
                             </div>
                         </div>
-                          <div class="row col-4">
+                        <div class="row col-4">
                             <label class="col-form-label col-12">RAM</label>
                             <div class="row col-12">
-                                <asp:TextBox runat="server" ID="txtramVerif" CssClass="form-control" ></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtramVerif" CssClass="form-control"></asp:TextBox>
                             </div>
                         </div>
                     </div>
                     <!--/QUINTA FILA-->
                     <!--SEXTA FILA-->
-                     <div class="row col-12">
-                         
+                    <div class="row col-12">
+
                         <div class="row col-4">
                             <label class="col-form-label col-12">Latitud ATM</label>
                             <div class="row col-12">
-                               <asp:TextBox runat="server" ID="txtlatitudATM" CssClass="form-control"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtlatitudATM" CssClass="form-control"></asp:TextBox>
                             </div>
                         </div>
 
                         <div class="row col-4">
                             <label class="col-form-label col-12">Longitud ATM</label>
                             <div class="row col-12">
-                                <asp:TextBox runat="server" ID="txtlongitudATM" CssClass="form-control" ></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtlongitudATM" CssClass="form-control"></asp:TextBox>
                             </div>
                         </div>
                     </div>
                     <!--/SEXTA FILA-->
-                      <!--TERCERA FILA-->
+                    <!--TERCERA FILA-->
                     <div class="row col-12">
                         <div class="row col-4">
                             <label class="col-form-label col-12">¿Lectora tiene antiskimming?</label>
                             <div class="row col-12">
-                                <asp:DropDownList AutoPostBack="true"  ID="dropantiskimming" CssClass="form-control col-12" runat="server">
+                                <asp:DropDownList AutoPostBack="true" ID="dropantiskimming" CssClass="form-control col-12" runat="server">
                                     <asp:ListItem Value="0" Text="Seleccione opción..."></asp:ListItem>
                                     <asp:ListItem Value="1" Text="Si"></asp:ListItem>
                                     <asp:ListItem Value="2" Text="No"></asp:ListItem>
@@ -384,7 +381,7 @@
                         </div>
                     </div>
                     <!--/TERCERA FILA-->
-                    
+
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>
@@ -513,12 +510,12 @@
                     <div class="row col-12">
                         <div class="card row col-6">
                             <div class="card-body">
-                                <asp:FileUpload ID="imgclimatizacion" runat="server"  Visible="false" />
+                                <asp:FileUpload ID="imgclimatizacion" runat="server" Visible="false" />
                             </div>
                         </div>
                         <div class="card row col-6">
                             <div class="card-body">
-                                <asp:FileUpload ID="imgproteccionEnergia" runat="server" Visible="false"/>
+                                <asp:FileUpload ID="imgproteccionEnergia" runat="server" Visible="false" />
                             </div>
                         </div>
                     </div>
@@ -535,13 +532,13 @@
         </div>
         <br />
         <br />
-        <asp:UpdatePanel ID="UPEnviarVerif" Runat="server">
+        <asp:UpdatePanel ID="UPEnviarVerif" runat="server">
             <ContentTemplate>
-        <div class="col-md-4 align-self-center" style="margin-left:auto; margin-right:auto">           
-            <asp:Button runat="server" ID="btnEnviarVerif" CssClass="btn btn-rounded btn-block btn-outline-success" Text="Enviar" />
-        </div>
-                 </ContentTemplate>
-            </asp:UpdatePanel>
+                <div class="col-md-4 align-self-center" style="margin-left: auto; margin-right: auto">
+                    <asp:Button runat="server" ID="btnEnviarVerif" CssClass="btn btn-rounded btn-block btn-outline-success" Text="Enviar" />
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
         <br />
         <br />
     </div>
@@ -589,7 +586,7 @@
                             <div>
                                 <label>Nuevo Técnico Responsable</label>
                             </div>
-                            
+
                             <div>
                                 <asp:DropDownList ID="dropNewTecnico" runat="server" CssClass="form-control col-12">
                                     <asp:ListItem Value="0" Text="Seleccione nuevo personal responsable...."></asp:ListItem>
@@ -610,7 +607,7 @@
                 <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                     <ContentTemplate>
                         <div class="modal-footer">
-                            <asp:Button runat="server" ID="btnMantSinRealizar"  CssClass="btn btn-rounded btn-block btn-outline-success" Text="Enviar" />
+                            <asp:Button runat="server" ID="btnMantSinRealizar" CssClass="btn btn-rounded btn-block btn-outline-success" Text="Enviar" />
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
@@ -624,7 +621,7 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="Script" runat="server">
-        <script src="/assets/node_modules/icheck/icheck.min.js"></script>
+    <script src="/assets/node_modules/icheck/icheck.min.js"></script>
     <script src="/assets/node_modules/icheck/icheck.init.js"></script>
     <script src="/assets/node_modules/dropify/dist/js/dropify.min.js"></script>
     <script>
@@ -672,7 +669,7 @@
     <script src="/assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
 
 
-<%--    <script src="/assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
+    <%--    <script src="/assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="/assets/node_modules/popper/popper.min.js"></script>
     <script src="/assets/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>

@@ -44,7 +44,7 @@
             </div>
         </ProgressTemplate>
     </asp:UpdateProgress>
-     <div class="row page-titles">
+    <div class="row page-titles">
         <div class="col-md-5 align-self-center">
             <h4 class="text-themecolor">Lista de verificación</h4>
         </div>
@@ -54,17 +54,17 @@
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Inicio</a></li>
                     <li class="breadcrumb-item active">Lista de verificación</li>
                 </ol>
-               
-            </div> 
+
+            </div>
         </div>
     </div>
     <!--/ENCABEZADO-->
 
-    <div class="card" >
+    <div class="card">
         <br />
-        <div class="row col-12" style="margin-left:10px; margin-left:10px;">
-            <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-undo"></i> Crear lista de verificación</h3>
-        </div>   
+        <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
+            <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-undo"></i>Crear lista de verificación</h3>
+        </div>
 
         <!--DATAGRID-->
         <asp:UpdatePanel ID="UpdateDivBusquedas" runat="server" UpdateMode="Conditional">
@@ -81,7 +81,7 @@
                                         <div class="col-sm-9">
                                             <asp:UpdatePanel ID="UpdatePanel5" runat="server">
                                                 <ContentTemplate>
-                                                    <asp:TextBox ID="TxBuscarTecnicoATM" OnTextChanged="TxBuscarTecnicoATM_TextChanged"  runat="server" placeholder="ingrese nombre de ATM - Presione afuera para proceder" class="form-control" AutoPostBack="true"></asp:TextBox>
+                                                    <asp:TextBox ID="TxBuscarTecnicoATM" OnTextChanged="TxBuscarTecnicoATM_TextChanged" runat="server" placeholder="ingrese nombre de ATM - Presione afuera para proceder" class="form-control" AutoPostBack="true"></asp:TextBox>
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
                                         </div>
@@ -111,19 +111,19 @@
                                                     PageSize="10" OnRowCommand="GVBusqueda_RowCommand">
                                                     <Columns>
                                                         <asp:TemplateField HeaderText="Selección" ItemStyle-HorizontalAlign="center">
-                                                            <ItemTemplate>                                                               
+                                                            <ItemTemplate>
                                                                 <asp:LinkButton runat="server" ID="btnVerifATM" Text="Crear lista" CssClass="btn btn-info mr-2" CommandArgument='<%# Eval("ID") %>' CommandName="Aprobar"></asp:LinkButton>
-                                                                 <asp:LinkButton runat="server" ID="btnReprogramar" Text="Cancelar" CssClass="btn btn-danger mr-2" CommandArgument='<%# Eval("ID") %>' CommandName="Reprogramar"></asp:LinkButton>
+                                                                <asp:LinkButton runat="server" ID="btnReprogramar" Text="Cancelar" CssClass="btn btn-danger mr-2" CommandArgument='<%# Eval("ID") %>' CommandName="Reprogramar"></asp:LinkButton>
                                                                 <%-- <asp:Button ID="BtnUsuarioModificar" runat="server" Text="Modificar" CssClass="btn btn-rounded btn-block btn-success" CommandArgument='<%# Eval("codATM") %>' CommandName="Modificar" />--%>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
-                                                        <asp:BoundField DataField="ID" HeaderText="Código" Visible="false"  ItemStyle-HorizontalAlign="center"/>
-                                                        <asp:BoundField DataField="Codigo" HeaderText="Código de ATM"  ItemStyle-HorizontalAlign="center"/>
-                                                        <asp:BoundField DataField="NomATM" HeaderText="Nombre"  ItemStyle-HorizontalAlign="center"/>
-                                                        <asp:BoundField DataField="Tecnico" HeaderText="Técnico Responsable"  ItemStyle-HorizontalAlign="center"/>
-                                                        <asp:BoundField DataField="Sucursal" HeaderText="Sucursal"  ItemStyle-HorizontalAlign="center"/>
-                                                        <asp:BoundField DataField="Ubicacion" HeaderText="Ubicación"  ItemStyle-HorizontalAlign="center"/>
-                                                            
+                                                        <asp:BoundField DataField="ID" HeaderText="Código" Visible="false" ItemStyle-HorizontalAlign="center" />
+                                                        <asp:BoundField DataField="Codigo" HeaderText="Código de ATM" ItemStyle-HorizontalAlign="center" />
+                                                        <asp:BoundField DataField="NomATM" HeaderText="Nombre" ItemStyle-HorizontalAlign="center" />
+                                                        <asp:BoundField DataField="Tecnico" HeaderText="Técnico Responsable" ItemStyle-HorizontalAlign="center" />
+                                                        <asp:BoundField DataField="Sucursal" HeaderText="Sucursal" ItemStyle-HorizontalAlign="center" />
+                                                        <asp:BoundField DataField="Ubicacion" HeaderText="Ubicación" ItemStyle-HorizontalAlign="center" />
+
                                                     </Columns>
                                                 </asp:GridView>
                                             </ContentTemplate>
@@ -137,82 +137,81 @@
             </ContentTemplate>
         </asp:UpdatePanel>
         <!--/DATAGRID-->
-         <!-- Modal al no realizar trabajo -->
-    <div class="modal bs-example-modal-lg" id="modalverificacion" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myLargeModalLabel">Motivo por el que se canceló el mantenimiento</h4>
-                    <button type="button" id="btnexitModal" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+        <!-- Modal al no realizar trabajo -->
+        <div class="modal bs-example-modal-lg" id="modalverificacion" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myLargeModalLabel">Motivo por el que se canceló el mantenimiento</h4>
+                        <button type="button" id="btnexitModal" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                    </div>
+
+                    <asp:UpdatePanel runat="server" ID="UPModal">
+                        <ContentTemplate>
+                            <div class="modal-body">
+                                <div>
+                                    <asp:Label runat="server">Mantenimiento a reprogramar</asp:Label>
+                                </div>
+                                <div>
+                                    <asp:TextBox runat="server" CssClass="form-control" ID="txtModalATM" Enabled="false"></asp:TextBox>
+                                </div>
+                                <br />
+                                <div>
+                                    <asp:Label runat="server">Motivo de Cancelación de Mantenimiento</asp:Label>
+                                </div>
+                                <div>
+                                    <asp:DropDownList ID="DDLModalMotivo" OnSelectedIndexChanged="DDLModalMotivo_SelectedIndexChanged" AutoPostBack="true" runat="server" CssClass="form-control col-12">
+                                    </asp:DropDownList>
+                                </div>
+                                <br />
+                                <div>Cambio realizado por</div>
+                                <div>
+                                    <asp:DropDownList ID="DDLModalcambioPor" runat="server" CssClass="form-control col-12">
+                                    </asp:DropDownList>
+                                </div>
+                                <br />
+                                <div>
+                                    <label runat="server" visible="false" id="lbnewTecnico">Nuevo Técnico Responsable</label>
+                                </div>
+
+                                <div>
+                                    <asp:DropDownList ID="DDLModalNewTecnico" Visible="false" runat="server" CssClass="form-control col-12">
+                                    </asp:DropDownList>
+                                </div>
+                                <br />
+                                <div>
+                                    <asp:Label runat="server">Detalle de motivo de cancelación</asp:Label>
+                                </div>
+                                <div>
+                                    <asp:TextBox ID="txtdetalleCancela" runat="server" TextMode="Multiline" Rows="5" CssClass="form-control col-12"></asp:TextBox>
+                                </div>
+                                <div class="col-md-6 align-self-center" style="margin-left: auto; margin-right: auto">
+                                    <asp:Label runat="server" BorderStyle="None" Style="color: red;" Visible="false" ID="lbValidarModal" CssClass="col form-control"></asp:Label>
+                                </div>
+                            </div>
+
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+
+                    <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                        <ContentTemplate>
+                            <div class="modal-footer">
+                                <asp:Button runat="server" ID="btnMantSinRealizar" OnClick="btnMantSinRealizar_Click" CssClass="btn btn-success col-12" Text="Enviar" />
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+
                 </div>
-
-                <asp:UpdatePanel runat="server" ID="UPModal">
-                    <ContentTemplate>
-                        <div class="modal-body">
-                            <div>
-                                <asp:Label runat="server">Mantenimiento a reprogramar</asp:Label>
-                            </div>
-                            <div>
-                                <asp:TextBox runat="server" CssClass="form-control" ID="txtModalATM" Enabled="false"></asp:TextBox>
-                            </div>
-                            <br />
-                            <div>
-                                <asp:Label runat="server">Motivo de Cancelación de Mantenimiento</asp:Label>
-                            </div>
-                            <div>
-                                <asp:DropDownList ID="DDLModalMotivo" OnSelectedIndexChanged="DDLModalMotivo_SelectedIndexChanged" AutoPostBack="true" runat="server" CssClass="form-control col-12">                                 
-                                </asp:DropDownList>
-                            </div>
-                            <br />
-                            <div>Cambio realizado por</div>
-                            <div>
-                                <asp:DropDownList ID="DDLModalcambioPor" runat="server" CssClass="form-control col-12">
-                                   
-                                </asp:DropDownList>
-                            </div>
-                            <br />
-                            <div>
-                                <label runat="server" visible="false" id="lbnewTecnico">Nuevo Técnico Responsable</label>
-                            </div>
-                            
-                            <div>
-                                <asp:DropDownList ID="DDLModalNewTecnico" Visible="false" runat="server" CssClass="form-control col-12">                                  
-                                </asp:DropDownList>
-                            </div>
-                            <br />
-                            <div>
-                                <asp:Label runat="server">Detalle de motivo de cancelación</asp:Label>
-                            </div>
-                            <div>
-                                <asp:TextBox ID="txtdetalleCancela" runat="server" TextMode="Multiline" Rows="5" CssClass="form-control col-12"></asp:TextBox>
-                            </div>
-                            <div class="col-md-6 align-self-center" style="margin-left:auto; margin-right:auto">
-                                <asp:Label runat="server" BorderStyle="None" style="color:red;" Visible="false" ID="lbValidarModal" CssClass="col form-control"></asp:Label>
-                            </div>
-                        </div>
-
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-
-                <asp:UpdatePanel ID="UpdatePanel4" runat="server">
-                    <ContentTemplate>
-                        <div class="modal-footer">
-                            <asp:Button runat="server" ID="btnMantSinRealizar" OnClick="btnMantSinRealizar_Click" CssClass="btn btn-success col-12" Text="Enviar" />
-                        </div>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-
+                <!-- /.modal-content -->
             </div>
-            <!-- /.modal-content -->
+            <!--/.modal-dialog -->
         </div>
-        <!--/.modal-dialog -->
-    </div>
-    <!-- /Modal al no realizar trabajo -->
+        <!-- /Modal al no realizar trabajo -->
     </div>
     <br />
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Script" runat="server">
-<%--<script src="/js/fstdropdown.js"></script>
+    <%--<script src="/js/fstdropdown.js"></script>
     <script>
         function setDrop() {
             if (!document.getElementById('third').classList.contains("fstdropdown-select"))

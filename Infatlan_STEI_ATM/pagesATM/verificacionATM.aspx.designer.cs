@@ -330,6 +330,15 @@ namespace Infatlan_STEI_ATM
         protected global::System.Web.UI.WebControls.TextBox txtantiSkimming;
 
         /// <summary>
+        /// Control RBLDiscoDuro.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList RBLDiscoDuro;
+
+        /// <summary>
         /// Control FUDiscoDuro.
         /// </summary>
         /// <remarks>
@@ -337,6 +346,15 @@ namespace Infatlan_STEI_ATM
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload FUDiscoDuro;
+
+        /// <summary>
+        /// Control RBLATMDesarmadoPS.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList RBLATMDesarmadoPS;
 
         /// <summary>
         /// Control FUATMDesarmadoPS.
@@ -348,6 +366,15 @@ namespace Infatlan_STEI_ATM
         protected global::System.Web.UI.WebControls.FileUpload FUATMDesarmadoPS;
 
         /// <summary>
+        /// Control RBLATMDesarmadoPI.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList RBLATMDesarmadoPI;
+
+        /// <summary>
         /// Control FUATMDesarmadoPI.
         /// </summary>
         /// <remarks>
@@ -355,6 +382,15 @@ namespace Infatlan_STEI_ATM
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload FUATMDesarmadoPI;
+
+        /// <summary>
+        /// Control RBLVendor.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList RBLVendor;
 
         /// <summary>
         /// Control FUDispositivoVendor.
@@ -366,6 +402,15 @@ namespace Infatlan_STEI_ATM
         protected global::System.Web.UI.WebControls.FileUpload FUDispositivoVendor;
 
         /// <summary>
+        /// Control RBLSystemInfo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList RBLSystemInfo;
+
+        /// <summary>
         /// Control FUSYSTEMINFO.
         /// </summary>
         /// <remarks>
@@ -373,6 +418,15 @@ namespace Infatlan_STEI_ATM
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload FUSYSTEMINFO;
+
+        /// <summary>
+        /// Control RBLAntiSkimming.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList RBLAntiSkimming;
 
         /// <summary>
         /// Control FUAntiskimmin.
@@ -384,6 +438,15 @@ namespace Infatlan_STEI_ATM
         protected global::System.Web.UI.WebControls.FileUpload FUAntiskimmin;
 
         /// <summary>
+        /// Control RBLMonitorFiltro.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList RBLMonitorFiltro;
+
+        /// <summary>
         /// Control FUMonitorFiltro.
         /// </summary>
         /// <remarks>
@@ -391,6 +454,15 @@ namespace Infatlan_STEI_ATM
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload FUMonitorFiltro;
+
+        /// <summary>
+        /// Control RBLPadleWheel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList RBLPadleWheel;
 
         /// <summary>
         /// Control FUPadlewheel.
@@ -402,6 +474,15 @@ namespace Infatlan_STEI_ATM
         protected global::System.Web.UI.WebControls.FileUpload FUPadlewheel;
 
         /// <summary>
+        /// Control RBLDispDesarmado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList RBLDispDesarmado;
+
+        /// <summary>
         /// Control FUDispDesarmado.
         /// </summary>
         /// <remarks>
@@ -409,6 +490,15 @@ namespace Infatlan_STEI_ATM
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload FUDispDesarmado;
+
+        /// <summary>
+        /// Control RBLTeclado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList RBLTeclado;
 
         /// <summary>
         /// Control FUTeclado.
@@ -420,40 +510,13 @@ namespace Infatlan_STEI_ATM
         protected global::System.Web.UI.WebControls.FileUpload FUTeclado;
 
         /// <summary>
-        /// Control UpdatePanel1.
+        /// Control RBLClimatizacion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
-
-        /// <summary>
-        /// Control ddlclimatizacion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlclimatizacion;
-
-        /// <summary>
-        /// Control ddlenergia.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlenergia;
-
-        /// <summary>
-        /// Control DIVImg11.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DIVImg11;
+        protected global::System.Web.UI.WebControls.RadioButtonList RBLClimatizacion;
 
         /// <summary>
         /// Control FUClimatizacion.
@@ -465,13 +528,13 @@ namespace Infatlan_STEI_ATM
         protected global::System.Web.UI.WebControls.FileUpload FUClimatizacion;
 
         /// <summary>
-        /// Control DIVImg12.
+        /// Control RBLEnergiaElectrica.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DIVImg12;
+        protected global::System.Web.UI.WebControls.RadioButtonList RBLEnergiaElectrica;
 
         /// <summary>
         /// Control FUEnergia.

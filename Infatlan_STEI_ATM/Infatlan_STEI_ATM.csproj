@@ -3230,6 +3230,7 @@
     <Content Include="assets\node_modules\x-editable\dist\jqueryui-editable\img\loading.gif" />
     <Content Include="assets\node_modules\x-editable\dist\jqueryui-editable\js\jqueryui-editable.js" />
     <Content Include="assets\node_modules\x-editable\dist\jqueryui-editable\js\jqueryui-editable.min.js" />
+    <Content Include="pagesATM\buscarAprobarVerificacionATM.aspx" />
     <Content Include="pagesATM\buscarVerificacionATM.aspx" />
     <Content Include="css\animate.min.css" />
     <Content Include="css\GridStyle.css" />
@@ -3325,6 +3326,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="pagesATM\buscarAprobarVerificacionATM.aspx.cs">
+      <DependentUpon>buscarAprobarVerificacionATM.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pagesATM\buscarAprobarVerificacionATM.aspx.designer.cs">
+      <DependentUpon>buscarAprobarVerificacionATM.aspx</DependentUpon>
+    </Compile>
     <Compile Include="pagesATM\buscarVerificacionATM.aspx.cs">
       <DependentUpon>buscarVerificacionATM.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

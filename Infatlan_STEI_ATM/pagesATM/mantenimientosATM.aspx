@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
-     <div class="row page-titles">
+    <div class="row page-titles">
         <div class="col-md-6 align-self-center">
             <h4 class="text-themecolor">Ingresar mantenimientos programados anuales de ATM</h4>
         </div>
@@ -12,8 +12,8 @@
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Inicio</a></li>
                     <li class="breadcrumb-item active">Mantenimientos programados anuales de ATM</li>
                 </ol>
-               
-            </div> 
+
+            </div>
         </div>
     </div>
     <!--/ENCABEZADO-->
@@ -29,18 +29,16 @@
         <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
             <%--<asp:UpdatePanel runat="server" ID="UPFile">
                 <ContentTemplate>--%>
-                    <asp:FileUpload runat="server" ID="FUMantenimientos" AllowMultiple="false" ClientIDMode="AutoID" CssClass="col-5" />
+            <asp:FileUpload runat="server" ID="FUMantenimientos" AllowMultiple="false" ClientIDMode="AutoID" CssClass="col-5" />
 
-                    <div class="row col-6">
-                        <asp:Button Text="Enviar" ID="BtnEnviar" CssClass="btn btn-success" runat="server" OnClick="BtnEnviar_Click1" />
-                    </div>
-                <%--</ContentTemplate>
+            <div class="row col-6">
+                <asp:Button Text="Enviar" ID="BtnEnviar" CssClass="btn btn-success" runat="server" OnClick="BtnEnviar_Click1" />
+            </div>
+            <%--</ContentTemplate>
                 <Triggers>
                     <asp:PostBackTrigger ControlID=""/>
                 </Triggers>
             </asp:UpdatePanel>--%>
-
-            
         </div>
         <br />
         <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
@@ -57,7 +55,7 @@
             <br />
         </div>
     </div>
-    
+
 
 
 </asp:Content>

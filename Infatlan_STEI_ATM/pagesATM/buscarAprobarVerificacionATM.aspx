@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/mainATM.Master" AutoEventWireup="true" CodeBehind="buscarReprogramarATM.aspx.cs" Inherits="Infatlan_STEI_ATM.pagesATM.buscarReprogramarATM" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/mainATM.Master" AutoEventWireup="true" CodeBehind="buscarAprobarVerificacionATM.aspx.cs" Inherits="Infatlan_STEI_ATM.pagesATM.buscarAprobarVerificacionATM" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
     <link href="/css/GridStyle.css" rel="stylesheet" />
     <link href="/css/pager.css" rel="stylesheet" />
@@ -16,12 +16,12 @@
         }
     </script>
     <script type="text/javascript">
-        function openModal() {
-            $('#modalReprograma').modal('show');
+        function openEmpleadosModal() {
+            $('#EmpleadoModal').modal('show');
         }
 
-        function closeModal() {
-            $('#modalReprograma').modal('hide');
+        function openPasswordModal() {
+            $('#PasswordModal').modal('show');
         }
 
         var url = document.location.toString();
@@ -46,13 +46,13 @@
     </asp:UpdateProgress>
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
-            <h4 class="text-themecolor">Reprogramar mantenimiento</h4>
+            <h4 class="text-themecolor">Aprobar Verificación</h4>
         </div>
         <div class="col-md-7 align-self-center text-right">
             <div class="d-flex justify-content-end align-items-center">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Inicio</a></li>
-                    <li class="breadcrumb-item active">Reprogramar mantenimiento</li>
+                    <li class="breadcrumb-item active">Aprobar verificación</li>
                 </ol>
 
             </div>
@@ -63,7 +63,7 @@
     <div class="card">
         <br />
         <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
-            <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-undo"></i>Reprogramar mantenimiento</h3>
+            <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-undo"></i>Aprobar verificación</h3>
         </div>
 
         <!--DATAGRID-->
@@ -73,7 +73,7 @@
                     <div class="col-12 grid-margin stretch-card">
                         <div class="card" id="21">
                             <div class="card-body">
-                                <h4 class="card-title">Reprogramar mantenimiento</h4>
+                                <h4 class="card-title">Aprobar verificación</h4>
 
                                 <div class="col-md-6">
                                     <div class="form-group row">
@@ -112,7 +112,7 @@
                                                     <Columns>
                                                         <asp:TemplateField HeaderText="Selección" ItemStyle-HorizontalAlign="center">
                                                             <ItemTemplate>
-                                                                <asp:LinkButton runat="server" ID="btnReprogramarATM" Text="Reprogramar" CssClass="btn btn-info mr-2" CommandArgument='<%# Eval("ID") %>' CommandName="Aprobar"></asp:LinkButton>
+                                                                <asp:LinkButton runat="server" ID="btnAprobarATM" Text="Aprobar" CssClass="btn btn-info mr-2" CommandArgument='<%# Eval("ID") %>' CommandName="Aprobar"></asp:LinkButton>
                                                                 <%-- <asp:Button ID="BtnUsuarioModificar" runat="server" Text="Modificar" CssClass="btn btn-rounded btn-block btn-success" CommandArgument='<%# Eval("codATM") %>' CommandName="Modificar" />--%>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
@@ -136,56 +136,6 @@
             </ContentTemplate>
         </asp:UpdatePanel>
         <!--/DATAGRID-->
-        <!-- Modal asegurar notificacion -->
-        <div class="modal bs-example-modal-lg" id="modalReprograma" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
-            <div class="modal-dialog modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="myLargeModalLabel2">¿Seguro que reprogramará mantenimiento?</h4>
-                    </div>
-                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                        <ContentTemplate>
-
-                            <div class="row col-12">
-                                <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Código de ATM: </strong></asp:Label>
-                                <asp:Label runat="server" BorderStyle="None" ID="lbModalCodATM" class="col form-control col-6"></asp:Label>
-                            </div>
-                            <div class="row col-12">
-                                <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Nombre ATM: </strong>  </asp:Label>
-                                <asp:Label runat="server" BorderStyle="None" ID="lbModalNomATM" class="col form-control col-6"></asp:Label>
-                            </div>
-                            <div class="row col-12">
-                                <asp:Label runat="server" BorderStyle="none" class="col form-control col-6"><strong>Fecha de mantenimiento: </strong></asp:Label>
-                                <asp:Label runat="server" BorderStyle="none" ID="lbModalFechaMan" class="col form-control col-6"></asp:Label>
-                            </div>
-                            <div class="row col-12">
-                                <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Nueva fecha mantenimiento: </strong></asp:Label>
-                                <asp:TextBox ID="txtNewFechaInicio" AutoPostBack="true" placeholder="1900-12-31" CssClass="form-control col-6" runat="server" TextMode="Date"></asp:TextBox>
-                            </div>
-                            <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
-                                <asp:Label runat="server" Style="color: red;" Visible="false" BorderStyle="none" ID="lbReprogra1" CssClass="col form-control"><strong></strong></asp:Label>
-                            </div>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-                    <asp:UpdatePanel ID="UpdatePanel3" runat="server">
-                        <ContentTemplate>
-                            <div class="modal-footer col-12">
-                                <div class="row col-3">
-                                    <asp:Button runat="server" ID="btnReprogramarNotif" OnClick="btnReprogramarNotif_Click" CssClass="btn btn-success mr-3" Text="Reprogramar" />
-                                </div>
-                                <div class="row col-3">
-                                    <asp:Button runat="server" ID="btnCerrarReprogramarNotif" OnClick="btnCerrarReprogramarNotif_Click" CssClass="btn btn-danger mr-3" Text="Cancelar" />
-                                </div>
-                            </div>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-
-                </div>
-                <!-- /.modal-content -->
-            </div>
-            <!--/.modal-dialog -->
-        </div>
-        <!-- /asegurar notificacion -->
     </div>
     <br />
 </asp:Content>

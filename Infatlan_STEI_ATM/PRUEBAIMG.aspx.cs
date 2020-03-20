@@ -16,7 +16,36 @@ namespace Infatlan_STEI_ATM
         bd vConexion = new bd();
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            ControlImagenes();
+        }
+        void ControlImagenes()
+        {
+            RBLDiscoDuro.SelectedValue = "1";
+            RBLATMDesarmadoPS.SelectedValue = "1";
+            RBLATMDesarmadoPI.SelectedValue = "1";
+            RBLVendor.SelectedValue = "1";
+            RBLSystemInfo.SelectedValue = "1";
+            RBLAntiSkimming.SelectedValue = "1";
+            RBLMonitorFiltro.SelectedValue = "1";
+            RBLPadleWheel.SelectedValue = "1";
+            RBLDispDesarmado.SelectedValue = "1";
+            RBLTeclado.SelectedValue = "1";
+            if (RBLClimatizacion.SelectedValue == "1")
+            {
+                FUClimatizacion.Enabled = true;
+            }
+            else
+            {
+                FUClimatizacion.Enabled = false;
+            }
+            if (RBLEnergiaElectrica.SelectedValue == "1")
+            {
+                FUEnergia.Enabled = true;
+            }
+            else
+            {
+                FUEnergia.Enabled = false;
+            }
         }
         public void Mensaje(string vMensaje, WarningType type)
         {
@@ -72,37 +101,50 @@ namespace Infatlan_STEI_ATM
         {
             //IMAGENES1
             String vNombreDepot1 = String.Empty;
-            HttpPostedFile bufferDeposito1T = FUATMDesarmadoPS.PostedFile;
+            HttpPostedFile bufferDeposito1T = FUDiscoDuro.PostedFile;
             byte[] vFileDeposito1 = null;
             string vExtension = string.Empty;
 
             if (bufferDeposito1T != null)
             {
-                vNombreDepot1 = FUATMDesarmadoPS.FileName;
+                vNombreDepot1 = FUDiscoDuro.FileName;
                 Stream vStream = bufferDeposito1T.InputStream;
                 BinaryReader vReader = new BinaryReader(vStream);
                 vFileDeposito1 = vReader.ReadBytes((int)vStream.Length);
-                vExtension = System.IO.Path.GetExtension(FUATMDesarmadoPS.FileName);
+                vExtension = System.IO.Path.GetExtension(FUDiscoDuro.FileName);
             }
 
             String vArchivo = String.Empty;
             if (vFileDeposito1 != null)
+            {
                 vArchivo = Convert.ToBase64String(vFileDeposito1);
-            try
+                lbimg.Text = "EXISTE IMAGEN";
+                Mensaje("EXISTE IMAGEN", WarningType.Success);
+            }
+           
+            else
             {
-                string NumPregunta = "22";
-                string vQuery = "STEISP_ATM_ListaVerificacion 3, '" + 2 + "','" + NumPregunta + "','" + "SI" + "','" + vArchivo + "'";
-                Int32 vInfo = vConexion.ejecutarSQL(vQuery);
-                if (vInfo == 1)
-                {
-                    Mensaje("antiskimming creada con éxito", WarningType.Success);
-                }
+                //Mensaje(, WarningType.Danger);
+                lbimg.Text ="NO DEJE IMAGEN VACIA";
+            }
 
-            }
-            catch (Exception Ex)
-            {
-                throw;
-            }
+            //try
+            //{
+            //    string NumPregunta = "22";
+            //    string vQuery = "STEISP_ATM_ListaVerificacion 3, '" + 2 + "','" + NumPregunta + "','" + "SI" + "','" + vArchivo + "'";
+            //    Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+            //    if (vInfo == 1)
+            //    {
+            //        Mensaje("antiskimming creada con éxito", WarningType.Success);
+            //    }
+
+            //}
+            //catch (Exception Ex)
+            //{
+            //    throw;
+            //}
         }
+
     }
+
 }

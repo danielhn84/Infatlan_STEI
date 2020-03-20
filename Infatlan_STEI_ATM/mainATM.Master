@@ -158,7 +158,7 @@
                                 <li><a href="../pagesATM/notificacionATM.aspx">Crear Notificación</a></li>
                                 <li><a href="../pagesATM/buscarAprobarNotificacionATM.aspx">Aprobar Notificación</a></li>
                                 <li><a href="../pagesATM/buscarVerificacionATM.aspx">Crear Verificación</a></li>   
-                                <li><a href="../pagesATM/aprobarVerificacionATM.aspx">Aprobar Verificación</a></li>
+                                <li><a href="../pagesATM/buscarAprobarVerificacionATM.aspx">Aprobar Verificación</a></li>
                             </ul>
                         </li>
                         <li><a  href="../pagesATM/buscarReprogramarATM.aspx" aria-expanded="false"><i class="ti-timer"></i><span class="hide-menu">Reprogramación</span></a></li>

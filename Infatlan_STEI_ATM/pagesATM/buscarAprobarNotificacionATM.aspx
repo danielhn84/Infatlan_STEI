@@ -44,7 +44,7 @@
             </div>
         </ProgressTemplate>
     </asp:UpdateProgress>
-     <div class="row page-titles">
+    <div class="row page-titles">
         <div class="col-md-5 align-self-center">
             <h4 class="text-themecolor">Aprobar Notificaciones</h4>
         </div>
@@ -54,17 +54,17 @@
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Inicio</a></li>
                     <li class="breadcrumb-item active">Aprobar Notificaciones</li>
                 </ol>
-               
-            </div> 
+
+            </div>
         </div>
     </div>
     <!--/ENCABEZADO-->
 
-    <div class="card" >
+    <div class="card">
         <br />
-        <div class="row col-12" style="margin-left:10px; margin-left:10px;">
-            <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-undo"></i> Aprobar Notificación</h3>
-        </div>   
+        <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
+            <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-undo"></i>Aprobar Notificación</h3>
+        </div>
 
         <!--DATAGRID-->
         <asp:UpdatePanel ID="UpdateDivBusquedas" runat="server" UpdateMode="Conditional">
@@ -111,18 +111,18 @@
                                                     PageSize="10" OnRowCommand="GVBusqueda_RowCommand">
                                                     <Columns>
                                                         <asp:TemplateField HeaderText="Selección" ItemStyle-HorizontalAlign="center">
-                                                            <ItemTemplate>                                                               
+                                                            <ItemTemplate>
                                                                 <asp:LinkButton runat="server" ID="btnAprobarATM" Text="Aprobar" CssClass="btn btn-info mr-2" CommandArgument='<%# Eval("ID") %>' CommandName="Aprobar"></asp:LinkButton>
                                                                 <%-- <asp:Button ID="BtnUsuarioModificar" runat="server" Text="Modificar" CssClass="btn btn-rounded btn-block btn-success" CommandArgument='<%# Eval("codATM") %>' CommandName="Modificar" />--%>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
-                                                        <asp:BoundField DataField="ID" HeaderText="Código" Visible="false"  ItemStyle-HorizontalAlign="center"/>
-                                                        <asp:BoundField DataField="Codigo" HeaderText="Código de ATM"  ItemStyle-HorizontalAlign="center"/>
-                                                        <asp:BoundField DataField="NomATM" HeaderText="Nombre"  ItemStyle-HorizontalAlign="center"/>
-                                                        <asp:BoundField DataField="Tecnico" HeaderText="Técnico Responsable"  ItemStyle-HorizontalAlign="center"/>
-                                                        <asp:BoundField DataField="Sucursal" HeaderText="Sucursal"  ItemStyle-HorizontalAlign="center"/>
-                                                        <asp:BoundField DataField="Ubicacion" HeaderText="Ubicación"  ItemStyle-HorizontalAlign="center"/>
-                                                            
+                                                        <asp:BoundField DataField="ID" HeaderText="Código" Visible="false" ItemStyle-HorizontalAlign="center" />
+                                                        <asp:BoundField DataField="Codigo" HeaderText="Código de ATM" ItemStyle-HorizontalAlign="center" />
+                                                        <asp:BoundField DataField="NomATM" HeaderText="Nombre" ItemStyle-HorizontalAlign="center" />
+                                                        <asp:BoundField DataField="Tecnico" HeaderText="Técnico Responsable" ItemStyle-HorizontalAlign="center" />
+                                                        <asp:BoundField DataField="Sucursal" HeaderText="Sucursal" ItemStyle-HorizontalAlign="center" />
+                                                        <asp:BoundField DataField="Ubicacion" HeaderText="Ubicación" ItemStyle-HorizontalAlign="center" />
+
                                                     </Columns>
                                                 </asp:GridView>
                                             </ContentTemplate>
@@ -140,7 +140,7 @@
     <br />
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Script" runat="server">
-<%--<script src="/js/fstdropdown.js"></script>
+    <%--<script src="/js/fstdropdown.js"></script>
     <script>
         function setDrop() {
             if (!document.getElementById('third').classList.contains("fstdropdown-select"))

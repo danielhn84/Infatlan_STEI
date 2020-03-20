@@ -564,182 +564,217 @@
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>
-        <br />
-        <br />
-        <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
-            <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-image" style="margin-left: 10px"></i>Comprobación</h3>
-        </div>
+
         <br />
         <hr />
         <br />
-        <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
-            <div class="row col-12">
-                <div class="card row col-4">
-                    <label for="input-file-now">Disco Duro</label><br />
-                    <div class="card-body">
-                        <img id="imgDiscoDuro" height="300" width="300" src="" style="border-width: 0px; visibility: hidden;" />
-                        <asp:FileUpload ID="FUDiscoDuro" runat="server" onchange="img1(this);" />
-                    </div>
+        <asp:UpdatePanel runat="server">
+            <ContentTemplate>
+                <div class="card-body">
+                    <h3 class="card-title" style="color: #808080;"><i class="fa fa-image" style="margin-left: 10px"></i>Comprobación</h3>
+                    <h5 class="card-subtitle">Subir imagenes de lo solicitado de mantenimiento</h5>
+                    <table class="tablesaw table-bordered table-hover table no-wrap" data-tablesaw-mode="swipe"
+                        data-tablesaw-sortable data-tablesaw-sortable-switch data-tablesaw-minimap
+                        data-tablesaw-mode-switch>
+                        <thead>
+                            <tr>
+                                <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist" class="border">Imagen a subir</th>
+                                <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col
+                                    data-tablesaw-priority="3" class="border">¿Subir imagen?</th>
+                                <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2" class="border">Seleccione imagen
+                                </th>
+                                <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="1" class="border">
+                                    <abbr title="Rotten Tomato Rating">Mostrar imagen</abbr>
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="title"><a class="link" href="javascript:void(0)">Disco duro</a></td>
+                                <td>
+                                    <asp:RadioButtonList ID="RBLDiscoDuro" runat="server" CssClass="custom-checkbox" BorderStyle="None" Enabled="false" RepeatDirection="Horizontal">
+                                        <asp:ListItem Value="1" Text="Si"></asp:ListItem>
+                                        <asp:ListItem Value="2" Text="No"></asp:ListItem>
+                                    </asp:RadioButtonList>
+                                </td>
+                                <td>
+                                    <asp:FileUpload ID="FUDiscoDuro" runat="server" onchange="img1(this);" /></td>
+                                <td>
+                                    <img id="imgDiscoDuro" height="100" width="100" src="" style="border-width: 0px; visibility: hidden;" /></td>
+
+                            </tr>
+                            <tr>
+                                <td class="title"><a class="link" href="javascript:void(0)">ATM desarmado parte superior (limpiar)</a></td>
+                                <td>
+                                    <asp:RadioButtonList ID="RBLATMDesarmadoPS" runat="server" CssClass="custom-checkbox" BorderStyle="None" Enabled="false" RepeatDirection="Horizontal">
+                                        <asp:ListItem Value="1" Text="Si"></asp:ListItem>
+                                        <asp:ListItem Value="2" Text="No"></asp:ListItem>
+                                    </asp:RadioButtonList>
+                                </td>
+                                <td>
+                                    <asp:FileUpload ID="FUATMDesarmadoPS" runat="server" onchange="img2(this);" /></td>
+                                <td>
+                                    <img id="imgATMDesarmadoPS" height="100" width="100" src="" style="border-width: 0px; visibility: hidden;" /></td>
+
+                            </tr>
+                            <tr>
+                                <td class="title"><a class="link" href="javascript:void(0)">ATM desarmado parte inferior (limpiar)</a>
+                                </td>
+                                <td>
+                                    <asp:RadioButtonList ID="RBLATMDesarmadoPI" runat="server" CssClass="custom-checkbox" BorderStyle="None" Enabled="false" RepeatDirection="Horizontal">
+                                        <asp:ListItem Value="1" Text="Si"></asp:ListItem>
+                                        <asp:ListItem Value="2" Text="No"></asp:ListItem>
+                                    </asp:RadioButtonList>
+                                </td>
+                                <td>
+                                    <asp:FileUpload ID="FUATMDesarmadoPI" runat="server" onchange="img3(this);" /></td>
+                                <td>
+                                    <img id="imgATMDesarmadoPI" height="100" width="100" src="" style="border-width: 0px; visibility: hidden;" /></td>
+
+                            </tr>
+                            <tr>
+                                <td class="title"><a class="link" href="javascript:void(0)">Dispositivo modo
+                                    <br />
+                                    diagnostico de vendor en linea</a></td>
+                                <td>
+                                    <asp:RadioButtonList ID="RBLVendor" runat="server" CssClass="custom-checkbox" BorderStyle="None" Enabled="false" RepeatDirection="Horizontal">
+                                        <asp:ListItem Value="1" Text="Si"></asp:ListItem>
+                                        <asp:ListItem Value="2" Text="No"></asp:ListItem>
+                                    </asp:RadioButtonList>
+                                </td>
+                                <td>
+                                    <asp:FileUpload ID="FUDispositivoVendor" runat="server" onchange="img4(this);" /></td>
+                                <td>
+                                    <img id="imgDispositivoVendor" height="100" width="100" src="" style="border-width: 0px; visibility: hidden;" /></td>
+
+                            </tr>
+                            <tr>
+                                <td class="title"><a class="link" href="javascript:void(0)">Tipo de procesador con<br />
+                                    el comando "SYSTEMINFO"</a></td>
+                                <td>
+                                    <asp:RadioButtonList ID="RBLSystemInfo" runat="server" CssClass="custom-checkbox" BorderStyle="None" Enabled="false" RepeatDirection="Horizontal">
+                                        <asp:ListItem Value="1" Text="Si"></asp:ListItem>
+                                        <asp:ListItem Value="2" Text="No"></asp:ListItem>
+                                    </asp:RadioButtonList>
+                                </td>
+                                <td>
+                                    <asp:FileUpload ID="FUSYSTEMINFO" runat="server" onchange="img5(this);" /></td>
+                                <td>
+                                    <img id="imgSYSTEMINFO" height="100" width="100" src="" style="border-width: 0px; visibility: hidden;" /></td>
+
+                            </tr>
+                            <tr>
+                                <td class="title"><a class="link" href="javascript:void(0)">Lectora con el antiskimming
+                                    <br />
+                                    desarmado y limpio</a>
+                                </td>
+                                <td>
+                                    <asp:RadioButtonList ID="RBLAntiSkimming" runat="server" CssClass="custom-checkbox" BorderStyle="None" Enabled="false" RepeatDirection="Horizontal">
+                                        <asp:ListItem Value="1" Text="Si"></asp:ListItem>
+                                        <asp:ListItem Value="2" Text="No"></asp:ListItem>
+                                    </asp:RadioButtonList>
+                                </td>
+                                <td>
+                                    <asp:FileUpload ID="FUAntiskimmin" runat="server" onchange="img6(this);" /></td>
+                                <td>
+                                    <img id="imgAntiskimmin" height="100" width="100" src="" style="border-width: 0px; visibility: hidden;" /></td>
+
+                            </tr>
+                            <tr>
+                                <td class="title"><a class="link" href="javascript:void(0)">Monitor con el filtro
+                                </a></td>
+                                <td>
+                                    <asp:RadioButtonList ID="RBLMonitorFiltro" runat="server" CssClass="custom-checkbox" BorderStyle="None" Enabled="false" RepeatDirection="Horizontal">
+                                        <asp:ListItem Value="1" Text="Si"></asp:ListItem>
+                                        <asp:ListItem Value="2" Text="No"></asp:ListItem>
+                                    </asp:RadioButtonList>
+                                </td>
+                                <td>
+                                    <asp:FileUpload ID="FUMonitorFiltro" runat="server" onchange="img7(this);" /></td>
+                                <td>
+                                    <img id="imgMonitorFiltro" height="100" width="100" src="" style="border-width: 0px; visibility: hidden;" /></td>
+
+                            </tr>
+                            <tr>
+                                <td class="title"><a class="link" href="javascript:void(0)">PadleWheel(rueda de paletas)</a></td>
+                                <td>
+                                    <asp:RadioButtonList ID="RBLPadleWheel" runat="server" CssClass="custom-checkbox" BorderStyle="None" Enabled="false" RepeatDirection="Horizontal">
+                                        <asp:ListItem Value="1" Text="Si"></asp:ListItem>
+                                        <asp:ListItem Value="2" Text="No"></asp:ListItem>
+                                    </asp:RadioButtonList>
+                                </td>
+                                <td>
+                                    <asp:FileUpload ID="FUPadlewheel" runat="server" onchange="img8(this);" /></td>
+                                <td>
+                                    <img id="imgPadlewheel" height="100" width="100" src="" style="border-width: 0px; visibility: hidden;" /></td>
+
+                            </tr>
+                            <tr>
+                                <td class="title"><a class="link" href="javascript:void(0)">Dispositivos desarmado</a></td>
+                                <td>
+                                    <asp:RadioButtonList ID="RBLDispDesarmado" runat="server" CssClass="custom-checkbox" BorderStyle="None" Enabled="false" RepeatDirection="Horizontal">
+                                        <asp:ListItem Value="1" Text="Si"></asp:ListItem>
+                                        <asp:ListItem Value="2" Text="No"></asp:ListItem>
+                                    </asp:RadioButtonList>
+                                </td>
+                                <td>
+                                    <asp:FileUpload ID="FUDispDesarmado" runat="server" onchange="img9(this);" /></td>
+                                <td>
+                                    <img id="imgDispDesarmado" height="100" width="100" src="" style="border-width: 0px; visibility: hidden;" /></td>
+
+                            </tr>
+                            <tr>
+                                <td class="title"><a class="link" href="javascript:void(0)">Teclado
+                                </a></td>
+                                <td>
+                                    <asp:RadioButtonList ID="RBLTeclado" runat="server" CssClass="custom-checkbox" BorderStyle="None" Enabled="false" RepeatDirection="Horizontal">
+                                        <asp:ListItem Value="1" Text="Si"></asp:ListItem>
+                                        <asp:ListItem Value="2" Text="No"></asp:ListItem>
+                                    </asp:RadioButtonList>
+                                </td>
+                                <td>
+                                    <asp:FileUpload ID="FUTeclado" runat="server" onchange="img10(this);" /></td>
+                                <td>
+                                    <img id="imgTeclado" height="100" width="100" src="" style="border-width: 0px; visibility: hidden;" /></td>
+
+                            </tr>
+                            <tr>
+                                <td class="title"><a class="link" href="javascript:void(0)">¿Cuenta con Climatización adecuada?
+                                </a></td>
+                                <td>
+                                    <asp:RadioButtonList ID="RBLClimatizacion" OnSelectedIndexChanged="RBLClimatizacion_SelectedIndexChanged" runat="server" AutoPostBack="true" CssClass="custom-checkbox" BorderStyle="None" RepeatDirection="Horizontal">
+                                        <asp:ListItem Value="1" Text="Si"></asp:ListItem>
+                                        <asp:ListItem Value="2" Text="No"></asp:ListItem>
+                                    </asp:RadioButtonList>
+                                </td>
+                                <td>
+                                    <asp:FileUpload ID="FUClimatizacion" runat="server" Enabled="false" onchange="img11(this);" /></td>
+                                <td>
+                                    <img id="imgClimatizacion" height="100" width="100" src="" style="border-width: 0px; visibility: hidden;" /></td>
+
+                            </tr>
+                            <tr>
+                                <td class="title"><a class="link" href="javascript:void(0)">¿Cuenta con protección de energía<br />
+                                    eléctrica?
+                                </a></td>
+                                <td>
+                                    <asp:RadioButtonList ID="RBLEnergiaElectrica" OnSelectedIndexChanged="RBLEnergiaElectrica_SelectedIndexChanged" runat="server" AutoPostBack="true" CssClass="custom-checkbox" BorderStyle="None" RepeatDirection="Horizontal">
+                                        <asp:ListItem Value="1" Text="Si"></asp:ListItem>
+                                        <asp:ListItem Value="2" Text="No"></asp:ListItem>
+                                    </asp:RadioButtonList>
+                                </td>
+                                <td>
+                                    <asp:FileUpload ID="FUEnergia" runat="server" Enabled="false" onchange="img12(this);" /></td>
+                                <td>
+                                    <img id="imgEnergia" class="col row-6" height="100" width="100" src="" style="border-width: 0px; visibility: hidden;" /></td>
+
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-
-
-                <div class="card row col-4">
-                    <label for="input-file-now">ATM desarmado parte superior (limpiar)</label><br />
-                    <div class="card-body">
-
-                        <img id="imgATMDesarmadoPS" height="300" width="300" src="" style="border-width: 0px; visibility: hidden;" />
-                        <asp:FileUpload ID="FUATMDesarmadoPS" runat="server" onchange="img2(this);" />
-                    </div>
-                </div>
-
-
-                <div class="card row col-4">
-                    <label for="input-file-now">ATM desarmado parte inferior (limpiar)</label><br />
-                    <div class="card-body">
-
-                        <img id="imgATMDesarmadoPI" height="300" width="300" src="" style="border-width: 0px; visibility: hidden;" />
-                        <asp:FileUpload ID="FUATMDesarmadoPI" runat="server" onchange="img3(this);" />
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <!--PRIMERA FILA DE IMAGENES-->
-
-        <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
-            <div class="row col-12">
-                <div class="card row col-4">
-                    <label for="input-file-now" class="col row-4">Dispositivo modo diagnostico de vendor en linea</label><br />
-                    <div class="card-body">
-
-                        <img id="imgDispositivoVendor" height="300" width="300" src="" style="border-width: 0px; visibility: hidden;" />
-                        <asp:FileUpload ID="FUDispositivoVendor" runat="server" onchange="img4(this);" />
-                    </div>
-                </div>
-                <div class="card row col-4">
-                    <label class="col row-4">Tipo de procesador con el comando "SYSTEMINFO"</label><br />
-                    <div class="card-body">
-
-                        <img id="imgSYSTEMINFO" height="300" width="300" src="" style="border-width: 0px; visibility: hidden;" />
-                        <asp:FileUpload ID="FUSYSTEMINFO" runat="server" onchange="img5(this);" />
-                    </div>
-                </div>
-                <div class="card row col-4">
-                    <label class="col row-4">Lectora con el antiskimming desarmado y limpio</label><br />
-                    <div class="card-body">
-
-                        <img id="imgAntiskimmin" height="300" width="300" src="" style="border-width: 0px; visibility: hidden;" />
-                        <asp:FileUpload ID="FUAntiskimmin" runat="server" onchange="img6(this);" />
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--SEGUNDA FILA DE IMAGENES-->
-
-        <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
-            <div class="row col-12">
-                <div class="card row col-4">
-                    <label for="input-file-now">Monitor con el filtro</label><br />
-                    <div class="card-body">
-                        <img id="imgMonitorFiltro" height="300" width="300" src="" style="border-width: 0px; visibility: hidden;" />
-                        <asp:FileUpload ID="FUMonitorFiltro" runat="server" onchange="img7(this);" />
-                    </div>
-                </div>
-                <div class="card row col-4">
-                    <label for="input-file-now">PadleWheel(rueda de paletas)</label><br />
-                    <div class="card-body">
-
-                        <img id="imgPadlewheel" height="300" width="300" src="" style="border-width: 0px; visibility: hidden;" />
-                        <asp:FileUpload ID="FUPadlewheel" runat="server" onchange="img8(this);" />
-                    </div>
-                </div>
-                <div class="card row col-4">
-                    <label for="input-file-now">Dispositivos desarmado</label><br />
-                    <div class="card-body">
-
-                        <img id="imgDispDesarmado" height="300" width="300" src="" style="border-width: 0px; visibility: hidden;" />
-                        <asp:FileUpload ID="FUDispDesarmado" runat="server" onchange="img9(this);" />
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <!--TERCERA FILA DE IMAGENES-->
-        <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
-            <div class="row col-12">
-                <div class="card row col-4">
-                    <label for="input-file-now">Teclado</label><br />
-                    <div class="card-body">
-                        <img id="imgTeclado" height="300" width="300" src="" style="border-width: 0px; visibility: hidden;" />
-                        <asp:FileUpload ID="FUTeclado" runat="server" onchange="img10(this);" />
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--CUARTA FILA DE IMAGENES-->
-        <br />
-        <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
-            <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-fax" style="margin-left: 10px"></i>Condiciones de Sítio</h3>
-        </div>
-        <br />
-        <hr />
-        <br />
-
-        <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
-            <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
-                <ContentTemplate>
-                    <!--PRIMERA FILA-->
-                    <div class="row col-12">
-                        <!--PRIMERA COLUMNA-->
-                        <div class="row col-6">
-                            <label class="col-form-label col-12">¿Cuenta con Climatización adecuada?</label>
-                            <div class="row col-12">
-                                <asp:DropDownList ID="ddlclimatizacion" AutoPostBack="true" OnSelectedIndexChanged="ddlclimatizacion_SelectedIndexChanged" CssClass="form-control" runat="server">
-                                    <asp:ListItem Value="0" Text="Seleccione respuesta..."></asp:ListItem>
-                                    <asp:ListItem Value="1" Text="Si"></asp:ListItem>
-                                    <asp:ListItem Value="2" Text="No"></asp:ListItem>
-                                </asp:DropDownList>
-                            </div>
-                        </div>
-                        <!--SEGUNDA COLUMNA-->
-                        <div class="row col-6">
-                            <label class="col-form-label col-12">¿Cuenta con protección de energía eléctrica?</label>
-                            <div class="row col-12">
-                                <asp:DropDownList ID="ddlenergia" AutoPostBack="true" OnTextChanged="ddlenergia_TextChanged" CssClass="form-control" runat="server">
-                                    <asp:ListItem Value="0" Text="Seleccione respuesta..."></asp:ListItem>
-                                    <asp:ListItem Value="1" Text="Si"></asp:ListItem>
-                                    <asp:ListItem Value="2" Text="No"></asp:ListItem>
-                                </asp:DropDownList>
-                            </div>
-                        </div>
-                    </div>
-                    <!--SEGUNDA FILA-->
-
-                    <div class="row col-12">
-
-                        <div runat="server" visible="false" id="DIVImg11" class="card row col-6">
-                            <div class="card-body row col-6">
-
-                                <img id="imgClimatizacion" height="300" width="300" src="" style="border-width: 0px; visibility: hidden;" />
-                                <asp:FileUpload ID="FUClimatizacion" runat="server" onchange="img11(this);" />
-
-                            </div>
-                        </div>
-
-                        <div runat="server" visible="false" id="DIVImg12" class="card row col-6">
-                            <div class="card-body row col-6">
-                                <img id="imgEnergia" class="col row-6" height="300" width="300" src="" style="border-width: 0px; visibility: hidden;" />
-                                <asp:FileUpload ID="FUEnergia" runat="server" onchange="img12(this);" />
-                            </div>
-                        </div>
-
-
-                    </div>
-                </ContentTemplate>
-            </asp:UpdatePanel>
-        </div>
-
-
+            </ContentTemplate>
+        </asp:UpdatePanel>
         <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
             <label class="col-form-label">Observaciones y Comentarios</label>
             <br />
@@ -756,6 +791,9 @@
                 </div>
 
             </ContentTemplate>
+                    <%--<Triggers>
+                        <asp:PostBackTrigger ControlID="btnEnviarVerif" />
+                    </Triggers>--%>
         </asp:UpdatePanel>
         <br />
         <br />
@@ -797,7 +835,7 @@
                     <ContentTemplate>
                         <div class="modal-footer col-12">
                             <div class="row col-3">
-                                <asp:Button runat="server" ID="btnModalVerif" UseSubmitBehavior="false"  OnClick="btnModalVerif_Click" CssClass="btn btn-success mr-3" Text="Enviar" />
+                                <asp:Button runat="server" ID="btnModalVerif" UseSubmitBehavior="false" OnClick="btnModalVerif_Click" CssClass="btn btn-success mr-3" Text="Enviar" />
                             </div>
                             <div class="row col-3">
                                 <asp:Button runat="server" ID="btnModalCerrarVerif" OnClick="btnModalCerrarVerif_Click" CssClass="btn btn-danger mr-3" Text="Cancelar" />
@@ -805,7 +843,7 @@
                         </div>
                     </ContentTemplate>
                     <Triggers>
-                        <asp:PostBackTrigger ControlID="btnEnviarVerif" />
+                        <asp:PostBackTrigger ControlID="btnModalVerif" />
                     </Triggers>
                 </asp:UpdatePanel>
 

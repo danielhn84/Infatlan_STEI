@@ -26,7 +26,22 @@ namespace Infatlan_STEI_ATM
                 //limpiarModalVerificacion();
                 CargarVerificacion();
                 llenarForm();
+                ControlImagenes();
             }
+        }
+        void ControlImagenes()
+        {
+            RBLDiscoDuro.SelectedValue = "1";
+            RBLATMDesarmadoPS.SelectedValue = "1";
+            RBLATMDesarmadoPI.SelectedValue = "1";
+            RBLVendor.SelectedValue = "1";
+            RBLSystemInfo.SelectedValue = "1";
+            RBLAntiSkimming.SelectedValue = "1";
+            RBLMonitorFiltro.SelectedValue = "1";
+            RBLPadleWheel.SelectedValue = "1";
+            RBLDispDesarmado.SelectedValue = "1";
+            RBLTeclado.SelectedValue = "1";
+           
         }
         public void Mensaje(string vMensaje, WarningType type)
         {
@@ -123,11 +138,12 @@ namespace Infatlan_STEI_ATM
             {
             throw new Exception("Favor seleccione una respuesta de AntiSkimming.");
             }
-                
-            if (ddlclimatizacion.SelectedValue == "0")
+            if(RBLClimatizacion.SelectedValue!="1" && RBLClimatizacion.SelectedValue != "2")
                 throw new Exception("Favor seleccione una respuesta de climatización.");
-            if (ddlenergia.SelectedValue == "0")
-                throw new Exception("Favor seleccione una respuesta de la energia.");
+            if (RBLEnergiaElectrica.SelectedValue != "1" && RBLEnergiaElectrica.SelectedValue != "2")
+                throw new Exception("Favor seleccione una respuesta de energía eléctrica.");
+
+
             if (txtobseracionesVerif.Text == "" || txtobseracionesVerif.Text == string.Empty)
                 throw new Exception("Favor ingrese sus observaciones del caso.");
             //if (FUClimatizacion.HasFile)
@@ -246,28 +262,7 @@ namespace Infatlan_STEI_ATM
       
         }
 
-        protected void ddlclimatizacion_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (ddlclimatizacion.SelectedValue == "1")
-                {
-                    
-                    DIVImg11.Visible = true;
-                    
-                }
-                else
-                {
-                    DIVImg11.Visible = false;
-                }
-            }
-            catch (Exception)
-            {
-
-                
-            }
-           
-        }
+       
         private string GetExtension(string Extension)
         {
             switch (Extension)
@@ -319,6 +314,10 @@ namespace Infatlan_STEI_ATM
             try
             {
                 validar();
+                //ActualizarATM();
+                //ActualizarVerifATM();
+                //PreguntasVerif();
+                //PreguntasTxt_Img();
                 lbcodATM.Text = txtcodATM.Text;
                 lbNombreATM.Text = txtnomATM.Text;
                 lbsucursalATM.Text = txtsucursal.Text;
@@ -380,6 +379,7 @@ namespace Infatlan_STEI_ATM
                 throw;
             }
         }
+
         void PreguntasVerif()
         {
             //string usu = "acedillo";
@@ -478,7 +478,7 @@ namespace Infatlan_STEI_ATM
             try
             {
                 string NumPregunta = "22";
-                string vQuery = "STEISP_ATM_ListaVerificacion 3, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + NumPregunta + "','" + ddlclimatizacion.SelectedItem.Text + "','" + vArchivo + "'";
+                string vQuery = "STEISP_ATM_ListaVerificacion 3, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + NumPregunta + "','" + RBLClimatizacion.SelectedItem.Text + "','" + vArchivo + "'";
                 Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                 if (vInfo == 1)
                 {
@@ -512,7 +512,7 @@ namespace Infatlan_STEI_ATM
                 try
                 {
                     string NumPregunta = "23";
-                    string vQuery = "STEISP_ATM_ListaVerificacion 3, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + NumPregunta + "','" + ddlclimatizacion.SelectedItem.Text + "','" + vArchivo2 + "'";
+                    string vQuery = "STEISP_ATM_ListaVerificacion 3, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + NumPregunta + "','" + RBLEnergiaElectrica.SelectedItem.Text + "','" + vArchivo2 + "'";
                     Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                     if (vInfo == 1)
                     {
@@ -528,6 +528,204 @@ namespace Infatlan_STEI_ATM
            
 
             //  if (FileUpload1.HasFile)--VERIFICAR SI TIENE IMAGEN
+        }
+
+        void ImgVerificacion()
+        {
+            //IMAGENES1
+            String vNombreDepot1 = String.Empty;
+            HttpPostedFile bufferDeposito1 = FUDiscoDuro.PostedFile;
+            byte[] vFileDeposito1 = null;
+            string vExtension1 = string.Empty;
+
+            if (bufferDeposito1 != null)
+            {
+                vNombreDepot1 = FUClimatizacion.FileName;
+                Stream vStream1 = bufferDeposito1.InputStream;
+                BinaryReader vReader1 = new BinaryReader(vStream1);
+                vFileDeposito1 = vReader1.ReadBytes((int)vStream1.Length);
+                vExtension1 = System.IO.Path.GetExtension(FUClimatizacion.FileName);
+            }
+            String vArchivo1 = String.Empty;
+            if (vFileDeposito1 != null)
+                vArchivo1 = Convert.ToBase64String(vFileDeposito1);
+            //////////////////////////////////////////////////////////////////////////////
+            //IMAGENES2
+            String vNombreDepot2 = String.Empty;
+            HttpPostedFile bufferDeposito2 = FUATMDesarmadoPS.PostedFile;
+            byte[] vFileDeposito2 = null;
+            string vExtension2 = string.Empty;
+
+            if (bufferDeposito2 != null)
+            {
+                vNombreDepot2 = FUATMDesarmadoPS.FileName;
+                Stream vStream2 = bufferDeposito2.InputStream;
+                BinaryReader vReader2 = new BinaryReader(vStream2);
+                vFileDeposito2 = vReader2.ReadBytes((int)vStream2.Length);
+                vExtension2 = System.IO.Path.GetExtension(FUATMDesarmadoPS.FileName);
+            }
+            String vArchivo2 = String.Empty;
+            if (vFileDeposito2 != null)
+                vArchivo2 = Convert.ToBase64String(vFileDeposito2);
+            ////////////////////////////////////////////////////////////////////////////////
+            //IMAGENES3
+            String vNombreDepot3 = String.Empty;
+            HttpPostedFile bufferDeposito3 = FUATMDesarmadoPI.PostedFile;
+            byte[] vFileDeposito3 = null;
+            string vExtension3 = string.Empty;
+
+            if (bufferDeposito3 != null)
+            {
+                vNombreDepot3 = FUATMDesarmadoPI.FileName;
+                Stream vStream3 = bufferDeposito3.InputStream;
+                BinaryReader vReader3 = new BinaryReader(vStream3);
+                vFileDeposito3 = vReader3.ReadBytes((int)vStream3.Length);
+                vExtension3 = System.IO.Path.GetExtension(FUATMDesarmadoPI.FileName);
+            }
+            String vArchivo3 = String.Empty;
+            if (vFileDeposito3 != null)
+                vArchivo3 = Convert.ToBase64String(vFileDeposito3);
+            ////////////////////////////////////////////////////////////////////////////////
+            //IMAGENES4
+            String vNombreDepot4 = String.Empty;
+            HttpPostedFile bufferDeposito4 = FUDispositivoVendor.PostedFile;
+            byte[] vFileDeposito4 = null;
+            string vExtension4 = string.Empty;
+
+            if (bufferDeposito4 != null)
+            {
+                vNombreDepot4 = FUDispositivoVendor.FileName;
+                Stream vStream4 = bufferDeposito4.InputStream;
+                BinaryReader vReader4 = new BinaryReader(vStream4);
+                vFileDeposito4 = vReader4.ReadBytes((int)vStream4.Length);
+                vExtension4 = System.IO.Path.GetExtension(FUDispositivoVendor.FileName);
+            }
+            String vArchivo4 = String.Empty;
+            if (vFileDeposito4 != null)
+                vArchivo4 = Convert.ToBase64String(vFileDeposito4);
+            ////////////////////////////////////////////////////////////////////////////////
+            //IMAGENES5
+            String vNombreDepot5 = String.Empty;
+            HttpPostedFile bufferDeposito5 = FUSYSTEMINFO.PostedFile;
+            byte[] vFileDeposito5 = null;
+            string vExtension5 = string.Empty;
+
+            if (bufferDeposito5 != null)
+            {
+                vNombreDepot5 = FUSYSTEMINFO.FileName;
+                Stream vStream5 = bufferDeposito5.InputStream;
+                BinaryReader vReader5 = new BinaryReader(vStream5);
+                vFileDeposito5 = vReader5.ReadBytes((int)vStream5.Length);
+                vExtension5 = System.IO.Path.GetExtension(FUSYSTEMINFO.FileName);
+            }
+            String vArchivo5 = String.Empty;
+            if (vFileDeposito5 != null)
+                vArchivo5 = Convert.ToBase64String(vFileDeposito5);
+            ////////////////////////////////////////////////////////////////////////////////
+            //IMAGENES6
+            String vNombreDepot6 = String.Empty;
+            HttpPostedFile bufferDeposito6 = FUAntiskimmin.PostedFile;
+            byte[] vFileDeposito6 = null;
+            string vExtension6 = string.Empty;
+
+            if (bufferDeposito6 != null)
+            {
+                vNombreDepot6 = FUAntiskimmin.FileName;
+                Stream vStream6 = bufferDeposito6.InputStream;
+                BinaryReader vReader6 = new BinaryReader(vStream6);
+                vFileDeposito6 = vReader6.ReadBytes((int)vStream6.Length);
+                vExtension6 = System.IO.Path.GetExtension(FUAntiskimmin.FileName);
+            }
+            String vArchivo6 = String.Empty;
+            if (vFileDeposito6 != null)
+                vArchivo6 = Convert.ToBase64String(vFileDeposito6);
+            ////////////////////////////////////////////////////////////////////////////////
+            //IMAGENES7
+            String vNombreDepot7 = String.Empty;
+            HttpPostedFile bufferDeposito7 = FUMonitorFiltro.PostedFile;
+            byte[] vFileDeposito7 = null;
+            string vExtension7 = string.Empty;
+
+            if (bufferDeposito7 != null)
+            {
+                vNombreDepot7 = FUMonitorFiltro.FileName;
+                Stream vStream7 = bufferDeposito7.InputStream;
+                BinaryReader vReader7 = new BinaryReader(vStream7);
+                vFileDeposito7 = vReader7.ReadBytes((int)vStream7.Length);
+                vExtension7 = System.IO.Path.GetExtension(FUMonitorFiltro.FileName);
+            }
+            String vArchivo7 = String.Empty;
+            if (vFileDeposito7 != null)
+                vArchivo7 = Convert.ToBase64String(vFileDeposito7);
+            ////////////////////////////////////////////////////////////////////////////////
+            //IMAGENES8
+            String vNombreDepot8 = String.Empty;
+            HttpPostedFile bufferDeposito8 = FUPadlewheel.PostedFile;
+            byte[] vFileDeposito8 = null;
+            string vExtension8 = string.Empty;
+
+            if (bufferDeposito8 != null)
+            {
+                vNombreDepot8 = FUPadlewheel.FileName;
+                Stream vStream8 = bufferDeposito8.InputStream;
+                BinaryReader vReader8 = new BinaryReader(vStream8);
+                vFileDeposito8 = vReader8.ReadBytes((int)vStream8.Length);
+                vExtension8 = System.IO.Path.GetExtension(FUPadlewheel.FileName);
+            }
+            String vArchivo8 = String.Empty;
+            if (vFileDeposito8 != null)
+                vArchivo8 = Convert.ToBase64String(vFileDeposito8);
+            ////////////////////////////////////////////////////////////////////////////////
+            //IMAGENES9
+            String vNombreDepot9 = String.Empty;
+            HttpPostedFile bufferDeposito9 = FUDispDesarmado.PostedFile;
+            byte[] vFileDeposito9 = null;
+            string vExtension9 = string.Empty;
+
+            if (bufferDeposito9 != null)
+            {
+                vNombreDepot9 = FUDispDesarmado.FileName;
+                Stream vStream9 = bufferDeposito9.InputStream;
+                BinaryReader vReader9 = new BinaryReader(vStream9);
+                vFileDeposito9 = vReader9.ReadBytes((int)vStream9.Length);
+                vExtension9 = System.IO.Path.GetExtension(FUDispDesarmado.FileName);
+            }
+            String vArchivo9 = String.Empty;
+            if (vFileDeposito9 != null)
+                vArchivo9 = Convert.ToBase64String(vFileDeposito9);
+            ////////////////////////////////////////////////////////////////////////////////
+            //IMAGENES10
+            String vNombreDepot10 = String.Empty;
+            HttpPostedFile bufferDeposito10 = FUTeclado.PostedFile;
+            byte[] vFileDeposito10 = null;
+            string vExtension10 = string.Empty;
+
+            if (bufferDeposito10 != null)
+            {
+                vNombreDepot10 = FUTeclado.FileName;
+                Stream vStream10 = bufferDeposito10.InputStream;
+                BinaryReader vReader10 = new BinaryReader(vStream10);
+                vFileDeposito10 = vReader10.ReadBytes((int)vStream10.Length);
+                vExtension10 = System.IO.Path.GetExtension(FUTeclado.FileName);
+            }
+            String vArchivo10 = String.Empty;
+            if (vFileDeposito10 != null)
+                vArchivo10 = Convert.ToBase64String(vFileDeposito10);
+            try
+            {
+                string vQuery = "STEISP_ATM_ImagenesVerif 1, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo1 + "','" + vArchivo2 + "','" + vArchivo3 + "'," +
+                    "'"+vArchivo4+ "','" + vArchivo5 + "','" + vArchivo6 + "','" + vArchivo7 + "','" + vArchivo8 + "','" + vArchivo9 + "', '" + vArchivo10 + "'";
+                Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                if (vInfo == 1)
+                {
+
+                }
+
+            }
+            catch (Exception Ex)
+            {
+                throw;
+            }
         }
 
         protected void dropantiskimming_TextChanged(object sender, EventArgs e)
@@ -562,25 +760,7 @@ namespace Infatlan_STEI_ATM
        
        
 
-        protected void ddlenergia_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (ddlenergia.SelectedValue == "1")
-                {
-                    DIVImg12.Visible = true;
-                }
-                else
-                {
-                    DIVImg12.Visible = false;
-                }
-            }
-            catch (Exception Ex)
-            {
-
-                
-            }
-        }
+        
 
         protected void btnModalVerif_Click(object sender, EventArgs e)
         {
@@ -601,6 +781,31 @@ namespace Infatlan_STEI_ATM
         protected void btnModalCerrarVerif_Click(object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
+        }
+
+        protected void RBLEnergiaElectrica_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+            if (RBLEnergiaElectrica.SelectedValue == "1")
+            {
+                FUEnergia.Enabled = true;
+            }
+            else
+            {
+                FUEnergia.Enabled = false;
+            }
+        }
+
+        protected void RBLClimatizacion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (RBLClimatizacion.SelectedValue == "1")
+            {
+                FUClimatizacion.Enabled = true;
+            }
+            else
+            {
+                FUClimatizacion.Enabled = false;
+            }
         }
     }
 }

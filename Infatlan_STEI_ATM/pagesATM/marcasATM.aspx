@@ -5,7 +5,7 @@
         function openModal() { $('#modalmarcasATM').modal('show'); }
         function openModal2() { $('#modalmarcas2ATM').modal('show'); }
     </script>
-     <!--PARA CERRAR MODAL-->
+    <!--PARA CERRAR MODAL-->
     <script type="text/javascript">
         function closeModal() { $('#modalmarcasATM').modal('hide'); }
         function closeModal2() { $('#modalmarcas2ATM').modal('hide'); }
@@ -14,8 +14,8 @@
     <link href="/css/GridStyle.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
-    
-     <div class="row page-titles">
+
+    <div class="row page-titles">
         <div class="col-md-5 align-self-center">
             <h4 class="text-themecolor">Ingresar nueva marca</h4>
         </div>
@@ -25,35 +25,35 @@
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Inicio</a></li>
                     <li class="breadcrumb-item active">Ingresar nueva marca</li>
                 </ol>
-               
-            </div> 
+
+            </div>
         </div>
     </div>
     <!--/ENCABEZADO-->
 
-     <div class="card" >
-             <br />
-    <div class="row col-12" style="margin-left:10px; margin-left:10px;">
-            <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-save"></i> Ingresar nueva marca</h3>
+    <div class="card">
+        <br />
+        <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
+            <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-save"></i>Ingresar nueva marca</h3>
         </div>
-         <br />
-         <hr />
-         <br />
-                                           
-                                       <!--DATAGRID-->
+        <br />
+        <hr />
+        <br />
+
+        <!--DATAGRID-->
         <asp:UpdatePanel ID="UpdateDivBusquedas" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
-               <div class="row col-12">
-               <label class="col-3 col-form-label">Marcas creadas</label>
-                   <asp:UpdatePanel runat="server" ID="UpdatePanel2">
-                       <ContentTemplate>
-                           <asp:Button runat="server" ID="btnnewmarcasATM" OnClick="btnnewmarcasATM_Click" CssClass="btn btn-info mr-2" Text="Nuevo" />
-                       </ContentTemplate>
-                   </asp:UpdatePanel>
+                <div class="row col-12">
+                    <label class="col-3 col-form-label">Marcas creadas</label>
+                    <asp:UpdatePanel runat="server" ID="UpdatePanel2">
+                        <ContentTemplate>
+                            <asp:Button runat="server" ID="btnnewmarcasATM" OnClick="btnnewmarcasATM_Click" CssClass="btn btn-info mr-2" Text="Nuevo" />
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </div>
-                 <br />
-         <hr />
-         <br />
+                <br />
+                <hr />
+                <br />
                 <div class="row">
                     <div class="col-12 grid-margin stretch-card">
                         <div class="card" id="212">
@@ -65,7 +65,7 @@
                                                 <asp:GridView ID="GVBusqueda" runat="server"
                                                     CssClass="table table-bordered"
                                                     PagerStyle-CssClass="pgr"
-                                                    HeaderStyle-CssClass="table"  HeaderStyle-HorizontalAlign="center"
+                                                    HeaderStyle-CssClass="table" HeaderStyle-HorizontalAlign="center"
                                                     RowStyle-CssClass="rows"
                                                     AutoGenerateColumns="false"
                                                     AllowPaging="true"
@@ -77,11 +77,11 @@
                                                                 <asp:LinkButton ID="btnmarca" runat="server" CssClass="btn btn-info mr-2" Text="Modificar" CommandArgument='<%# Eval("idMarca") %>' CommandName="Codigo"></asp:LinkButton>
                                                                 <%--<asp:Button ID="BtnUsuarioPassword" runat="server" Text="De baja" CssClass="btn btn-block btn-outline-danger" CommandArgument='<%# Eval("codATM") %>' CommandName="Baja" />--%>
                                                             </ItemTemplate>
-                                                        </asp:TemplateField>                                                     
-                                                        <asp:BoundField DataField="idMarca" HeaderText="Código de marca"  ItemStyle-HorizontalAlign="center" />
-                                                        <asp:BoundField DataField="nombreMarca" HeaderText="Marcas" ItemStyle-HorizontalAlign="center"/>
-                                        
-                                                            
+                                                        </asp:TemplateField>
+                                                        <asp:BoundField DataField="idMarca" HeaderText="Código de marca" ItemStyle-HorizontalAlign="center" />
+                                                        <asp:BoundField DataField="nombreMarca" HeaderText="Marcas" ItemStyle-HorizontalAlign="center" />
+
+
                                                     </Columns>
                                                 </asp:GridView>
                                             </ContentTemplate>
@@ -95,45 +95,45 @@
             </ContentTemplate>
         </asp:UpdatePanel>
         <!--/DATAGRID-->
-         <br />
-         <hr />
-         <br />
-          <!--MODAL GUARDAR tipoATM -->
+        <br />
+        <hr />
+        <br />
+        <!--MODAL GUARDAR tipoATM -->
         <div class="modal bs-example-modal-lg" id="modalmarcasATM" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="myLargeModalLabel">¿Seguro que modificará la marca?</h4>                       
+                        <h4 class="modal-title" id="myLargeModalLabel">¿Seguro que modificará la marca?</h4>
                     </div>
-                     <asp:UpdatePanel ID="UpdatePanel1" Runat="server">
-            <ContentTemplate>
-                    <div class="row col-12">
-                        <asp:label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Código de marca: </strong></asp:label>
-                        <asp:label runat="server" BorderStyle="None" ID="lbcodmarcaATM" class="col form-control col-6"></asp:label>
-                    </div>
-                 <div class="row col-12">
-                        <asp:label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Marca: </strong></asp:label>
-                        <asp:label runat="server" BorderStyle="None" ID="lbNombremarcaATM" class="col form-control col-6"></asp:label>
-                    </div>   
-                <div class="row col-12">
-                        <asp:label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Nueva Marca: </strong></asp:label>
-                        <asp:TextBox runat="server" ID="txtModalNewMarcaATM" CssClass="form-control col-6"></asp:TextBox>
-                    </div>   
-                <div class="col-md-8 align-self-center" style="margin-left:auto; margin-right:auto">
-                    <asp:label runat="server" style="color:red;" Visible="false"  borderstyle="none" ID="lbmarca1" CssClass="col form-control" ><strong></strong></asp:label>
-                    </div>
-                </ContentTemplate>
-                         </asp:UpdatePanel>
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                        <ContentTemplate>
+                            <div class="row col-12">
+                                <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Código de marca: </strong></asp:Label>
+                                <asp:Label runat="server" BorderStyle="None" ID="lbcodmarcaATM" class="col form-control col-6"></asp:Label>
+                            </div>
+                            <div class="row col-12">
+                                <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Marca: </strong></asp:Label>
+                                <asp:Label runat="server" BorderStyle="None" ID="lbNombremarcaATM" class="col form-control col-6"></asp:Label>
+                            </div>
+                            <div class="row col-12">
+                                <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Nueva Marca: </strong></asp:Label>
+                                <asp:TextBox runat="server" ID="txtModalNewMarcaATM" CssClass="form-control col-6"></asp:TextBox>
+                            </div>
+                            <div class="col-md-8 align-self-center" style="margin-left: auto; margin-right: auto">
+                                <asp:Label runat="server" Style="color: red;" Visible="false" BorderStyle="none" ID="lbmarca1" CssClass="col form-control"><strong></strong></asp:Label>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                     <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                         <ContentTemplate>
                             <div class="modal-footer col-12">
                                 <div class="row col-3">
-                                <asp:Button runat="server" ID="btnModalEnviarMarcaATM" OnClick="btnModalEnviarMarcaATM_Click" CssClass="btn btn-success mr-2" Text="Modificar" />
+                                    <asp:Button runat="server" ID="btnModalEnviarMarcaATM" OnClick="btnModalEnviarMarcaATM_Click" CssClass="btn btn-success mr-2" Text="Modificar" />
                                 </div>
-                                 <div class="row col-3">
-                                <asp:Button runat="server" ID="btnModalCerrarMarcaATM" OnClick="btnModalCerrarMarcaATM_Click"  CssClass="btn btn-danger mr-2" Text="Cancelar" />
+                                <div class="row col-3">
+                                    <asp:Button runat="server" ID="btnModalCerrarMarcaATM" OnClick="btnModalCerrarMarcaATM_Click" CssClass="btn btn-danger mr-2" Text="Cancelar" />
                                 </div>
-                                </div>
+                            </div>
                         </ContentTemplate>
                     </asp:UpdatePanel>
 
@@ -144,34 +144,34 @@
         </div>
         <!-- /MODAL GUARDAR tipoATM -->
 
-          <!--MODAL NUEVA MODELOATM -->
+        <!--MODAL NUEVA MODELOATM -->
         <div class="modal bs-example-modal-lg" id="modalmarcas2ATM" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="myLargeModalLabel1">Nueva marca</h4>                       
+                        <h4 class="modal-title" id="myLargeModalLabel1">Nueva marca</h4>
                     </div>
-                     <asp:UpdatePanel ID="UpdatePanel3" Runat="server">
-            <ContentTemplate>                   
-                 <div class="row col-12">
-                        <asp:label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Nueva marca: </strong></asp:label>
-                        <asp:TextBox runat="server" ID="txtNewMarcaATM" CssClass="form-control col-6"></asp:TextBox>
-                    </div>     
-                <div class="col-md-8 align-self-center" style="margin-left:auto; margin-right:auto">
-                    <asp:label runat="server" style="color:red;" Visible="false"  borderstyle="none" ID="lbmarca2" CssClass="col form-control" ><strong></strong></asp:label>
-                    </div>
-                </ContentTemplate>
-                         </asp:UpdatePanel>
+                    <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                        <ContentTemplate>
+                            <div class="row col-12">
+                                <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Nueva marca: </strong></asp:Label>
+                                <asp:TextBox runat="server" ID="txtNewMarcaATM" CssClass="form-control col-6"></asp:TextBox>
+                            </div>
+                            <div class="col-md-8 align-self-center" style="margin-left: auto; margin-right: auto">
+                                <asp:Label runat="server" Style="color: red;" Visible="false" BorderStyle="none" ID="lbmarca2" CssClass="col form-control"><strong></strong></asp:Label>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                     <asp:UpdatePanel ID="UpdatePanel5" runat="server">
                         <ContentTemplate>
                             <div class="modal-footer col-12">
                                 <div class="row col-3">
-                                <asp:Button runat="server" ID="btnModalNueviMarcaATM" OnClick="btnModalNueviMarcaATM_Click" CssClass="btn btn-success mr-2" Text="Agregar" />
+                                    <asp:Button runat="server" ID="btnModalNueviMarcaATM" OnClick="btnModalNueviMarcaATM_Click" CssClass="btn btn-success mr-2" Text="Agregar" />
                                 </div>
-                                 <div class="row col-3">
-                                <asp:Button runat="server" ID="btnModalCerrarNueviMarcaATM" OnClick="btnModalCerrarNueviMarcaATM_Click"  CssClass="btn btn-danger mr-2" Text="Cancelar" />
+                                <div class="row col-3">
+                                    <asp:Button runat="server" ID="btnModalCerrarNueviMarcaATM" OnClick="btnModalCerrarNueviMarcaATM_Click" CssClass="btn btn-danger mr-2" Text="Cancelar" />
                                 </div>
-                                </div>
+                            </div>
                         </ContentTemplate>
                     </asp:UpdatePanel>
 
@@ -183,7 +183,7 @@
         <!-- /MODAL NUEVA MODELOATM -->
 
 
-         </div>
+    </div>
 
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Script" runat="server">
