@@ -134,6 +134,9 @@ namespace Infatlan_STEI_ATM.pagesATM
                             lbModalNomATM.Text = item["NomATM"].ToString();                            
                             lbModalFechaMan.Text = Convert.ToDateTime(item["FechaMantenimiento"]).ToString("yyyy/MM/dd");                           
                             lbModalCodATM.Text = item["Codigo"].ToString();
+                            lbQuienCancelo.Text= item["CanceladoPor"].ToString();
+                            lbMotivoCancelo.Text= item["NCancelar"].ToString();
+                            lbdetalle.Text= item["DetMotivo"].ToString();
                         }
                         TxBuscarTecnicoATM.Text = string.Empty;
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal();", true);

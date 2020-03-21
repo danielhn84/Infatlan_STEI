@@ -384,30 +384,66 @@
                 <br />
                 <br />
                 <div class="row col-5">
-                    <asp:CheckBoxList ID="ckpasos1" runat="server" class="check green" data-checkbox="icheckbox_flat-green">
-                        <asp:ListItem Value="1" Text="1. Verificar que ATM este en servicio antes de apagarlo"></asp:ListItem>
-                        <asp:ListItem Value="2" Text="2. Solicitar al encargado del ATM sacar contadores"></asp:ListItem>
-                        <asp:ListItem Value="3" Text="3. Solicitar al encargado del ATM sacar maleta"></asp:ListItem>
-                        <asp:ListItem Value="4" Text="4. Apagar ATM de forma correcta"></asp:ListItem>
-                        <asp:ListItem Value="5" Text="5. Retirar CPU"></asp:ListItem>
-                        <asp:ListItem Value="6" Text="6. Retirar Monitor"></asp:ListItem>
-                        <asp:ListItem Value="7" Text="7. Retirar la lectora"></asp:ListItem>
-                        <asp:ListItem Value="8" Text="8. Retirar presentador"></asp:ListItem>
-                        <asp:ListItem Value="9" Text="9. Limpieza de stacker"></asp:ListItem>
+                    <asp:CheckBoxList ID="ckpasos1" runat="server" class="check green col-12" data-checkbox="icheckbox_flat-green">
+                        <asp:ListItem Value="1" Text="1. Verificar que ATM este en servicio antes de apagarlo"></asp:ListItem>                       
+                    </asp:CheckBoxList>
+                    <asp:CheckBoxList ID="ckpasos2" runat="server" class="check green col-12" data-checkbox="icheckbox_flat-green">                       
+                        <asp:ListItem Value="2" Text="2. Solicitar al encargado del ATM sacar contadores"></asp:ListItem>                       
+                    </asp:CheckBoxList>
+                    <asp:CheckBoxList ID="ckpasos3" runat="server" class="check green col-12" data-checkbox="icheckbox_flat-green">                       
+                        <asp:ListItem Value="3" Text="3. Solicitar al encargado del ATM sacar maleta"></asp:ListItem>                       
+                    </asp:CheckBoxList>
+                     <asp:CheckBoxList ID="ckpasos4" runat="server" class="check green col-12" data-checkbox="icheckbox_flat-green">                                               
+                        <asp:ListItem Value="4" Text="4. Apagar ATM de forma correcta"></asp:ListItem>                   
+                    </asp:CheckBoxList>
+                    <asp:CheckBoxList ID="ckpasos5" runat="server" class="check green col-12" data-checkbox="icheckbox_flat-green">                                                                      
+                        <asp:ListItem Value="5" Text="5. Retirar CPU"></asp:ListItem>                       
+                    </asp:CheckBoxList>
+                     <asp:CheckBoxList ID="ckpasos6" runat="server" class="check green col-12" data-checkbox="icheckbox_flat-green">                                                                                             
+                        <asp:ListItem Value="6" Text="6. Retirar Monitor"></asp:ListItem>                       
+                    </asp:CheckBoxList>
+                     <asp:CheckBoxList ID="ckpasos7" runat="server" class="check green col-12" data-checkbox="icheckbox_flat-green">                                                                                                                     
+                        <asp:ListItem Value="7" Text="7. Retirar la lectora"></asp:ListItem>                       
+                    </asp:CheckBoxList>
+                    <asp:CheckBoxList ID="ckpasos8" runat="server" class="check green col-12" data-checkbox="icheckbox_flat-green">                                                                                                                     
+                        <asp:ListItem Value="8" Text="8. Retirar presentador"></asp:ListItem>                      
+                    </asp:CheckBoxList>
+                    <asp:CheckBoxList ID="ckpasos9" runat="server" class="check green col-12" data-checkbox="icheckbox_flat-green">                                                                                                                                            
+                        <asp:ListItem Value="9" Text="9. Limpieza de stacker"></asp:ListItem>                    
+                    </asp:CheckBoxList>
+                     <asp:CheckBoxList ID="ckpasos10" runat="server" class="check green col-12" data-checkbox="icheckbox_flat-green">                                                                                                                                                                   
                         <asp:ListItem Value="10" Text="10. Limpieza de pickers"></asp:ListItem>
                     </asp:CheckBoxList>
                 </div>
                 <div class="row col-7">
-                    <asp:CheckBoxList ID="ckpasos2" runat="server" class="check green" data-checkbox="icheckbox_flat-green">
-                        <asp:ListItem Value="11" Text="11. Sopletear todos los dispositivos"></asp:ListItem>
+                    <asp:CheckBoxList ID="ckpasos11" runat="server" class="check green col-12" data-checkbox="icheckbox_flat-green">
+                        <asp:ListItem Value="11" Text="11. Sopletear todos los dispositivos"></asp:ListItem>                      
+                    </asp:CheckBoxList>
+                     <asp:CheckBoxList ID="ckpasos12" runat="server" class="check green col-12" data-checkbox="icheckbox_flat-green">                       
                         <asp:ListItem Value="12" Text="12. Limpieza general por cada dispositivo"></asp:ListItem>
-                        <asp:ListItem Value="13" Text="13. Limpieza de pantalla con espuma"></asp:ListItem>
+                    </asp:CheckBoxList>
+                     <asp:CheckBoxList ID="ckpasos13" runat="server" class="check green col-12" data-checkbox="icheckbox_flat-green">                                               
+                        <asp:ListItem Value="13" Text="13. Limpieza de pantalla con espuma"></asp:ListItem>                       
+                    </asp:CheckBoxList>
+                     <asp:CheckBoxList ID="ckpasos14" runat="server" class="check green col-12" data-checkbox="icheckbox_flat-green">                                                                      
                         <asp:ListItem Value="14" Text="14. Realizar cambios de repuesto"></asp:ListItem>
-                        <asp:ListItem Value="15" Text="15. Armar ATM"></asp:ListItem>
-                        <asp:ListItem Value="16" Text="16. Encender ATM"></asp:ListItem>
+                    </asp:CheckBoxList>
+                    <asp:CheckBoxList ID="ckpasos15" runat="server" class="check green col-12" data-checkbox="icheckbox_flat-green">                                                                                              
+                        <asp:ListItem Value="15" Text="15. Armar ATM"></asp:ListItem>                       
+                    </asp:CheckBoxList>
+                    <asp:CheckBoxList ID="ckpasos16" runat="server" class="check green col-12" data-checkbox="icheckbox_flat-green">                                                                                                                      
+                        <asp:ListItem Value="16" Text="16. Encender ATM"></asp:ListItem>                      
+                    </asp:CheckBoxList>
+                    <asp:CheckBoxList ID="ckpasos17" runat="server" class="check green col-12" data-checkbox="icheckbox_flat-green">                                                                                                                                              
                         <asp:ListItem Value="17" Text="17. Solicitar que ingresen maletas"></asp:ListItem>
-                        <asp:ListItem Value="18" Text="18. Pruebas con los dospositivos(en el vendor)"></asp:ListItem>
-                        <asp:ListItem Value="19" Text="19. Dejar en servicio el ATM"></asp:ListItem>
+                    </asp:CheckBoxList>
+                     <asp:CheckBoxList ID="ckpasos18" runat="server" class="check green col-12" data-checkbox="icheckbox_flat-green">                                                                                                                                                                     
+                        <asp:ListItem Value="18" Text="18. Pruebas con los dospositivos(en el vendor)"></asp:ListItem>                     
+                    </asp:CheckBoxList>
+                     <asp:CheckBoxList ID="ckpasos19" runat="server" class="check green col-12" data-checkbox="icheckbox_flat-green">                                                                                                                                                                                            
+                        <asp:ListItem Value="19" Text="19. Dejar en servicio el ATM"></asp:ListItem>                       
+                    </asp:CheckBoxList>
+                     <asp:CheckBoxList ID="ckpasos20" runat="server" class="check green col-12" data-checkbox="icheckbox_flat-green">                                                                                                                                                                                             
                         <asp:ListItem Value="20" Text="20. Contractarse con personal de ATM y verificar que camaras están en linea"></asp:ListItem>
                     </asp:CheckBoxList>
                 </div>
@@ -593,10 +629,11 @@
                             <tr>
                                 <td class="title"><a class="link" href="javascript:void(0)">Disco duro</a></td>
                                 <td>
-                                    <asp:RadioButtonList ID="RBLDiscoDuro" runat="server" CssClass="custom-checkbox" BorderStyle="None" Enabled="false" RepeatDirection="Horizontal">
+                                    <asp:RadioButtonList ID="RBLDiscoDuro" runat="server" class="check" data-radio="iradio_square-red" Enabled="false" RepeatDirection="Horizontal">
                                         <asp:ListItem Value="1" Text="Si"></asp:ListItem>
                                         <asp:ListItem Value="2" Text="No"></asp:ListItem>
                                     </asp:RadioButtonList>
+                                    <%--<input type="radio" class="check" id="square-radio-1" name="square-radio" data-radio="iradio_square-red">--%>
                                 </td>
                                 <td>
                                     <asp:FileUpload ID="FUDiscoDuro" runat="server" onchange="img1(this);" /></td>

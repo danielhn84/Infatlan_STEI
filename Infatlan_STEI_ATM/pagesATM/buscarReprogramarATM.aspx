@@ -158,6 +158,18 @@
                                 <asp:Label runat="server" BorderStyle="none" class="col form-control col-6"><strong>Fecha de mantenimiento: </strong></asp:Label>
                                 <asp:Label runat="server" BorderStyle="none" ID="lbModalFechaMan" class="col form-control col-6"></asp:Label>
                             </div>
+                             <div class="row col-12">
+                                <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Motivo cancelación: </strong></asp:Label>
+                                <asp:Label runat="server" BorderStyle="none" ID="lbMotivoCancelo" class="col form-control col-6"></asp:Label>
+                            </div>
+                             <div class="row col-12">
+                                <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Quien canceló: </strong></asp:Label>
+                                <asp:Label runat="server" BorderStyle="none" ID="lbQuienCancelo" class="col form-control col-6"></asp:Label>
+                            </div>
+                             <div class="row col-12">
+                                <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Detalle cancelación: </strong></asp:Label>
+                                <asp:Label runat="server" BorderStyle="none" ID="lbdetalle" class="col form-control col-6"></asp:Label>
+                            </div>
                             <div class="row col-12">
                                 <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Nueva fecha mantenimiento: </strong></asp:Label>
                                 <asp:TextBox ID="txtNewFechaInicio" AutoPostBack="true" placeholder="1900-12-31" CssClass="form-control col-6" runat="server" TextMode="Date"></asp:TextBox>

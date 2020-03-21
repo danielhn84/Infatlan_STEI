@@ -105,6 +105,33 @@ namespace Infatlan_STEI_ATM.pagesATM
         protected global::System.Web.UI.WebControls.Label lbModalFechaMan;
 
         /// <summary>
+        /// Control lbMotivoCancelo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbMotivoCancelo;
+
+        /// <summary>
+        /// Control lbQuienCancelo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbQuienCancelo;
+
+        /// <summary>
+        /// Control lbdetalle.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbdetalle;
+
+        /// <summary>
         /// Control txtNewFechaInicio.
         /// </summary>
         /// <remarks>

@@ -382,152 +382,239 @@ namespace Infatlan_STEI_ATM
 
         void PreguntasVerif()
         {
-            //string usu = "acedillo";
-            string comentario = null;
-            string respuesta = "";
+            
+            string respuesta1 = null;
+            string respuesta2 = null;
+            string respuesta3 = null;
+            string respuesta4 = null;
+            string respuesta5 = null;
+            string respuesta6 = null;
+            string respuesta7 = null;
+            string respuesta8 = null;
+            string respuesta9 = null;
+            string respuesta10 = null;
+            string respuesta11 = null;
+            string respuesta12 = null;
+            string respuesta13 = null;
+            string respuesta14 = null;
+            string respuesta15 = null;
+            string respuesta16 = null;
+            string respuesta17 = null;
+            string respuesta18 = null;
+            string respuesta19 = null;
+            string respuesta20 = null;
             for (int i = 0; i < ckpasos1.Items.Count; i++)
             {
-
-                if (ckpasos1.Items[i].Selected)
-                {
-                     respuesta = "Si";
-                }
+                if (ckpasos1.Items[i].Selected)               
+                    respuesta1 = "Si";
                 else
-                {
-                     respuesta = "No";
-                }
-                try
-                {                                
-                    string vQuery = "STEISP_ATM_ListaVerificacion 1, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + ckpasos1.Items[i].Value + "','" + respuesta + "','" + comentario + "'";
+                    respuesta1 = "No";               
+            }
+            ////////////////////////////////////////////////////////////
+            for (int i = 0; i < ckpasos2.Items.Count; i++)
+            {
+                if (ckpasos2.Items[i].Selected)
+                    respuesta2 = "Si";
+                else
+                    respuesta2 = "No";
+            }
+            ////////////////////////////////////////////////////////////
+            for (int i = 0; i < ckpasos3.Items.Count; i++)
+            {
+                if (ckpasos3.Items[i].Selected)
+                    respuesta3 = "Si";
+                else
+                    respuesta3 = "No";
+            }
+            ////////////////////////////////////////////////////////////
+            for (int i = 0; i < ckpasos4.Items.Count; i++)
+            {
+                if (ckpasos4.Items[i].Selected)
+                    respuesta4 = "Si";
+                else
+                    respuesta4 = "No";
+            }
+            ////////////////////////////////////////////////////////////
+            for (int i = 0; i < ckpasos5.Items.Count; i++)
+            {
+                if (ckpasos5.Items[i].Selected)
+                    respuesta5 = "Si";
+                else
+                    respuesta5 = "No";
+            }
+            ////////////////////////////////////////////////////////////
+            for (int i = 0; i < ckpasos6.Items.Count; i++)
+            {
+                if (ckpasos6.Items[i].Selected)
+                    respuesta6 = "Si";
+                else
+                    respuesta6 = "No";
+            }
+            ////////////////////////////////////////////////////////////
+            for (int i = 0; i < ckpasos7.Items.Count; i++)
+            {
+                if (ckpasos7.Items[i].Selected)
+                    respuesta7 = "Si";
+                else
+                    respuesta7 = "No";
+            }
+            ////////////////////////////////////////////////////////////
+            for (int i = 0; i < ckpasos8.Items.Count; i++)
+            {
+                if (ckpasos8.Items[i].Selected)
+                    respuesta8 = "Si";
+                else
+                    respuesta8 = "No";
+            }
+            ////////////////////////////////////////////////////////////
+            for (int i = 0; i < ckpasos9.Items.Count; i++)
+            {
+                if (ckpasos9.Items[i].Selected)
+                    respuesta9 = "Si";
+                else
+                    respuesta9 = "No";
+            }
+            ////////////////////////////////////////////////////////////
+            for (int i = 0; i < ckpasos10.Items.Count; i++)
+            {
+                if (ckpasos10.Items[i].Selected)
+                    respuesta10 = "Si";
+                else
+                    respuesta10 = "No";
+            }
+            ////////////////////////////////////////////////////////////
+            for (int i = 0; i < ckpasos11.Items.Count; i++)
+            {
+                if (ckpasos11.Items[i].Selected)
+                    respuesta11 = "Si";
+                else
+                    respuesta11 = "No";
+            }
+            ////////////////////////////////////////////////////////////
+            for (int i = 0; i < ckpasos12.Items.Count; i++)
+            {
+                if (ckpasos12.Items[i].Selected)
+                    respuesta12 = "Si";
+                else
+                    respuesta12 = "No";
+            }
+            ////////////////////////////////////////////////////////////
+            for (int i = 0; i < ckpasos13.Items.Count; i++)
+            {
+                if (ckpasos13.Items[i].Selected)
+                    respuesta13 = "Si";
+                else
+                    respuesta13 = "No";
+            }
+            ////////////////////////////////////////////////////////////
+            for (int i = 0; i < ckpasos14.Items.Count; i++)
+            {
+                if (ckpasos14.Items[i].Selected)
+                    respuesta14 = "Si";
+                else
+                    respuesta14 = "No";
+            }
+            ////////////////////////////////////////////////////////////
+            for (int i = 0; i < ckpasos15.Items.Count; i++)
+            {
+                if (ckpasos15.Items[i].Selected)
+                    respuesta15 = "Si";
+                else
+                    respuesta15 = "No";
+            }
+            ////////////////////////////////////////////////////////////
+            for (int i = 0; i < ckpasos16.Items.Count; i++)
+            {
+                if (ckpasos16.Items[i].Selected)
+                    respuesta16 = "Si";
+                else
+                    respuesta16 = "No";
+            }
+            ////////////////////////////////////////////////////////////
+            for (int i = 0; i < ckpasos17.Items.Count; i++)
+            {
+                if (ckpasos17.Items[i].Selected)
+                    respuesta17 = "Si";
+                else
+                    respuesta17 = "No";
+            }
+            ////////////////////////////////////////////////////////////
+            for (int i = 0; i < ckpasos18.Items.Count; i++)
+            {
+                if (ckpasos18.Items[i].Selected)
+                    respuesta18 = "Si";
+                else
+                    respuesta18 = "No";
+            }
+            ////////////////////////////////////////////////////////////
+            for (int i = 0; i < ckpasos19.Items.Count; i++)
+            {
+                if (ckpasos19.Items[i].Selected)
+                    respuesta19 = "Si";
+                else
+                    respuesta19 = "No";
+            }
+            ////////////////////////////////////////////////////////////
+            for (int i = 0; i < ckpasos20.Items.Count; i++)
+            {
+                if (ckpasos20.Items[i].Selected)
+                    respuesta20 = "Si";
+                else
+                    respuesta20 = "No";
+            }
+            //IMAGENES1
+            String vNombreDepot1 = String.Empty;
+            HttpPostedFile bufferDeposito1T = FUClimatizacion.PostedFile;
+            byte[] vFileDeposito1 = null;
+            string vExtension = string.Empty;
+
+            if (bufferDeposito1T != null)
+            {
+                vNombreDepot1 = FUClimatizacion.FileName;
+                Stream vStream = bufferDeposito1T.InputStream;
+                BinaryReader vReader = new BinaryReader(vStream);
+                vFileDeposito1 = vReader.ReadBytes((int)vStream.Length);
+                vExtension = System.IO.Path.GetExtension(FUClimatizacion.FileName);
+            }
+            String vArchivo = String.Empty;
+            if (vFileDeposito1 != null)
+                vArchivo = Convert.ToBase64String(vFileDeposito1);
+            /////////////////////////////////////////////////////////////////////
+            //IMAGENES2
+            String vNombreDepot2 = String.Empty;
+            HttpPostedFile bufferDeposito2 = FUEnergia.PostedFile;
+            byte[] vFileDeposito2 = null;
+            string vExtension2 = string.Empty;
+
+            if (bufferDeposito2 != null)
+            {
+                vNombreDepot2 = FUEnergia.FileName;
+                Stream vStream2 = bufferDeposito2.InputStream;
+                BinaryReader vReader2 = new BinaryReader(vStream2);
+                vFileDeposito2 = vReader2.ReadBytes((int)vStream2.Length);
+                vExtension2 = System.IO.Path.GetExtension(FUEnergia.FileName);
+            }
+            String vArchivo2 = String.Empty;
+            if (vFileDeposito2 != null)
+                vArchivo2 = Convert.ToBase64String(vFileDeposito2);
+            /////////////////////////////////////////////////////////////////////
+            try
+            {                                
+                    string vQuery = "STEISP_ATM_ListaVerificacion 1, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + respuesta1 + "','" + respuesta2 + "'," +
+                    "'" + respuesta3 + "','"+ respuesta4 + "','" + respuesta5 + "','" + respuesta6 + "'," +
+                    "'" + respuesta7 + "','" + respuesta8 + "','" + respuesta9 + "','" + respuesta10 + "'," +
+                    "'" + respuesta11 + "','" + respuesta12 + "','" + respuesta13 + "','" + respuesta14 + "'," +
+                    "'" + respuesta15 + "','" + respuesta16 + "','" + respuesta17 + "','" + respuesta18 + "'," +
+                    "'" + respuesta19 + "','" + respuesta20 + "','"+RBLClimatizacion.SelectedItem.Text +"','"+vArchivo+"'," +
+                    "'"+RBLEnergiaElectrica.SelectedItem.Text+"','"+vArchivo2+"','"+dropantiskimming.SelectedItem.Text+"','"+txtantiSkimming.Text+"'";
                     Int32 vInfo = vConexion.ejecutarSQL(vQuery);                                  
                 }
                 catch (Exception Ex)
                 {
                    throw;
                 }
-            }
-
             
-
-
-            for (int i = 0; i < ckpasos2.Items.Count; i++)
-            {
-
-                if (ckpasos2.Items[i].Selected)
-                {
-                    respuesta = "Si";
-                }
-                else
-                {
-                    respuesta = "No";
-                }
-                try
-                {
-                    string vQuery = "STEISP_ATM_ListaVerificacion 1, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + ckpasos2.Items[i].Value + "','" + respuesta + "','" + comentario + "'";
-                    Int32 vInfo = vConexion.ejecutarSQL(vQuery);
-                    if (vInfo == 1)
-                    {
-
-                    }
-
-                }
-                catch (Exception Ex)
-                {
-                    throw;
-                }
-            }
-
-        }
-
-        void PreguntasTxt_Img()
-        { 
-            try
-            {
-                string NumPregunta = "21";
-                string vQuery = "STEISP_ATM_ListaVerificacion 2, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + NumPregunta + "','" + dropantiskimming.SelectedItem.Text + "','" + txtantiSkimming.Text + "'";
-                Int32 vInfo = vConexion.ejecutarSQL(vQuery);
-                if (vInfo == 1)
-                {                  
-                    Mensaje("Lista de verificación ingresada con éxito", WarningType.Success);                  
-                }
-
-            }
-            catch (Exception Ex)
-            {
-                throw;
-            }
-
-
-                //IMAGENES1
-                String vNombreDepot1 = String.Empty;
-                HttpPostedFile bufferDeposito1T = FUClimatizacion.PostedFile;
-                byte[] vFileDeposito1 = null;
-                string vExtension = string.Empty;
-
-                if (bufferDeposito1T != null)
-                {
-                    vNombreDepot1 = FUClimatizacion.FileName;
-                    Stream vStream = bufferDeposito1T.InputStream;
-                    BinaryReader vReader = new BinaryReader(vStream);
-                    vFileDeposito1 = vReader.ReadBytes((int)vStream.Length);
-                    vExtension = System.IO.Path.GetExtension(FUClimatizacion.FileName);
-                }
-                String vArchivo = String.Empty;
-                if (vFileDeposito1 != null)
-                    vArchivo = Convert.ToBase64String(vFileDeposito1);
-            try
-            {
-                string NumPregunta = "22";
-                string vQuery = "STEISP_ATM_ListaVerificacion 3, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + NumPregunta + "','" + RBLClimatizacion.SelectedItem.Text + "','" + vArchivo + "'";
-                Int32 vInfo = vConexion.ejecutarSQL(vQuery);
-                if (vInfo == 1)
-                {
-                    
-                }
-
-            }
-             catch (Exception Ex)
-            {
-                   throw;
-            }
-
-
-                //IMAGENES2
-                String vNombreDepot2 = String.Empty;
-                HttpPostedFile bufferDeposito2 = FUEnergia.PostedFile;
-                byte[] vFileDeposito2 = null;
-                string vExtension2 = string.Empty;
-
-                if (bufferDeposito2 != null)
-                {
-                    vNombreDepot2 = FUEnergia.FileName;
-                    Stream vStream2 = bufferDeposito2.InputStream;
-                    BinaryReader vReader2 = new BinaryReader(vStream2);
-                    vFileDeposito2 = vReader2.ReadBytes((int)vStream2.Length);
-                    vExtension2 = System.IO.Path.GetExtension(FUEnergia.FileName);
-                }
-                String vArchivo2 = String.Empty;
-                if (vFileDeposito2 != null)
-                    vArchivo2 = Convert.ToBase64String(vFileDeposito2);
-                try
-                {
-                    string NumPregunta = "23";
-                    string vQuery = "STEISP_ATM_ListaVerificacion 3, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + NumPregunta + "','" + RBLEnergiaElectrica.SelectedItem.Text + "','" + vArchivo2 + "'";
-                    Int32 vInfo = vConexion.ejecutarSQL(vQuery);
-                    if (vInfo == 1)
-                    {
-                    Mensaje("Lista de verificación ingresada con éxito", WarningType.Success);
-                }
-
-                }
-                catch (Exception Ex)
-                {
-                    throw;
-                }
-
            
-
-            //  if (FileUpload1.HasFile)--VERIFICAR SI TIENE IMAGEN
         }
 
         void ImgVerificacion()
@@ -769,8 +856,8 @@ namespace Infatlan_STEI_ATM
                 
                 ActualizarATM();
                 ActualizarVerifATM();
-                PreguntasVerif();
-                PreguntasTxt_Img();
+                ImgVerificacion();
+                PreguntasVerif();               
             }
             catch (Exception Ex)
             {
