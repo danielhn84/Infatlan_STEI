@@ -828,9 +828,9 @@
                 </div>
 
             </ContentTemplate>
-                    <%--<Triggers>
+                    <Triggers>
                         <asp:PostBackTrigger ControlID="btnEnviarVerif" />
-                    </Triggers>--%>
+                    </Triggers>
         </asp:UpdatePanel>
         <br />
         <br />
@@ -879,9 +879,9 @@
                             </div>
                         </div>
                     </ContentTemplate>
-                    <Triggers>
+                   <%-- <Triggers>
                         <asp:PostBackTrigger ControlID="btnModalVerif" />
-                    </Triggers>
+                    </Triggers>--%>
                 </asp:UpdatePanel>
 
             </div>

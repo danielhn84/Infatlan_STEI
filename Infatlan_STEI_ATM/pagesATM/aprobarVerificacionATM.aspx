@@ -575,11 +575,7 @@
                         <div class="row col-4">
                             <label class="col-form-label col-12">¿Lectora tiene antiskimming?</label>
                             <div class="row col-12">
-                                <asp:DropDownList AutoPostBack="true" Enabled="false" ID="dropantiskimming" CssClass="form-control col-12" runat="server">
-                                    <asp:ListItem Value="0" Text="Seleccione opción..."></asp:ListItem>
-                                    <asp:ListItem Value="1" Text="Si"></asp:ListItem>
-                                    <asp:ListItem Value="2" Text="No"></asp:ListItem>
-                                </asp:DropDownList>
+                                <asp:TextBox runat="server" ID="txtPreguntaAntiskimming" CssClass="form-control" Enabled="false"></asp:TextBox>
                             </div>
                         </div>
 
@@ -632,8 +628,10 @@
                                 <td>
                                     <asp:FileUpload ID="FUDiscoDuro" Enabled="false" runat="server" onchange="img1(this);" /></td>
                                 <td>
-                                    <img id="imgDiscoDuro" height="100" width="100" src="" style="border-width: 0px; visibility: hidden;" /></td>
-
+                                    <%--<img id="imgDiscoDuro" height="100" width="100" src="" style="border-width: 0px; visibility: hidden;" />--%>
+                                    <asp:Image ID="imgDiscoDuro" runat="server" height="100" width="100" src="" style="border-width: 0px; visibility: hidden;"></asp:Image>
+                                </td>
+                                
                             </tr>
                             <tr>
                                 <td class="title"><a class="link" href="javascript:void(0)">ATM desarmado parte superior (limpiar)</a></td>
@@ -810,7 +808,7 @@
             <label class="col-form-label">Observaciones y Comentarios</label>
             <br />
             <div class="row col-11 align-self-center">
-                <asp:TextBox runat="server" ID="txtobseracionesVerif" TextMode="MultiLine" Rows="3" PlaceHolder="Ingrese su comentario..." CssClass="form-control col-12"></asp:TextBox>
+                <asp:TextBox runat="server" ID="txtobseracionesVerif" Enabled="false" TextMode="MultiLine" Rows="3" PlaceHolder="Ingrese su comentario..." CssClass="form-control col-12"></asp:TextBox>
             </div>
         </div>
         <br />
@@ -884,6 +882,39 @@
         <!--/.modal-dialog -->
     </div>
     <!-- /MODAL VERIF ATM -->
+
+    <!--MODAL IMAGENES-->
+    <div class="modal bs-example-modal-lg" id="modalVerifIMGATM" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 runat="server" class="modal-title" id="h4Pregunta"></h4>
+                </div>
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                    <ContentTemplate>
+                        <div class="row col-12">
+                            <img id="imgModal" height="400" width="400" src="" style="border-width: 0px; visibility: hidden;" /></td>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+                <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+                    <ContentTemplate>
+                        <div class="modal-footer col-12">                          
+                                <asp:Button runat="server" ID="btnCerrarImg" CssClass="btn btn-danger mr-3" Text="Cerrar" />
+                            </div>
+                        </div>
+                    </ContentTemplate>
+                    <Triggers>
+                        <asp:PostBackTrigger ControlID="btnModalVerif" />
+                    </Triggers>
+                </asp:UpdatePanel>
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!--/.modal-dialog -->
+    </div>
+    <!-- /MODAL IMAGENES -->
 
 </asp:Content>
 

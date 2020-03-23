@@ -313,11 +313,11 @@ namespace Infatlan_STEI_ATM
         {
             try
             {
-                validar();
-                //ActualizarATM();
-                //ActualizarVerifATM();
-                //PreguntasVerif();
-                //PreguntasTxt_Img();
+                //validar();
+                ActualizarATM();
+                ActualizarVerifATM();
+                ImgVerificacion();
+                PreguntasVerif();
                 lbcodATM.Text = txtcodATM.Text;
                 lbNombreATM.Text = txtnomATM.Text;
                 lbsucursalATM.Text = txtsucursal.Text;
