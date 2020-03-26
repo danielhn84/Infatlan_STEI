@@ -11,7 +11,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Configuration;
 
-namespace Infatlan_STEI_Inventario.pages
+namespace Infatlan_STEI_Inventario.pages.Configuracion
 {
     public partial class marcas : System.Web.UI.Page
     {
