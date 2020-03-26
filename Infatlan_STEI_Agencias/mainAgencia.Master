@@ -1,0 +1,174 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="mainAgencia.Master.cs" Inherits="Infatlan_STEI.main" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/logo_mini.png">
+    <title>Infatlan - STEI</title>
+    <link href="/assets/node_module/morrisjs/morris.css" rel="stylesheet">
+    <link href="/assets/node_module/toast-master/css/jquery.toast.css" rel="stylesheet">
+    <link href="/css/style.min.css" rel="stylesheet">
+    <link href="/css/animate.min.css" rel="stylesheet" />
+    <link href="/css/pages/dashboard1.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link href="/your-path-to-fontawesome/css/fontawesome.css" rel="stylesheet">
+  <link href="/your-path-to-fontawesome/css/brands.css" rel="stylesheet">
+  <link href="/your-path-to-fontawesome/css/solid.css" rel="stylesheet">
+
+      <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="css/ruang-admin.min.css" rel="stylesheet">
+
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>     
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> 
+
+
+
+    <script type="text/javascript"> 
+        infatlan = {
+            showNotification: function (from, align, mensaje, tipo) {
+                color = Math.floor((Math.random() * 4) + 1);
+                $.notify({
+                    icon: "pe - 7s - gift",
+                    message: mensaje
+                }, {
+                        type: tipo,
+                        timer: 4000,
+                        placement: { from: from, align: align }
+                    });
+            }
+        }
+    </script>
+
+
+    <asp:ContentPlaceHolder ID="Head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class=" skin-default fixed-layout">
+
+
+    <div id="main-wrapper">
+        <header class="topbar">
+            <nav class="navbar top-navbar navbar-expand-md navbar-dark   ">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="index.html" style="margin-left: 35px;">
+                        <b>
+
+                            <img src="/assets/images/logo.png" alt="homepage" class="dark-logo" />
+                        </b>
+                    </a>
+                </div>
+                <div class="navbar-collapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item"><a class="nav-link nav-toggler d-block d-sm-none waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a></li>
+                        <li class="nav-item"><a class="nav-link sidebartoggler d-none d-lg-block d-md-block waves-effect waves-dark" href="javascript:void(0)"><i class="icon-menu"></i></a></li>
+                        <li class="nav-item">
+                      
+                        </li>
+                    </ul>
+
+                   
+                </div>
+            </nav>
+        </header>
+
+        <aside class="left-sidebar">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- User Profile-->
+                <div class="user-profile">
+                    <div class="user-pro-body">
+                        <div>
+
+                            <%--<img src="/assets/images/users/usuario.png" alt="user-img" class="img-circle"></div>--%>
+<%--                        <div class="dropdown">
+                            <a href="javascript:void(0)" class="dropdown-toggle u-dropdown link hide-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuario <span class="caret"></span></a>
+                            <div class="dropdown-menu animated flipInY">
+
+                                <!-- text-->
+                                <a href="javascript:void(0)" class="dropdown-item"><i class="ti-settings"></i>Account Setting</a>
+                                <!-- text-->
+                                <div class="dropdown-divider"></div>
+                                <!-- text-->
+                                <a href="login.html" class="dropdown-item"><i class="fa fa-power-off"></i>Logout</a>
+                                <!-- text-->
+                            </div>--%>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"> <i class="material-icons md-18">account_balance</i><span class="hide-menu">Agencia</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="#">Agencias</a></li>
+                                <li><a href="#">Inventario</a></li>
+                                <li><a href="#">ATM</a></li>
+                                <li><a href="#">Estructurado</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-wrench"></i><span class="hide-menu">Configuración</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="/paginas/configuraciones/usuarios.aspx">Usuarios</a></li>
+                                <li><a href="#">Permisos</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a class="waves-effect waves-dark" href="../documentation/documentation.html" aria-expanded="false"><i class="fa fa-circle-o text-danger"></i><span class="hide-menu">Documentation</span></a></li>
+                        <li><a class="waves-effect waves-dark" href="pages-login.html" aria-expanded="false"><i class="fa fa-circle-o text-success"></i><span class="hide-menu">Log Out</span></a></li>
+                        <li><a class="waves-effect waves-dark" href="pages-faq.html" aria-expanded="false"><i class="fa fa-circle-o text-info"></i><span class="hide-menu">FAQs</span></a></li>
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+
+        <div class="page-wrapper">
+
+            <div class="container-fluid">
+                <form id="FormaPrincipal" runat="server">
+                    <asp:ScriptManager runat="server" ID="SM1"></asp:ScriptManager>
+                    <div>
+                        <asp:ContentPlaceHolder ID="Content" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            © 2020 Infatlan
+        </footer>
+
+    </div>
+
+    <script src="/assets/node_module/jquery/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap popper Core JavaScript -->
+    <script src="/assets/node_module/popper/popper.min.js"></script>
+    <script src="/assets/node_module/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="/js/perfect-scrollbar.jquery.min.js"></script>
+    <!--Wave Effects -->
+    <script src="/js/waves.js"></script>
+    <script src="/js/sidebarmenu.js"></script>
+    <script src="/js/custom.min.js"></script>
+
+    <script src="/assets/node_module/raphael/raphael-min.js"></script>
+    <script src="/assets/node_module/morrisjs/morris.min.js"></script>
+    <script src="/assets/node_module/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <script src="/assets/node_module/toast-master/js/jquery.toast.js"></script>
+    <script src="/js/dashboard1.js"></script>
+    <script src="/assets/node_module/toast-master/js/jquery.toast.js"></script>
+    <script src="/js/bootstrap-notify.js"></script>
+    <asp:ContentPlaceHolder ID="Script" runat="server">
+    </asp:ContentPlaceHolder>
+</body>
+</html>

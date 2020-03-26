@@ -7,6 +7,7 @@ namespace Infatlan_STEI.classes
 {
     public class generales
     {
+        public generales() { }
         public Boolean getAccess(int vAplicacion, roles vRoles, ref getRoles vRolesAplicacion)
         {
             Boolean vAcceso = false;
