@@ -23,7 +23,7 @@
         function closeModal2() { $('#modalRechazar').modal('hide'); }
     </script>
      
-    }
+    
     <script src="http://code.jquery.com/jquery-1.10.2.min.js" type="text/javascript"></script>
     <%--IMAGENES--%>
     <script type="text/javascript">
@@ -210,18 +210,20 @@
     </script>
     <%--IMAGENES--%>
 </asp:Content>
-
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
-    <div class="row page-titles">
+     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
-            <h4 class="text-themecolor">Completar lista de verificación de ATMs</h4>
+            <h4 class="text-themecolor">Crear lista de verificación</h4>
         </div>
         <div class="col-md-7 align-self-center text-right">
             <div class="d-flex justify-content-end align-items-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Inicio</a></li>
+                    <li class="breadcrumb-item active">Crear lista de verificación</li>
+                </ol>
             </div>
         </div>
     </div>
-
     <div class="card">
         <br />
         <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
@@ -230,7 +232,6 @@
         <hr />
         <br />
         <div class="row col-12" style="margin: 10px 10px 10px 10px">
-
             <!--SEGUNDA FILA-->
             <div class="row col-12">
                 <div class="row col-6">
@@ -451,11 +452,7 @@
             </div>
         </div>
         <br />
-
-
-
-
-
+        
         <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
                 <div class="row col-12" style="margin: 10px 10px 10px 10px">
@@ -629,7 +626,7 @@
                                 <td class="title"><a class="link" href="javascript:void(0)">*Disco duro</a></td>   
                                 <td> <asp:FileUpload ID="FUDiscoDuro" runat="server" onchange="img1(this);" /></td>                                
                                 <%--<td runat="server" id="td1img1" style="display:none"><img id="imgDiscoDuro" runat="server" height="150" width="150" src="" style="border-width: 0px;" /></td>--%>
-                                <td runat="server" id="td2img1"><img id="imgDiscoDuro" runat="server" height="150" width="150" src="" style="border-width: 0px;" /></td>                                                          
+                                <td><img id="imgDiscoDuro" runat="server" height="150" width="150" src="" style="border-width: 0px;" /></td>                                                          
                             </tr>                              
                             <tr>
                                 <td class="title"><a class="link" href="javascript:void(0)">*ATM desarmado parte superior (limpiar)</a></td>                               

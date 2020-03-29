@@ -43,13 +43,13 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     case "4":
                         //td1img1.Attributes.Add("style", "DISPLAY: block");
                         //td2img1.Attributes.Add("style", "DISPLAY: none");
-                        DIVbtnRechazo.Visible = true;
+                        //DIVbtnRechazo.Visible = true;
                         llenarFormRechazado();
                         llenarImagenes();
                         aprobacionCampos();
                         break;
                 }
-               
+
             }
         }
         void aprobacionCampos()
@@ -119,7 +119,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             string vImagen1 = Session["ATM_VERIF_IMG1"].ToString();
             string srcImgen1 = "data:image;base64," + vImagen1;
             imgDiscoDuro.Src = srcImgen1;
-            
+
             //IMAGEN2
             string vImagen2 = Session["ATM_VERIF_IMG2"].ToString();
             string srcImgen2 = "data:image;base64," + vImagen2;
@@ -223,7 +223,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 dropantiskimming.SelectedValue = "2";
                 txtantiSkimming.Enabled = false;
             }
-                txtantiSkimming.Text = Session["ATM_VERIF_RESP23"].ToString();           
+            txtantiSkimming.Text = Session["ATM_VERIF_RESP23"].ToString();
         }
         void llenarForm()
         {
@@ -278,12 +278,12 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         void validar()
         {
 
-           
 
-            //if (filePath.length < 1)
-            // throw new Exception("Favor agregar imagen de disco duro.");
-            if (txthsalidaInfa.Text == "" || txthsalidaInfa.Text == string.Empty)
-                throw new Exception("Favor ingrese la hora que salio de Infatlan.");
+
+            if (!FUDiscoDuro.HasFile)
+                //    throw new Exception("Favor agregar imagen de disco duro.");
+                if (txthsalidaInfa.Text == "" || txthsalidaInfa.Text == string.Empty)
+                    throw new Exception("Favor ingrese la hora que salio de Infatlan.");
             if (txtHllegadaInfatlan.Text == "" || txtHllegadaInfatlan.Text == string.Empty)
                 throw new Exception("Favor ingrese la hora que llego a Infatlan.");
             if (TxFechaInicio.Text == "" || TxFechaInicio.Text == string.Empty)
@@ -348,7 +348,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         }
 
         void CargarVerificacion()
-        {
+            {
             if (HttpContext.Current.Session["VERIF"] == null)
             {
                 try
@@ -516,8 +516,8 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
 
         void ActualizarATM()
-        {
-            
+            {
+
 
             try
             {
@@ -538,9 +538,9 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             }
         }
 
-        void ActualizarVerifATM()
-        {
-           
+            void ActualizarVerifATM()
+            {
+
 
             try
             {
@@ -560,8 +560,8 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             }
         }
 
-        void PreguntasVerif()
-        {
+            void PreguntasVerif()
+            {
             string id = Request.QueryString["id"];
             string tipo = Request.QueryString["tipo"];
             string respuesta1 = null;
@@ -842,12 +842,12 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             }
         }
 
-       
-        void ImgVerificacion()
-        {
+
+            void ImgVerificacion()
+            {
             string id = Request.QueryString["id"];
             string tipo = Request.QueryString["tipo"];
-            
+
             //IMAGENES1
             String vNombreDepot1 = String.Empty;
             HttpPostedFile bufferDeposito1 = FUDiscoDuro.PostedFile;
@@ -1108,8 +1108,8 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             }
         }
 
-        protected void dropantiskimming_TextChanged(object sender, EventArgs e)
-        {
+            protected void dropantiskimming_TextChanged(object sender, EventArgs e)
+            {
 
             try
             {
@@ -1130,16 +1130,16 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         }      
 
 
-        protected void btnmodal_Click(object sender, EventArgs e)
-        {
+            protected void btnmodal_Click(object sender, EventArgs e)
+            {
 
-            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal();", true);
+               ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal();", true);
 
-        }
+            }
 
 
-        protected void btnModalVerif_Click(object sender, EventArgs e)
-        {
+            protected void btnModalVerif_Click(object sender, EventArgs e)
+            {
             try
             {
                 string id = Request.QueryString["id"];
@@ -1147,10 +1147,10 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
                 if (tipo == "4")
                 {
-                    string usu = "acedillo";
+                    
                     try
                     {
-                        string vQuery = "STEISP_ATM_VERIFICACION 5, '" + usu + "','" + Session["ATM_IDMANT_VERIF_CREAR"] + "'";
+                        string vQuery = "STEISP_ATM_VERIFICACION 5, '" + Session["usuATM"].ToString() + "','" + Session["ATM_IDMANT_VERIF_CREAR"] + "'";
                         Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                         if (vInfo == 1)
                         {
@@ -1189,17 +1189,17 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             {
                 Mensaje(Ex.Message, WarningType.Danger);
             }
-        
-    
+
+
         }
 
         protected void btnModalCerrarVerif_Click(object sender, EventArgs e)
-        {
-            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
-        }
+            {
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
+            }
 
-        protected void btnRechazarVerif_Click(object sender, EventArgs e)
-        {
+            protected void btnRechazarVerif_Click(object sender, EventArgs e)
+            {
             txtmotivoRechazo.Text = string.Empty;
             H5Alerta.Visible = false;
             lbcodATM2.Text = txtcodATM.Text;
@@ -1210,16 +1210,16 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal2();", true);
         }
 
-        protected void btnRechazarModal_Click(object sender, EventArgs e)
-        {
+            protected void btnRechazarModal_Click(object sender, EventArgs e)
+            {
             if (txtmotivoRechazo.Text == "" || txtmotivoRechazo.Text == string.Empty)
             {
-                
+
                 H5Alerta.Visible = true;
             }
             else
             {
-                
+
                 try
                 {
                     string vQuery = "STEISP_ATM_VERIFICACION 6, '" + Session["usuATM"].ToString() + "','" + Session["ATM_IDMANT_VERIF_CREAR"] + "'";
@@ -1242,22 +1242,22 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             }
         }
 
-        protected void btnCerrarRechazoModal_Click(object sender, EventArgs e)
-        {
-            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal2();", true);
-        }
+            protected void btnCerrarRechazoModal_Click(object sender, EventArgs e)
+            {
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal2();", true);
+            }
 
-        protected void btnborrar_Click(object sender, EventArgs e)
-        {
-            string vImagen11 = Session["ATM_VERIF_IMG21"].ToString();
-            string srcImgen11 = "data:image;base64," + vImagen11;
-            imgClimatizacion.Src = null;
-           
-        }       
+            protected void btnborrar_Click(object sender, EventArgs e)
+            {
+                string vImagen11 = Session["ATM_VERIF_IMG21"].ToString();
+                string srcImgen11 = "data:image;base64," + vImagen11;
+                imgClimatizacion.Src = null;
 
-        protected void btnBorrar1_Click(object sender, EventArgs e)
-        {           
-            imgEnergia.Src = string.Empty;
+            }       
+
+            protected void btnBorrar1_Click(object sender, EventArgs e)
+            {           
+                imgEnergia.Src = string.Empty;
+            }
         }
-    }
 }
