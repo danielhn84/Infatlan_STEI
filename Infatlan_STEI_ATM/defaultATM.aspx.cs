@@ -18,6 +18,7 @@ namespace Infatlan_STEI_ATM
         {
             if (!Page.IsPostBack)
             {
+                Session["usuATM"] = "acedillo";
                 Contar();
             }
         }
@@ -45,7 +46,7 @@ namespace Infatlan_STEI_ATM
                 GVMantenimiento.DataBind();
                 Session["ATM_DEFAULT_MANTREALIZADO"] = vDatos4;
             }
-            catch (Exception ex)
+            catch (Exception Ex)
             {
                 //Mensaje(ex.Message, WarningType.Danger);
             }

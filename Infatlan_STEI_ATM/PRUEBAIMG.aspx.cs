@@ -97,6 +97,10 @@ namespace Infatlan_STEI_ATM
                     return "application/octet-stream";
             }
         }
+        public bool ThumbnailCallback()
+        {
+            return false;
+        }
         protected void btnguardar_Click(object sender, EventArgs e)
         {
             //IMAGENES1
@@ -114,35 +118,25 @@ namespace Infatlan_STEI_ATM
                 vExtension = System.IO.Path.GetExtension(FUDiscoDuro.FileName);
             }
 
-            String vArchivo = String.Empty;
-            if (vFileDeposito1 != null)
-            {
-                vArchivo = Convert.ToBase64String(vFileDeposito1);
-                lbimg.Text = "EXISTE IMAGEN";
-                Mensaje("EXISTE IMAGEN", WarningType.Success);
-            }
-           
-            else
-            {
-                //Mensaje(, WarningType.Danger);
-                lbimg.Text ="NO DEJE IMAGEN VACIA";
-            }
+            ///THUMBNAILS///
+            //----------        Getting the Image File
+            System.Drawing.Image img = System.Drawing.Image.FromFile(Server.MapPath("~/IMG_PRUEBAS/1.png"));
 
-            //try
-            //{
-            //    string NumPregunta = "22";
-            //    string vQuery = "STEISP_ATM_ListaVerificacion 3, '" + 2 + "','" + NumPregunta + "','" + "SI" + "','" + vArchivo + "'";
-            //    Int32 vInfo = vConexion.ejecutarSQL(vQuery);
-            //    if (vInfo == 1)
-            //    {
-            //        Mensaje("antiskimming creada con éxito", WarningType.Success);
-            //    }
+            //----------        Getting Size of Original Image
+            double imgHeight = img.Size.Height;
+            double imgWidth = img.Size.Width;
 
-            //}
-            //catch (Exception Ex)
-            //{
-            //    throw;
-            //}
+            //----------        Getting Decreased Size
+            double x = imgWidth / 200;
+            int newWidth = Convert.ToInt32(imgWidth / x);
+            int newHeight = Convert.ToInt32(imgHeight / x);
+
+            //----------        Creating Small Image
+            System.Drawing.Image.GetThumbnailImageAbort myCallback = new System.Drawing.Image.GetThumbnailImageAbort(ThumbnailCallback);
+            System.Drawing.Image myThumbnail = img.GetThumbnailImage(newWidth, newHeight, myCallback, IntPtr.Zero);
+
+            //----------        Saving Image
+            myThumbnail.Save(Server.MapPath("~/IMG_PRUEBAS/NewImage.jpg"));
         }
 
     }

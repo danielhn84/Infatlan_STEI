@@ -30,7 +30,7 @@
 
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
- <asp:Button runat="server" ID="btnguardar" OnClick="btnguardar_Click" />
+ <asp:Button runat="server" ID="btnguardar" Text="Visualizar" OnClick="btnguardar_Click" />
         </ContentTemplate>
                 <Triggers>
                     <asp:PostBackTrigger ControlID="btnguardar" />
