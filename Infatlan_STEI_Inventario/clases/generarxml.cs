@@ -39,7 +39,7 @@ namespace Infatlan_STEI_Inventario.clases
                     vXmlTW.WriteString(Convert.ToString(vDatos[4]));
                     vXmlTW.WriteEndElement();
 
-                    vXmlTW.WriteStartElement("observaciones");
+                    vXmlTW.WriteStartElement("cantidad");
                     vXmlTW.WriteString(Convert.ToString(vDatos[5]));
                     vXmlTW.WriteEndElement();
 

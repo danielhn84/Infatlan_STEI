@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="entradas.aspx.cs" Inherits="Infatlan_STEI_Inventario.pages.inventarios" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="inventarioUbicacion.aspx.cs" Inherits="Infatlan_STEI_Inventario.pages.inventarios" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
     <script type="text/javascript">
         var updateProgress = null;
@@ -29,114 +29,20 @@
         </ProgressTemplate>
     </asp:UpdateProgress>
     <br />
-    <asp:UpdatePanel runat="server" ID="UpdatePanel">
-        <ContentTemplate>
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Entradas</h4>
-                    <h6 class="card-subtitle">Mercadería que ingresa al inventario.</h6>
-                    <br />
-                    <div class="form-body col-12">
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="form-group row">
-                                    <label class="col-form-label col-12">Codigo</label>
-                                    <div class="col-10">
-                                        <asp:TextBox ID="TxCod" class="form-control text-uppercase" runat="server"></asp:TextBox>                                            
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group row">
-                                    <label class="col-form-label col-12">Proveedor</label>
-                                    <div class="col-10">
-                                        <asp:DropDownList runat="server" ID="DDLProveedor" CssClass="form-control"></asp:DropDownList>
-                                    </div>
-                                    <div class="col-1">
-                                        <asp:Button ID="BtnAddProveedor" Text="+" CssClass="btn btn-success" runat="server" OnClick="BtnAddProveedor_Click" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="form-group row">
-                                    <label class="col-form-label col-12">Artículo</label>
-                                    <div class="col-10">
-                                        <asp:DropDownList runat="server" ID="DDLProducto" CssClass="form-control"></asp:DropDownList>
-                                    </div>
-                                    <div class="col-2">
-                                        <asp:Button ID="BtnAddArticulo" Text="+" CssClass="btn btn-success" runat="server" OnClick="BtnAddArticulo_Click" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group row">
-                                    <label class="col-form-label col-12">Serie</label>
-                                    <div class="col-10">
-                                        <asp:TextBox runat="server" ID="TxSerie" CssClass="form-control"></asp:TextBox>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="form-group row">
-                                    <label class="col-form-label col-12">Cantidad</label>
-                                    <div class="col-10">
-                                        <asp:TextBox runat="server" ID="TxCant" CssClass="form-control" TextMode="Number"></asp:TextBox>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group row">
-                                    <label class="col-form-label col-12">Precio</label>
-                                    <div class="col-10">
-                                        <asp:TextBox runat="server" ID="TxPrecio" CssClass="form-control" TextMode="Number"></asp:TextBox>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="form-group row">
-                                    <label class="col-form-label col-12">Ubicación</label>
-                                    <div class="col-10">
-                                        <asp:DropDownList runat="server" ID="DDLUbicacion" CssClass="form-control"></asp:DropDownList>
-                                    </div>
-                                    <div class="col-1">
-                                        <asp:Button ID="BtnAddUbicacion" Text="+" CssClass="btn btn-success" runat="server" OnClick="BtnAddUbicacion_Click" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group row">
-                                    <label class="col-form-label col-12">Descripción</label>
-                                    <div class="col-10">
-                                        <asp:TextBox runat="server" ID="TxDesc" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-actions" style="margin-top:-4%">
-                    <div class="card-body">
-                        <button type="submit" class="btn btn-success" style="margin-right:7px"> <i class="fa fa-check" style="margin-right:5px"></i>Guardar</button>
-                        <button type="button" class="btn btn-dark">Cancelar</button>
-                    </div>
-                </div>
-            </div>
-        </ContentTemplate>
-    </asp:UpdatePanel>
 
     <asp:UpdatePanel runat="server" ID="UpdatePanel1">
         <ContentTemplate>
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Registros</h4>
-                    <h6 class="card-subtitle">Todas las entradas de material y equipo.</h6>
-                    <br />
+                    <h4 class="card-title">Registros de
+                        <asp:Label Text="" ID="LbUbicacion" runat="server" />
+                    </h4>
+                    <h6 class="card-subtitle">Todas los articulos asignados a esta ubicación.</h6>
+                    <div class="row">
+                        <div class="col-12">
+                            <a href="inventario.aspx" class="btn btn-primary"><i style="margin-right:10%" class="icon-action-undo"></i>Volver</a>
+                        </div>
+                    </div>
                     <div class="table-responsive m-t-40">
                         <asp:GridView ID="GVBusqueda" runat="server"
                             CssClass="table table-bordered"
@@ -148,25 +54,12 @@
                             GridLines="None" 
                             PageSize="10" >
                             <Columns>
-                                <asp:BoundField DataField="idStock" HeaderText="No." />
-                                <asp:BoundField DataField="TipoStock" HeaderText="Equipo" />
-                                <asp:BoundField DataField="Marca" HeaderText="Marca" />
-                                <asp:BoundField DataField="modelo" HeaderText="Modelo" />
+                                <asp:BoundField DataField="idInventario" HeaderText="No." />
+                                <asp:BoundField DataField="codigoInventario" HeaderText="Cod." />
+                                <asp:BoundField DataField="Articulo" HeaderText="Articulo" />
+                                <asp:BoundField DataField="serie" HeaderText="Serie" />
                                 <asp:BoundField DataField="cantidad" HeaderText="Cantidad" />
-                                <asp:BoundField DataField="Proveedor" HeaderText="Proveedor"/>
-                                <asp:BoundField DataField="descripcion" HeaderText="Detalle" />
-                                <asp:BoundField DataField="series" HeaderText="Serie" />
-                                <asp:TemplateField HeaderText="Seleccione" HeaderStyle-Width="13%">
-                                    <ItemTemplate>
-                                        <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-info mr-2" CommandArgument='<%# Eval("idStock") %>' CommandName="EditarArticulo">
-                                            <i class="icon-pencil" ></i>
-                                        </asp:LinkButton>
-                            
-                                        <asp:LinkButton ID="BtnEditar2" runat="server" class="btn btn-primary mr-2" CommandArgument='<%# Eval("idStock") %>' CommandName="EliminarArticulo">
-                                            <i class="icon-trash" ></i>
-                                        </asp:LinkButton>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
+                                <asp:BoundField DataField="precio" HeaderText="Total" />
                             </Columns>
                         </asp:GridView>
                     </div>

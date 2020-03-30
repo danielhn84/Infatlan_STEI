@@ -141,13 +141,13 @@ namespace Infatlan_STEI_Inventario.pages
         protected global::System.Web.UI.WebControls.DropDownList DDLMarca;
 
         /// <summary>
-        /// Control TxCantidad.
+        /// Control TxPrecio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxCantidad;
+        protected global::System.Web.UI.WebControls.TextBox TxPrecio;
 
         /// <summary>
         /// Control TxDetalle.
@@ -400,6 +400,24 @@ namespace Infatlan_STEI_Inventario.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LbMensaje;
+
+        /// <summary>
+        /// Control DivMensajeCant.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivMensajeCant;
+
+        /// <summary>
+        /// Control LbMensajeCant.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LbMensajeCant;
 
         /// <summary>
         /// Control UpdatePanel4.

@@ -33,15 +33,14 @@ namespace Infatlan_STEI_Inventario.pages
 
         private void cargarDatos(){
             try{
-                String vQuery = "[STEISP_INVENTARIO_Stock] 1";
+                String vQuery = "[STEISP_INVENTARIO_Principal] 4";
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
 
                 if (vDatos.Rows.Count > 0){
                     GVBusqueda.DataSource = vDatos;
                     GVBusqueda.DataBind();
-                    Session["INV_STOCK"] = vDatos;
+                    Session["INV_PRAL_UBIC"] = vDatos;
                 }
-
                 //STOCK
                 vQuery = "[STEISP_INVENTARIO_Stock] 1";
                 vDatos = vConexion.obtenerDataTable(vQuery);
@@ -153,17 +152,10 @@ namespace Infatlan_STEI_Inventario.pages
             try{
                 String vQuery = "[STEISP_INVENTARIO_Stock] 2," + DDLArticulo.SelectedValue;
                 DataTable vDataStock = vConexion.obtenerDataTable(vQuery);
-                Decimal vCantidad = 0;
-                Decimal vCantidadActual = 0;
-                if (vDataStock.Rows.Count > 0)
-                    vCantidad = Convert.ToDecimal(vDataStock.Rows[0]["cantidad"].ToString());
-                if (vCantidad > 0){
-                    if (Convert.ToDecimal(TxCantidad.Text) <= vCantidad)
-                        vCantidadActual = vCantidad - Convert.ToDecimal(TxCantidad.Text);
-                    else
-                        throw new Exception("La cantidad solicitada es mayor a la disponible.");
-                }else
-                    throw new Exception("No hay unidades disponibles de este artículo.");
+                Decimal vCantidad = Convert.ToDecimal(vDataStock.Rows[0]["cantidad"].ToString());
+                Decimal vCantidadActual = vCantidad - Convert.ToDecimal(TxCantidad.Text); 
+                Decimal vPrecioDec = Convert.ToDecimal(TxCantidad.Text) * Convert.ToDecimal(vDataStock.Rows[0]["precioUnit"].ToString());
+                String vPrecio = vPrecioDec.ToString().Replace(",", ".");
 
                 generarxml vMaestro = new generarxml();
                 Object[] vDatosMaestro = new object[10];
@@ -172,9 +164,9 @@ namespace Infatlan_STEI_Inventario.pages
                 vDatosMaestro[2] = DDLUbicacion.SelectedValue;
                 vDatosMaestro[3] = ""; //Responsable
                 vDatosMaestro[4] = TxDescripcion.Text;
-                vDatosMaestro[5] = ""; // Observaciones
+                vDatosMaestro[5] = TxCantidad.Text;
                 vDatosMaestro[6] = ""; // Serie
-                vDatosMaestro[7] = TxPrecio.Text;
+                vDatosMaestro[7] = vPrecio; 
                 vDatosMaestro[8] = Session["USUARIO"].ToString();
                 vDatosMaestro[9] = DDLTipoTransaccion.SelectedValue;
                 String vXML = vMaestro.ObtenerMaestroString(vDatosMaestro);
@@ -186,13 +178,25 @@ namespace Infatlan_STEI_Inventario.pages
                     ",'" + vXML + "'";
                 Int32 vInfo = vConexion.ejecutarSql(vQuery);
                 if (vInfo == 3){
+                    limpiarForm();
                     Mensaje("Transacción realizada con éxito.", WarningType.Success);
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "cerrarModal();", true);
+                }else{
+                    Mensaje("Ha ocurrido un error. Favor comunicarse con sistemas.", WarningType.Danger);
                 }
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "cerrarModal();", true);
 
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);
             }
+        }
+
+        private void limpiarForm() {
+            TxCodigo.Text = string.Empty;
+            DDLArticulo.SelectedValue = "0";
+            DDLUbicacion.SelectedValue = "0";
+            DDLTipoTransaccion.SelectedValue = "0";
+            TxDescripcion.Text = string.Empty;
+            TxCantidad.Text = string.Empty;
         }
 
         protected void BtnGuardarInventario_Click(object sender, EventArgs e){
@@ -209,12 +213,19 @@ namespace Infatlan_STEI_Inventario.pages
                 throw new Exception("Favor seleccione el articulo.");
             if (TxCantidad.Text == "" || TxCantidad.Text == string.Empty)
                 throw new Exception("Favor ingrese la cantidad del artículo.");
-            if (TxPrecio.Text == "" || TxPrecio.Text == string.Empty)
-                throw new Exception("Favor ingrese el precio del artículo.");
             if (DDLUbicacion.SelectedValue == "0")
                 throw new Exception("Favor seleccione la nueva ubicación del articulo.");
             if (DDLTipoTransaccion.SelectedValue == "0")
                 throw new Exception("Favor seleccione el tipo de transaccion a realizar.");
+
+            String vQuery = "[STEISP_INVENTARIO_Stock] 2," + DDLArticulo.SelectedValue;
+            DataTable vDataStock = vConexion.obtenerDataTable(vQuery);
+            Decimal vCantidad = Convert.ToDecimal(vDataStock.Rows[0]["cantidad"].ToString());
+            if (vCantidad > 0){
+                if (Convert.ToDecimal(TxCantidad.Text) > vCantidad)
+                    throw new Exception("La cantidad solicitada es mayor a la disponible.");
+            }else
+                throw new Exception("No hay unidades disponibles de este artículo.");
         }
 
         protected void BtnAceptarUbic_Click(object sender, EventArgs e){
@@ -245,6 +256,14 @@ namespace Infatlan_STEI_Inventario.pages
                         }
                     }
                     DDLUbicacion.SelectedValue = Convert.ToString(DDLUbicacion.Items.Count - 1);
+                    vQuery = "[STEISP_INVENTARIO_Principal] 4";
+                    vDatos = vConexion.obtenerDataTable(vQuery);
+
+                    if (vDatos.Rows.Count > 0){
+                        GVBusqueda.DataSource = vDatos;
+                        GVBusqueda.DataBind();
+                        Session["INV_PRAL_UBIC"] = vDatos;
+                    }
                 }
             }catch (Exception ex){
                 LbMensajeUbic.Text = ex.Message;
@@ -263,6 +282,33 @@ namespace Infatlan_STEI_Inventario.pages
                 throw new Exception("Favor ingrese el código.");
             if (TxDireccionUbic.Text == "" || TxDireccionUbic.Text == string.Empty)
                 throw new Exception("Favor ingrese la dirección.");
+        }
+
+        protected void GVBusqueda_RowCommand(object sender, GridViewCommandEventArgs e){
+            try{
+                String vQuery = "[STEISP_INVENTARIO_Ubicacaiones] 1";
+                DataTable vDatos = vConexion.obtenerDataTable(vQuery);
+
+
+                string vIdUbicacion = e.CommandArgument.ToString();
+                string vCodigo = vDatos.Rows[0]["codigo"].ToString();
+                Session["INV_UBIC_ID"] = vIdUbicacion;
+                if (e.CommandName == "VerInventario") 
+                    Response.Redirect("/pages/inventarioUbicacion.aspx?i=" + vIdUbicacion + "&c=" + vCodigo);
+                
+            }catch (Exception Ex){
+                Mensaje(Ex.Message, WarningType.Danger);
+            }
+        }
+
+        protected void GVBusqueda_PageIndexChanging(object sender, GridViewPageEventArgs e){
+            try{
+                GVBusqueda.PageIndex = e.NewPageIndex;
+                GVBusqueda.DataSource = (DataTable)Session["INV_PRAL_UBIC"];
+                GVBusqueda.DataBind();
+            }catch (Exception ex){
+                Mensaje(ex.Message, WarningType.Danger);
+            }
         }
     }
 }

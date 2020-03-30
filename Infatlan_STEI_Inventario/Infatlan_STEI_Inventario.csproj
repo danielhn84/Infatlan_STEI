@@ -3321,7 +3321,7 @@
     <Content Include="pages\inventario.aspx" />
     <Content Include="pages\Configuracion\ubicaciones.aspx" />
     <Content Include="pages\articulos.aspx" />
-    <Content Include="pages\entradas.aspx" />
+    <Content Include="pages\inventarioUbicacion.aspx" />
     <Content Include="pages\perfiles.aspx" />
     <Content Include="pages\proveedores.aspx" />
     <Content Include="pages\transacciones.aspx" />
@@ -3377,12 +3377,12 @@
     <Compile Include="pages\articulos.aspx.designer.cs">
       <DependentUpon>articulos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="pages\entradas.aspx.cs">
-      <DependentUpon>entradas.aspx</DependentUpon>
+    <Compile Include="pages\inventarioUbicacion.aspx.cs">
+      <DependentUpon>inventarioUbicacion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pages\entradas.aspx.designer.cs">
-      <DependentUpon>entradas.aspx</DependentUpon>
+    <Compile Include="pages\inventarioUbicacion.aspx.designer.cs">
+      <DependentUpon>inventarioUbicacion.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\perfiles.aspx.cs">
       <DependentUpon>perfiles.aspx</DependentUpon>

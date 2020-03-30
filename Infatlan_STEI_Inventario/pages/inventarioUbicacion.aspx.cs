@@ -15,12 +15,14 @@ namespace Infatlan_STEI_Inventario.pages
     {
         db vConexion = new db();
         protected void Page_Load(object sender, EventArgs e){
+            String vIdUbicacion = " " + Request.QueryString["i"];
+            LbUbicacion.Text = " " + Request.QueryString["c"];
             Session["AUTH"] = true;
             Session["USUARIO"] = "wpadilla";
             if (!Page.IsPostBack){
                 if (Convert.ToBoolean(Session["AUTH"])){
                     limpiarSessiones();
-                    cargarDatos();
+                    cargarDatos(vIdUbicacion);
                 }
             }
         }
@@ -29,9 +31,9 @@ namespace Infatlan_STEI_Inventario.pages
             
         }
 
-        private void cargarDatos(){
+        private void cargarDatos(String vId){
             try{
-                String vQuery = "[STEISP_INVENTARIO_Principal] 1";
+                String vQuery = "[STEISP_INVENTARIO_Principal] 5," + vId;
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
 
                 if (vDatos.Rows.Count > 0){
@@ -40,66 +42,6 @@ namespace Infatlan_STEI_Inventario.pages
                     Session["INV_ENTRADAS"] = vDatos;
                 }
 
-                //PROVEEDOR
-                vQuery = "[STEISP_INVENTARIO_Proveedores] 1";
-                vDatos = vConexion.obtenerDataTable(vQuery);
-
-                if (vDatos.Rows.Count > 0){
-                    DDLProveedor.Items.Clear();
-                    DDLProveedor.Items.Add(new ListItem { Value = "0", Text = "Seleccione una opción" });
-                    foreach (DataRow item in vDatos.Rows){
-                        DDLProveedor.Items.Add(new ListItem { Value = item["idProveedor"].ToString(), Text = item["nombre"].ToString() });
-                    }
-                }
-
-                //STOCK
-                vQuery = "[STEISP_INVENTARIO_Stock] 1";
-                vDatos = vConexion.obtenerDataTable(vQuery);
-
-                if (vDatos.Rows.Count > 0){
-                    DDLProducto.Items.Clear();
-                    DDLProducto.Items.Add(new ListItem { Value = "0", Text = "Seleccione una opción" });
-                    foreach (DataRow item in vDatos.Rows){
-                        DDLProducto.Items.Add(new ListItem { Value = item["idStock"].ToString(), Text = item["TipoStock"].ToString() + " - " + item["modelo"].ToString() });
-                    }
-                }
-
-                //UBICACIONES
-                vQuery = "[STEISP_INVENTARIO_Ubicacaiones] 1";
-                vDatos = vConexion.obtenerDataTable(vQuery);
-
-                if (vDatos.Rows.Count > 0){
-                    DDLUbicacion.Items.Clear();
-                    DDLUbicacion.Items.Add(new ListItem { Value = "0", Text = "Seleccione una opción" });
-                    foreach (DataRow item in vDatos.Rows){
-                        DDLUbicacion.Items.Add(new ListItem { Value = item["idUbicacion"].ToString(), Text = item["codigo"].ToString() });
-                    }
-                }
-
-
-                // DEPARTAMENTOS
-                vQuery = "STEISP_INVENTARIO_Generales 1";
-                vDatos = vConexion.obtenerDataTable(vQuery);
-
-                if (vDatos.Rows.Count > 0){
-                    DDLDepartamento.Items.Clear();
-                    DDLDepartamento.Items.Add(new ListItem { Value = "0", Text = "Seleccione una opción" });
-                    foreach (DataRow item in vDatos.Rows){
-                        DDLDepartamento.Items.Add(new ListItem { Value = item["idDepartamento"].ToString(), Text = item["nombre"].ToString() });
-                    }
-                }
-
-                // TIPO UBICACION
-                vQuery = "[STEISP_INVENTARIO_Generales] 3";
-                vDatos = vConexion.obtenerDataTable(vQuery);
-
-                if (vDatos.Rows.Count > 0){
-                    DDLTipoUbic.Items.Clear();
-                    DDLTipoUbic.Items.Add(new ListItem { Value = "0", Text = "Seleccione una opción" });
-                    foreach (DataRow item in vDatos.Rows){
-                        DDLTipoUbic.Items.Add(new ListItem { Value = item["idTipoUbicacion"].ToString(), Text = item["nombre"].ToString() });
-                    }
-                }
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);
             }
@@ -159,5 +101,9 @@ namespace Infatlan_STEI_Inventario.pages
             }else
                 DDLMunicipio.Items.Clear();
         }
+
+        //protected void BtnVolver_Click(object sender, EventArgs e){
+        //    Response.Redirect("inventario.aspx");
+        //}
     }
 }
