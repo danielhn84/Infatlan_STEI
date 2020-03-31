@@ -19,7 +19,11 @@
         function openPRov() { $('#ModalProveedores').modal('show'); }
         function cerrarProv() { $('#ModalProveedores').modal('hide'); }
 
-        function ModalConfirmar() {$('#ModalConfirmar').modal('show');}
+        function ModalConfirmar() {
+            $('#ModalConfirmar').modal('show');
+            document.getElementById('tch3').value = '';
+        }
+        function closeConfirmar() { $('#ModalConfirmar').modal('hide'); }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
@@ -59,20 +63,21 @@
                             PageSize="10" OnPageIndexChanging="GVBusqueda_PageIndexChanging">
                             <Columns>
                                 <asp:BoundField DataField="idStock" HeaderText="No." />
-                                <asp:BoundField DataField="TipoStock" HeaderText="Equipo" />
+                                <asp:BoundField DataField="TipoStock" HeaderText="TipoStock" />
                                 <asp:BoundField DataField="Marca" HeaderText="Marca" />
                                 <asp:BoundField DataField="modelo" HeaderText="Modelo" />
                                 <asp:BoundField DataField="cantidad" HeaderText="Cantidad" />
+                                <asp:BoundField DataField="precioUnit" HeaderText="Precio" />
                                 <asp:BoundField DataField="Proveedor" HeaderText="Proveedor"/>
                                 <asp:BoundField DataField="descripcion" HeaderText="Detalle" />
                                 <asp:BoundField DataField="series" HeaderText="Serie" />
                                 <asp:TemplateField HeaderText="Seleccione" HeaderStyle-Width="13%">
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-info mr-2" CommandArgument='<%# Eval("idStock") %>' CommandName="EditarArticulo">
+                                        <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-info mr-2" Title="Editar" CommandArgument='<%# Eval("idStock") %>' CommandName="EditarArticulo">
                                             <i class="icon-pencil" ></i>
                                         </asp:LinkButton>
                             
-                                        <asp:LinkButton ID="BtnEditar2" runat="server" class="btn btn-success mr-2" CommandArgument='<%# Eval("idStock") %>' CommandName="EliminarArticulo">
+                                        <asp:LinkButton ID="BtnEditar2" runat="server" class="btn btn-success mr-2" Title="Aregar" CommandArgument='<%# Eval("idStock") %>' CommandName="EliminarArticulo">
                                             <i class="icon-plus" ></i>
                                         </asp:LinkButton>
                                     </ItemTemplate>
@@ -147,19 +152,18 @@
                                         <div class="col-2" >
                                             <label class="col-form-label">Marca</label>
                                         </div>
-                                        <div class="col-sm-9">
+                                        <div class="col-10">
                                             <asp:DropDownList runat="server" ID="DDLMarca" CssClass="form-control"></asp:DropDownList>
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-6">
                                     <div class="form-group row">
                                         <div class="col-3" style="margin-left:2%">
-                                            <label class="col-form-label">Cantidad</label>
+                                            <label class="">Precio Unitario</label>
                                         </div>
-                                        <div class="col-sm-8">
-                                            <asp:TextBox ID="TxCantidad" placeholder="" TextMode="Number" class="form-control" runat="server"></asp:TextBox>                                            
+                                        <div class="col-8">
+                                            <asp:TextBox ID="TxPrecio" placeholder="" TextMode="Number" class="form-control" runat="server"></asp:TextBox>                                            
                                         </div>
                                     </div>
                                 </div>
@@ -168,18 +172,17 @@
                                         <div class="col-2">
                                             <label class="col-form-label">Detalle</label>
                                         </div>
-                                        <div class="col-sm-9">
+                                        <div class="col-10">
                                             <asp:TextBox ID="TxDetalle" placeholder="" class="form-control" runat="server"></asp:TextBox>                                            
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-6">
                                     <div class="form-group row">
                                         <div class="col-2" style="margin-left:2%">
                                             <label class="col-form-label">Serie</label>
                                         </div>
-                                        <div class="col-sm-9">
+                                        <div class="col-9">
                                             <asp:TextBox ID="TxSerie" placeholder="" class="form-control" runat="server"></asp:TextBox>                                            
                                         </div>
                                     </div>
@@ -189,7 +192,7 @@
                                         <div class="col-2">
                                             <label class="col-form-label">Estado</label>
                                         </div>
-                                        <div class="col-9">
+                                        <div class="col-10">
                                             <asp:DropDownList runat="server" ID="DDLEstado" CssClass="form-control">
                                                 <asp:ListItem Value="1" Text="Activo"></asp:ListItem>
                                                 <asp:ListItem Value="0" Text="Inactivo"></asp:ListItem>
@@ -238,14 +241,14 @@
                                         <div class="col-2" style="margin-left:2%">
                                             <label class="col-form-label">Nombre</label>
                                         </div>
-                                        <div class="col-sm-9">
+                                        <div class="col-9">
                                             <asp:TextBox ID="TxNombreProv" class="form-control text-uppercase" runat="server"></asp:TextBox>                                            
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group row">
-                                        <div class="col-3" >
+                                        <div class="col-3" style="margin-left:2%">
                                             <label class="col-form-label">Responsable</label>
                                         </div>
                                         <div class="col-8">
@@ -266,7 +269,7 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group row">
-                                        <div class="col-3">
+                                        <div class="col-3" style="margin-left:2%">
                                             <label class="col-form-label">Direccion</label>
                                         </div>
                                         <div class="col-8">
@@ -364,11 +367,22 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label col-12">Cantidad</label>
+                        <input id="tch3" type="text" value="" name="tch3" data-bts-button-down-class="btn btn-secondary btn-outline" data-bts-button-up-class="btn btn-secondary btn-outline">
+                    </div>
+                    <div class="row">
+                        <div class="col-12" runat="server" id="DivMensajeCant" visible="false" style="display: flex; background-color:tomato; justify-content:center">
+                            <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbMensajeCant"></asp:Label>
+                        </div>
+                    </div>
+                </div>
                 <div class="modal-footer">
                     <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                         <ContentTemplate>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <asp:Button ID="BtnConfirmar" runat="server" Text="Aceptar" class="btn btn-danger" OnClick="BtnConfirmar_Click"/>
+                            <asp:Button ID="BtnConfirmar" runat="server" Text="Aceptar" class="btn btn-info" OnClick="BtnConfirmar_Click"/>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
@@ -378,4 +392,10 @@
 
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Script" runat="server">
+    <script src="../assets/node_module/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.js" type="text/javascript"></script>
+    <script>
+        $(function () {
+            $("input[name='tch3']").TouchSpin();
+        });
+    </script>
 </asp:Content>
