@@ -18,7 +18,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["NOTI"] = null;
-
+            
             if (!Page.IsPostBack)
             {
                 txtFechaInicio.TextMode = TextBoxMode.Date;
@@ -173,7 +173,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 if (vData == null)
                     vData = vDatos.Clone();
                 if (vDatos != null)
-                    vData.Rows.Add(vDatos.Rows[0]["idUsuario"].ToString(), vDatos.Rows[0]["nombre"].ToString(), vDatos.Rows[0]["identidad"].ToString());
+                    vData.Rows.Add(vDatos.Rows[0]["idUsuario"].ToString(), vDatos.Rows[0]["nombre"].ToString(), vDatos.Rows[0]["identidad"].ToString(), vDatos.Rows[0]["correo"].ToString());
                 GVBusqueda.DataSource = vData;
                 GVBusqueda.DataBind();
                 Session["ATM_EMPLEADOS"] = vData;
@@ -194,8 +194,9 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 String vQuery = "STEISP_AGENCIA_CreacionNotificacion 6, " + DLLtecResponsable.SelectedValue;
                 DataTable vDatos = vConexion.ObtenerTabla(vQuery);
                 txtidentidadTecResponsable.Text = vDatos.Rows[0]["identidad"].ToString();
+                Session["ATM_Notif_emailTecnicoResponsable"]= vDatos.Rows[0]["correo"].ToString();
 
-            }
+    }
             catch (Exception ex)
             {
                 Mensaje(ex.Message, WarningType.Danger);
@@ -275,6 +276,134 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
         }
 
+        void EnviarCorreo()
+        {
+            string id = Request.QueryString["id"];
+            string tipo = Request.QueryString["tipo"];
+            string vCorreo = "acedillo@bancatlan.hn";
+            string vNombre = "Adán Cedillo";
+            SmtpService vService = new SmtpService();
+
+            if (tipo=="3")
+            {                
+                //SOLICITANTE                
+                string vMotivo = "Se informa que su solicitud fué debidamente aprobado.";
+                string vMsg = "Puede continuar con el proceso.";
+                vService.EnviarMensaje(Session["ATM_CORREOCREADOR"].ToString(),
+                   typeBody.Aprobado,
+                   Session["USUCREADORATM"].ToString(),
+                   Session["ATM_NOMBRECREADOR"].ToString() + Session["ATM_APELLIDOCREADOR"].ToString(),
+                   vMotivo,
+                   vMsg
+                   );
+                //SUPERVISOR                 
+                string vMotivo2 = " fué notificado de la aprobación de su respectiva solicitud.";
+                string vMsg2 = "Solicitud fue aprobado exitosamente.";
+                vService.EnviarMensaje(vCorreo,
+                   typeBody.Supervisor,
+                   Session["usuATM"].ToString(),
+                   vNombre,
+                   vMotivo2,
+                   vMsg2
+                   );
+                //TECNICORESPONSABLE
+                string vMotivo3 = " se aprobó mantenimiento asignado.";
+                string vMsg3 = "Solicitud fue aprobado exitosamente.";
+                vService.EnviarMensaje(Session["ATM_Notif_emailTecnicoResponsable"].ToString(),
+                   typeBody.Tecnicos,
+                   "",
+                   DLLtecResponsable.SelectedItem.Text,
+                   vMotivo3,
+                   vMsg3
+                   );
+                //TECNICOPARTICIPANTE
+                string vMotivo4 = " se aprobó mantenimiento asignado.";
+                string vMsg4 = "Solicitud fue aprobado exitosamente.";
+                foreach (DataRow item in GVBusqueda.Rows)
+                {                   
+                        vService.EnviarMensaje(item["correo"].ToString(),
+                            typeBody.Tecnicos,
+                            item["idUsuario"].ToString(),
+                            item["nombre"].ToString(),
+                            vMotivo4,
+                            vMsg4
+                            );
+                }
+                //JEFES DE AGENCIA
+                string vMotivo5 = " aprobó mantenimiento programado a su agencia.";
+                string vMsg5 = "Solicitud fue aprobado exitosamente.";
+                foreach (DataRow item in GVLlenaJefeApruebaNotif.Rows)
+                {
+                    vService.EnviarMensaje(item["Correo"].ToString(),
+                        typeBody.JefeAgencia,
+                        "",
+                        "",
+                        vMotivo5,
+                        vMsg5
+                        );
+                }
+            }
+            else
+            {
+                //SOLICITANTE                
+                string vMotivo = "Se informa que su solicitud fué enviada.";
+                string vMsg = "Su solicitud debe ser aprobado por su jefe inmediato.";
+                vService.EnviarMensaje(vCorreo,
+                   typeBody.Solicitante,
+                   Session["usuATM"].ToString(),
+                   vNombre,
+                   vMotivo,
+                   vMsg
+                   );
+                //SUPERVISOR                
+                string vMotivo2 = " le envía solicitud de mantenimiento para su respectiva aprobación.";
+                string vMsg2 = "Para continuar con el proceso de notificación debe aprobar dicha solicitud.";
+                vService.EnviarMensaje(vCorreo,
+                   typeBody.Supervisor,
+                   Session["usuATM"].ToString(),
+                   vNombre,
+                   vMotivo2,
+                   vMsg2
+                   );
+                //TECNICORESPONSABLE
+                string vMotivo3 = " se le informa que se le asignó un mantenimiento de ATM.";
+                string vMsg3 = "Dicha solicitud debe ser aprobado por su jefe inmediato.";
+                vService.EnviarMensaje(Session["ATM_Notif_emailTecnicoResponsable"].ToString(),
+                   typeBody.Tecnicos,
+                   "",
+                   DLLtecResponsable.SelectedItem.Text,
+                   vMotivo3,
+                   vMsg3
+                   );
+                //TECNICOPARTICIPANTE
+                string vMotivo4 = " se le informa que formará parte de equipo de mantenimiento de ATM";
+                string vMsg4 = "Dicha solicitud debe ser aprobado por su jefe inmediato.";
+                foreach (DataRow item in GVBusqueda.Rows)
+                {
+                    vService.EnviarMensaje(item["correo"].ToString(),
+                        typeBody.Tecnicos,
+                        item["idUsuario"].ToString(),
+                        item["nombre"].ToString(),
+                        vMotivo4,
+                        vMsg4
+                        );
+                }
+                //JEFES DE AGENCIA
+                string vMotivo5 = " solicita permiso para realizar mantenimiento programado a su agencia.";
+                string vMsg5 = "Solicitud debe ser aprobado por su persona.";
+                foreach (DataRow item in GVjefesAgencias.Rows)
+                {
+                    vService.EnviarMensaje(item["mail"].ToString(),
+                        typeBody.JefeAgencia,
+                        "",
+                        "",
+                        vMotivo5,
+                        vMsg5
+                        );
+                }
+            }
+        }
+
         protected void btnModalEnviarNotificacion_Click(object sender, EventArgs e)
         {
             string id = Request.QueryString["id"];
@@ -290,9 +419,13 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     {
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
                         Mensaje("Notificación aprobada con éxito", WarningType.Success);
+                        //Enviar Correo
+                        //EnviarCorreo();
+                        //Enviar Correo
                         LimpiarNotificacion();
                         UpNotif.Update();
                         Session.Clear();
+                        Session["usuATM"] = "acedillo";
                         Response.Redirect("buscarAprobarNotificacion.aspx");
                     }
                     else
@@ -340,7 +473,10 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                                 usuariosMantenimiento();
                             }
                             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
-                            Mensaje("Mantenimiento modificado con éxito", WarningType.Success);
+                            Mensaje("Mantenimiento creado con éxito", WarningType.Success);
+                            //Enviar Correo
+                            //EnviarCorreo();
+                            //Enviar Correo
                             LimpiarNotificacion();
                             UpNotif.Update();
                             cargarData();
@@ -360,6 +496,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                         Mensaje(Ex.Message, WarningType.Danger);
                     }
                     Session.Clear();
+                    Session["usuATM"] = "acedillo";
                 }
                 else
                 {
@@ -384,6 +521,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 {
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
                     Mensaje("Mantenimiento cancelado con éxito, ahora está en lista de reprogramación", WarningType.Success);
+                   
                     LimpiarNotificacion();
                     UpNotif.Update();
                     cargarData();
@@ -928,9 +1066,71 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                         lbRep1.Visible = false;
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal2();", true);
                         Mensaje("Notificación enviada a reprogramación exitoso", WarningType.Success);
+                        ////CORREO
+                        //string vCorreo = "acedillo@bancatlan.hn";
+                        //string vNombre = "Adán Cedillo";
+                        //SmtpService vService = new SmtpService();
+                        ////SOLICITANTE                
+                        //string vMotivo = "Se informa que su solicitud fué debidamente aprobado.";
+                        //string vMsg = "Puede continuar con el proceso.";
+                        //vService.EnviarMensaje(Session["ATM_CORREOCREADOR"].ToString(),
+                        //   typeBody.Aprobado,
+                        //   Session["USUCREADORATM"].ToString(),
+                        //   Session["ATM_NOMBRECREADOR"].ToString() + Session["ATM_APELLIDOCREADOR"].ToString(),
+                        //   vMotivo,
+                        //   vMsg
+                        //   );
+                        ////SUPERVISOR                 
+                        //string vMotivo2 = " fué notificado de la aprobación de su respectiva solicitud.";
+                        //string vMsg2 = "Solicitud fue aprobado exitosamente.";
+                        //vService.EnviarMensaje(vCorreo,
+                        //   typeBody.Supervisor,
+                        //   Session["usuATM"].ToString(),
+                        //   vNombre,
+                        //   vMotivo2,
+                        //   vMsg2
+                        //   );
+                        ////TECNICORESPONSABLE
+                        //string vMotivo3 = " se aprobó mantenimiento asignado.";
+                        //string vMsg3 = "Solicitud fue aprobado exitosamente.";
+                        //vService.EnviarMensaje(Session["ATM_Notif_emailTecnicoResponsable"].ToString(),
+                        //   typeBody.Tecnicos,
+                        //   "",
+                        //   DLLtecResponsable.SelectedItem.Text,
+                        //   vMotivo3,
+                        //   vMsg3
+                        //   );
+                        ////TECNICOPARTICIPANTE
+                        //string vMotivo4 = " se aprobó mantenimiento asignado.";
+                        //string vMsg4 = "Solicitud fue aprobado exitosamente.";
+                        //foreach (DataRow item in GVBusqueda.Rows)
+                        //{
+                        //    vService.EnviarMensaje(item["correo"].ToString(),
+                        //        typeBody.Tecnicos,
+                        //        item["idUsuario"].ToString(),
+                        //        item["nombre"].ToString(),
+                        //        vMotivo4,
+                        //        vMsg4
+                        //        );
+                        //}
+                        ////JEFES DE AGENCIA
+                        //string vMotivo5 = " aprobó mantenimiento programado a su agencia.";
+                        //string vMsg5 = "Solicitud fue aprobado exitosamente.";
+                        //foreach (DataRow item in GVLlenaJefeApruebaNotif.Rows)
+                        //{
+                        //    vService.EnviarMensaje(item["Correo"].ToString(),
+                        //        typeBody.JefeAgencia,
+                        //        "",
+                        //        "",
+                        //        vMotivo5,
+                        //        vMsg5
+                        //        );
+                        //}
+                        ////CORREO
                         LimpiarNotificacion();
                         UpNotif.Update();
                         Session.Clear();
+                        Session["usuATM"] = "acedillo";
                         Response.Redirect("buscarAprobarNotificacion.aspx");
                     }
                     else

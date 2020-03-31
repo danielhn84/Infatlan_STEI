@@ -110,7 +110,23 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                             Session["usuario"] = item["Usuario"].ToString();
                             Session["identidad"] = item["Identidad"].ToString();
                             Session["codATM"] = item["Codigo"].ToString();
+                            Session["emailEmpleadoATM"] = item["Correo"].ToString();
+                            Session["USUCREADORATM"] = item["UsuarioCreador"].ToString();
+                           
                         }
+
+                       
+                            DataTable vDatos2 = new DataTable();
+                            String vQuery2 = "STEISP_AGENCIA_CreacionNotificacion 6,'" + Session["USUCREADORATM"].ToString() + "'";
+                            vDatos2 = vConexion.ObtenerTabla(vQuery2);
+                            foreach (DataRow item in vDatos2.Rows)
+                            {                            
+                                Session["ATM_NOMBRECREADOR"] = item["nombre"].ToString();
+                                Session["ATM_APELLIDOCREADOR"] = item["apellidos"].ToString();
+                                Session["ATM_CORREOCREADOR"] = item["correo"].ToString();
+                            }
+                                
+
                         TxBuscarTecnicoATM.Text = string.Empty;
                         Response.Redirect("notificacion.aspx?id=2&tipo=3");
                         //Response.Redirect("aprobarNotificacion.aspx");

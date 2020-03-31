@@ -158,12 +158,23 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                         Session["ATM_SYSAID_VERIF_CREAR"] = item["SysAid"].ToString();
                         Session["ATM_TECNICO_VERIF_CREAR"] = item["Tecnico"].ToString();
                         Session["ATM_USUARIO_VERIF_CREAR"] = item["Usuario"].ToString();
+                        Session["ATM_USUCORREO_VERIF_CREAR"] = item["CorreoTecnico"].ToString();
                         Session["ATM_IDENTIDAD_VERIF_CREAR"] = item["Identidad"].ToString();
                         Session["ATM_SO_VERIF_CREAR"] = item["SO"].ToString();
                         Session["ATM_VERSIONSW_VERIF_CREAR"] = item["VersionSw"].ToString();
-
+                        Session["ATM_USUCREADOR_VERIF_CREAR"] = item["UsuarioCreador"].ToString();
                     }
                     
+                    DataTable vDatos4 = new DataTable();
+                    String vQuery4 = "STEISP_AGENCIA_CreacionNotificacion 6,'" + Session["ATM_USUCREADOR_VERIF_CREAR"].ToString() + "'";
+                    vDatos4 = vConexion.ObtenerTabla(vQuery4);
+                    foreach (DataRow item in vDatos4.Rows)
+                    {
+                        Session["ATM_NOMBRECREADOR_VERIF"] = item["nombre"].ToString();
+                        Session["ATM_APELLIDOCREADOR_VERIF"] = item["apellidos"].ToString();
+                        Session["ATM_CORREOCREADOR_VERIF"] = item["correo"].ToString();
+                    }
+
                     DataTable vDatos2 = new DataTable();
                     string vQuery2 = "STEISP_ATM_Generales 25, '" + codVerificacion + "'";
                     vDatos2 = vConexion.ObtenerTabla(vQuery2);

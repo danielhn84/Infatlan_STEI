@@ -237,6 +237,7 @@
                                     <asp:BoundField DataField="idUsuario" HeaderText="Usuario" ItemStyle-Width="30%" />
                                     <asp:BoundField DataField="nombre" HeaderText="Nombre" ItemStyle-Width="30%" />
                                     <asp:BoundField DataField="identidad" HeaderText="Identidad" ItemStyle-Width="30%" />
+                                    <asp:BoundField DataField="correo" HeaderText="Correo" Visible="false" ItemStyle-Width="30%" />
                                 </Columns>
                             </asp:GridView>
                         </div>
