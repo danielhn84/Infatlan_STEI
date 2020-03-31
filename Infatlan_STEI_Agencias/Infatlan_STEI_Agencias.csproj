@@ -467,6 +467,7 @@
     <Content Include="assets\images\users\usuario.png" />
     <Content Include="assets\images\usuario.png" />
     <Content Include="assets\images\vistaPrevia.JPG" />
+    <Content Include="assets\images\vistaPrevia1.JPG" />
     <Content Include="assets\node_modules\blockUI\jquery.blockUI.js" />
     <Content Include="assets\node_modules\bootstrap-datepicker\bootstrap-datepicker.min.css" />
     <Content Include="assets\node_modules\bootstrap-datepicker\bootstrap-datepicker.min.js" />
@@ -3291,17 +3292,19 @@
     <Content Include="js\perfect-scrollbar.jquery.min.js" />
     <Content Include="js\sidebarmenu.js" />
     <Content Include="js\waves.js" />
-    <Content Include="paginasAgencia\aprobarNotificacion.aspx" />
-    <Content Include="paginasAgencia\Cableado.aspx" />
-    <Content Include="paginasAgencia\completarLV.aspx" />
-    <Content Include="paginasAgencia\completarLV.html" />
-    <Content Include="paginasAgencia\configuraciones\usuarios.aspx" />
-    <Content Include="paginasAgencia\creacionNotificacion.aspx" />
-    <Content Include="paginasAgencia\defaultAgencia.aspx" />
-    <Content Include="paginasAgencia\ListaVerificacion.aspx" />
-    <Content Include="paginasAgencia\lvPendientesCompletar.aspx" />
-    <Content Include="paginasAgencia\lvIndividual.aspx" />
-    <Content Include="paginasAgencia\reprogramarMantenimiento.aspx" />
+    <Content Include="pages\configuraciones\calendarioMantenimientoAnual.aspx" />
+    <Content Include="pages\mantenimiento\aprobarNotificacion.aspx" />
+    <Content Include="pages\configuraciones\agenciaTipo.aspx" />
+    <Content Include="pages\configuraciones\creacionAgencia.aspx" />
+    <Content Include="pages\configuraciones\motivosCancelacionMantenimientos.aspx" />
+    <Content Include="pages\configuraciones\tiposAreas.aspx" />
+    <Content Include="pages\mantenimiento\creacionNotificacion.aspx" />
+    <Content Include="pages\defaultAgencia.aspx" />
+    <Content Include="pages\mantenimiento\lvPendientesAprobarJefes.aspx" />
+    <Content Include="pages\mantenimiento\lvPendientesCompletar.aspx" />
+    <Content Include="pages\mantenimiento\lvIndividual.aspx" />
+    <Content Include="pages\mantenimiento\lvPendientesModificar.aspx" />
+    <Content Include="pages\mantenimiento\reprogramarMantenimiento.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -3321,71 +3324,95 @@
     <Compile Include="mainAgencia.Master.designer.cs">
       <DependentUpon>mainAgencia.Master</DependentUpon>
     </Compile>
-    <Compile Include="paginasAgencia\aprobarNotificacion.aspx.cs">
+    <Compile Include="pages\configuraciones\calendarioMantenimientoAnual.aspx.cs">
+      <DependentUpon>calendarioMantenimientoAnual.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\configuraciones\calendarioMantenimientoAnual.aspx.designer.cs">
+      <DependentUpon>calendarioMantenimientoAnual.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\mantenimiento\aprobarNotificacion.aspx.cs">
       <DependentUpon>aprobarNotificacion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="paginasAgencia\aprobarNotificacion.aspx.designer.cs">
+    <Compile Include="pages\mantenimiento\aprobarNotificacion.aspx.designer.cs">
       <DependentUpon>aprobarNotificacion.aspx</DependentUpon>
     </Compile>
-    <Compile Include="paginasAgencia\Cableado.aspx.cs">
-      <DependentUpon>Cableado.aspx</DependentUpon>
+    <Compile Include="pages\configuraciones\agenciaTipo.aspx.cs">
+      <DependentUpon>agenciaTipo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="paginasAgencia\Cableado.aspx.designer.cs">
-      <DependentUpon>Cableado.aspx</DependentUpon>
+    <Compile Include="pages\configuraciones\agenciaTipo.aspx.designer.cs">
+      <DependentUpon>agenciaTipo.aspx</DependentUpon>
     </Compile>
-    <Compile Include="paginasAgencia\completarLV.aspx.cs">
-      <DependentUpon>completarLV.aspx</DependentUpon>
+    <Compile Include="pages\configuraciones\creacionAgencia.aspx.cs">
+      <DependentUpon>creacionAgencia.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="paginasAgencia\completarLV.aspx.designer.cs">
-      <DependentUpon>completarLV.aspx</DependentUpon>
+    <Compile Include="pages\configuraciones\creacionAgencia.aspx.designer.cs">
+      <DependentUpon>creacionAgencia.aspx</DependentUpon>
     </Compile>
-    <Compile Include="paginasAgencia\configuraciones\usuarios.aspx.cs">
-      <DependentUpon>usuarios.aspx</DependentUpon>
+    <Compile Include="pages\configuraciones\motivosCancelacionMantenimientos.aspx.cs">
+      <DependentUpon>motivosCancelacionMantenimientos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="paginasAgencia\creacionNotificacion.aspx.cs">
+    <Compile Include="pages\configuraciones\motivosCancelacionMantenimientos.aspx.designer.cs">
+      <DependentUpon>motivosCancelacionMantenimientos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\configuraciones\tiposAreas.aspx.cs">
+      <DependentUpon>tiposAreas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\configuraciones\tiposAreas.aspx.designer.cs">
+      <DependentUpon>tiposAreas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\mantenimiento\creacionNotificacion.aspx.cs">
       <DependentUpon>creacionNotificacion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="paginasAgencia\creacionNotificacion.aspx.designer.cs">
+    <Compile Include="pages\mantenimiento\creacionNotificacion.aspx.designer.cs">
       <DependentUpon>creacionNotificacion.aspx</DependentUpon>
     </Compile>
-    <Compile Include="paginasAgencia\defaultAgencia.aspx.cs">
+    <Compile Include="pages\defaultAgencia.aspx.cs">
       <DependentUpon>defaultAgencia.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="paginasAgencia\defaultAgencia.aspx.designer.cs">
+    <Compile Include="pages\defaultAgencia.aspx.designer.cs">
       <DependentUpon>defaultAgencia.aspx</DependentUpon>
     </Compile>
-    <Compile Include="paginasAgencia\ListaVerificacion.aspx.cs">
-      <DependentUpon>ListaVerificacion.aspx</DependentUpon>
+    <Compile Include="pages\mantenimiento\lvPendientesAprobarJefes.aspx.cs">
+      <DependentUpon>lvPendientesAprobarJefes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="paginasAgencia\ListaVerificacion.aspx.designer.cs">
-      <DependentUpon>ListaVerificacion.aspx</DependentUpon>
+    <Compile Include="pages\mantenimiento\lvPendientesAprobarJefes.aspx.designer.cs">
+      <DependentUpon>lvPendientesAprobarJefes.aspx</DependentUpon>
     </Compile>
-    <Compile Include="paginasAgencia\lvPendientesCompletar.aspx.cs">
+    <Compile Include="pages\mantenimiento\lvPendientesCompletar.aspx.cs">
       <DependentUpon>lvPendientesCompletar.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="paginasAgencia\lvPendientesCompletar.aspx.designer.cs">
+    <Compile Include="pages\mantenimiento\lvPendientesCompletar.aspx.designer.cs">
       <DependentUpon>lvPendientesCompletar.aspx</DependentUpon>
     </Compile>
-    <Compile Include="paginasAgencia\lvIndividual.aspx.cs">
+    <Compile Include="pages\mantenimiento\lvIndividual.aspx.cs">
       <DependentUpon>lvIndividual.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="paginasAgencia\lvIndividual.aspx.designer.cs">
+    <Compile Include="pages\mantenimiento\lvIndividual.aspx.designer.cs">
       <DependentUpon>lvIndividual.aspx</DependentUpon>
     </Compile>
-    <Compile Include="paginasAgencia\reprogramarMantenimiento.aspx.cs">
+    <Compile Include="pages\mantenimiento\lvPendientesModificar.aspx.cs">
+      <DependentUpon>lvPendientesModificar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\mantenimiento\lvPendientesModificar.aspx.designer.cs">
+      <DependentUpon>lvPendientesModificar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\mantenimiento\reprogramarMantenimiento.aspx.cs">
       <DependentUpon>reprogramarMantenimiento.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="paginasAgencia\reprogramarMantenimiento.aspx.designer.cs">
+    <Compile Include="pages\mantenimiento\reprogramarMantenimiento.aspx.designer.cs">
       <DependentUpon>reprogramarMantenimiento.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -4491,6 +4518,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
