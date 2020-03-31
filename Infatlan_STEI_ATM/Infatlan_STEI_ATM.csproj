@@ -3230,6 +3230,11 @@
     <Content Include="assets\node_modules\x-editable\dist\jqueryui-editable\img\loading.gif" />
     <Content Include="assets\node_modules\x-editable\dist\jqueryui-editable\js\jqueryui-editable.js" />
     <Content Include="assets\node_modules\x-editable\dist\jqueryui-editable\js\jqueryui-editable.min.js" />
+    <Content Include="email\TemplateMail.html" />
+    <Content Include="img\logo.png" />
+    <Content Include="pages\devolver\rechazados.aspx" />
+    <Content Include="pages\mantenimiento\buscarAprobarVerificacion.aspx" />
+    <Content Include="pages\mantenimiento\buscarVerificacion.aspx" />
     <Content Include="css\animate.min.css" />
     <Content Include="css\GridStyle.css" />
     <Content Include="css\pages\bootstrap-switch.css" />
@@ -3277,25 +3282,26 @@
     <Content Include="dist\js\jquery.smartWizard.min.js" />
     <Content Include="img\admin111.jpg" />
     <Content Include="js\bootstrap-notify.js" />
-    <Content Include="pagesATM\addATM.aspx" />
-    <Content Include="pagesATM\aprobarNotificacionATM.aspx" />
-    <Content Include="pagesATM\aprobarVerificacionATM.aspx" />
-    <Content Include="pagesATM\buscarAprobarNotificacionATM.aspx" />
-    <Content Include="pagesATM\buscarReprogramarATM.aspx" />
-    <Content Include="pagesATM\detalleModeloATM.aspx" />
-    <Content Include="pagesATM\mantenimientosATM.aspx" />
-    <Content Include="pagesATM\marcasATM.aspx" />
-    <Content Include="pagesATM\modeloATM.aspx" />
-    <Content Include="pagesATM\procesadorATM.aspx" />
-    <Content Include="pagesATM\Prueba.aspx" />
-    <Content Include="pagesATM\reprogramacionATM.aspx" />
-    <Content Include="pagesATM\soATM.aspx" />
-    <Content Include="pagesATM\tecladoATM.aspx" />
-    <Content Include="pagesATM\tipoATM.aspx" />
-    <Content Include="pagesATM\tipoCargaATM.aspx" />
-    <Content Include="pagesATM\updateATM.aspx" />
-    <Content Include="pagesATM\updateATMTotal.aspx" />
-    <Content Include="pagesATM\verificacionATM.aspx" />
+    <Content Include="pages\ATM\add.aspx" />
+    <Content Include="pages\mantenimiento\aprobarNotificacion.aspx" />
+    <Content Include="pages\mantenimiento\aprobarVerificacion.aspx" />
+    <Content Include="pages\mantenimiento\buscarAprobarNotificacion.aspx" />
+    <Content Include="pages\reprogramar\buscarReprogramar.aspx" />
+    <Content Include="pages\ATM\cancelarVerificacion.aspx" />
+    <Content Include="pages\ATM\detalleModelo.aspx" />
+    <Content Include="pages\calendario\mantenimientos.aspx" />
+    <Content Include="pages\ATM\marcas.aspx" />
+    <Content Include="pages\ATM\modelo.aspx" />
+    <Content Include="pages\ATM\procesador.aspx" />
+    <Content Include="pages\Prueba.aspx" />
+    <Content Include="pages\reprogramar\reprogramacion.aspx" />
+    <Content Include="pages\ATM\so.aspx" />
+    <Content Include="pages\ATM\teclado.aspx" />
+    <Content Include="pages\ATM\tipo.aspx" />
+    <Content Include="pages\ATM\tipoCarga.aspx" />
+    <Content Include="pages\ATM\update.aspx" />
+    <Content Include="pages\ATM\updateTotal.aspx" />
+    <Content Include="pages\mantenimiento\verificacion.aspx" />
     <Content Include="js\custom.js" />
     <Content Include="js\custom.min.js" />
     <Content Include="js\dashboard1.js" />
@@ -3317,11 +3323,36 @@
     <Content Include="js\perfect-scrollbar.jquery.min.js" />
     <Content Include="js\sidebarmenu.js" />
     <Content Include="js\waves.js" />
-    <Content Include="pagesATM\notificacionATM.aspx" />
-    <Content Include="pagesATM\versionSwATM.aspx" />
+    <Content Include="pages\mantenimiento\notificacion.aspx" />
+    <Content Include="pages\ATM\versionSw.aspx" />
     <Content Include="Web.config" />
+    <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="clases\SmtpService.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\devolver\rechazados.aspx.cs">
+      <DependentUpon>rechazados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\devolver\rechazados.aspx.designer.cs">
+      <DependentUpon>rechazados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\mantenimiento\buscarAprobarVerificacion.aspx.cs">
+      <DependentUpon>buscarAprobarVerificacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\mantenimiento\buscarAprobarVerificacion.aspx.designer.cs">
+      <DependentUpon>buscarAprobarVerificacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\mantenimiento\buscarVerificacion.aspx.cs">
+      <DependentUpon>buscarVerificacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\mantenimiento\buscarVerificacion.aspx.designer.cs">
+      <DependentUpon>buscarVerificacion.aspx</DependentUpon>
+    </Compile>
     <Compile Include="clases\bd.cs" />
     <Compile Include="clases\LdapService.cs" />
     <Compile Include="defaultATM.aspx.cs">
@@ -3331,138 +3362,145 @@
     <Compile Include="defaultATM.aspx.designer.cs">
       <DependentUpon>defaultATM.aspx</DependentUpon>
     </Compile>
-    <Compile Include="pagesATM\addATM.aspx.cs">
-      <DependentUpon>addATM.aspx</DependentUpon>
+    <Compile Include="pages\ATM\add.aspx.cs">
+      <DependentUpon>add.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pagesATM\addATM.aspx.designer.cs">
-      <DependentUpon>addATM.aspx</DependentUpon>
+    <Compile Include="pages\ATM\add.aspx.designer.cs">
+      <DependentUpon>add.aspx</DependentUpon>
     </Compile>
-    <Compile Include="pagesATM\aprobarNotificacionATM.aspx.cs">
-      <DependentUpon>aprobarNotificacionATM.aspx</DependentUpon>
+    <Compile Include="pages\mantenimiento\aprobarNotificacion.aspx.cs">
+      <DependentUpon>aprobarNotificacion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pagesATM\aprobarNotificacionATM.aspx.designer.cs">
-      <DependentUpon>aprobarNotificacionATM.aspx</DependentUpon>
+    <Compile Include="pages\mantenimiento\aprobarNotificacion.aspx.designer.cs">
+      <DependentUpon>aprobarNotificacion.aspx</DependentUpon>
     </Compile>
-    <Compile Include="pagesATM\aprobarVerificacionATM.aspx.cs">
-      <DependentUpon>aprobarVerificacionATM.aspx</DependentUpon>
+    <Compile Include="pages\mantenimiento\aprobarVerificacion.aspx.cs">
+      <DependentUpon>aprobarVerificacion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pagesATM\aprobarVerificacionATM.aspx.designer.cs">
-      <DependentUpon>aprobarVerificacionATM.aspx</DependentUpon>
+    <Compile Include="pages\mantenimiento\aprobarVerificacion.aspx.designer.cs">
+      <DependentUpon>aprobarVerificacion.aspx</DependentUpon>
     </Compile>
-    <Compile Include="pagesATM\buscarAprobarNotificacionATM.aspx.cs">
-      <DependentUpon>buscarAprobarNotificacionATM.aspx</DependentUpon>
+    <Compile Include="pages\mantenimiento\buscarAprobarNotificacion.aspx.cs">
+      <DependentUpon>buscarAprobarNotificacion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pagesATM\buscarAprobarNotificacionATM.aspx.designer.cs">
-      <DependentUpon>buscarAprobarNotificacionATM.aspx</DependentUpon>
+    <Compile Include="pages\mantenimiento\buscarAprobarNotificacion.aspx.designer.cs">
+      <DependentUpon>buscarAprobarNotificacion.aspx</DependentUpon>
     </Compile>
-    <Compile Include="pagesATM\buscarReprogramarATM.aspx.cs">
-      <DependentUpon>buscarReprogramarATM.aspx</DependentUpon>
+    <Compile Include="pages\reprogramar\buscarReprogramar.aspx.cs">
+      <DependentUpon>buscarReprogramar.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pagesATM\buscarReprogramarATM.aspx.designer.cs">
-      <DependentUpon>buscarReprogramarATM.aspx</DependentUpon>
+    <Compile Include="pages\reprogramar\buscarReprogramar.aspx.designer.cs">
+      <DependentUpon>buscarReprogramar.aspx</DependentUpon>
     </Compile>
-    <Compile Include="pagesATM\detalleModeloATM.aspx.cs">
-      <DependentUpon>detalleModeloATM.aspx</DependentUpon>
+    <Compile Include="pages\ATM\cancelarVerificacion.aspx.cs">
+      <DependentUpon>cancelarVerificacion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pagesATM\detalleModeloATM.aspx.designer.cs">
-      <DependentUpon>detalleModeloATM.aspx</DependentUpon>
+    <Compile Include="pages\ATM\cancelarVerificacion.aspx.designer.cs">
+      <DependentUpon>cancelarVerificacion.aspx</DependentUpon>
     </Compile>
-    <Compile Include="pagesATM\mantenimientosATM.aspx.cs">
-      <DependentUpon>mantenimientosATM.aspx</DependentUpon>
+    <Compile Include="pages\ATM\detalleModelo.aspx.cs">
+      <DependentUpon>detalleModelo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pagesATM\mantenimientosATM.aspx.designer.cs">
-      <DependentUpon>mantenimientosATM.aspx</DependentUpon>
+    <Compile Include="pages\ATM\detalleModelo.aspx.designer.cs">
+      <DependentUpon>detalleModelo.aspx</DependentUpon>
     </Compile>
-    <Compile Include="pagesATM\marcasATM.aspx.cs">
-      <DependentUpon>marcasATM.aspx</DependentUpon>
+    <Compile Include="pages\calendario\mantenimientos.aspx.cs">
+      <DependentUpon>mantenimientos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pagesATM\marcasATM.aspx.designer.cs">
-      <DependentUpon>marcasATM.aspx</DependentUpon>
+    <Compile Include="pages\calendario\mantenimientos.aspx.designer.cs">
+      <DependentUpon>mantenimientos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="pagesATM\modeloATM.aspx.cs">
-      <DependentUpon>modeloATM.aspx</DependentUpon>
+    <Compile Include="pages\ATM\marcas.aspx.cs">
+      <DependentUpon>marcas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pagesATM\modeloATM.aspx.designer.cs">
-      <DependentUpon>modeloATM.aspx</DependentUpon>
+    <Compile Include="pages\ATM\marcas.aspx.designer.cs">
+      <DependentUpon>marcas.aspx</DependentUpon>
     </Compile>
-    <Compile Include="pagesATM\procesadorATM.aspx.cs">
-      <DependentUpon>procesadorATM.aspx</DependentUpon>
+    <Compile Include="pages\ATM\modelo.aspx.cs">
+      <DependentUpon>modelo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pagesATM\procesadorATM.aspx.designer.cs">
-      <DependentUpon>procesadorATM.aspx</DependentUpon>
+    <Compile Include="pages\ATM\modelo.aspx.designer.cs">
+      <DependentUpon>modelo.aspx</DependentUpon>
     </Compile>
-    <Compile Include="pagesATM\Prueba.aspx.cs">
+    <Compile Include="pages\ATM\procesador.aspx.cs">
+      <DependentUpon>procesador.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\ATM\procesador.aspx.designer.cs">
+      <DependentUpon>procesador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\Prueba.aspx.cs">
       <DependentUpon>Prueba.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pagesATM\Prueba.aspx.designer.cs">
+    <Compile Include="pages\Prueba.aspx.designer.cs">
       <DependentUpon>Prueba.aspx</DependentUpon>
     </Compile>
-    <Compile Include="pagesATM\reprogramacionATM.aspx.cs">
-      <DependentUpon>reprogramacionATM.aspx</DependentUpon>
+    <Compile Include="pages\reprogramar\reprogramacion.aspx.cs">
+      <DependentUpon>reprogramacion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pagesATM\reprogramacionATM.aspx.designer.cs">
-      <DependentUpon>reprogramacionATM.aspx</DependentUpon>
+    <Compile Include="pages\reprogramar\reprogramacion.aspx.designer.cs">
+      <DependentUpon>reprogramacion.aspx</DependentUpon>
     </Compile>
-    <Compile Include="pagesATM\soATM.aspx.cs">
-      <DependentUpon>soATM.aspx</DependentUpon>
+    <Compile Include="pages\ATM\so.aspx.cs">
+      <DependentUpon>so.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pagesATM\soATM.aspx.designer.cs">
-      <DependentUpon>soATM.aspx</DependentUpon>
+    <Compile Include="pages\ATM\so.aspx.designer.cs">
+      <DependentUpon>so.aspx</DependentUpon>
     </Compile>
-    <Compile Include="pagesATM\tecladoATM.aspx.cs">
-      <DependentUpon>tecladoATM.aspx</DependentUpon>
+    <Compile Include="pages\ATM\teclado.aspx.cs">
+      <DependentUpon>teclado.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pagesATM\tecladoATM.aspx.designer.cs">
-      <DependentUpon>tecladoATM.aspx</DependentUpon>
+    <Compile Include="pages\ATM\teclado.aspx.designer.cs">
+      <DependentUpon>teclado.aspx</DependentUpon>
     </Compile>
-    <Compile Include="pagesATM\tipoATM.aspx.cs">
-      <DependentUpon>tipoATM.aspx</DependentUpon>
+    <Compile Include="pages\ATM\tipo.aspx.cs">
+      <DependentUpon>tipo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pagesATM\tipoATM.aspx.designer.cs">
-      <DependentUpon>tipoATM.aspx</DependentUpon>
+    <Compile Include="pages\ATM\tipo.aspx.designer.cs">
+      <DependentUpon>tipo.aspx</DependentUpon>
     </Compile>
-    <Compile Include="pagesATM\tipoCargaATM.aspx.cs">
-      <DependentUpon>tipoCargaATM.aspx</DependentUpon>
+    <Compile Include="pages\ATM\tipoCarga.aspx.cs">
+      <DependentUpon>tipoCarga.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pagesATM\tipoCargaATM.aspx.designer.cs">
-      <DependentUpon>tipoCargaATM.aspx</DependentUpon>
+    <Compile Include="pages\ATM\tipoCarga.aspx.designer.cs">
+      <DependentUpon>tipoCarga.aspx</DependentUpon>
     </Compile>
-    <Compile Include="pagesATM\updateATM.aspx.cs">
-      <DependentUpon>updateATM.aspx</DependentUpon>
+    <Compile Include="pages\ATM\update.aspx.cs">
+      <DependentUpon>update.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pagesATM\updateATM.aspx.designer.cs">
-      <DependentUpon>updateATM.aspx</DependentUpon>
+    <Compile Include="pages\ATM\update.aspx.designer.cs">
+      <DependentUpon>update.aspx</DependentUpon>
     </Compile>
-    <Compile Include="pagesATM\updateATMTotal.aspx.cs">
-      <DependentUpon>updateATMTotal.aspx</DependentUpon>
+    <Compile Include="pages\ATM\updateTotal.aspx.cs">
+      <DependentUpon>updateTotal.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pagesATM\updateATMTotal.aspx.designer.cs">
-      <DependentUpon>updateATMTotal.aspx</DependentUpon>
+    <Compile Include="pages\ATM\updateTotal.aspx.designer.cs">
+      <DependentUpon>updateTotal.aspx</DependentUpon>
     </Compile>
-    <Compile Include="pagesATM\verificacionATM.aspx.cs">
-      <DependentUpon>verificacionATM.aspx</DependentUpon>
+    <Compile Include="pages\mantenimiento\verificacion.aspx.cs">
+      <DependentUpon>verificacion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pagesATM\verificacionATM.aspx.designer.cs">
-      <DependentUpon>verificacionATM.aspx</DependentUpon>
+    <Compile Include="pages\mantenimiento\verificacion.aspx.designer.cs">
+      <DependentUpon>verificacion.aspx</DependentUpon>
     </Compile>
     <Compile Include="mainATM.Master.cs">
       <DependentUpon>mainATM.Master</DependentUpon>
@@ -3471,21 +3509,28 @@
     <Compile Include="mainATM.Master.designer.cs">
       <DependentUpon>mainATM.Master</DependentUpon>
     </Compile>
-    <Compile Include="pagesATM\notificacionATM.aspx.cs">
-      <DependentUpon>notificacionATM.aspx</DependentUpon>
+    <Compile Include="pages\mantenimiento\notificacion.aspx.cs">
+      <DependentUpon>notificacion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pagesATM\notificacionATM.aspx.designer.cs">
-      <DependentUpon>notificacionATM.aspx</DependentUpon>
+    <Compile Include="pages\mantenimiento\notificacion.aspx.designer.cs">
+      <DependentUpon>notificacion.aspx</DependentUpon>
     </Compile>
-    <Compile Include="pagesATM\versionSwATM.aspx.cs">
-      <DependentUpon>versionSwATM.aspx</DependentUpon>
+    <Compile Include="pages\ATM\versionSw.aspx.cs">
+      <DependentUpon>versionSw.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pagesATM\versionSwATM.aspx.designer.cs">
-      <DependentUpon>versionSwATM.aspx</DependentUpon>
+    <Compile Include="pages\ATM\versionSw.aspx.designer.cs">
+      <DependentUpon>versionSw.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\icons\font-awesome\fonts\fontawesome-webfont.eot" />
@@ -4581,7 +4626,7 @@
     <Content Include="scss\widgets\topbar-mail.scss" />
     <Content Include="scss\widgets\weather-widget.scss" />
     <Content Include="scss\widgets\widgets.scss" />
-    <Content Include="pagesATM\plantillas\PlantillaATM.xlsx" />
+    <Content Include="pages\plantillas\PlantillaATM.xlsx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -18,6 +18,7 @@ namespace Infatlan_STEI_ATM
         {
             if (!Page.IsPostBack)
             {
+                Session["usuATM"] = "acedillo";
                 Contar();
             }
         }
@@ -43,9 +44,9 @@ namespace Infatlan_STEI_ATM
                 vDatos4 = vConexion.ObtenerTabla("STEISP_ATM_ConteosDefault 4, '" + usu + "'");
                 GVMantenimiento.DataSource = vDatos4;
                 GVMantenimiento.DataBind();
-                Session["procesadorATM"] = vDatos4;
+                Session["ATM_DEFAULT_MANTREALIZADO"] = vDatos4;
             }
-            catch (Exception ex)
+            catch (Exception Ex)
             {
                 //Mensaje(ex.Message, WarningType.Danger);
             }

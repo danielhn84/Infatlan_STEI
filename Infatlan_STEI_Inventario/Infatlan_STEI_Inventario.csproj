@@ -3257,6 +3257,8 @@
     <Content Include="assets\node_module\x-editable\dist\jqueryui-editable\js\jqueryui-editable.js" />
     <Content Include="assets\node_module\x-editable\dist\jqueryui-editable\js\jqueryui-editable.min.js" />
     <Content Include="css\animate.min.css" />
+    <Content Include="css\fstdropdown.css" />
+    <Content Include="css\fstdropdown.min.css" />
     <Content Include="css\pages\bootstrap-switch.css" />
     <Content Include="css\pages\breadcrumb-page.css" />
     <Content Include="css\pages\chat-app-page.css" />
@@ -3297,6 +3299,8 @@
     <Content Include="js\dashboard2.js" />
     <Content Include="js\dashboard3.js" />
     <Content Include="js\dashboard4.js" />
+    <Content Include="js\fstdropdown.js" />
+    <Content Include="js\fstdropdown.min.js" />
     <Content Include="js\hoverable-collapse.js" />
     <Content Include="js\pages\chat.js" />
     <Content Include="js\pages\flot-data.js" />
@@ -3313,10 +3317,11 @@
     <Content Include="js\perfect-scrollbar.jquery.min.js" />
     <Content Include="js\sidebarmenu.js" />
     <Content Include="js\waves.js" />
-    <Content Include="pages\marcas.aspx" />
-    <Content Include="pages\ubicaciones.aspx" />
+    <Content Include="pages\Configuracion\marcas.aspx" />
+    <Content Include="pages\inventario.aspx" />
+    <Content Include="pages\Configuracion\ubicaciones.aspx" />
     <Content Include="pages\articulos.aspx" />
-    <Content Include="pages\inventarios.aspx" />
+    <Content Include="pages\inventarioUbicacion.aspx" />
     <Content Include="pages\perfiles.aspx" />
     <Content Include="pages\proveedores.aspx" />
     <Content Include="pages\transacciones.aspx" />
@@ -3325,6 +3330,7 @@
   <ItemGroup>
     <Compile Include="clases\db.cs" />
     <Compile Include="clases\generales.cs" />
+    <Compile Include="clases\generarxml.cs" />
     <Compile Include="clases\LdapService.cs" />
     <Compile Include="clases\SmtpService.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -3343,18 +3349,25 @@
     <Compile Include="main.Master.designer.cs">
       <DependentUpon>main.Master</DependentUpon>
     </Compile>
-    <Compile Include="pages\marcas.aspx.cs">
+    <Compile Include="pages\Configuracion\marcas.aspx.cs">
       <DependentUpon>marcas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pages\marcas.aspx.designer.cs">
+    <Compile Include="pages\Configuracion\marcas.aspx.designer.cs">
       <DependentUpon>marcas.aspx</DependentUpon>
     </Compile>
-    <Compile Include="pages\ubicaciones.aspx.cs">
+    <Compile Include="pages\inventario.aspx.cs">
+      <DependentUpon>inventario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\inventario.aspx.designer.cs">
+      <DependentUpon>inventario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\Configuracion\ubicaciones.aspx.cs">
       <DependentUpon>ubicaciones.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pages\ubicaciones.aspx.designer.cs">
+    <Compile Include="pages\Configuracion\ubicaciones.aspx.designer.cs">
       <DependentUpon>ubicaciones.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\articulos.aspx.cs">
@@ -3364,12 +3377,12 @@
     <Compile Include="pages\articulos.aspx.designer.cs">
       <DependentUpon>articulos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="pages\inventarios.aspx.cs">
-      <DependentUpon>inventarios.aspx</DependentUpon>
+    <Compile Include="pages\inventarioUbicacion.aspx.cs">
+      <DependentUpon>inventarioUbicacion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pages\inventarios.aspx.designer.cs">
-      <DependentUpon>inventarios.aspx</DependentUpon>
+    <Compile Include="pages\inventarioUbicacion.aspx.designer.cs">
+      <DependentUpon>inventarioUbicacion.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\perfiles.aspx.cs">
       <DependentUpon>perfiles.aspx</DependentUpon>

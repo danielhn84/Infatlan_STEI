@@ -118,8 +118,8 @@
                     <div class="user-pro-body">
                         <div>
                             <img src="/img/admin111.jpg" alt="user-img" class="img-circle"></div>                           
-                        <div class="dropdown">
-                            <a href="javascript:void(0)" class="dropdown-toggle u-dropdown link hide-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuario <span class="caret"></span></a>
+                        <div class="dropdown">                            
+                            <a href="javascript:void(0)" class="dropdown-toggle u-dropdown link hide-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">acedillo <span class="caret"></span></a>
                             <div class="dropdown-menu animated flipInY">
 
                                 <!-- text-->
@@ -136,32 +136,34 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav"> 
-                        <li><a  href="../pagesATM/buscarReprogramarATM.aspx" aria-expanded="false"><i class="ti-home"></i><span class="hide-menu">Dashboard</span></a></li>
+                        <li><a  href="../../defaultATM.aspx" aria-expanded="false"><i class="ti-home"></i><span class="hide-menu">Dashboard</span></a></li>
                          <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-desktop"></i><span class="hide-menu">ATM<span class="badge badge-pill badge-cyan ml-auto">13</span></span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="../pagesATM/addATM.aspx">Agregar ATM</a></li>
-                                <li><a href="../pagesATM/updateATM.aspx">Modificar ATM</a></li>    
-                                <li><a href="../pagesATM/tipoATM.aspx">Tipo ATM</a></li>
-                                <li><a href="../pagesATM/modeloATM.aspx">Modelo ATM</a></li>
-                                <li><a href="../pagesATM/detalleModeloATM.aspx">Detalle Modelo ATM</a></li>
-                                <li><a href="../pagesATM/tipoCargaATM.aspx">Tipo Carga ATM</a></li>
-                                <li><a href="../pagesATM/procesadorATM.aspx">Procesador ATM</a></li>
-                                <li><a href="../pagesATM/tecladoATM.aspx">Teclado ATM</a></li>                               
-                                <li><a href="../pagesATM/soATM.aspx">Sistema Operativo</a></li>
-                                <li><a href="../pagesATM/versionSwATM.aspx">Versión Software</a></li>
-                                <li><a href="../pagesATM/marcasATM.aspx">Marcas de Disco</a></li>
+                                <li><a href="../../pages/ATM/add.aspx">Agregar</a></li>
+                                <li><a href="../../pages/ATM/update.aspx">Modificar</a></li>    
+                                <li><a href="../../pages/ATM/tipo.aspx">Tipo ATM</a></li>
+                                <li><a href="../../pages/ATM/modelo.aspx">Modelo</a></li>
+                                <li><a href="../../pages/ATM/detalleModelo.aspx">Detalle Modelo</a></li>
+                                <li><a href="../../pages/ATM/tipoCarga.aspx">Tipo Carga</a></li>
+                                <li><a href="../../pages/ATM/procesador.aspx">Procesador</a></li>
+                                <li><a href="../../pages/ATM/teclado.aspx">Teclado</a></li>                               
+                                <li><a href="../../pages/ATM/so.aspx">Sistema Operativo</a></li>
+                                <li><a href="../../pages/ATM/versionSw.aspx">Versión Software</a></li>
+                                <li><a href="../../pages/ATM/marcas.aspx">Marcas de Disco</a></li>
+                                <li><a href="../../pages/ATM/cancelarVerificacion.aspx">Motivo cancelar</a></li>
                             </ul>
                         </li>
                         <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-wrench"></i><span class="hide-menu">Mantenimiento Preventivo ATM<span class="badge badge-pill badge-cyan ml-auto">4</span></span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="../pagesATM/notificacionATM.aspx">Crear Notificación</a></li>
-                                <li><a href="../pagesATM/buscarAprobarNotificacionATM.aspx">Aprobar Notificación</a></li>
-                                <li><a href="../pagesATM/verificacionATM.aspx">Crear Verificación</a></li>   
-                                <li><a href="../pagesATM/aprobarVerificacionATM.aspx">Aprobar Verificación</a></li>
+                                <li><a href="../../pages/mantenimiento/notificacion.aspx">Crear Notificación</a></li>
+                                <li><a href="../../pages/mantenimiento/buscarAprobarNotificacion.aspx">Aprobar Notificación</a></li>
+                                <li><a href="../../pages/mantenimiento/buscarVerificacion.aspx">Crear Verificación</a></li>   
+                                <li><a href="../../pages/mantenimiento/buscarAprobarVerificacion.aspx">Aprobar Verificación</a></li>
                             </ul>
                         </li>
-                        <li><a  href="../pagesATM/buscarReprogramarATM.aspx" aria-expanded="false"><i class="ti-timer"></i><span class="hide-menu">Reprogramación</span></a></li>
-                        <li><a  href="../pagesATM/mantenimientosATM.aspx" aria-expanded="false"><i class=" ti-calendar"></i><span class="hide-menu">Calendario</span></a></li>
+                        <li><a  href="../../pages/devolver/rechazados.aspx" aria-expanded="false"><i class="ti-back-left"></i><span class="hide-menu">Devoluciones</span></a></li>
+                        <li><a  href="../../pages/reprogramar/buscarReprogramar.aspx" aria-expanded="false"><i class="ti-timer"></i><span class="hide-menu">Reprogramación</span></a></li>
+                        <li><a  href="../../pages/calendario/mantenimientos.aspx" aria-expanded="false"><i class=" ti-calendar"></i><span class="hide-menu">Calendario</span></a></li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
