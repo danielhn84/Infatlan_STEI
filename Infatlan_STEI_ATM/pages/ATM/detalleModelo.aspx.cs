@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Weblbdetalle1
+using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using Infatlan_STEI_ATM.clases;
+
 
 namespace Infatlan_STEI_ATM.pages.ATM
 {
@@ -48,6 +49,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
         {
             if (HttpContext.Current.Session["DETALLE_MODELO_ATM"] == null)
             {
+                
                 //lbdetalle1.Visible = false;
                 //lbdetalle2.Visible = false;
                 string det ="";
