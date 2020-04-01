@@ -226,5 +226,86 @@ namespace Infatlan_STEI_Agencias.pages
 
             }
         }
+
+        protected void TxBuscarAgencia_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                cargarDatos();
+                String vBusqueda = TxBuscarAgencia.Text;
+                DataTable vDatos = (DataTable)Session["AG_LvPC_LISTAS_PENDIENTES_TECNICO"];
+                if (vBusqueda.Equals(""))
+                {
+                    GVListaVerificacion.DataSource = vDatos;
+                    GVListaVerificacion.DataBind();
+                    UPListaVerificacion.Update();
+                }
+                else
+                {
+                    EnumerableRowCollection<DataRow> filtered = vDatos.AsEnumerable()
+                        .Where(r => r.Field<String>("Lugar").Contains(vBusqueda));
+
+                    Boolean isNumeric = int.TryParse(vBusqueda, out int n);
+
+                    if (isNumeric)
+                    {
+                        if (filtered.Count() == 0)
+                        {
+                            filtered = vDatos.AsEnumerable().Where(r =>
+                                Convert.ToInt32(r["id_Mantenimiento"]) == Convert.ToInt32(vBusqueda));
+                        }
+                    }
+
+                    DataTable vDatosFiltrados = new DataTable();
+                    vDatosFiltrados.Columns.Add("id_Mantenimiento");
+                    vDatosFiltrados.Columns.Add("fecha");
+                    vDatosFiltrados.Columns.Add("Cod_Agencia");
+                    vDatosFiltrados.Columns.Add("Lugar");
+                    vDatosFiltrados.Columns.Add("Area");
+                    vDatosFiltrados.Columns.Add("sysAid");
+                    vDatosFiltrados.Columns.Add("Responsable");
+                    vDatosFiltrados.Columns.Add("idUsuario");
+
+                    foreach (DataRow item in filtered)
+                    {
+                        vDatosFiltrados.Rows.Add(
+                            item["id_Mantenimiento"].ToString(),
+                            item["fecha"].ToString(),
+                            item["Cod_Agencia"].ToString(),
+                            item["Lugar"].ToString(),
+                            item["Area"].ToString(),
+                            item["sysAid"].ToString(),
+                            item["Responsable"].ToString(),
+                            item["idUsuario"].ToString()
+
+                            );
+                    }
+
+                    GVListaVerificacion.DataSource = vDatosFiltrados;
+                    GVListaVerificacion.DataBind();
+                    Session["AG_LvPC_LISTAS_PENDIENTES_TECNICO"] = vDatosFiltrados;
+                    UPListaVerificacion.Update();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Mensaje(ex.Message, WarningType.Danger);
+            }
+        }
+
+        protected void GVListaVerificacion_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            try
+            {
+                GVListaVerificacion.PageIndex = e.NewPageIndex;
+                GVListaVerificacion.DataSource = (DataTable)Session["AG_LvPC_LISTAS_PENDIENTES_TECNICO"];
+                GVListaVerificacion.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Mensaje(ex.Message, WarningType.Danger);
+            }
+        }
     }
 }

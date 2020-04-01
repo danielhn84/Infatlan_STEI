@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/mainAgencia.Master" AutoEventWireup="true" CodeBehind="lvIndividual.aspx.cs" Inherits="Infatlan_STEI_Agencias.pages.LvIndividual" %>
 
+
 <%@ Register Assembly="System.Web.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI" TagPrefix="asp" %>
 
 
@@ -199,7 +200,7 @@
     <%--(INICIO) Targeta Datos Generales --%>
     <div class="card">
         <div class="card-body">
-            <h3 class="card-title"><i class="mdi mdi-numeric-1-box-multiple-outline mr-2"></i>Datos Generales</h3>
+            <h3 class="card-title">Datos Generales</h3>
 
             <div class="row p-t-20">
                 <div class="col-md-6">
@@ -274,7 +275,7 @@
     <%--(INICIO) Targeta Personal Encargado --%>
     <div class="card">
         <div class="card-body">        
-          <h3 class="card-title"><i class="mdi mdi-numeric-2-box-multiple-outline mr-2"></i>Personal Encargado</h3>
+          <h3 class="card-title">Personal Encargado</h3>
            <br>
             <h5 class="card-title">-Técnico Responsable</h5>
             <div class="row p-t-20">
@@ -334,7 +335,7 @@
     <%--(INICIO) Targeta Datos Tecnicos --%>
     <div class="card">
         <div class="card-body">
-            <h3 class="card-title"><i class="mdi mdi-numeric-3-box-multiple-outline mr-2"></i>Datos Técnicos</h3>
+            <h3 class="card-title">Datos Técnicos</h3>
 
             <div class="row p-t-20">
                 <div class="col-md-2">
@@ -404,7 +405,7 @@
     <%--(INICIO) Targeta Pruebas --%>
     <div class="card">
         <div class="card-body">
-            <h3 class="card-title"><i class="mdi mdi-numeric-4-box-multiple-outline mr-2"></i>Pruebas de PC</h3>
+            <h3 class="card-title">Pruebas de PC</h3>
             <asp:UpdatePanel runat="server" ID="UpNoProbaronEquipo" UpdateMode="Conditional">
                 <ContentTemplate>
                     <div class="row p-t-20">
@@ -429,7 +430,7 @@
     <%--(INICIO) Targeta Equipo de Comunicacion --%>
     <div class="card">
         <div class="card-body">
-            <h3 class="card-title"><i class="mdi mdi-numeric-5-box-multiple-outline mr-2"></i>Equipo de Comunicación</h3>
+            <h3 class="card-title">Equipo de Comunicación</h3>
 
             <%-- Pregunta 1 --%>
             <asp:UpdatePanel runat="server" ID="UpClimatizacion" UpdateMode="Conditional">
@@ -484,7 +485,7 @@
     <%--(INICIO) Targeta Entorno Cuarto de Comunicaciones --%>
     <div class="card">
         <div class="card-body">           
-             <h3 class="card-title"><i class="mdi mdi-numeric-6-box-multiple-outline mr-2"></i> Entorno Cuarto de Comunicaciones</h3>
+             <h3 class="card-title"> Entorno Cuarto de Comunicaciones</h3>
          
             <%-- Pregunta 1 --%>
             <asp:UpdatePanel runat="server" ID="UpPolvoSuciedad" UpdateMode="Conditional">
@@ -579,7 +580,7 @@
     <%--(INICIO) Targeta Imagenes Obligatorias--%>
     <div class="card">
         <div class="card-body">
-            <h3 class="card-title"><i class="mdi mdi-numeric-7-box-multiple-outline mr-2"></i>Entorno y Rack de Comunicaciones</h3>          
+            <h3 class="card-title">Entorno y Rack de Comunicaciones</h3>          
             <%-- Pregunta 1 --%>
             <div class="row p-t-20">
                 <div class="col-md-8">
@@ -608,7 +609,7 @@
     <%--(INICIO) Targeta Imagenes Observaciones--%>
     <div class="card">
         <div class="card-body">
-            <h3 class="card-title"><i class="mdi mdi-numeric-8-box-multiple-outline mr-2"></i>Observaciones Generales</h3>
+            <h3 class="card-title">Observaciones Generales</h3>
             <div class="form-group row" runat="server">
                 <div class="row p-t-20 col-12">
                     <label class="control-label col-md-2">Observaciones:</label>
@@ -638,7 +639,7 @@
      <%--(INICIO) Aprobacion--%>
     <div class="card" runat="server" id="DivAprobacion" visible="false">
         <div class="card-body">
-            <h3 class="card-title"><i class="mdi mdi-numeric-9-box-multiple-outline mr-2"></i>Aprobación</h3>
+            <h3 class="card-title">Aprobación</h3>
             <asp:UpdatePanel runat="server" ID="UpdatePanel9" UpdateMode="Conditional">
                 <ContentTemplate>
                     <div class="row p-t-20">
@@ -784,7 +785,7 @@
                                 <div class="alert alert-success  alert-dismissible align-content-md-center" style="align-self: auto">
                                     <div class="row">
                                         <div class="col-3">
-                                            <p class="text-center"><i class="fa fa-question-circle-o  fa-5x  "><span class="dashicons dashicons-admin-home"></span></i></p>
+                                            <p class="text-center"><img src="https://img.icons8.com/color/70/000000/accept-database.png"/><span class="dashicons dashicons-admin-home"></span></i></p>
                                         </div>
                                         <div class="col-9" style="text-align: center">
 
@@ -804,7 +805,7 @@
                                 <div class="alert alert-success  alert-dismissible align-content-md-center" style="align-self: auto">
                                     <div class="row">
                                         <div class="col-3">
-                                            <p class="text-center"><i class="fa fa-question-circle-o  fa-5x  "><span class="dashicons dashicons-admin-home"></span></i></p>
+                                            <p class="text-center"><img src="https://img.icons8.com/color/70/000000/accept-database.png"/><span class="dashicons dashicons-admin-home"></span></i></p>
                                         </div>
                                         <div class="col-9" style="text-align: center">
 
@@ -912,7 +913,7 @@
                         <div class="alert alert-success  alert-dismissible align-content-md-center" style="align-self: auto">
                             <div class="row">
                                 <div class="col-3">
-                                    <p class="text-center"><i class="fa fa-question-circle-o  fa-5x  "><span class="dashicons dashicons-admin-home"></span></i></p>
+                                    <p class="text-center"><img src="https://img.icons8.com/color/70/000000/accept-database.png"/><span class="dashicons dashicons-admin-home"></span></i></p>
                                 </div>
                                 <div class="col-9" style="text-align: center">
                                     <br>
@@ -939,8 +940,7 @@
                                 <asp:PostBackTrigger ControlID="btnModalEnviarLv" />
                             </Triggers>
                         </asp:UpdatePanel>
-                    </div>
-                
+                    </div>              
             </div>
         </div>
     </div>

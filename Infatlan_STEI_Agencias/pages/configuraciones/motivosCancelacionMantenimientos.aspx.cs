@@ -163,5 +163,77 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             }
 
         }
+
+        protected void GVMotivos_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            try
+            {
+                GVMotivos.PageIndex = e.NewPageIndex;
+                GVMotivos.DataSource = (DataTable)Session["AG_MCM_MOTIVOS"];
+                GVMotivos.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Mensaje(ex.Message, WarningType.Danger);
+            }
+        }
+
+        protected void TxBuscarMotivo_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                cargar();
+                String vBusqueda = TxBuscarMotivo.Text;
+                DataTable vDatos = (DataTable)Session["AG_MCM_MOTIVOS"];
+                if (vBusqueda.Equals(""))
+                {
+                    GVMotivos.DataSource = vDatos;
+                    GVMotivos.DataBind();
+                    UpdatePanel5.Update();
+                }
+                else
+                {
+                    EnumerableRowCollection<DataRow> filtered = vDatos.AsEnumerable()
+                        .Where(r => r.Field<String>("tipo").Contains(vBusqueda));
+
+                    Boolean isNumeric = int.TryParse(vBusqueda, out int n);
+
+                    if (isNumeric)
+                    {
+                        if (filtered.Count() == 0)
+                        {
+                            filtered = vDatos.AsEnumerable().Where(r =>
+                                Convert.ToInt32(r["id"]) == Convert.ToInt32(vBusqueda));
+                        }
+                    }
+
+                    DataTable vDatosFiltrados = new DataTable();
+                    vDatosFiltrados.Columns.Add("id");
+                    vDatosFiltrados.Columns.Add("motivo");
+                    vDatosFiltrados.Columns.Add("tipo");
+                    vDatosFiltrados.Columns.Add("estado");
+
+                    foreach (DataRow item in filtered)
+                    {
+                        vDatosFiltrados.Rows.Add(
+                            item["id"].ToString(),
+                            item["motivo"].ToString(),
+                            item["tipo"].ToString(),
+                            item["estado"].ToString()
+                            );
+                    }
+
+                    GVMotivos.DataSource = vDatosFiltrados;
+                    GVMotivos.DataBind();
+                    Session["AG_MCM_MOTIVOS"] = vDatosFiltrados;
+                    UpdatePanel5.Update();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Mensaje(ex.Message, WarningType.Danger);
+            }
+        }
     }
 }

@@ -23,10 +23,11 @@
             <div class="card">
                 <div class="card-body">
                     <div class="form-body">
-                        <h3 class="card-title"><i class="mdi mdi-numeric-1-box-multiple-outline mr-2"></i>Datos Generales</h3>                       
+                        <h3 class="card-title">Datos Generales</h3>
                         <asp:UpdatePanel runat="server" ID="UPFormulario">
                             <ContentTemplate>
                                 <!--Inicio Fila 1-->
+                                <hr/>
                                 <div class="row p-t-20">
                                     <div class="col-md-6">
                                         <label class="control-label   text-danger">*</label><label class="control-label">Fecha Mantenimiento:</label></label>
@@ -129,7 +130,7 @@
                     <div class="form-body">
                         <asp:UpdatePanel runat="server" ID="UpdatePanel1" UpdateMode="Conditional">
                             <ContentTemplate>
-                            <h3 class="card-title"><i class="mdi mdi-numeric-2-box-multiple-outline mr-2"></i>Personal Encargado</h3>                               
+                            <h3 class="card-title">Personal Encargado</h3>                             
                                 <br>
                                 <h5 class="card-title">-Técnico Responsable</h5>
                                 <div class="row p-t-20">
@@ -166,8 +167,8 @@
                                                 <Columns>
                                                     <asp:TemplateField HeaderText="Acción" ItemStyle-HorizontalAlign="center">
                                                         <ItemTemplate>
-                                                            <asp:LinkButton ID="LBEliminarTecnicoParticipantes" runat="server" CssClass="btn btn-danger" CommandArgument='<%# Eval("idUsuario") %>' CommandName="Eliminar">
-                                                                <i class="icon-trash"></i>
+                                                            <asp:LinkButton ID="LBEliminarTecnicoParticipantes" runat="server"  CommandArgument='<%# Eval("idUsuario") %>' CommandName="Eliminar">
+                                                                <img src="https://img.icons8.com/color/23/000000/delete-property.png"/>
                                                             </asp:LinkButton>
                                                         </ItemTemplate>
                                                         <ItemStyle Width="5%" />
@@ -183,9 +184,9 @@
                                 <br>
                                 <br>
 
-                                <h5 class="card-title">-Jefes de Agencia </h5>
+                               <%-- <h5 class="card-title">-Jefes de Agencia </h5>--%>
                                
-                                <div class="row col-12">                                                                    
+                                <div class="row col-12" runat="server" visible="false">                                                                    
                                     <div class="col-md-6">
                                          <asp:TextBox runat="server"  ID="txtbuscarJefeNotif"   CssClass="form-control"></asp:TextBox>
                                     </div>                                   
@@ -288,8 +289,7 @@
                                     </div>
                                 </div>--%>
 
-                                <br>
-                                <br>
+                         
                             </ContentTemplate>
                         </asp:UpdatePanel>
 
@@ -312,8 +312,7 @@
                                 </div>
                             </div>--%>
 
-                             <br />
-                            <br />
+                      
                             <div class="row p-t-20 col-md-12">
                                 <div class="col-md-5" style="margin-left: auto; margin-left: auto">
                                     <asp:Button ID="BtnEnviarNotificacion" class="btn btn-block btn-lg btn-success" runat="server" Text="Enviar" OnClick="BtnEnviarNotificacion_Click" />
@@ -337,7 +336,8 @@
                  <div class="modal-header bg-dark">
                     <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
-                            <h3 class="modal-title" style="color: white">Crear Notificación</h3>
+                            <h3 class="modal-title" style="color: white" >
+                                <asp:Label ID="lbTitulo" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label></h3>
                         </ContentTemplate>
                     </asp:UpdatePanel>
 
@@ -405,7 +405,7 @@
                             <div class="row">
                                 <div class="col-3">
                                     <br>
-                                    <p class="text-center"><i class="fa fa-question-circle-o  fa-5x  "><span class="dashicons dashicons-admin-home"></span></i></p>
+                                    <p class="text-center"><img src="https://img.icons8.com/color/70/000000/accept-database.png"/><span class="dashicons dashicons-admin-home"></span></i></p>
                                 </div>
                                 <div class="col-9" style="text-align: center">
                                     <br>

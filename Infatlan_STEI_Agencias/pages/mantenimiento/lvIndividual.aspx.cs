@@ -1505,7 +1505,7 @@ namespace Infatlan_STEI_Agencias.pages
 
             limpiar();
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModalEnvioLv();", true);
-            Response.Redirect("/pages/mantenimiento/lvPendientesCompletar.aspx");
+            Response.Redirect("/pages/mantenimiento/lvPendientesModificar.aspx");
 
         }     
         private void limpiar()
