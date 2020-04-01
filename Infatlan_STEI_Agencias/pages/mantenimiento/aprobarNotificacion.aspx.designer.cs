@@ -69,6 +69,24 @@ namespace Infatlan_STEI_Agencias.pages
         protected global::System.Web.UI.WebControls.GridView GVBusqueda;
 
         /// <summary>
+        /// Control UpdatePanel1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+
+        /// <summary>
+        /// Control lbTitulo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbTitulo;
+
+        /// <summary>
         /// Control UpdatePanel3.
         /// </summary>
         /// <remarks>
@@ -148,6 +166,24 @@ namespace Infatlan_STEI_Agencias.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnModalAprobarNotificacion;
+
+        /// <summary>
+        /// Control UpdatePanel6.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel6;
+
+        /// <summary>
+        /// Control lbTituloCancelar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbTituloCancelar;
 
         /// <summary>
         /// Control UpdatePanel2.

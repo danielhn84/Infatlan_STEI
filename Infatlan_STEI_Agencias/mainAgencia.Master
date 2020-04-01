@@ -107,8 +107,8 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <%-- <li><a  href="../pagesATM/buscarReprogramarATM.aspx" aria-expanded="false"><i class="fa fa-chart-bar fa-4x"></i><span class="hide-menu">Dashboard</span></a></li>--%>
-                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa  fa-bar-chart-o fa-4x"></i><span class="hide-menu">Dashboard</span></a>
-                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-bank fa-4x"></i><span class="hide-menu">Configuraciones</span></a>
+                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><img src="https://img.icons8.com/color/28/000000/positive-dynamic.png"/><span class="hide-menu">Dashboard</span></a>
+                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><img src="https://img.icons8.com/color/28/000000/bank-building.png"/><span class="hide-menu">Configuraciones</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="../pages/configuraciones/creacionAgencia.aspx">Creación de Agencia</a></li>
                                 <li><a href="../pages/configuraciones/agenciaTipo.aspx">Tipos de Agencia</a></li>    
@@ -119,7 +119,7 @@
                         </li>
              
                        
-                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-wrench fa-4x"></i><span class="hide-menu">Mantenimiento Preventivo</span></a>
+                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><img src="https://img.icons8.com/color/28/000000/maintenance.png"/><span class="hide-menu">Mantenimiento Preventivo</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="../pages/mantenimiento/creacionNotificacion.aspx">Crear Notificación</a></li>
                                 <li><a href="../pages/mantenimiento/aprobarNotificacion.aspx">Aprobar Notificación</a></li>

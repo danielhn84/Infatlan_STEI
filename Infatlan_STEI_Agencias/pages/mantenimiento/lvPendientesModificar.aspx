@@ -16,17 +16,19 @@
         <div class="card-body">
             <h4 class="card-title">LV Pendientes Modificar</h4>
             <p>Listas de verificación pendientes de modificar que estan asignadas a su persona.</p>
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Buscar</label>
-                    <div class="col-sm-9">
+                    <div class="col-sm-12">
                         <asp:UpdatePanel ID="UpdatePanel5" runat="server">
                             <ContentTemplate>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1"><i class="ti-search"></i></span>
+           
+                                <div class="row p-t-20">
+                                    <div class="col-md-1">
+                                        <label class="control-label   text-danger">*</label><label class="control-label">Buscar:</label></label>                                      
                                     </div>
-                                    <asp:TextBox ID="TxBuscarAgencia" runat="server" placeholder="Búsqueda por nombre de agencia" class="form-control" AutoPostBack="true"></asp:TextBox>
+                                    <div class="col-md-6">
+                                        <asp:TextBox ID="TxBuscarAgencia" runat="server" placeholder="Búsqueda por agencia o codigo, luego presione Enter" class="form-control" AutoPostBack="true" ></asp:TextBox>
+                                    </div>
                                 </div>
                             </ContentTemplate>
                         </asp:UpdatePanel>
@@ -48,14 +50,14 @@
                                 RowStyle-CssClass="rows"
                                 AutoGenerateColumns="false"
                                 AllowPaging="true"
-                                GridLines="None"
+                                GridLines="None" OnPageIndexChanging="GvLvPendentesModificar_PageIndexChanging"
                                 PageSize="10"  OnRowCommand="GvLvPendentesModificar_RowCommand">
 
                                 <Columns>
                                     <asp:TemplateField HeaderText="Acción" ItemStyle-HorizontalAlign="center">
                                         <ItemTemplate>
-                                            <asp:LinkButton ID="LBModificar" runat="server" CssClass="btn btn-info" CommandName="Modificar" CommandArgument='<%# Eval("id_Mantenimiento") %>'>
-                                                        <i class=" icon-pencil"></i>
+                                            <asp:LinkButton ID="LBModificar" runat="server"  CommandName="Modificar" CommandArgument='<%# Eval("id_Mantenimiento") %>'>
+                                                        <img src="https://img.icons8.com/color/23/000000/edit-property.png"/>
                                             </asp:LinkButton>
                                         </ItemTemplate>
                                         <ItemStyle Width="10%" />

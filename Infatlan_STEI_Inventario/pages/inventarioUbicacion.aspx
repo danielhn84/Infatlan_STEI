@@ -9,15 +9,11 @@
         }
     </script>
     <script type="text/javascript">
-        function openModalP() { $('#ModalProveedores').modal('show'); }
-        function cerrarModalP() { $('#ModalProveedores').modal('hide'); }
-        function openModalA() { $('#ModalArticulos').modal('show'); }
-        function cerrarModalA() { $('#ModalArticulos').modal('hide'); }
-        function openModal() { $('#ModalUbicaciones').modal('show'); }
-        function closeModal() { $('#ModalUbicaciones').modal('hide'); }
-        function openModalU() { $('#ModalUbicaciones').modal('show'); }
-        function closeModalU() { $('#ModalUbicaciones').modal('hide'); }
+        function openModal() { $('#ModalMover').modal('show'); }
+        function cerrarModal() { $('#ModalMover').modal('hide'); }
     </script>
+    <link href="../assets/node_module/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css" />
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
     <asp:UpdateProgress ID="UpdateProgress1" runat="server">
@@ -50,8 +46,8 @@
                             HeaderStyle-CssClass="table"
                             RowStyle-CssClass="rows"
                             AutoGenerateColumns="false"
-                            AllowPaging="true"
-                            GridLines="None" 
+                            AllowPaging="true" OnPageIndexChanging="GVBusqueda_PageIndexChanging"
+                            GridLines="None" OnRowCommand="GVBusqueda_RowCommand"
                             PageSize="10" >
                             <Columns>
                                 <asp:BoundField DataField="idInventario" HeaderText="No." />
@@ -60,6 +56,13 @@
                                 <asp:BoundField DataField="serie" HeaderText="Serie" />
                                 <asp:BoundField DataField="cantidad" HeaderText="Cantidad" />
                                 <asp:BoundField DataField="precio" HeaderText="Total" />
+                                <asp:TemplateField HeaderText="Seleccione" HeaderStyle-Width="13%">
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="BtnMover" runat="server" class="btn btn-info mr-2" Title="Mover" CommandArgument='<%# Eval("idInventario") %>' CommandName="MoverArticulo">
+                                            <i class="icon-refresh" ></i>
+                                        </asp:LinkButton>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
                             </Columns>
                         </asp:GridView>
                     </div>
@@ -68,275 +71,58 @@
         </ContentTemplate>
     </asp:UpdatePanel>
 
-    <%--MODAL DE PROVEEDORES--%>
-    <div class="modal fade" id="ModalProveedores" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+    <%--MODAL DE MOVER ARTICULO--%>
+    <div class="modal fade" id="ModalMover" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="ModalLabelModificacion">
-                        <asp:Label ID="LbIdProveedor" runat="server" Text="Crear Nuevo Proveedor"></asp:Label>
+                        <asp:Label ID="LbIdInventario" runat="server" Text="Mover Articulo(s)"></asp:Label>
                     </h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <asp:UpdatePanel ID="UpdatePanelModal" runat="server">
-                        <ContentTemplate>
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="form-group row">
-                                        <div class="col-2" style="margin-left:2%">
-                                            <label class="col-form-label">Nombre</label>
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <asp:TextBox ID="TxNombre" class="form-control text-uppercase" runat="server"></asp:TextBox>                                            
-                                        </div>
-                                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <label class="col-form-label">Ubicación Actual</label>
                                 </div>
-                                <div class="col-6">
-                                    <div class="form-group row">
-                                        <div class="col-3" >
-                                            <label class="col-form-label">Responsable</label>
-                                        </div>
-                                        <div class="col-8">
-                                            <asp:TextBox ID="TxResponsable" class="form-control" runat="server"></asp:TextBox>                                            
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-6">
-                                    <div class="form-group row">
-                                        <div class="col-2" style="margin-left:2%">
-                                            <label class="col-form-label">Teléfono</label>
-                                        </div>
-                                        <div class="col-9">
-                                            <asp:TextBox ID="TxTelefono" class="form-control" runat="server"></asp:TextBox>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group row">
-                                        <div class="col-3">
-                                            <label class="col-form-label">Direccion</label>
-                                        </div>
-                                        <div class="col-8">
-                                            <asp:TextBox ID="TxDireccion" TextMode="MultiLine" class="form-control" runat="server"></asp:TextBox>                                                                                        
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-12" runat="server" id="DivMensajeProv" visible="false" style="display: flex; background-color:tomato; justify-content:center">
-                                    <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbAdvertencia"></asp:Label>
+                                <div class="col-12">
+                                    <asp:UpdatePanel ID="UpdatePanelModal" runat="server">
+                                        <ContentTemplate>
+                                            <asp:TextBox ID="TxActual" ReadOnly="true" CssClass="form-control" runat="server"></asp:TextBox>
+                                            <asp:TextBox Visible="false" ID="TxIdInventario" ReadOnly="true" CssClass="form-control" runat="server"></asp:TextBox>
+                                            <asp:TextBox Visible="false" ID="TxIdUbicacion" ReadOnly="true" CssClass="form-control" runat="server"></asp:TextBox>
+                                            <asp:TextBox Visible="false" ID="TxIdStock" ReadOnly="true" CssClass="form-control" runat="server"></asp:TextBox>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
                                 </div>
                             </div>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group row">
+                                <div class="col-12" >
+                                    <label class="col-form-label">Nueva Ubicación</label>
+                                </div>
+                                <div class="col-12">
+                                    <asp:DropDownList ID="DDLNueva" runat="server" CssClass="select2 form-control custom-select" style="width: 100%"></asp:DropDownList>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12" runat="server" id="DivMensaje" visible="false" style="display: flex; background-color:tomato; justify-content:center">
+                            <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbAdvertencia"></asp:Label>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <asp:UpdatePanel ID="UpdateModificacionBotones" runat="server">
                         <ContentTemplate>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <asp:Button ID="BtnAceptarP" runat="server" Text="Aceptar" class="btn btn-success"/>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <%--MODAL DE ARTICULOS--%>
-    <div class="modal fade" id="ModalArticulos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="ModalLabelModArticulos">
-                        <asp:Label ID="LbIdArticulo" runat="server" Text="Crear Nuevo Articulo"></asp:Label>
-                    </h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <asp:UpdatePanel ID="UpdatePanel4" runat="server">
-                        <ContentTemplate>
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="form-group row">
-                                        <div class="col-2" style="margin-left:2%">
-                                            <label>Tipo de Artículo</label>
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <asp:DropDownList ID="DDLTipo" runat="server" class="form-control"></asp:DropDownList>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group row">
-                                        <div class="col-3">
-                                            <label class="col-form-label">Proveedor</label>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <asp:DropDownList ID="DDLProveedores" runat="server" class="form-control"></asp:DropDownList>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-6">
-                                    <div class="form-group row">
-                                        <div class="col-2" style="margin-left:2%">
-                                            <label class="col-form-label">Modelo</label>
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <asp:TextBox ID="TxModelo" placeholder="" class="form-control" runat="server"></asp:TextBox>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group row">
-                                        <div class="col-2" >
-                                            <label class="col-form-label">Marca</label>
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <asp:DropDownList runat="server" ID="DDLMarca" CssClass="form-control"></asp:DropDownList>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-6">
-                                    <div class="form-group row">
-                                        <div class="col-3" style="margin-left:2%">
-                                            <label class="col-form-label">Cantidad</label>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <asp:TextBox ID="TxCantidad" placeholder="" TextMode="Number" class="form-control" runat="server"></asp:TextBox>                                            
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group row">
-                                        <div class="col-2">
-                                            <label class="col-form-label">Detalle</label>
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <asp:TextBox ID="TxDetalle" placeholder="" class="form-control" runat="server"></asp:TextBox>                                            
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-6">
-                                    <div class="form-group row">
-                                        <div class="col-2" style="margin-left:2%">
-                                            <label class="col-form-label">Serie</label>
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <asp:TextBox ID="TxSerieArt" placeholder="" class="form-control" runat="server"></asp:TextBox>                                            
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-12" runat="server" id="DivMensajeArt" visible="false" style="display: flex; background-color:tomato; justify-content:center">
-                                    <asp:Label runat="server" CssClass="col-form-label text-white" ID="Label1"></asp:Label>
-                                </div>
-                            </div>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-                </div>
-                <div class="modal-footer">
-                    <asp:UpdatePanel ID="UpdatePanel5" runat="server">
-                        <ContentTemplate>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <asp:Button ID="BtnAceptarArt" runat="server" Text="Aceptar" class="btn btn-success"/>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <%--MODAL DE UBICACIONES--%>
-    <div class="modal fade" id="ModalUbicaciones" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">
-                        <asp:Label ID="LbIdUbicacion" runat="server" Text="Crear Nueva Ubicación"></asp:Label>
-                    </h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <asp:UpdatePanel ID="UpdatePanel7" runat="server">
-                        <ContentTemplate>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group row">
-                                        <div class="col-2" style="margin-left:5%">
-                                            <label class="col-form-label">Tipo</label>
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <asp:DropDownList ID="DDLTipoUbic" runat="server" class="form-control"></asp:DropDownList>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12">
-                                    <div class="form-group row">
-                                        <div class="col-3" style="margin-left:5%">
-                                            <label class="col-form-label">Departamento</label>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <asp:DropDownList ID="DDLDepartamento" AutoPostBack="true" runat="server" class="form-control" OnSelectedIndexChanged="DDLDepartamento_SelectedIndexChanged"></asp:DropDownList>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12">
-                                    <div class="form-group row">
-                                        <div class="col-2" style="margin-left:5%">
-                                            <label class="col-form-label">Municipio</label>
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <asp:DropDownList ID="DDLMunicipio" runat="server" class="form-control"></asp:DropDownList>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12">
-                                    <div class="form-group row">
-                                        <div class="col-2" style="margin-left:5%">
-                                            <label class="col-form-label">Código</label>
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <asp:TextBox ID="TxCodigo" class="form-control text-uppercase" runat="server"></asp:TextBox>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12">
-                                    <div class="form-group row">
-                                        <div class="col-2" style="margin-left:5%">
-                                            <label class="col-form-label">Dirección</label>
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <asp:TextBox ID="TxDireccionUbic" TextMode="MultiLine" class="form-control" runat="server"></asp:TextBox>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-12" runat="server" id="DivMensajeUbic" visible="false" style="display: flex; background-color:tomato; justify-content:center">
-                                    <asp:Label runat="server" CssClass="col-form-label text-white" ID="Label2"></asp:Label>
-                                </div>
-                            </div>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-                </div>
-                <div class="modal-footer">
-                    <asp:UpdatePanel ID="UpdatePanel8" runat="server">
-                        <ContentTemplate>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <asp:Button ID="BtnAceptarUbic" runat="server" Text="Aceptar" class="btn btn-success"/>
+                            <asp:Button ID="BtnAceptar" runat="server" Text="Aceptar" class="btn btn-success" OnClick="BtnAceptar_Click"/>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
@@ -345,4 +131,42 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Script" runat="server">
+    <script src="../assets/node_module/select2/dist/js/select2.full.min.js" type="text/javascript"></script>
+    <style>
+        .select2-selection__rendered {line-height: 31px !important;}
+        .select2-container .select2-selection--single {height: 35px !important;}
+        .select2-selection__arrow {height: 34px !important;}
+    </style>
+    <script>
+        $(function () {
+            $(".select2").select2();
+            $(".ajax").select2({
+                ajax: {
+                    url: "https://api.github.com/search/repositories",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            q: params.term, // search term
+                            page: params.page
+                        };
+                    },
+                    processResults: function (data, params) {
+                        params.page = params.page || 1;
+                        return {
+                            results: data.items,
+                            pagination: {
+                                more: (params.page * 30) < data.total_count
+                            }
+                        };
+                    },
+                    cache: true
+                },
+                escapeMarkup: function (markup) {
+                    return markup;
+                },
+                minimumInputLength: 1,
+            });
+        });
+    </script>
 </asp:Content>

@@ -28,7 +28,7 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
 
         private void cargarDatos(){
             try{
-                String vQuery = "[STEISP_INVENTARIO_Ubicacaiones] 1";
+                String vQuery = "[STEISP_INVENTARIO_Ubicaciones] 1";
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
 
                 if (vDatos.Rows.Count > 0){
@@ -143,7 +143,7 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                 String vQuery = "", vMensaje = "";
                 int vInfo;
                 DataTable vDatos = new DataTable();
-                vQuery = "[STEISP_INVENTARIO_Ubicacaiones] {0}" +
+                vQuery = "[STEISP_INVENTARIO_Ubicaciones] {0}" +
                         "," + DDLTipo.SelectedValue +
                         "," + DDLMunicipio.SelectedValue +
                         ",'" + TxCodigo.Text.ToUpper() + "'" + 
@@ -203,7 +203,7 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                     LbIdUbicacion.Text = "Editar Ubicacion " + vIdUbicacion;
                     Session["INV_UBI_ID"] = vIdUbicacion;
                     DivEstado.Visible = true;
-                    vQuery = "[STEISP_INVENTARIO_Ubicacaiones] 2," + vIdUbicacion + "";
+                    vQuery = "[STEISP_INVENTARIO_Ubicaciones] 2," + vIdUbicacion + "";
                     vDatos = vConexion.obtenerDataTable(vQuery);
 
                     for (int i = 0; i < vDatos.Rows.Count; i++){
