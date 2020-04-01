@@ -19,6 +19,8 @@ namespace Infatlan_STEI_Inventario.pages
             LbUbicacion.Text = " " + Request.QueryString["c"];
             Session["AUTH"] = true;
             Session["USUARIO"] = "wpadilla";
+            DDLNueva.CssClass = "select2 form-control custom-select";
+
             if (!Page.IsPostBack){
                 if (Convert.ToBoolean(Session["AUTH"])){
                     limpiarSessiones();
@@ -36,12 +38,21 @@ namespace Infatlan_STEI_Inventario.pages
                 String vQuery = "[STEISP_INVENTARIO_Principal] 5," + vId;
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
 
-                if (vDatos.Rows.Count > 0){
-                    GVBusqueda.DataSource = vDatos;
-                    GVBusqueda.DataBind();
-                    Session["INV_ENTRADAS"] = vDatos;
-                }
+                GVBusqueda.DataSource = vDatos;
+                GVBusqueda.DataBind();
+                Session["INV_UBIC_ARTICULO"] = vDatos;
 
+                //UBICACIONES
+                vQuery = "[STEISP_INVENTARIO_Ubicaciones] 1";
+                vDatos = vConexion.obtenerDataTable(vQuery);
+
+                if (vDatos.Rows.Count > 0){
+                    DDLNueva.Items.Clear();
+                    DDLNueva.Items.Add(new ListItem { Value = "0", Text = "Seleccione" });
+                    foreach (DataRow item in vDatos.Rows){
+                        DDLNueva.Items.Add(new ListItem { Value = item["idUbicacion"].ToString(), Text = item["codigo"].ToString() });
+                    }
+                }
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);
             }
@@ -51,59 +62,78 @@ namespace Infatlan_STEI_Inventario.pages
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
 
-        protected void BtnAddProveedor_Click(object sender, EventArgs e){
-            limpiarModalProv();
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalP();", true);
-        }
-
-        private void limpiarModalProv() { 
-        
-        }
-
-        protected void BtnAddArticulo_Click(object sender, EventArgs e){
-            limpiarModalArt();
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalA();", true);
-        }
-
-        private void limpiarModalArt(){
-
-        }
-
-        protected void BtnAddUbicacion_Click(object sender, EventArgs e){
-            limpiarModalUbic();
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalU();", true);
-        }
-
         private void limpiarModalUbic(){
 
         }
 
-        protected void DDLDepartamento_SelectedIndexChanged(object sender, EventArgs e){
+        protected void GVBusqueda_RowCommand(object sender, GridViewCommandEventArgs e){
             try{
-                cargarMunicipios(DDLDepartamento.SelectedValue);
+                DataTable vDatos = new DataTable();
+                String vQuery = "";
+
+                string vIdInventario = e.CommandArgument.ToString();
+                if (e.CommandName == "MoverArticulo"){
+                    DivMensaje.Visible = false;
+                    
+                    //UBICACION ACTUAL
+                    vQuery = "[STEISP_INVENTARIO_Ubicaciones] 5, " + vIdInventario;
+                    vDatos = vConexion.obtenerDataTable(vQuery);
+
+                    if (vDatos.Rows.Count > 0){
+                        TxActual.Text = vDatos.Rows[0]["codigo"].ToString();
+                        TxIdInventario.Text = vIdInventario;
+                        TxIdUbicacion.Text = vDatos.Rows[0]["idUbicacion"].ToString();
+                        TxIdStock.Text = vDatos.Rows[0]["idStock"].ToString();
+                    }
+
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+                }
+            }catch (Exception Ex){
+                Mensaje(Ex.Message, WarningType.Danger);
+            }
+        }
+
+        protected void BtnAceptar_Click(object sender, EventArgs e){
+            try{
+                generarxml vMaestro = new generarxml();
+                Object[] vDatosMaestro = new object[10];
+                vDatosMaestro[0] = "";
+                vDatosMaestro[1] = TxIdStock.Text;
+                vDatosMaestro[2] = TxIdUbicacion.Text;
+                vDatosMaestro[3] = ""; //Responsable
+                vDatosMaestro[4] = "";
+                vDatosMaestro[5] = "";
+                vDatosMaestro[6] = ""; // Serie
+                vDatosMaestro[7] = "";
+                vDatosMaestro[8] = Session["USUARIO"].ToString();
+                vDatosMaestro[9] = 5;
+                String vXML = vMaestro.ObtenerMaestroString(vDatosMaestro);
+                vXML = vXML.Replace("<?xml version=\"1.0\" encoding=\"utf-16\"?>", "");
+
+                String vQuery = "[STEISP_INVENTARIO_Principal] 3" +
+                    "," + TxIdInventario.Text +
+                    "," + DDLNueva.SelectedValue + 
+                    ",'" + vXML + "'";
+                Int32 vInfo = vConexion.ejecutarSql(vQuery);
+                if (vInfo == 2){
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "cerrarModal();", true);
+                    Mensaje("Cambio realizado con éxito.", WarningType.Success);
+                    cargarDatos(TxIdUbicacion.Text);
+                }
+
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
 
-        private void cargarMunicipios(String vIdDepto) {
-            if (vIdDepto != "0"){
-                String vQuery = "STEISP_INVENTARIO_Generales 2," + DDLDepartamento.SelectedValue;
-                DataTable vDatos = vConexion.obtenerDataTable(vQuery);
-
-                if (vDatos.Rows.Count > 0){
-                    DDLMunicipio.Items.Clear();
-                    DDLMunicipio.Items.Add(new ListItem { Value = "0", Text = "Seleccione una opción" });
-                    foreach (DataRow item in vDatos.Rows){
-                        DDLMunicipio.Items.Add(new ListItem { Value = item["idMunicipio"].ToString(), Text = item["nombre"].ToString() });
-                    }
-                }
-            }else
-                DDLMunicipio.Items.Clear();
+        protected void GVBusqueda_PageIndexChanging(object sender, GridViewPageEventArgs e){
+            try{
+                GVBusqueda.PageIndex = e.NewPageIndex;
+                GVBusqueda.DataSource = (DataTable)Session["INV_UBIC_ARTICULO"];
+                GVBusqueda.DataBind();
+            }catch (Exception ex){
+                Mensaje(ex.Message, WarningType.Danger);
+            }
         }
-
-        //protected void BtnVolver_Click(object sender, EventArgs e){
-        //    Response.Redirect("inventario.aspx");
-        //}
     }
 }

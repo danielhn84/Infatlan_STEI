@@ -369,6 +369,10 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
+                        <label class="control-label col-12">Motivo</label>
+                        <asp:DropDownList ID="DDLTipoTransaccion" CssClass="form-control" runat="server"></asp:DropDownList>
+                    </div>
+                    <div class="form-group">
                         <label class="control-label col-12">Cantidad</label>
                         <input id="tch3" type="text" value="" name="tch3" data-bts-button-down-class="btn btn-secondary btn-outline" data-bts-button-up-class="btn btn-secondary btn-outline">
                     </div>

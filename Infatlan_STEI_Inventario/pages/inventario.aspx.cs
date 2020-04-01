@@ -54,7 +54,7 @@ namespace Infatlan_STEI_Inventario.pages
                 }
 
                 //UBICACIONES
-                vQuery = "[STEISP_INVENTARIO_Ubicacaiones] 1";
+                vQuery = "[STEISP_INVENTARIO_Ubicaciones] 1";
                 vDatos = vConexion.obtenerDataTable(vQuery);
 
                 if (vDatos.Rows.Count > 0){
@@ -90,7 +90,7 @@ namespace Infatlan_STEI_Inventario.pages
                 }
 
                 // TIPO TRANSACCION
-                vQuery = "[STEISP_INVENTARIO_Generales] 8";
+                vQuery = "[STEISP_INVENTARIO_Generales] 8,1";
                 vDatos = vConexion.obtenerDataTable(vQuery);
 
                 if (vDatos.Rows.Count > 0){
@@ -234,7 +234,7 @@ namespace Infatlan_STEI_Inventario.pages
                 String vQuery = "";
                 int vInfo;
                 DataTable vDatos = new DataTable();
-                vQuery = "[STEISP_INVENTARIO_Ubicacaiones] 3" +
+                vQuery = "[STEISP_INVENTARIO_Ubicaciones] 3" +
                         "," + DDLTipoUbic.SelectedValue +
                         "," + DDLMunicipio.SelectedValue +
                         ",'" + TxCodigoUbic.Text.ToUpper() + "'" + 
@@ -245,7 +245,7 @@ namespace Infatlan_STEI_Inventario.pages
 
                 if (vInfo == 1){
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
-                    vQuery = "[STEISP_INVENTARIO_Ubicacaiones] 1";
+                    vQuery = "[STEISP_INVENTARIO_Ubicaciones] 1";
                     vDatos = vConexion.obtenerDataTable(vQuery);
 
                     if (vDatos.Rows.Count > 0){
@@ -286,12 +286,18 @@ namespace Infatlan_STEI_Inventario.pages
 
         protected void GVBusqueda_RowCommand(object sender, GridViewCommandEventArgs e){
             try{
-                String vQuery = "[STEISP_INVENTARIO_Ubicacaiones] 1";
+                String vQuery = "[STEISP_INVENTARIO_Ubicaciones] 1";
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
 
-
+                string vCodigo = "";
                 string vIdUbicacion = e.CommandArgument.ToString();
-                string vCodigo = vDatos.Rows[0]["codigo"].ToString();
+                for (int i = 0; i < vDatos.Rows.Count; i++){
+                    if (vIdUbicacion == vDatos.Rows[i]["idUbicacion"].ToString()){
+                        vCodigo = vDatos.Rows[i]["codigo"].ToString();
+                        break;
+                    }
+                }
+
                 Session["INV_UBIC_ID"] = vIdUbicacion;
                 if (e.CommandName == "VerInventario") 
                     Response.Redirect("/pages/inventarioUbicacion.aspx?i=" + vIdUbicacion + "&c=" + vCodigo);
