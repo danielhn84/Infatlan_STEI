@@ -266,6 +266,8 @@ namespace Infatlan_STEI_Agencias.pages{
                 TxHrInicioModal.Text = TxHoraInicio.Text;
                 TxHrFinModal.Text = TxHoraFin.Text;
                 TxResponsable.Text = DDLNombreResponsable.SelectedItem.Text;
+                lbTitulo.Text = "Crear Notificación " + TxLugar.Text;
+                UpdatePanel2.Update();
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal();", true);
 
             }catch (Exception ex){

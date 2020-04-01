@@ -102,5 +102,24 @@ namespace Infatlan_STEI_Agencias.pages
             }
         
         }
+
+        protected void TxBuscarAgencia_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void GvLvPendentesAprobar_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            try
+            {
+                GvLvPendentesAprobar.PageIndex = e.NewPageIndex;
+                GvLvPendentesAprobar.DataSource = (DataTable)Session["AG_LvPA_LISTAS_PENDIENTES_APROBAR_JEFE"];
+                GvLvPendentesAprobar.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Mensaje(ex.Message, WarningType.Danger);
+            }
+        }
     }
 }

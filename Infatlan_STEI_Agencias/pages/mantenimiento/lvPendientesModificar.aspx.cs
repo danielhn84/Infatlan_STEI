@@ -108,5 +108,81 @@ namespace Infatlan_STEI_Agencias.pages
 
             }
         }
+
+        protected void GvLvPendentesModificar_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            try
+            {
+                GvLvPendentesModificar.PageIndex = e.NewPageIndex;
+                GvLvPendentesModificar.DataSource = (DataTable)Session["AG_LvPM_LISTAS_PENDIENTES_MODIFICAR_TECNICO"];
+                GvLvPendentesModificar.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Mensaje(ex.Message, WarningType.Danger);
+            }
+
+        }
+
+        //protected void TxBuscarAgencia_TextChanged(object sender, EventArgs e)
+        //{
+
+        //    try
+        //    {
+        //        cargarDatos();
+        //        String vBusqueda = TxBuscarAgencia.Text;
+        //        DataTable vDatos = (DataTable)Session["AG_LvPM_LISTAS_PENDIENTES_MODIFICAR_TECNICO"];
+        //        if (vBusqueda.Equals(""))
+        //        {
+        //            GvLvPendentesModificar.DataSource = vDatos;
+        //            GvLvPendentesModificar.DataBind();
+        //            UpLvPendientesModificar.Update();
+        //        }
+        //        else
+        //        {
+        //            EnumerableRowCollection<DataRow> filtered = vDatos.AsEnumerable()
+        //                .Where(r => r.Field<String>("Lugar").Contains(vBusqueda));
+
+        //            Boolean isNumeric = int.TryParse(vBusqueda, out int n);
+
+        //            if (isNumeric)
+        //            {
+        //                if (filtered.Count() == 0)
+        //                {
+        //                    filtered = vDatos.AsEnumerable().Where(r =>
+        //                        Convert.ToInt32(r["Cod_Agencia"]) == Convert.ToInt32(vBusqueda));
+        //                }
+        //            }
+
+        //            DataTable vDatosFiltrados = new DataTable();
+        //            vDatosFiltrados.Columns.Add("idTipoAgencia");
+        //            vDatosFiltrados.Columns.Add("nombre");
+        //            vDatosFiltrados.Columns.Add("estado");
+
+        //            foreach (DataRow item in filtered)
+        //            {
+        //                vDatosFiltrados.Rows.Add(
+        //                    item["id_Mantenimiento"].ToString(),
+        //                    item["fecha"].ToString(),
+        //                    item["Cod_Agencia"].ToString(),
+        //                                                item["Cod_Agencia"].ToString()
+        //                                                                            item["Cod_Agencia"].ToString()
+        //                                                                                                        item["Cod_Agencia"].ToString()
+        //                    );
+        //            }
+
+        //            GvLvPendentesModificar.DataSource = vDatosFiltrados;
+        //            GvLvPendentesModificar.DataBind();
+        //            Session["AG_LvPM_LISTAS_PENDIENTES_MODIFICAR_TECNICO"] = vDatosFiltrados;
+        //            UpLvPendientesModificar.Update();
+        //        }
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Mensaje(ex.Message, WarningType.Danger);
+        //    }
+
+        //}
     }
 }

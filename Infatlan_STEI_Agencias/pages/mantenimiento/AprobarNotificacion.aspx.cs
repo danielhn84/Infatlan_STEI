@@ -71,6 +71,8 @@ namespace Infatlan_STEI_Agencias.pages
                     TxFecha.Text = vFecha;
                     TxTecnicoResponsable.Text = vResponsable;
                     TxArea.Text = vArea;
+                    lbTitulo.Text = "Aprobar Notificación " + vLugar;
+                    UpdatePanel1.Update();
                 }
 
                 String vQuery2 = "STEISP_AGENCIA_AprobarNotificacion 5," + vIdMantenimiento;
@@ -85,9 +87,19 @@ namespace Infatlan_STEI_Agencias.pages
 
                
             }else if(e.CommandName == "Cancelar"){
+            
+
                 limpiarModalCancelarNotificacion();
+            
                 string vIdMantenimiento = e.CommandArgument.ToString();
                 Session["AG_CN_ID_MANTENIMIENTO"] = vIdMantenimiento;
+                String vQuery = "STEISP_AGENCIA_AprobarNotificacion 3," + vIdMantenimiento;
+                DataTable vDatos = vConexion.obtenerDataTable(vQuery);
+                string vLugar = vDatos.Rows[0]["Lugar"].ToString();
+
+                lbTituloCancelar.Text = "Cancelar Notificación " + vLugar;
+                UpdatePanel6.Update();
+
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModalCancelacion();", true);
             }
 
@@ -113,20 +125,21 @@ namespace Infatlan_STEI_Agencias.pages
         {
             try
             {
+                cargarDatos();
                 String vBusqueda = TxBuscarAgencia.Text;
                 DataTable vDatos = (DataTable)Session["AG_CN_MANTENIMIENTOS_PENDIENTES_APROBAR"];
 
                 if (vBusqueda.Equals(""))
                 {
-                    cargarDatos();
-                    //GVBusqueda.DataSource = vDatos;
-                    //GVBusqueda.DataBind();
+                   
+                    GVBusqueda.DataSource = vDatos;
+                    GVBusqueda.DataBind();
                     UPGvBusqueda.Update();
                 }
                 else
                 {
                     EnumerableRowCollection<DataRow> filtered = vDatos.AsEnumerable()
-                        .Where(r => r.Field<String>("Lugar").Contains(vBusqueda.ToUpper()));
+                        .Where(r => r.Field<String>("Lugar").Contains(vBusqueda));
 
                     Boolean isNumeric = int.TryParse(vBusqueda, out int n);
                     if (isNumeric)
@@ -232,6 +245,20 @@ namespace Infatlan_STEI_Agencias.pages
             DDLMotivo.SelectedIndex = -1;
             TxDetalle.Text = string.Empty;
             UpdateModal.Visible = false;
+        }
+
+        protected void GVBusqueda_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            try
+            {
+                GVBusqueda.PageIndex = e.NewPageIndex;
+                GVBusqueda.DataSource = (DataTable)Session["AG_CN_MANTENIMIENTOS_PENDIENTES_APROBAR"];
+                GVBusqueda.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Mensaje(ex.Message, WarningType.Danger);
+            }
         }
     }
 }

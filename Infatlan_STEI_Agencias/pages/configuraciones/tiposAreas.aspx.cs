@@ -149,5 +149,75 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
 
 
         }
+
+        protected void GVAreas_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            try
+            {
+                GVAreas.PageIndex = e.NewPageIndex;
+                GVAreas.DataSource = (DataTable)Session["AG_TA_AREAS_MANTENIMIENTO"];
+                GVAreas.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Mensaje(ex.Message, WarningType.Danger);
+            }
+        }
+
+        protected void TxBuscarArea_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                cargar();
+                String vBusqueda = TxBuscarArea.Text;
+                DataTable vDatos = (DataTable)Session["AG_TA_AREAS_MANTENIMIENTO"];
+                if (vBusqueda.Equals(""))
+                {
+                    GVAreas.DataSource = vDatos;
+                    GVAreas.DataBind();
+                    UpdatePanel5.Update();
+                }
+                else
+                {
+                    EnumerableRowCollection<DataRow> filtered = vDatos.AsEnumerable()
+                        .Where(r => r.Field<String>("nombre").Contains(vBusqueda));
+
+                    Boolean isNumeric = int.TryParse(vBusqueda, out int n);
+
+                    if (isNumeric)
+                    {
+                        if (filtered.Count() == 0)
+                        {
+                            filtered = vDatos.AsEnumerable().Where(r =>
+                                Convert.ToInt32(r["idAreaAgencia"]) == Convert.ToInt32(vBusqueda));
+                        }
+                    }
+
+                    DataTable vDatosFiltrados = new DataTable();
+                    vDatosFiltrados.Columns.Add("idAreaAgencia");
+                    vDatosFiltrados.Columns.Add("nombre");
+                    vDatosFiltrados.Columns.Add("estado");
+
+                    foreach (DataRow item in filtered)
+                    {
+                        vDatosFiltrados.Rows.Add(
+                            item["idAreaAgencia"].ToString(),
+                            item["nombre"].ToString(),
+                            item["estado"].ToString()
+                            );
+                    }
+
+                    GVAreas.DataSource = vDatosFiltrados;
+                    GVAreas.DataBind();
+                    Session["AG_TA_AREAS_MANTENIMIENTO"] = vDatosFiltrados;
+                    UpdatePanel5.Update();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Mensaje(ex.Message, WarningType.Danger);
+            }
+        }
     }
 }

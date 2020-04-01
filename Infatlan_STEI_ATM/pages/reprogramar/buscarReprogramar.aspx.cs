@@ -112,6 +112,36 @@ namespace Infatlan_STEI_ATM.pages.reprogramar
             }
         }
 
+        void EnviarCorreo()
+        {
+            string id = Request.QueryString["id"];
+            string tipo = Request.QueryString["tipo"];
+            string vCorreo = "acedillo@bancatlan.hn";
+            string vNombre = "Adán Cedillo";
+            string vUsu = "acedillo";
+            SmtpService vService = new SmtpService();
+          
+                //SOLICITANTE                
+                string vMotivo = "Se informa que mantenimiento fué reprogramado.";
+                string vMsg = "Puede continuar con el proceso.";
+                vService.EnviarMensaje(vCorreo,
+                   typeBody.Aprobado,
+                   Session["usuATM"].ToString(),
+                   vNombre,
+                   vMotivo,
+                   vMsg
+                   );
+                //SUPERVISOR                 
+                string vMotivo2 = "El empleado fué notificado de la reprogramación de mantenimiento.";
+                string vMsg2 = "Solicitud fue aprobado exitosamente.";
+                vService.EnviarMensaje(vCorreo,
+                   typeBody.Supervisor,
+                   vUsu,
+                   vNombre,
+                   vMotivo2,
+                   vMsg2
+                   );          
+        }
         protected void GVBusqueda_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             H5Alerta.Visible = false;
@@ -137,6 +167,7 @@ namespace Infatlan_STEI_ATM.pages.reprogramar
                             lbQuienCancelo.Text= item["CanceladoPor"].ToString();
                             lbMotivoCancelo.Text= item["NCancelar"].ToString();
                             lbdetalle.Text= item["DetMotivo"].ToString();
+                            Session["ATM_IDZONA_REPROGRAMAR"]= item["IDZona"].ToString();
                         }
                         TxBuscarTecnicoATM.Text = string.Empty;
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal();", true);
@@ -190,6 +221,7 @@ namespace Infatlan_STEI_ATM.pages.reprogramar
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
                         Mensaje("Mantenimiento reprogramado con éxito", WarningType.Success);
                         UpdateGridView.Update();
+                        EnviarCorreo();
                         cargarData();
                     }
                     else

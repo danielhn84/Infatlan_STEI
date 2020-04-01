@@ -38,18 +38,21 @@
                             <div class="card-body">
                                 <h4 class="card-title">Aprobaciones Pendientes</h4>
                                 <p>Notificaciones que no han sido aprobadas por Jefe, suplentes o coordinadores de mantenimiento.</p>
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label">Buscar</label>
-                                        <div class="col-sm-9">
+       
+                                        <div class="col-sm-12">
                                             <asp:UpdatePanel ID="UpdatePanel5" runat="server">
                                                 <ContentTemplate>
-                                                    <div class="input-group mb-3">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text" id="basic-addon1"><i class="ti-search"></i></span>
+                                                    <div class="row p-t-20">
+                                                        <div class="col-md-1">
+                                                            <label class="control-label   text-danger">*</label><label class="control-label">Buscar:</label></label>                                      
                                                         </div>
-                                                        <asp:TextBox ID="TxBuscarAgencia" runat="server" placeholder="Ingrese nombre de agencia" class="form-control" AutoPostBack="true" OnTextChanged="TxBuscarAgencia_TextChanged"></asp:TextBox>
+                                                        <div class="col-md-6">
+                                                            <asp:TextBox ID="TxBuscarAgencia" runat="server" placeholder="Búsqueda por agencia o codigo, luego presione Enter..." class="form-control" AutoPostBack="true" OnTextChanged="TxBuscarAgencia_TextChanged"></asp:TextBox>
+                                                        </div>
                                                     </div>
+
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
                                         </div>
@@ -75,18 +78,18 @@
                                     RowStyle-CssClass="rows"
                                     AutoGenerateColumns="false"
                                     AllowPaging="true"
-                                    GridLines="None"
+                                    GridLines="None" OnPageIndexChanging="GVBusqueda_PageIndexChanging"
                                     PageSize="10" OnRowCommand="GVBusqueda_RowCommand">
 
                                     <Columns>
-                                        <asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Acción" ItemStyle-HorizontalAlign="center">
                                             <ItemTemplate>
-                                                <asp:LinkButton ID="LBAprobar" runat="server" CssClass="btn btn-success" CommandName="Aprobar" CommandArgument='<%# Eval("id_Mantenimiento") %>'>
-                                                        <i class="icon-check"></i>
+                                                <asp:LinkButton ID="LBAprobar" runat="server"  CommandName="Aprobar" CommandArgument='<%# Eval("id_Mantenimiento") %>'>
+                                                        <img src="https://img.icons8.com/color/23/000000/check-file.png"/>
                                                 </asp:LinkButton>
 
-                                                <asp:LinkButton ID="LBCancelar" runat="server" CssClass="btn btn-danger" CommandName="Cancelar" CommandArgument='<%# Eval("id_Mantenimiento") %>'>
-                                                        <i class="icon-close"></i>
+                                                <asp:LinkButton ID="LBCancelar" runat="server"  CommandName="Cancelar" CommandArgument='<%# Eval("id_Mantenimiento") %>'>
+                                                        <img src="https://img.icons8.com/color/23/000000/file-delete--v1.png"/>
                                                 </asp:LinkButton>
                                             </ItemTemplate>
                                             <ItemStyle Width="10%" />
@@ -116,7 +119,14 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="width: 600px; top: 320px; left: 50%; transform: translate(-50%, -50%);">
                 <div class="modal-header bg-dark">
-                    <h3 class="modal-title" id="ModalLabelUsuario" style="color: white"> Aprobar Notificación</h3>
+                   
+                     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+                        <ContentTemplate>
+                            <h3 class="modal-title" style="color: white" >
+                                <asp:Label ID="lbTitulo" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label></h3>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+
                     <button type="button" class="close" style="color: white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -192,7 +202,7 @@
                                     <div class="alert alert-success  alert-dismissible align-content-md-center" style="align-self: auto">
                                         <div class="row">
                                             <div class="col-3">
-                                                <p class="text-center"><i class="fa fa-question-circle-o  fa-5x  "><span class="dashicons dashicons-admin-home"></span></i></p>
+                                                <p class="text-center"><img src="https://img.icons8.com/color/70/000000/accept-database.png"/><span class="dashicons dashicons-admin-home"></span></i></p>
                                             </div>
                                             <div class="col-9" style="text-align: center">
                                               <br>
@@ -232,7 +242,15 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="width: 600px; top: 320px; left: 50%; transform: translate(-50%, -50%);">
                  <div class="modal-header bg-dark">
-                    <h3 class="modal-title" style="color: white"> Cancelar Notificación</h3>
+                 
+
+                     <asp:UpdatePanel ID="UpdatePanel6" runat="server" UpdateMode="Conditional">
+                         <ContentTemplate>
+                             <h3 class="modal-title" style="color: white">
+                                 <asp:Label ID="lbTituloCancelar" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label></h3>
+                         </ContentTemplate>
+                     </asp:UpdatePanel>
+
                     <button type="button" class="close"  data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -291,8 +309,8 @@
                                     <div class="alert alert-success  alert-dismissible align-content-md-center" style="align-self: auto">
                                         <div class="row">
                                             <div class="col-3">
-                                                <br>
-                                                <p class="text-center"><i class="fa fa-question-circle-o  fa-5x "></i></p>
+                                               
+                                                <p class="text-center"><img src="https://img.icons8.com/color/70/000000/accept-database.png"/></i></p>
                                             </div>
 
                                             <div class="col-9" style="text-align: center">

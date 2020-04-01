@@ -36,27 +36,33 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             try
             {
                 DDLTipoAgencia.Items.Clear();
+                DDLTipoAgenciaModificar.Items.Clear();
                 String vQuery = "STEISP_AGENCIA_CreacionAgencia 1";
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
                 DDLTipoAgencia.Items.Add(new ListItem { Value = "0", Text = "Seleccione una opción" });
+                
                 if (vDatos.Rows.Count > 0)
                 {
                     foreach (DataRow item in vDatos.Rows)
                     {
                         DDLTipoAgencia.Items.Add(new ListItem { Value = item["idTipoAgencia"].ToString(), Text = item["nombre"].ToString() });
-                             }
+                        DDLTipoAgenciaModificar.Items.Add(new ListItem { Value = item["idTipoAgencia"].ToString(), Text = item["nombre"].ToString() });
+                    }
                 }
 
 
                 DDLDepartamento.Items.Clear();
+                DDLDepartamentoModificar.Items.Clear();
                 String vQuery1 = "STEISP_AGENCIA_CreacionAgencia 2";
                 DataTable vDatos1 = vConexion.obtenerDataTable(vQuery1);
                 DDLDepartamento.Items.Add(new ListItem { Value = "0", Text = "Seleccione una opción" });
+              
                 if (vDatos1.Rows.Count > 0)
                 {
                     foreach (DataRow item in vDatos1.Rows)
                     {
                         DDLDepartamento.Items.Add(new ListItem { Value = item["idDepartamento"].ToString(), Text = item["nombre"].ToString() });
+                        DDLDepartamentoModificar.Items.Add(new ListItem { Value = item["idDepartamento"].ToString(), Text = item["nombre"].ToString() });
                     }
                 }
             }
@@ -103,6 +109,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 DataTable vDatosAgencias = vConexion.obtenerDataTable(vQueryAgencias);
                 GVAgencias.DataSource = vDatosAgencias;
                 GVAgencias.DataBind();
+                Session["AG_CA_AGENCIAS_BASA"] = vDatosAgencias;
             }
             catch (Exception ex)
             {
@@ -169,6 +176,129 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             }
         }
 
+        protected void GVAgencias_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            try
+            {
+                GVAgencias.PageIndex = e.NewPageIndex;
+                GVAgencias.DataSource = (DataTable)Session["AG_CA_AGENCIAS_BASA"];
+                GVAgencias.DataBind();
+            }             
+            catch (Exception ex)
+            {
+                Mensaje(ex.Message, WarningType.Danger);
+            }
+        }
 
+        protected void TxBuscarAgencia_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                cargarDataAgencias();
+                String vBusqueda = TxBuscarAgencia.Text;
+                DataTable vDatos = (DataTable)Session["AG_CA_AGENCIAS_BASA"];
+                if (vBusqueda.Equals(""))
+                {
+                    GVAgencias.DataSource = vDatos;
+                    GVAgencias.DataBind();
+                    UpdatePanel5.Update();
+                }
+                else
+                {
+                    EnumerableRowCollection<DataRow> filtered = vDatos.AsEnumerable()
+                        .Where(r => r.Field<String>("nombre").Contains(vBusqueda));
+
+                    Boolean isNumeric = int.TryParse(vBusqueda, out int n);
+
+                    if (isNumeric)
+                    {
+                        if (filtered.Count() == 0)
+                        {
+                            filtered = vDatos.AsEnumerable().Where(r =>
+                                Convert.ToInt32(r["codigoAgencia"]) == Convert.ToInt32(vBusqueda));
+                        }
+                    }
+
+                    DataTable vDatosFiltrados = new DataTable();
+                    vDatosFiltrados.Columns.Add("idAgencia");
+                    vDatosFiltrados.Columns.Add("nombre");
+                    vDatosFiltrados.Columns.Add("codigoAgencia");
+                    vDatosFiltrados.Columns.Add("direccion");
+                    vDatosFiltrados.Columns.Add("telefono");
+                    vDatosFiltrados.Columns.Add("TipoAgencia");
+                    vDatosFiltrados.Columns.Add("departamento");
+
+                    foreach (DataRow item in filtered)
+                    {
+                        vDatosFiltrados.Rows.Add(
+                            item["idAgencia"].ToString(),
+                            item["nombre"].ToString(),
+                            item["codigoAgencia"].ToString(),
+                            item["direccion"].ToString(),
+                            item["telefono"].ToString(),
+                            item["TipoAgencia"].ToString(),
+                            item["departamento"].ToString()
+                            );
+                    }
+
+                    GVAgencias.DataSource = vDatosFiltrados;
+                    GVAgencias.DataBind();
+                    Session["AG_CA_AGENCIAS_BASA"] = vDatosFiltrados;
+                    UpdatePanel5.Update();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Mensaje(ex.Message, WarningType.Danger);
+            }
+        }
+
+        protected void GVAgencias_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Modifcar")
+            {
+                string vIdAgenciaModificar = e.CommandArgument.ToString();
+                Session["AG_CA_ID_AREA_MODIFICAR"] = vIdAgenciaModificar;
+
+                try
+                {
+
+                    
+
+                    String vQuery2 = " STEISP_AGENCIA_CreacionAgencia 5," + vIdAgenciaModificar;
+                    DataTable vDatos = vConexion.obtenerDataTable(vQuery2);
+                    Int32 RbConductorModificarConverido = Convert.ToInt32(vDatos.Rows[0]["requiereConductor"]);
+                    Int32 DDLEstadoConvertido = Convert.ToInt32(vDatos.Rows[0]["estado"]);
+
+                    TxCodigoModificar.Text= vDatos.Rows[0]["codigoAgencia"].ToString();
+                    TxAgenciaModificar.Text = vDatos.Rows[0]["nombre"].ToString();
+                    TxDireccionModificar.Text = vDatos.Rows[0]["direccion"].ToString();
+                    TxTelefonoModificar.Text = vDatos.Rows[0]["telefono"].ToString();
+                    TxLatitudModificar.Text = vDatos.Rows[0]["lat"].ToString();
+                    TxLongitudModificar.Text = vDatos.Rows[0]["lng"].ToString();
+                    DDLTipoAgenciaModificar.SelectedValue= vDatos.Rows[0]["idTipoAgencia"].ToString();
+                    DDLDepartamentoModificar.SelectedValue= vDatos.Rows[0]["idDepartamento"].ToString();
+                    DDLEstado.SelectedValue = DDLEstadoConvertido.ToString();
+                    RbConductorModificar.SelectedValue= RbConductorModificarConverido.ToString();
+
+
+
+                    TituloModalCrearAgencia.Text = "Modificar Agencia "+ TxAgenciaModificar.Text;
+                    UpdatePanel3.Update();
+
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModalModificarAgencia();", true);
+                }
+                catch (Exception ex)
+                {
+                    Mensaje(ex.Message, WarningType.Danger);
+                }
+            }
+        }
+
+        protected void btnModalModificar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

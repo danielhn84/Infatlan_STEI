@@ -28,17 +28,20 @@
         <div class="card-body">
             <h4 class="card-title">LV Pendientes</h4>
             <p>Listas de verificación pendientes de completar que estan asignadas a su persona.</p>
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Buscar</label>
-                    <div class="col-sm-9">
+                    <div class="col-sm-12">
                         <asp:UpdatePanel ID="UpdatePanel5" runat="server">
                             <ContentTemplate>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1"><i class="ti-search"></i></span>
+
+                                <div class="row p-t-20">
+                                    <div class="col-md-1">
+                                        <label class="control-label   text-danger">*</label><label class="control-label">Buscar:</label></label>                                      
                                     </div>
-                                    <asp:TextBox ID="TxBuscarAgencia" runat="server" placeholder="Búsqueda por nombre de agencia" class="form-control" AutoPostBack="true"></asp:TextBox>
+                                    <div class="col-md-6">
+                                        <asp:TextBox ID="TxBuscarAgencia" runat="server" placeholder="Búsqueda por  Agencia o Codigo, luego presione Enter" class="form-control" AutoPostBack="true" OnTextChanged="TxBuscarAgencia_TextChanged"></asp:TextBox>
+                                    </div>
+
                                 </div>
                             </ContentTemplate>
                         </asp:UpdatePanel>
@@ -59,18 +62,18 @@
                                 RowStyle-CssClass="rows"
                                 AutoGenerateColumns="false"
                                 AllowPaging="true"
-                                GridLines="None"
+                                GridLines="None" OnPageIndexChanging="GVListaVerificacion_PageIndexChanging"
                                 PageSize="10" OnRowCommand="GVListaVerificacion_RowCommand">
 
                                 <Columns>
                                     <asp:TemplateField HeaderText="Acción" ItemStyle-HorizontalAlign="center" >
                                         <ItemTemplate>
-                                            <asp:LinkButton ID="LBAprobar" runat="server" CssClass="btn btn-cyan" CommandName="Completar" CommandArgument='<%# Eval("id_Mantenimiento") %>'>
-                                                        <i class="icon-docs"></i>
+                                            <asp:LinkButton ID="LBAprobar" runat="server"  CommandName="Completar" CommandArgument='<%# Eval("id_Mantenimiento") %>'>
+                                                       <img src="https://img.icons8.com/color/23/000000/check-file.png"/>
                                             </asp:LinkButton>
 
-                                            <asp:LinkButton ID="LBCancelar" runat="server" CssClass="btn btn-danger" CommandName="Cancelar" CommandArgument='<%# Eval("id_Mantenimiento") %>'>
-                                                        <i class="icon-close"></i>
+                                            <asp:LinkButton ID="LBCancelar" runat="server" CommandName="Cancelar" CommandArgument='<%# Eval("id_Mantenimiento") %>'>
+                                                          <img src="https://img.icons8.com/color/23/000000/file-delete--v1.png"/>
                                             </asp:LinkButton>
                                              
                                         </ItemTemplate>
@@ -199,7 +202,7 @@
                         <div class="alert alert-success  alert-dismissible align-content-md-center" style="align-self: auto">
                             <div class="row">
                                 <div class="col-3">          
-                                    <p class="text-center"><i class="fa fa-question-circle-o  fa-5x  "><span class="dashicons dashicons-admin-home"></span></i></p>
+                                    <p class="text-center"><img src="https://img.icons8.com/color/70/000000/accept-database.png"/><span class="dashicons dashicons-admin-home"></span></i></p>
                                 </div>
                                 <div class="col-9" style="text-align: center">
                                     <br>

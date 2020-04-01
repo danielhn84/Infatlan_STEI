@@ -26,8 +26,8 @@
 
 
             <ul class="nav nav-tabs" role="tablist">
-                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#home" role="tab"><span class="hidden-sm-up"><i class="fa fa-save"></i></span><span class="hidden-xs-down"> Guardar</span></a> </li>
-                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class=" icon-refresh"></i></span><span class="hidden-xs-down"> Modificar</span></a> </li>
+                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#home" role="tab"><span class="hidden-sm-up"><img src="https://img.icons8.com/color/23/000000/save.png"/></span><span class="hidden-xs-down"> Guardar</span></a> </li>
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><img src="https://img.icons8.com/color/23/000000/edit-property.png"/></span><span class="hidden-xs-down"> Modificar</span></a> </li>
             </ul>
 
             <div class="tab-content tabcontent-border">
@@ -63,20 +63,24 @@
                                 <!--SEGUNDO CONTENIDO-->
                 <div class="tab-pane  p-20" id="profile" role="tabpanel">
 
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Buscar</label>
-                    <div class="col-sm-9">
-           <%--             <asp:UpdatePanel ID="UpdatePanel5" runat="server">
-                            <ContentTemplate>--%>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1"><i class="ti-search"></i></span>
+                    <div class="col-sm-12">
+                     <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+                            <ContentTemplate>
+
+                                <div class="row p-t-20">
+                                    <div class="col-md-1">
+                                        <label class="control-label   text-danger">*</label><label class="control-label">Buscar:</label></label>                                      
                                     </div>
-                                    <asp:TextBox ID="TxBuscarArea" runat="server" placeholder="Búsqueda por area" class="form-control" AutoPostBack="true"></asp:TextBox>
+                                    <div class="col-md-6">
+                                       <asp:TextBox ID="TxBuscarArea" runat="server" placeholder="Búsqueda por area o id, luego presione Enter" class="form-control" AutoPostBack="true" OnTextChanged="TxBuscarArea_TextChanged"></asp:TextBox>
+                                    </div>
+
                                 </div>
-                <%--            </ContentTemplate>
-                        </asp:UpdatePanel>--%>
+
+                           </ContentTemplate>
+                        </asp:UpdatePanel>
                     </div>
                 </div>
             </div>
@@ -93,14 +97,14 @@
                                             RowStyle-CssClass="rows"
                                             AutoGenerateColumns="false"
                                             AllowPaging="true"
-                                            GridLines="None"
+                                            GridLines="None" OnPageIndexChanging="GVAreas_PageIndexChanging"
                                             PageSize="10" OnRowCommand="GVAreas_RowCommand">
 
                                             <Columns>
                                                 <asp:TemplateField HeaderText="Acción" ItemStyle-HorizontalAlign="center">
                                                     <ItemTemplate>
-                                                        <asp:LinkButton ID="LbModificar" runat="server" CssClass="btn btn-cyan" CommandName="Modifcar" CommandArgument='<%# Eval("idAreaAgencia") %>'>
-                                                        <i class="icon-pencil"></i>
+                                                        <asp:LinkButton ID="LbModificar" runat="server"  CommandName="Modifcar" CommandArgument='<%# Eval("idAreaAgencia") %>'>
+                                                         <img src="https://img.icons8.com/color/23/000000/edit-property.png"/>
                                                         </asp:LinkButton>    
 
                                                     </ItemTemplate>
@@ -179,7 +183,7 @@
                                 <div class="alert alert-success  alert-dismissible align-content-md-center" style="align-self: auto">
                                     <div class="row">
                                         <div class="col-3">
-                                            <p class="text-center"><i class="fa fa-question-circle-o  fa-5x  "><span class="dashicons dashicons-admin-home"></span></i></p>
+                                            <p class="text-center"><img src="https://img.icons8.com/color/70/000000/accept-database.png"/><span class="dashicons dashicons-admin-home"></span></i></p>
                                         </div>
                                         <div class="col-9" style="text-align: center">
 
