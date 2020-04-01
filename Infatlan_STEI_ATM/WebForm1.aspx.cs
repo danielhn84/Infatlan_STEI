@@ -23,10 +23,10 @@ namespace Infatlan_STEI_ATM
         protected void btncorreo_Click(object sender, EventArgs e)
         {
             SmtpService vService = new SmtpService();
-            string vEmpresa = "acedillo@bancatlan.hn";
+            string vEmpresa = "yujuu@bancatlan.hn";
             string vNombre = "Adan Cedillo";
             string vUsuario = "acedillo";
-            //string vCorreo= "acedillo@bancatlan.hn";
+            string vMotivo = " ha solicitado permiso para realizar mantenimiento en agencia";
 
             //-PROD- Boolean vFlagEnvioSupervisor = true;
             //Boolean vFlagEnvioSupervisor = false;
@@ -36,9 +36,11 @@ namespace Infatlan_STEI_ATM
             //    if (!item["emailEmpresa"].ToString().Trim().Equals(""))
             //    {
             vService.EnviarMensaje(vEmpresa,
-                        typeBody.Supervisor,
+                        typeBody.JefeAgencia,
                         vUsuario,
-                        vNombre
+                        vNombre,
+                        vMotivo,
+                        txtcoreoBody.Text
                         );
             //        vFlagEnvioSupervisor = true;
             //    }
@@ -51,8 +53,10 @@ namespace Infatlan_STEI_ATM
             //        if (!item["emailEmpresa"].ToString().Trim().Equals(""))
                         vService.EnviarMensaje(vEmpresa,
                             typeBody.Solicitante,
+                            vUsuario,
                             vNombre,
-                            vNombre
+                            vMotivo,
+                            txtcoreoBody.Text
                             );
             //    }
             //}

@@ -78,6 +78,18 @@ namespace Infatlan_STEI_Inventario.pages
                     }
                 }
 
+                // TIPO TRANSACCION
+                vQuery = "[STEISP_INVENTARIO_Generales] 8,2";
+                vDatos = vConexion.obtenerDataTable(vQuery);
+
+                if (vDatos.Rows.Count > 0){
+                    DDLTipoTransaccion.Items.Clear();
+                    DDLTipoTransaccion.Items.Add(new ListItem { Value = "0", Text = "Seleccione" });
+                    foreach (DataRow item in vDatos.Rows){
+                        DDLTipoTransaccion.Items.Add(new ListItem { Value = item["idTipoTransaccion"].ToString(), Text = item["nombre"].ToString() });
+                    }
+                }
+
                 //ESTADO
                 vQuery = "[STEISP_INVENTARIO_Generales] 6";
                 vDatos = vConexion.obtenerDataTable(vQuery);

@@ -15,14 +15,18 @@ namespace Infatlan_STEI_ATM.clases
         Supervisor,       
         Solicitante,
         Aprobado,
-        Rechazado
+        Rechazado,
+        JefeAgencia,
+        Reprogramacion,
+        Tecnicos,
+
     }
 
     public class SmtpService : Page{
 
         public SmtpService() { }
 
-        public Boolean EnviarMensaje(String To, typeBody Body, String Usuario, String Nombre){
+        public Boolean EnviarMensaje(String To, typeBody Body, String Usuario, String Nombre,string Motivo,string Msg){
             Boolean vRespuesta = false;
             try{
                 MailMessage mail = new MailMessage("Soporte Técnico<" + ConfigurationManager.AppSettings["SmtpFrom"] + ">", To);
@@ -38,36 +42,62 @@ namespace Infatlan_STEI_ATM.clases
                     case typeBody.Supervisor:
                         mail.AlternateViews.Add(CreateHtmlMessage(PopulateBody(
                             Usuario,
-                            "El empleado " + Nombre + " ha creado una solicitud de ATM.",
+                            Motivo,
                             ConfigurationManager.AppSettings["Host"] + "/pages/mantenimiento/buscarAprobarNotificacion.aspx",
-                            "Te informamos que su solicitud tiene que ser autorizado, para que ser procesada."
+                            //"Te informamos que su solicitud tiene que ser autorizado, para que ser procesada."
+                            Msg
                             ), Server.MapPath("/img/logo.png")));
                         break;                   
                     case typeBody.Solicitante:
                         mail.AlternateViews.Add(CreateHtmlMessage(PopulateBody(
                             Usuario,
-                            "Has creado una petición de mantenimiento ATM.",
+                            Motivo,
                             ConfigurationManager.AppSettings["Host"] + "/default.aspx",
-                            "Te informamos que la solicitud ha sido enviado a tu jefe para la debida autorización."
+                            //"Te informamos que la solicitud ha sido enviado a tu jefe para la debida autorización."
+                            Msg
                             ), Server.MapPath("/img/logo.png")));
                         break;
                     case typeBody.Aprobado:
                         mail.AlternateViews.Add(CreateHtmlMessage(PopulateBody(
                             Usuario,
-                            "Se ha aprobado tu solicitud de permiso",
+                            Motivo,
                             ConfigurationManager.AppSettings["Host"] + "/default.aspx",
-                            "Te informamos que el permiso que has solicitado ha sido aprobado."
+                            //"Te informamos que el permiso que has solicitado ha sido aprobado."
+                            Msg
                             ), Server.MapPath("/img/logo.png")));
                         break;
                     case typeBody.Rechazado:
                         mail.AlternateViews.Add(CreateHtmlMessage(PopulateBody(
                             Usuario,
-                            "Se ha rechazado tu solicitud de permiso",
+                            Motivo,
                             ConfigurationManager.AppSettings["Host"] + "/pages/devolver/rechazados.aspx",
                             Nombre
                             ), Server.MapPath("/img/logo.png")));
                         break;
-                   
+                    case typeBody.JefeAgencia:
+                        mail.AlternateViews.Add(CreateHtmlMessage(PopulateBody(
+                            Usuario,
+                            "El empleado " + Nombre + Motivo,
+                            ConfigurationManager.AppSettings["Host"] + "/pages/devolver/rechazados.aspx",                          
+                            Msg
+                            ), Server.MapPath("/img/logo.png")));
+                        break;
+                    case typeBody.Reprogramacion:
+                        mail.AlternateViews.Add(CreateHtmlMessage(PopulateBody(
+                            Usuario,
+                            Motivo,
+                            ConfigurationManager.AppSettings["Host"] + "/pages/devolver/rechazados.aspx",
+                            Msg
+                            ), Server.MapPath("/img/logo.png")));
+                        break;
+                    case typeBody.Tecnicos:
+                        mail.AlternateViews.Add(CreateHtmlMessage(PopulateBody(
+                            Usuario,
+                            Motivo,
+                            ConfigurationManager.AppSettings["Host"] + "/default.aspx",
+                            Msg
+                            ), Server.MapPath("/img/logo.png")));
+                        break;
 
                 }
                 client.Send(mail);
