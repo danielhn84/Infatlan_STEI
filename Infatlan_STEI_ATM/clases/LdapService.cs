@@ -1,10 +1,13 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.DirectoryServices;
+using System.DirectoryServices.AccountManagement;
+using System.DirectoryServices.ActiveDirectory;
+using System.Globalization;
 using System.Linq;
 using System.Web;
+using System.Data;
 
 namespace Infatlan_STEI_ATM.clases
 {

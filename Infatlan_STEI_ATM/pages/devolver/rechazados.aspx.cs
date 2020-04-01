@@ -103,7 +103,20 @@ namespace Infatlan_STEI_ATM.pages.devolver
                         Session["ATM_USUARIO_VERIF_CREAR"] = item["Usuario"].ToString();
                         Session["ATM_IDENTIDAD_VERIF_CREAR"] = item["Identidad"].ToString();
                         Session["ATM_SO_VERIF_CREAR"] = item["SO"].ToString();
+                        Session["ATM_USUCREADOR_VERIF_CREAR"] = item["UsuarioCreador"].ToString();
+                        Session["ATM_USUCORREO_VERIF_CREAR"] = item["CorreoTecnico"].ToString();
                         Session["ATM_VERSIONSW_VERIF_CREAR"] = item["VersionSw"].ToString();                                             
+                    }
+
+                    
+                    DataTable vDatos4 = new DataTable();
+                    String vQuery4 = "STEISP_AGENCIA_CreacionNotificacion 6,'" + Session["ATM_USUCREADOR_VERIF_CREAR"].ToString() + "'";
+                    vDatos4 = vConexion.ObtenerTabla(vQuery4);
+                    foreach (DataRow item in vDatos4.Rows)
+                    {
+                        Session["ATM_NOMBRECREADOR_VERIF"] = item["nombre"].ToString();
+                        Session["ATM_APELLIDOCREADOR_VERIF"] = item["apellidos"].ToString();
+                        Session["ATM_CORREOCREADOR_VERIF"] = item["correo"].ToString();
                     }
 
                     DataTable vDatos2 = new DataTable();

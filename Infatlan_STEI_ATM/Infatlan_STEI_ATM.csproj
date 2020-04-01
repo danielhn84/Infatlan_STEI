@@ -3230,6 +3230,8 @@
     <Content Include="assets\node_modules\x-editable\dist\jqueryui-editable\img\loading.gif" />
     <Content Include="assets\node_modules\x-editable\dist\jqueryui-editable\js\jqueryui-editable.js" />
     <Content Include="assets\node_modules\x-editable\dist\jqueryui-editable\js\jqueryui-editable.min.js" />
+    <Content Include="email\TemplateMail.html" />
+    <Content Include="img\logo.png" />
     <Content Include="pages\devolver\rechazados.aspx" />
     <Content Include="pages\mantenimiento\buscarAprobarVerificacion.aspx" />
     <Content Include="pages\mantenimiento\buscarVerificacion.aspx" />
@@ -3323,10 +3325,13 @@
     <Content Include="js\waves.js" />
     <Content Include="pages\mantenimiento\notificacion.aspx" />
     <Content Include="pages\ATM\versionSw.aspx" />
-    <Content Include="PRUEBAIMG.aspx" />
     <Content Include="Web.config" />
+    <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="clases\SmtpService.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="pages\devolver\rechazados.aspx.cs">
       <DependentUpon>rechazados.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3519,12 +3524,12 @@
       <DependentUpon>versionSw.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PRUEBAIMG.aspx.cs">
-      <DependentUpon>PRUEBAIMG.aspx</DependentUpon>
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="PRUEBAIMG.aspx.designer.cs">
-      <DependentUpon>PRUEBAIMG.aspx</DependentUpon>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

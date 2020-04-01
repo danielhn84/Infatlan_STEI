@@ -43,7 +43,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     case "4":
                         //td1img1.Attributes.Add("style", "DISPLAY: block");
                         //td2img1.Attributes.Add("style", "DISPLAY: none");
-                        //DIVbtnRechazo.Visible = true;
+                        DIVbtnRechazo.Visible = true;
                         llenarFormRechazado();
                         llenarImagenes();
                         aprobacionCampos();
@@ -513,8 +513,64 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
         }
 
+        void EnviarCorreo()
+        {
+            string id = Request.QueryString["id"];
+            string tipo = Request.QueryString["tipo"];
+            string vCorreo = "acedillo@bancatlan.hn";
+            string vNombre = "Adán Cedillo";
+            string vUsu = "acedillo";
+            SmtpService vService = new SmtpService();
 
-
+            if (tipo == "4")//APROBACIONES
+            {
+                //SOLICITANTE                
+                string vMotivo = "Se informa que su solicitud fué debidamente aprobado.";
+                string vMsg = "Puede continuar con el proceso.";
+                vService.EnviarMensaje(Session["ATM_USUCORREO_VERIF_CREAR"].ToString(),
+                   typeBody.Aprobado,
+                   Session["ATM_USUARIO_VERIF_CREAR"].ToString(),
+                   Session["ATM_TECNICO_VERIF_CREAR"].ToString(),
+                   vMotivo,
+                   vMsg
+                   );
+                //SUPERVISOR                 
+                string vMotivo2 = "El empleado " + txtTecnicoResponsable.Text + " fué notificado de la aprobación de su respectiva solicitud.";
+                string vMsg2 = "Solicitud fue aprobado exitosamente.";
+                vService.EnviarMensaje(vCorreo,
+                   typeBody.Supervisor,
+                   Session["usuATM"].ToString(),
+                   txtTecnicoResponsable.Text,
+                   vMotivo2,
+                   vMsg2
+                   );
+               
+            }
+            else
+            {
+                //SOLICITANTE                
+                string vMotivo = "Se informa que su solicitud fué enviada.";
+                string vMsg = "Su solicitud debe ser aprobado por su jefe inmediato.";
+                vService.EnviarMensaje(vCorreo,
+                   typeBody.Solicitante,
+                   Session["usuATM"].ToString(),
+                   Session["ATM_TECNICO_VERIF_CREAR"].ToString(),
+                   vMotivo,
+                   vMsg
+                   );
+                //SUPERVISOR                
+                string vMotivo2 = "El empleado " + txtTecnicoResponsable.Text + " le envía lista de verificación para su respectiva aprobación.";
+                string vMsg2 = "Para continuar con el proceso de notificación debe aprobar dicha solicitud.";
+                vService.EnviarMensaje(vCorreo,
+                   typeBody.Supervisor,
+                   vUsu,
+                   vNombre,
+                   vMotivo2,
+                   vMsg2
+                   );
+                
+            }
+        }
         void ActualizarATM()
             {
 
@@ -1156,6 +1212,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                         {
                             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
                             Mensaje("Lista de verificación aprobada con éxito", WarningType.Success);
+                            //EnviarCorreo();
                             Response.Redirect("buscarAprobarVerificacion.aspx");
                         }
                         else
@@ -1175,6 +1232,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     ActualizarVerifATM();
                     ImgVerificacion();
                     PreguntasVerif();
+                    //EnviarCorreo();
                     if (tipo == "2")
                     {
                         Response.Redirect("../../pages/devolver/rechazados.aspx");
