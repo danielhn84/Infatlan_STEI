@@ -310,15 +310,13 @@
                 </div>
 
                 <div class="modal-footer">
-                        <asp:UpdatePanel ID="UpdatePanel12" runat="server">
+                        <asp:UpdatePanel ID="UpdatePanel12" runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
                                 <button type="button" class="btn btn-light" data-dismiss="modal">
                                     Close</button>                            
                                 <asp:Button ID="btnModalModificar" runat="server" Text="Modificar" class="btn btn-dark"  OnClick="btnModalModificar_Click" />
                             </ContentTemplate>
-                            <Triggers>
-                                <asp:PostBackTrigger ControlID="btnModalEnviarLv" />
-                            </Triggers>
+                        
                         </asp:UpdatePanel>
                     </div>
                 
