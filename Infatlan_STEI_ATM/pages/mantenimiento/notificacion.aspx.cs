@@ -196,7 +196,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 txtidentidadTecResponsable.Text = vDatos.Rows[0]["identidad"].ToString();
                 Session["ATM_Notif_emailTecnicoResponsable"]= vDatos.Rows[0]["correo"].ToString();
 
-    }
+            }
             catch (Exception ex)
             {
                 Mensaje(ex.Message, WarningType.Danger);

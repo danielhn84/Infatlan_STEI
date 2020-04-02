@@ -12,7 +12,7 @@ using System.Data;
 
 namespace Infatlan_STEI_ATM.pages.calendario
 {
-    public partial class manteniminetos : System.Web.UI.Page
+    public partial class mantenimientos : System.Web.UI.Page
     {
         bd vConexion = new bd();
         protected void Page_Load(object sender, EventArgs e){
@@ -66,52 +66,91 @@ namespace Infatlan_STEI_ATM.pages.calendario
             else
                 return true;
         }
-
+        public void Mensaje(string vMensaje, WarningType type)
+        {
+            ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
+        }
         public void procesarArchivo(DataSet vArchivo, ref int vSuccess, string DireccionCarga, string TipoProceso){
             try{
                 if (vArchivo.Tables[0].Rows.Count > 0){
                     DataTable vDatos = vArchivo.Tables[0];
                     string vQuery = "";
                     //Boolean idEmpleado = false;
+                    Session["CODATM_SUBIDO"] = "Completo";
+                    for (int i = 0; i < vDatos.Rows.Count; i++)
+                    {
+                        
+                        String CodATM = vDatos.Rows[i]["CodigoATM"].ToString();
+                        String Fecha = vDatos.Rows[i]["FECHA"].ToString();
 
-                    if (TipoProceso == "LISTA_MAN"){
-                        Boolean vCodATM = false, vFecha = false;
-
-                        foreach (DataColumn item in vDatos.Columns){
-                            if (item.ColumnName.ToString() == "CodigoATM")
-                                vCodATM = true;
-                            if (item.ColumnName.ToString() == "FECHA")
-                                vFecha = true;
+                        String vQuery2 = "STEISP_ATM_VERIFICACION 7, '" + CodATM + "',1";
+                        DataTable vDatos2 = vConexion.ObtenerTabla(vQuery2);
+                        foreach (DataRow item in vDatos2.Rows)
+                        {
+                            Session["CODATM_MANT"] = item["codATM"].ToString();
                         }
 
-                        if (vCodATM && vFecha){
-                            for (int i = 0; i < vDatos.Rows.Count; i++){
-                                String CodATM = vDatos.Rows[i]["CodigoATM"].ToString();
-                                String Fecha = vDatos.Rows[i]["FECHA"].ToString();
+                        if (Session["CODATM_MANT"].ToString() != CodATM)
+                        {                             
+                            Session["CODATM_SUBIDO"] = Session["CODATM_SUBIDO"] +", "+ CodATM;
+                          
+                        }
+                        else
+                        {
+                            
+                        }
 
-                                String vFormato = "yyyy/MM/dd"; //"dd/MM/yyyy HH:mm:ss"
-                                String vFechaMant = Convert.ToDateTime(Fecha).ToString(vFormato);
+                    }
+                    if (Session["CODATM_SUBIDO"].ToString()!="Completo")
+                        throw new Exception();
+                    else
+                    {
+                        if (TipoProceso == "LISTA_MAN")
+                        {
+                            Boolean vCodATM = false, vFecha = false;
 
-                                vQuery = "STEISP_ATM_Mantenimientos '" + vFechaMant + "'" +
-                                    ",'" + CodATM + "'" +
-                                    ",'" + Session["usuATM"].ToString() + "'";
-                                    
-                                int vRespuesta = vConexion.ejecutarSQL(vQuery);
-                                if (vRespuesta == 1)
-                                    vSuccess++;
+                            foreach (DataColumn item in vDatos.Columns)
+                            {
+                                if (item.ColumnName.ToString() == "CodigoATM")
+                                    vCodATM = true;
+                                if (item.ColumnName.ToString() == "FECHA")
+                                    vFecha = true;
+                            }
+
+                            if (vCodATM && vFecha)
+                            {
+                                for (int i = 0; i < vDatos.Rows.Count; i++)
+                                {
+                                    String CodATM = vDatos.Rows[i]["CodigoATM"].ToString();
+                                    String Fecha = vDatos.Rows[i]["FECHA"].ToString();
+
+
+                                    String vFormato = "yyyy/MM/dd"; //"dd/MM/yyyy HH:mm:ss"
+                                    String vFechaMant = Convert.ToDateTime(Fecha).ToString(vFormato);
+
+                                    vQuery = "STEISP_ATM_Mantenimientos '" + vFechaMant + "'" +
+                                        ",'" + CodATM + "'" +
+                                        ",'" + Session["usuATM"].ToString() + "'";
+
+                                    int vRespuesta = vConexion.ejecutarSQL(vQuery);
+                                    if (vRespuesta == 1)
+                                        vSuccess++;
+
+                                }
                             }
                         }
                     }
 
                 }else
-                    throw new Exception("No contiene ninguna hoja de excel.");
-            }catch (Exception){
-                throw;
+                  
+                throw new Exception("No contiene ninguna hoja de excel.");
+            }catch (Exception ex){
+                LbMensaje.Text=ex.Message;
             }
         }
 
         protected void BtnEnviar_Click1(object sender, EventArgs e){
-            String archivoLog = string.Format("{0}_{1}", Convert.ToString(Session["usu"]), DateTime.Now.ToString("yyyyMMdd"));
+            String archivoLog = string.Format("{0}_{1}", Convert.ToString(Session["usuATM"]), DateTime.Now.ToString("yyyyMMdd"));
 
             try{
                 String vDireccionCarga = ConfigurationManager.AppSettings["RUTA_SERVER"].ToString();
@@ -123,10 +162,14 @@ namespace Infatlan_STEI_ATM.pages.calendario
                     Boolean vCargado = false;
                     int vSuccess = 0, vError = 0;
                     if (File.Exists(vDireccionCarga))
-                        vCargado = cargarArchivo(vDireccionCarga, ref vSuccess, ref vError, Convert.ToString(Session["usu"]), vTipoPermiso);
+                        vCargado = cargarArchivo(vDireccionCarga, ref vSuccess, ref vError, Convert.ToString(Session["usuATM"]), vTipoPermiso);
 
-                    if (vCargado)
+                    if (vCargado)  
+                        if(Session["CODATM_SUBIDO"].ToString()!= "Completo")
+                            LbMensaje.Text = "Código " + Session["CODATM_SUBIDO"].ToString() + " no existe." + "<br>" + "<b style='color:green;'>Success:</b> " + vSuccess.ToString() + "&emsp;";
+                        else
                         LbMensaje.Text = "Archivo cargado con exito." + "<br>" + "<b style='color:green;'>Success:</b> " + vSuccess.ToString() + "&emsp;";
+                    
                 }
                 else
                     LbMensaje.Text = "No se encontró ningún archivo a cargar.";

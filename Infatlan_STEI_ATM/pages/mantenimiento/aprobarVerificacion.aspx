@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/mainATM.Master" AutoEventWireup="true" CodeBehind="aprobarVerificacion.aspx.cs" Inherits="Infatlan_STEI_ATM.pages.mantenimiento.aprobarVerificacion" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="aprobarVerificacion.aspx.cs" Inherits="Infatlan_STEI_ATM.pages.mantenimiento.aprobarVerificacion" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
     <link href="/assets/node_modules/icheck/skins/all.css" rel="stylesheet">
     <link href="/css/pages/form-icheck.css" rel="stylesheet">

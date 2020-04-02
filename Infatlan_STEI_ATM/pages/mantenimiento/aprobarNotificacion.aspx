@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/mainATM.Master" AutoEventWireup="true" CodeBehind="aprobarNotificacion.aspx.cs" Inherits="Infatlan_STEI_ATM.pages.mantenimiento.aprobarNotificacion" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="aprobarNotificacion.aspx.cs" Inherits="Infatlan_STEI_ATM.pages.mantenimiento.aprobarNotificacion" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
     <style>
         .hatm {

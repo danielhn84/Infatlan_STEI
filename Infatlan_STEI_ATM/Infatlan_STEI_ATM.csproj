@@ -3269,7 +3269,7 @@
     <Content Include="css\pages\widget-page.css" />
     <Content Include="css\style.css" />
     <Content Include="css\style.min.css" />
-    <Content Include="defaultATM.aspx" />
+    <Content Include="default.aspx" />
     <Content Include="dist\css\smart_wizard.css" />
     <Content Include="dist\css\smart_wizard.min.css" />
     <Content Include="dist\css\smart_wizard_theme_arrows.css" />
@@ -3355,12 +3355,12 @@
     </Compile>
     <Compile Include="clases\bd.cs" />
     <Compile Include="clases\LdapService.cs" />
-    <Compile Include="defaultATM.aspx.cs">
-      <DependentUpon>defaultATM.aspx</DependentUpon>
+    <Compile Include="default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="defaultATM.aspx.designer.cs">
-      <DependentUpon>defaultATM.aspx</DependentUpon>
+    <Compile Include="default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\ATM\add.aspx.cs">
       <DependentUpon>add.aspx</DependentUpon>
@@ -3502,12 +3502,12 @@
     <Compile Include="pages\mantenimiento\verificacion.aspx.designer.cs">
       <DependentUpon>verificacion.aspx</DependentUpon>
     </Compile>
-    <Compile Include="mainATM.Master.cs">
-      <DependentUpon>mainATM.Master</DependentUpon>
+    <Compile Include="main.Master.cs">
+      <DependentUpon>main.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="mainATM.Master.designer.cs">
-      <DependentUpon>mainATM.Master</DependentUpon>
+    <Compile Include="main.Master.designer.cs">
+      <DependentUpon>main.Master</DependentUpon>
     </Compile>
     <Compile Include="pages\mantenimiento\notificacion.aspx.cs">
       <DependentUpon>notificacion.aspx</DependentUpon>
@@ -4544,7 +4544,7 @@
     <Content Include="css\fonts\materialdesignicons-webfont.ttf" />
     <Content Include="css\fonts\Simple-Line-Icons.ttf" />
     <Content Include="css\fonts\themify.ttf" />
-    <Content Include="mainATM.Master" />
+    <Content Include="main.Master" />
     <None Include="packages.config" />
     <Content Include="scss\colors\blue-dark.scss" />
     <Content Include="scss\colors\blue.scss" />
