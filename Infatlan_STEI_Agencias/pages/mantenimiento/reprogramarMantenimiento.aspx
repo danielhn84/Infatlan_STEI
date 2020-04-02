@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/mainAgencia.Master" AutoEventWireup="true" CodeBehind="reprogramarMantenimiento.aspx.cs" Inherits="Infatlan_STEI_Agencias.pages.reprogramarMantenimiento" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="reprogramarMantenimiento.aspx.cs" Inherits="Infatlan_STEI_Agencias.pages.reprogramarMantenimiento" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
 
     <script type="text/javascript">
@@ -77,8 +77,8 @@
                                     <Columns>
                                         <asp:TemplateField  HeaderText="Acción" ItemStyle-HorizontalAlign="center" >
                                             <ItemTemplate>
-                                                <asp:LinkButton ID="LbReprogramar" runat="server"  CommandName="Reprogramar" CommandArgument='<%# Eval("id_Mantenimiento") %>'>
-                                                        <img src="https://img.icons8.com/color/23/000000/calendar.png"/>
+                                                <asp:LinkButton ID="LbReprogramar" class="btn  btn-cyan mr-2" runat="server"  CommandName="Reprogramar" CommandArgument='<%# Eval("id_Mantenimiento") %>'>
+                                                    <i class="icon-calender" ></i>
                                                 </asp:LinkButton>
                                             </ItemTemplate>
                                             <ItemStyle Width="10%" />
@@ -96,6 +96,11 @@
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </div>
+                    <div class="row p-t-20 col-md-12">
+                                <div class="col-md-4 " style="margin-left: auto; margin-right: auto">
+                                    <a href="../../default.aspx"" class="btn  btn-block btn-primary">Volver</a>
+                                </div>
+                            </div>
                 </div>
             </div>
         </div>

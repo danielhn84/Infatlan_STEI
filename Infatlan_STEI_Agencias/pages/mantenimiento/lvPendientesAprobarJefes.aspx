@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/mainAgencia.Master" AutoEventWireup="true" CodeBehind="lvPendientesAprobarJefes.aspx.cs" Inherits="Infatlan_STEI_Agencias.pages.lvPendientesAprobarJefes" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="lvPendientesAprobarJefes.aspx.cs" Inherits="Infatlan_STEI_Agencias.pages.lvPendientesAprobarJefes" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
@@ -59,8 +59,8 @@
                                 <Columns>
                                     <asp:TemplateField HeaderText="Acción" ItemStyle-HorizontalAlign="center">
                                         <ItemTemplate>
-                                            <asp:LinkButton ID="LBAprobar" runat="server"  CommandName="Aprobar" CommandArgument='<%# Eval("id_Mantenimiento") %>'>
-                                             <img src="https://img.icons8.com/color/23/000000/check-file.png"/>
+                                            <asp:LinkButton ID="LBAprobar" class="btn btn-success mr-2" runat="server"  CommandName="Aprobar" CommandArgument='<%# Eval("id_Mantenimiento") %>'>                                           
+                                            <i class="icon-check" ></i>
                                             </asp:LinkButton>
                                         </ItemTemplate>
                                         <ItemStyle Width="10%" />
@@ -78,6 +78,13 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
+
+                <div class="row p-t-20 col-md-12">
+                                <div class="col-md-4 " style="margin-left: auto; margin-right: auto">
+                                    <a href="../../default.aspx"" class="btn  btn-block btn-primary">Volver</a>
+                                </div>
+                            </div>
+                <br>
             </div>
         </div>
     </div>

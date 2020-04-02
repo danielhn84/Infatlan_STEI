@@ -300,5 +300,10 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
         {
 
         }
+
+        protected void BtnRegresar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/mainAgencia.Master" AutoEventWireup="true" CodeBehind="lvIndividual.aspx.cs" Inherits="Infatlan_STEI_Agencias.pages.LvIndividual" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="lvIndividual.aspx.cs" Inherits="Infatlan_STEI_Agencias.pages.LvIndividual" %>
 
 
 <%@ Register Assembly="System.Web.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI" TagPrefix="asp" %>
@@ -622,13 +622,21 @@
             <asp:UpdatePanel ID="UpdatePanel5" runat="server">
                 <ContentTemplate>
                     <div class="row p-t-20 col-md-12">
-                        <div class="col-md-3" style="margin-left: auto; margin-right: auto">
-                                <asp:Button ID="BtnEnviarLv" class="btn btn-block btn-lg btn-success" runat="server" Text="Enviar LV " OnClick="BtnEnviarLv_Click" />
+                        <div class="col-md-4">
+                                <asp:Button ID="BtnEnviarLv" class="btn btn-block  btn-success" runat="server" Text="Enviar LV " OnClick="BtnEnviarLv_Click" />
                         </div>
-                        <div class="col-md-3 " style="margin-left: auto; margin-right: auto">
-                            <asp:Button ID="BtnRegresarCompletarLV" class="btn btn-block btn-lg  btn-info " runat="server" Text="Regresar" OnClick="BtnRegresarCompletarLV_Click" />
+                        <div class="col-md-4">
+                            <asp:Button ID="BtnRegresarCompletarLV" class="btn btn-block  btn-danger" runat="server" Text="Cancelar" OnClick="BtnRegresarCompletarLV_Click" />
+                        </div>
+
+                        <div class="col-md-4">                  
+                            <a href="../../default.aspx"" class="btn  btn-block btn-primary">Volver</a>
                         </div>
                     </div>
+
+
+                                      
+
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>
@@ -669,14 +677,20 @@
             <asp:UpdatePanel ID="UpdatePanel10" runat="server">
                 <ContentTemplate>
                     <div class="row p-t-20 col-md-12">
-                        <div class="col-md-3" style="margin-left: auto; margin-right: auto">
-                             <asp:Button ID="BtnEnviarAprobacion" class="btn btn-block btn-lg btn-success" runat="server" Text="Enviar"  OnClick="BtnEnviarAprobacion_Click"/>
+                        <div class="col-md-4">
+                             <asp:Button ID="BtnEnviarAprobacion" class="btn btn-block btn-success" runat="server" Text="Enviar"  OnClick="BtnEnviarAprobacion_Click"/>
                         </div>              
                   
-                        <div class="col-md-3 " style="margin-left: auto; margin-right: auto">
-                         <asp:Button ID="BtnRegresarPendienteAprobar" class="btn btn-block btn-lg  btn-info " runat="server" Text="Regresar"  OnClick="BtnRegresarPendienteAprobar_Click" />   
+                        <div class="col-md-4">
+                         <asp:Button ID="BtnRegresarPendienteAprobar" class="btn btn-block   btn-danger " runat="server" Text="Cancelar"  OnClick="BtnRegresarPendienteAprobar_Click" />   
+                        </div>
+
+                        <div class="col-md-4" id="ocultarBotonVolver">                  
+                            <a href="../../default.aspx"" class="btn  btn-block btn-primary">Volver</a>
                         </div>
                     </div>
+
+                   
                     <br />
                     <br />
                 </ContentTemplate>

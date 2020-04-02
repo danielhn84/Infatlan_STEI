@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/mainAgencia.Master" AutoEventWireup="true" CodeBehind="creacionNotificacion.aspx.cs" Inherits="Infatlan_STEI_Agencias.pages.CreacionNotificacion" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="creacionNotificacion.aspx.cs" Inherits="Infatlan_STEI_Agencias.pages.CreacionNotificacion" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
     <!--PARA LLAMAR MODAL-->
@@ -314,18 +314,22 @@
 
                       
                             <div class="row p-t-20 col-md-12">
-                                <div class="col-md-5" style="margin-left: auto; margin-left: auto">
-                                    <asp:Button ID="BtnEnviarNotificacion" class="btn btn-block btn-lg btn-success" runat="server" Text="Enviar" OnClick="BtnEnviarNotificacion_Click" />
+                                <div class="col-md-4">
+                                    <asp:Button ID="BtnEnviarNotificacion" class="btn btn-block btn-success" runat="server" Text="Enviar" OnClick="BtnEnviarNotificacion_Click" />
                                 </div>
 
-                                <div class="col-md-5 " style="margin-left: auto; margin-right: auto">
-                                    <asp:Button ID="BtnCancelarNotificacion" class="btn btn-block btn-lg  btn-info " runat="server" Text="Cancelar" OnClick="BtnCancelarNotificacion_Click" />
+                                <div class="col-md-4">
+                                    <asp:Button ID="BtnCancelarNotificacion" class="btn btn-block  btn-danger" runat="server" Text="Cancelar" OnClick="BtnCancelarNotificacion_Click" />
                                 </div>
+
+                                <div class="col-md-4">
+                                      <a href="../../default.aspx"" class="btn  btn-block btn-primary">Volver</a>
+                                </div>
+
                             </div>
                             <br />
 
-           
-            
+
                             </ContentTemplate>
                         </asp:UpdatePanel>
 

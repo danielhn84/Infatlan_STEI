@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/mainAgencia.Master" AutoEventWireup="true" CodeBehind="lvPendientesModificar.aspx.cs" Inherits="Infatlan_STEI_Agencias.pages.lvPendientesModificar" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="lvPendientesModificar.aspx.cs" Inherits="Infatlan_STEI_Agencias.pages.lvPendientesModificar" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">    
@@ -56,8 +56,8 @@
                                 <Columns>
                                     <asp:TemplateField HeaderText="Acción" ItemStyle-HorizontalAlign="center">
                                         <ItemTemplate>
-                                            <asp:LinkButton ID="LBModificar" runat="server"  CommandName="Modificar" CommandArgument='<%# Eval("id_Mantenimiento") %>'>
-                                                        <img src="https://img.icons8.com/color/23/000000/edit-property.png"/>
+                                            <asp:LinkButton ID="LBModificar" runat="server" class="btn btn-info mr-2"  CommandName="Modificar" CommandArgument='<%# Eval("id_Mantenimiento") %>'>
+                                                       <i class="icon-pencil" ></i>
                                             </asp:LinkButton>
                                         </ItemTemplate>
                                         <ItemStyle Width="10%" />
@@ -75,6 +75,12 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
+                <div class="row p-t-20 col-md-12">
+                                <div class="col-md-4 " style="margin-left: auto; margin-right: auto">
+                                    <a href="../../default.aspx"" class="btn  btn-block btn-primary">Volver</a>
+                                </div>
+                            </div>
+                <br>
             </div>
         </div>
     </div>
