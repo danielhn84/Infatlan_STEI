@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/mainAgencia.Master" AutoEventWireup="true" CodeBehind="creacionAgencia.aspx.cs" Inherits="Infatlan_STEI_Agencias.pages.configuraciones.creacionAgencia" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="creacionAgencia.aspx.cs" Inherits="Infatlan_STEI_Agencias.pages.configuraciones.creacionAgencia" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
 
     <script type="text/javascript">
@@ -25,8 +25,8 @@
             <p>Información general de cada agencia</p>
 
             <ul class="nav nav-tabs" role="tablist">
-                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#home" role="tab"><span class="hidden-sm-up"><img src="https://img.icons8.com/color/23/000000/save.png"/></span><span class="hidden-xs-down"> Guardar</span></a> </li>
-                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><img src="https://img.icons8.com/color/23/000000/edit-property.png"/></span><span class="hidden-xs-down"> Modificar</span></a> </li>
+                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#home" role="tab"><span class="hidden-sm-up"><i class="fa fa-save"></i></span><span class="hidden-xs-down"> Guardar</span></a> </li>
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="icon-pencil"></i></span><span class="hidden-xs-down"> Modificar</span></a> </li>
             </ul>
             <div class="tab-content tabcontent-border">
 
@@ -108,13 +108,27 @@
 
                             <br />
                             <br />
-                            <div class="row p-t-20 col-md-12">
+             <%--               <div class="row p-t-20 col-md-12">
                                 <div class="col-md-5" style="margin-left: auto; margin-left: auto">
                                     <asp:Button ID="BtnEnviar" class="btn btn-block btn-lg btn-success" runat="server" Text="Enviar" OnClick="BtnEnviar_Click" />
                                 </div>
 
                                 <div class="col-md-5 " style="margin-left: auto; margin-right: auto">
                                     <asp:Button ID="BtnCancelar" class="btn btn-block btn-lg  btn-info " runat="server" Text="Cancelar" OnClick="BtnCancelar_Click" />
+                                </div>
+                            </div>--%>
+
+
+                            <div class="row p-t-20 col-md-12">
+                                <div class="col-md-4">
+                                    <asp:Button ID="BtnEnviar" class="btn  btn-block btn-success" runat="server" Text="Enviar" OnClick="BtnEnviar_Click" />
+                                </div>
+                                <div class=" col-md-4">
+                                    <asp:Button ID="BtnCancelar" class="btn  btn-block btn-danger" runat="server" Text="Cancelar" OnClick="BtnCancelar_Click" />
+                                </div>
+
+                                <div class="col-md-4">
+                                    <a href="../../default.aspx"" class="btn  btn-block btn-primary">Volver</a>
                                 </div>
                             </div>
                             <br />
@@ -165,8 +179,8 @@
                                             <Columns>
                                                 <asp:TemplateField HeaderText="Acción" ItemStyle-HorizontalAlign="center">
                                                     <ItemTemplate>
-                                                        <asp:LinkButton ID="LbModificar" runat="server"  CommandName="Modifcar" CommandArgument='<%# Eval("idAgencia") %>'>
-                                                        <img src="https://img.icons8.com/color/23/000000/edit-property.png"/>
+                                                        <asp:LinkButton ID="LbModificar"  class="btn btn-info mr-2"  runat="server"  CommandName="Modifcar" CommandArgument='<%# Eval("idAgencia") %>'>
+                                                       <i class="icon-pencil" ></i>
                                                         </asp:LinkButton>
 
                                                     </ItemTemplate>
@@ -183,6 +197,12 @@
                                         </asp:GridView>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
+                            </div>
+
+                            <div class="row p-t-20 col-md-12">
+                             <div class="col-md-4 " style="margin-left: auto; margin-right: auto">
+                                <a href="../../default.aspx"" class="btn  btn-block btn-primary">Volver</a>
+                             </div>
                             </div>
                         </div>
                     </div>

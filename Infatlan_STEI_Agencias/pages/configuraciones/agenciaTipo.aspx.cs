@@ -204,5 +204,22 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
+
+        protected void BtnRegresar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Infatlan_STEI/Infatlan_STEI_Agencias/default.aspx");
+
+            //< a href = "inventario.aspx" class="btn btn-primary"><i style = "margin-right:10%" class="icon-action-undo"></i>Volver</a>
+    }
+
+        protected void BtnRegresar_Click1(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void BtnRegresar1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
