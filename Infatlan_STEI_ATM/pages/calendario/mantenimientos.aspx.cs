@@ -77,11 +77,14 @@ namespace Infatlan_STEI_ATM.pages.calendario
                     string vQuery = "";
                     //Boolean idEmpleado = false;
                     Session["CODATM_SUBIDO"] = "Completo";
+                    Session["FECHA_SUBIDO"] = "Completo";
                     for (int i = 0; i < vDatos.Rows.Count; i++)
                     {
                         
                         String CodATM = vDatos.Rows[i]["CodigoATM"].ToString();
                         String Fecha = vDatos.Rows[i]["FECHA"].ToString();
+                        //String vFormato = "yyyy/MM/dd"; //"dd/MM/yyyy HH:mm:ss"
+                        string vFechaMant = Convert.ToDateTime(Fecha).Year.ToString();
 
                         String vQuery2 = "STEISP_ATM_VERIFICACION 7, '" + CodATM + "',1";
                         DataTable vDatos2 = vConexion.ObtenerTabla(vQuery2);
@@ -91,17 +94,25 @@ namespace Infatlan_STEI_ATM.pages.calendario
                         }
 
                         if (Session["CODATM_MANT"].ToString() != CodATM)
-                        {                             
+                        {
+                            if (Session["CODATM_SUBIDO"].ToString() == "Completo")
+                                Session["CODATM_SUBIDO"] = "";
+
+
                             Session["CODATM_SUBIDO"] = Session["CODATM_SUBIDO"] +", "+ CodATM;
                           
                         }
-                        else
+                        if(vFechaMant!="2020")
                         {
+                            if (Session["FECHA_SUBIDO"].ToString() == "Completo")
+                                Session["FECHA_SUBIDO"] = "";
                             
+
+                            Session["FECHA_SUBIDO"] = Session["FECHA_SUBIDO"] + ", " + CodATM;
                         }
 
                     }
-                    if (Session["CODATM_SUBIDO"].ToString()!="Completo")
+                    if (Session["CODATM_SUBIDO"].ToString()!="Completo" || Session["FECHA_SUBIDO"].ToString() != "Completo")
                         throw new Exception();
                     else
                     {
@@ -165,8 +176,8 @@ namespace Infatlan_STEI_ATM.pages.calendario
                         vCargado = cargarArchivo(vDireccionCarga, ref vSuccess, ref vError, Convert.ToString(Session["usuATM"]), vTipoPermiso);
 
                     if (vCargado)  
-                        if(Session["CODATM_SUBIDO"].ToString()!= "Completo")
-                            LbMensaje.Text = "Código " + Session["CODATM_SUBIDO"].ToString() + " no existe." + "<br>" + "<b style='color:green;'>Success:</b> " + vSuccess.ToString() + "&emsp;";
+                        if(Session["CODATM_SUBIDO"].ToString()!= "Completo" || Session["FECHA_SUBIDO"].ToString() != "Completo")
+                            LbMensaje.Text = "Código " + Session["CODATM_SUBIDO"].ToString() + " no existe." + "<br>" + "Fecha erronea de código "+ Session["FECHA_SUBIDO"].ToString() + "<br>" + "<b style='color:green;'>Success:</b> " + vSuccess.ToString() + "&emsp;";
                         else
                         LbMensaje.Text = "Archivo cargado con exito." + "<br>" + "<b style='color:green;'>Success:</b> " + vSuccess.ToString() + "&emsp;";
                     
