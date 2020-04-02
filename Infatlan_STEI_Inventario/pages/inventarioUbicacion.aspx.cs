@@ -35,6 +35,7 @@ namespace Infatlan_STEI_Inventario.pages
 
         private void cargarDatos(String vId){
             try{
+
                 String vQuery = "[STEISP_INVENTARIO_Principal] 5," + vId;
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
 
