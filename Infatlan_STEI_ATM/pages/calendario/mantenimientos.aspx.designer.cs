@@ -11,7 +11,7 @@ namespace Infatlan_STEI_ATM.pages.calendario
 {
 
 
-    public partial class manteniminetos
+    public partial class mantenimientos
     {
 
         /// <summary>

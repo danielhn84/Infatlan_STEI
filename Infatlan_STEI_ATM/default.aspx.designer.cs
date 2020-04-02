@@ -11,7 +11,7 @@ namespace Infatlan_STEI_ATM
 {
 
 
-    public partial class defaultATM1
+    public partial class @default
     {
 
         /// <summary>

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/mainATM.Master" AutoEventWireup="true" CodeBehind="procesador.aspx.cs" Inherits="Infatlan_STEI_ATM.pages.ATM.procesador" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="procesador.aspx.cs" Inherits="Infatlan_STEI_ATM.pages.ATM.procesador" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
     <!--PARA LLAMAR MODAL-->
     <script type="text/javascript">
@@ -72,15 +72,15 @@
                                                     GridLines="None"
                                                     PageSize="10" OnRowCommand="GVBusqueda_RowCommand">
                                                     <Columns>
+                                                      
+                                                        <asp:BoundField DataField="idProcesadorATM" HeaderText="Código procesador ATM" ItemStyle-HorizontalAlign="center" />
+                                                        <asp:BoundField DataField="nombreProcesadorATM" HeaderText="Procesador ATM" ItemStyle-HorizontalAlign="center" />
                                                         <asp:TemplateField HeaderText="Select" ItemStyle-HorizontalAlign="center">
                                                             <ItemTemplate>
                                                                 <asp:LinkButton ID="btnprocesador" runat="server" CssClass="btn btn-info ti-pencil-alt mr-2" Text="" CommandArgument='<%# Eval("idProcesadorATM") %>' CommandName="Codigo"></asp:LinkButton>
                                                                 <%--<asp:Button ID="BtnUsuarioPassword" runat="server" Text="De baja" CssClass="btn btn-block btn-outline-danger" CommandArgument='<%# Eval("codATM") %>' CommandName="Baja" />--%>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
-                                                        <asp:BoundField DataField="idProcesadorATM" HeaderText="Código procesador ATM" ItemStyle-HorizontalAlign="center" />
-                                                        <asp:BoundField DataField="nombreProcesadorATM" HeaderText="Procesador ATM" ItemStyle-HorizontalAlign="center" />
-
 
                                                     </Columns>
                                                 </asp:GridView>

@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="mainATM.Master.cs" Inherits="Infatlan_STEI.main" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="main.Master.cs" Inherits="Infatlan_STEI.main" %>
 
 <!DOCTYPE html>
 
@@ -136,7 +136,7 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav"> 
-                        <li><a  href="../../defaultATM.aspx" aria-expanded="false"><i class="ti-home"></i><span class="hide-menu">Dashboard</span></a></li>
+                        <li><a  href="../../default.aspx" aria-expanded="false"><i class="ti-home"></i><span class="hide-menu">Dashboard</span></a></li>
                          <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-desktop"></i><span class="hide-menu">ATM<span class="badge badge-pill badge-cyan ml-auto">13</span></span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="../../pages/ATM/add.aspx">Agregar</a></li>

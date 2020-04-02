@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/mainATM.Master" AutoEventWireup="true" CodeBehind="cancelarVerificacion.aspx.cs" Inherits="Infatlan_STEI_ATM.pages.ATM.cancelarVerificacion" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="cancelarVerificacion.aspx.cs" Inherits="Infatlan_STEI_ATM.pages.ATM.cancelarVerificacion" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
     <!--PARA LLAMAR MODAL-->
     <script type="text/javascript">
@@ -72,15 +72,15 @@
                                                     GridLines="None"
                                                     PageSize="10" OnRowCommand="GVBusqueda_RowCommand">
                                                     <Columns>
+                                                       
+                                                        <asp:BoundField DataField="idCancelMant" HeaderText="Código motivo cancelar" ItemStyle-HorizontalAlign="center" />
+                                                        <asp:BoundField DataField="nombreCancelar" HeaderText="Motivo cancelar" ItemStyle-HorizontalAlign="center" />
                                                         <asp:TemplateField HeaderText="Selección" ItemStyle-HorizontalAlign="center">
                                                             <ItemTemplate>
                                                                 <asp:LinkButton ID="btnmarca" runat="server" CssClass="btn btn-info ti-pencil-alt mr-2" Text="" CommandArgument='<%# Eval("idCancelMant") %>' CommandName="Codigo"></asp:LinkButton>
                                                                 <%--<asp:Button ID="BtnUsuarioPassword" runat="server" Text="De baja" CssClass="btn btn-block btn-outline-danger" CommandArgument='<%# Eval("codATM") %>' CommandName="Baja" />--%>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
-                                                        <asp:BoundField DataField="idCancelMant" HeaderText="Código motivo cancelar" ItemStyle-HorizontalAlign="center" />
-                                                        <asp:BoundField DataField="nombreCancelar" HeaderText="Motivo cancelar" ItemStyle-HorizontalAlign="center" />
-
 
                                                     </Columns>
                                                 </asp:GridView>
