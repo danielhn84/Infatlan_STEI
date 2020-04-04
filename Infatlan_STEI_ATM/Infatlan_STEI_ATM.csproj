@@ -462,6 +462,7 @@
     <Content Include="assets\images\users\d4.jpg" />
     <Content Include="assets\images\users\d5.jpg" />
     <Content Include="assets\images\users\profile.png" />
+    <Content Include="assets\images\vistaPrevia1.JPG" />
     <Content Include="assets\node_modules\blockUI\jquery.blockUI.js" />
     <Content Include="assets\node_modules\bootstrap-datepicker\bootstrap-datepicker.min.css" />
     <Content Include="assets\node_modules\bootstrap-datepicker\bootstrap-datepicker.min.js" />

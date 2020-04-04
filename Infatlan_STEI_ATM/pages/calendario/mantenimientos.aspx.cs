@@ -176,10 +176,15 @@ namespace Infatlan_STEI_ATM.pages.calendario
                         vCargado = cargarArchivo(vDireccionCarga, ref vSuccess, ref vError, Convert.ToString(Session["usuATM"]), vTipoPermiso);
 
                     if (vCargado)  
-                        if(Session["CODATM_SUBIDO"].ToString()!= "Completo" || Session["FECHA_SUBIDO"].ToString() != "Completo")
-                            LbMensaje.Text = "Código " + Session["CODATM_SUBIDO"].ToString() + " no existe." + "<br>" + "Fecha erronea de código "+ Session["FECHA_SUBIDO"].ToString() + "<br>" + "<b style='color:green;'>Success:</b> " + vSuccess.ToString() + "&emsp;";
-                        else
                         LbMensaje.Text = "Archivo cargado con exito." + "<br>" + "<b style='color:green;'>Success:</b> " + vSuccess.ToString() + "&emsp;";
+                    if(Session["CODATM_SUBIDO"].ToString()!= "Completo" && Session["FECHA_SUBIDO"].ToString() == "Completo")
+                        LbMensaje.Text = "Código " + Session["CODATM_SUBIDO"].ToString() + " no existe." + "<br>" + "<b style='color:green;'>Success:</b> " + vSuccess.ToString() + "&emsp;";
+                    if (Session["CODATM_SUBIDO"].ToString() == "Completo" && Session["FECHA_SUBIDO"].ToString() != "Completo")
+                        LbMensaje.Text = "Fecha erronea de código " + Session["FECHA_SUBIDO"].ToString() + "<br>" + "<b style='color:green;'>Success:</b> " + vSuccess.ToString() + "&emsp;";
+                    if (Session["CODATM_SUBIDO"].ToString() != "Completo" && Session["FECHA_SUBIDO"].ToString() != "Completo")
+                        LbMensaje.Text = "Código " + Session["CODATM_SUBIDO"].ToString() + " no existe." + "<br>" + "Fecha erronea de código " + Session["FECHA_SUBIDO"].ToString() + "<br>" + "<b style='color:green;'>Success:</b> " + vSuccess.ToString() + "&emsp;";
+                    
+                        
                     
                 }
                 else
