@@ -24,7 +24,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["usu"] = "acamador";
+            Session["USUARIO"] = "acamador";
             if (!Page.IsPostBack)
             {
 
@@ -96,33 +96,33 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                     string vQuery = "";
                     //Boolean idEmpleado = false;
 
-                    if (TipoProceso == "LISTA_MAN")
+                    if (TipoProceso == "LISTA_MANTENIMIENTOS")
                     {
-                        Boolean vidAreaAgencia = false, vFecha = false, vtipo = false;
+                        Boolean vcodigoAgencia = false, vFecha = false, varea = false;
 
                         foreach (DataColumn item in vDatos.Columns)
                         {
-                            if (item.ColumnName.ToString() == "idAgencia")
-                                vidAreaAgencia = true;
+                            if (item.ColumnName.ToString() == "codigoAgencia")
+                                vcodigoAgencia = true;
                             if (item.ColumnName.ToString() == "fechaMantenimiento")               
                                 vFecha = true;
 
                             if (item.ColumnName.ToString() == "idAreaAgencia")
-                                vtipo = true;
+                                varea = true;
                         }
 
-                        if (vidAreaAgencia && vFecha && vtipo)
+                        if (vcodigoAgencia && vFecha && varea)
                         {
                             for (int i = 0; i < vDatos.Rows.Count; i++)
                             {
-                                String idAgencia = vDatos.Rows[i]["idAgencia"].ToString();
+                                String codigoAgencia = vDatos.Rows[i]["codigoAgencia"].ToString();
                                 String fechaMantenimiento = vDatos.Rows[i]["fechaMantenimiento"].ToString();
                                 String idAreaAgencia = vDatos.Rows[i]["idAreaAgencia"].ToString();
 
                                 String vFormato = "yyyy/MM/dd"; //"dd/MM/yyyy HH:mm:ss"
                                 String vFechaMant = Convert.ToDateTime(fechaMantenimiento).ToString(vFormato);
 
-                                vQuery = "STEISP_AGENCIA_CreacionAgencia 6, '" + idAgencia + "'" +
+                                vQuery = "STEISP_AGENCIA_CreacionAgencia 7, '" + codigoAgencia + "'" +
                                     ",'" + vFechaMant + "'" +
                                     ",'" + idAreaAgencia + "'";
 
@@ -145,7 +145,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
 
         protected void BtnEnviar_Click1(object sender, EventArgs e)
         {
-            String archivoLog = string.Format("{0}_{1}", Convert.ToString(Session["usu"]), DateTime.Now.ToString("yyyyMMdd"));
+            String archivoLog = string.Format("{0}_{1}", Convert.ToString(Session["USUARIO"]), DateTime.Now.ToString("yyyyMMdd"));
 
             try
             {
@@ -155,7 +155,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                     String vNombreArchivo = FUMantenimientosAgencia.FileName;
                     vDireccionCarga += "/" + archivoLog + "_" + vNombreArchivo;
                     FUMantenimientosAgencia.SaveAs(vDireccionCarga);
-                    String vTipoPermiso = "LISTA_MAN";
+                    String vTipoPermiso = "LISTA_MANTENIMIENTOS";
                     Boolean vCargado = false;
                     int vSuccess = 0, vError = 0;
                     if (File.Exists(vDireccionCarga))

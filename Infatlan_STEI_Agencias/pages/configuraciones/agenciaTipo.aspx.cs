@@ -6,13 +6,13 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Infatlan_STEI_Agencias.classes;
 using System.Data;
+using System.Globalization;
 
 
 namespace Infatlan_STEI_Agencias.pages.configuraciones
 {
     public partial class agenciaTipo : System.Web.UI.Page
     {
-
         db vConexion = new db();
         public void Mensaje(string vMensaje, WarningType type)
         {
@@ -30,8 +30,9 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             try
             {
                 validarGuardarTipoAgencia();
-                String vQuery1 = " STEISP_AGENCIA_TiposAgencia 1,'"
-                                   + TxAgencia.Text + "'";
+                String vQuery1 = "STEISP_AGENCIA_TiposAgencia 1,'"
+                                   + TxAgencia.Text + 
+                                   "','"+ Session["USUARIO"] + "'";
                 Int32 vInformacion1 = vConexion.ejecutarSql(vQuery1);
 
                 if (vInformacion1 == 1)
@@ -72,10 +73,11 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             try
             {
                 String vQuery = "STEISP_AGENCIA_TiposAgencia 2";
-                DataTable vDatos = vConexion.obtenerDataTable(vQuery);
-                Session["AG_TA_DATA_AGENCIA_TIPO"] = vDatos;
+                DataTable vDatos = vConexion.obtenerDataTable(vQuery);              
+                TxTipoAgenciaModal.Text = vDatos.Rows[0]["nombre"].ToString();
                 GVTipoAgencias.DataSource = vDatos;
-                GVTipoAgencias.DataBind();               
+                GVTipoAgencias.DataBind();
+                Session["AG_TA_DATA_AGENCIA_TIPO"] = vDatos;
             }
             catch (Exception ex)
             {
@@ -98,6 +100,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                     TxTipoAgenciaModal.Text = vDatos.Rows[0]["nombre"].ToString();
                     DdlEstadoTipoAgencia.SelectedValue = vDatos.Rows[0]["estado"].ToString();
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModalModificarTipoAgencia();", true);
+                    
                 }
                 catch (Exception ex)
                 {
@@ -109,17 +112,16 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
         {
             try
             {
-                string estado = "";
-                if (DdlEstadoTipoAgencia.SelectedValue == "True")
-                { estado = "1"; }
-                else {
-                    estado = "0";
-                }
-
+                DivAlerta.Visible = false;
+                UpdateModal.Update();
+                validarModificarTipoAgencia();
+                string estado = DdlEstadoTipoAgencia.SelectedValue == "True" ? "1" : "0";
+                
                 String vQuery3 = " STEISP_AGENCIA_TiposAgencia 4,"
                                    + Session["AG_TA_ID_AREA_MODIFICAR"] +
-                                   ",'" + TxTipoAgenciaModal.Text +
-                                   "'," + estado;
+                                   ",'" + TxTipoAgenciaModal.Text.Substring(0, 1).ToUpper() + TxTipoAgenciaModal.Text.Substring(1) +
+                                   "'," + estado +
+                                   ",'" + Session["USUARIO"]+ "'";
                 Int32 vInformacion3 = vConexion.ejecutarSql(vQuery3);
 
                 if (vInformacion3 == 1)
@@ -127,12 +129,16 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                     Mensaje("Tipo de agencia actualizado con exito. ", WarningType.Success);
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModalModificarTipoAgencia();", true);
                     cargar();
+                    UPTipoAgencias.Update();
                 }
 
             }
             catch (Exception ex)
             {
-                Mensaje(ex.Message, WarningType.Danger);
+                LbMensajeModalError.Text = ex.Message;
+                DivAlerta.Visible = true;
+                UpdateModal.Visible = true;
+                UpdateModal.Update();
             }
         }
         protected void GVTipoAgencias_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -148,7 +154,6 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
-
         protected void TxBuscarArea_TextChanged(object sender, EventArgs e)
         {
             try
@@ -164,9 +169,11 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 }
                 else
                 {
+                    vBusqueda = TxBuscarArea.Text.Substring(0, 1).ToUpper() + TxBuscarArea.Text.Substring(1);
                     EnumerableRowCollection<DataRow> filtered = vDatos.AsEnumerable()
                         .Where(r => r.Field<String>("nombre").Contains(vBusqueda));
 
+                 
                     Boolean isNumeric = int.TryParse(vBusqueda, out int n);
 
                     if (isNumeric)
@@ -192,7 +199,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                             );
                     }
 
-                    GVTipoAgencias.DataSource = vDatosFiltrados;
+                    GVTipoAgencias.DataSource          = vDatosFiltrados;
                     GVTipoAgencias.DataBind();
                     Session["AG_TA_DATA_AGENCIA_TIPO"] = vDatosFiltrados;
                     UPTipoAgencias.Update();
@@ -204,22 +211,21 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
-
         protected void BtnRegresar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Infatlan_STEI/Infatlan_STEI_Agencias/default.aspx");
-
-            //< a href = "inventario.aspx" class="btn btn-primary"><i style = "margin-right:10%" class="icon-action-undo"></i>Volver</a>
-    }
-
-        protected void BtnRegresar_Click1(object sender, EventArgs e)
-        {
-
+            Response.Redirect("../../default.aspx");
         }
-
-        protected void BtnRegresar1_Click(object sender, EventArgs e)
+        private void validarModificarTipoAgencia()
         {
+            if (TxTipoAgenciaModal.Text == "" || TxTipoAgenciaModal.Text == string.Empty)
+                throw new Exception("Campos vacios, Favor ingresar el tipo de agencia.");
+        }
+        protected void TxTipoAgenciaModal_TextChanged(object sender, EventArgs e)
+        {           
 
+                DivAlerta.Visible = false;
+                UpdateModal.Update();
+               
         }
     }
 }

@@ -37,7 +37,7 @@
                                     <label class="control-label text-danger">*</label><label class="control-label ">Tipo de Agencia:</label>
                                 </div>
                                 <div class="col-md-10">
-                                    <asp:TextBox runat="server" ID="TxAgencia" TextMode="MultiLine" Rows="3" CssClass="form-control" placeholder="Ingrese tipo de agencia.."></asp:TextBox>
+                                    <asp:TextBox runat="server" ID="TxAgencia" TextMode="MultiLine" Rows="3" MaxLength="250" CssClass="form-control" placeholder="Ingrese tipo de agencia.."></asp:TextBox>
                                 </div>
                             </div>
                             <br />
@@ -71,7 +71,7 @@
                                     <ContentTemplate>
                                         <div class="row p-t-20">
                                             <div class="col-md-1">
-                                                <label class="control-label   text-danger">*</label><label class="control-label">Buscar:</label></label>                                      
+                                                <label class="control-label">Buscar:</label></label>                                      
                                             </div>
                                             <div class="col-md-6">
                                                 <asp:TextBox ID="TxBuscarArea" runat="server" placeholder="Búsqueda por Tipo Agencia o Id, luego presione Enter" class="form-control" AutoPostBack="true" OnTextChanged="TxBuscarArea_TextChanged"></asp:TextBox>
@@ -166,16 +166,20 @@
 
                             <div class="col-md-12" runat="server">
                                 <div class="form-group row">
-                                    <label class="col-md-3 col-form-label">Tipo Agencia:</label>
+                                    <div class="col-md-3">
+                                        <label class="control-label text-danger">*</label><label class="col-form-label">Tipo Agencia:</label>
+                                    </div>
                                     <div class="col-md-9">
-                                        <asp:TextBox ID="TxTipoAgenciaModal" class="form-control" runat="server" TextMode="MultiLine" Rows="3"></asp:TextBox>
+                                        <asp:TextBox ID="TxTipoAgenciaModal" class="form-control" runat="server" TextMode="MultiLine" Rows="3" OnTextChanged="TxTipoAgenciaModal_TextChanged"></asp:TextBox>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-md-12" runat="server">
                                 <div class="form-group row">
-                                    <label class="col-md-3 col-form-label">Estado:</label>
+                                    <div class="col-md-3">
+                                        <label class="control-label text-danger">*</label><label class="col-form-label">Estado:</label>
+                                    </div>
                                     <div class="col-md-9">
                                         <asp:DropDownList ID="DdlEstadoTipoAgencia" runat="server" class="form-control" AutoPostBack="true">
                                             <asp:ListItem Value="False" Text="Inactivo"></asp:ListItem>
@@ -185,12 +189,22 @@
                                 </div>
                             </div>
 
+                            <asp:UpdatePanel ID="UpdateModal" runat="server" UpdateMode="Conditional">
+                                <ContentTemplate>
+                                    <div class="col-md-12" style="align-self: center" runat="server" id="DivAlerta" visible="false">
+                                        <div class="alert alert-danger   align-content-md-center">
+                                            <h3 class="text-danger" style="text-align: center"><i class="fa fa-exclamation-triangle"></i>Warning</h3>
+                                            <asp:Label ID="LbMensajeModalError" runat="server" Text="" Width="100%"></asp:Label>
+                                        </div>
+                                    </div>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+
 
                             <div class="col-md-12" style="margin-left: auto; margin-right: auto" runat="server" visible="true">
                                 <div class="alert alert-success  alert-dismissible align-content-md-center" style="align-self: auto">
                                     <div class="row">
-                                        <div class="col-3">
-                                           
+                                        <div class="col-3">                                           
                                             <p class="text-center"><img src="https://img.icons8.com/color/70/000000/accept-database.png"/><span class="dashicons dashicons-admin-home"></span></i></p>
                                         </div>
                                         <div class="col-9" style="text-align: center">

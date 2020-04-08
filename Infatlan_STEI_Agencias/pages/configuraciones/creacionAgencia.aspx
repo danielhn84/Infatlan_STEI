@@ -38,12 +38,12 @@
                             <div class="row p-t-20">
                                 <div class="col-md-6">
                                     <label class="control-label   text-danger">*</label><label class="control-label">Agencia:</label></label>
-                                        <asp:TextBox ID="TxAgencia" AutoPostBack="true" runat="server" class="form-control"></asp:TextBox>
+                                        <asp:TextBox ID="TxAgencia" AutoPostBack="true" runat="server" class="form-control" MaxLength="100"></asp:TextBox>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label class="control-label   text-danger">*</label><label class="control-label">Código Agencia:</label></label>    
-                                        <asp:TextBox ID="TxCodigo" AutoPostBack="true" runat="server" TextMode="Number" class="form-control"></asp:TextBox>
+                                        <asp:TextBox ID="TxCodigo" AutoPostBack="true" runat="server" TextMode="Number" class="form-control" MaxLength="10"></asp:TextBox>
                                 </div>
                             </div>
                             <!--Fin Fila 1-->
@@ -52,12 +52,12 @@
                             <div class="row p-t-20">
                                 <div class="col-md-6">
                                     <label class="control-label   text-danger">*</label><label class="control-label">Dirección:</label></label>
-                                        <asp:TextBox ID="TxDireccion" AutoPostBack="true" runat="server" TextMode="MultiLine" Rows="3" class="form-control"></asp:TextBox>
+                                        <asp:TextBox ID="TxDireccion" AutoPostBack="true" runat="server" TextMode="MultiLine" Rows="3" class="form-control" MaxLength="500"></asp:TextBox>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label class="control-label   text-danger">*</label><label class="control-label">Telefono:</label></label>    
-                                        <asp:TextBox ID="TxTelefono" AutoPostBack="true" runat="server" TextMode="MultiLine" Rows="3" class="form-control"></asp:TextBox>
+                                        <asp:TextBox ID="TxTelefono" AutoPostBack="true" runat="server" TextMode="MultiLine" Rows="3" class="form-control" MaxLength="20"></asp:TextBox>
                                 </div>
                             </div>
                             <!--Fin Fila 2-->
@@ -66,12 +66,12 @@
                             <div class="row p-t-20">
                                 <div class="col-md-6">
                                     <label class="control-label   text-danger">*</label><label class="control-label">Latitud:</label></label>
-                                        <asp:TextBox ID="TxLatitud" AutoPostBack="true" runat="server" TextMode="MultiLine" Rows="3" class="form-control"></asp:TextBox>
+                                        <asp:TextBox ID="TxLatitud" AutoPostBack="true" runat="server" TextMode="MultiLine" Rows="3" class="form-control" MaxLength="20"></asp:TextBox>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label class="control-label   text-danger">*</label><label class="control-label">Longitud:</label></label>    
-                                        <asp:TextBox ID="TxLongitud" AutoPostBack="true" runat="server" TextMode="MultiLine" Rows="3" class="form-control"></asp:TextBox>
+                                        <asp:TextBox ID="TxLongitud" AutoPostBack="true" runat="server" TextMode="MultiLine" Rows="3" class="form-control" MaxLength="20"></asp:TextBox>
                                 </div>
                             </div>
                             <!--Fin Fila 3-->
@@ -148,7 +148,7 @@
                                     <ContentTemplate>
                                         <div class="row p-t-20">
                                             <div class="col-md-1">
-                                                <label class="control-label   text-danger">*</label><label class="control-label">Buscar:</label></label>                                      
+                                                <label class="control-label">Buscar:</label></label>                                      
                                             </div>
                                             <div class="col-md-6">
                                                <asp:TextBox ID="TxBuscarAgencia" runat="server" placeholder="Búsqueda por agencia o codigo, luego presione Enter..." class="form-control" AutoPostBack="true" OnTextChanged="TxBuscarAgencia_TextChanged"></asp:TextBox>
@@ -164,7 +164,7 @@
                     <div class="row col-12">
                         <div class="col-12 grid-margin stretch-card">
                             <div class="table-responsive">
-                                <asp:UpdatePanel runat="server" ID="UPAgencias">
+                                <asp:UpdatePanel runat="server" ID="UPAgencias" UpdateMode="Conditional">
                                     <ContentTemplate>
                                         <asp:GridView ID="GVAgencias" runat="server"
                                             CssClass="table table-bordered"
@@ -193,6 +193,7 @@
                                                 <asp:BoundField DataField="telefono" HeaderText="Telefono" ControlStyle-Width="30%" />
                                                 <asp:BoundField DataField="TipoAgencia" HeaderText="Tipo" ControlStyle-Width="30%" />
                                                 <asp:BoundField DataField="departamento" HeaderText="Departamento" ControlStyle-Width="30%" />
+                                                <asp:BoundField DataField="estado" HeaderText="Estado" ControlStyle-Width="30%" />
                                             </Columns>
                                         </asp:GridView>
                                     </ContentTemplate>
@@ -235,11 +236,14 @@
 
                             <div class="col-md-12" runat="server">
                                 <div class="form-group row">
-                                    <label class="col-md-2 col-form-label">Id Codigo:</label>
+                                    <label class="col-md-2 col-form-label">Codigo:</label>
                                     <div class="col-md-4">
                                         <asp:TextBox ID="TxCodigoModificar" class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                                     </div>
-                                    <label class="col-md-2 col-form-label">Agencia:</label>
+                                    <div class="col-md-2  ">
+                                        <label class="control-label text-danger">*</label><label class="col-form-label">Agencia:</label>
+                                    </div>
+                               
                                     <div class="col-md-4">
                                         <asp:TextBox ID="TxAgenciaModificar" class="form-control" runat="server" ></asp:TextBox>
                                     </div>
@@ -248,11 +252,17 @@
 
                             <div class="col-md-12" runat="server">
                                 <div class="form-group row">
-                                    <label class="col-md-2 col-form-label">Dirección:</label>
+                                    <div class="col-md-2  ">
+                                        <label class="control-label text-danger">*</label><label class="col-form-label">Dirección:</label>
+                                    </div>
+                                    
                                     <div class="col-md-4">
                                         <asp:TextBox ID="TxDireccionModificar" class="form-control" runat="server" TextMode="MultiLine" Rows="2"></asp:TextBox>
                                     </div>
-                                    <label class="col-md-2 col-form-label">Telefono:</label>
+                                    <div class="col-md-2  ">
+                                        <label class="control-label text-danger">*</label><label class="col-form-label">Telefono:</label>
+                                    </div>
+                                    
                                     <div class="col-md-4">
                                         <asp:TextBox ID="TxTelefonoModificar" class="form-control" runat="server" TextMode="MultiLine" Rows="2"></asp:TextBox>
                                     </div>
@@ -261,11 +271,17 @@
 
                             <div class="col-md-12" runat="server">
                                 <div class="form-group row">
-                                    <label class="col-md-2 col-form-label">Latitud:</label>
+                                    <div class="col-md-2  ">
+                                        <label class="control-label text-danger">*</label><label class="col-form-label">Latitud:</label>
+                                    </div>
+                                    
                                     <div class="col-md-4">
                                         <asp:TextBox ID="TxLatitudModificar" class="form-control" runat="server" TextMode="MultiLine" Rows="2"></asp:TextBox>
                                     </div>
-                                    <label class="col-md-2 col-form-label">Longitud:</label>
+                                    <div class="col-md-2  ">
+                                        <label class="control-label text-danger">*</label><label class="col-form-label">Longitud:</label>
+                                    </div>
+                                    
                                     <div class="col-md-4">
                                         <asp:TextBox ID="TxLongitudModificar" class="form-control" runat="server" TextMode="MultiLine" Rows="2"></asp:TextBox>
                                     </div>
@@ -274,11 +290,18 @@
 
                             <div class="col-md-12" runat="server">
                                 <div class="form-group row">
-                                    <label class="col-md-2 col-form-label">Tipo Agencia:</label>
+                                    <div class="col-md-2  ">
+                                        <label class="control-label text-danger">*</label><label class="col-form-label">Tipo Agencia:</label>
+                                    </div>
+                                    
                                     <div class="col-md-4">
                                          <asp:DropDownList ID="DDLTipoAgenciaModificar" runat="server" AutoPostBack="true" CssClass="form-control"></asp:DropDownList>
                                     </div>
-                                    <label class="col-md-2 col-form-label">Departamento:</label>
+
+                                    <div class="col-md-2">
+                                        <label class="control-label text-danger">*</label><label class="col-form-label">Depto.:</label>
+                                    </div>
+                                                                        
                                     <div class="col-md-4">
                                         <asp:DropDownList ID="DDLDepartamentoModificar" runat="server" AutoPostBack="true" CssClass="form-control"></asp:DropDownList>
                                     </div>
@@ -287,14 +310,21 @@
 
                             <div class="col-md-12" runat="server">
                                 <div class="form-group row">
-                                    <label class="col-md-2 col-form-label">Requiere Conductor:</label>
-                                    <div class="col-md-4">
+                                    
+                                    <div class="col-md-3">
+                                        <label class="control-label text-danger">*</label><label class="col-form-label">Requiere Conductor:</label>
+                                    </div>
+
+                                    <div class="col-md-3">
                                        <asp:RadioButtonList ID="RbConductorModificar" RepeatDirection="Horizontal" Width="90px" runat="server" AutoPostBack="True">
                                         <asp:ListItem Value="1">Si</asp:ListItem>
                                         <asp:ListItem Value="0">No</asp:ListItem>
                                     </asp:RadioButtonList> 
                                     </div>
-                                    <label class="col-md-2 col-form-label">Estado:</label>
+                                    
+                                    <div class="col-md-2  ">
+                                        <label class="control-label text-danger">*</label><label class="col-form-label">Estado:</label>
+                                    </div>
                                     <div class="col-md-4">
                                         <asp:DropDownList ID="DDLEstado" runat="server" AutoPostBack="true" CssClass="form-control">
                                         <asp:ListItem Value="0" Text="Inactivo"></asp:ListItem>
@@ -306,6 +336,17 @@
                             </div>
 
 
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+
+                    <asp:UpdatePanel ID="UpdateModal" runat="server" UpdateMode="Conditional">
+                        <ContentTemplate>
+                            <div class="col-md-12" style="align-self: center" runat="server" id="DivAlerta" visible="false">
+                                <div class="alert alert-danger   align-content-md-center">
+                                    <h3 class="text-danger" style="text-align: center"><i class="fa fa-exclamation-triangle"></i>Warning</h3>
+                                    <asp:Label ID="LbMensajeModalError" runat="server" Text="" Width="100%"></asp:Label>
+                                </div>
+                            </div>
                         </ContentTemplate>
                     </asp:UpdatePanel>
 
@@ -321,8 +362,7 @@
                                     <p>Si esta seguro dar clic en el botón "Modificar"</p>
                                 </div>
                                 <br>
-                                
-                         
+                                                      
                             </div>
                         </div>
                     </div>
@@ -338,8 +378,7 @@
                             </ContentTemplate>
                         
                         </asp:UpdatePanel>
-                    </div>
-                
+                    </div>                
             </div>
         </div>
     </div>

@@ -167,11 +167,12 @@
                                                 <Columns>
                                                     <asp:TemplateField HeaderText="Acción" ItemStyle-HorizontalAlign="center">
                                                         <ItemTemplate>
-                                                            <asp:LinkButton ID="LBEliminarTecnicoParticipantes" runat="server"  CommandArgument='<%# Eval("idUsuario") %>' CommandName="Eliminar">
-                                                                <img src="https://img.icons8.com/color/23/000000/delete-property.png"/>
+                                                            <asp:LinkButton ID="LBEliminarTecnicoParticipantes"  class="btn btn-danger mr-2" runat="server"  CommandName="Eliminar" CommandArgument='<%# Eval("idUsuario") %>'>
+  
+                                                                <i class="icon-close"></i>
                                                             </asp:LinkButton>
                                                         </ItemTemplate>
-                                                        <ItemStyle Width="5%" />
+                                                        <%--<ItemStyle Width="5%" />--%>
                                                     </asp:TemplateField>
                                                     <asp:BoundField DataField="idUsuario" HeaderText="Usuario" ItemStyle-Width="25%" />
                                                     <asp:BoundField DataField="nombre" HeaderText="Nombre" ItemStyle-Width="25%"/>
@@ -242,7 +243,10 @@
                                             <ItemTemplate>
                                                 <!--<button id="btnBorrarGrid" class="btn btn-danger waves-effect waves-light" type="button"><span class="btn-label"><i class="fa fa-trash"></i></span></button>
                                                 <!-- <button type="button" class="btn btn-rounded btn-block btn-danger btn-sm"><i class="fa fa-minus-circle"></i></button>-->
-                                                <asp:LinkButton ID="Btnseleccionar" OnClick="Btnseleccionar_Click" Enabled="true" runat="server" Text="" class="btn btn-danger mr-2" CommandArgument='<%# Eval("Correo") %>' CommandName="eliminar"><i class="icon-trash"></i></asp:LinkButton>
+                                      <%--          <asp:LinkButton ID="Btnseleccionar" OnClick="Btnseleccionar_Click" Enabled="true" runat="server" Text="" class="btn btn-danger mr-2" CommandArgument='<%# Eval("Correo") %>' CommandName="eliminar">
+                                                    <i class="icon-trash"></i>
+
+                                                </asp:LinkButton>--%>
                                             </ItemTemplate>
                                             <ItemStyle Width="10%" />
                                         </asp:TemplateField>
@@ -409,7 +413,7 @@
                             <div class="row">
                                 <div class="col-3">
                                     <br>
-                                    <p class="text-center"><img src="https://img.icons8.com/color/70/000000/accept-database.png"/><span class="dashicons dashicons-admin-home"></span></i></p>
+                                    <p class="text-center"><img src="https://img.icons8.com/color/70/000000/accept-database.png"/><span class="dashicons dashicons-admin-home"></span></p>
                                 </div>
                                 <div class="col-9" style="text-align: center">
                                     <br>
