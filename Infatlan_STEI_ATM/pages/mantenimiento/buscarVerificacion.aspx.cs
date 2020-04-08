@@ -37,11 +37,11 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         }
         void cargarData()
         {
-            string usu = "acedillo";
+            
             try
             {
                 DataTable vDatos = new DataTable();
-                vDatos = vConexion.ObtenerTabla("STEISP_ATM_VERIFICACION 1, '"+usu+"','"+Session["COD_VERIFMANTE_ATM"]+"'");
+                vDatos = vConexion.ObtenerTabla("STEISP_ATM_VERIFICACION 1, '"+ Session["usuATM"].ToString() + "','"+Session["COD_VERIFMANTE_ATM"]+"'");
                 GVBusqueda.DataSource = vDatos;
                 GVBusqueda.DataBind();
                 Session["ATM_VERIF_CARGAR"] = vDatos;
@@ -185,7 +185,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             DDLModalNewTecnico.Visible = false;
             limpiarModalVerificacion();
             H5Alerta.Visible = false;
-            string usu = "acedillo";
+            
             try
             {
                 DataTable vDataaaa = (DataTable)Session["ATM_VERIF_CARGAR"];
@@ -196,7 +196,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     try
                     {
                         DataTable vDatos = new DataTable();
-                        vDatos = vConexion.ObtenerTabla("STEISP_ATM_VERIFICACION 2, '" + usu + "','" + codVerif + "'");
+                        vDatos = vConexion.ObtenerTabla("STEISP_ATM_VERIFICACION 2, '" + Session["usuATM"].ToString() + "','" + codVerif + "'");
                         //vDatos = vConexion.ObtenerTabla(vQuery);
                         foreach (DataRow item in vDatos.Rows)
                         {
@@ -263,7 +263,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     try
                     {
                         DataTable vDatos2 = new DataTable();
-                        vDatos2 = vConexion.ObtenerTabla("STEISP_ATM_VERIFICACION 2, '" + usu + "','" + codVerif + "'");
+                        vDatos2 = vConexion.ObtenerTabla("STEISP_ATM_VERIFICACION 2, '" + Session["usuATM"].ToString() + "','" + codVerif + "'");
                         //vDatos = vConexion.ObtenerTabla(vQuery);
                         foreach (DataRow item in vDatos2.Rows)
                         {                            

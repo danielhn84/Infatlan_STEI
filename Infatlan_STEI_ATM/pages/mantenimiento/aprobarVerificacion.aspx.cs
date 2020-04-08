@@ -186,10 +186,10 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
         protected void btnModalVerif_Click(object sender, EventArgs e)
         {
-            string usu = "acedillo";
+            
             try
             {
-                string vQuery = "STEISP_ATM_VERIFICACION 5, '" + usu + "','" + Session["ATM_CODVERIF"] + "'";                   
+                string vQuery = "STEISP_ATM_VERIFICACION 5, '" + Session["usuATM"].ToString() + "','" + Session["ATM_CODVERIF"] + "'";                   
                 Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                 if (vInfo == 1)
                 {
@@ -222,10 +222,10 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             }
             else
             {
-                string usu = "acedillo";
+                
                 try
                 {
-                    string vQuery = "STEISP_ATM_VERIFICACION 6, '" + usu + "','" + Session["ATM_CODVERIF"] + "'";
+                    string vQuery = "STEISP_ATM_VERIFICACION 6, '" + Session["usuATM"].ToString() + "','" + Session["ATM_CODVERIF"] + "'";
                     Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                     if (vInfo == 1)
                     {
