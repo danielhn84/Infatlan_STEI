@@ -36,7 +36,20 @@
             </div>
 
             <br><br>
-             <asp:Label ID="LbMensaje" runat="server" Text=""></asp:Label>
+             <%--<asp:Label ID="LbMensaje" runat="server" Text=""></asp:Label>--%>
+
+            
+                            <asp:UpdatePanel ID="UpdateModal" runat="server" UpdateMode="Conditional">
+                                <ContentTemplate>
+                                    <div class="col-md-12" style="align-self: center" runat="server" id="DivAlerta" visible="false">
+                                        <div class="alert alert-danger   align-content-md-center">
+                                            <h3 class="text-danger" style="text-align: center"><i class="fa fa-exclamation-triangle"></i>Warning</h3>
+                                            <asp:Label ID="LbMensaje" runat="server" Text="" Width="100%"></asp:Label>
+                                        </div>
+                                    </div>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+
 
             <div class="row p-t-20 col-md-12">
                 <div class="col-md-4">
