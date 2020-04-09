@@ -453,6 +453,7 @@
                         </div>
 
                     </div>
+                    
                 </ContentTemplate>
             </asp:UpdatePanel>
 
@@ -619,7 +620,7 @@
                 </div>
             </div>
 
-            <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+            <asp:UpdatePanel ID="UpdatePanel5" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
                     <div class="row p-t-20 col-md-12">
                         <div class="col-md-4">
@@ -629,7 +630,7 @@
                             <asp:Button ID="BtnRegresarCompletarLV" class="btn btn-block  btn-danger" runat="server" Text="Cancelar" OnClick="BtnRegresarCompletarLV_Click" />
                         </div>
 
-                        <div class="col-md-4">                  
+                        <div class="col-md-4" id="ocultarBotonVolver1" runat="server" visible="false">                  
                             <a href="../../default.aspx"" class="btn  btn-block btn-primary">Volver</a>
                         </div>
                     </div>
@@ -685,7 +686,7 @@
                          <asp:Button ID="BtnRegresarPendienteAprobar" class="btn btn-block   btn-danger " runat="server" Text="Cancelar"  OnClick="BtnRegresarPendienteAprobar_Click" />   
                         </div>
 
-                        <div class="col-md-4" id="ocultarBotonVolver">                  
+                        <div class="col-md-4" id="ocultarBotonVolver" runat="server" >                  
                             <a href="../../default.aspx"" class="btn  btn-block btn-primary">Volver</a>
                         </div>
                     </div>
