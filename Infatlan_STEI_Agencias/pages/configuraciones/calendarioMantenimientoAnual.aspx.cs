@@ -30,9 +30,6 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
 
             }
         }
-
- 
-
         public Boolean cargarArchivo(String DireccionCarga, ref int vSuccess, ref int vError, String vUsuario, String TipoProceso)
         {
             Boolean vResultado = false;
@@ -68,7 +65,6 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             }
             return vResultado;
         }
-
         private bool verificarRow(DataRow dr)
         {
             int contador = 0;
@@ -85,7 +81,6 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             else
                 return true;
         }
-
         public void procesarArchivo(DataSet vArchivo, ref int vSuccess, string DireccionCarga, string TipoProceso)
         {
             try
@@ -204,9 +199,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             {
                 LbMensaje.Text = ex.Message;
             }
-        }
-        
-
+        }      
         protected void BtnEnviar_Click1(object sender, EventArgs e)
         {
             String archivoLog = string.Format("{0}_{1}", Convert.ToString(Session["USUARIO"]), DateTime.Now.ToString("yyyyMMdd"));
@@ -241,8 +234,9 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                     }
                     else
                     {
-                        //LbMensaje.Text = "Archivo cargado con exito." + "<br>" + "<b style='color:green;'>Success:</b> " + vSuccess.ToString() + "&emsp;";
-                        Mensaje("Tipo de agencia actualizado con exito. ", WarningType.Success);
+                        LbMensajeSuccsess.Text = "Archivo de mantenimientos preventivos cargados con exito." + "<br>" + "<b style='color:green;'>Success:</b> " + vSuccess.ToString() + "&emsp;";
+                        Div1.Visible = true;
+                        UpdatePanel1.Update();
                     }
                 }
                 else
@@ -258,14 +252,15 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
 
              }
         }
-
-      
-
         protected void BtnCancelar_Click1(object sender, EventArgs e)
         {
             try
             {
                 Mensaje("Acción cancelado con exito. ", WarningType.Success);
+                Div1.Visible = false;
+                UpdatePanel1.Update();
+                DivAlerta.Visible = false;
+                UpdateModal.Update();
             }
             catch (Exception ex)
             {
