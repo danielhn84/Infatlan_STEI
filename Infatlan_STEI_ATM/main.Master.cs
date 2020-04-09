@@ -11,7 +11,11 @@ namespace Infatlan_STEI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!Page.IsPostBack)
+            {
+                lbusu.Text=Session["usuATM"].ToString();
+            }
+            
         }
     }
 }

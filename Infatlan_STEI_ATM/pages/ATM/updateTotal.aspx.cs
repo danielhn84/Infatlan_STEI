@@ -83,6 +83,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
                 throw;
             }
             DDLDetalleModelo.SelectedIndex = CargarInformacionDDL(DDLDetalleModelo, Session["DetalleModelo"].ToString());
+            txtcodUbicacion.Text = Session["CodUbicacion"].ToString();
         }
 
         int CargarInformacionDDL(DropDownList vList, String vValue)
@@ -464,7 +465,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     "'" + txtserieATM.Text + "','" + txtramATM.Text + " GB" + "', " + DDLso.SelectedValue + "," +
                     "'" + txtserieDisco.Text + "','" + txtcapacidadDisco.Text + " GB" + "'," + DDLmarca.SelectedValue + "," +
                     "'" + txtIP.Text + "','" + txtpuerto.Text + "','" + txtlatitud.Text + "','" + txtlongitud.Text + "'," +
-                    "'" + txtdireccion.Text + "','" + Session["usuATM"].ToString() + "','" + txtinventarioATM.Text + "', '" + DDLversionSw.SelectedValue + "'";
+                    "'" + txtdireccion.Text + "','" + Session["usuATM"].ToString() + "','" + txtinventarioATM.Text + "', '" + DDLversionSw.SelectedValue + "','" + txtcodUbicacion.Text + "'";
                 Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                 if (vInfo == 1)
                 {
@@ -489,6 +490,33 @@ namespace Infatlan_STEI_ATM.pages.ATM
         protected void btnModalCerrarModificarATM_Click(object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
+        }
+
+        protected void DDLsucursalATM_TextChanged(object sender, EventArgs e)
+        {
+            string idDepa = "";
+            txtcodUbicacion.Text = string.Empty;
+            try
+            {
+                String vQuery2 = "STEISP_ATM_Generales 27, '" + DDLsucursalATM.SelectedValue + "'";
+                DataTable vDatos2 = vConexion.ObtenerTabla(vQuery2);
+                foreach (DataRow item in vDatos2.Rows)
+                {
+                    idDepa = item["idDepartamento"].ToString();
+                }
+                String vQuery = "STEISP_INVENTARIO_Ubicaciones 6, '" + idDepa + "'";
+                DataTable vDatos = vConexion.ObtenerTabla(vQuery);
+                foreach (DataRow item in vDatos.Rows)
+                {
+                    txtcodUbicacion.Text = item["codigo"].ToString();
+                }
+
+            }
+            catch (Exception Ex)
+            {
+
+                throw;
+            }
         }
     }
 }

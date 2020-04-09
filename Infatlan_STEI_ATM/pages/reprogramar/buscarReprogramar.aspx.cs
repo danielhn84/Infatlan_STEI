@@ -221,7 +221,7 @@ namespace Infatlan_STEI_ATM.pages.reprogramar
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
                         Mensaje("Mantenimiento reprogramado con éxito", WarningType.Success);
                         UpdateGridView.Update();
-                        EnviarCorreo();
+                        //EnviarCorreo();
                         cargarData();
                     }
                     else
