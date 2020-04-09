@@ -53,7 +53,7 @@
                     <div class="row col-4">
                         <label class="col-form-label col-12">Sucursal de ATM</label>
                         <div class="col-12">
-                            <asp:DropDownList runat="server" ClientIDMode="AutoID" ID="DDLsucursalATM" CssClass="form-control"></asp:DropDownList>
+                            <asp:DropDownList runat="server" ClientIDMode="AutoID" ID="DDLsucursalATM" AutoPostBack="true" OnTextChanged="DDLsucursalATM_TextChanged" CssClass="form-control"></asp:DropDownList>
                         </div>
                     </div>
 
@@ -231,6 +231,12 @@
                         <label class="col-form-label col-12">Inventario de ATM</label>
                         <div class="col-12">
                             <asp:TextBox runat="server" CssClass="form-control" ID="txtinventarioATM"></asp:TextBox>
+                        </div>
+                    </div>
+                     <div class="row col-4">
+                        <label class="col-form-label col-12">Código de ubicación</label>
+                        <div class="col-12">
+                            <asp:TextBox runat="server" CssClass="form-control" Enabled="false" ID="txtcodUbicacion"></asp:TextBox>
                         </div>
                     </div>
                 </div>
