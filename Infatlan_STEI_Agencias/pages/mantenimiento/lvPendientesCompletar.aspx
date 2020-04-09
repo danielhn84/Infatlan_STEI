@@ -77,7 +77,7 @@
                                             </asp:LinkButton>
                                              
                                         </ItemTemplate>
-                                        <ItemStyle Width="10%" />
+                                        <ItemStyle Width="12%" />
                                     </asp:TemplateField>
                                     <asp:BoundField DataField="id_Mantenimiento" HeaderText="Id"  ControlStyle-Width="10%" />
                                     <asp:BoundField DataField="fecha" HeaderText="Fecha" ControlStyle-Width="10%" />

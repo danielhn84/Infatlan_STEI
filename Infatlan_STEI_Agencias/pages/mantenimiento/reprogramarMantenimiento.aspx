@@ -98,7 +98,7 @@
                     </div>
                     <div class="row p-t-20 col-md-12">
                                 <div class="col-md-4 " style="margin-left: auto; margin-right: auto">
-                                    <a href="../../default.aspx"" class="btn  btn-block btn-primary">Volver</a>
+                                    <a href="../../default.aspx" class="btn  btn-block btn-primary">Volver</a>
                                 </div>
                             </div>
                 </div>

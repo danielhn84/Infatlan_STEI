@@ -19,15 +19,14 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
         {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
                 cargar();
+                UPMotivos.Update();
             }
         }
-
         protected void BtnEnviar_Click(object sender, EventArgs e)
         {
             try
@@ -43,6 +42,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                     Mensaje("Motivo de cancelación creado con exito. ", WarningType.Success);   
                     limpiarFormulario();
                     cargar();
+                    UPMotivos.Update();
                 }
             }
             catch (Exception ex)
@@ -50,7 +50,6 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
-
         protected void BtnCancelar_Click(object sender, EventArgs e)
         {
             try
@@ -64,8 +63,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             }
 
         }
-
-       private void validarGuardarMotivo()
+        private void validarGuardarMotivo()
         {
             if (TxMotivoCancelacion.Text == "" || TxMotivoCancelacion.Text == string.Empty)
                 throw new Exception("Falta completar el campo Motivo de cancelación.");
@@ -73,14 +71,11 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             if (RblTipo.SelectedValue.Equals(""))
                 throw new Exception("Falta completar opción tipo.");       
         }
-
-       private void limpiarFormulario()
+        private void limpiarFormulario()
         {
             TxMotivoCancelacion.Text = string.Empty;
             RblTipo.SelectedIndex = -1;
-
         }
-
         void cargar()
         {
             try
@@ -98,9 +93,6 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             }
 
         }
-
-
-
         protected void GVMotivos_RowCommand(object sender, GridViewCommandEventArgs e)
         {
 
@@ -111,18 +103,16 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
 
                 try
                 {
-
-                    String vQuery2 = " STEISP_AGENCIA_MotivosCancelacion 2," + vIdEstadoModificar;
+                    String vQuery2 = " STEISP_AGENCIA_MotivosCancelacion 3," + vIdEstadoModificar;
                     DataTable vDatos = vConexion.obtenerDataTable(vQuery2);
                     Session["AG_MCM_DATA_ESTADOS"] = vDatos;
                     TxIdEstadoModal.Text = vDatos.Rows[0]["id"].ToString();
                     TxMotivoModal.Text = vDatos.Rows[0]["motivo"].ToString();
                     DDLTipo.SelectedItem.Text = vDatos.Rows[0]["tipo"].ToString();
-                    DdlEstado.SelectedValue = vDatos.Rows[0]["estado"].ToString();
+                    DdlEstado.SelectedItem.Text = vDatos.Rows[0]["estado"].ToString();
+
 
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModalModificarEstado();", true);
-
-
                 }
                 catch (Exception ex)
                 {
@@ -130,22 +120,27 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 }
             }
         }
+        private void validarModificarMotivo()
+        {
+            if (TxMotivoModal.Text == "" || TxMotivoModal.Text == string.Empty)
+                throw new Exception("Falta completar el campo Motivo de cancelación.");
 
+            if (DDLTipo.SelectedValue.Equals(""))
+                throw new Exception("Falta completar opción tipo.");
+        }
         protected void btnModalModificarEstado_Click(object sender, EventArgs e)
         {
             try
 
             {
-                string estado = "";
-                if (DdlEstado.SelectedValue == "True")
-                { estado = "1"; }else {
-                    estado = "0"; }
-
+                DivAlerta.Visible = false;
+                UpdateModal.Update();
+                validarModificarMotivo();
                 String vQuery3 = " STEISP_AGENCIA_MotivosCancelacion 4,"
                                    + Session["AG_MCM_ID_ESTADO_MODIFICAR"] +
-                                   ",'" + TxMotivoModal.Text +
-                                   "'," + DDLTipo.SelectedValue +
-                                   "," + estado;
+                                   ",'" + TxMotivoModal.Text+
+                                    "'," + DDLTipo.SelectedValue +
+                                    "," + DdlEstado.SelectedValue;
 
                 Int32 vInformacion3 = vConexion.ejecutarSql(vQuery3);
 
@@ -154,16 +149,19 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                     Mensaje("Motivo actualizado con exito. ", WarningType.Success);
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModalModificarEstado();", true);
                     cargar();
+                    UPMotivos.Update();
                 }
 
             }
             catch (Exception ex)
             {
-                Mensaje(ex.Message, WarningType.Danger);
+                LbMensajeModalError.Text = ex.Message;
+                DivAlerta.Visible = true;
+                UpdateModal.Visible = true;
+                UpdateModal.Update();
             }
 
         }
-
         protected void GVMotivos_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             try
@@ -177,7 +175,6 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
-
         protected void TxBuscarMotivo_TextChanged(object sender, EventArgs e)
         {
             try
