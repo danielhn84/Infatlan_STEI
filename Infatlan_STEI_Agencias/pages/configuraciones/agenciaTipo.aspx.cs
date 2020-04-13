@@ -227,5 +227,6 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 UpdateModal.Update();
                
         }
+
     }
 }

@@ -96,8 +96,8 @@ namespace Infatlan_STEI_Agencias.pages
             {
                 validaciones();
                 string vNuevaFecha = TxNuevaFecha.Text;
-                String vFormato = "yyyy/MM/dd"; //"dd/MM/yyyy HH:mm:ss"
-                String vFechaMant = Convert.ToDateTime(vNuevaFecha).ToString(vFormato);
+                String vFormato = "yyyy/MM/dd";
+                String vFechaMant = Convert.ToDateTime(TxNuevaFecha.Text).ToString(vFormato);
 
                 String vQuery = "STEISP_AGENCIA_ReprogramarMantenimiento  3," + Session["AG_RM_ID_MANTENIMIENTO"] + ",'" + vFechaMant + "'," +Session["USUARIO"];
                 Int32 vInfo = vConexion.ejecutarSql(vQuery);

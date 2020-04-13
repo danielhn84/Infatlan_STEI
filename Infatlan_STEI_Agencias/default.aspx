@@ -2,6 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">   
+    <br><br>
      <div class="card-group">
                     <div class="card">
                         <div class="card-body">
@@ -10,7 +11,7 @@
                                     <div class="d-flex no-block align-items-center">
                                         <div>
                                             <h3><i class="icon-screen-desktop"></i></h3>
-                                            <p class="text-muted">MYNEW CLIENTS</p>
+                                            <p class="text-muted">PENDIENTES LLENAR LV</p>
                                         </div>
                                         <div class="ml-auto">
                                             <h2 class="counter text-primary">23</h2>
@@ -34,7 +35,7 @@
                                     <div class="d-flex no-block align-items-center">
                                         <div>
                                             <h3><i class="icon-note"></i></h3>
-                                            <p class="text-muted">NEW PROJECTS</p>
+                                            <p class="text-muted">PENDIENTES MODIFICAR LV</p>
                                         </div>
                                         <div class="ml-auto">
                                             <h2 class="counter text-cyan">169</h2>
@@ -58,7 +59,7 @@
                                     <div class="d-flex no-block align-items-center">
                                         <div>
                                             <h3><i class="icon-doc"></i></h3>
-                                            <p class="text-muted">NEW INVOICES</p>
+                                            <p class="text-muted">MANTENIMIENTOS REALIZADOS</p>
                                         </div>
                                         <div class="ml-auto">
                                             <h2 class="counter text-purple">157</h2>

@@ -30,9 +30,6 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
 
             }
         }
-
- 
-
         public Boolean cargarArchivo(String DireccionCarga, ref int vSuccess, ref int vError, String vUsuario, String TipoProceso)
         {
             Boolean vResultado = false;
@@ -68,7 +65,6 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             }
             return vResultado;
         }
-
         private bool verificarRow(DataRow dr)
         {
             int contador = 0;
@@ -85,7 +81,6 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             else
                 return true;
         }
-
         public void procesarArchivo(DataSet vArchivo, ref int vSuccess, string DireccionCarga, string TipoProceso)
         {
             try
@@ -94,55 +89,117 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 {
                     DataTable vDatos = vArchivo.Tables[0];
                     string vQuery = "";
-                    //Boolean idEmpleado = false;
 
-                    if (TipoProceso == "LISTA_MANTENIMIENTOS")
+                    Session["AG_CMA_COD_AGENCIA_SUBIDO"] = "Completo";
+                    Session["AG_CMA_FECHA_SUBIDO"] = "Completo";
+                    Session["AG_CMA_AREA_SUBIDO"] = "Completo";
+
+                    for (int i = 0; i < vDatos.Rows.Count; i++)
                     {
-                        Boolean vcodigoAgencia = false, vFecha = false, varea = false;
 
-                        foreach (DataColumn item in vDatos.Columns)
+                        String CodAgencia = vDatos.Rows[i]["codigoAgencia"].ToString();
+                        String Fecha = vDatos.Rows[i]["fechaMantenimiento"].ToString();
+                        String Area = vDatos.Rows[i]["idAreaAgencia"].ToString();
+                        //String vFormato = "yyyy/MM/dd"; //"dd/MM/yyyy HH:mm:ss"
+                        string vFechaMant = Convert.ToDateTime(Fecha).Year.ToString();
+
+                        string vCodigoValidar = "";
+                        string vAreaValidar = "";
+
+                        String vQuery2 = "STEISP_AGENCIA_CreacionAgencia 8, " + CodAgencia;
+                        DataTable vDatos2 = vConexion.obtenerDataTable(vQuery2);
+                        foreach (DataRow item in vDatos2.Rows)
                         {
-                            if (item.ColumnName.ToString() == "codigoAgencia")
-                                vcodigoAgencia = true;
-                            if (item.ColumnName.ToString() == "fechaMantenimiento")               
-                                vFecha = true;
-
-                            if (item.ColumnName.ToString() == "idAreaAgencia")
-                                varea = true;
+                            vCodigoValidar = item["codigoAgencia"].ToString();
                         }
 
-                        if (vcodigoAgencia && vFecha && varea)
+                        if (vCodigoValidar != CodAgencia)
                         {
-                            for (int i = 0; i < vDatos.Rows.Count; i++)
-                            {
-                                String codigoAgencia = vDatos.Rows[i]["codigoAgencia"].ToString();
-                                String fechaMantenimiento = vDatos.Rows[i]["fechaMantenimiento"].ToString();
-                                String idAreaAgencia = vDatos.Rows[i]["idAreaAgencia"].ToString();
+                            if (Session["AG_CMA_COD_AGENCIA_SUBIDO"].ToString() == "Completo")
+                                Session["AG_CMA_COD_AGENCIA_SUBIDO"] = "";
 
-                                String vFormato = "yyyy/MM/dd"; //"dd/MM/yyyy HH:mm:ss"
-                                String vFechaMant = Convert.ToDateTime(fechaMantenimiento).ToString(vFormato);
+                            Session["AG_CMA_COD_AGENCIA_SUBIDO"] = Session["AG_CMA_COD_AGENCIA_SUBIDO"] + ", " + CodAgencia;
 
-                                vQuery = "STEISP_AGENCIA_CreacionAgencia 7, '" + codigoAgencia + "'" +
-                                    ",'" + vFechaMant + "'" +
-                                    ",'" + idAreaAgencia + "'";
-
-                                int vRespuesta = vConexion.ejecutarSql(vQuery);
-                                if (vRespuesta == 1)
-                                    vSuccess++;
-                            }
                         }
+
+                        String vQuery3 = "STEISP_AGENCIA_CreacionAgencia 9, " + Area;
+                        DataTable vDatos3 = vConexion.obtenerDataTable(vQuery3);
+                        foreach (DataRow item in vDatos3.Rows)
+                        {
+                            vAreaValidar = item["idAreaAgencia"].ToString();
+                        }
+
+                        if (vAreaValidar != Area)
+                        {
+                            if (Session["AG_CMA_AREA_SUBIDO"].ToString() == "Completo")
+                                Session["AG_CMA_AREA_SUBIDO"] = "";
+
+                            Session["AG_CMA_AREA_SUBIDO"] = Session["AG_CMA_AREA_SUBIDO"] + ", " + Area;
+                        }
+
+                        if (vFechaMant != "2020")
+                        {
+                            if (Session["AG_CMA_FECHA_SUBIDO"].ToString() == "Completo")
+                                Session["AG_CMA_FECHA_SUBIDO"] = "";
+
+
+                            Session["AG_CMA_FECHA_SUBIDO"] = Session["AG_CMA_FECHA_SUBIDO"] + ", " + CodAgencia;
+                        }
+
                     }
 
+                    if (Session["AG_CMA_COD_AGENCIA_SUBIDO"].ToString() != "Completo" || Session["AG_CMA_FECHA_SUBIDO"].ToString() != "Completo" || Session["AG_CMA_AREA_SUBIDO"].ToString() != "Completo")
+                        throw new Exception("Los mantenimientos no se guardaron, se detectaron los siguientes inconvenientes: ");
+                    else
+                    {
+                        if (TipoProceso == "LISTA_MANTENIMIENTOS")
+                        {
+                            Boolean vcodigoAgencia = false, vFecha = false, varea = false;
+
+                            foreach (DataColumn item in vDatos.Columns)
+                            {
+                                if (item.ColumnName.ToString() == "codigoAgencia")
+                                    vcodigoAgencia = true;
+                                if (item.ColumnName.ToString() == "fechaMantenimiento")
+                                    vFecha = true;
+
+                                if (item.ColumnName.ToString() == "idAreaAgencia")
+                                    varea = true;
+                            }
+
+                            if (vcodigoAgencia && vFecha && varea)
+                            {
+                                for (int i = 0; i < vDatos.Rows.Count; i++)
+                                {
+                                    String codigoAgencia = vDatos.Rows[i]["codigoAgencia"].ToString();
+                                    String fechaMantenimiento = vDatos.Rows[i]["fechaMantenimiento"].ToString();
+                                    String idAreaAgencia = vDatos.Rows[i]["idAreaAgencia"].ToString();
+
+                                    String vFormato = "yyyy/MM/dd"; //"dd/MM/yyyy HH:mm:ss"
+                                    String vFechaMant = Convert.ToDateTime(fechaMantenimiento).ToString(vFormato);
+
+                                    vQuery = "STEISP_AGENCIA_CreacionAgencia 7, '" + codigoAgencia + "'" +
+                                        ",'" + vFechaMant + "'" +
+                                        ",'" + idAreaAgencia + "'";
+
+                                    int vRespuesta = vConexion.ejecutarSql(vQuery);
+                                    if (vRespuesta == 1)
+                                        vSuccess++;
+                                }
+                            }
+                        }
+
+                    }
                 }
                 else
+
                     throw new Exception("No contiene ninguna hoja de excel.");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                LbMensaje.Text = ex.Message;
             }
-        }
-
+        }      
         protected void BtnEnviar_Click1(object sender, EventArgs e)
         {
             String archivoLog = string.Format("{0}_{1}", Convert.ToString(Session["USUARIO"]), DateTime.Now.ToString("yyyyMMdd"));
@@ -159,27 +216,51 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                     Boolean vCargado = false;
                     int vSuccess = 0, vError = 0;
                     if (File.Exists(vDireccionCarga))
-                        vCargado = cargarArchivo(vDireccionCarga, ref vSuccess, ref vError, Convert.ToString(Session["usu"]), vTipoPermiso);
+                        vCargado = cargarArchivo(vDireccionCarga, ref vSuccess, ref vError, Convert.ToString(Session["USUARIO"]), vTipoPermiso);
 
-                    if (vCargado)
-                        LbMensaje.Text = "Archivo cargado con exito." + "<br>" + "<b style='color:green;'>Success:</b> " + vSuccess.ToString() + "&emsp;";
+                    if (vSuccess == 0)
+                    {
+                        if (Session["AG_CMA_COD_AGENCIA_SUBIDO"].ToString() != "Completo")
+                            LbMensaje.Text = LbMensaje.Text + "Código: " + Session["AG_CMA_COD_AGENCIA_SUBIDO"].ToString() + " no existe, favor verificar que este agregado en la seccion de agencias." + "&emsp;";
+
+                        if (Session["AG_CMA_FECHA_SUBIDO"].ToString() != "Completo")
+                            LbMensaje.Text = LbMensaje.Text + "Código " + Session["AG_CMA_FECHA_SUBIDO"].ToString() + " fechas erroneas, favor verificar que sean fechas del año actual." + "&emsp;";
+
+                        if (Session["AG_CMA_AREA_SUBIDO"].ToString() != "Completo")
+                            LbMensaje.Text = LbMensaje.Text + "Area " + Session["AG_CMA_AREA_SUBIDO"].ToString() + " tipo area no existe, favor verificar que esten ingresadas y activas." + "&emsp;";
+                        DivAlerta.Visible = true;
+                        UpdateModal.Update();
+
+                    }
+                    else
+                    {
+                        LbMensajeSuccsess.Text = "Archivo de mantenimientos preventivos cargados con exito." + "<br>" + "<b style='color:green;'>Success:</b> " + vSuccess.ToString() + "&emsp;";
+                        Div1.Visible = true;
+                        UpdatePanel1.Update();
+                    }
                 }
                 else
+                {
                     LbMensaje.Text = "No se encontró ningún archivo a cargar.";
+                    DivAlerta.Visible = true;
+                    UpdateModal.Update();
+                }
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
-                LbMensaje.Text = Ex.Message;
-            }
+                LbMensaje.Text = ex.Message;
+
+             }
         }
-
-      
-
         protected void BtnCancelar_Click1(object sender, EventArgs e)
         {
             try
             {
                 Mensaje("Acción cancelado con exito. ", WarningType.Success);
+                Div1.Visible = false;
+                UpdatePanel1.Update();
+                DivAlerta.Visible = false;
+                UpdateModal.Update();
             }
             catch (Exception ex)
             {

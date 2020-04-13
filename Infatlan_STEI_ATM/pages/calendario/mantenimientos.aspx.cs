@@ -112,6 +112,9 @@ namespace Infatlan_STEI_ATM.pages.calendario
                         }
 
                     }
+
+
+
                     if (Session["CODATM_SUBIDO"].ToString()!="Completo" || Session["FECHA_SUBIDO"].ToString() != "Completo")
                         throw new Exception();
                     else
@@ -156,7 +159,9 @@ namespace Infatlan_STEI_ATM.pages.calendario
                         }
                     }
 
-                }else
+                
+                }
+                else
                   
                 throw new Exception("No contiene ninguna hoja de excel.");
             }catch (Exception ex){
