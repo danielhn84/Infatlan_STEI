@@ -102,7 +102,9 @@ namespace Infatlan_STEI_ATM.pages.calendario
                             Session["CODATM_SUBIDO"] = Session["CODATM_SUBIDO"] +", "+ CodATM;
                           
                         }
-                        if(vFechaMant!="2020")
+                        DateTime today = DateTime.Today;
+                        string vYear = Convert.ToString(today.Year);
+                        if (vFechaMant!=vYear)
                         {
                             if (Session["FECHA_SUBIDO"].ToString() == "Completo")
                                 Session["FECHA_SUBIDO"] = "";

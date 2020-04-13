@@ -45,7 +45,7 @@
             <div class="footer">
                 <div class="stats">
                     <asp:Label Text="Descargue la plantilla" runat="server" />
-                    <a href="../plantillas/PlantillaATM.xlsx">AQUI</a>                    
+                    <a href="../plantillas/PlantillaATM.xlsx">AQUI</a>
                 </div>
                 <div class="stats col-12">
                     <i class="fa fa-info"></i>

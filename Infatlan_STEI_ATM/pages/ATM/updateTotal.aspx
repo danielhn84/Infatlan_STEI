@@ -233,7 +233,7 @@
                             <asp:TextBox runat="server" CssClass="form-control" ID="txtinventarioATM"></asp:TextBox>
                         </div>
                     </div>
-                     <div class="row col-4">
+                    <div class="row col-4">
                         <label class="col-form-label col-12">Código de ubicación</label>
                         <div class="col-12">
                             <asp:TextBox runat="server" CssClass="form-control" Enabled="false" ID="txtcodUbicacion"></asp:TextBox>
