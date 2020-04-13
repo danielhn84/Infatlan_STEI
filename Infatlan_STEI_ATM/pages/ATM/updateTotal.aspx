@@ -296,11 +296,11 @@
                     <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                         <ContentTemplate>
                             <div class="modal-footer col-12">
-                                <div class="row col-6">
-                                    <asp:Button runat="server" ID="btnModalModificarATM" OnClick="btnModalModificarATM_Click" CssClass="btn btn-rounded btn-block btn-outline-success" Text="Enviar" />
+                                <div class="row col-3">
+                                    <asp:Button runat="server" ID="btnModalModificarATM" OnClick="btnModalModificarATM_Click" CssClass="btn btn-success mr-2" Text="Modificar" />
                                 </div>
-                                <div class="row col-6">
-                                    <asp:Button runat="server" ID="btnModalCerrarModificarATM" OnClick="btnModalCerrarModificarATM_Click" CssClass="btn btn-rounded btn-block btn-outline-danger" Text="Cancelar" />
+                                <div class="row col-3">
+                                    <asp:Button runat="server" ID="btnModalCerrarModificarATM" OnClick="btnModalCerrarModificarATM_Click" CssClass="btn btn-danger mr-2" Text="Cancelar" />
                                 </div>
                             </div>
                         </ContentTemplate>
