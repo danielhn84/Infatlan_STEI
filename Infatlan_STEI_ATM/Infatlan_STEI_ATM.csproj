@@ -3287,6 +3287,9 @@
     <Content Include="pages\mantenimiento\aprobarNotificacion.aspx" />
     <Content Include="pages\mantenimiento\aprobarVerificacion.aspx" />
     <Content Include="pages\mantenimiento\buscarAprobarNotificacion.aspx" />
+    <Content Include="pages\material\buscarAprobar.aspx" />
+    <Content Include="pages\material\buscarMaterial.aspx" />
+    <Content Include="pages\material\material.aspx" />
     <Content Include="pages\reprogramar\buscarReprogramar.aspx" />
     <Content Include="pages\ATM\cancelarVerificacion.aspx" />
     <Content Include="pages\ATM\detalleModelo.aspx" />
@@ -3390,6 +3393,27 @@
     </Compile>
     <Compile Include="pages\mantenimiento\buscarAprobarNotificacion.aspx.designer.cs">
       <DependentUpon>buscarAprobarNotificacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\material\buscarAprobar.aspx.cs">
+      <DependentUpon>buscarAprobar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\material\buscarAprobar.aspx.designer.cs">
+      <DependentUpon>buscarAprobar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\material\buscarMaterial.aspx.cs">
+      <DependentUpon>buscarMaterial.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\material\buscarMaterial.aspx.designer.cs">
+      <DependentUpon>buscarMaterial.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\material\material.aspx.cs">
+      <DependentUpon>material.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\material\material.aspx.designer.cs">
+      <DependentUpon>material.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\reprogramar\buscarReprogramar.aspx.cs">
       <DependentUpon>buscarReprogramar.aspx</DependentUpon>

@@ -161,6 +161,13 @@
                                 <li><a href="../../pages/mantenimiento/buscarAprobarVerificacion.aspx">Aprobar Verificación</a></li>
                             </ul>
                         </li>
+                         <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-wrench"></i><span class="hide-menu">Materiales<span class="badge badge-pill badge-cyan ml-auto">2</span></span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="../../pages/material/buscarMaterial.aspx">Solicitar</a></li>
+                                <li><a href="../../pages/material/buscarAprobar.aspx">Aprobar</a></li>
+                                
+                            </ul>
+                        </li>
                         <li><a  href="../../pages/devolver/rechazados.aspx" aria-expanded="false"><i class="ti-back-left"></i><span class="hide-menu">Devoluciones</span></a></li>
                         <li><a  href="../../pages/reprogramar/buscarReprogramar.aspx" aria-expanded="false"><i class="ti-timer"></i><span class="hide-menu">Reprogramación</span></a></li>
                         <li><a  href="../../pages/calendario/mantenimientos.aspx" aria-expanded="false"><i class=" ti-calendar"></i><span class="hide-menu">Calendario</span></a></li>
