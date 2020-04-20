@@ -217,7 +217,7 @@
                     </div>
                 </div>
                 <!--/SEPTIMA FILA-->
-                 <br />
+                <br />
                 <hr />
                 <br />
                 <!--OCTAVA FILA-->
@@ -242,10 +242,10 @@
                     </div>
                 </div>
                 <!--/OCTAVA FILA-->
-                 <br />
+                <br />
                 <hr />
                 <br />
-               
+
                 <!--NOVENA FILA-->
                 <div class="row col-12">
                     <label class="col-form-label col-12">Dirección</label>

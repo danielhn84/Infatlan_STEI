@@ -79,6 +79,10 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     {                      
                         string vQuery = "STEISP_ATM_Estado 1,'" + codATMs +"'";
                         Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+
+                        //VALIDA QUE ATM ESTE ACTIVO
+                        String vQuery2 = "STEISP_ATM_VERIFICACION 8, '" + codATMs + "',1";
+                        DataTable vDatos2 = vConexion.ObtenerTabla(vQuery2);
                         if (vInfo == 1)
                         {                          
                             Mensaje("ATM fue dado de baja exitosamente", WarningType.Success);

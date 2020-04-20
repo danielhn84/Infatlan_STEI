@@ -359,6 +359,11 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     "'" + txtIP.Text + "','" + txtpuerto.Text + "','" + txtlatitud.Text + "','" + txtlongitud.Text + "'," +
                     "'" + txtdireccion.Text + "','" + Session["usuATM"].ToString() + "','"+txtinventarioATM.Text+"', '"+ DDLversionSw.SelectedValue +"','"+txtcodUbicacion.Text+"'";
                 Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+
+                //VALIDA QUE ATM ESTE ACTIVO
+                String vQuery2 = "STEISP_ATM_VERIFICACION 9, '" + txtcodATM.Text + "',1";
+                DataTable vDatos2 = vConexion.ObtenerTabla(vQuery2);
+
                 if (vInfo == 1){
                     Limpiar();
                     cargarDataATM();
