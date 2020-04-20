@@ -753,6 +753,15 @@ namespace Infatlan_STEI_Agencias.pages
         protected global::System.Web.UI.WebControls.Button BtnRegresarCompletarLV;
 
         /// <summary>
+        /// Control ocultarBotonVolver1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ocultarBotonVolver1;
+
+        /// <summary>
         /// Control DivAprobacion.
         /// </summary>
         /// <remarks>
@@ -832,6 +841,15 @@ namespace Infatlan_STEI_Agencias.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnRegresarPendienteAprobar;
+
+        /// <summary>
+        /// Control ocultarBotonVolver.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ocultarBotonVolver;
 
         /// <summary>
         /// Control UpdatePanel8.
