@@ -3333,6 +3333,7 @@
     <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="clases\generarxml.cs" />
     <Compile Include="clases\SmtpService.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
