@@ -29,7 +29,7 @@ namespace Infatlan_STEI_ATM.pages.material
             {
 
                 DataTable vDatos = new DataTable();
-                vDatos = vConexion.ObtenerTabla("STEISP_ATM_VERIFICACION 10, '" + Session["usuATM"].ToString() + "'");
+                vDatos = vConexion.ObtenerTabla("STEISP_ATM_VERIFICACION 11, '" + Session["usuATM"].ToString() + "'");
                 GVBusqueda.DataSource = vDatos;
                 GVBusqueda.DataBind();
                 Session["ATM_MATERIALES_APROBAR_MANTENIMIENTO"] = vDatos;
@@ -156,9 +156,12 @@ namespace Infatlan_STEI_ATM.pages.material
                         Session["ATM_VERSIONSW_MATERIAL"] = item["VersionSw"].ToString();
                         Session["ATM_USUCORREO_MATERIAL"] = item["CorreoTecnico"].ToString();
                         Session["ATM_USUCREADOR_MATERIAL"] = item["UsuarioCreador"].ToString();
+                        Session["ATM_CODUBI_MATERIAL"] = item["CodigoUbi"].ToString();
+                        Session["ATM_COMENTARIO_MATERIAL"] = item["ComentarioMateriales"].ToString();
                     }
 
-                    Response.Redirect("material.aspx");
+                   
+                        Response.Redirect("material.aspx?id=1&tipo=2");
                 }
                 catch (Exception)
                 {
