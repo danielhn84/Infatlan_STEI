@@ -102,8 +102,8 @@
                                                 PageSize="10" OnRowCommand="GVNewMateriales_RowCommand"
                                                 Style="margin: 30px 0px 20px 0px">
                                                 <Columns>
-                                                   <asp:BoundField DataField="idMantenimiento" HeaderText="Código" Visible="true" ItemStyle-HorizontalAlign="center" />
-                                                   <asp:BoundField DataField="idStock" HeaderText="Stock" Visible="true" ItemStyle-HorizontalAlign="center" />
+                                                   <asp:BoundField DataField="idMantenimiento" HeaderText="Código" Visible="false" ItemStyle-HorizontalAlign="center" />
+                                                   <asp:BoundField DataField="idStock" HeaderText="Stock" Visible="false" ItemStyle-HorizontalAlign="center" />
                                                    <asp:BoundField DataField="nombre" HeaderText="Material" ItemStyle-HorizontalAlign="center" />
                                                    <asp:BoundField DataField="marca" HeaderText="Marca" ItemStyle-HorizontalAlign="center" />
                                                    <asp:BoundField DataField="cantidad" HeaderText="Cantidad" ItemStyle-HorizontalAlign="center" />
