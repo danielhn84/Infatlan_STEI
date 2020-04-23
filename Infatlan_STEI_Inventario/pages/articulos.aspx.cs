@@ -188,6 +188,10 @@ namespace Infatlan_STEI_Inventario.pages
                 String vQuery, vMensaje = "";
                 DataTable vDatos = new DataTable();
                 int vInfo;
+                Boolean vATM = CBxATM.Checked;
+                Boolean vAgencia = CBxAgencia.Checked;
+                Boolean vCableado = CBxCE.Checked;
+
                 vQuery = "[STEISP_INVENTARIO_Stock] {0}" +
                         "," + DDLTipo.SelectedValue +
                         "," + DDLProveedor.SelectedValue +
@@ -197,7 +201,10 @@ namespace Infatlan_STEI_Inventario.pages
                         ",'" + TxSerie.Text + "'" +
                         "," + TxPrecio.Text  +
                         ",'" + Session["USUARIO"].ToString() + "'" +
-                        "," + DDLEstado.Text ;
+                        "," + DDLEstado.Text +
+                        ",'" + vATM.ToString()  + "'" +
+                        ",'" + vAgencia.ToString()  + "'" +
+                        ",'" + vCableado.ToString()  + "'";
 
                 if (HttpContext.Current.Session["INV_STOCK_ID"] == null){
                     vQuery = string.Format(vQuery, "3");
@@ -274,6 +281,10 @@ namespace Infatlan_STEI_Inventario.pages
                         TxModelo.Text = vDatos.Rows[i]["modelo"].ToString();
                         TxDetalle.Text = vDatos.Rows[i]["descripcion"].ToString();
                         TxSerie.Text = vDatos.Rows[i]["series"].ToString();
+                        TxPrecio.Text = vDatos.Rows[i]["precioUnit"].ToString();
+                        CBxATM.Checked = Convert.ToBoolean(vDatos.Rows[i]["atm"].ToString());
+                        CBxAgencia.Checked = Convert.ToBoolean(vDatos.Rows[i]["agencias"].ToString());
+                        CBxCE.Checked = Convert.ToBoolean(vDatos.Rows[i]["cableadoEstructurado"].ToString());
                     }
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
                 }else if (e.CommandName == "EliminarArticulo"){
@@ -361,7 +372,7 @@ namespace Infatlan_STEI_Inventario.pages
 
         protected void BtnAddProv_Click(object sender, EventArgs e){
             limpiarModalProv();
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openPRov();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openProv();", true);
         }
 
         protected void BtnAgregarProv_Click(object sender, EventArgs e){
@@ -403,6 +414,42 @@ namespace Infatlan_STEI_Inventario.pages
                 throw new Exception("Favor ingrese el teléfono del proveedor.");
             if (TxResponsableProv.Text == "" || TxResponsableProv.Text == string.Empty)
                 throw new Exception("Favor ingrese la persona responsable.");
+        }
+
+        protected void BtnAddMarca_Click(object sender, EventArgs e){
+            DivMensajeMarca.Visible = false;
+            LbMensajeMarca.Text = string.Empty;
+            TxNombreMarca.Text = string.Empty;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openMarca();", true);
+        }
+
+        protected void BtnAgregarMarca_Click(object sender, EventArgs e){
+            try{
+                if (TxNombreMarca.Text == string.Empty || TxNombreMarca.Text == "")
+                    throw new Exception("");
+                
+                String vQuery = "[STEISP_INVENTARIO_Marcas] 3" +
+                    ",'" + TxNombreMarca.Text.ToUpper() + "'" +
+                    ",'" + Session["USUARIO"].ToString() + "',1";
+                int vInfo = vConexion.ejecutarSql(vQuery);
+                if (vInfo == 1){
+                    vQuery = "[STEISP_INVENTARIO_Generales] 5";
+                    DataTable vDatos = vConexion.obtenerDataTable(vQuery);
+
+                    if (vDatos.Rows.Count > 0){
+                        DDLMarca.Items.Clear();
+                        DDLMarca.Items.Add(new ListItem { Value = "0", Text = "Seleccione" });
+                        foreach (DataRow item in vDatos.Rows){
+                            DDLMarca.Items.Add(new ListItem { Value = item["idMarca"].ToString(), Text = item["nombre"].ToString() });
+                        }
+                    }
+                    DDLMarca.SelectedValue = Convert.ToString(DDLMarca.Items.Count -1);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "cerrarMarca();", true);
+                }
+            }catch (Exception ex){
+                LbMensajeMarca.Text = ex.Message;
+                DivMensajeMarca.Visible = true;
+            }
         }
     }
 }

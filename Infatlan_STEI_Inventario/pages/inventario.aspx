@@ -211,7 +211,7 @@
                                             <label class="col-form-label">Código</label>
                                         </div>
                                         <div class="col-sm-9">
-                                            <asp:TextBox ID="TxCodigoUbic" class="form-control text-uppercase" runat="server"></asp:TextBox>
+                                            <asp:TextBox ID="TxCodigoUbic" ReadOnly="true" class="form-control text-uppercase" runat="server"></asp:TextBox>
                                         </div>
                                     </div>
                                 </div>
