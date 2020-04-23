@@ -196,7 +196,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     try
                     {
                         DataTable vDatos = new DataTable();
-                        vDatos = vConexion.ObtenerTabla("STEISP_ATM_VERIFICACION 2, '" + Session["usuATM"].ToString() + "','" + codVerif + "'");
+                        vDatos = vConexion.ObtenerTabla("STEISP_ATM_VERIFICACION 2,'" + codVerif + "'");
                         //vDatos = vConexion.ObtenerTabla(vQuery);
                         foreach (DataRow item in vDatos.Rows)
                         {

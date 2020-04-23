@@ -119,10 +119,12 @@ namespace Infatlan_STEI_ATM.pages.material
                 {
                     try
                     {
-                        DataTable vDatos = new DataTable();
-                        vDatos = vConexion.ObtenerTabla("STEISP_ATM_VERIFICACION 2,'" + codVerif + "'");
-                        //vDatos = vConexion.ObtenerTabla(vQuery);
-                        foreach (DataRow item in vDatos.Rows)
+                    
+
+                    DataTable vDatos = new DataTable();
+                    String vQuery = "STEISP_ATM_VERIFICACION 2,'" + codVerif + "'";
+                    vDatos = vConexion.ObtenerTabla(vQuery);
+                    foreach (DataRow item in vDatos.Rows)
                         {
 
                             Session["ATM_CODATM_MATERIAL"] = item["Codigo"].ToString();
@@ -160,7 +162,10 @@ namespace Infatlan_STEI_ATM.pages.material
                             Session["ATM_VERSIONSW_MATERIAL"] = item["VersionSw"].ToString();
                             Session["ATM_USUCORREO_MATERIAL"] = item["CorreoTecnico"].ToString();
                             Session["ATM_USUCREADOR_MATERIAL"] = item["UsuarioCreador"].ToString();
-                        }
+                            Session["ATM_CODUBI_MATERIAL"] = item["CodigoUbi"].ToString();
+                            Session["ATM_COMENTARIOAPRO_MATERIAL"] = item["ComentarioAprobarMateriales"].ToString();
+                        
+                    }
 
                         Response.Redirect("material.aspx");
                     }
