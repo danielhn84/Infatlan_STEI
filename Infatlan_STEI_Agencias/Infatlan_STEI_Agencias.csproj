@@ -3311,6 +3311,7 @@
     <Content Include="pages\mantenimiento\lvIndividual.aspx" />
     <Content Include="pages\mantenimiento\lvPendientesModificar.aspx" />
     <Content Include="pages\mantenimiento\reprogramarMantenimiento.aspx" />
+    <Content Include="pages\mantenimiento\solicitudMateriales.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -3413,6 +3414,13 @@
     </Compile>
     <Compile Include="pages\mantenimiento\reprogramarMantenimiento.aspx.designer.cs">
       <DependentUpon>reprogramarMantenimiento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\mantenimiento\solicitudMateriales.aspx.cs">
+      <DependentUpon>solicitudMateriales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\mantenimiento\solicitudMateriales.aspx.designer.cs">
+      <DependentUpon>solicitudMateriales.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
