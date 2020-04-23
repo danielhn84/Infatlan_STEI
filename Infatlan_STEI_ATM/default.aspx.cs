@@ -11,7 +11,7 @@ using Infatlan_STEI_ATM.clases;
 
 namespace Infatlan_STEI_ATM
 {
-    public partial class defaultATM1 : System.Web.UI.Page
+    public partial class @default : System.Web.UI.Page
     {
         bd vConexion = new bd();
         protected void Page_Load(object sender, EventArgs e)

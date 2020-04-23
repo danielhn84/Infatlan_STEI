@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/mainATM.Master" AutoEventWireup="true" CodeBehind="verificacion.aspx.cs" Inherits="Infatlan_STEI_ATM.pages.mantenimiento.verificacion" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="verificacion.aspx.cs" Inherits="Infatlan_STEI_ATM.pages.mantenimiento.verificacion" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
     <link href="/assets/node_modules/icheck/skins/all.css" rel="stylesheet">
@@ -33,8 +33,11 @@
                 //PRIMERA IMAGEN              
                 var reader = new FileReader();
                 reader.onload = function (e) {           
-                    $('#imgDiscoDuro').css('visibility', 'visible');
-                    $('#imgDiscoDuro').attr('src', e.target.result);                     
+                    //$('#imgDiscoDuro').css('visibility', 'visible');
+                    //$('#imgDiscoDuro').attr('src', e.target.result);  
+                    var ruta1 = e.target.result;
+                    document.getElementById('<%=imgDiscoDuro.ClientID%>').src = ruta1;
+                    document.getElementById('<%=HFDiscoDuro.ClientID%>').value = 'si';
                 }
                 reader.readAsDataURL(input.files[0]);
                 //PRIMERA IMAGEN              
@@ -48,8 +51,11 @@
                 //PRIMERA IMAGEN
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $('#imgATMDesarmadoPS').css('visibility', 'visible');
-                    $('#imgATMDesarmadoPS').attr('src', e.target.result);
+                    //$('#imgATMDesarmadoPS').css('visibility', 'visible');
+                    //$('#imgATMDesarmadoPS').attr('src', e.target.result);
+                    var ruta2 = e.target.result;
+                    document.getElementById('<%=imgATMDesarmadoPS.ClientID%>').src = ruta2;
+                    document.getElementById('<%=HFATMDesarmadoPS.ClientID%>').value = 'si';
                 }
                 reader.readAsDataURL(input.files[0]);
                 //PRIMERA IMAGEN              
@@ -63,8 +69,11 @@
                 //PRIMERA IMAGEN
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $('#imgATMDesarmadoPI').css('visibility', 'visible');
-                    $('#imgATMDesarmadoPI').attr('src', e.target.result);
+                    //$('#imgATMDesarmadoPI').css('visibility', 'visible');
+                    //$('#imgATMDesarmadoPI').attr('src', e.target.result);
+                    var ruta3 = e.target.result;
+                    document.getElementById('<%=imgATMDesarmadoPI.ClientID%>').src = ruta3;
+                    document.getElementById('<%=HFATMDesarmadoPI.ClientID%>').value = 'si';
                 }
                 reader.readAsDataURL(input.files[0]);
                 //PRIMERA IMAGEN              
@@ -78,8 +87,11 @@
                 //PRIMERA IMAGEN
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $('#imgDispositivoVendor').css('visibility', 'visible');
-                    $('#imgDispositivoVendor').attr('src', e.target.result);
+                    //$('#imgDispositivoVendor').css('visibility', 'visible');
+                    //$('#imgDispositivoVendor').attr('src', e.target.result);
+                    var ruta4 = e.target.result;
+                    document.getElementById('<%=imgDispositivoVendor.ClientID%>').src = ruta4;
+                    document.getElementById('<%=HFDispositivoVendor.ClientID%>').value = 'si';
                 }
                 reader.readAsDataURL(input.files[0]);
                 //PRIMERA IMAGEN              
@@ -93,8 +105,11 @@
                 //PRIMERA IMAGEN
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $('#imgSYSTEMINFO').css('visibility', 'visible');
-                    $('#imgSYSTEMINFO').attr('src', e.target.result);
+                    //$('#imgSYSTEMINFO').css('visibility', 'visible');
+                    //$('#imgSYSTEMINFO').attr('src', e.target.result);
+                    var ruta5 = e.target.result;
+                    document.getElementById('<%=imgSYSTEMINFO.ClientID%>').src = ruta5;
+                    document.getElementById('<%=HFSYSTEMINFO.ClientID%>').value = 'si';
                 }
                 reader.readAsDataURL(input.files[0]);
                 //PRIMERA IMAGEN              
@@ -108,8 +123,11 @@
                 //PRIMERA IMAGEN
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $('#imgAntiskimmin').css('visibility', 'visible');
-                    $('#imgAntiskimmin').attr('src', e.target.result);
+                    //$('#imgAntiskimmin').css('visibility', 'visible');
+                    //$('#imgAntiskimmin').attr('src', e.target.result);
+                    var ruta6 = e.target.result;
+                    document.getElementById('<%=imgAntiskimmin.ClientID%>').src = ruta6;
+                    document.getElementById('<%=HFAntiskimmin.ClientID%>').value = 'si';
                 }
                 reader.readAsDataURL(input.files[0]);
                 //PRIMERA IMAGEN              
@@ -123,8 +141,11 @@
                 //PRIMERA IMAGEN
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $('#imgMonitorFiltro').css('visibility', 'visible');
-                    $('#imgMonitorFiltro').attr('src', e.target.result);
+                    //$('#imgMonitorFiltro').css('visibility', 'visible');
+                    //$('#imgMonitorFiltro').attr('src', e.target.result);
+                    var ruta7 = e.target.result;
+                    document.getElementById('<%=imgMonitorFiltro.ClientID%>').src = ruta7;
+                    document.getElementById('<%=HFMonitorFiltro.ClientID%>').value = 'si';
                 }
                 reader.readAsDataURL(input.files[0]);
                 //PRIMERA IMAGEN              
@@ -138,8 +159,11 @@
                 //PRIMERA IMAGEN
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $('#imgPadlewheel').css('visibility', 'visible');
-                    $('#imgPadlewheel').attr('src', e.target.result);
+                    //$('#imgPadlewheel').css('visibility', 'visible');
+                    //$('#imgPadlewheel').attr('src', e.target.result);
+                    var ruta8 = e.target.result;
+                    document.getElementById('<%=imgPadlewheel.ClientID%>').src = ruta8;
+                    document.getElementById('<%=HFPadlewheel.ClientID%>').value = 'si';
                 }
                 reader.readAsDataURL(input.files[0]);
                 //PRIMERA IMAGEN              
@@ -153,8 +177,11 @@
                 //PRIMERA IMAGEN
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $('#imgDispDesarmado').css('visibility', 'visible');
-                    $('#imgDispDesarmado').attr('src', e.target.result);
+                    //$('#imgDispDesarmado').css('visibility', 'visible');
+                    //$('#imgDispDesarmado').attr('src', e.target.result);
+                    var ruta9 = e.target.result;
+                    document.getElementById('<%=imgDispDesarmado.ClientID%>').src = ruta9;
+                    document.getElementById('<%=HFDispDesarmado.ClientID%>').value = 'si';
                 }
                 reader.readAsDataURL(input.files[0]);
                 //PRIMERA IMAGEN              
@@ -168,8 +195,11 @@
                 //PRIMERA IMAGEN
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $('#imgTeclado').css('visibility', 'visible');
-                    $('#imgTeclado').attr('src', e.target.result);
+                    //$('#imgTeclado').css('visibility', 'visible');
+                    //$('#imgTeclado').attr('src', e.target.result);
+                    var ruta10 = e.target.result;
+                    document.getElementById('<%=imgTeclado.ClientID%>').src = ruta10;
+                    document.getElementById('<%=HFTeclado.ClientID%>').value = 'si';
                 }
                 reader.readAsDataURL(input.files[0]);
                 //PRIMERA IMAGEN              
@@ -183,8 +213,10 @@
                 //PRIMERA IMAGEN
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $('#imgClimatizacion').css('visibility', 'visible');
-                    $('#imgClimatizacion').attr('src', e.target.result);
+                    //$('#imgClimatizacion').css('visibility', 'visible');
+                    //$('#imgClimatizacion').attr('src', e.target.result);
+                    var ruta11 = e.target.result;
+                    document.getElementById('<%=imgClimatizacion.ClientID%>').src = ruta11;                    
                 }
                 reader.readAsDataURL(input.files[0]);
                 //PRIMERA IMAGEN              
@@ -198,8 +230,11 @@
                 //PRIMERA IMAGEN
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $('#imgEnergia').css('visibility', 'visible');
-                    $('#imgEnergia').attr('src', e.target.result);
+                    //$('#imgEnergia').css('visibility', 'visible');
+                    //$('#imgEnergia').attr('src', e.target.result);
+                    var ruta12 = e.target.result;
+                    document.getElementById('<%=imgEnergia.ClientID%>').src = ruta12;
+                    
                 }
                 reader.readAsDataURL(input.files[0]);
                 //PRIMERA IMAGEN              
@@ -626,67 +661,63 @@
                                 <td class="title"><a class="link" href="javascript:void(0)">*Disco duro</a></td>   
                                 <td> <asp:FileUpload ID="FUDiscoDuro" runat="server" onchange="img1(this);" /></td>                                
                                 <%--<td runat="server" id="td1img1" style="display:none"><img id="imgDiscoDuro" runat="server" height="150" width="150" src="" style="border-width: 0px;" /></td>--%>
-                                <td><img id="imgDiscoDuro" runat="server" height="150" width="150" src="" style="border-width: 0px;" /></td>                                                          
+                                <td><img id="imgDiscoDuro" runat="server" height="150" width="150" src="/assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>                                                          
                             </tr>                              
                             <tr>
                                 <td class="title"><a class="link" href="javascript:void(0)">*ATM desarmado parte superior (limpiar)</a></td>                               
                                 <td> <asp:FileUpload ID="FUATMDesarmadoPS" runat="server" onchange="img2(this);" /></td>
-                                <td> <img id="imgATMDesarmadoPS" runat="server" height="150" width="150" src="" style="border-width: 0px;" /></td>
+                                <td> <img id="imgATMDesarmadoPS" runat="server" height="150" width="150" src="/assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                             </tr>
                             <tr>
                                 <td class="title"><a class="link" href="javascript:void(0)">*ATM desarmado parte inferior (limpiar)</a> </td>    
                                 <td><asp:FileUpload ID="FUATMDesarmadoPI" runat="server" onchange="img3(this);" /></td>
-                                <td> <img id="imgATMDesarmadoPI" runat="server" height="150" width="150" src="" style="border-width: 0px;" /></td>
+                                <td> <img id="imgATMDesarmadoPI" runat="server" height="150" width="150" src="/assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                             </tr>
                             <tr>
                                 <td class="title"><a class="link" href="javascript:void(0)">*Dispositivo modo diagnostico de vendor en linea</a></td>                              
                                 <td><asp:FileUpload ID="FUDispositivoVendor" runat="server" onchange="img4(this);" /></td>
-                                <td><img id="imgDispositivoVendor" runat="server" height="150" width="150" src="" style="border-width: 0px;" /></td>
+                                <td><img id="imgDispositivoVendor" runat="server" height="150" width="150" src="/assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                             </tr>
                             <tr>
                                 <td class="title"><a class="link" href="javascript:void(0)">*Tipo de procesador con el comando "SYSTEMINFO"</a></td>                               
                                 <td><asp:FileUpload ID="FUSYSTEMINFO" runat="server" onchange="img5(this);" /></td>
-                                <td><img id="imgSYSTEMINFO" runat="server" height="150" width="150" src="" style="border-width: 0px;" /></td>
+                                <td><img id="imgSYSTEMINFO" runat="server" height="150" width="150" src="/assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                             </tr>
                             <tr>
                                 <td class="title"><a class="link" href="javascript:void(0)">*Lectora con el antiskimming desarmado y limpio</a></td>           
                                 <td><asp:FileUpload ID="FUAntiskimmin" runat="server" onchange="img6(this);" /></td>
-                                <td><img id="imgAntiskimmin" runat="server" height="150" width="150" src="" style="border-width: 0px;" /></td>
+                                <td><img id="imgAntiskimmin" runat="server" height="150" width="150" src="/assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                             </tr>
                             <tr>
                                 <td class="title"><a class="link" href="javascript:void(0)">*Monitor con el filtro</a></td>                              
                                 <td><asp:FileUpload ID="FUMonitorFiltro" runat="server" onchange="img7(this);" /></td>
-                                <td><img id="imgMonitorFiltro" runat="server" height="150" width="150" src="" style="border-width: 0px;" /></td>
+                                <td><img id="imgMonitorFiltro" runat="server" height="150" width="150" src="/assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                             </tr>
                             <tr>
                                 <td class="title"><a class="link" href="javascript:void(0)">*PadleWheel(rueda de paletas)</a></td>                              
                                 <td><asp:FileUpload ID="FUPadlewheel" runat="server" onchange="img8(this);" /></td>
-                                <td><img id="imgPadlewheel" runat="server" height="150" width="150" src="" style="border-width: 0px;" /></td>
+                                <td><img id="imgPadlewheel" runat="server" height="150" width="150" src="/assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                             </tr>
                             <tr>
                                 <td class="title"><a class="link" href="javascript:void(0)">*Dispositivos desarmado</a></td>
                                 <td> <asp:FileUpload ID="FUDispDesarmado" runat="server" onchange="img9(this);" /></td>
-                                <td><img id="imgDispDesarmado" runat="server" height="150" width="150" src="" style="border-width: 0px;" /></td>
+                                <td><img id="imgDispDesarmado" runat="server" height="150" width="150" src="/assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                             </tr>
                             <tr>
                                 <td class="title"><a class="link" href="javascript:void(0)">*Teclado</a></td>                                
                                 <td><asp:FileUpload ID="FUTeclado" runat="server" onchange="img10(this);" /></td>
-                                <td><img id="imgTeclado" runat="server" height="150" width="150" src="" style="border-width: 0px;" /></td>
+                                <td><img id="imgTeclado" runat="server" height="150" width="150" src="/assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                             </tr>
                             <tr>                                                            
                                 <td class="title"><a class="link" href="javascript:void(0)">¿Cuenta con Climatización adecuada? </a></td>                                
                                 <td><asp:FileUpload ID="FUClimatizacion" runat="server" onchange="img11(this);" /></td>                                
-                                    <td><img id="imgClimatizacion" runat="server" height="150" width="150" src="" style="border-width: 0px;" /></td>
+                                    <td><img id="imgClimatizacion" runat="server" height="150" width="150" src="/assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                                   </tr>
-                            <tr>
-                                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
-                                    <ContentTemplate>                                 
+                            <tr>                                                               
                                 <td class="title"><a class="link" href="javascript:void(0)">¿Cuenta con protección de energía<br /> eléctrica?</a></td>                            
                                 <td><asp:FileUpload ID="FUEnergia" runat="server" onchange="img12(this);" /></td>                                     
-                                <td><img id="imgEnergia" runat="server" height="150" width="150" src="" style="border-width: 0px;" /></td>
-                                </ContentTemplate>
-                                </asp:UpdatePanel>
-                                </tr>
+                                <td><img id="imgEnergia" runat="server" height="150" width="150" src="/assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>                                
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -839,6 +870,21 @@
         <!--/.modal-dialog -->
     </div>
     <!-- /MODAL RECHAZAR VERIF ATM -->
+
+    <asp:UpdatePanel ID="UpdatePanel8" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
+            <asp:HiddenField ID="HFDiscoDuro" runat="server" />
+            <asp:HiddenField ID="HFATMDesarmadoPS" runat="server" />
+            <asp:HiddenField ID="HFATMDesarmadoPI" runat="server" />
+            <asp:HiddenField ID="HFDispositivoVendor" runat="server" />
+            <asp:HiddenField ID="HFSYSTEMINFO" runat="server" />
+            <asp:HiddenField ID="HFMonitorFiltro" runat="server" />
+            <asp:HiddenField ID="HFAntiskimmin" runat="server" />
+            <asp:HiddenField ID="HFPadlewheel" runat="server" />
+            <asp:HiddenField ID="HFDispDesarmado" runat="server" />
+            <asp:HiddenField ID="HFTeclado" runat="server" />
+        </ContentTemplate>
+    </asp:UpdatePanel>
 
 </asp:Content>
 

@@ -196,10 +196,10 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
         protected void btnModalAprobNotificacion_Click(object sender, EventArgs e)
         {
-            string usu = "acedillo";
+            
             try
             {
-                string vQuery = "STEISP_ATM_Aprobaciones 1, '" + Session["codNotificacion"] + "','" + txtcomentarioReprogramaNotif.Text + "', '" + usu + "'";                
+                string vQuery = "STEISP_ATM_Aprobaciones 1, '" + Session["codNotificacion"] + "','" + txtcomentarioReprogramaNotif.Text + "', '" + Session["usuATM"].ToString() + "'";                
                 Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                 if (vInfo == 1)
                 {                   
@@ -253,7 +253,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
         protected void btnReprogramarNotif_Click(object sender, EventArgs e)
         {
-            string usu = "acedillo";
+           
             if (txtcomentarioReprogramaNotif.Text == "" || txtcomentarioReprogramaNotif.Text == string.Empty)
             {
                 lbRep1.Text = "No puede dejar el comentario de reprogramación vacio";
@@ -263,7 +263,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             {
                 try
                 {
-                    string vQuery = "STEISP_ATM_Aprobaciones 2, '" + Session["codNotificacion"] + "','" + txtcomentarioReprogramaNotif.Text + "', '" + usu + "'";
+                    string vQuery = "STEISP_ATM_Aprobaciones 2, '" + Session["codNotificacion"] + "','" + txtcomentarioReprogramaNotif.Text + "', '" + Session["usuATM"].ToString() + "'";
                     Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                     if (vInfo == 1)
                     {

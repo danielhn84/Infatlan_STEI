@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/mainATM.Master" AutoEventWireup="true" CodeBehind="updateTotal.aspx.cs" Inherits="Infatlan_STEI_ATM.pages.ATM.updateTotal" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="updateTotal.aspx.cs" Inherits="Infatlan_STEI_ATM.pages.ATM.updateTotal" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
     <!--PARA LLAMAR MODAL-->
     <script type="text/javascript">
@@ -53,7 +53,7 @@
                     <div class="row col-4">
                         <label class="col-form-label col-12">Sucursal de ATM</label>
                         <div class="col-12">
-                            <asp:DropDownList runat="server" ClientIDMode="AutoID" ID="DDLsucursalATM" CssClass="form-control"></asp:DropDownList>
+                            <asp:DropDownList runat="server" ClientIDMode="AutoID" ID="DDLsucursalATM" AutoPostBack="true" OnTextChanged="DDLsucursalATM_TextChanged" CssClass="form-control"></asp:DropDownList>
                         </div>
                     </div>
 
@@ -233,6 +233,12 @@
                             <asp:TextBox runat="server" CssClass="form-control" ID="txtinventarioATM"></asp:TextBox>
                         </div>
                     </div>
+                    <div class="row col-4">
+                        <label class="col-form-label col-12">Código de ubicación</label>
+                        <div class="col-12">
+                            <asp:TextBox runat="server" CssClass="form-control" Enabled="false" ID="txtcodUbicacion"></asp:TextBox>
+                        </div>
+                    </div>
                 </div>
                 <!--/OCTAVA FILA-->
                 <!--NOVENA FILA-->
@@ -290,11 +296,11 @@
                     <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                         <ContentTemplate>
                             <div class="modal-footer col-12">
-                                <div class="row col-6">
-                                    <asp:Button runat="server" ID="btnModalModificarATM" OnClick="btnModalModificarATM_Click" CssClass="btn btn-rounded btn-block btn-outline-success" Text="Enviar" />
+                                <div class="row col-3">
+                                    <asp:Button runat="server" ID="btnModalModificarATM" OnClick="btnModalModificarATM_Click" CssClass="btn btn-success mr-2" Text="Modificar" />
                                 </div>
-                                <div class="row col-6">
-                                    <asp:Button runat="server" ID="btnModalCerrarModificarATM" OnClick="btnModalCerrarModificarATM_Click" CssClass="btn btn-rounded btn-block btn-outline-danger" Text="Cancelar" />
+                                <div class="row col-3">
+                                    <asp:Button runat="server" ID="btnModalCerrarModificarATM" OnClick="btnModalCerrarModificarATM_Click" CssClass="btn btn-danger mr-2" Text="Cancelar" />
                                 </div>
                             </div>
                         </ContentTemplate>

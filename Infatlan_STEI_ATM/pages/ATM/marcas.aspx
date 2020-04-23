@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/mainATM.Master" AutoEventWireup="true" CodeBehind="marcas.aspx.cs" Inherits="Infatlan_STEI_ATM.pages.ATM.marcas" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="marcas.aspx.cs" Inherits="Infatlan_STEI_ATM.pages.ATM.marcas" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
     <!--PARA LLAMAR MODAL-->
     <script type="text/javascript">
@@ -47,7 +47,7 @@
                     <label class="col-3 col-form-label">Marcas creadas</label>
                     <asp:UpdatePanel runat="server" ID="UpdatePanel2">
                         <ContentTemplate>
-                            <asp:LinkButton runat="server" ID="btnnewmarcasATM" OnClick="btnnewmarcasATM_Click" CssClass="btn btn-info icon-plus mr-2" Text="" ></asp:LinkButton>
+                            <asp:LinkButton runat="server" ID="btnnewmarcasATM" OnClick="btnnewmarcasATM_Click" CssClass="btn btn-info icon-plus mr-2" Text=""></asp:LinkButton>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
@@ -72,15 +72,15 @@
                                                     GridLines="None"
                                                     PageSize="10" OnRowCommand="GVBusqueda_RowCommand">
                                                     <Columns>
+
+                                                        <asp:BoundField DataField="idMarca" HeaderText="Código de marca" ItemStyle-HorizontalAlign="center" />
+                                                        <asp:BoundField DataField="nombreMarca" HeaderText="Marcas" ItemStyle-HorizontalAlign="center" />
                                                         <asp:TemplateField HeaderText="Selección" ItemStyle-HorizontalAlign="center">
                                                             <ItemTemplate>
                                                                 <asp:LinkButton ID="btnmarca" runat="server" CssClass="btn btn-info ti-pencil-alt mr-2" Text="" CommandArgument='<%# Eval("idMarca") %>' CommandName="Codigo"></asp:LinkButton>
                                                                 <%--<asp:Button ID="BtnUsuarioPassword" runat="server" Text="De baja" CssClass="btn btn-block btn-outline-danger" CommandArgument='<%# Eval("codATM") %>' CommandName="Baja" />--%>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
-                                                        <asp:BoundField DataField="idMarca" HeaderText="Código de marca" ItemStyle-HorizontalAlign="center" />
-                                                        <asp:BoundField DataField="nombreMarca" HeaderText="Marcas" ItemStyle-HorizontalAlign="center" />
-
 
                                                     </Columns>
                                                 </asp:GridView>
@@ -159,11 +159,11 @@
                                 <asp:TextBox runat="server" ID="txtNewMarcaATM" CssClass="form-control col-6"></asp:TextBox>
                             </div>
                             <div class="col-md-6 align-self-center" style="margin-left: auto; margin-right: auto">
-                                <br />                             
-                                     <h5 runat="server" visible="false" id="H5Alerta"  class="text-danger"><i class="fa fa-exclamation-triangle"></i> Ingrese nueva marca.</h5>                                                               
-                                </div>
-                                
-                            
+                                <br />
+                                <h5 runat="server" visible="false" id="H5Alerta" class="text-danger"><i class="fa fa-exclamation-triangle"></i>Ingrese nueva marca.</h5>
+                            </div>
+
+
                         </ContentTemplate>
                     </asp:UpdatePanel>
                     <asp:UpdatePanel ID="UpdatePanel5" runat="server">

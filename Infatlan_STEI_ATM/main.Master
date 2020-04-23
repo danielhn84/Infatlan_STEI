@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="mainATM.Master.cs" Inherits="Infatlan_STEI.main" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="main.Master.cs" Inherits="Infatlan_STEI.main" %>
 
 <!DOCTYPE html>
 
@@ -119,7 +119,7 @@
                         <div>
                             <img src="/img/admin111.jpg" alt="user-img" class="img-circle"></div>                           
                         <div class="dropdown">                            
-                            <a href="javascript:void(0)" class="dropdown-toggle u-dropdown link hide-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">acedillo <span class="caret"></span></a>
+                            <a href="javascript:void(0)"  data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><asp:Label runat="server" ID="lbusu" CssClass="dropdown-toggle u-dropdown link hide-menu" style="color:black;"></asp:Label><span class="caret"></span></a>
                             <div class="dropdown-menu animated flipInY">
 
                                 <!-- text-->
@@ -136,7 +136,7 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav"> 
-                        <li><a  href="../../defaultATM.aspx" aria-expanded="false"><i class="ti-home"></i><span class="hide-menu">Dashboard</span></a></li>
+                        <li><a  href="../../default.aspx" aria-expanded="false"><i class="ti-home"></i><span class="hide-menu">Dashboard</span></a></li>
                          <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-desktop"></i><span class="hide-menu">ATM<span class="badge badge-pill badge-cyan ml-auto">13</span></span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="../../pages/ATM/add.aspx">Agregar</a></li>
@@ -153,12 +153,19 @@
                                 <li><a href="../../pages/ATM/cancelarVerificacion.aspx">Motivo cancelar</a></li>
                             </ul>
                         </li>
-                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-wrench"></i><span class="hide-menu">Mantenimiento Preventivo ATM<span class="badge badge-pill badge-cyan ml-auto">4</span></span></a>
+                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-wrench"></i><span class="hide-menu">Mantenimiento<span class="badge badge-pill badge-cyan ml-auto">4</span></span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="../../pages/mantenimiento/notificacion.aspx">Crear Notificación</a></li>
                                 <li><a href="../../pages/mantenimiento/buscarAprobarNotificacion.aspx">Aprobar Notificación</a></li>
                                 <li><a href="../../pages/mantenimiento/buscarVerificacion.aspx">Crear Verificación</a></li>   
                                 <li><a href="../../pages/mantenimiento/buscarAprobarVerificacion.aspx">Aprobar Verificación</a></li>
+                            </ul>
+                        </li>
+                         <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-write"></i><span class="hide-menu">Materiales<span class="badge badge-pill badge-cyan ml-auto">2</span></span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="../../pages/material/buscarMaterial.aspx">Solicitar</a></li>
+                                <li><a href="../../pages/material/buscarAprobar.aspx">Aprobar</a></li>
+                                
                             </ul>
                         </li>
                         <li><a  href="../../pages/devolver/rechazados.aspx" aria-expanded="false"><i class="ti-back-left"></i><span class="hide-menu">Devoluciones</span></a></li>

@@ -21,6 +21,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             Session["VERIF"] = null;
             if (!Page.IsPostBack)
             {
+                vaciarValorImg();
                 if (dropantiskimming.SelectedValue == "1")
                 {
                     txtantiSkimming.Enabled = true;
@@ -51,6 +52,20 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 }
 
             }
+        }
+        void vaciarValorImg()
+        {
+            HFDiscoDuro.Value = "";
+            HFATMDesarmadoPS.Value = "";
+            HFATMDesarmadoPI.Value = "";
+            HFDispositivoVendor.Value = "";
+            HFSYSTEMINFO.Value = "";
+            HFAntiskimmin.Value = "";
+            HFMonitorFiltro.Value = "";
+            HFPadlewheel.Value = "";
+            HFDispDesarmado.Value = "";
+            HFTeclado.Value = "";
+
         }
         void aprobacionCampos()
         {
@@ -119,51 +134,67 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             string vImagen1 = Session["ATM_VERIF_IMG1"].ToString();
             string srcImgen1 = "data:image;base64," + vImagen1;
             imgDiscoDuro.Src = srcImgen1;
-
+            HFDiscoDuro.Value = "si";
             //IMAGEN2
             string vImagen2 = Session["ATM_VERIF_IMG2"].ToString();
             string srcImgen2 = "data:image;base64," + vImagen2;
             imgATMDesarmadoPS.Src = srcImgen2;
+            HFATMDesarmadoPS.Value = "si";
             //IMAGEN3
             string vImagen3 = Session["ATM_VERIF_IMG3"].ToString();
             string srcImgen3 = "data:image;base64," + vImagen3;
             imgATMDesarmadoPI.Src = srcImgen3;
+            HFATMDesarmadoPI.Value = "si";
             //IMAGEN4
             string vImagen4 = Session["ATM_VERIF_IMG4"].ToString();
             string srcImgen4 = "data:image;base64," + vImagen4;
             imgDispositivoVendor.Src = srcImgen4;
+            HFDispositivoVendor.Value = "si";
             //IMAGEN5
             string vImagen5 = Session["ATM_VERIF_IMG5"].ToString();
             string srcImgen5 = "data:image;base64," + vImagen5;
             imgSYSTEMINFO.Src = srcImgen5;
+            HFSYSTEMINFO.Value = "si";
             //IMAGEN6
             string vImagen6 = Session["ATM_VERIF_IMG6"].ToString();
             string srcImgen6 = "data:image;base64," + vImagen6;
             imgAntiskimmin.Src = srcImgen6;
+            HFAntiskimmin.Value = "si";
             //IMAGEN7
             string vImagen7 = Session["ATM_VERIF_IMG7"].ToString();
             string srcImgen7 = "data:image;base64," + vImagen7;
             imgMonitorFiltro.Src = srcImgen7;
+            HFMonitorFiltro.Value = "si";
             //IMAGEN8
             string vImagen8 = Session["ATM_VERIF_IMG8"].ToString();
             string srcImgen8 = "data:image;base64," + vImagen8;
             imgPadlewheel.Src = srcImgen8;
+            HFPadlewheel.Value = "si";
             //IMAGEN9
             string vImagen9 = Session["ATM_VERIF_IMG9"].ToString();
             string srcImgen9 = "data:image;base64," + vImagen9;
             imgDispDesarmado.Src = srcImgen9;
+            HFDispDesarmado.Value = "si";
             //IMAGEN10
             string vImagen10 = Session["ATM_VERIF_IMG10"].ToString();
             string srcImgen10 = "data:image;base64," + vImagen10;
             imgTeclado.Src = srcImgen10;
+            HFTeclado.Value = "si";
             //IMAGEN11
             string vImagen11 = Session["ATM_VERIF_IMG21"].ToString();
-            string srcImgen11 = "data:image;base64," + vImagen11;
-            imgClimatizacion.Src = srcImgen11;
+            string srcImgen11 = "data:image;base64," + vImagen11;            
+            if (vImagen11 == "")
+                imgClimatizacion.Src = "/assets/images/vistaPrevia1.JPG";
+            else
+                imgClimatizacion.Src = srcImgen11;
             //IMAGEN12
             string vImagen12 = Session["ATM_VERIF_IMG22"].ToString();
             string srcImgen12 = "data:image;base64," + vImagen12;
-            imgEnergia.Src = srcImgen12;
+            if (vImagen12 == "")
+                imgEnergia.Src = "/assets/images/vistaPrevia1.JPG";
+            else
+                imgEnergia.Src = srcImgen12;
+
         }
         void llenarFormRechazado()
         {
@@ -266,23 +297,10 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             // DDLsucursalATM.SelectedIndex = CargarInformacionDDL(DDLsucursalATM, Session["sucursalATM"].ToString());
         }
 
-        void validarIMG()
-        {
-            if (!FUDiscoDuro.HasFile)
-                throw new Exception("Favor agregar imagen de disco duro.");
-            if (!FUATMDesarmadoPS.HasFile)
-                throw new Exception("Favor agregar imagen de desarmado parte superior.");
-            if (!FUATMDesarmadoPI.HasFile)
-                throw new Exception("Favor agregar imagen de desarmado parte inferior.");
-        }
+        
         void validar()
-        {
-
-
-
-            if (!FUDiscoDuro.HasFile)
-                //    throw new Exception("Favor agregar imagen de disco duro.");
-                if (txthsalidaInfa.Text == "" || txthsalidaInfa.Text == string.Empty)
+        {               
+            if (txthsalidaInfa.Text == "" || txthsalidaInfa.Text == string.Empty)
                     throw new Exception("Favor ingrese la hora que salio de Infatlan.");
             if (txtHllegadaInfatlan.Text == "" || txtHllegadaInfatlan.Text == string.Empty)
                 throw new Exception("Favor ingrese la hora que llego a Infatlan.");
@@ -320,12 +338,28 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 throw new Exception("Favor seleccione una respuesta de AntiSkimming.");
             }
 
-
-
             if (txtobseracionesVerif.Text == "" || txtobseracionesVerif.Text == string.Empty)
                 throw new Exception("Favor ingrese sus observaciones del caso.");
-            //if (FUClimatizacion.HasFile)
-            //    throw new Exception("Favor agregar imagen de climatización.");
+            if (HFDiscoDuro.Value== string.Empty)
+                throw new Exception("Favor agregar imagen de disco duro.");
+            if (HFATMDesarmadoPS.Value == string.Empty)
+                throw new Exception("Favor agregar imagen de ATM desarmado parte superior.");
+            if (HFATMDesarmadoPI.Value == string.Empty)
+                throw new Exception("Favor agregar imagen de ATM desarmado parte inferior.");
+            if (HFDispositivoVendor.Value == string.Empty)
+                throw new Exception("Favor agregar imagen de dispositivo vendor.");
+            if (HFSYSTEMINFO.Value == string.Empty)
+                throw new Exception("Favor agregar imagen de SistemInfo.");
+            if (HFAntiskimmin.Value == string.Empty)
+                throw new Exception("Favor agregar imagen de antiskimming.");
+            if (HFMonitorFiltro.Value == string.Empty)
+                throw new Exception("Favor agregar imagen de filtro de monitor.");
+            if (HFPadlewheel.Value == string.Empty)
+                throw new Exception("Favor agregar imagen de Padlewheel.");
+            if (HFDispDesarmado.Value == string.Empty)
+                throw new Exception("Favor agregar imagen de dispositivo desarmado.");
+            if (HFTeclado.Value == string.Empty)
+                throw new Exception("Favor agregar imagen de teclado.");
         }
 
         int CargarInformacionDDL(DropDownList vList, String vValue)
@@ -1213,6 +1247,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
                             Mensaje("Lista de verificación aprobada con éxito", WarningType.Success);
                             //EnviarCorreo();
+                            vaciarValorImg();
                             Response.Redirect("buscarAprobarVerificacion.aspx");
                         }
                         else
@@ -1233,6 +1268,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     ImgVerificacion();
                     PreguntasVerif();
                     //EnviarCorreo();
+                    vaciarValorImg();
                     if (tipo == "2")
                     {
                         Response.Redirect("../../pages/devolver/rechazados.aspx");

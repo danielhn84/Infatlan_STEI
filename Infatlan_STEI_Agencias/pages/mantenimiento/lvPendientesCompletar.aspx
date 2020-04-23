@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/mainAgencia.Master" AutoEventWireup="true" CodeBehind="lvPendientesCompletar.aspx.cs" Inherits="Infatlan_STEI_Agencias.pages.LvCompletar" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="lvPendientesCompletar.aspx.cs" Inherits="Infatlan_STEI_Agencias.pages.LvCompletar" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
 
     
@@ -68,16 +68,16 @@
                                 <Columns>
                                     <asp:TemplateField HeaderText="Acción" ItemStyle-HorizontalAlign="center" >
                                         <ItemTemplate>
-                                            <asp:LinkButton ID="LBAprobar" runat="server"  CommandName="Completar" CommandArgument='<%# Eval("id_Mantenimiento") %>'>
-                                                       <img src="https://img.icons8.com/color/23/000000/check-file.png"/>
+                                            <asp:LinkButton ID="LBAprobar" class="btn btn-success mr-2"  runat="server"  CommandName="Completar" CommandArgument='<%# Eval("id_Mantenimiento") %>'>
+                                                        <i class="icon-check" ></i>
                                             </asp:LinkButton>
 
-                                            <asp:LinkButton ID="LBCancelar" runat="server" CommandName="Cancelar" CommandArgument='<%# Eval("id_Mantenimiento") %>'>
-                                                          <img src="https://img.icons8.com/color/23/000000/file-delete--v1.png"/>
+                                            <asp:LinkButton ID="LBCancelar" class="btn btn-primary mr-2" runat="server" CommandName="Cancelar" CommandArgument='<%# Eval("id_Mantenimiento") %>'>
+                                                          <i class="icon-close" ></i>
                                             </asp:LinkButton>
                                              
                                         </ItemTemplate>
-                                        <ItemStyle Width="10%" />
+                                        <ItemStyle Width="12%" />
                                     </asp:TemplateField>
                                     <asp:BoundField DataField="id_Mantenimiento" HeaderText="Id"  ControlStyle-Width="10%" />
                                     <asp:BoundField DataField="fecha" HeaderText="Fecha" ControlStyle-Width="10%" />
@@ -92,6 +92,12 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
+                <div class="row p-t-20 col-md-12">
+                                <div class="col-md-4 " style="margin-left: auto; margin-right: auto">
+                                    <a href="../../default.aspx"" class="btn  btn-block btn-primary">Volver</a>
+                                </div>
+                            </div>
+                <br>
             </div>
         </div>
 

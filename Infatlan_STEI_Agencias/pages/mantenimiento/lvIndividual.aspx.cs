@@ -411,7 +411,7 @@ namespace Infatlan_STEI_Agencias.pages
         protected void BtnRegresarPendienteAprobar_Click(object sender, EventArgs e)
         {
             LimpiarAprobarLV();
-            Response.Redirect("/pages/mantenimiento/lvPendientesAprobarJefes.aspx");
+            Response.Redirect("/pages/mantenimiento/lvPendientesModificar.aspx");
         }
 
 
@@ -462,6 +462,8 @@ namespace Infatlan_STEI_Agencias.pages
         void OcultarTarjeta()
         {
             DivAprobacion.Visible = false;
+            ocultarBotonVolver1.Visible = true;
+            UpdatePanel5.Update();
         }
         void mostrarAsteriscos()
         {
@@ -1505,7 +1507,7 @@ namespace Infatlan_STEI_Agencias.pages
 
             limpiar();
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModalEnvioLv();", true);
-            Response.Redirect("/pages/mantenimiento/lvPendientesModificar.aspx");
+            Response.Redirect("/pages/mantenimiento/lvPendientesCompletar.aspx");
 
         }     
         private void limpiar()

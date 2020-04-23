@@ -105,6 +105,15 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
         protected global::System.Web.UI.WebControls.RadioButtonList RblConductor;
 
         /// <summary>
+        /// Control DDLMunicipio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DDLMunicipio;
+
+        /// <summary>
         /// Control BtnEnviar.
         /// </summary>
         /// <remarks>
@@ -258,6 +267,24 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
         protected global::System.Web.UI.WebControls.DropDownList DDLDepartamentoModificar;
 
         /// <summary>
+        /// Control DDLMunicipioModificar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DDLMunicipioModificar;
+
+        /// <summary>
+        /// Control txtcodUbicacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtcodUbicacion;
+
+        /// <summary>
         /// Control RbConductorModificar.
         /// </summary>
         /// <remarks>
@@ -274,6 +301,33 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DDLEstado;
+
+        /// <summary>
+        /// Control UpdateModal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdateModal;
+
+        /// <summary>
+        /// Control DivAlerta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivAlerta;
+
+        /// <summary>
+        /// Control LbMensajeModalError.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LbMensajeModalError;
 
         /// <summary>
         /// Control Div3.

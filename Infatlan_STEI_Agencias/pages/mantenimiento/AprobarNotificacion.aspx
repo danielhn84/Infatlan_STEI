@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/mainAgencia.Master" AutoEventWireup="true" CodeBehind="aprobarNotificacion.aspx.cs" Inherits="Infatlan_STEI_Agencias.pages.AprobarNotificacion" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="aprobarNotificacion.aspx.cs" Inherits="Infatlan_STEI_Agencias.pages.AprobarNotificacion" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
 
@@ -37,7 +37,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Aprobaciones Pendientes</h4>
-                                <p>Notificaciones que no han sido aprobadas por Jefe, suplentes o coordinadores de mantenimiento.</p>
+                                <p>Notificaciones que no han sido aprobadas por jefe, suplentes o coordinadores de mantenimiento.</p>
                                 <div class="col-md-12">
                                     <div class="form-group row">
        
@@ -84,15 +84,15 @@
                                     <Columns>
                                         <asp:TemplateField HeaderText="Acción" ItemStyle-HorizontalAlign="center">
                                             <ItemTemplate>
-                                                <asp:LinkButton ID="LBAprobar" runat="server"  CommandName="Aprobar" CommandArgument='<%# Eval("id_Mantenimiento") %>'>
-                                                        <img src="https://img.icons8.com/color/23/000000/check-file.png"/>
+                                                <asp:LinkButton ID="LBAprobar"   class="btn btn-success mr-2"  runat="server"  CommandName="Aprobar" CommandArgument='<%# Eval("id_Mantenimiento") %>'>
+                                                        <i class="icon-check" ></i> 
                                                 </asp:LinkButton>
 
-                                                <asp:LinkButton ID="LBCancelar" runat="server"  CommandName="Cancelar" CommandArgument='<%# Eval("id_Mantenimiento") %>'>
-                                                        <img src="https://img.icons8.com/color/23/000000/file-delete--v1.png"/>
+                                                <asp:LinkButton ID="LBCancelar"  class="btn btn-primary mr-2" runat="server"  CommandName="Cancelar" CommandArgument='<%# Eval("id_Mantenimiento") %>'>
+                                                        <i class="icon-close" ></i> 
                                                 </asp:LinkButton>
                                             </ItemTemplate>
-                                            <ItemStyle Width="10%" />
+                                            <ItemStyle Width="13%" />
                                         </asp:TemplateField>
                                         <asp:BoundField DataField="id_Mantenimiento" HeaderText="Id" />
                                         <asp:BoundField DataField="fecha" HeaderText="Fecha"  />
@@ -108,6 +108,12 @@
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </div>
+
+                     <div class="row p-t-20 col-md-12">
+                                <div class="col-md-4 " style="margin-left: auto; margin-right: auto">
+                                    <a href="../../default.aspx"" class="btn  btn-block btn-primary">Volver</a>
+                                </div>
+                   </div>
                 </div>
             </div>
         </div>
@@ -251,7 +257,7 @@
                          </ContentTemplate>
                      </asp:UpdatePanel>
 
-                    <button type="button" class="close"  data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" style="color: white"  data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>

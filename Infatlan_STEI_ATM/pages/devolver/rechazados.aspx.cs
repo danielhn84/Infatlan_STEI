@@ -28,11 +28,11 @@ namespace Infatlan_STEI_ATM.pages.devolver
         }
         void cargarData()
         {
-            string usu = "acedillo";
+            
             try
             {
                 DataTable vDatos = new DataTable();
-                vDatos = vConexion.ObtenerTabla("STEISP_ATM_VERIFICACION 3,'" + usu + "',1");
+                vDatos = vConexion.ObtenerTabla("STEISP_ATM_VERIFICACION 3,'" + Session["usuATM"].ToString() + "',1");
                 GVBusqueda.DataSource = vDatos;
                 GVBusqueda.DataBind();
                 Session["ATM_RECHAZADOVERIF_CARGAR"] = vDatos;

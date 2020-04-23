@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/mainATM.Master" AutoEventWireup="true" CodeBehind="add.aspx.cs" Inherits="Infatlan_STEI_ATM.pages.ATM.add" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="add.aspx.cs" Inherits="Infatlan_STEI_ATM.pages.ATM.add" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
     <!--PARA LLAMAR MODAL-->
     <script type="text/javascript">
@@ -52,7 +52,7 @@
                     <div class="row col-4">
                         <label class="col-form-label col-12">Sucursal de ATM</label>
                         <div class="col-12">
-                            <asp:DropDownList runat="server" ClientIDMode="AutoID" ID="DDLsucursalATM" CssClass="form-control"></asp:DropDownList>
+                            <asp:DropDownList runat="server" OnTextChanged="DDLsucursalATM_TextChanged" ClientIDMode="AutoID" AutoPostBack="true" ID="DDLsucursalATM" CssClass="form-control"></asp:DropDownList>
                         </div>
                     </div>
 
@@ -217,6 +217,9 @@
                     </div>
                 </div>
                 <!--/SEPTIMA FILA-->
+                <br />
+                <hr />
+                <br />
                 <!--OCTAVA FILA-->
                 <div class="row col-12">
                     <div class="row col-4">
@@ -231,8 +234,18 @@
                             <asp:TextBox runat="server" CssClass="form-control" ID="txtinventarioATM"></asp:TextBox>
                         </div>
                     </div>
+                    <div class="row col-4">
+                        <label class="col-form-label col-12">Código de ubicación</label>
+                        <div class="col-12">
+                            <asp:TextBox runat="server" CssClass="form-control" Enabled="false" ID="txtcodUbicacion"></asp:TextBox>
+                        </div>
+                    </div>
                 </div>
                 <!--/OCTAVA FILA-->
+                <br />
+                <hr />
+                <br />
+
                 <!--NOVENA FILA-->
                 <div class="row col-12">
                     <label class="col-form-label col-12">Dirección</label>

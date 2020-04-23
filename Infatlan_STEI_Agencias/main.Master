@@ -1,6 +1,7 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="mainAgencia.Master.cs" Inherits="Infatlan_STEI.main" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="main.Master.cs" Inherits="Infatlan_STEI.main" %>
 
 <!DOCTYPE html>
+
 
 <html>
 <head runat="server">
@@ -39,10 +40,10 @@
                     icon: "pe - 7s - gift",
                     message: mensaje
                 }, {
-                        type: tipo,
-                        timer: 4000,
-                        placement: { from: from, align: align }
-                    });
+                    type: tipo,
+                    timer: 4000,
+                    placement: { from: from, align: align }
+                });
             }
         }
     </script>
@@ -106,71 +107,28 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <%-- <li><a  href="../pagesATM/buscarReprogramarATM.aspx" aria-expanded="false"><i class="fa fa-chart-bar fa-4x"></i><span class="hide-menu">Dashboard</span></a></li>--%>
-                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><img src="https://img.icons8.com/color/28/000000/positive-dynamic.png"/><span class="hide-menu">Dashboard</span></a>
-                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><img src="https://img.icons8.com/color/28/000000/bank-building.png"/><span class="hide-menu">Configuraciones</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="../pages/configuraciones/creacionAgencia.aspx">Creación de Agencia</a></li>
-                                <li><a href="../pages/configuraciones/agenciaTipo.aspx">Tipos de Agencia</a></li>    
-                                <li><a href="../pages/configuraciones/motivosCancelacionMantenimientos.aspx">Motivos de cancelación</a></li>
-                                <li><a href="../pages/configuraciones/tiposAreas.aspx">Tipos de Area</a></li><li>
-                                 <li><a href="../pages/configuraciones/tiposAreas.aspx">Calendario Anual</a></li><li>
-                            </ul>
-                        </li>
-             
                        
-                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><img src="https://img.icons8.com/color/28/000000/maintenance.png"/><span class="hide-menu">Mantenimiento Preventivo</span></a>
+                       <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-home"></i><span class="hide-menu">Configuraciones</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="../pages/mantenimiento/creacionNotificacion.aspx">Crear Notificación</a></li>
-                                <li><a href="../pages/mantenimiento/aprobarNotificacion.aspx">Aprobar Notificación</a></li>
-                                <li><a href="../pages/mantenimiento/lvPendientesCompletar.aspx">Completar Lista Verificación</a></li>                                 
-                                <li><a href="../pages/mantenimiento/lvPendientesAprobarJefes.aspx">Aprobar LV Verificación</a></li>
-                                <li><a href="../pages/mantenimiento/lvPendientesModificar.aspx">Modificar LV Verificación</a></li>
-                                <li><a href="../pages/mantenimiento/reprogramarMantenimiento.aspx">Reprogramar Mantenimiento</a></li>
+                                <li><a href="/pages/configuraciones/creacionAgencia.aspx">Agencias</a></li>
+                                <li><a href="/pages/configuraciones/agenciaTipo.aspx">Tipos de Agencia</a></li>                               
+                                <li><a href="/pages/configuraciones/motivosCancelacionMantenimientos.aspx">Motivos</a></li>
+                                <li><a href="/pages/configuraciones/tiposAreas.aspx">Areas</a></li>
+                                <li><a href="/pages/configuraciones/calendarioMantenimientoAnual.aspx">Calendario Anual</a></li>
                             </ul>
-                            
-                        </li>
-                        <%--<li><a  href="../pagesATM/buscarReprogramarATM.aspx" aria-expanded="false"><i class="ti-timer"></i><span class="hide-menu">Reprogramación</span></a></li>
-                        <li><a  href="../pagesATM/mantenimientosATM.aspx" aria-expanded="false"><i class=" ti-calendar"></i><span class="hide-menu">Calendario</span></a></li>--%>
-
-
-                       
-  <%--                      <li><a  href="../paginasAgencia/defaultAgencia.aspx" aria-expanded="false"><i class="ti-home"></i><span class="hide-menu">Dashboard</span></a></li>
-                         <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-desktop"></i><span class="hide-menu">Administración de Agencias</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="">Agregar Agencia</a></li>
-                                <li><a href="">Agregar Motivos de Cancelacion</a></li>    
-                                <li><a href="">Agregar Calendario</a></li>
-
-                            </ul>
-                        </li>
-
-
-                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"> <i class="material-icons md-18">account_balance</i><span class="hide-menu">Proceso Mantenimiento en Agencia</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                              
                            
-                                <li><a href="../paginasAgencia/creacionNotificacion.aspx">Envio de notificación</a></li>
-                                <li><a href="../paginasAgencia/aprobarNotificacion.aspx">Aprobacion de notificación</a></li>
-                                <li><a href="../paginasAgencia/reprogramarMantenimiento.aspx">Reprogramar Mantenimiento</a></li>
-                                <li><a href="../paginasAgencia/lvPendientesCompletar.aspx">Completar LV</a></li>
-                                <li><a href="../paginasAgencia/creacionNotificacion.aspx">Aprobar LV</a></li>
-                                <li><a href="../paginasAgencia/creacionNotificacion.aspx">Modificar LV</a></li>
-               
-                            </ul>
-                        </li>
-                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-wrench"></i><span class="hide-menu">Configuración</span></a>
+                       </li>                   
+                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-wrench"></i><span class="hide-menu">Mantenimiento</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="/paginas/configuraciones/usuarios.aspx">Usuarios</a></li>
-                                <li><a href="#">Permisos</a></li>
+                                <li><a href="/pages/mantenimiento/creacionNotificacion.aspx">Crear Notificación</a></li>
+                                <li><a href="/pages/mantenimiento/aprobarNotificacion.aspx">Aprobar Notificacion</a></li>
+                                <li><a href="/pages/mantenimiento/lvPendientesCompletar.aspx">Completar LV</a></li>
+                                <li><a href="/pages/mantenimiento/lvPendientesAprobarJefes.aspx">Aprobar LV</a></li>
+                                <li><a href="/pages/mantenimiento/lvPendientesModificar.aspx">Modificar LV</a></li>
+                                <li><a href="/pages/mantenimiento/reprogramarMantenimiento.aspx">Reprogramar</a></li>
                             </ul>
                         </li>
-
-                        <li><a class="waves-effect waves-dark" href="../documentation/documentation.html" aria-expanded="false"><i class="fa fa-circle-o text-danger"></i><span class="hide-menu">Documentation</span></a></li>
-                        <li><a class="waves-effect waves-dark" href="pages-login.html" aria-expanded="false"><i class="fa fa-circle-o text-success"></i><span class="hide-menu">Log Out</span></a></li>
-                        <li><a class="waves-effect waves-dark" href="pages-faq.html" aria-expanded="false"><i class="fa fa-circle-o text-info"></i><span class="hide-menu">FAQs</span></a></li>
-                    
-      --%>
+                        <li><a class="waves-effect waves-dark" href="pages-faq.html" aria-expanded="false"><i class="icon-bubble"></i><span class="hide-menu">FAQs</span></a></li>                  
       </ul>
 
 
@@ -223,3 +181,5 @@
     </asp:ContentPlaceHolder>
 </body>
 </html>
+
+

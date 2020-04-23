@@ -15,12 +15,9 @@ namespace Infatlan_STEI_Agencias.pages
 
     public partial class AprobarNotificacion : System.Web.UI.Page
     {
-
-
         db vConexion = new db();
         protected void Page_Load(object sender, EventArgs e)
         {
-
             Session["USUARIO"] = "acamador";
 
             if (!Page.IsPostBack)

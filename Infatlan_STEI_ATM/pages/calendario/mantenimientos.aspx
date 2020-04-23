@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/mainATM.Master" AutoEventWireup="true" CodeBehind="mantenimientos.aspx.cs" Inherits="Infatlan_STEI_ATM.pages.calendario.manteniminetos" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="mantenimientos.aspx.cs" Inherits="Infatlan_STEI_ATM.pages.calendario.mantenimientos" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
@@ -45,11 +45,11 @@
             <div class="footer">
                 <div class="stats">
                     <asp:Label Text="Descargue la plantilla" runat="server" />
-                    <a href="plantillas/PlantillaATM.xlsx">AQUI</a>
+                    <a href="../plantillas/PlantillaATM.xlsx">AQUI</a>
                 </div>
-                <div class="stats">
+                <div class="stats col-12">
                     <i class="fa fa-info"></i>
-                    <asp:Label ID="LbMensaje" runat="server" Text="Recuerda verificar el Excel"></asp:Label>
+                    <asp:Label ID="LbMensaje" runat="server" CssClass="col-10" Text="Recuerda verificar el Excel"></asp:Label>
                 </div>
             </div>
             <br />

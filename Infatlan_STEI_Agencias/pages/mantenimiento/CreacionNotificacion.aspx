@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/mainAgencia.Master" AutoEventWireup="true" CodeBehind="creacionNotificacion.aspx.cs" Inherits="Infatlan_STEI_Agencias.pages.CreacionNotificacion" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="creacionNotificacion.aspx.cs" Inherits="Infatlan_STEI_Agencias.pages.CreacionNotificacion" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
     <!--PARA LLAMAR MODAL-->
@@ -147,7 +147,7 @@
                                 <br>
 
                                 <h5 class="card-title">-Técnicos Participantes </h5>
-                                <label class="control-label text-danger">*</label><label class="control-label">Nombre:</label>
+                                <label class="control-label">Nombre:</label>
                                 <asp:DropDownList ID="DDLNombreParticipantes" AutoPostBack="true" runat="server" CssClass="fstdropdown-select form-control" OnTextChanged="DDLNombreParticipantes_TextChanged" Enabled="false"></asp:DropDownList>
                                 <br>
                                 <br>
@@ -167,11 +167,12 @@
                                                 <Columns>
                                                     <asp:TemplateField HeaderText="Acción" ItemStyle-HorizontalAlign="center">
                                                         <ItemTemplate>
-                                                            <asp:LinkButton ID="LBEliminarTecnicoParticipantes" runat="server"  CommandArgument='<%# Eval("idUsuario") %>' CommandName="Eliminar">
-                                                                <img src="https://img.icons8.com/color/23/000000/delete-property.png"/>
+                                                            <asp:LinkButton ID="LBEliminarTecnicoParticipantes"  class="btn btn-danger mr-2" runat="server"  CommandName="Eliminar" CommandArgument='<%# Eval("idUsuario") %>'>
+  
+                                                                <i class="icon-close"></i>
                                                             </asp:LinkButton>
                                                         </ItemTemplate>
-                                                        <ItemStyle Width="5%" />
+                                                        <%--<ItemStyle Width="5%" />--%>
                                                     </asp:TemplateField>
                                                     <asp:BoundField DataField="idUsuario" HeaderText="Usuario" ItemStyle-Width="25%" />
                                                     <asp:BoundField DataField="nombre" HeaderText="Nombre" ItemStyle-Width="25%"/>
@@ -184,14 +185,14 @@
                                 <br>
                                 <br>
 
-                               <%-- <h5 class="card-title">-Jefes de Agencia </h5>--%>
-                               
-                                <div class="row col-12" runat="server" visible="false">                                                                    
+                                <h5 class="card-title">-Jefes de Agencia </h5>
+
+                                <div class="row col-12" runat="server" visible="true">
                                     <div class="col-md-6">
-                                         <asp:TextBox runat="server"  ID="txtbuscarJefeNotif"   CssClass="form-control"></asp:TextBox>
-                                    </div>                                   
+                                        <asp:TextBox runat="server" ID="txtbuscarJefeNotif" placeholder="Búsqueda por nombre, apellido o correo, luego dar clic en el boton" ReadOnly="true" CssClass="form-control"></asp:TextBox>
+                                    </div>
                                     <div class="col-md-6">
-                                         <asp:LinkButton runat="server" ID="btnBuscarJefe" OnClick="btnBuscarJefe_Click" CssClass="btn btn-info mr-2"><i class="fa fa-search"></i></asp:LinkButton>
+                                        <asp:LinkButton runat="server" ID="btnBuscarJefe" OnClick="btnBuscarJefe_Click" CssClass="btn btn-info mr-2"><i class="fa fa-search"></i></asp:LinkButton>
                                     </div>
                                 </div>
                                 <br><br>
@@ -212,7 +213,7 @@
                                                     <asp:TemplateField HeaderText="Acción" ItemStyle-HorizontalAlign="center" >
                                                         <ItemTemplate>
                                                             <asp:LinkButton runat="server" ID="btnCorreoJefe" CssClass="btn btn-cyan" CommandName="correos"  CommandArgument='<%# Eval("mail") %>'>
-                                                                <i class="icon-plus">
+                                                                <i class="icon-plus"></i>
                                                             </asp:LinkButton>
                                                         
                                                         </ItemTemplate>                                                       
@@ -226,42 +227,42 @@
                                     </div>
                                 </div>
 
-
-                                <asp:GridView ID="GVjefesAgencias" runat="server"
-                                    CssClass="table table-bordered"
-                                    PagerStyle-CssClass="pgr"
-                                    HeaderStyle-CssClass="table"
-                                    RowStyle-CssClass="rows"
-                                    AutoGenerateColumns="true"
-                                    AllowPaging="true"
-                                    GridLines="None"
-                                    PageSize="10"  OnRowCommand="GVjefesAgencias_RowCommand"
-                                    Style="margin: 30px 0px 20px 0px">
-                                    <Columns>
-                                        <asp:TemplateField HeaderStyle-Width="60px">
-                                            <ItemTemplate>
-                                                <!--<button id="btnBorrarGrid" class="btn btn-danger waves-effect waves-light" type="button"><span class="btn-label"><i class="fa fa-trash"></i></span></button>
+                                <div class="row col-12">
+                                    <div class="col-12 grid-margin stretch-card">
+                                        <div class="table-responsive">
+                                            <asp:GridView ID="GVjefesAgencias" runat="server"
+                                                CssClass="table table-bordered"
+                                                PagerStyle-CssClass="pgr"
+                                                HeaderStyle-CssClass="table" HeaderStyle-HorizontalAlign="center"
+                                                RowStyle-CssClass="rows"
+                                                AutoGenerateColumns="true"
+                                                AllowPaging="true"
+                                                GridLines="None" OnPageIndexChanging="GVjefesAgencias_PageIndexChanging"
+                                                PageSize="10" OnRowCommand="GVjefesAgencias_RowCommand">
+                                                <%--Style="margin: 30px 0px 20px 0px"--%>
+                                                <Columns>
+                                                    <asp:TemplateField HeaderText="Acción" ItemStyle-HorizontalAlign="center">
+                                                        <ItemTemplate>
+                                                            <!--<button id="btnBorrarGrid" class="btn btn-danger waves-effect waves-light" type="button"><span class="btn-label"><i class="fa fa-trash"></i></span></button>
                                                 <!-- <button type="button" class="btn btn-rounded btn-block btn-danger btn-sm"><i class="fa fa-minus-circle"></i></button>-->
-                                                <asp:LinkButton ID="Btnseleccionar" OnClick="Btnseleccionar_Click" Enabled="true" runat="server" Text="" class="btn btn-danger mr-2" CommandArgument='<%# Eval("Correo") %>' CommandName="eliminar"><i class="icon-trash"></i></asp:LinkButton>
-                                            </ItemTemplate>
-                                            <ItemStyle Width="10%" />
-                                        </asp:TemplateField>
+                                                            <asp:LinkButton ID="Btnseleccionar" Enabled="true" runat="server" Text="" class="btn btn-danger mr-2" CommandArgument='<%# Eval("Correo") %>' CommandName="eliminar">
+                                                    <i class="icon-trash"></i>
 
-                                    </Columns>
-                                </asp:GridView>
+                                                            </asp:LinkButton>
+                                                        </ItemTemplate>
+                                                        <ItemStyle Width="10%" />
+                                                    </asp:TemplateField>
 
+                                                </Columns>
+                                            </asp:GridView>
 
-
-
-
-
-
-
+                                        </div>
+                                    </div>
 
                                 </div>
 
 
-<%--                                <div class="row col-12">
+                                <%--                                <div class="row col-12">
                                     <div class="col-12 grid-margin stretch-card">
                                         <div class="table-responsive">
                                             <asp:GridView ID="GVCorreoJefeAgencia" runat="server"
@@ -314,18 +315,22 @@
 
                       
                             <div class="row p-t-20 col-md-12">
-                                <div class="col-md-5" style="margin-left: auto; margin-left: auto">
-                                    <asp:Button ID="BtnEnviarNotificacion" class="btn btn-block btn-lg btn-success" runat="server" Text="Enviar" OnClick="BtnEnviarNotificacion_Click" />
+                                <div class="col-md-4">
+                                    <asp:Button ID="BtnEnviarNotificacion" class="btn btn-block btn-success" runat="server" Text="Enviar" OnClick="BtnEnviarNotificacion_Click" />
                                 </div>
 
-                                <div class="col-md-5 " style="margin-left: auto; margin-right: auto">
-                                    <asp:Button ID="BtnCancelarNotificacion" class="btn btn-block btn-lg  btn-info " runat="server" Text="Cancelar" OnClick="BtnCancelarNotificacion_Click" />
+                                <div class="col-md-4">
+                                    <asp:Button ID="BtnCancelarNotificacion" class="btn btn-block  btn-danger" runat="server" Text="Cancelar" OnClick="BtnCancelarNotificacion_Click" />
                                 </div>
+
+                                <div class="col-md-4">
+                                      <a href="../../default.aspx"" class="btn  btn-block btn-primary">Volver</a>
+                                </div>
+
                             </div>
                             <br />
 
-           
-            
+
                             </ContentTemplate>
                         </asp:UpdatePanel>
 
@@ -405,7 +410,7 @@
                             <div class="row">
                                 <div class="col-3">
                                     <br>
-                                    <p class="text-center"><img src="https://img.icons8.com/color/70/000000/accept-database.png"/><span class="dashicons dashicons-admin-home"></span></i></p>
+                                    <p class="text-center"><img src="https://img.icons8.com/color/70/000000/accept-database.png"/><span class="dashicons dashicons-admin-home"></span></p>
                                 </div>
                                 <div class="col-9" style="text-align: center">
                                     <br>

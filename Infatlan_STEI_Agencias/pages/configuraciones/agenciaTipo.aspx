@@ -1,9 +1,10 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/mainAgencia.Master" AutoEventWireup="true" CodeBehind="agenciaTipo.aspx.cs" Inherits="Infatlan_STEI_Agencias.pages.configuraciones.agenciaTipo" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="agenciaTipo.aspx.cs" Inherits="Infatlan_STEI_Agencias.pages.configuraciones.agenciaTipo" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
     <script type="text/javascript">
         function openModalModificarTipoAgencia() { $('#modalModificarTipoAgencia').modal('show'); }
         function closeModalModificarTipoAgencia() { $('#modalModificarTipoAgencia').modal('hide'); }
-    </script>
+   
+</script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
@@ -23,8 +24,9 @@
             <p>Tipo de agencias que se le da mantenimiento preventivo</p>
 
             <ul class="nav nav-tabs" role="tablist">
-                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#home" role="tab"><span class="hidden-sm-up"><img src="https://img.icons8.com/color/23/000000/save.png"/></span><span class="hidden-xs-down"> Guardar</span></a> </li>
-                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><img src="https://img.icons8.com/color/23/000000/edit-property.png"/></span><span class="hidden-xs-down"> Modificar</span></a> </li>
+                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#home" role="tab"><span class="hidden-sm-up"><i class="fa fa-save"></i></span><span class="hidden-xs-down"> Guardar</span></a> </li>
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="icon-pencil"></i></span><span class="hidden-xs-down"> Modificar</span></a> </li>
+                 
             </ul>
 
             <div class="tab-content tabcontent-border">
@@ -37,21 +39,26 @@
                                     <label class="control-label text-danger">*</label><label class="control-label ">Tipo de Agencia:</label>
                                 </div>
                                 <div class="col-md-10">
-                                    <asp:TextBox runat="server" ID="TxAgencia" TextMode="MultiLine" Rows="3" CssClass="form-control" placeholder="Ingrese tipo de agencia.."></asp:TextBox>
+                                    <asp:TextBox runat="server" ID="TxAgencia" TextMode="MultiLine" Rows="3" MaxLength="250" CssClass="form-control" placeholder="Ingrese tipo de agencia.."></asp:TextBox>
                                 </div>
                             </div>
                             <br />
-                            <br />
+
                             <div class="row p-t-20 col-md-12">
-                                <div class="col-md-5" style="margin-left: auto; margin-left: auto">
-                                    <asp:Button ID="BtnEnviar" class="btn btn-block btn-lg btn-success" runat="server" Text="Enviar" OnClick="BtnEnviar_Click" />
+                                <div class="col-md-4">
+                                    <asp:Button ID="BtnEnviar" class="btn  btn-block btn-success" runat="server" Text="Enviar" OnClick="BtnEnviar_Click" />
+                                </div>
+                                <div class="col-md-4">
+                                    <asp:Button ID="BtnCancelar" class="btn  btn-block btn-danger" runat="server" Text="Cancelar" OnClick="BtnCancelar_Click" />
                                 </div>
 
-                                <div class="col-md-5 " style="margin-left: auto; margin-right: auto">
-                                    <asp:Button ID="BtnCancelar" class="btn btn-block btn-lg  btn-info " runat="server" Text="Cancelar" OnClick="BtnCancelar_Click" />
+                                <div class="col-md-4">
+                                    <a href="../../default.aspx"" class="btn  btn-block btn-primary">Volver</a>
                                 </div>
+
                             </div>
-                            <br />
+
+
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
@@ -66,7 +73,7 @@
                                     <ContentTemplate>
                                         <div class="row p-t-20">
                                             <div class="col-md-1">
-                                                <label class="control-label   text-danger">*</label><label class="control-label">Buscar:</label></label>                                      
+                                                <label class="control-label">Buscar:</label></label>                                      
                                             </div>
                                             <div class="col-md-6">
                                                 <asp:TextBox ID="TxBuscarArea" runat="server" placeholder="Búsqueda por Tipo Agencia o Id, luego presione Enter" class="form-control" AutoPostBack="true" OnTextChanged="TxBuscarArea_TextChanged"></asp:TextBox>
@@ -98,8 +105,8 @@
                                             <Columns>
                                                 <asp:TemplateField HeaderText="Acción" ItemStyle-HorizontalAlign="center">
                                                     <ItemTemplate>
-                                                        <asp:LinkButton ID="LbModificar" runat="server" CommandName="Modifcar" CommandArgument='<%# Eval("idTipoAgencia") %>'>
-                                                        <img src="https://img.icons8.com/color/23/000000/edit-property.png"/>
+                                                        <asp:LinkButton ID="LbModificar" class="btn btn-info mr-2"   runat="server" CommandName="Modifcar" CommandArgument='<%# Eval("idTipoAgencia") %>'>
+                                                        <i class="icon-pencil" ></i>
                                                         </asp:LinkButton>
 
                                                     </ItemTemplate>
@@ -114,9 +121,20 @@
                                 </asp:UpdatePanel>
                             </div>
                         </div>
+
+                        <div class="row p-t-20 col-md-12">
+                            <div class="col-md-4 " style="margin-left: auto; margin-right: auto">
+                                <a href="../../default.aspx"" class="btn  btn-block btn-primary">Volver</a>
+                            </div>
+                        </div>
+
+                   
+
                     </div>
                 </div>
                 <!--/SEGUNDO CONTENIDO-->
+
+               
             </div>
         </div>
     </div>
@@ -152,16 +170,20 @@
 
                             <div class="col-md-12" runat="server">
                                 <div class="form-group row">
-                                    <label class="col-md-3 col-form-label">Tipo Agencia:</label>
+                                    <div class="col-md-3">
+                                        <label class="control-label text-danger">*</label><label class="col-form-label">Tipo Agencia:</label>
+                                    </div>
                                     <div class="col-md-9">
-                                        <asp:TextBox ID="TxTipoAgenciaModal" class="form-control" runat="server" TextMode="MultiLine" Rows="3"></asp:TextBox>
+                                        <asp:TextBox ID="TxTipoAgenciaModal" class="form-control" runat="server" TextMode="MultiLine" Rows="3" OnTextChanged="TxTipoAgenciaModal_TextChanged"></asp:TextBox>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-md-12" runat="server">
                                 <div class="form-group row">
-                                    <label class="col-md-3 col-form-label">Estado:</label>
+                                    <div class="col-md-3">
+                                        <label class="control-label text-danger">*</label><label class="col-form-label">Estado:</label>
+                                    </div>
                                     <div class="col-md-9">
                                         <asp:DropDownList ID="DdlEstadoTipoAgencia" runat="server" class="form-control" AutoPostBack="true">
                                             <asp:ListItem Value="False" Text="Inactivo"></asp:ListItem>
@@ -171,12 +193,22 @@
                                 </div>
                             </div>
 
+                            <asp:UpdatePanel ID="UpdateModal" runat="server" UpdateMode="Conditional">
+                                <ContentTemplate>
+                                    <div class="col-md-12" style="align-self: center" runat="server" id="DivAlerta" visible="false">
+                                        <div class="alert alert-danger   align-content-md-center">
+                                            <h3 class="text-danger" style="text-align: center"><i class="fa fa-exclamation-triangle"></i>Warning</h3>
+                                            <asp:Label ID="LbMensajeModalError" runat="server" Text="" Width="100%"></asp:Label>
+                                        </div>
+                                    </div>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+
 
                             <div class="col-md-12" style="margin-left: auto; margin-right: auto" runat="server" visible="true">
                                 <div class="alert alert-success  alert-dismissible align-content-md-center" style="align-self: auto">
                                     <div class="row">
-                                        <div class="col-3">
-                                           
+                                        <div class="col-3">                                           
                                             <p class="text-center"><img src="https://img.icons8.com/color/70/000000/accept-database.png"/><span class="dashicons dashicons-admin-home"></span></i></p>
                                         </div>
                                         <div class="col-9" style="text-align: center">

@@ -43,6 +43,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Excel.4.5">
+      <HintPath>..\..\..\..\Desktop\Nueva carpeta (3)\Infatlan_Biometrico\BiometricoWeb\bin\Excel.4.5.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelDataReader, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.3.6.0\lib\net45\ExcelDataReader.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.ComponentModel" />
     <Reference Include="System.Configuration.Install" />
@@ -50,6 +56,7 @@
     <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.DirectoryServices.Protocols" />
     <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Management" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
@@ -3299,12 +3306,12 @@
     <Content Include="pages\configuraciones\motivosCancelacionMantenimientos.aspx" />
     <Content Include="pages\configuraciones\tiposAreas.aspx" />
     <Content Include="pages\mantenimiento\creacionNotificacion.aspx" />
-    <Content Include="pages\defaultAgencia.aspx" />
     <Content Include="pages\mantenimiento\lvPendientesAprobarJefes.aspx" />
     <Content Include="pages\mantenimiento\lvPendientesCompletar.aspx" />
     <Content Include="pages\mantenimiento\lvIndividual.aspx" />
     <Content Include="pages\mantenimiento\lvPendientesModificar.aspx" />
     <Content Include="pages\mantenimiento\reprogramarMantenimiento.aspx" />
+    <Content Include="pages\mantenimiento\solicitudMateriales.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -3317,12 +3324,12 @@
     <Compile Include="default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="mainAgencia.Master.cs">
-      <DependentUpon>mainAgencia.Master</DependentUpon>
+    <Compile Include="main.Master.cs">
+      <DependentUpon>main.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="mainAgencia.Master.designer.cs">
-      <DependentUpon>mainAgencia.Master</DependentUpon>
+    <Compile Include="main.Master.designer.cs">
+      <DependentUpon>main.Master</DependentUpon>
     </Compile>
     <Compile Include="pages\configuraciones\calendarioMantenimientoAnual.aspx.cs">
       <DependentUpon>calendarioMantenimientoAnual.aspx</DependentUpon>
@@ -3373,13 +3380,6 @@
     <Compile Include="pages\mantenimiento\creacionNotificacion.aspx.designer.cs">
       <DependentUpon>creacionNotificacion.aspx</DependentUpon>
     </Compile>
-    <Compile Include="pages\defaultAgencia.aspx.cs">
-      <DependentUpon>defaultAgencia.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="pages\defaultAgencia.aspx.designer.cs">
-      <DependentUpon>defaultAgencia.aspx</DependentUpon>
-    </Compile>
     <Compile Include="pages\mantenimiento\lvPendientesAprobarJefes.aspx.cs">
       <DependentUpon>lvPendientesAprobarJefes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3415,10 +3415,17 @@
     <Compile Include="pages\mantenimiento\reprogramarMantenimiento.aspx.designer.cs">
       <DependentUpon>reprogramarMantenimiento.aspx</DependentUpon>
     </Compile>
+    <Compile Include="pages\mantenimiento\solicitudMateriales.aspx.cs">
+      <DependentUpon>solicitudMateriales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\mantenimiento\solicitudMateriales.aspx.designer.cs">
+      <DependentUpon>solicitudMateriales.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="mainAgencia.Master" />
+    <Content Include="main.Master" />
     <Content Include="assets\icons\font-awesome\fonts\fontawesome-webfont.eot" />
     <Content Include="assets\icons\font-awesome\fonts\fontawesome-webfont.ttf" />
     <Content Include="assets\icons\font-awesome\fonts\fontawesome-webfont.woff" />
@@ -4511,12 +4518,42 @@
     <Content Include="scss\widgets\topbar-mail.scss" />
     <Content Include="scss\widgets\weather-widget.scss" />
     <Content Include="scss\widgets\widgets.scss" />
+    <Content Include="pages\plantilla\PlantillaAgencia.xlsx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>9</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
