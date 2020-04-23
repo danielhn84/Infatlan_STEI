@@ -76,48 +76,46 @@
                             </div>
                             <!--Fin Fila 3-->
 
-
                             <!--Inicio Fila 4-->
                             <div class="row p-t-20">
                                 <div class="col-md-6">
                                     <label class="control-label   text-danger">*</label><label class="control-label">Tipo Agencia:</label></label>
-                                      <asp:DropDownList ID="DDLTipoAgencia" runat="server" AutoPostBack="true" CssClass="form-control"></asp:DropDownList>
+                                    <asp:DropDownList ID="DDLTipoAgencia" runat="server" AutoPostBack="true" CssClass="form-control"></asp:DropDownList>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label class="control-label   text-danger">*</label><label class="control-label">Departamento:</label></label>    
-                                      <asp:DropDownList ID="DDLDepartamento" runat="server" AutoPostBack="true" CssClass="form-control"></asp:DropDownList>
+                                    <asp:DropDownList ID="DDLDepartamento" runat="server" AutoPostBack="true" CssClass="form-control" OnSelectedIndexChanged="DDLDepartamento_SelectedIndexChanged"></asp:DropDownList>
                                 </div>
                             </div>
                             <!--Fin Fila 4-->
                             <br>
                             <!--Fin Fila 5-->
                             <div class="row p-t-20">
-                                <div class="col-md-5">
+                                <div class="col-md-6">
                                     <label class="control-label   text-danger">*</label><label class="control-label">Requiere Conductor:</label></label>                                    
-                                </div>
+                            <%--    </div>
 
-                                <div class="col-md-2">
+                                <div class="col-md-2">--%>
                                     <asp:RadioButtonList ID="RblConductor" RepeatDirection="Horizontal" Width="90px" runat="server" AutoPostBack="True">
                                         <asp:ListItem Value="1">Si</asp:ListItem>
                                         <asp:ListItem Value="0">No</asp:ListItem>
                                     </asp:RadioButtonList>
                                 </div>
+
+                                <div class="col-md-6">
+                                    <label class="control-label   text-danger">*</label><label class="control-label">Municipio:</label></label>                                    
+                                <asp:DropDownList ID="DDLMunicipio" runat="server" class="form-control"></asp:DropDownList>   
+                                    </div>
+
+                            
+                                
                             </div>
                             <!--Fin Fila 5-->
 
                             <br />
                             <br />
-             <%--               <div class="row p-t-20 col-md-12">
-                                <div class="col-md-5" style="margin-left: auto; margin-left: auto">
-                                    <asp:Button ID="BtnEnviar" class="btn btn-block btn-lg btn-success" runat="server" Text="Enviar" OnClick="BtnEnviar_Click" />
-                                </div>
-
-                                <div class="col-md-5 " style="margin-left: auto; margin-right: auto">
-                                    <asp:Button ID="BtnCancelar" class="btn btn-block btn-lg  btn-info " runat="server" Text="Cancelar" OnClick="BtnCancelar_Click" />
-                                </div>
-                            </div>--%>
-
+            
 
                             <div class="row p-t-20 col-md-12">
                                 <div class="col-md-4">
@@ -182,7 +180,6 @@
                                                         <asp:LinkButton ID="LbModificar"  class="btn btn-info mr-2"  runat="server"  CommandName="Modifcar" CommandArgument='<%# Eval("idAgencia") %>'>
                                                        <i class="icon-pencil" ></i>
                                                         </asp:LinkButton>
-
                                                     </ItemTemplate>
                                                     <ItemStyle Width="10%" />
                                                 </asp:TemplateField>
@@ -303,38 +300,58 @@
                                     </div>
                                                                         
                                     <div class="col-md-4">
-                                        <asp:DropDownList ID="DDLDepartamentoModificar" runat="server" AutoPostBack="true" CssClass="form-control"></asp:DropDownList>
+                                        <asp:DropDownList ID="DDLDepartamentoModificar" runat="server" AutoPostBack="true" CssClass="form-control" OnSelectedIndexChanged="DDLDepartamentoModificar_SelectedIndexChanged"></asp:DropDownList>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-md-12" runat="server">
                                 <div class="form-group row">
-                                    
+                                    <div class="col-md-2">
+                                        <label class="control-label text-danger">*</label><label class="col-form-label">Municipio:</label>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <asp:DropDownList ID="DDLMunicipioModificar" runat="server" AutoPostBack="true" CssClass="form-control"></asp:DropDownList>
+                                    </div>
+
+                                    <div class="col-md-2  ">
+                                        <label class="control-label text-danger">*</label><label class="col-form-label">Cod Ubicacion:</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                      <asp:TextBox ID="txtcodUbicacion" class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+                                    </div>
+                                    </div>
+                                </div>
+
+                            <div class="col-md-12" runat="server">
+                                <div class="form-group row">
+
                                     <div class="col-md-3">
                                         <label class="control-label text-danger">*</label><label class="col-form-label">Requiere Conductor:</label>
                                     </div>
 
                                     <div class="col-md-3">
-                                       <asp:RadioButtonList ID="RbConductorModificar" RepeatDirection="Horizontal" Width="90px" runat="server" AutoPostBack="True">
-                                        <asp:ListItem Value="1">Si</asp:ListItem>
-                                        <asp:ListItem Value="0">No</asp:ListItem>
-                                    </asp:RadioButtonList> 
+                                        <asp:RadioButtonList ID="RbConductorModificar" RepeatDirection="Horizontal" Width="90px" runat="server" AutoPostBack="True">
+                                            <asp:ListItem Value="1">Si</asp:ListItem>
+                                            <asp:ListItem Value="0">No</asp:ListItem>
+                                        </asp:RadioButtonList>
                                     </div>
-                                    
+
                                     <div class="col-md-2  ">
                                         <label class="control-label text-danger">*</label><label class="col-form-label">Estado:</label>
                                     </div>
                                     <div class="col-md-4">
                                         <asp:DropDownList ID="DDLEstado" runat="server" AutoPostBack="true" CssClass="form-control">
-                                        <asp:ListItem Value="0" Text="Inactivo"></asp:ListItem>
-                                        <asp:ListItem Value="1" Text="Activo"></asp:ListItem>
-                                       
-                                         </asp:DropDownList>
+                                            <asp:ListItem Value="0" Text="Inactivo"></asp:ListItem>
+                                            <asp:ListItem Value="1" Text="Activo"></asp:ListItem>
+
+                                        </asp:DropDownList>
                                     </div>
                                 </div>
                             </div>
 
+                           
 
                         </ContentTemplate>
                     </asp:UpdatePanel>
@@ -354,7 +371,7 @@
                         <div class="alert alert-success  alert-dismissible align-content-md-center" style="align-self: auto">
                             <div class="row">
                                 <div class="col-3">
-                                    <p class="text-center"><img src="https://img.icons8.com/color/70/000000/accept-database.png"/><span class="dashicons dashicons-admin-home"></span></i></p>
+                                    <p class="text-center"><img src="https://img.icons8.com/color/70/000000/accept-database.png"/><span class="dashicons dashicons-admin-home"></span></p>
                                 </div>
                                 <div class="col-9" style="text-align: center">
                                     <br>
