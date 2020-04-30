@@ -16,8 +16,11 @@
         function openArticuloTipo() { $('#ModalArticulosTipo').modal('show'); }
         function cerrarArticuloTipo() { $('#ModalArticulosTipo').modal('hide'); }
 
-        function openPRov() { $('#ModalProveedores').modal('show'); }
+        function openProv() { $('#ModalProveedores').modal('show'); }
         function cerrarProv() { $('#ModalProveedores').modal('hide'); }
+
+        function openMarca() { $('#ModalMarcas').modal('show'); }
+        function cerrarMarca() { $('#ModalMarcas').modal('hide'); }
 
         function ModalConfirmar() {
             $('#ModalConfirmar').modal('show');
@@ -152,8 +155,11 @@
                                         <div class="col-2" >
                                             <label class="col-form-label">Marca</label>
                                         </div>
-                                        <div class="col-10">
+                                        <div class="col-8">
                                             <asp:DropDownList runat="server" ID="DDLMarca" CssClass="form-control"></asp:DropDownList>
+                                        </div>
+                                        <div class="col-1">
+                                            <asp:Button Text="+" OnClick="BtnAddMarca_Click" ID="BtnAddMarca" CssClass="btn btn-success" runat="server" />
                                         </div>
                                     </div>
                                 </div>
@@ -197,6 +203,28 @@
                                                 <asp:ListItem Value="1" Text="Activo"></asp:ListItem>
                                                 <asp:ListItem Value="0" Text="Inactivo"></asp:ListItem>
                                             </asp:DropDownList>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label style="margin-right:5%" class="control-label text-right col-md-3">Categorías:</label>
+                                        <div class="form-group">
+                                            <label class="custom-control custom-checkbox m-b-0">
+                                                <input type="checkbox" runat="server" id="CBxAgencia" class="custom-control-input">
+                                                <span class="custom-control-label">Agencias</span>
+                                            </label>
+
+                                            <label class="custom-control custom-checkbox m-b-0">
+                                                <input type="checkbox" runat="server" id="CBxATM" class="custom-control-input">
+                                                <span class="custom-control-label">ATM</span>
+                                            </label>
+
+                                            <label class="custom-control custom-checkbox m-b-0">
+                                                <input type="checkbox" runat="server" id="CBxCE" class="custom-control-input">
+                                                <span class="custom-control-label">Cableado Estructurado</span>
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
@@ -346,6 +374,52 @@
                         <ContentTemplate>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                             <asp:Button ID="BtnAgregarTA" runat="server" Text="Aceptar" class="btn btn-success" OnClick="BtnAgregarTA_Click"/>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%--MODAL DE MARCAS--%>
+    <div class="modal fade" id="ModalMarcas" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header table-dark">
+                    <h4 class="modal-title" id="ModalLabelMarcas">
+                        <asp:Label CssClass=" text-white" ID="Label2" runat="server" Text="Crear Marca"></asp:Label>
+                    </h4>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                        <ContentTemplate>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group row">
+                                        <div class="col-12" style="margin-left:2%">
+                                            <label>Nombre</label>
+                                        </div>
+                                        <div class="col-12">
+                                            <asp:TextBox ID="TxNombreMarca" placeholder="" class="form-control text-uppercase" runat="server"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12" runat="server" id="DivMensajeMarca" visible="false" style="display: flex; background-color:tomato; justify-content:center">
+                                    <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbMensajeMarca"></asp:Label>
+                                </div>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+                <div class="modal-footer">
+                    <asp:UpdatePanel ID="UpdatePanel9" runat="server">
+                        <ContentTemplate>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <asp:Button ID="BtnAgregarMarca" runat="server" Text="Aceptar" class="btn btn-success" OnClick="BtnAgregarMarca_Click"/>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
