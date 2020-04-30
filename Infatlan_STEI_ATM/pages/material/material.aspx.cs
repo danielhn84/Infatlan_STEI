@@ -39,6 +39,7 @@ namespace Infatlan_STEI_ATM.pages.material
                         txtmotivo.Text = "";
                         RBConductor.Enabled = false;
                         DDLConductor.Enabled = false;
+                        DDLConductor.SelectedIndex = CargarInformacionDDL(DDLConductor, Session["ATM_IDCHOFER_MATERIAL"].ToString());
                         break;
                 }
             }
@@ -129,12 +130,22 @@ namespace Infatlan_STEI_ATM.pages.material
             txtSucursal.Text = Session["ATM_SUCURSAL_MATERIAL"].ToString();
             txtmotivo.Text = Convert.ToString(Session["ATM_COMENTARIO_MATERIAL"]);           
             LBComentario.InnerText = "*Comentario: " + Convert.ToString(Session["ATM_COMENTARIOAPRO_MATERIAL"]);
-            DDLConductor.SelectedIndex = CargarInformacionDDL(DDLConductor, Session["ATM_IDCHOFER_MATERIAL"].ToString());
+            
             RBConductor.SelectedValue = Convert.ToString(Session["ATM_CHOFER_MATERIAL"]);
             
 
             if (HttpContext.Current.Session["CARGAR_STOCK"] == null)
             {
+                //CONDUCTORES
+                String vQuery3 = "STEISP_ATM_Generales 30";
+                DataTable vDatos3 = vConexion.ObtenerTabla(vQuery3);
+                DDLConductor.Items.Add(new ListItem { Value = "0", Text = "Seleccione conductor..." });
+                foreach (DataRow item in vDatos3.Rows)
+                {
+                    DDLConductor.Items.Add(new ListItem { Value = item["idConductor"].ToString(), Text = item["nombre"].ToString() });
+
+                }
+
                 //DEVOLVER
                 DataTable vDatos2 = new DataTable();
                 vDatos2 = vConexion.ObtenerTabla("STEISP_ATM_VERIFICACION 12, '" + Session["ATM_IDMANT_MATERIAL"].ToString() + "'");
@@ -190,8 +201,8 @@ namespace Infatlan_STEI_ATM.pages.material
                     TransaccionInventario();
                     string vQuery2 = "STEISP_ATM_VerificacionTotal 7, '" + Session["ATM_IDMANT_MATERIAL"].ToString() + "','" + Session["usuATM"].ToString() + "','" + txtmotivo.Text + "'";
                     vConexion.ejecutarSQL(vQuery2);
-                    string vQuery3 = "STEISP_ATM_VerificacionTotal 6, '" + Session["ATM_IDMANT_MATERIAL"].ToString() + "'";
-                    vConexion.ejecutarSQL(vQuery3);
+                    //string vQuery3 = "STEISP_ATM_VerificacionTotal 6, '" + Session["ATM_IDMANT_MATERIAL"].ToString() + "'";
+                    //vConexion.ejecutarSQL(vQuery3);
                 }
                 else
                 {

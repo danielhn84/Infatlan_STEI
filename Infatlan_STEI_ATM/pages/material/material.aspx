@@ -67,12 +67,14 @@
                         </div>
                     </div>
                     <div class="row col-4">
-                        <label class="col-form-label col-4">Conductor</label>
-                        <div class="col-8">
-                            <asp:DropDownList runat="server" ID="DDLConductor" CssClass="form-control" AutoPostBack="true">
-                                <asp:ListItem Value="0" Text="Seleccione conductor..."></asp:ListItem>
-                                <asp:ListItem Value="08765465564" Text="ANIBAL FIGUEROA"></asp:ListItem>
-                            </asp:DropDownList>
+                        <label class="col-form-label col-12" style="text-align: right;">Conductor</label>
+                        <div class="col-9">
+                            
+                        </div>
+                    </div>
+                     <div class="row col-4">                        
+                        <div class="col-12">
+                            <asp:DropDownList runat="server" ID="DDLConductor" CssClass="form-control" AutoPostBack="true"></asp:DropDownList>
                         </div>
                     </div>
                    
