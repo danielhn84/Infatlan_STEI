@@ -51,6 +51,24 @@ namespace Infatlan_STEI_ATM.pages.material
         protected global::System.Web.UI.WebControls.TextBox txtSucursal;
 
         /// <summary>
+        /// Control RBConductor.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList RBConductor;
+
+        /// <summary>
+        /// Control DDLConductor.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DDLConductor;
+
+        /// <summary>
         /// Control DDLStock.
         /// </summary>
         /// <remarks>
