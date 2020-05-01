@@ -177,7 +177,8 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                                    + DDLMunicipio.SelectedValue +
                                    ",'" + codigoUbicacion +
                                     "','" + TxDireccion.Text +
-                                    "','" + Session["USUARIO"] + "'";
+                                    "','" + Session["USUARIO"] +
+                                    "','" + TxAgencia.Text + "'";                                    
                 Int32 vInformacion3 = vConexion.ejecutarSql(vQuery3);
 
 
@@ -289,6 +290,11 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
         {
             if (e.CommandName == "Modifcar")
             {
+
+                DivAlerta.Visible = false;
+                UpdateModal.Visible = false;
+                UpdateModal.Update();
+
                 string vIdAgenciaModificar = e.CommandArgument.ToString();
                 Session["AG_CA_ID_AGENCIA_MODIFICAR"] = vIdAgenciaModificar;
 
@@ -387,18 +393,33 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                                    ",'" + txtcodUbicacion.Text +
                                    "','" + TxDireccionModificar.Text +
                                    "'," + DDLEstado.SelectedValue +
-                                   ",'" + Session["USUARIO"] +"'" ;
+                                   ",'" + Session["USUARIO"] +
+                                   "','"+ TxAgencia.Text + "'";
+                
                 Int32 vInformacion2 = vConexion.ejecutarSql(vQuery2);
 
 
 
                 if (vInformacion1 == 1 && vInformacion2 == 1)
                 {
+                    SmtpService vService = new SmtpService();
+
                     Mensaje("Datos actualizados de agencia con exito. ", WarningType.Success);
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModalModificarAgencia();", true);
                     cargarDataAgencias();   
-                    UPAgencias.Update();                                     
-                }
+                    UPAgencias.Update();
+
+                    //string motivo = "Se notifica que se ha modificado co éxito la agencia"+ txtcodUbicacion.Text + " ,ubicada:"+ TxDireccionModificar.Text;
+                    //string vCorreo = "acamador@bancatlan.hn";
+                    //string vNombre = "Ana Carolina Amador Mejia";                  
+                    //    vService.EnviarMensaje(vCorreo,
+                    //        typeBody.EnvioCorreo,
+                    //        vNombre,
+                    //        "Motivo: " + motivo
+                    //        );
+                    
+
+                    }
             }
             catch (Exception ex)
             {

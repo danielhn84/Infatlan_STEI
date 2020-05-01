@@ -77,6 +77,8 @@ namespace Infatlan_STEI_Agencias.pages
                     TituloModalReprogramar.Text= item["Lugar1"].ToString();
 
                 }
+
+
                 UpTituloReprogramar.Update();
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModalReprogramarMantenimiento();", true);
 

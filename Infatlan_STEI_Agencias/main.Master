@@ -122,12 +122,14 @@
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="/pages/mantenimiento/creacionNotificacion.aspx">Crear Notificación</a></li>
                                 <li><a href="/pages/mantenimiento/aprobarNotificacion.aspx">Aprobar Notificacion</a></li>
-                                <li><a href="/pages/mantenimiento/lvPendientesCompletar.aspx">Completar LV</a></li>
+                                <li><a href="/pages/mantenimiento/solicitudMateriales.aspx">Solicitar Materiales</a></li>
+                                <li><a href="/pages/mantenimiento/aprobarSolicitudMateriales.aspx">Aprobar Materiales</a></li>
                                 <li><a href="/pages/mantenimiento/lvPendientesAprobarJefes.aspx">Aprobar LV</a></li>
                                 <li><a href="/pages/mantenimiento/lvPendientesModificar.aspx">Modificar LV</a></li>
                                 <li><a href="/pages/mantenimiento/reprogramarMantenimiento.aspx">Reprogramar</a></li>
                             </ul>
                         </li>
+                        
                         <li><a class="waves-effect waves-dark" href="pages-faq.html" aria-expanded="false"><i class="icon-bubble"></i><span class="hide-menu">FAQs</span></a></li>                  
       </ul>
 

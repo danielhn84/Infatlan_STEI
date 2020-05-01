@@ -15,6 +15,15 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
     {
 
         /// <summary>
+        /// Control UpdateProgress1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress UpdateProgress1;
+
+        /// <summary>
         /// Control FUMantenimientosAgencia.
         /// </summary>
         /// <remarks>

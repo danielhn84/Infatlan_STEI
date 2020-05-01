@@ -2,12 +2,30 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
 
     <script type="text/javascript">
+
+        var updateProgress = null;
+        function postbackButtonClick() {
+            updateProgress = $find("<%= UpdateProgress1.ClientID %>");
+            window.setTimeout("updateProgress.set_visible(true)", updateProgress.get_displayAfter());
+            return true;
+        }
+
+
         function openModalModificarAgencia() { $('#modalModificarAgencia').modal('show'); }
         function closeModalModificarAgencia() { $('#modalModificarAgencia').modal('hide'); }
     </script>
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
+    <asp:UpdateProgress ID="UpdateProgress1" runat="server">
+        <ProgressTemplate>
+            <div style="position: fixed; text-align: center; height: 100%; width: 100%; top: 0; right: 0; left: 0; z-index: 9999999; background-color: #ffffff; opacity: 0.7; margin: 0;">
+                <span style="display: inline-block; height: 100%; vertical-align: middle;"></span>
+                <asp:Image ID="imgUpdateProgress" runat="server" ImageUrl="/assets/images/loading.gif" AlternateText="Loading ..." ToolTip="Loading ..." Style="display: inline-block; vertical-align: middle;" />
+            </div>
+            
+        </ProgressTemplate>
+    </asp:UpdateProgress>
 
     <div class="row page-titles">
         <div class="col-md-7 align-self-center">
@@ -105,17 +123,16 @@
 
                                 <div class="col-md-6">
                                     <label class="control-label   text-danger">*</label><label class="control-label">Municipio:</label></label>                                    
-                                <asp:DropDownList ID="DDLMunicipio" runat="server" class="form-control"></asp:DropDownList>   
-                                    </div>
+                                <asp:DropDownList ID="DDLMunicipio" runat="server" class="form-control"></asp:DropDownList>
+                                </div>
 
-                            
-                                
+
+
                             </div>
                             <!--Fin Fila 5-->
 
                             <br />
                             <br />
-            
 
                             <div class="row p-t-20 col-md-12">
                                 <div class="col-md-4">
@@ -138,7 +155,6 @@
 
                 <!--SEGUNDO CONTENIDO-->
                 <div class="tab-pane  p-20" id="profile" role="tabpanel">
-
                     <div class="col-md-12">
                         <div class="form-group row">
                             <div class="col-sm-12">
@@ -151,7 +167,6 @@
                                             <div class="col-md-6">
                                                <asp:TextBox ID="TxBuscarAgencia" runat="server" placeholder="Búsqueda por agencia o codigo, luego presione Enter..." class="form-control" AutoPostBack="true" OnTextChanged="TxBuscarAgencia_TextChanged"></asp:TextBox>
                                             </div>
-
                                         </div>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
@@ -173,7 +188,6 @@
                                             AllowPaging="true"
                                             GridLines="None"
                                             PageSize="10" OnPageIndexChanging="GVAgencias_PageIndexChanging" OnRowCommand="GVAgencias_RowCommand" >
-
                                             <Columns>
                                                 <asp:TemplateField HeaderText="Acción" ItemStyle-HorizontalAlign="center">
                                                     <ItemTemplate>
@@ -217,7 +231,7 @@
                 <div class="modal-header bg-dark">
                     <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
-                            <h3 class="modal-title" style="color: white" >
+                            <h3 class="modal-title" style="color: white">
                                 <asp:Label ID="TituloModalCrearAgencia" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label></h3>
                         </ContentTemplate>
                     </asp:UpdatePanel>
@@ -230,7 +244,6 @@
                 <div class="modal-body">
                     <asp:UpdatePanel ID="UpdatePanel11" runat="server">
                         <ContentTemplate>
-
                             <div class="col-md-12" runat="server">
                                 <div class="form-group row">
                                     <label class="col-md-2 col-form-label">Codigo:</label>
@@ -240,9 +253,9 @@
                                     <div class="col-md-2  ">
                                         <label class="control-label text-danger">*</label><label class="col-form-label">Agencia:</label>
                                     </div>
-                               
+
                                     <div class="col-md-4">
-                                        <asp:TextBox ID="TxAgenciaModificar" class="form-control" runat="server" ></asp:TextBox>
+                                        <asp:TextBox ID="TxAgenciaModificar" class="form-control" runat="server"></asp:TextBox>
                                     </div>
                                 </div>
                             </div>
@@ -252,14 +265,14 @@
                                     <div class="col-md-2  ">
                                         <label class="control-label text-danger">*</label><label class="col-form-label">Dirección:</label>
                                     </div>
-                                    
+
                                     <div class="col-md-4">
                                         <asp:TextBox ID="TxDireccionModificar" class="form-control" runat="server" TextMode="MultiLine" Rows="2"></asp:TextBox>
                                     </div>
                                     <div class="col-md-2  ">
                                         <label class="control-label text-danger">*</label><label class="col-form-label">Telefono:</label>
                                     </div>
-                                    
+
                                     <div class="col-md-4">
                                         <asp:TextBox ID="TxTelefonoModificar" class="form-control" runat="server" TextMode="MultiLine" Rows="2"></asp:TextBox>
                                     </div>
@@ -271,14 +284,14 @@
                                     <div class="col-md-2  ">
                                         <label class="control-label text-danger">*</label><label class="col-form-label">Latitud:</label>
                                     </div>
-                                    
+
                                     <div class="col-md-4">
                                         <asp:TextBox ID="TxLatitudModificar" class="form-control" runat="server" TextMode="MultiLine" Rows="2"></asp:TextBox>
                                     </div>
                                     <div class="col-md-2  ">
                                         <label class="control-label text-danger">*</label><label class="col-form-label">Longitud:</label>
                                     </div>
-                                    
+
                                     <div class="col-md-4">
                                         <asp:TextBox ID="TxLongitudModificar" class="form-control" runat="server" TextMode="MultiLine" Rows="2"></asp:TextBox>
                                     </div>
@@ -290,15 +303,15 @@
                                     <div class="col-md-2  ">
                                         <label class="control-label text-danger">*</label><label class="col-form-label">Tipo Agencia:</label>
                                     </div>
-                                    
+
                                     <div class="col-md-4">
-                                         <asp:DropDownList ID="DDLTipoAgenciaModificar" runat="server" AutoPostBack="true" CssClass="form-control"></asp:DropDownList>
+                                        <asp:DropDownList ID="DDLTipoAgenciaModificar" runat="server" AutoPostBack="true" CssClass="form-control"></asp:DropDownList>
                                     </div>
 
                                     <div class="col-md-2">
                                         <label class="control-label text-danger">*</label><label class="col-form-label">Depto.:</label>
                                     </div>
-                                                                        
+
                                     <div class="col-md-4">
                                         <asp:DropDownList ID="DDLDepartamentoModificar" runat="server" AutoPostBack="true" CssClass="form-control" OnSelectedIndexChanged="DDLDepartamentoModificar_SelectedIndexChanged"></asp:DropDownList>
                                     </div>
@@ -319,10 +332,10 @@
                                         <label class="control-label text-danger">*</label><label class="col-form-label">Cod Ubicacion:</label>
                                     </div>
                                     <div class="col-md-4">
-                                      <asp:TextBox ID="txtcodUbicacion" class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
-                                    </div>
+                                        <asp:TextBox ID="txtcodUbicacion" class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                                     </div>
                                 </div>
+                            </div>
 
                             <div class="col-md-12" runat="server">
                                 <div class="form-group row">
@@ -351,7 +364,7 @@
                                 </div>
                             </div>
 
-                           
+
 
                         </ContentTemplate>
                     </asp:UpdatePanel>
@@ -371,7 +384,8 @@
                         <div class="alert alert-success  alert-dismissible align-content-md-center" style="align-self: auto">
                             <div class="row">
                                 <div class="col-3">
-                                    <p class="text-center"><img src="https://img.icons8.com/color/70/000000/accept-database.png"/><span class="dashicons dashicons-admin-home"></span></p>
+                                    <p class="text-center">
+                                        <img src="https://img.icons8.com/color/70/000000/accept-database.png" /><span class="dashicons dashicons-admin-home"></span></p>
                                 </div>
                                 <div class="col-9" style="text-align: center">
                                     <br>
@@ -379,7 +393,6 @@
                                     <p>Si esta seguro dar clic en el botón "Modificar"</p>
                                 </div>
                                 <br>
-                                                      
                             </div>
                         </div>
                     </div>
@@ -387,15 +400,15 @@
                 </div>
 
                 <div class="modal-footer">
-                        <asp:UpdatePanel ID="UpdatePanel12" runat="server" UpdateMode="Conditional">
-                            <ContentTemplate>
-                                <button type="button" class="btn btn-light" data-dismiss="modal">
-                                    Close</button>                            
-                                <asp:Button ID="btnModalModificar" runat="server" Text="Modificar" class="btn btn-dark"  OnClick="btnModalModificar_Click" />
-                            </ContentTemplate>
-                        
-                        </asp:UpdatePanel>
-                    </div>                
+                    <asp:UpdatePanel ID="UpdatePanel12" runat="server" UpdateMode="Conditional">
+                        <ContentTemplate>
+                            <button type="button" class="btn btn-light" data-dismiss="modal">
+                                Close</button>
+                            <asp:Button ID="btnModalModificar" runat="server" Text="Modificar" class="btn btn-dark" OnClick="btnModalModificar_Click" />
+                        </ContentTemplate>
+
+                    </asp:UpdatePanel>
+                </div>
             </div>
         </div>
     </div>

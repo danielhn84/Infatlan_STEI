@@ -32,6 +32,12 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
         }
         public Boolean cargarArchivo(String DireccionCarga, ref int vSuccess, ref int vError, String vUsuario, String TipoProceso)
         {
+
+            Div1.Visible = false;
+            UpdatePanel1.Update();
+            DivAlerta.Visible = false;
+            UpdateModal.Update();
+
             Boolean vResultado = false;
             try
             {
@@ -206,6 +212,11 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
 
             try
             {
+                Div1.Visible = false;
+                UpdatePanel1.Update();
+                DivAlerta.Visible = false;
+                UpdateModal.Update();
+
                 String vDireccionCarga = ConfigurationManager.AppSettings["RUTA_SERVER"].ToString();
                 if (FUMantenimientosAgencia.HasFile)
                 {
@@ -256,6 +267,12 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
         {
             try
             {
+
+                Div1.Visible = false;
+                UpdatePanel1.Update();
+                DivAlerta.Visible = false;
+                UpdateModal.Update();
+
                 Mensaje("Acción cancelado con exito. ", WarningType.Success);
                 Div1.Visible = false;
                 UpdatePanel1.Update();
