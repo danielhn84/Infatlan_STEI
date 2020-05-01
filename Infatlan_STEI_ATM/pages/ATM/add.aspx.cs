@@ -364,6 +364,11 @@ namespace Infatlan_STEI_ATM.pages.ATM
                 String vQuery2 = "STEISP_ATM_VERIFICACION 9, '" + txtcodATM.Text + "',1";
                 DataTable vDatos2 = vConexion.ObtenerTabla(vQuery2);
 
+                //INGRESAR UBICACIONES
+                string IDUbi = "5";
+                String vQuery3 = "STEISP_INVENTARIO_Ubicaciones 3, '"+IDUbi+"', '" + DDLsucursalATM.SelectedValue + "','"+txtcodUbicacion.Text+"','"+txtdireccion.Text+"','" + Session["usuATM"].ToString() + "','"+txtnombreATM.Text+"'";
+                DataTable vDatos3 = vConexion.ObtenerTabla(vQuery3);
+
                 if (vInfo == 1){
                     Limpiar();
                     cargarDataATM();

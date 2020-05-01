@@ -112,6 +112,7 @@ namespace Infatlan_STEI_Inventario.pages
         protected void DDLDepartamento_SelectedIndexChanged(object sender, EventArgs e){
             try{
                 cargarMunicipios(DDLDepartamento.SelectedValue);
+                generaCodigo();
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);
             }
@@ -131,6 +132,12 @@ namespace Infatlan_STEI_Inventario.pages
                 }
             }else
                 DDLMunicipio.Items.Clear();
+        }
+
+        private void generaCodigo() {
+            String vQuery = "[STEISP_INVENTARIO_Ubicaciones] 6," + DDLDepartamento.SelectedValue;
+            DataTable vDatos = vConexion.obtenerDataTable(vQuery);
+            TxCodigoUbic.Text = vDatos.Rows[0]["codigo"].ToString();
         }
 
         protected void BtnAddUbicacion_Click(object sender, EventArgs e){

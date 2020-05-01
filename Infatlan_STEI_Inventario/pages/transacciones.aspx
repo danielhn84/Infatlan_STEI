@@ -42,7 +42,7 @@
                             RowStyle-CssClass="rows"
                             AutoGenerateColumns="false"
                             AllowPaging="true"
-                            GridLines="None" OnRowCommand="GVBusqueda_RowCommand"
+                            GridLines="None"
                             PageSize="10" OnPageIndexChanging="GVBusqueda_PageIndexChanging">
                             <Columns>
                                 <asp:BoundField DataField="idTransaccion" HeaderText="No." />

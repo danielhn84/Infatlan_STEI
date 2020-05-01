@@ -55,8 +55,34 @@
                 </div>
                 <!--/PRIMERA FILA-->
                 <br />
+                 <!--SEGUNDA FILA-->
+                <div class="row col-12">
+                    <div class="row col-4">
+                        <label class="col-form-label col-7">¿Necesita conductor?</label>
+                        <div class="col-3" style = "margin: 10px; width: 10%; float: left;">
+                            <asp:RadioButtonList runat="server" ID="RBConductor" RepeatDirection="Horizontal" OnTextChanged="RBConductor_TextChanged" AutoPostBack="true" >
+                                <asp:ListItem Value="1" Text="Si" />
+                                <asp:ListItem Value="0" Text="No" />
+                            </asp:RadioButtonList>
+                        </div>
+                    </div>
+                    <div class="row col-4">
+                        <label class="col-form-label col-12" style="text-align: right;">Conductor</label>
+                        <div class="col-9">
+                            
+                        </div>
+                    </div>
+                     <div class="row col-4">                        
+                        <div class="col-12">
+                            <asp:DropDownList runat="server" ID="DDLConductor" CssClass="form-control" AutoPostBack="true"></asp:DropDownList>
+                        </div>
+                    </div>
+                   
+                </div>
+                <!--/SEGUNDA FILA-->
                 <br />
-                <%--SEGUNDA FILA--%>
+                <br />
+                <%--TERCERA FILA--%>
                 <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
                  <table class="tablesaw table-bordered table-hover table no-wrap" data-tablesaw-mode="swipe"
                         data-tablesaw-sortable data-tablesaw-sortable-switch data-tablesaw-minimap
@@ -83,7 +109,7 @@
                         </tbody>
                     </table>
                     </div>
-                <%--/SEGUNDA FILA--%>
+                <%--/TERCERA FILA--%>
                 
                 <asp:UpdatePanel runat="server" ID="UPMateriales" UpdateMode="Conditional">
                     <ContentTemplate>
@@ -102,16 +128,17 @@
                                                 PageSize="10" OnRowCommand="GVNewMateriales_RowCommand"
                                                 Style="margin: 30px 0px 20px 0px">
                                                 <Columns>
-                                                   <asp:BoundField DataField="idMantenimiento" HeaderText="Código" Visible="true" ItemStyle-HorizontalAlign="center" />
-                                                   <asp:BoundField DataField="idStock" HeaderText="Stock" Visible="true" ItemStyle-HorizontalAlign="center" />
+                                                   <asp:BoundField DataField="idMantenimiento" HeaderText="Código" Visible="false" ItemStyle-HorizontalAlign="center" />
+                                                   <asp:BoundField DataField="idStock" HeaderText="Stock" Visible="false" ItemStyle-HorizontalAlign="center" />
                                                    <asp:BoundField DataField="nombre" HeaderText="Material" ItemStyle-HorizontalAlign="center" />
                                                    <asp:BoundField DataField="marca" HeaderText="Marca" ItemStyle-HorizontalAlign="center" />
                                                    <asp:BoundField DataField="cantidad" HeaderText="Cantidad" ItemStyle-HorizontalAlign="center" />
-                                                    <asp:TemplateField HeaderStyle-Width="60px" ItemStyle-HorizontalAlign="center">
+                                                  <%-- <asp:BoundField DataField="IDUbi" HeaderText="Ubi" Visible="true" ItemStyle-HorizontalAlign="center" />--%>
+                                                    <asp:TemplateField  HeaderStyle-Width="60px" ItemStyle-HorizontalAlign="center">
                                                         <ItemTemplate>                                                           
                                                             <asp:LinkButton ID="Btnseleccionar" Enabled="true" runat="server" Text="" class="btn btn-danger mr-2" CommandArgument='<%# Eval("idStock") %>' CommandName="eliminar"><i class="icon-trash"></i></asp:LinkButton>
                                                         </ItemTemplate>
-                                                        <ItemStyle Width="10%" />
+                                                        
                                                     </asp:TemplateField>
                                                 </Columns>
                                             </asp:GridView>

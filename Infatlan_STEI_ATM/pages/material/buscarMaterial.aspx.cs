@@ -164,7 +164,11 @@ namespace Infatlan_STEI_ATM.pages.material
                             Session["ATM_USUCREADOR_MATERIAL"] = item["UsuarioCreador"].ToString();
                             Session["ATM_CODUBI_MATERIAL"] = item["CodigoUbi"].ToString();
                             Session["ATM_COMENTARIOAPRO_MATERIAL"] = item["ComentarioAprobarMateriales"].ToString();
-                        
+                            Session["ATM_INVUBI_MATERIAL"] = item["InvUbi"].ToString();
+                            Session["ATM_CHOFER_MATERIAL"] = item["Chofer"].ToString();
+                            Session["ATM_IDCHOFER_MATERIAL"] = item["IDChofer"].ToString();
+
+
                     }
 
                         Response.Redirect("material.aspx");

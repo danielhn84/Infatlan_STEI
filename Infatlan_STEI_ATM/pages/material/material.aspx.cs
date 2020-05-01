@@ -23,6 +23,7 @@ namespace Infatlan_STEI_ATM.pages.material
             if (!Page.IsPostBack)
             {
                 cargarData();
+                RBConductor.SelectedValue = "1";
                 //LBMotivo.InnerText = "Motivo por el que solicita equipo";
                 switch (tipo)
                 {
@@ -36,11 +37,31 @@ namespace Infatlan_STEI_ATM.pages.material
                         LBComentario.InnerText = "*Comentario: "+Convert.ToString(Session["ATM_COMENTARIO_MATERIAL"]);
                         //txtmotivo.Text= Convert.ToString(Session["ATM_COMENTARIOAPRO_MATERIAL"]);
                         txtmotivo.Text = "";
+                        RBConductor.Enabled = false;
+                        DDLConductor.Enabled = false;
+                        DDLConductor.SelectedIndex = CargarInformacionDDL(DDLConductor, Session["ATM_IDCHOFER_MATERIAL"].ToString());
                         break;
                 }
             }
         }
-
+        int CargarInformacionDDL(DropDownList vList, String vValue)
+        {
+            int vIndex = 0;
+            try
+            {
+                int vContador = 0;
+                foreach (ListItem item in vList.Items)
+                {
+                    if (item.Value.Equals(vValue))
+                    {
+                        vIndex = vContador;
+                    }
+                    vContador++;
+                }
+            }
+            catch { throw; }
+            return vIndex;
+        }
         void TransaccionInventario()
         {
             
@@ -52,11 +73,12 @@ namespace Infatlan_STEI_ATM.pages.material
                         string vMantenimiento = vDatos.Rows[i]["idMantenimiento"].ToString();
                         string vStock = vDatos.Rows[i]["idStock"].ToString();
                         int vCantidadSolicitada = Convert.ToInt32(vDatos.Rows[i]["cantidad"].ToString());
-                        
+                        //int vUbi = Convert.ToInt32(vDatos.Rows[i]["idUbi"].ToString());
 
 
 
-                        String vQuery = "[STEISP_INVENTARIO_Stock] 2," + vStock;
+
+                    String vQuery = "[STEISP_INVENTARIO_Stock] 2," + vStock;
                         DataTable vDataStock = vConexion.ObtenerTabla(vQuery);
                         Decimal vCantidad = Convert.ToDecimal(vDataStock.Rows[0]["cantidad"].ToString());
                         Decimal vCantidadActual = vCantidad - Convert.ToDecimal(vCantidadSolicitada);
@@ -69,13 +91,14 @@ namespace Infatlan_STEI_ATM.pages.material
                         String vPrecio = vPrecioDec.ToString().Replace(",", ".");
                         String vCodigoUbi= Session["ATM_CODUBI_MATERIAL"].ToString();
                         String vUsuario= Session["usuATM"].ToString();
+                        String vUsuResponsable = Session["ATM_USUARIO_MATERIAL"].ToString();
                     //Session["ATM_USUARIO_MATERIAL"].ToString()
                     generarxml vMaestro = new generarxml();
                         Object[] vDatosMaestro = new object[10];
                         vDatosMaestro[0] = vCodigoUbi;
                         vDatosMaestro[1] = vStock;
-                        vDatosMaestro[2] = "1";
-                        vDatosMaestro[3] = ""; //Responsable
+                        vDatosMaestro[2] = Session["ATM_INVUBI_MATERIAL"];
+                        vDatosMaestro[3] = vUsuResponsable; //Responsable
                         vDatosMaestro[4] = "Mantenimiento ATM";
                         vDatosMaestro[5] = vCantidadSolicitada;
                         vDatosMaestro[6] = ""; // Serie
@@ -107,9 +130,22 @@ namespace Infatlan_STEI_ATM.pages.material
             txtSucursal.Text = Session["ATM_SUCURSAL_MATERIAL"].ToString();
             txtmotivo.Text = Convert.ToString(Session["ATM_COMENTARIO_MATERIAL"]);           
             LBComentario.InnerText = "*Comentario: " + Convert.ToString(Session["ATM_COMENTARIOAPRO_MATERIAL"]);
+            
+            RBConductor.SelectedValue = Convert.ToString(Session["ATM_CHOFER_MATERIAL"]);
+            
 
             if (HttpContext.Current.Session["CARGAR_STOCK"] == null)
             {
+                //CONDUCTORES
+                String vQuery3 = "STEISP_ATM_Generales 30";
+                DataTable vDatos3 = vConexion.ObtenerTabla(vQuery3);
+                DDLConductor.Items.Add(new ListItem { Value = "0", Text = "Seleccione conductor..." });
+                foreach (DataRow item in vDatos3.Rows)
+                {
+                    DDLConductor.Items.Add(new ListItem { Value = item["idConductor"].ToString(), Text = item["nombre"].ToString() });
+
+                }
+
                 //DEVOLVER
                 DataTable vDatos2 = new DataTable();
                 vDatos2 = vConexion.ObtenerTabla("STEISP_ATM_VERIFICACION 12, '" + Session["ATM_IDMANT_MATERIAL"].ToString() + "'");
@@ -165,6 +201,8 @@ namespace Infatlan_STEI_ATM.pages.material
                     TransaccionInventario();
                     string vQuery2 = "STEISP_ATM_VerificacionTotal 7, '" + Session["ATM_IDMANT_MATERIAL"].ToString() + "','" + Session["usuATM"].ToString() + "','" + txtmotivo.Text + "'";
                     vConexion.ejecutarSQL(vQuery2);
+                    //string vQuery3 = "STEISP_ATM_VerificacionTotal 6, '" + Session["ATM_IDMANT_MATERIAL"].ToString() + "'";
+                    //vConexion.ejecutarSQL(vQuery3);
                 }
                 else
                 {
@@ -177,13 +215,15 @@ namespace Infatlan_STEI_ATM.pages.material
                         string vMantenimiento = vDatos.Rows[i]["idMantenimiento"].ToString();
                         string vStock = vDatos.Rows[i]["idStock"].ToString();
                         int vCantidad = Convert.ToInt32(vDatos.Rows[i]["cantidad"].ToString());
+                        //int vUbi = Convert.ToInt32(vDatos.Rows[i]["IDUbi"].ToString());
                         string vQuery = "STEISP_ATM_VerificacionTotal 3, '" + vMantenimiento + "','" + vStock + "', '" + vCantidad + "'";
                         vConexion.ejecutarSQL(vQuery);
 
                     }
 
-                    string vQuery2 = "STEISP_ATM_VerificacionTotal 4, '" + Session["ATM_IDMANT_MATERIAL"].ToString() + "','" + Session["usuATM"].ToString() + "','" + txtmotivo.Text + "'";
+                    string vQuery2 = "STEISP_ATM_VerificacionTotal 4, '" + Session["ATM_IDMANT_MATERIAL"].ToString() + "','" + Session["usuATM"].ToString() + "','" + txtmotivo.Text + "', '"+RBConductor.SelectedValue+"','"+DDLConductor.SelectedValue+"'";
                     vConexion.ejecutarSQL(vQuery2);
+                    
                 }
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
                 Mensaje("Materiales solicitados con éxito", WarningType.Success);
@@ -213,10 +253,15 @@ namespace Infatlan_STEI_ATM.pages.material
 
         protected void btnguardar_Click(object sender, EventArgs e)
         {
-            if(Session["ATM_MATERIALES_VERIF"]!=null || txtmotivo.Text!="")
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal();", true);           
+            if (Session["ATM_MATERIALES_VERIF"] != null || txtmotivo.Text != "")
+            {
+                if(RBConductor.SelectedValue=="1" && DDLConductor.SelectedValue=="0")
+                    Mensaje("Seleccione conductor", WarningType.Warning);
+                else
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal();", true);
+            }
             else
-                Mensaje("Llene la lista de materiales a solicitar", WarningType.Warning);
+                Mensaje("No deje campos vaciosr", WarningType.Warning);
         }
 
         protected void GVNewMateriales_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -261,12 +306,14 @@ namespace Infatlan_STEI_ATM.pages.material
                     string vNombreMaterial = DDLStock.SelectedItem.Text;
                     string vMarca = txtmarca.Text;
                     string vCantidad = txtcantidad.Text;
+                    //int vUbic = Convert.ToInt32(Session["ATM_INVUBI_MATERIAL"]);
 
                     vData.Columns.Add("idMantenimiento");
                     vData.Columns.Add("idStock");
                     vData.Columns.Add("nombre");
                     vData.Columns.Add("marca");
                     vData.Columns.Add("cantidad");
+                    //vData.Columns.Add("IDUbi");
 
                     if (vDatos == null)
                         vDatos = vData.Clone();
@@ -337,6 +384,17 @@ namespace Infatlan_STEI_ATM.pages.material
         protected void btnModalCerrarRechazo_Click(object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal2();", true);
+        }
+
+        protected void RBConductor_TextChanged(object sender, EventArgs e)
+        {
+            if (RBConductor.SelectedValue == "1")
+                DDLConductor.Enabled = true;
+            else
+            {
+                DDLConductor.Enabled = false;
+                DDLConductor.SelectedValue = "0";
+            }
         }
     }
 }
