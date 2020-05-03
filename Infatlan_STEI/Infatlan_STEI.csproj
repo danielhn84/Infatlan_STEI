@@ -4042,7 +4042,6 @@
     <Content Include="assets\node_module\jquery-steps-master\.travis.yml" />
     <Content Include="assets\node_module\jquery-steps-master\bower.json" />
     <Content Include="assets\node_module\jquery-steps-master\build\jquery.steps-1.1.0.zip" />
-    <Content Include="assets\node_module\jquery-steps-master\build\jQuery.Steps.1.1.0.nupkg" />
     <Content Include="assets\node_module\jquery-steps-master\CHANGELOG.md" />
     <Content Include="assets\node_module\jquery-steps-master\nuget\jQuery.Steps.nuspec" />
     <Content Include="assets\node_module\jquery-steps-master\package.json" />
@@ -4331,6 +4330,7 @@
     <Content Include="assets\node_module\typeahead.js-master\README.md" />
     <Content Include="assets\node_module\typeahead.js-master\test\ci" />
     <Content Include="assets\node_module\typeahead.js-master\typeahead.js.jquery.json" />
+    <Content Include="assets\node_module\jquery-steps-master\build\jQuery.Steps.1.1.0.nupkg" />
     <None Include="packages.config" />
     <Content Include="scss\colors\blue-dark.scss" />
     <Content Include="scss\colors\blue.scss" />
@@ -4412,6 +4412,7 @@
     <Content Include="scss\widgets\topbar-mail.scss" />
     <Content Include="scss\widgets\weather-widget.scss" />
     <Content Include="scss\widgets\widgets.scss" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -16,7 +16,7 @@ using System.Web.ApplicationServices;
 
 
 using Word = Microsoft.Office.Interop.Word;
-using Microsoft.Xrm.Portal.Web;
+
 using Infatlan_STEI_Inventario.clases;
 
 namespace Infatlan_STEI_CableadoEstructurado.paginas

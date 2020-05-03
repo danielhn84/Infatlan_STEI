@@ -15,7 +15,6 @@ using System.Configuration;
 using System.Web.ApplicationServices;
 
 using Word = Microsoft.Office.Interop.Word;
-using Microsoft.Xrm.Portal.Web;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
 using Microsoft.Office.Interop.Word;

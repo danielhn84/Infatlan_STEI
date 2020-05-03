@@ -7,13 +7,11 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace Infatlan_STEI
-{
-
-
-    public partial class main
-    {
-
+namespace Infatlan_STEI {
+    
+    
+    public partial class main {
+        
         /// <summary>
         /// Control Head.
         /// </summary>
@@ -22,7 +20,7 @@ namespace Infatlan_STEI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder Head;
-
+        
         /// <summary>
         /// Control FormaPrincipal.
         /// </summary>
@@ -31,16 +29,7 @@ namespace Infatlan_STEI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm FormaPrincipal;
-
-        /// <summary>
-        /// Control LBInventario.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LBInventario;
-
+        
         /// <summary>
         /// Control Content.
         /// </summary>
@@ -49,7 +38,7 @@ namespace Infatlan_STEI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder Content;
-
+        
         /// <summary>
         /// Control Script.
         /// </summary>

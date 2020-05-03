@@ -67,10 +67,8 @@
                         <ul id="sidebarnav">
                             <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Modulos <span class="badge badge-pill badge-cyan ml-auto">4</span></span></a>
                                 <ul aria-expanded="false" class="collapse">
-                                    <li><a href="#">Agencias</a></li>
-                                    <li runat="server" ><%--<a href="#">Inventario</a>--%>
-                                        <asp:LinkButton Text="Inventario" ID="LBInventario" runat="server" OnClick="Unnamed_Click" />
-                                    </li>
+                                    <li><a href="/sites/agencias/default.aspx">Agencias</a></li>
+                
                                     <li><a href="#">ATM</a></li>
                                     <li><a href="#">Estructurado</a></li>
                                 </ul>
