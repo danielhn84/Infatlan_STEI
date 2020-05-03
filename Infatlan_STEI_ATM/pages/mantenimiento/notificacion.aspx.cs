@@ -670,7 +670,10 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             catch (Exception Ex)
             {
 
-            }           
+            }
+
+            
+
         }
                
 

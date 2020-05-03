@@ -136,6 +136,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
                         Session["versionSw"] = item["idVersionSw"];
                         Session["DetalleModelo"] = item["modeloATM"].ToString();
                         Session["CodUbicacion"] = item["codUbicacion"].ToString();
+                        Session["InvUbicacion"] = item["idUbicacion"].ToString();
                         }
                     TxBuscarATM.Text = string.Empty;
                     Response.Redirect("updateTotal.aspx");

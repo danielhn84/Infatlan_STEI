@@ -98,6 +98,11 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
 
             if (e.CommandName == "Modifcar")
             {
+
+                DivAlerta.Visible = false;
+                UpdateModal.Visible = false;
+                UpdateModal.Update();
+
                 string vIdEstadoModificar = e.CommandArgument.ToString();
                 Session["AG_MCM_ID_ESTADO_MODIFICAR"] = vIdEstadoModificar;
 
@@ -186,12 +191,12 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 {
                     GVMotivos.DataSource = vDatos;
                     GVMotivos.DataBind();
-                    UpdatePanel5.Update();
+                    UPMotivos.Update();
                 }
                 else
                 {
                     EnumerableRowCollection<DataRow> filtered = vDatos.AsEnumerable()
-                        .Where(r => r.Field<String>("tipo").Contains(vBusqueda));
+                        .Where(r => r.Field<String>("motivo").Contains(vBusqueda));
 
                     Boolean isNumeric = int.TryParse(vBusqueda, out int n);
 
@@ -223,7 +228,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                     GVMotivos.DataSource = vDatosFiltrados;
                     GVMotivos.DataBind();
                     Session["AG_MCM_MOTIVOS"] = vDatosFiltrados;
-                    UpdatePanel5.Update();
+                    UPMotivos.Update();
                 }
 
             }
@@ -231,6 +236,25 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             {
                 Mensaje(ex.Message, WarningType.Danger);
             }
+        }
+
+        protected void TxMotivoModal_TextChanged(object sender, EventArgs e)
+        {
+            DivAlerta.Visible = false;
+            UpdateModal.Visible = false;
+            UpdateModal.Update();
+        }
+        protected void DDLTipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DivAlerta.Visible = false;
+            UpdateModal.Visible = false;
+            UpdateModal.Update();
+        }
+        protected void DdlEstado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DivAlerta.Visible = false;
+            UpdateModal.Visible = false;
+            UpdateModal.Update();
         }
     }
 }

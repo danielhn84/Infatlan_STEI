@@ -11,8 +11,6 @@ using Infatlan_STEI_Agencias.classes;
 
 namespace Infatlan_STEI_Agencias.pages
 {
-
-
     public partial class AprobarNotificacion : System.Web.UI.Page
     {
         db vConexion = new db();
@@ -25,7 +23,6 @@ namespace Infatlan_STEI_Agencias.pages
                 cargarDatos();
             }
         }
-
         private void cargarDatos() {
             try{
 
@@ -41,11 +38,9 @@ namespace Infatlan_STEI_Agencias.pages
             }
             
         }
-
         public void Mensaje(string vMensaje, WarningType type){
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
-
         protected void GVBusqueda_RowCommand(object sender, GridViewCommandEventArgs e){
             if (e.CommandName == "Aprobar"){
                 limpiarModalAprobarNotificacion();
@@ -101,7 +96,6 @@ namespace Infatlan_STEI_Agencias.pages
             }
 
         }
-
         protected void btnModalAprobarNotificacion_Click(object sender, EventArgs e){
             try{
                 String vQuery = "STEISP_AGENCIA_AprobarNotificacion 2," + Session["AG_CN_ID_MANTENIMIENTO"] +"," + Session["USUARIO"];
@@ -117,7 +111,6 @@ namespace Infatlan_STEI_Agencias.pages
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
-
         protected void TxBuscarAgencia_TextChanged(object sender, EventArgs e)
         {
             try
@@ -186,8 +179,6 @@ namespace Infatlan_STEI_Agencias.pages
                 Mensaje(Ex.Message, WarningType.Danger);
             }
         }
-
-
         private void validaciones()
         {           
             if (DDLMotivo.SelectedValue.Equals("0"))
@@ -197,8 +188,6 @@ namespace Infatlan_STEI_Agencias.pages
                 throw new Exception("Falta completar datos, Favor ingrese detalle de la cancelación del mantenimiento. ");
           
         }
-
-
         protected void BtnCancelarNoti_Click(object sender, EventArgs e)
         {
             try
@@ -225,8 +214,6 @@ namespace Infatlan_STEI_Agencias.pages
                
             }
         }
-
-
         private void limpiarModalAprobarNotificacion()
         {
             TxIdMant.Text = string.Empty;
@@ -236,14 +223,12 @@ namespace Infatlan_STEI_Agencias.pages
             TxTecnicoResponsable.Text = string.Empty;
             TxParticipantes.Text = string.Empty;
         }
-
         private void limpiarModalCancelarNotificacion()
         {
             DDLMotivo.SelectedIndex = -1;
             TxDetalle.Text = string.Empty;
             UpdateModal.Visible = false;
         }
-
         protected void GVBusqueda_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             try

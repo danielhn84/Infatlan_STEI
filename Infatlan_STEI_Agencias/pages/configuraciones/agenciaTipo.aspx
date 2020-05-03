@@ -1,18 +1,34 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="agenciaTipo.aspx.cs" Inherits="Infatlan_STEI_Agencias.pages.configuraciones.agenciaTipo" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
     <script type="text/javascript">
+
+        var updateProgress = null;
+        function postbackButtonClick() {
+            updateProgress = $find("<%= UpdateProgress1.ClientID %>");
+            window.setTimeout("updateProgress.set_visible(true)", updateProgress.get_displayAfter());
+            return true;
+        }
+
         function openModalModificarTipoAgencia() { $('#modalModificarTipoAgencia').modal('show'); }
         function closeModalModificarTipoAgencia() { $('#modalModificarTipoAgencia').modal('hide'); }
-   
-</script>
+    </script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
+    <asp:UpdateProgress ID="UpdateProgress1" runat="server">
+        <ProgressTemplate>
+            <div style="position: fixed; text-align: center; height: 100%; width: 100%; top: 0; right: 0; left: 0; z-index: 9999999; background-color: #ffffff; opacity: 0.7; margin: 0;">
+                <span style="display: inline-block; height: 100%; vertical-align: middle;"></span>
+                <asp:Image ID="imgUpdateProgress" runat="server" ImageUrl="/assets/images/loading.gif" AlternateText="Loading ..." ToolTip="Loading ..." Style="display: inline-block; vertical-align: middle;" />
+            </div>
+            
+        </ProgressTemplate>
+    </asp:UpdateProgress>
+
     <div class="row page-titles">
         <div class="col-md-7 align-self-center">
             <h2 class="text-themecolor">Tipos de Agencia</h2>
             <div class="mr-md-3 mr-xl-5">
-                <%-- <h2>Creación de Notificación</h2>--%>
                 <p class="mb-md-0">Soporte Técnico y Comunicaciones</p>
             </div>
         </div>
@@ -25,8 +41,7 @@
 
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#home" role="tab"><span class="hidden-sm-up"><i class="fa fa-save"></i></span><span class="hidden-xs-down"> Guardar</span></a> </li>
-                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="icon-pencil"></i></span><span class="hidden-xs-down"> Modificar</span></a> </li>
-                 
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="icon-pencil"></i></span><span class="hidden-xs-down"> Modificar</span></a> </li>                 
             </ul>
 
             <div class="tab-content tabcontent-border">
@@ -126,15 +141,10 @@
                             <div class="col-md-4 " style="margin-left: auto; margin-right: auto">
                                 <a href="../../default.aspx"" class="btn  btn-block btn-primary">Volver</a>
                             </div>
-                        </div>
-
-                   
-
+                        </div>                
                     </div>
                 </div>
-                <!--/SEGUNDO CONTENIDO-->
-
-               
+                <!--/SEGUNDO CONTENIDO-->              
             </div>
         </div>
     </div>

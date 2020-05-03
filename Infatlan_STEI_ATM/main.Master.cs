@@ -13,7 +13,7 @@ namespace Infatlan_STEI
         {
             if (!Page.IsPostBack)
             {
-                lbusu.Text=Session["usuATM"].ToString();
+                //lbusu.Text=Session["usuATM"].ToString();
             }
             
         }
