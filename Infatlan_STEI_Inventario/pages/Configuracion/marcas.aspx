@@ -53,7 +53,8 @@
                             <Columns>
                                 <asp:BoundField DataField="idMarca" HeaderText="No."/>
                                 <asp:BoundField DataField="nombre" HeaderText="Marca"/>
-                                <asp:TemplateField HeaderText="Seleccione" HeaderStyle-Width="13%">
+                                <asp:BoundField DataField="fechaCreacion" HeaderText="Fecha"/>
+                                <asp:TemplateField HeaderText="Seleccione">
                                     <ItemTemplate>
                                         <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-info mr-2" CommandArgument='<%# Eval("idMarca") %>' CommandName="EditarMarca">
                                             <i class="icon-pencil" ></i>

@@ -6,7 +6,7 @@ using System.DirectoryServices;
 using System.Linq;
 using System.Web;
 
-namespace Infatlan_STEI_Agencias.classes
+namespace Infatlan_STEI.classes
 {
     public class LdapService
     {

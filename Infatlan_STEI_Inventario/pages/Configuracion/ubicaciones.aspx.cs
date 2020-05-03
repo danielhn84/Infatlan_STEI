@@ -18,7 +18,7 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
         db vConexion = new db();
         protected void Page_Load(object sender, EventArgs e){
             Session["AUTH"] = true;
-
+            Session["USUARIO"] = "wpadilla";
             if (!Page.IsPostBack){
                 if (Convert.ToBoolean(Session["AUTH"])){
                     cargarDatos();
@@ -147,14 +147,14 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                         "," + DDLTipo.SelectedValue +
                         "," + DDLMunicipio.SelectedValue +
                         ",'" + TxCodigo.Text.ToUpper() + "'" + 
-                        ",'" + TxDireccion.Text + "'{1}";
+                        ",'" + TxDireccion.Text + "' {1}";
 
                 if (HttpContext.Current.Session["INV_UBI_ID"] == null){
-                    vQuery = string.Format(vQuery, "3", "");
+                    vQuery = string.Format(vQuery, "3", ",'" + Session["USUARIO"].ToString() + "','SYSUBICATION'");
                     vInfo = vConexion.ejecutarSql(vQuery);
                     vMensaje = "Ubicación registrada con éxito.";
                 }else{
-                    vQuery = string.Format(vQuery, "4," + Session["INV_UBI_ID"].ToString(), "," + DDLEstado.SelectedValue);
+                    vQuery = string.Format(vQuery, "4," + Session["INV_UBI_ID"].ToString(), "," + DDLEstado.SelectedValue + ",'" + Session["USUARIO"].ToString() + "','SYSUBICATION'");
                     vInfo = vConexion.ejecutarSql(vQuery);
                     vMensaje = "Ubicación actualizada con éxito.";
                 }

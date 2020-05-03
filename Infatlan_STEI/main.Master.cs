@@ -13,5 +13,17 @@ namespace Infatlan_STEI
         {
 
         }
+
+        protected void Unnamed_Click(object sender, EventArgs e){
+            try
+            {
+                Response.Redirect("localhost:44344/Infatlan_STEI_Inventario/default.aspx");
+
+            }
+            catch (Exception ex)
+            {
+                String error = ex.Message;
+            }
+        }
     }
 }

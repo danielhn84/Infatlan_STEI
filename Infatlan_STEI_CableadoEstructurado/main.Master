@@ -14,18 +14,29 @@
     <link href="/assets/node_modules/morrisjs/morris.css" rel="stylesheet">
     <link href="/assets/node_modules/toast-master/css/jquery.toast.css" rel="stylesheet">
     <link href="/css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/animate.min.css"  />
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="css/animate.min.css" rel="stylesheet" />
     <link href="/css/pages/dashboard1.css" rel="stylesheet">
-
-
-   <%-- <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">--%>
-    <link href="/css/style.min.css" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="/assets/node_modules/jsgrid/jsgrid.min.css" />
-    <link type="text/css" rel="stylesheet" href="/assets/node_modules/jsgrid/jsgrid-theme.min.css" />
-
-     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <asp:ContentPlaceHolder ID="Head" runat="server">
     </asp:ContentPlaceHolder>
+     <script type="text/javascript"> 
+        infatlan = {
+            showNotification: function (from, align, mensaje, tipo) {
+                color = Math.floor((Math.random() * 4) + 1);
+                $.notify({
+                    icon: "pe - 7s - gift",
+                    message: mensaje
+                }, {
+                        type: tipo,
+                        timer: 4000,
+                        placement: { from: from, align: align }
+                    });
+            }
+        }
+    </script>
+
+
 </head>
 <body class="skin-default fixed-layout">
 
@@ -35,18 +46,9 @@
             <p class="loader__label">STEI</p>
         </div>
     </div>
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
     <div id="main-wrapper">
-        <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
         <header class="topbar">
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
-                <!-- ============================================================== -->
-                <!-- Logo -->
-                <!-- ============================================================== -->
                 <div class="navbar-header">
                     <a class="navbar-brand" href="index.html" style="margin-left: 35px;">
                         <b>
@@ -54,20 +56,10 @@
                         </b>
                     </a>
                 </div>
-                <!-- ============================================================== -->
-                <!-- End Logo -->
-                <!-- ============================================================== -->
                 <div class="navbar-collapse">
-                    <!-- ============================================================== -->
-                    <!-- toggle and nav items -->
-                    <!-- ============================================================== -->
                     <ul class="navbar-nav mr-auto">
-                        <!-- This is  -->
                         <li class="nav-item"><a class="nav-link nav-toggler d-block d-sm-none waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a></li>
                         <li class="nav-item"><a class="nav-link sidebartoggler d-none d-lg-block d-md-block waves-effect waves-dark" href="javascript:void(0)"><i class="icon-menu"></i></a></li>
-                        <!-- ============================================================== -->
-                        <!-- Search -->
-                        <!-- ============================================================== -->
                     </ul>
 
                     <ul class="navbar-nav my-lg-0">
@@ -239,44 +231,21 @@
                       
                         <div class="dropdown">
                            <div class="dropdown-menu animated flipInY">
-
-                                <!-- text-->
                                 <a href="javascript:void(0)" class="dropdown-item"><i class="ti-settings"></i>Account Setting</a>
-                                <!-- text-->
                                 <div class="dropdown-divider"></div>
-                                <!-- text-->
                                 <a href="login.html" class="dropdown-item"><i class="fa fa-power-off"></i>Logout</a>
-                                <!-- text-->
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Modulos <span class="badge badge-pill badge-cyan ml-auto">4</span></span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="#">Agencias</a></li>
-                                <li><a href="#">Inventario</a></li>
-                                <li><a href="#">ATM</a></li>
-                                <li><a href="#">Estructurado</a></li>
-                            </ul>
-                        </li>
-                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-wrench"></i><span class="hide-menu">Configuración<span class="badge badge-pill badge-cyan ml-auto">2</span></span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="#">Usuarios</a></li>
-                                <li><a href="#">Permisos</a></li>
-                            </ul>
-                        </li>
-
-                        <li><a class="waves-effect waves-dark" href="../documentation/documentation.html" aria-expanded="false"><i class="fa fa-circle-o text-danger"></i><span class="hide-menu">Documentation</span></a></li>
-                        <li><a class="waves-effect waves-dark" href="pages-login.html" aria-expanded="false"><i class="fa fa-circle-o text-success"></i><span class="hide-menu">Log Out</span></a></li>
-                        <li><a class="waves-effect waves-dark" href="pages-faq.html" aria-expanded="false"><i class="fa fa-circle-o text-info"></i><span class="hide-menu">FAQs</span></a></li>
+                        <li><a href="/page/visitaTecnica.aspx"><i class="icon-docs"></i>Visita Técnica</a></li>
+                        <li><a href="/page/visitaTecnica.aspx"><i class="icon-docs"></i>Aprobación</a></li>
+                        <li><a href="/page/cotizacion/principalPresupuestos.aspx"><i class="icon-docs"></i>Cotización</a></li>
                     </ul>
                 </nav>
-                <!-- End Sidebar navigation -->
             </div>
-            <!-- End Sidebar scroll-->
         </aside>
 
         <div class="page-wrapper">
@@ -309,18 +278,13 @@
     <script src="/js/sidebarmenu.js"></script>
     <script src="/js/custom.min.js"></script>
 
-     <script src="../assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
-    <script src="dist/js/custom.min.js"></script>
-    <script src="../assets/node_modules/jsgrid/db.js"></script>
-    <script type="text/javascript" src="../assets/node_modules/jsgrid/jsgrid.min.js"></script>
-    <script src="dist/js/pages/jsgrid-init.js"></script>
-
     <script src="/assets/node_modules/raphael/raphael-min.js"></script>
     <script src="/assets/node_modules/morrisjs/morris.min.js"></script>
     <script src="/assets/node_modules/jquery-sparkline/jquery.sparkline.min.js"></script>
     <script src="/assets/node_modules/toast-master/js/jquery.toast.js"></script>
     <script src="/js/dashboard1.js"></script>
     <script src="/assets/node_modules/toast-master/js/jquery.toast.js"></script>
+    <script src="/js/bootstrap-notify.js"></script>
 
     <asp:ContentPlaceHolder ID="Script" runat="server">
     </asp:ContentPlaceHolder>
