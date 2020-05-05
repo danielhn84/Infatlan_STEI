@@ -56,7 +56,7 @@
 
                     <div class="table-responsive m-t-40">
                         <asp:GridView ID="GVBusqueda" runat="server"
-                            CssClass="table table-bordered"
+                            CssClass="table table-bordered embed-responsive"
                             PagerStyle-CssClass="pgr"
                             HeaderStyle-CssClass="table"
                             RowStyle-CssClass="rows"
@@ -74,13 +74,13 @@
                                 <asp:BoundField DataField="Proveedor" HeaderText="Proveedor"/>
                                 <asp:BoundField DataField="descripcion" HeaderText="Detalle" />
                                 <asp:BoundField DataField="series" HeaderText="Serie" />
-                                <asp:TemplateField HeaderText="Seleccione" HeaderStyle-Width="13%">
+                                <asp:TemplateField HeaderText="Seleccione" >
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-info mr-2" Title="Editar" CommandArgument='<%# Eval("idStock") %>' CommandName="EditarArticulo">
-                                            <i class="icon-pencil" ></i>
+                                        <asp:LinkButton ID="BtnEditar" Style="padding:8%" runat="server" class="btn btn-info mr-2" Title="Editar" CommandArgument='<%# Eval("idStock") %>' CommandName="EditarArticulo">
+                                            <i class="icon-pencil"></i>
                                         </asp:LinkButton>
                             
-                                        <asp:LinkButton ID="BtnEditar2" runat="server" class="btn btn-success mr-2" Title="Aregar" CommandArgument='<%# Eval("idStock") %>' CommandName="EliminarArticulo">
+                                        <asp:LinkButton ID="BtnEditar2" Style="padding:8%" runat="server" class="btn btn-success mr-2" Title="Aregar" CommandArgument='<%# Eval("idStock") %>' CommandName="EliminarArticulo">
                                             <i class="icon-plus" ></i>
                                         </asp:LinkButton>
                                     </ItemTemplate>

@@ -97,7 +97,7 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
                     String vNombre = arg[1];
                     //String vMaterial = e.CommandArgument.ToString();
 
-                    Response.Redirect("/page/cotizacion/aprobacionContabilidad.aspx?i=" + vId + "&n=" + vNombre);
+                    Response.Redirect("/sites/cableado/page/cotizacion/aprobacionContabilidad.aspx?i=" + vId + "&n=" + vNombre);
 
                 }
 

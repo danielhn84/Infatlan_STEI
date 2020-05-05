@@ -307,7 +307,7 @@ namespace Infatlan_STEI_Inventario.pages
 
                 Session["INV_UBIC_ID"] = vIdUbicacion;
                 if (e.CommandName == "VerInventario") 
-                    Response.Redirect("/pages/inventarioUbicacion.aspx?i=" + vIdUbicacion + "&c=" + vCodigo);
+                    Response.Redirect("/sites/inventario/pages/inventarioUbicacion.aspx?i=" + vIdUbicacion + "&c=" + vCodigo);
                 
             }catch (Exception Ex){
                 Mensaje(Ex.Message, WarningType.Danger);

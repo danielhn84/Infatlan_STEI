@@ -3305,6 +3305,7 @@
     <Content Include="js\sidebarmenu.js" />
     <Content Include="js\waves.js" />
     <Content Include="login.aspx" />
+    <Content Include="logout.aspx" />
     <Content Include="paginas\configuraciones\usuarios.aspx" />
     <Content Include="paginas\mail\TemplateMail.html" />
     <Content Include="Web.config" />
@@ -3327,6 +3328,13 @@
     </Compile>
     <Compile Include="login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="logout.aspx.cs">
+      <DependentUpon>logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="logout.aspx.designer.cs">
+      <DependentUpon>logout.aspx</DependentUpon>
     </Compile>
     <Compile Include="main.Master.cs">
       <DependentUpon>main.Master</DependentUpon>

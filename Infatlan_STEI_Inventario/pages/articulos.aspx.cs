@@ -426,7 +426,7 @@ namespace Infatlan_STEI_Inventario.pages
         protected void BtnAgregarMarca_Click(object sender, EventArgs e){
             try{
                 if (TxNombreMarca.Text == string.Empty || TxNombreMarca.Text == "")
-                    throw new Exception("");
+                    throw new Exception("Favor ingrese el nombre.");
                 
                 String vQuery = "[STEISP_INVENTARIO_Marcas] 3" +
                     ",'" + TxNombreMarca.Text.ToUpper() + "'" +

@@ -11,8 +11,8 @@
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/logo_mini.png">
     <title>Infatlan - STEI</title>
-    <link href="/assets/node_modules/morrisjs/morris.css" rel="stylesheet">
-    <link href="/assets/node_modules/toast-master/css/jquery.toast.css" rel="stylesheet">
+    <link href="/assets/node_module/morrisjs/morris.css" rel="stylesheet">
+    <link href="/assets/node_module/toast-master/css/jquery.toast.css" rel="stylesheet">
     <link href="/css/style.min.css" rel="stylesheet">
     <link href="/css/animate.min.css" rel="stylesheet" />
     <link href="/css/pages/dashboard1.css" rel="stylesheet">
@@ -48,24 +48,10 @@
 </head>
 <body class="skin-default fixed-layout" onclick="EnterKeyFilter();">
 
-    <!--<div class="preloader">
-        <div class="loader">
-            <div class="loader__figure"></div>
-            <p class="loader__label">stei</p>
-        </div>
-    </div>-->
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
+    
     <div id="main-wrapper">
-        <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
         <header class="topbar">
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
-                <!-- ============================================================== -->
-                <!-- Logo -->
-                <!-- ============================================================== -->
                 <div class="navbar-header">
                     <a class="navbar-brand" href="index.html" style="margin-left: 35px;">
                         <b>                           
@@ -73,109 +59,63 @@
                         </b>
                     </a>
                 </div>
-                <!-- ============================================================== -->
-                <!-- End Logo -->
-                <!-- ============================================================== -->
                 <div class="navbar-collapse">
-                    <!-- ============================================================== -->
-                    <!-- toggle and nav items -->
-                    <!-- ============================================================== -->
                     <ul class="navbar-nav mr-auto">
-                        <!-- This is  -->
                         <li class="nav-item"><a class="nav-link nav-toggler d-block d-sm-none waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a></li>
                         <li class="nav-item"><a class="nav-link sidebartoggler d-none d-lg-block d-md-block waves-effect waves-dark" href="javascript:void(0)"><i class="icon-menu"></i></a></li>
-                        <!-- ============================================================== -->
-                        <!-- Search -->
-                        <!-- ============================================================== -->
                         <li class="nav-item">
                             <form class="app-search d-none d-md-block d-lg-block">
-                                <h3></h3><!--imagen de Soporte-->
+                                <h3></h3>
                             </form>
                         </li>
-                    </ul>
-
-                    <ul class="navbar-nav my-lg-0">
-
-                        <li class="nav-item dropdown">
-                            
-                        </li>
-
-                        
-
-                      
-     
-
                     </ul>
                 </div>
             </nav>
         </header>
 
         <aside class="left-sidebar">
-            <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
-                <!-- User Profile-->
-                <div class="user-profile">
-                    <div class="user-pro-body">
-                        <div>
-                            <img src="/img/admin111.jpg" alt="user-img" class="img-circle"></div>                           
-                        <div class="dropdown">                            
-                            <a href="javascript:void(0)"  data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><asp:Label runat="server" ID="lbusu" CssClass="dropdown-toggle u-dropdown link hide-menu" style="color:black;"></asp:Label><span class="caret"></span></a>
-                            <div class="dropdown-menu animated flipInY">
 
-                                <!-- text-->
-                                <a href="javascript:void(0)" class="dropdown-item"><i class="ti-settings"></i>Account Setting</a>
-                                <!-- text-->
-                                <div class="dropdown-divider"></div>
-                                <!-- text-->
-                                <a href="login.html" class="dropdown-item"><i class="fa fa-power-off"></i>Logout</a>
-                                <!-- text-->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav"> 
-                        <li><a  href="../../default.aspx" aria-expanded="false"><i class="ti-home"></i><span class="hide-menu">Dashboard</span></a></li>
+                        <li><a  href="/default.aspx" aria-expanded="false"><i class="ti-home"></i><span class="hide-menu">Dashboard</span></a></li>
                          <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-desktop"></i><span class="hide-menu">ATM<span class="badge badge-pill badge-cyan ml-auto">13</span></span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="../../pages/ATM/add.aspx">Agregar</a></li>
-                                <li><a href="../../pages/ATM/update.aspx">Modificar</a></li>    
-                                <li><a href="../../pages/ATM/tipo.aspx">Tipo ATM</a></li>
-                                <li><a href="../../pages/ATM/modelo.aspx">Modelo</a></li>
-                                <li><a href="../../pages/ATM/detalleModelo.aspx">Detalle Modelo</a></li>
-                                <li><a href="../../pages/ATM/tipoCarga.aspx">Tipo Carga</a></li>
-                                <li><a href="../../pages/ATM/procesador.aspx">Procesador</a></li>
-                                <li><a href="../../pages/ATM/teclado.aspx">Teclado</a></li>                               
-                                <li><a href="../../pages/ATM/so.aspx">Sistema Operativo</a></li>
-                                <li><a href="../../pages/ATM/versionSw.aspx">Versión Software</a></li>
-                                <li><a href="../../pages/ATM/marcas.aspx">Marcas de Disco</a></li>
-                                <li><a href="../../pages/ATM/cancelarVerificacion.aspx">Motivo cancelar</a></li>
+                                <li><a href="/sites/ATM/pages/ATM/add.aspx">Agregar</a></li>
+                                <li><a href="/sites/ATM/pages/ATM/update.aspx">Modificar</a></li>    
+                                <li><a href="/sites/ATM/pages/ATM/tipo.aspx">Tipo ATM</a></li>
+                                <li><a href="/sites/ATM/pages/ATM/modelo.aspx">Modelo</a></li>
+                                <li><a href="/sites/ATM/pages/ATM/detalleModelo.aspx">Detalle Modelo</a></li>
+                                <li><a href="/sites/ATM/pages/ATM/tipoCarga.aspx">Tipo Carga</a></li>
+                                <li><a href="/sites/ATM/pages/ATM/procesador.aspx">Procesador</a></li>
+                                <li><a href="/sites/ATM/pages/ATM/teclado.aspx">Teclado</a></li>                               
+                                <li><a href="/sites/ATM/pages/ATM/so.aspx">Sistema Operativo</a></li>
+                                <li><a href="/sites/ATM/pages/ATM/versionSw.aspx">Versión Software</a></li>
+                                <li><a href="/sites/ATM/pages/ATM/marcas.aspx">Marcas de Disco</a></li>
+                                <li><a href="/sites/ATM/pages/ATM/cancelarVerificacion.aspx">Motivo cancelar</a></li>
                             </ul>
                         </li>
                         <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-wrench"></i><span class="hide-menu">Mantenimiento<span class="badge badge-pill badge-cyan ml-auto">4</span></span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="../../pages/mantenimiento/notificacion.aspx">Crear Notificación</a></li>
-                                <li><a href="../../pages/mantenimiento/buscarAprobarNotificacion.aspx">Aprobar Notificación</a></li>
-                                <li><a href="../../pages/mantenimiento/buscarVerificacion.aspx">Crear Verificación</a></li>   
-                                <li><a href="../../pages/mantenimiento/buscarAprobarVerificacion.aspx">Aprobar Verificación</a></li>
+                                <li><a href="/sites/ATM/pages/mantenimiento/notificacion.aspx">Crear Notificación</a></li>
+                                <li><a href="/sites/ATM/pages/mantenimiento/buscarAprobarNotificacion.aspx">Aprobar Notificación</a></li>
+                                <li><a href="/sites/ATM/pages/mantenimiento/buscarVerificacion.aspx">Crear Verificación</a></li>   
+                                <li><a href="/sites/ATM/pages/mantenimiento/buscarAprobarVerificacion.aspx">Aprobar Verificación</a></li>
                             </ul>
                         </li>
                          <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-write"></i><span class="hide-menu">Materiales<span class="badge badge-pill badge-cyan ml-auto">2</span></span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="../../pages/material/buscarMaterial.aspx">Solicitar</a></li>
-                                <li><a href="../../pages/material/buscarAprobar.aspx">Aprobar</a></li>
+                                <li><a href="/sites/ATM/pages/material/buscarMaterial.aspx">Solicitar</a></li>
+                                <li><a href="/sites/ATM/pages/material/buscarAprobar.aspx">Aprobar</a></li>
                                 
                             </ul>
                         </li>
-                        <li><a  href="../../pages/devolver/rechazados.aspx" aria-expanded="false"><i class="ti-back-left"></i><span class="hide-menu">Devoluciones</span></a></li>
-                        <li><a  href="../../pages/reprogramar/buscarReprogramar.aspx" aria-expanded="false"><i class="ti-timer"></i><span class="hide-menu">Reprogramación</span></a></li>
-                        <li><a  href="../../pages/calendario/mantenimientos.aspx" aria-expanded="false"><i class=" ti-calendar"></i><span class="hide-menu">Calendario</span></a></li>
+                        <li><a  href="/sites/ATM/pages/devolver/rechazados.aspx" aria-expanded="false"><i class="ti-back-left"></i><span class="hide-menu">Devoluciones</span></a></li>
+                        <li><a  href="/sites/ATM/pages/reprogramar/buscarReprogramar.aspx" aria-expanded="false"><i class="ti-timer"></i><span class="hide-menu">Reprogramación</span></a></li>
+                        <li><a  href="/sites/ATM/pages/calendario/mantenimientos.aspx" aria-expanded="false"><i class=" ti-calendar"></i><span class="hide-menu">Calendario</span></a></li>
                     </ul>
                 </nav>
-                <!-- End Sidebar navigation -->
             </div>
-            <!-- End Sidebar scroll-->
         </aside>
 
         <div class="page-wrapper">
@@ -185,7 +125,6 @@
                     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                     <div>
                         <asp:ContentPlaceHolder ID="Content" runat="server">
-
                         </asp:ContentPlaceHolder>
                     </div>
                 </form>
@@ -199,23 +138,20 @@
 
     </div>
 
-    <script src="/assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
-    <!-- Bootstrap popper Core JavaScript -->
-    <script src="/assets/node_modules/popper/popper.min.js"></script>
-    <script src="/assets/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="/assets/node_module/jquery/jquery-3.2.1.min.js"></script>
+    <script src="/assets/node_module/popper/popper.min.js"></script>
+    <script src="/assets/node_module/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/js/perfect-scrollbar.jquery.min.js"></script>
-    <!--Wave Effects -->
     <script src="/js/waves.js"></script>
     <script src="/js/sidebarmenu.js"></script>
     <script src="/js/custom.min.js"></script>
 
-    <script src="/assets/node_modules/raphael/raphael-min.js"></script>
-    <script src="/assets/node_modules/morrisjs/morris.min.js"></script>
-    <script src="/assets/node_modules/jquery-sparkline/jquery.sparkline.min.js"></script>
-    <script src="/assets/node_modules/toast-master/js/jquery.toast.js"></script>
+    <script src="/assets/node_module/raphael/raphael-min.js"></script>
+    <script src="/assets/node_module/morrisjs/morris.min.js"></script>
+    <script src="/assets/node_module/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <script src="/assets/node_module/toast-master/js/jquery.toast.js"></script>
     <script src="/js/dashboard1.js"></script>
-    <script src="/assets/node_modules/toast-master/js/jquery.toast.js"></script>
+    <script src="/assets/node_module/toast-master/js/jquery.toast.js"></script>
     <script src="/js/bootstrap-notify.js"></script>
     <asp:ContentPlaceHolder ID="Script" runat="server">
     </asp:ContentPlaceHolder>

@@ -17,6 +17,7 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
         {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["USUARIO"] = "acamador";
@@ -25,6 +26,7 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
                 cargarDatos();
             }
         }
+        
         private void cargarDatos()
         {
             try
@@ -40,6 +42,7 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
+        
         protected void GVMaterialesAprobar_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             string vIdMantenimiento = e.CommandArgument.ToString();
@@ -75,12 +78,14 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModalAprobarMaterial();", true);
             }
         }
+        
         private void validaciones()
         {
             if (RbConductor.SelectedValue.Equals("1")  && DDLConductor.SelectedValue.Equals("0"))
                 throw new Exception("Falta completar datos, Favor seleccionar el conductor asignado. ");
 
         }
+        
         protected void btnModalAprobar_Click(object sender, EventArgs e)
         {
             try
@@ -99,11 +104,13 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
                 UpdateModal.Update();
             }            
         }
+        
         protected void DDLConductor_TextChanged(object sender, EventArgs e)
         {
             DivAlerta.Visible = false;
             UpdateModal.Update();
         }
+        
         void limpiarModal()
         {
             GVNewMaterialesAprobar.DataSource = null;
@@ -113,6 +120,7 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
             DDLConductor.SelectedIndex = -1;
 
         }
+        
         void TransaccionInventario()
         {
             try

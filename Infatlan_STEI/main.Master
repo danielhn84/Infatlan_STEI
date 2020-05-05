@@ -43,17 +43,12 @@
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item"><a class="nav-link nav-toggler d-block d-sm-none waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a></li>
                             <li class="nav-item"><a class="nav-link sidebartoggler d-none d-lg-block d-md-block waves-effect waves-dark" href="javascript:void(0)"><i class="icon-menu"></i></a></li>
-                        
-                        </ul>
-
-                        <ul class="navbar-nav my-lg-0">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ti-user"></i></a>
-                                <a href="javascript:void(0)" class="dropdown-toggle u-dropdown link hide-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuario <span class="caret"></span></a>
-                                <div class="dropdown-menu animated flipInY">
-                                    <a href="javascript:void(0)" class="dropdown-item"><i class="ti-settings"></i>Account Setting</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a href="login.html" class="dropdown-item"><i class="fa fa-power-off"></i>Logout</a>
+                            <li class="nav-item dropdown u-pro">
+                                <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="hidden-md-down"><asp:Literal Text="" ID="LitUsuario" runat="server" /> &nbsp;<i class="fa fa-angle-down"></i></span> 
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right animated flipInY">
+                                    <a href="/logout.aspx" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
                                 </div>
                             </li>
                         </ul>
@@ -68,9 +63,10 @@
                             <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Modulos <span class="badge badge-pill badge-cyan ml-auto">4</span></span></a>
                                 <ul aria-expanded="false" class="collapse">
                                     <li><a href="/sites/agencias/default.aspx">Agencias</a></li>
-                
-                                    <li><a href="#">ATM</a></li>
-                                    <li><a href="#">Estructurado</a></li>
+                                    <li><a href="/sites/ATM/default.aspx">ATM</a></li>
+                                    <li><a href="/sites/cableado/default.aspx">Cableado</a></li>
+                                    <li><a href="sites/inventario/default.aspx">Inventarios</a></li>
+
                                 </ul>
                             </li>
                             <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-wrench"></i><span class="hide-menu">Configuración<span class="badge badge-pill badge-cyan ml-auto">2</span></span></a>

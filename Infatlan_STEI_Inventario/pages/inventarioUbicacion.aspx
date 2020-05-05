@@ -97,6 +97,9 @@
                                             <asp:TextBox Visible="false" ID="TxIdInventario" ReadOnly="true" CssClass="form-control" runat="server"></asp:TextBox>
                                             <asp:TextBox Visible="false" ID="TxIdUbicacion" ReadOnly="true" CssClass="form-control" runat="server"></asp:TextBox>
                                             <asp:TextBox Visible="false" ID="TxIdStock" ReadOnly="true" CssClass="form-control" runat="server"></asp:TextBox>
+                                            <asp:TextBox Visible="false" ID="TxCodigo" ReadOnly="true" CssClass="form-control" runat="server"></asp:TextBox>
+                                            <asp:TextBox Visible="false" ID="TxPrecio" ReadOnly="true" CssClass="form-control" runat="server"></asp:TextBox>
+                                            <asp:TextBox Visible="false" ID="TxCantidadActual" ReadOnly="true" CssClass="form-control" runat="server"></asp:TextBox>
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
                                 </div>
@@ -111,11 +114,23 @@
                                     <asp:DropDownList ID="DDLNueva" runat="server" CssClass="select2 form-control custom-select" style="width: 100%"></asp:DropDownList>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <div class="col-12" >
+                                    <label class="col-form-label">Cantidad</label>
+                                </div>
+                                <div class="col-12">
+                                    <asp:TextBox runat="server" TextMode="Number" ID="TxCantidad" CssClass="form-control"/>
+                                </div>
+                            </div>
                         </div>
-
-                        <div class="col-12" runat="server" id="DivMensaje" visible="false" style="display: flex; background-color:tomato; justify-content:center">
-                            <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbAdvertencia"></asp:Label>
-                        </div>
+                        <asp:UpdatePanel runat="server" ID="UPMensaje">
+                            <ContentTemplate>
+                                <div class="col-12" runat="server" id="DivMensaje" visible="false" style="display: flex; background-color:tomato; justify-content:center">
+                                    <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbAdvertencia"></asp:Label>
+                                </div>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                        
                     </div>
                 </div>
                 <div class="modal-footer">

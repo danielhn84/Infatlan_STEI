@@ -541,7 +541,7 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
                     }
                     Limpiar();
                     udpContabilidad.Update();
-                    Response.Redirect("/page/cotizacion/principalPresupuestos.aspx");
+                    Response.Redirect("/sites/cableado/page/cotizacion/principalPresupuestos.aspx");
                 }
                 else
                 {

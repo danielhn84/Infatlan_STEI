@@ -85,6 +85,9 @@ namespace Infatlan_STEI_Inventario.pages
                         TxIdInventario.Text = vIdInventario;
                         TxIdUbicacion.Text = vDatos.Rows[0]["idUbicacion"].ToString();
                         TxIdStock.Text = vDatos.Rows[0]["idStock"].ToString();
+                        TxCodigo.Text = vDatos.Rows[0]["codigoInventario"].ToString();
+                        TxPrecio.Text = vDatos.Rows[0]["precio"].ToString();
+                        TxCantidadActual.Text = vDatos.Rows[0]["cantidad"].ToString();
                     }
 
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
@@ -96,34 +99,59 @@ namespace Infatlan_STEI_Inventario.pages
 
         protected void BtnAceptar_Click(object sender, EventArgs e){
             try{
+                //validar la cantidad
+                if (Convert.ToDecimal(TxCantidadActual.Text) < Convert.ToDecimal(TxCantidad.Text))
+                    throw new Exception("La cantidad solicitada es mayor que la disponible.");
+
+                String vQuery = "[STEISP_INVENTARIO_Stock] 2," + TxIdStock.Text;
+                DataTable vDataStock = vConexion.obtenerDataTable(vQuery);
+                Decimal vPrecioDec = Convert.ToDecimal(TxCantidad.Text) * Convert.ToDecimal(vDataStock.Rows[0]["precioUnit"].ToString());
+                String vPrecio = vPrecioDec.ToString().Replace(",", ".");
+
                 generarxml vMaestro = new generarxml();
                 Object[] vDatosMaestro = new object[10];
-                vDatosMaestro[0] = "";
+                vDatosMaestro[0] = TxCodigo.Text; 
                 vDatosMaestro[1] = TxIdStock.Text;
-                vDatosMaestro[2] = TxIdUbicacion.Text;
-                vDatosMaestro[3] = ""; //Responsable
-                vDatosMaestro[4] = "";
-                vDatosMaestro[5] = "";
+                vDatosMaestro[2] = DDLNueva.SelectedValue; // NUEVA
+                vDatosMaestro[3] = Session["USUARIO"].ToString(); //Responsable
+                vDatosMaestro[4] = "TRAN_UBIC";
+                vDatosMaestro[5] = TxCantidad.Text;
                 vDatosMaestro[6] = ""; // Serie
-                vDatosMaestro[7] = "";
+                vDatosMaestro[7] = vPrecio;
                 vDatosMaestro[8] = Session["USUARIO"].ToString();
-                vDatosMaestro[9] = 5;
+                vDatosMaestro[9] = 14;
                 String vXML = vMaestro.ObtenerMaestroString(vDatosMaestro);
                 vXML = vXML.Replace("<?xml version=\"1.0\" encoding=\"utf-16\"?>", "");
 
-                String vQuery = "[STEISP_INVENTARIO_Principal] 3" +
-                    "," + TxIdInventario.Text +
-                    "," + DDLNueva.SelectedValue + 
-                    ",'" + vXML + "'";
-                Int32 vInfo = vConexion.ejecutarSql(vQuery);
-                if (vInfo == 2){
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "cerrarModal();", true);
-                    Mensaje("Cambio realizado con éxito.", WarningType.Success);
-                    cargarDatos(TxIdUbicacion.Text);
-                }
 
+                if (Convert.ToDecimal(TxCantidadActual.Text) == Convert.ToDecimal(TxCantidad.Text)){
+                   vQuery = "[STEISP_INVENTARIO_Principal] 3" +
+                   "," + TxIdInventario.Text +
+                   "," + TxIdUbicacion.Text +  //UBICACION ANTERIOR
+                   ",'" + vXML + "'";
+
+                    Int32 vInfo = vConexion.ejecutarSql(vQuery);
+                    if (vInfo == 2){
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "cerrarModal();", true);
+                        Mensaje("Cambio realizado con éxito.", WarningType.Success);
+                        cargarDatos(TxIdUbicacion.Text);
+                    }
+                }else if (Convert.ToDecimal(TxCantidadActual.Text) > Convert.ToDecimal(TxCantidad.Text)){
+                    vQuery = "[STEISP_INVENTARIO_Principal] 6" +
+                    "," + TxIdInventario.Text +
+                    "," + TxIdUbicacion.Text +  //UBICACION ANTERIOR
+                    ",'" + vXML + "'";
+
+                    Int32 vInfo = vConexion.ejecutarSql(vQuery);
+                    if (vInfo == 4){
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "cerrarModal();", true);
+                        Mensaje("Cambio realizado con éxito.", WarningType.Success);
+                        cargarDatos(TxIdUbicacion.Text);
+                    }
+                }
             }catch (Exception ex){
-                Mensaje(ex.Message, WarningType.Danger);
+                DivMensaje.Visible = true;
+                LbAdvertencia.Text = ex.Message;
             }
         }
 

@@ -24,15 +24,6 @@ namespace Infatlan_STEI
         protected global::System.Web.UI.WebControls.ContentPlaceHolder Head;
 
         /// <summary>
-        /// Control lbusu.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbusu;
-
-        /// <summary>
         /// Control FormaPrincipal.
         /// </summary>
         /// <remarks>

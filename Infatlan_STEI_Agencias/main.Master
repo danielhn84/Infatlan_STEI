@@ -110,23 +110,23 @@
                        
                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-home"></i><span class="hide-menu">Configuraciones</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="/pages/configuraciones/creacionAgencia.aspx">Agencias</a></li>
-                                <li><a href="/pages/configuraciones/agenciaTipo.aspx">Tipos de Agencia</a></li>                               
-                                <li><a href="/pages/configuraciones/motivosCancelacionMantenimientos.aspx">Motivos</a></li>
-                                <li><a href="/pages/configuraciones/tiposAreas.aspx">Areas</a></li>
-                                <li><a href="/pages/configuraciones/calendarioMantenimientoAnual.aspx">Calendario Anual</a></li>
+                                <li><a href="/sites/agencias/pages/configuraciones/creacionAgencia.aspx">Agencias</a></li>
+                                <li><a href="/sites/agencias/pages/configuraciones/agenciaTipo.aspx">Tipos de Agencia</a></li>                               
+                                <li><a href="/sites/agencias/pages/configuraciones/motivosCancelacionMantenimientos.aspx">Motivos</a></li>
+                                <li><a href="/sites/agencias/pages/configuraciones/tiposAreas.aspx">Areas</a></li>
+                                <li><a href="/sites/agencias/pages/configuraciones/calendarioMantenimientoAnual.aspx">Calendario Anual</a></li>
                             </ul>
                            
                        </li>                   
                         <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-wrench"></i><span class="hide-menu">Mantenimiento</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="/pages/mantenimiento/creacionNotificacion.aspx">Crear Notificación</a></li>
-                                <li><a href="/pages/mantenimiento/aprobarNotificacion.aspx">Aprobar Notificacion</a></li>
-                                <li><a href="/pages/mantenimiento/solicitudMateriales.aspx">Solicitar Materiales</a></li>
-                                <li><a href="/pages/mantenimiento/aprobarSolicitudMateriales.aspx">Aprobar Materiales</a></li>
-                                <li><a href="/pages/mantenimiento/lvPendientesAprobarJefes.aspx">Aprobar LV</a></li>
-                                <li><a href="/pages/mantenimiento/lvPendientesModificar.aspx">Modificar LV</a></li>
-                                <li><a href="/pages/mantenimiento/reprogramarMantenimiento.aspx">Reprogramar</a></li>
+                                <li><a href="/sites/agencias/pages/mantenimiento/creacionNotificacion.aspx">Crear Notificación</a></li>
+                                <li><a href="/sites/agencias/pages/mantenimiento/aprobarNotificacion.aspx">Aprobar Notificacion</a></li>
+                                <li><a href="/sites/agencias/pages/mantenimiento/solicitudMateriales.aspx">Solicitar Materiales</a></li>
+                                <li><a href="/sites/agencias/pages/mantenimiento/aprobarSolicitudMateriales.aspx">Aprobar Materiales</a></li>
+                                <li><a href="/sites/agencias/pages/mantenimiento/lvPendientesAprobarJefes.aspx">Aprobar LV</a></li>
+                                <li><a href="/sites/agencias/pages/mantenimiento/lvPendientesModificar.aspx">Modificar LV</a></li>
+                                <li><a href="/sites/agencias/pages/mantenimiento/reprogramarMantenimiento.aspx">Reprogramar</a></li>
                             </ul>
                         </li>
                         
