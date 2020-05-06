@@ -23,10 +23,12 @@ namespace Infatlan_STEI_ATM.pages.ATM
                 cargarData();
             }
         }
+        
         public void Mensaje(string vMensaje, WarningType type)
         {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
+        
         int CargarInformacionDDL(DropDownList vList, String vValue)
         {
             int vIndex = 0;
@@ -45,6 +47,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
             catch { throw; }
             return vIndex;
         }
+        
         void cargarData()
         {
             if (HttpContext.Current.Session["DETALLE_MODELO_ATM"] == null)

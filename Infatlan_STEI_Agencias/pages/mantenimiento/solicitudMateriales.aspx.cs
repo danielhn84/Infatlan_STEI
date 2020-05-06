@@ -14,11 +14,11 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
     public partial class solicitudMateriales : System.Web.UI.Page
     {
         db vConexion = new db();
-
         public void Mensaje(string vMensaje, WarningType type)
         {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["USUARIO"] = "acamador";
@@ -28,7 +28,6 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
                 cargarDatos();
             }
         }
-
 
         private void cargarDatos()
         {
@@ -61,6 +60,7 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
+        
         protected void GVBusqueda_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             string vIdMantenimiento = e.CommandArgument.ToString();
@@ -83,6 +83,7 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModalMaterial();", true);
              }
         }
+        
         protected void btnAgregar_Click(object sender, EventArgs e)
         {          
             try
@@ -199,6 +200,7 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
             DivAlertaCantidad.Visible = false;
             UpCantidadMaxima.Update();
         }
+        
         private void validaciones()
         {
             if (DDLArticulo.SelectedValue.Equals("0"))
@@ -207,6 +209,7 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
             if (TxCantidad.Text.Equals(""))
                 throw new Exception("Falta completar datos, Favor ingrese la cantidad de material a solicitar. ");
         }
+        
         protected void btnModalEnviar_Click(object sender, EventArgs e)
         {
             try
@@ -266,6 +269,5 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
             if (Session["AG_SM_MATERIALES"] == null)
                 throw new Exception("Lista de materiales vacia, favor seleccionar material a solicitar. ");
         }
-
     }
 }

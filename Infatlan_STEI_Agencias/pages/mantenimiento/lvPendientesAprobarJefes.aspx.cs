@@ -12,9 +12,7 @@ namespace Infatlan_STEI_Agencias.pages
 {
     public partial class lvPendientesAprobarJefes : System.Web.UI.Page
     {
-
         db vConexion = new db();
-
         public void Mensaje(string vMensaje, WarningType type)
         {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
@@ -91,11 +89,9 @@ namespace Infatlan_STEI_Agencias.pages
                     DataTable vDatos7 = vConexion.obtenerDataTable(vQuery7);
                     Session["AG_LvPA_DATOS_IMAGENES_OBLIGATORIAS"] = vDatos7;
                   
-                    Response.Redirect("/pages/mantenimiento/lvIndividual.aspx?ex=2");
+                    Response.Redirect("/sites/agencias/pages/mantenimiento/lvIndividual.aspx?ex=2");
                     
-                }
-                catch (Exception ex)
-                {
+                }catch (Exception ex){
                     Mensaje(ex.Message, WarningType.Danger);
                 }
 

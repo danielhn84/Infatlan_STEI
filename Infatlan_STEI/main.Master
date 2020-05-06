@@ -15,6 +15,7 @@
     <link href="/assets/node_module/toast-master/css/jquery.toast.css" rel="stylesheet">
     <link href="/css/style.min.css" rel="stylesheet">
     <link href="/css/pages/dashboard1.css" rel="stylesheet">
+
     <asp:ContentPlaceHolder ID="Head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -43,6 +44,9 @@
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item"><a class="nav-link nav-toggler d-block d-sm-none waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a></li>
                             <li class="nav-item"><a class="nav-link sidebartoggler d-none d-lg-block d-md-block waves-effect waves-dark" href="javascript:void(0)"><i class="icon-menu"></i></a></li>
+
+                        </ul>
+                        <ul class="navbar-nav my-lg-0">
                             <li class="nav-item dropdown u-pro">
                                 <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="hidden-md-down"><asp:Literal Text="" ID="LitUsuario" runat="server" /> &nbsp;<i class="fa fa-angle-down"></i></span> 
@@ -55,6 +59,7 @@
                     </div>
                 </nav>
             </header>
+
 
             <aside class="left-sidebar">
                 <div class="scroll-sidebar">
@@ -75,6 +80,8 @@
                                     <li><a href="#">Permisos</a></li>
                                 </ul>
                             </li>
+                            <li><a class="waves-effect waves-dark" href="pages-faq.html" aria-expanded="false"><i class="icon-bubble"></i><span class="hide-menu">FAQs</span></a></li>
+                            <li><a class="waves-effect waves-dark" href="pages-faq.html" aria-expanded="false"><i class="icon-doc"></i><span class="hide-menu">Reportes</span></a></li>
 
                         </ul>
                     </nav>
@@ -111,6 +118,7 @@
     <script src="/assets/node_module/toast-master/js/jquery.toast.js"></script>
     <script src="/js/dashboard1.js"></script>
     <script src="/assets/node_module/toast-master/js/jquery.toast.js"></script>
+
 
     <asp:ContentPlaceHolder ID="Script" runat="server">
     </asp:ContentPlaceHolder>

@@ -19,6 +19,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
         {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -27,6 +28,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 UPMotivos.Update();
             }
         }
+        
         protected void BtnEnviar_Click(object sender, EventArgs e)
         {
             try
@@ -50,6 +52,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
+        
         protected void BtnCancelar_Click(object sender, EventArgs e)
         {
             try
@@ -63,6 +66,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             }
 
         }
+        
         private void validarGuardarMotivo()
         {
             if (TxMotivoCancelacion.Text == "" || TxMotivoCancelacion.Text == string.Empty)
@@ -71,11 +75,13 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             if (RblTipo.SelectedValue.Equals(""))
                 throw new Exception("Falta completar opción tipo.");       
         }
+        
         private void limpiarFormulario()
         {
             TxMotivoCancelacion.Text = string.Empty;
             RblTipo.SelectedIndex = -1;
         }
+        
         void cargar()
         {
             try
@@ -93,6 +99,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             }
 
         }
+        
         protected void GVMotivos_RowCommand(object sender, GridViewCommandEventArgs e)
         {
 
@@ -125,6 +132,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 }
             }
         }
+        
         private void validarModificarMotivo()
         {
             if (TxMotivoModal.Text == "" || TxMotivoModal.Text == string.Empty)
@@ -133,6 +141,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             if (DDLTipo.SelectedValue.Equals(""))
                 throw new Exception("Falta completar opción tipo.");
         }
+        
         protected void btnModalModificarEstado_Click(object sender, EventArgs e)
         {
             try
@@ -167,6 +176,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             }
 
         }
+        
         protected void GVMotivos_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             try
@@ -180,6 +190,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
+        
         protected void TxBuscarMotivo_TextChanged(object sender, EventArgs e)
         {
             try
@@ -244,12 +255,14 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             UpdateModal.Visible = false;
             UpdateModal.Update();
         }
+        
         protected void DDLTipo_SelectedIndexChanged(object sender, EventArgs e)
         {
             DivAlerta.Visible = false;
             UpdateModal.Visible = false;
             UpdateModal.Update();
         }
+        
         protected void DdlEstado_SelectedIndexChanged(object sender, EventArgs e)
         {
             DivAlerta.Visible = false;

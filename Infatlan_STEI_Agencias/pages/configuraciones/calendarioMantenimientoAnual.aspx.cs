@@ -10,18 +10,16 @@ using System.Data;
 using Infatlan_STEI_Agencias.classes;
 using Excel;
 
-
-
 namespace Infatlan_STEI_Agencias.pages.configuraciones
 {
     public partial class calendarioMantenimientoAnual : System.Web.UI.Page
     {
-
         db vConexion = new db();
         public void Mensaje(string vMensaje, WarningType type)
         {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["USUARIO"] = "acamador";
@@ -30,6 +28,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
 
             }
         }
+        
         public Boolean cargarArchivo(String DireccionCarga, ref int vSuccess, ref int vError, String vUsuario, String TipoProceso)
         {
 
@@ -71,6 +70,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             }
             return vResultado;
         }
+        
         private bool verificarRow(DataRow dr)
         {
             int contador = 0;
@@ -87,6 +87,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             else
                 return true;
         }
+        
         public void procesarArchivo(DataSet vArchivo, ref int vSuccess, string DireccionCarga, string TipoProceso)
         {
             try
@@ -206,6 +207,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 LbMensaje.Text = ex.Message;
             }
         }      
+        
         protected void BtnEnviar_Click1(object sender, EventArgs e)
         {
             String archivoLog = string.Format("{0}_{1}", Convert.ToString(Session["USUARIO"]), DateTime.Now.ToString("yyyyMMdd"));
@@ -263,6 +265,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
 
              }
         }
+        
         protected void BtnCancelar_Click1(object sender, EventArgs e)
         {
             try

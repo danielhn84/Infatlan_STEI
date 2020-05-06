@@ -18,6 +18,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
         {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -25,6 +26,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 cargar();
             }
         }
+        
         protected void BtnEnviar_Click(object sender, EventArgs e)
         {
             try
@@ -47,15 +49,18 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
+        
         private void validarGuardarTipoAgencia()
         {
             if (TxAgencia.Text == "" || TxAgencia.Text == string.Empty)
                 throw new Exception("Falta ingresar el tipo de agencia que desea crear.");
         }
+        
         private void limpiarFormularioTipoAgencia()
         {
             TxAgencia.Text = string.Empty;
         }
+        
         protected void BtnCancelar_Click(object sender, EventArgs e)
         {
             try
@@ -68,6 +73,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
+        
         void cargar()
         {
             try
@@ -85,6 +91,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             }
 
         }
+        
         protected void GVTipoAgencias_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "Modifcar")
@@ -108,6 +115,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 }
             }
         }
+        
         protected void btnModalModificarTipoAgencia_Click(object sender, EventArgs e)
         {
             try
@@ -141,6 +149,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 UpdateModal.Update();
             }
         }
+        
         protected void GVTipoAgencias_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             try
@@ -154,6 +163,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
+        
         protected void TxBuscarArea_TextChanged(object sender, EventArgs e)
         {
             try
@@ -211,15 +221,17 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
-        protected void BtnRegresar_Click(object sender, EventArgs e)
-        {
+        
+        protected void BtnRegresar_Click(object sender, EventArgs e){
             Response.Redirect("../../default.aspx");
         }
+        
         private void validarModificarTipoAgencia()
         {
             if (TxTipoAgenciaModal.Text == "" || TxTipoAgenciaModal.Text == string.Empty)
                 throw new Exception("Campos vacios, Favor ingresar el tipo de agencia.");
         }
+        
         protected void TxTipoAgenciaModal_TextChanged(object sender, EventArgs e)
         {           
 
@@ -227,6 +239,5 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 UpdateModal.Update();
                
         }
-
     }
 }

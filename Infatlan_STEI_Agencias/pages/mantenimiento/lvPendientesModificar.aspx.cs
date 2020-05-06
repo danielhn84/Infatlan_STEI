@@ -95,7 +95,7 @@ namespace Infatlan_STEI_Agencias.pages
                     DataTable vDatos7 = vConexion.obtenerDataTable(vQuery7);
                     Session["AG_LvPM_DATOS_IMAGENES_OBLIGATORIAS"] = vDatos7;
 
-                    Response.Redirect("/pages/mantenimiento/lvIndividual.aspx?ex=3");
+                    Response.Redirect("/sites/agencias/pages/mantenimiento/lvIndividual.aspx?ex=3");
 
                 }
                 catch (Exception ex)

@@ -17,6 +17,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
         {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["USUARIO"] = "acamador";
@@ -26,6 +27,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 cargarDataAgencias();
             }
         }
+        
         void cargarData()
         {
             try
@@ -83,6 +85,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
+        
         private void validar()
         {
             if (TxAgencia.Text == "" || TxAgencia.Text == string.Empty)
@@ -115,6 +118,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             if (RblConductor.SelectedValue.Equals(""))
                 throw new Exception("Falta completar opción ¿Si requiere de conductorn para el traslado hacia la agencia?.");
         }
+        
         private void cargarDataAgencias()
         {
             try
@@ -130,6 +134,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
+        
         private void limpiar()
         {
             TxAgencia.Text = String.Empty;
@@ -143,6 +148,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             DDLMunicipio.SelectedIndex = -1;
             RblConductor.SelectedIndex = -1;
         }
+        
         protected void BtnEnviar_Click(object sender, EventArgs e)
         {
             try
@@ -196,6 +202,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
+        
         protected void BtnCancelar_Click(object sender, EventArgs e)
         {
             try
@@ -208,6 +215,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
+        
         protected void GVAgencias_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             try
@@ -221,6 +229,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
+        
         protected void TxBuscarAgencia_TextChanged(object sender, EventArgs e)
         {
             try
@@ -286,6 +295,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
+        
         protected void GVAgencias_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "Modifcar")
@@ -335,6 +345,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 }
             }
         }
+        
         private void validarModificar()
         {
             if (TxAgenciaModificar.Text == "" || TxAgenciaModificar.Text == string.Empty)
@@ -364,6 +375,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             if (RbConductorModificar.SelectedValue.Equals(""))
                 throw new Exception("Falta completar opción ¿Si requiere de conductorn para el traslado hacia la agencia?.");
         }
+        
         protected void btnModalModificar_Click(object sender, EventArgs e)
         {
             try
@@ -430,6 +442,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             }
 
         }
+        
         protected void DDLDepartamento_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -442,6 +455,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             }
 
         }
+        
         private void cargarMunicipios(String vIdDepto)
         {
             if (vIdDepto != "0")
@@ -462,6 +476,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             else
                 DDLMunicipio.Items.Clear();
         }
+        
         protected void DDLDepartamentoModificar_SelectedIndexChanged(object sender, EventArgs e)
         {
             String vQuery = "STEISP_INVENTARIO_Generales 2," + DDLDepartamentoModificar.SelectedValue;

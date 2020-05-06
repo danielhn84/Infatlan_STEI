@@ -28,6 +28,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
         {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
+        
         void cargarDataATM(){
             
             if (HttpContext.Current.Session["ATM_ADD"] == null)
@@ -224,8 +225,6 @@ namespace Infatlan_STEI_ATM.pages.ATM
                 Session["ATM_ADD"] = "1";
                 }
             }
-
-
 
         protected void DDLModeloATM_SelectedIndexChanged(object sender, EventArgs e){
         //DETALLE MODELO ATM

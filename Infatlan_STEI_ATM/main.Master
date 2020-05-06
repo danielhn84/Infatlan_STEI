@@ -78,7 +78,8 @@
 
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav"> 
-                        <li><a  href="/default.aspx" aria-expanded="false"><i class="ti-home"></i><span class="hide-menu">Dashboard</span></a></li>
+
+                        <li><a  href="/default.aspx" aria-expanded="false"><i class="icon-action-undo"></i><span class="hide-menu">Volver</span></a></li>
                          <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-desktop"></i><span class="hide-menu">ATM<span class="badge badge-pill badge-cyan ml-auto">13</span></span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="/sites/ATM/pages/ATM/add.aspx">Agregar</a></li>

@@ -11,14 +11,11 @@ namespace Infatlan_STEI_Agencias.pages
 {
     public partial class reprogramarMantenimiento : System.Web.UI.Page
     {
-
         db vConexion = new db();
-
         public void Mensaje(string vMensaje, WarningType type)
         {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
-
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -28,6 +25,7 @@ namespace Infatlan_STEI_Agencias.pages
                 cargarDatos();
             }
         }
+        
         private void cargarDatos()
         {
             try
@@ -45,13 +43,11 @@ namespace Infatlan_STEI_Agencias.pages
             }
         }
 
-
         private void validaciones()
         {         
             if (TxNuevaFecha.Text.Equals(""))
                 throw new Exception("Falta completar datos,  Favor ingresar la nueva fecha de reprogramación del mantenimiento preventivo. ");
         }
-
 
         protected void GvMantPendientesReprogramar_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -84,7 +80,6 @@ namespace Infatlan_STEI_Agencias.pages
 
             }
         }
-
 
         private void LimpiarModalReprogramarMantenimiento()
         {

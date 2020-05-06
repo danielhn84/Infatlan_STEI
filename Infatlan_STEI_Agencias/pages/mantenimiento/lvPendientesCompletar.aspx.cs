@@ -44,7 +44,6 @@ namespace Infatlan_STEI_Agencias.pages
             }
         }
 
-
         protected void GVListaVerificacion_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "Completar")
@@ -69,16 +68,14 @@ namespace Infatlan_STEI_Agencias.pages
                     DataTable vDatos2 = vConexion.obtenerDataTable(vQuery2);           
                     Session["AG_LvPC_TECNICOS_PARTICIPANTES"] = vDatos2;
 
-
-                    Response.Redirect("/pages/mantenimiento/lvIndividual.aspx?ex=1");
+                    Response.Redirect("/sites/agencias/pages/mantenimiento/lvIndividual.aspx?ex=1");
                 }
                 catch (Exception ex)
                 {
                     Mensaje(ex.Message, WarningType.Danger);
                 }
 
-            } else if(e.CommandName == "Cancelar")
-            {
+            }else if(e.CommandName == "Cancelar"){
                 string vIdMantenimientoCompletar = e.CommandArgument.ToString();
                 Session["AG_LvPC_ID_MANTENIMIENTO_LV_COMPLETAR"] = vIdMantenimientoCompletar;
 
@@ -94,8 +91,6 @@ namespace Infatlan_STEI_Agencias.pages
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModalCancelarLV();", true);
                 }
           }
-
-   
 
         private void validarModalCancelacion()
         {
@@ -124,7 +119,6 @@ namespace Infatlan_STEI_Agencias.pages
             }
         }
 
-
         protected void TxDetalle_TextChanged(object sender, EventArgs e)
         {
             funcionCambioTecnicoResponsable();
@@ -134,7 +128,6 @@ namespace Infatlan_STEI_Agencias.pages
         {
             funcionCambioTecnicoResponsable();            
         }
-
 
         private void funcionCambioTecnicoResponsable(){
             LbMensajeModalErrorReprogramar.Text = "";
@@ -153,7 +146,6 @@ namespace Infatlan_STEI_Agencias.pages
             DDLNombreResponsable.Visible = false;
             etiqueta.Visible = false;
         }
-
 
         private void tecnicosResponsable()
         {

@@ -23,10 +23,12 @@ namespace Infatlan_STEI_ATM.pages.ATM
             }
 
         }
+        
         public void Mensaje(string vMensaje, WarningType type)
         {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
+        
         void cargarData()
         {
             if (HttpContext.Current.Session["CANCELARVERIF_ATM"] == null)

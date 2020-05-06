@@ -8,7 +8,6 @@ using System.IO;
 using System.Data;
 using Infatlan_STEI_Agencias.classes;
 using System.Drawing;
-
  
 namespace Infatlan_STEI_Agencias.pages
 {
@@ -114,6 +113,7 @@ namespace Infatlan_STEI_Agencias.pages
             BtnRegresarCompletarLV.Visible = false;
             DivAprobacion.Visible = true;
         }
+        
         void cargarDataVista()
         {
             try
@@ -310,6 +310,7 @@ namespace Infatlan_STEI_Agencias.pages
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
+        
         private void validacionesAprobarLV()
         {
             if (RblAprobarLV.SelectedValue.Equals(""))
@@ -318,6 +319,7 @@ namespace Infatlan_STEI_Agencias.pages
             if (RblAprobarLV.SelectedValue.Equals("0") && (TxMotivoCancelacionLV.Text == "" || TxMotivoCancelacionLV.Text == string.Empty))
                 throw new Exception("Falta que ingrese el motivo de cancelacion de la lista de verificación");
         }
+        
         protected void BtnEnviarAprobacion_Click(object sender, EventArgs e)
         {
             try
@@ -348,6 +350,7 @@ namespace Infatlan_STEI_Agencias.pages
                     Mensaje(ex.Message, WarningType.Danger);
             }
         }
+        
         protected void RblAprobarLV_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (RblAprobarLV.SelectedValue.Equals("1"))
@@ -365,11 +368,13 @@ namespace Infatlan_STEI_Agencias.pages
                 TxMotivoCancelacionLV.Text = String.Empty;
             }
         }
+        
         private void LimpiarAprobarLV()
         {
             RblAprobarLV.SelectedIndex = -1;
             TxMotivoCancelacionLV.Text = String.Empty;
         }
+        
         protected void btnModalAprobarLV_Click(object sender, EventArgs e)
         {
             try
@@ -406,18 +411,18 @@ namespace Infatlan_STEI_Agencias.pages
             }
             LimpiarAprobarLV();
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModalAprobarRegresarLv();", true);
-            Response.Redirect("/pages/mantenimiento/lvPendientesAprobarJefes.aspx");          
+            Response.Redirect("/sites/agencias/pages/mantenimiento/lvPendientesAprobarJefes.aspx");          
         }
-        protected void BtnRegresarPendienteAprobar_Click(object sender, EventArgs e)
-        {
+        
+        protected void BtnRegresarPendienteAprobar_Click(object sender, EventArgs e){
             LimpiarAprobarLV();
-            Response.Redirect("/pages/mantenimiento/lvPendientesModificar.aspx");
+            Response.Redirect("/sites/agencias/pages/mantenimiento/lvPendientesModificar.aspx");
         }
-
-
+        
         //**********************************************************************************************************************//
         //*******************************************  ENVIO LISTA DE VERIFICACION  ********************************************//
         //*********************************************************************************************************************//
+        
         private void cargarDataLlenado()
         {
             try
@@ -459,12 +464,14 @@ namespace Infatlan_STEI_Agencias.pages
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
+        
         void OcultarTarjeta()
         {
             DivAprobacion.Visible = false;
             ocultarBotonVolver1.Visible = true;
             UpdatePanel5.Update();
         }
+        
         void mostrarAsteriscos()
         {
             lbHoraSalida.Visible = true;
@@ -489,6 +496,7 @@ namespace Infatlan_STEI_Agencias.pages
             //DivRack.Visible = true;
             //DivEspacio.Visible = true;
         }
+        
         protected void RBLManEquipoComu_SelectedIndexChanged1(object sender, EventArgs e)
         {
             if (RBLManEquipoComu.SelectedValue.Equals("1"))
@@ -515,6 +523,7 @@ namespace Infatlan_STEI_Agencias.pages
 
 
         }
+        
         protected void RBProbaronEquipo_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (RBProbaronEquipo.SelectedValue.Equals("1"))
@@ -536,6 +545,7 @@ namespace Infatlan_STEI_Agencias.pages
             }
 
         }
+        
         protected void RblClimatizacionAdecuada_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (RblClimatizacionAdecuada.SelectedValue.Equals("0"))
@@ -556,6 +566,7 @@ namespace Infatlan_STEI_Agencias.pages
                 ImgPreviewClimatizacion.Src = "/assets/images/vistaPrevia1.JPG";
             }            
         }
+        
         protected void RblUPS_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (RblUPS.SelectedValue.Equals("0"))
@@ -576,6 +587,7 @@ namespace Infatlan_STEI_Agencias.pages
                 ImgPreviewUPS.Src = "/assets/images/vistaPrevia1.JPG";
             }
         }
+        
         protected void RbPolvoSuciedad_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (RbPolvoSuciedad.SelectedValue.Equals("0"))
@@ -596,6 +608,7 @@ namespace Infatlan_STEI_Agencias.pages
                 ImgPreviewPolvoSuciedad.Src = "/assets/images/vistaPrevia1.JPG";
             }
         }
+        
         protected void RblHumedadSustancias_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (RblHumedadSustancias.SelectedValue.Equals("0"))
@@ -616,6 +629,7 @@ namespace Infatlan_STEI_Agencias.pages
                 ImgPreviewHumedadSustancias.Src = "/assets/images/vistaPrevia1.JPG";
             }
         }     
+        
         protected void RblRoboDaño_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (RblRoboDaño.SelectedValue.Equals("0"))
@@ -636,6 +650,7 @@ namespace Infatlan_STEI_Agencias.pages
                 ImgPreviewRoboDaño.Src = "/assets/images/vistaPrevia1.JPG";
             }
         }
+        
         protected void RblElementosAjenos_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (RblElementosAjenos.SelectedValue.Equals("0"))
@@ -658,6 +673,7 @@ namespace Infatlan_STEI_Agencias.pages
                 ImgPreviewElementosAjenos.Src = "/assets/images/vistaPrevia1.JPG";
             }
         }
+        
         protected void BtnEnviarLv_Click(object sender, EventArgs e)
         {          
             try
@@ -696,6 +712,7 @@ namespace Infatlan_STEI_Agencias.pages
                 //UpdateModal.Update();
             }
         }
+        
         private string GetExtension(string Extension)
         {
             switch (Extension)
@@ -742,6 +759,7 @@ namespace Infatlan_STEI_Agencias.pages
                     return "application/octet-stream";
             }
         }
+        
         private void validacionesEnvioLV()
         {
           
@@ -831,6 +849,7 @@ namespace Infatlan_STEI_Agencias.pages
             if (TxEspacioFisico1.Value == string.Empty)
                 throw new Exception("Falta que adjunte imagen del espacio fisico en donde se encuentra el equipo de comunicaciones (Entorno).");                   
         }
+        
         protected void btnModalEnviarLv_Click(object sender, EventArgs e)
         {
             String vEx = Request.QueryString["ex"];
@@ -1507,9 +1526,10 @@ namespace Infatlan_STEI_Agencias.pages
 
             limpiar();
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModalEnvioLv();", true);
-            Response.Redirect("/pages/mantenimiento/lvPendientesCompletar.aspx");
+            Response.Redirect("/sites/agencias/pages/mantenimiento/lvPendientesCompletar.aspx");
 
         }     
+        
         private void limpiar()
         {
 
@@ -1569,17 +1589,16 @@ namespace Infatlan_STEI_Agencias.pages
             TxEspacioFisico1.Value = String.Empty;
 
         }
+        
         protected void BtnRegresarCompletarLV_Click(object sender, EventArgs e)
         {
             try
             {
              limpiar();
-             Response.Redirect("/pages/mantenimiento/lvPendientesAprobarJefes.aspx");
+             Response.Redirect("/sites/agencias/pages/mantenimiento/lvPendientesAprobarJefes.aspx");
             }
             catch (Exception Ex) { Mensaje(Ex.Message, WarningType.Danger); }
         }
-
-
 
         //**********************************************************************************************************************//
         //*****************************************  MODIFICAR LISTA DE VERIFICACION  *****************************************//
@@ -1831,6 +1850,7 @@ namespace Infatlan_STEI_Agencias.pages
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
+        
         void habilitarFU() {
             FuClimatizacion.Visible = true;
             FuUPS.Visible = true;

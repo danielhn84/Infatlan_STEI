@@ -69,7 +69,8 @@
                 
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li><a class="waves-effect waves-dark" href="/sites/inventario/pages/inventario.aspx" aria-expanded="false"><i class="icon-action-redo"></i><span class="hide-menu">Inventario</span></a></li>
+                        <li><a  href="/default.aspx" aria-expanded="false"><i class="icon-action-undo"></i><span class="hide-menu">Volver</span></a></li>
+                        <li><a class="waves-effect waves-dark" href="/sites/inventario/pages/inventario.aspx" aria-expanded="false"><i class="icon-basket-loaded"></i><span class="hide-menu">Inventario</span></a></li>
                         <li><a class="waves-effect waves-dark" href="/sites/inventario/pages/transacciones.aspx" aria-expanded="false"><i class="icon-folder-alt"></i><span class="hide-menu">Transacciones</span></a></li>
                         <li><a class="waves-effect waves-dark" href="/sites/inventario/pages/articulos.aspx" aria-expanded="false"><i class="icon-home"></i><span class="hide-menu">Almacén</span></a></li>
                         <li><a class="waves-effect waves-dark" href="/sites/inventario/pages/proveedores.aspx" aria-expanded="false"><i class="icon-people"></i><span class="hide-menu">Proveedores</span></a></li>
@@ -80,7 +81,6 @@
                                 <li><a href="/sites/inventario/pages/Configuracion/ubicaciones.aspx">Ubicaciones</a></li>
                             </ul>
                         </li>
-                        <li><a class="waves-effect waves-dark" href="pages-faq.html" aria-expanded="false"><i class="icon-bubble"></i><span class="hide-menu">FAQs</span></a></li>
                     </ul>
                 </nav>
             </div>

@@ -16,6 +16,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
         {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -23,6 +24,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 cargar();
             }
         }
+        
         protected void BtnEnviar_Click(object sender, EventArgs e)
         {
             try
@@ -44,15 +46,18 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
+        
         private void validarGuardarArea()
         {
             if (TxArea.Text == "" || TxArea.Text == string.Empty)
                 throw new Exception("Falta ingresar el area de mantenimiento.");           
         }
+        
         private void limpiarFormularioArea()
         {
             TxArea.Text = string.Empty;
         }
+        
         void cargar()
         {
             try
@@ -69,6 +74,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             }
 
         }
+        
         protected void GVAreas_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "Modifcar")
@@ -91,6 +97,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 }
             }
         }
+        
         protected void btnModalModificarEstado_Click(object sender, EventArgs e)
         {
             try
@@ -124,6 +131,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
+        
         protected void BtnCancelar_Click(object sender, EventArgs e)
         {
             try
@@ -138,6 +146,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
 
 
         }
+        
         protected void GVAreas_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             try
@@ -151,6 +160,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
+        
         protected void TxBuscarArea_TextChanged(object sender, EventArgs e)
         {
             try
