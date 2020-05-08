@@ -508,7 +508,7 @@ namespace Infatlan_STEI_Agencias.pages
                 //TxResNoManEquipoComu.Text = String.Empty;
                 TxResNoManEquipoComu1.Value = String.Empty;
                 UpdatePanel8.Update();
-                ImgPreviewNoMantEquipoComu.Src = "/assets/images/vistaPrevia1.JPG";
+                ImgPreviewNoMantEquipoComu.Src = "../../assets/images/vistaPrevia1.JPG";
             }
             else
             {
@@ -563,7 +563,7 @@ namespace Infatlan_STEI_Agencias.pages
                 //TxClimatizacion.Text = String.Empty;
                 TxClimatizacion1.Value = String.Empty;
                 UpdatePanel8.Update();
-                ImgPreviewClimatizacion.Src = "/assets/images/vistaPrevia1.JPG";
+                ImgPreviewClimatizacion.Src = "../../assets/images/vistaPrevia1.JPG";
             }            
         }
         
@@ -584,7 +584,7 @@ namespace Infatlan_STEI_Agencias.pages
                 //TxUPS.Text = String.Empty;
                 TxUPS1.Value = String.Empty;
                 UpdatePanel8.Update();
-                ImgPreviewUPS.Src = "/assets/images/vistaPrevia1.JPG";
+                ImgPreviewUPS.Src = "../../assets/images/vistaPrevia1.JPG";
             }
         }
         
@@ -605,7 +605,7 @@ namespace Infatlan_STEI_Agencias.pages
                 //TxPolvoSuciedad.Text = String.Empty;
                 TxPolvoSuciedad1.Value = String.Empty;
                 UpdatePanel8.Update();
-                ImgPreviewPolvoSuciedad.Src = "/assets/images/vistaPrevia1.JPG";
+                ImgPreviewPolvoSuciedad.Src = "../../assets/images/vistaPrevia1.JPG";
             }
         }
         
@@ -626,7 +626,7 @@ namespace Infatlan_STEI_Agencias.pages
                 //TxHumedadSustancias.Text = String.Empty;
                 TxHumedadSustancias1.Value = String.Empty;
                 UpdatePanel8.Update();
-                ImgPreviewHumedadSustancias.Src = "/assets/images/vistaPrevia1.JPG";
+                ImgPreviewHumedadSustancias.Src = "../../assets/images/vistaPrevia1.JPG";
             }
         }     
         
@@ -647,7 +647,7 @@ namespace Infatlan_STEI_Agencias.pages
                 //TxRoboDaño.Text = String.Empty;
                 TxRoboDaño1.Value = String.Empty;
                 UpdatePanel8.Update();
-                ImgPreviewRoboDaño.Src = "/assets/images/vistaPrevia1.JPG";
+                ImgPreviewRoboDaño.Src = "../../assets/images/vistaPrevia1.JPG";
             }
         }
         
@@ -670,7 +670,7 @@ namespace Infatlan_STEI_Agencias.pages
                 //TxElementosAjenos.Text = String.Empty;
                 TxElementosAjenos1.Value = String.Empty;
                 UpdatePanel8.Update();
-                ImgPreviewElementosAjenos.Src = "/assets/images/vistaPrevia1.JPG";
+                ImgPreviewElementosAjenos.Src = "../../assets/images/vistaPrevia1.JPG";
             }
         }
         

@@ -184,7 +184,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-12" runat="server" id="DivConductor" visible="false">
+<%--                            <div class="col-md-12" runat="server" id="DivConductor" visible="false">
                                 <div class="form-group row">
                                     <div class="col-md-2">
                                         <label class="col-form-label">Conductor Asignado:</label>
@@ -198,7 +198,7 @@
                                             </asp:DropDownList>
                                     </div>
                                 </div>
-                            </div>
+                            </div>--%>
                         </ContentTemplate>
                     </asp:UpdatePanel>
 
