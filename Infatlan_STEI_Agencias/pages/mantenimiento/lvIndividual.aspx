@@ -407,7 +407,7 @@
 
                         <div class="col-md-4 ">
                             <asp:FileUpload ID="FuImageNoMantEquipoComu" runat="server" Visible="false" onchange="showpreview(this); " class="form-control"   />
-                            <img id="ImgPreviewNoMantEquipoComu" height="250" width="382" src="/assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="false" />                           
+                            <img id="ImgPreviewNoMantEquipoComu" height="250" width="382" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="false" />                           
                         </div>
                     </div>
                     <asp:TextBox ID="TxMotivoNoMantEquipoComu" class="form-control" runat="server" TextMode="MultiLine" Rows="5" placeholder="Ingrese motivo por el cual no realizo el mantenimiento al equipo de comunicación..." Visible="false"></asp:TextBox>
@@ -464,7 +464,7 @@
 
                         <div class="col-md-4 ">
                             <asp:FileUpload ID="FuClimatizacion" runat="server" Visible="false" onchange="showpreview1(this);" class="form-control" />
-                            <img id="ImgPreviewClimatizacion" height="250" width="380" src="/assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="false" />                          
+                            <img id="ImgPreviewClimatizacion" height="250" width="380" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="false" />                          
                         </div>
 
                     </div>
@@ -488,7 +488,7 @@
 
                         <div class="col-md-4 ">
                             <asp:FileUpload ID="FuUPS" runat="server" Visible="false" onchange="showpreview2(this); " class="form-control" />
-                            <img id="ImgPreviewUPS" height="250" width="380" src="/assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="false" />                           
+                            <img id="ImgPreviewUPS" height="250" width="380" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="false" />                           
                         </div>
                     </div>
                 </ContentTemplate>
@@ -519,7 +519,7 @@
 
                         <div class="col-md-4 ">
                             <asp:FileUpload ID="FuPolvoSuciedad" runat="server" Visible="false" onchange="showpreview4(this);" class="form-control" />
-                            <img id="ImgPreviewPolvoSuciedad" height="250" width="380" src="/assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="false" />
+                            <img id="ImgPreviewPolvoSuciedad" height="250" width="380" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="false" />
                         </div>
                     </div>
                 </ContentTemplate>
@@ -540,7 +540,7 @@
                         </div>
                         <div class="col-md-4 ">
                             <asp:FileUpload ID="FuHumedadSustancias" runat="server" Visible="false" onchange="showpreview5(this);" class="form-control" />
-                            <img id="ImgPreviewHumedadSustancias" height="250" width="380" src="/assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="false" />                            
+                            <img id="ImgPreviewHumedadSustancias" height="250" width="380" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="false" />                            
                         </div>
                     </div>
                 </ContentTemplate>
@@ -561,7 +561,7 @@
                         </div>
                         <div class="col-md-4 ">
                             <asp:FileUpload ID="FuRoboDaño" runat="server" Visible="false" onchange="showpreview6(this);" class="form-control" />
-                            <img id="ImgPreviewRoboDaño" height="250" width="380" src="/assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="false" />                           
+                            <img id="ImgPreviewRoboDaño" height="250" width="380" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="false" />                           
                         </div>
                     </div>
                 </ContentTemplate>
@@ -583,7 +583,7 @@
                         </div>
                         <div class="col-md-4">
                             <asp:FileUpload ID="FuElementosAjenos" runat="server" Visible="false" onchange="showpreview7(this);" class="form-control" />
-                            <img id="ImgPreviewElementosAjenos" height="250" width="380" src="/assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="false" />                          
+                            <img id="ImgPreviewElementosAjenos" height="250" width="380" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="false" />                          
                         </div>
                     </div>
                 </ContentTemplate>
@@ -604,7 +604,7 @@
                 </div>
                 <div class="col-md-4" style="vertical-align: middle; text-align: right">
                     <asp:FileUpload ID="FuRack" runat="server" Visible="true" onchange="showpreview3(this);" class="form-control" />
-                    <img id="ImgPreviewRack" height="250" width="380" src="/assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="true" />
+                    <img id="ImgPreviewRack" height="250" width="380" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="true" />
                 </div>
             </div>
 
@@ -615,7 +615,7 @@
                 </div>
                 <div class="col-md-4" style="vertical-align: middle; text-align: right">
                     <asp:FileUpload ID="FuEspacioFisico" runat="server" Visible="true" onchange="showpreview8(this);" class="form-control" />
-                    <img id="ImgPreviewEspacioFisico" height="250" width="380" src="/assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="true" />
+                    <img id="ImgPreviewEspacioFisico" height="250" width="380" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="true" />
                 </div>
             </div>
         </div>

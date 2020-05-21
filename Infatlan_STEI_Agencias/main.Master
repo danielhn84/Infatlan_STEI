@@ -18,13 +18,13 @@
     <link href="/css/animate.min.css" rel="stylesheet" />
     <link href="/css/pages/dashboard1.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <link href="/your-path-to-fontawesome/css/fontawesome.css" rel="stylesheet">
-  <link href="/your-path-to-fontawesome/css/brands.css" rel="stylesheet">
-  <link href="/your-path-to-fontawesome/css/solid.css" rel="stylesheet">
+    <link href="/your-path-to-fontawesome/css/fontawesome.css" rel="stylesheet">
+    <link href="/your-path-to-fontawesome/css/brands.css" rel="stylesheet">
+    <link href="/your-path-to-fontawesome/css/solid.css" rel="stylesheet">
 
-      <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-  <link href="css/ruang-admin.min.css" rel="stylesheet">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="css/ruang-admin.min.css" rel="stylesheet">
 
 <%--<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>     
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> 
@@ -124,6 +124,7 @@
                                 <li><a href="/sites/agencias/pages/mantenimiento/aprobarNotificacion.aspx">Aprobar Notificacion</a></li>
                                 <li><a href="/sites/agencias/pages/mantenimiento/solicitudMateriales.aspx">Solicitar Materiales</a></li>
                                 <li><a href="/sites/agencias/pages/mantenimiento/aprobarSolicitudMateriales.aspx">Aprobar Materiales</a></li>
+                                <li><a href="/sites/agencias/pages/mantenimiento/lvPendientesCompletar.aspx">Completar LV</a></li>
                                 <li><a href="/sites/agencias/pages/mantenimiento/lvPendientesAprobarJefes.aspx">Aprobar LV</a></li>
                                 <li><a href="/sites/agencias/pages/mantenimiento/lvPendientesModificar.aspx">Modificar LV</a></li>
                                 <li><a href="/sites/agencias/pages/mantenimiento/reprogramarMantenimiento.aspx">Reprogramar</a></li>
@@ -179,6 +180,8 @@
     <script src="/js/dashboard1.js"></script>
     <script src="/assets/node_module/toast-master/js/jquery.toast.js"></script>
     <script src="/js/bootstrap-notify.js"></script>
+
+
     <asp:ContentPlaceHolder ID="Script" runat="server">
     </asp:ContentPlaceHolder>
 </body>
