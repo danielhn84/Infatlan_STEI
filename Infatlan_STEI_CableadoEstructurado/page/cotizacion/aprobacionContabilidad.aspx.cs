@@ -24,14 +24,21 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
     public partial class aprobacionContabilidad : System.Web.UI.Page
     {
         db vConexion = new db();
-        
-        
+
+        Boolean vRegistro = false;
         int vColor = 0;
+        decimal vCantidadEditada;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             CargarProceso();
             Session["USUARIO"] = "svalle";
+
+            if (vColor == 1)
+            {
+                navCostos.Visible = false;
+            }
+            
         }
 
         public void Mensaje(string vMensaje, WarningType type)
@@ -41,7 +48,6 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
 
         void CargarProceso()
         {
-
             try
             {
                 var sumTotal = 0.00;
@@ -53,12 +59,35 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
                 DataTable vDatos = new DataTable();
                 vDatos = vConexion.obtenerDataTable("STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 5, '" + Session["CE_IDESTUDIOPRINCIPAL"] + "'");
 
+
+                if (txtModCantidad.Text != "")
+                {
+                    string vNombreMaterial = ddlModMaterial.SelectedValue;
+
+                    for (int j = 0; j < vDatos.Rows.Count; j++)
+                    {
+                        if (vNombreMaterial == vDatos.Rows[j]["idStock"].ToString())
+                        {
+                            vDatos.Rows[j]["cantidad"] = Convert.ToDecimal(vDatos.Rows[j]["cantidad"].ToString()) + Convert.ToDecimal(txtModCantidad.Text);
+                            vCantidadEditada = Convert.ToDecimal(vDatos.Rows[j]["cantidad"].ToString());
+                            vRegistro = true;
+                        }
+                    }
+                   
+                }
+
                 GVContabilidad.DataSource = vDatos;
                 GVContabilidad.DataBind();
+                udpGVContabilidad.Update();
+                udpContabilidad.Update();
+                udpCostoTotalMateriales.Update();
                 Session["CE_PRESUPUESTO"] = vDatos;
                 GVContabilidad.Columns[4].ItemStyle.HorizontalAlign = HorizontalAlign.Center;
                 GVContabilidad.Columns[5].ItemStyle.HorizontalAlign = HorizontalAlign.Center;
-                
+
+
+               
+
 
                 for (int i = 0; i < vDatos.Rows.Count; i++)
                 {
@@ -69,17 +98,23 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
                     }
                     else
                     {
-
                         sumTotal += Convert.ToDouble(Convert.ToDecimal(vDatos.Rows[i]["costoTotal"]));
                         //txtCostoTotalMateriales.Text = sumTotal.ToString();
                         txtCostoTotalMateriales.Text = Convert.ToString(Math.Round(Convert.ToDecimal(sumTotal), 2));
                     }
 
-
+                    
                 }
 
 
+                String vQueryPDF = "STEISP_CABLESTRUCTURADO_Aprobacion 5, '" + Session["CE_IDESTUDIOPRINCIPAL"] + "'";
+                DataTable vDatosPDF = vConexion.obtenerDataTable(vQueryPDF);
 
+                String vFUPlano = vDatosPDF.Rows[0]["PDFPlano"].ToString();
+                string srcPlano = "data:application/pdf;base64," + vFUPlano;
+                IframePlano.Src = srcPlano;
+                IframePlano.Visible = true;
+                
             }
             catch (Exception Ex)
             {
@@ -109,15 +144,15 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
 
             try
             {
-
                 string[] arg = new string[2];
                 arg = e.CommandArgument.ToString().Split(';');
                 Session["CE_IDESTUDIOPRESUPUESTO"] = arg[0];
                 Session["CE_IDSTOCKPRESUPUESTO"] = arg[1];
 
+                
+
                 if (e.CommandName == "Modificar")
                 {
-
                     DataTable vDatos = new DataTable();
                     vDatos = vConexion.obtenerDataTable("STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 6," + Session["CE_IDESTUDIOPRESUPUESTO"] + "," + "'" + Session["CE_IDSTOCKPRESUPUESTO"] + "'");
 
@@ -125,12 +160,13 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
                     {
                         txtModCantidad.Text = item["cantidad"].ToString();
                         txtModCostoUnitario.Text = item["precio"].ToString();
-                        txtModMaterial.Text = item["material"].ToString();
+                        ddlModMaterial.SelectedValue = item["material"].ToString();
+                        CargarddlMaterial();
                     }
 
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
-
                 }
+              
             }
             catch (Exception Ex)
             {
@@ -171,7 +207,7 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
                 txtCostoTotal.Text = "";
                 udpCostoTotal.Update();
 
-                txtGanancia.Text = "";
+                txtIsvGanancia.Text = "";
                 udpGanancia.Update();
 
                 txtPropuesta.Text = "";
@@ -277,27 +313,72 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         {
             try
             {
-
+               
                 string vMensaje = "";
+                Int32 vInformacion;
+                String vQuery;
 
-                String vQuery = "STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 13," + Session["CE_IDESTUDIOPRESUPUESTO"] + "," +
-                                                                                "'" + Session["CE_IDSTOCKPRESUPUESTO"] + "'," +
-                                                                                "'" + txtModCantidad.Text + "'";
+                CargarProceso();
 
-                Int32 vInformacion = vConexion.ejecutarSql(vQuery);
+                if (txtModCostoUnitario.Visible == true)
+                {
+                    vQuery = "STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 13," + Session["CE_IDESTUDIOPRESUPUESTO"] + "," +
+                                                                                     "'" + Session["CE_IDSTOCKPRESUPUESTO"] + "'," +
+                                                                                    "'" + txtModCantidad.Text + "'," +
+                                                                                    "'" + ddlModMaterial.SelectedValue + "'";
+
+                    vInformacion = vConexion.ejecutarSql(vQuery);
+                }
+                else
+                {
+
+                    
+                    
+                    if (vRegistro == true)
+                    {
+                       vQuery = "STEISP_CABLESTRUCTURADO_IngresarDatosEstudio 12," + Session["CE_IDESTUDIOPRINCIPAL"] + "," +
+                                                                                    "'" + ddlModMaterial.SelectedValue + "'," +
+                                                                                    "'" + vCantidadEditada + "'," +
+                                                                                    "'" + 1 + "'";
+
+                    }
+                    else
+                    {
+                        vQuery = "STEISP_CABLESTRUCTURADO_IngresarDatosEstudio 12," + Session["CE_IDESTUDIOPRINCIPAL"] + "," +
+                                                                                      "'" + ddlModMaterial.SelectedValue + "'," +
+                                                                                      "'" + txtModCantidad.Text + "'," +
+                                                                                      "'" + 0 + "'";
+                    }
+                  
+                    vInformacion = vConexion.ejecutarSql(vQuery);
+
+                }
+
 
                 vMensaje = "Actualizado con Exito!";
 
                 if (vInformacion == 1)
                 {
 
-                    CerrarModal("ModificarMaterialModal");
+                    
                     Mensaje("Actualizado con Exito!", WarningType.Success);
-                    CargarProceso();
+                    CerrarModal("ModificarMaterialModal");
+                    DataTable vDatos = new DataTable();
+                    vDatos = vConexion.obtenerDataTable("STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 5, '" + Session["CE_IDESTUDIOPRINCIPAL"] + "'");
+                    GVContabilidad.DataSource = vDatos;
                     GVContabilidad.DataBind();
                     udpGVContabilidad.Update();
                     udpContabilidad.Update();
                     udpCostoTotalMateriales.Update();
+
+                    if (vColor == 1)
+                    {
+                        navCostos.Visible = false;
+                    }
+                    else if (vColor == 0)
+                    {
+                        navCostos.Visible = true;
+                    }
 
                 }
                 else
@@ -306,6 +387,7 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
                     CerrarModal("ModificarMaterialModal");
 
                 }
+
 
             }
             catch (Exception Ex)
@@ -333,7 +415,7 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
 
                 Session["CE_GANANCIA"] = Convert.ToDecimal(txtHorasExtras.Text) + Convert.ToDecimal(txtGastoViaje.Text) + Convert.ToDecimal(txtManoObraContra.Text) + Convert.ToDecimal(txtTransporte.Text) + Convert.ToDecimal(txtAlimentacion.Text) + Convert.ToDecimal(txtHospedaje.Text) + Convert.ToDecimal(txtImprevistos.Text);
 
-                txtGanancia.Text = "Lps.  " + Session["CE_GANANCIA"].ToString();
+                //txtGanancia.Text = "Lps.  " + Session["CE_GANANCIA"].ToString();
 
                 Session["CE_ISVGANANCIA"] = Convert.ToString(Math.Round((Convert.ToDecimal(Session["CE_GANANCIA"]) * Convert.ToDecimal(0.15)), 2));
 
@@ -425,8 +507,16 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
 
             try
             {
+                if (BtnModGuardarConta.Text == "Enviar")
+                {
+                 
+                    Response.Redirect("/sites/cableado/page/cotizacion/principalPresupuestos.aspx");
+                }
+
+
                 if (vColor == 0)
                 {
+                    
 
                     String vQuery1 = "STEISP_CABLESTRUCTURADO_IngresarDatosEstudio 6," + txtHorasExtras.Text + "," +
                                                                               "'" + txtGastoViaje.Text + "'," +
@@ -455,6 +545,8 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
 
                     Int32 vInformacion1 = vConexion.ejecutarSql(vQuery1);
 
+                    String vQuery = "STEISP_CABLESTRUCTURADO_IngresarDatosEstudio 8," + Session["CE_IDESTUDIOPRINCIPAL"];
+                    Int32 vInformacion = vConexion.ejecutarSql(vQuery);
 
 
                     //GENERAR XML Para disminucion
@@ -541,12 +633,18 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
                     }
                     Limpiar();
                     udpContabilidad.Update();
-                    Response.Redirect("/sites/cableado/page/cotizacion/principalPresupuestos.aspx");
+
+                    int vCondicion = 2;
+
+                    string vId = Request.QueryString["i"];
+
+                    Response.Redirect("/sites/cableado/page/cotizacion/ofertaEconomica.aspx?i=" + vId + "&a=" +vCondicion);
                 }
                 else
                 {
                     Limpiar();
-                    throw new Exception("Cantidad Solicitada mayor a Inventario");
+                    throw new Exception("Cantidad solicitada mayor a cantidad de inventario, solicitar nuevos materiales");
+                   
                     //vMensaje = "No cumple con los requerimientos";
                 }
             }
@@ -594,7 +692,6 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
 
             try
             {
-
             
                 if (e.Row.RowType == DataControlRowType.DataRow)
                 {
@@ -613,15 +710,87 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
                         vColor = 1;
                          throw new Exception("La Cantidad Solicitada es Mayor a Inventario.");
                     }
+                    vColor = 0;
                     //if (vCantidadActual == "4.00")
                     //{
                     //    e.Row.Cells[5].BackColor = Color.FromName("#f74557");
                     //}
-            }
+                }
+
+             
 
             }
             catch (Exception Ex) { Mensaje(Ex.Message, WarningType.Danger); }
 
+        }
+
+
+        protected void ddlModMaterial_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            
+        }
+
+        void CargarddlMaterial()
+        {
+
+            try
+            {
+                String vQuery = "STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 7";
+                DataTable vDatos = vConexion.obtenerDataTable(vQuery);
+
+                if (vDatos.Rows.Count > 0)
+                {
+                    //ddlModMaterial.Items.Clear();
+                    //ddlModMaterial.Items.Add(new ListItem { Value = "0", Text = "Seleccione una opción " });
+                    foreach (DataRow item in vDatos.Rows)
+                    {
+                        ddlModMaterial.Items.Add(new ListItem { Value = item["idStock"].ToString(), Text = item["material"].ToString() + " - " + item["modelo"].ToString() + " - " + item["marca"].ToString() });
+                    }
+                }
+
+
+
+            }
+            catch (Exception Ex)
+            {
+                Mensaje(Ex.Message, WarningType.Danger);
+            }
+
+
+        }
+
+        protected void btnAgregarMaterial_Click(object sender, EventArgs e)
+        {
+            txtModCantidad.Text = "";
+            txtModCostoUnitario.Visible = false;
+            lbModCosto.Visible = false;
+            BtnModModificarMaterial.Text = "Agregar";
+            UpdModModificar.Update();
+            LbModificarMaterial.Text = "Agregar Material";
+
+            ddlModMaterial.Items.Clear();
+            ddlModMaterial.Items.Add(new ListItem { Value = "0", Text = "Seleccione una opción " });
+            CargarddlMaterial();
+
+
+            
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+
+        }
+
+        protected void btnEnviarTecnico_Click(object sender, EventArgs e)
+        {
+           
+            lbMensaje.Text = "¿Está seguro que desea enviar el estudio al responsable?";
+            lbAlerta.Text = "Se enviara al responsable para que realice la modificación correspondiente.";
+            BtnModGuardarConta.Text = "Enviar";
+            udpModGuardar.Update();
+            udpModMensajes.Update();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalConta();", true);
+
+           
         }
     }
  } 

@@ -6058,6 +6058,7 @@
     <Content Include="css\style.css" />
     <Content Include="css\style.min.css" />
     <Content Include="default.aspx" />
+    <Content Include="Excel.4.5.dll" />
     <Content Include="js\bootstrap-notify.js" />
     <Content Include="js\custom.js" />
     <Content Include="js\custom.min.js" />

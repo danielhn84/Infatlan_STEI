@@ -9,7 +9,9 @@ using System.IO;
 namespace Infatlan_STEI_Agencias.pages{
     public partial class CreacionNotificacion : System.Web.UI.Page
     {
+
         db vConexion = new db();
+
         protected void Page_Load(object sender, EventArgs e){
             if (!IsPostBack){
                 cargarData();
@@ -40,6 +42,7 @@ namespace Infatlan_STEI_Agencias.pages{
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
+
 
         public void Mensaje(string vMensaje, WarningType type){
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
@@ -88,6 +91,7 @@ namespace Infatlan_STEI_Agencias.pages{
             }
         }
 
+
         protected void DDLCodigoAgencia_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -126,6 +130,7 @@ namespace Infatlan_STEI_Agencias.pages{
             }
         }
 
+
         protected void DDLNombreParticipantes_TextChanged(object sender, EventArgs e)
         {
             try{
@@ -163,6 +168,8 @@ namespace Infatlan_STEI_Agencias.pages{
             }
             catch (Exception Ex) { Mensaje(Ex.Message, WarningType.Danger); }
         }
+
+
 
         //protected void btnAgregar_Click(object sender, EventArgs e)
         //{
@@ -352,6 +359,7 @@ namespace Infatlan_STEI_Agencias.pages{
            
         }
 
+
         protected void btnModalCerrarNotificacion_Click(object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
@@ -372,6 +380,7 @@ namespace Infatlan_STEI_Agencias.pages{
             //btnBuscarJefe.Enabled = true;
 
         }
+
 
         private void Limpiar()
         {
@@ -552,4 +561,9 @@ namespace Infatlan_STEI_Agencias.pages{
             }
         }
     }
+
+
+
+
+
 }

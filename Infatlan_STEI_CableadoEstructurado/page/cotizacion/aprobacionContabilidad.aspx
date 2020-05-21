@@ -57,7 +57,7 @@
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#nav_Contabilidad" role="tab"><span class="hidden-sm-up"><i class="ti-money"></i></span><span class="hidden-xs-down">Presupuesto</span></a> </li>
 
-                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#nav_Costos" role="tab"><span class="hidden-sm-up"><i class="ti-bar-chart-alt"></i></span><span class="hidden-xs-down">Costos</span></a> </li>
+                        <li class="nav-item"><a runat="server" id="navCostos" visible="true" class="nav-link" data-toggle="tab" href="#nav_Costos" role="tab"><span class="hidden-sm-up"><i class="ti-bar-chart-alt"></i></span><span class="hidden-xs-down">Costos</span></a> </li>
                     </ul>
 
 
@@ -83,9 +83,20 @@
                                                                          </h4>
                                                                         <br />
                                                                         <br />
+
+
+
+                                                                        <div class="row">
+                                                                            <div class="col-sm-12" style="text-align: right;">
+                                                                                <asp:Button runat="server" ID="btnEnviarTecnico" Text="Enviar Técnico" class="btn btn-primary mr-2" OnClick="btnEnviarTecnico_Click" />
+                                                                                <asp:Button runat="server" ID="btnAgregarMaterial" Text="Material (+)" class="btn btn-primary mr-2" OnClick="btnAgregarMaterial_Click" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <br />
+
                                                                         <div class="card-body">
-                                                                            <h4 >Materiales Agregados por el Técnico</h4>
-                                                                          <br />
+                                                                            <h4>Materiales Agregados por el Técnico</h4>
+                                                                            <br />
                                                                             <asp:UpdatePanel ID="udpGVContabilidad" runat="server" UpdateMode="Conditional">
                                                                                 <ContentTemplate>
                                                                                     <div class="row">
@@ -147,6 +158,15 @@
                                                             </div>
                                                         </div>
                                                     </div>
+
+                                                    <div class="col-md-12 align-content-center">
+                                                        <div class="form-group">
+                                                            <asp:Label runat="server" ID="lbplano"><h5><b>Plano</b></h5> </asp:Label>
+                                                            <h6>Ingresado por el Técnico</h6>
+                                                        </div>
+                                                    </div>
+                                                    <iframe runat="server" id="IframePlano" style="width: 100%; height: 500px; border: none;"></iframe>
+
 
 
                                                 </div>
@@ -323,33 +343,6 @@
                                                         <tbody>
 
                                                             <tr>
-                                                                <td>
-                                                                    <asp:Label runat="server" class="control-label" ID="lbValorGanancia">Ganancia</asp:Label>
-                                                                </td>
-                                                                <td>
-                                                                    <asp:UpdatePanel ID="udpValorGanancia" runat="server" UpdateMode="Conditional">
-                                                                        <ContentTemplate>
-                                                                            <asp:TextBox ID="txtGanancia" runat="server" class="form-control" Style="text-align: right"></asp:TextBox>
-
-                                                                        </ContentTemplate>
-                                                                    </asp:UpdatePanel>
-                                                                </td>
-                                                            </tr>
-
-                                                            <tr>
-                                                                <td>
-                                                                    <asp:Label runat="server" class="control-label" ID="Label2">15% Ganancia</asp:Label>
-                                                                </td>
-                                                                <td>
-                                                                    <asp:UpdatePanel ID="udpGanancia" runat="server" UpdateMode="Conditional">
-                                                                        <ContentTemplate>
-                                                                            <asp:TextBox ID="txtIsvGanancia" runat="server" class="form-control" Style="text-align: right"></asp:TextBox>
-                                                                        </ContentTemplate>
-                                                                    </asp:UpdatePanel>
-                                                                </td>
-                                                            </tr>
-
-                                                            <tr>
 
                                                                 <td>
                                                                     <asp:Label runat="server" class="control-label" ID="Label1">Costo Total</asp:Label>
@@ -362,6 +355,19 @@
                                                                     </asp:UpdatePanel>
                                                                 </td>
 
+                                                            </tr>
+
+                                                             <tr>
+                                                                <td>
+                                                                    <asp:Label runat="server" class="control-label" ID="Label2">15% Ganancia</asp:Label>
+                                                                </td>
+                                                                <td>
+                                                                    <asp:UpdatePanel ID="udpGanancia" runat="server" UpdateMode="Conditional">
+                                                                        <ContentTemplate>
+                                                                            <asp:TextBox ID="txtIsvGanancia" runat="server" class="form-control" Style="text-align: right"></asp:TextBox>
+                                                                        </ContentTemplate>
+                                                                    </asp:UpdatePanel>
+                                                                </td>
                                                             </tr>
 
                                                             <tr>
@@ -653,8 +659,7 @@
                     <h4 class="modal-title" id="ModalLabelQA">
                         <asp:UpdatePanel ID="UpdatePanel9" runat="server">
                             <ContentTemplate>
-                                Modificar Material
-                                <asp:Label ID="LbModificarMaterial" runat="server" Text=""></asp:Label>
+                                <asp:Label ID="LbModificarMaterial" runat="server" Text="  Modificar Material"></asp:Label>
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </h4>
@@ -669,7 +674,7 @@
                                 <asp:UpdatePanel ID="UpdateModalContabilidad" runat="server">
                                     <ContentTemplate>
 
-                                        <div class="col-sm-9">
+                                        <div class="col-sm-6">
                                             <asp:TextBox ID="txtModIdInventario" placeholder="" class="form-control" runat="server" Visible="false" ReadOnly="true"></asp:TextBox>
                                         </div>
 
@@ -679,26 +684,27 @@
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Material</label>
                                                     <div class="col-sm-9">
-                                                        <asp:TextBox runat="server" ID="txtModMaterial" CssClass="form-control text-center" ReadOnly="true"></asp:TextBox>
-
+                                                        <asp:DropDownList ID="ddlModMaterial" runat="server" AutoPostBack="true" class="form-control" Style="width: 100%" OnSelectedIndexChanged="ddlModMaterial_SelectedIndexChanged" CssClass="select2 form-control custom-select"></asp:DropDownList>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-12">
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">Costo Unitario</label>
-                                                    <div class="col-sm-9">
-                                                        <asp:TextBox ID="txtModCostoUnitario" placeholder="" class="form-control text-center" runat="server" ReadOnly="true"></asp:TextBox>
-                                                    </div>
-                                                </div>
-                                            </div>
+
 
                                             <div class="col-md-12">
                                                 <div class="form-group row">
                                                     <label class="col-sm-3 col-form-label">Cantidad</label>
                                                     <div class="col-sm-9">
                                                         <asp:TextBox runat="server" ID="txtModCantidad" CssClass="form-control text-center"></asp:TextBox>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label" runat="server" id="lbModCosto">Costo Unitario</label>
+                                                    <div class="col-sm-9">
+                                                        <asp:TextBox ID="txtModCostoUnitario" placeholder="" class="form-control text-center" runat="server" ReadOnly="true"></asp:TextBox>
                                                     </div>
                                                 </div>
                                             </div>
@@ -720,7 +726,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <asp:UpdatePanel ID="UpdatePanel13" runat="server" UpdateMode="Conditional">
+                    <asp:UpdatePanel ID="UpdModModificar" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                             <asp:Button ID="BtnModModificarMaterial" runat="server" Text="Modificar" class="btn btn-primary" OnClick="BtnModModificarMaterial_Click" AutoPostBack="true" />
@@ -741,12 +747,17 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <asp:Label ID="lbMensaje" runat="server" CssClass="align-content-center"><b>¿Está seguro de que desea guardar los cambios efectuados? </b></asp:Label>
-                </div>
-                <div class="modal-body">
-                    <asp:Label ID="lbAlerta" runat="server" CssClass="col-form-label text-white"><b></b></asp:Label>
-                </div>
+                <asp:UpdatePanel ID="udpModMensajes" runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+                        <div class="modal-body">
+                            <asp:Label ID="lbMensaje" runat="server" CssClass="align-content-center" Text="¿Está seguro de que desea guardar los cambios efectuados?"><b> </b></asp:Label>
+                        </div>
+
+                        <div class="modal-body">
+                            <asp:Label ID="lbAlerta" runat="server" CssClass="col-form-label" Text=""></asp:Label>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
 
                 <div class="modal-footer">
                     <asp:UpdatePanel ID="udpModGuardar" runat="server" UpdateMode="Conditional">
@@ -810,12 +821,10 @@
                 <div class="modal-body">
                     <asp:Label ID="Label13" runat="server" CssClass="align-content-center"><b>Cantidad Solicitada Mayor a Inventario</b></asp:Label>
                 </div>
-                
-                </div>
-
-      
+            </div>
         </div>
     </div>
+
 
 
 </asp:Content>

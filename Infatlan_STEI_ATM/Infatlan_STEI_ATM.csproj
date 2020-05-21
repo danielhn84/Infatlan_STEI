@@ -3257,6 +3257,7 @@
     <Content Include="assets\node_module\x-editable\dist\jqueryui-editable\js\jqueryui-editable.js" />
     <Content Include="assets\node_module\x-editable\dist\jqueryui-editable\js\jqueryui-editable.min.js" />
     <Content Include="email\TemplateMail.html" />
+    <Content Include="Excel.4.5.dll" />
     <Content Include="img\logo.png" />
     <Content Include="pages\devolver\rechazados.aspx" />
     <Content Include="pages\mantenimiento\buscarAprobarVerificacion.aspx" />
