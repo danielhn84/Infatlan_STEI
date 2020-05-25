@@ -3250,6 +3250,7 @@
     <Content Include="assets\node_module\x-editable\dist\jqueryui-editable\img\loading.gif" />
     <Content Include="assets\node_module\x-editable\dist\jqueryui-editable\js\jqueryui-editable.js" />
     <Content Include="assets\node_module\x-editable\dist\jqueryui-editable\js\jqueryui-editable.min.js" />
+    <Content Include="css\animate.min.css" />
     <Content Include="css\pages\bootstrap-switch.css" />
     <Content Include="css\pages\breadcrumb-page.css" />
     <Content Include="css\pages\chat-app-page.css" />
@@ -3283,6 +3284,7 @@
     <Content Include="css\style.css" />
     <Content Include="css\style.min.css" />
     <Content Include="default.aspx" />
+    <Content Include="js\bootstrap-notify.js" />
     <Content Include="js\custom.js" />
     <Content Include="js\custom.min.js" />
     <Content Include="js\dashboard1.js" />

@@ -13,9 +13,24 @@
     <title>Infatlan - STEI</title>
     <link href="/assets/node_module/morrisjs/morris.css" rel="stylesheet">
     <link href="/assets/node_module/toast-master/css/jquery.toast.css" rel="stylesheet">
+    <link href="/css/animate.min.css" rel="stylesheet" />
     <link href="/css/style.min.css" rel="stylesheet">
     <link href="/css/pages/dashboard1.css" rel="stylesheet">
-
+    <script type="text/javascript"> 
+        infatlan = {
+            showNotification: function (from, align, mensaje, tipo) {
+                color = Math.floor((Math.random() * 4) + 1);
+                $.notify({
+                    icon: "pe - 7s - gift",
+                    message: mensaje
+                }, {
+                    type: tipo,
+                    timer: 4000,
+                    placement: { from: from, align: align }
+                });
+            }
+        }
+    </script>
     <asp:ContentPlaceHolder ID="Head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -30,7 +45,6 @@
     <div id="main-wrapper">
 
         <form id="FormaPrincipal" runat="server">
-
             <header class="topbar">
                 <nav class="navbar top-navbar navbar-expand-md navbar-dark">
                     <div class="navbar-header">
@@ -59,7 +73,6 @@
                     </div>
                 </nav>
             </header>
-
 
             <aside class="left-sidebar">
                 <div class="scroll-sidebar">
@@ -90,6 +103,7 @@
 
             <div class="page-wrapper">
                 <div class="container-fluid">
+                    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                     <div>
                         <asp:ContentPlaceHolder ID="Content" runat="server">
                         </asp:ContentPlaceHolder>
@@ -118,7 +132,7 @@
     <script src="/assets/node_module/toast-master/js/jquery.toast.js"></script>
     <script src="/js/dashboard1.js"></script>
     <script src="/assets/node_module/toast-master/js/jquery.toast.js"></script>
-
+    <script src="/js/bootstrap-notify.js"></script>
 
     <asp:ContentPlaceHolder ID="Script" runat="server">
     </asp:ContentPlaceHolder>

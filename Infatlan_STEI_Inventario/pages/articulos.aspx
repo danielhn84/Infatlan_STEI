@@ -13,6 +13,10 @@
         function openModal() { $('#ModalArticulos').modal('show'); }
         function cerrarModal() { $('#ModalArticulos').modal('hide'); }
 
+        function openModalEDC() { $('#ModalArticulosEDC').modal('show'); }
+        function cerrarModalEDC() { $('#ModalArticulosEDC').modal('hide'); }
+        function openModalInfoEDC() { $('#ModalInfoEDC').modal('show'); }
+
         function openArticuloTipo() { $('#ModalArticulosTipo').modal('show'); }
         function cerrarArticuloTipo() { $('#ModalArticulosTipo').modal('hide'); }
 
@@ -28,6 +32,7 @@
         }
         function closeConfirmar() { $('#ModalConfirmar').modal('hide'); }
     </script>
+    <link href="../assets/node_module/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
     <asp:UpdateProgress ID="UpdateProgress1" runat="server">
@@ -39,59 +44,174 @@
         </ProgressTemplate>
     </asp:UpdateProgress>
     <br /> 
-    <asp:UpdatePanel runat="server" ID="UpdatePanel">
-        <ContentTemplate>
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Almacén</h4>
-                    <h6 class="card-subtitle">Material o equipo que forma parte del inventario.</h6>
-                    <br />
-                    <div class="row col-7"> 
-                        <label class="col-2 col-form-label">Búsqueda</label>
-                        <div class="col-8">
-                            <asp:TextBox runat="server" PlaceHolder="Ingrese texto y presione Enter" ID="TxBusqueda" AutoPostBack="true" OnTextChanged="TxBusqueda_TextChanged" CssClass="form-control form-control-line"></asp:TextBox>
-                        </div>
-                        <asp:Button runat="server" ID="BtnNuevo" CssClass="btn btn-success" Text="Nuevo" OnClick="BtnNuevo_Click" />
-                    </div>
+    
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Almacén</h4>
+            <h6 class="card-subtitle">Material o equipo que forma parte del inventario.</h6>
+            <nav>
+                <div class="nav nav-pills " id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav_cargar_tab" data-toggle="tab" href="#navNuevo" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="icon-plus"> </i>General</a>
+                    <a runat="server" visible="true" class="nav-item nav-link" id="Registros" data-toggle="tab" href="#navEDC" role="tab" aria-controls="nav-profile" aria-selected="false"><i style="margin-right:5px" class="icon-puzzle"></i>Equipos de comunicación</a>
+                    <a runat="server" visible="true" class="nav-item nav-link" id="Enlaces" data-toggle="tab" href="#navEnlace" role="tab" aria-controls="nav-profile" aria-selected="false"><i style="margin-right:5px" class="icon-vector"></i>Enlaces</a>
+                </div>
+            </nav>
+            <hr />
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="navNuevo" role="tabpanel" aria-labelledby="nav-cargar-tab">
+                    <asp:UpdatePanel runat="server" ID="UpdatePanel">
+                        <ContentTemplate>
+                            <div class="row col-7">
+                                <label class="col-2 col-form-label">Búsqueda</label>
+                                <div class="col-8">
+                                    <asp:TextBox runat="server" PlaceHolder="Ingrese texto y presione Enter" ID="TxBusqueda" AutoPostBack="true" OnTextChanged="TxBusqueda_TextChanged" CssClass="form-control form-control-line"></asp:TextBox>
+                                </div>
+                                <asp:Button runat="server" ID="BtnNuevo" CssClass="btn btn-success" Text="Nuevo" OnClick="BtnNuevo_Click" />
+                            </div>
 
-                    <div class="table-responsive m-t-40">
-                        <asp:GridView ID="GVBusqueda" runat="server"
-                            CssClass="table table-bordered embed-responsive"
-                            PagerStyle-CssClass="pgr"
-                            HeaderStyle-CssClass="table"
-                            RowStyle-CssClass="rows"
-                            AutoGenerateColumns="false"
-                            AllowPaging="true"
-                            GridLines="None" OnRowCommand="GVBusqueda_RowCommand"
-                            PageSize="10" OnPageIndexChanging="GVBusqueda_PageIndexChanging">
-                            <Columns>
-                                <asp:BoundField DataField="idStock" HeaderText="No." />
-                                <asp:BoundField DataField="TipoStock" HeaderText="TipoStock" />
-                                <asp:BoundField DataField="Marca" HeaderText="Marca" />
-                                <asp:BoundField DataField="modelo" HeaderText="Modelo" />
-                                <asp:BoundField DataField="cantidad" HeaderText="Cantidad" />
-                                <asp:BoundField DataField="precioUnit" HeaderText="Precio" />
-                                <asp:BoundField DataField="Proveedor" HeaderText="Proveedor"/>
-                                <asp:BoundField DataField="descripcion" HeaderText="Detalle" />
-                                <asp:BoundField DataField="series" HeaderText="Serie" />
-                                <asp:TemplateField HeaderText="Seleccione" >
-                                    <ItemTemplate>
-                                        <asp:LinkButton ID="BtnEditar" Style="padding:8%" runat="server" class="btn btn-info mr-2" Title="Editar" CommandArgument='<%# Eval("idStock") %>' CommandName="EditarArticulo">
+                            <div class="table-responsive m-t-40">
+                                <asp:GridView ID="GVBusqueda" runat="server"
+                                    CssClass="table table-bordered embed-responsive"
+                                    PagerStyle-CssClass="pgr"
+                                    HeaderStyle-CssClass="table"
+                                    RowStyle-CssClass="rows"
+                                    AutoGenerateColumns="false"
+                                    AllowPaging="true"
+                                    GridLines="None" OnRowCommand="GVBusqueda_RowCommand"
+                                    PageSize="10" OnPageIndexChanging="GVBusqueda_PageIndexChanging">
+                                    <Columns>
+                                        <asp:BoundField DataField="idStock" HeaderText="No." />
+                                        <asp:BoundField DataField="TipoStock" HeaderText="TipoStock" />
+                                        <asp:BoundField DataField="Marca" HeaderText="Marca" />
+                                        <asp:BoundField DataField="modelo" HeaderText="Modelo" />
+                                        <asp:BoundField DataField="cantidad" HeaderText="Cantidad" />
+                                        <asp:BoundField DataField="precioUnit" HeaderText="Precio" />
+                                        <asp:BoundField DataField="Proveedor" HeaderText="Proveedor" />
+                                        <asp:BoundField DataField="descripcion" HeaderText="Detalle" />
+                                        <asp:BoundField DataField="series" HeaderText="Serie" />
+                                        <asp:TemplateField HeaderText="Seleccione">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="BtnEditar" Style="padding: 8%" runat="server" class="btn btn-info mr-2" Title="Editar" CommandArgument='<%# Eval("idStock") %>' CommandName="EditarArticulo">
                                             <i class="icon-pencil"></i>
-                                        </asp:LinkButton>
-                            
-                                        <asp:LinkButton ID="BtnEditar2" Style="padding:8%" runat="server" class="btn btn-success mr-2" Title="Aregar" CommandArgument='<%# Eval("idStock") %>' CommandName="EliminarArticulo">
+                                                </asp:LinkButton>
+
+                                                <asp:LinkButton ID="BtnEditar2" Style="padding: 8%" runat="server" class="btn btn-success mr-2" Title="Aregar" CommandArgument='<%# Eval("idStock") %>' CommandName="EliminarArticulo">
                                             <i class="icon-plus" ></i>
-                                        </asp:LinkButton>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                            </Columns>
-                        </asp:GridView>
-                    </div>
+                                                </asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+                                </asp:GridView>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+
+                <div class="tab-pane fade" id="navEDC" role="tabpanel" aria-labelledby="nav-tecnicos-tab">
+                    <asp:UpdatePanel runat="server" ID="UpdatePanel10">
+                        <ContentTemplate>
+                            <div class="row col-12">
+                                <div class="row col-7">
+                                    <label class="col-2 col-form-label">Búsqueda</label>
+                                    <div class="col-8">
+                                        <asp:TextBox runat="server" PlaceHolder="Ingrese texto y presione Enter" ID="TxBusquedaEDC" AutoPostBack="true" OnTextChanged="TxBusquedaEDC_TextChanged" CssClass="form-control form-control-line"></asp:TextBox>
+                                    </div>
+                                    <asp:Button runat="server" ID="BtnNuevoEDC" CssClass="btn btn-success" Text="Nuevo" OnClick="BtnNuevoEDC_Click" />
+                                </div>
+                                <div class="row col-5">
+                                    <label class="col-3 col-form-label">Cargar</label>
+                                    <div class="col-9">
+                                        <asp:FileUpload ID="FUCargaEDC" CssClass="form-control" runat="server"/>
+                                    </div>
+                                </div>
+                            </div>
+                            
+
+                            <div class="table-responsive m-t-40">
+                                <asp:GridView ID="GvBusquedaEDC" runat="server"
+                                    CssClass="table table-bordered embed-responsive"
+                                    PagerStyle-CssClass="pgr"
+                                    HeaderStyle-CssClass="table"
+                                    RowStyle-CssClass="rows"
+                                    AutoGenerateColumns="false"
+                                    AllowPaging="true"
+                                    GridLines="None" OnRowCommand="GvBusquedaEDC_RowCommand"
+                                    PageSize="10" OnPageIndexChanging="GvBusquedaEDC_PageIndexChanging">
+                                    <Columns>
+                                        <asp:BoundField DataField="idStockEDC" HeaderText="No." />
+                                        <asp:BoundField DataField="nombreNodo" HeaderText="Nombre" />
+                                        <asp:BoundField DataField="contrato" HeaderText="Contrato" />
+                                        <asp:BoundField DataField="serie" HeaderText="Serie" />
+                                        <asp:BoundField DataField="ip" HeaderText="IP" />
+                                        <asp:BoundField DataField="regiones" HeaderText="Region" />
+                                        <asp:BoundField DataField="latitud" HeaderText="Latitud" />
+                                        <asp:BoundField DataField="longitud" HeaderText="Longitud" />
+                                        <asp:BoundField DataField="fechaMantenimiento" HeaderText="Mantenimiento" />
+                                        <asp:TemplateField HeaderText="Seleccione">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-info mr-2" Title="Editar" CommandArgument='<%# Eval("idStockEDC") %>' CommandName="EditarArticuloEDC">
+                                                    <i class="icon-pencil"></i>
+                                                </asp:LinkButton>
+                                                <asp:LinkButton ID="BtnInfo" runat="server" class="btn btn-secondary mr-2" Title="Ver" CommandArgument='<%# Eval("idStockEDC") %>' CommandName="VerInfoEDC">
+                                                    <i class="icon-info"></i>
+                                                </asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+                                </asp:GridView>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+
+                <div class="tab-pane fade" id="navEnlace" role="tabpanel" aria-labelledby="nav-tecnicos-tab">
+                    <asp:UpdatePanel runat="server" ID="UpdatePanel26">
+                        <ContentTemplate>
+                            <div class="row col-7">
+                                <label class="col-2 col-form-label">Búsqueda</label>
+                                <div class="col-8">
+                                    <asp:TextBox runat="server" PlaceHolder="Ingrese texto y presione Enter" ID="TxBusquedaEnlace" AutoPostBack="true" OnTextChanged="TxBusquedaEnlace_TextChanged" CssClass="form-control form-control-line"></asp:TextBox>
+                                </div>
+                                <asp:Button runat="server" ID="BtnNuevoEnlace" CssClass="btn btn-success" Text="Nuevo" OnClick="BtnNuevoEnlace_Click" />
+                            </div>
+
+                            <div class="table-responsive m-t-40">
+                                <asp:GridView ID="GvEnlaces" runat="server"
+                                    CssClass="table table-bordered embed-responsive"
+                                    PagerStyle-CssClass="pgr"
+                                    HeaderStyle-CssClass="table"
+                                    RowStyle-CssClass="rows"
+                                    AutoGenerateColumns="false"
+                                    AllowPaging="true"
+                                    GridLines="None" OnRowCommand="GvEnlaces_RowCommand"
+                                    PageSize="10" OnPageIndexChanging="GvEnlaces_PageIndexChanging">
+                                    <Columns>
+                                        <asp:BoundField DataField="idEnlace" HeaderText="No." />
+                                        <asp:BoundField DataField="nombre" HeaderText="Nombre" />
+                                        <asp:BoundField DataField="proveedor" HeaderText="Proveedor" />
+                                        <asp:BoundField DataField="idTipoEnlace" HeaderText="Tipo" />
+                                        <asp:BoundField DataField="IPOrigen" HeaderText="IP Origen" />
+                                        <asp:BoundField DataField="IPDestino" HeaderText="IP Destino" />
+                                        <asp:BoundField DataField="equipoOrigen" HeaderText="equipo Origen" />
+                                        <asp:BoundField DataField="equipoDestino" HeaderText="equipo Destino" />
+                                        <asp:BoundField DataField="servicios" HeaderText="servicios" />
+                                        <asp:BoundField DataField="contacto" HeaderText="Contacto" />
+                                        <asp:TemplateField HeaderText="Seleccione">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-info mr-2" Title="Editar" CommandArgument='<%# Eval("idEnlace") %>' CommandName="EditarEnlace">
+                                                    <i class="icon-pencil"></i>
+                                                </asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+                                </asp:GridView>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </div>
             </div>
-        </ContentTemplate>
-    </asp:UpdatePanel>
+        </div>
+    </div>
             
     <%--MODAL DE ARTICULOS--%>
     <div class="modal fade" id="ModalArticulos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -241,6 +361,274 @@
                         <ContentTemplate>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                             <asp:Button ID="BtnAceptar" runat="server" Text="Aceptar" class="btn btn-success" OnClick="BtnAceptar_Click"/>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%--MODAL DE ARTICULOS EDC--%>
+    <div class="modal fade" id="ModalArticulosEDC" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="ModalLabelModificacionEDC">
+                        <asp:UpdatePanel ID="UpdatePanel11" runat="server">
+                            <ContentTemplate>
+                                <asp:Label ID="LbIdArticuloEDC" runat="server" Text=""></asp:Label>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-2" style="margin-left:2%">
+                                    <label class="col-form-label">Nombre</label>
+                                </div>
+                                <div class="col-9">
+                                    <asp:UpdatePanel ID="UpdatePanel14" runat="server">
+                                        <ContentTemplate>
+                                            <asp:TextBox ID="TxNombreNodo" class="form-control" runat="server"></asp:TextBox>                                            
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-2">
+                                    <label>Tipo Equipo</label>
+                                </div>
+                                <div class="col-9">
+                                    <asp:DropDownList ID="DDLTipoEquipoEDC" AutoPostBack="true" runat="server" class="select2 form-control custom-select" style="width: 100%"></asp:DropDownList>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-3" style="margin-left:2%">
+                                    <label>No. Contrato</label>
+                                </div>
+                                <div class="col-8">
+                                    <asp:UpdatePanel ID="UpdatePanel16" runat="server">
+                                        <ContentTemplate>
+                                            <asp:DropDownList ID="DDLContratos" runat="server" class="form-control"></asp:DropDownList>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-2">
+                                    <label class="col-form-label">Serie</label>
+                                </div>
+                                <div class="col-9">
+                                    <asp:UpdatePanel ID="UpdatePanel17" runat="server">
+                                        <ContentTemplate>
+                                            <asp:TextBox ID="TxSerieEDC" class="form-control" runat="server"></asp:TextBox>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+                                
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-2" style="margin-left:2%">
+                                    <label class="col-form-label">IP</label>
+                                </div>
+                                <div class="col-9">
+                                    <asp:UpdatePanel ID="UpdatePanel18" runat="server">
+                                        <ContentTemplate>
+                                            <asp:TextBox ID="TxIP" placeholder="" class="form-control" runat="server"></asp:TextBox>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-2">
+                                    <label class="col-form-label">Región</label>
+                                </div>
+                                <div class="col-9">
+                                    <asp:UpdatePanel ID="UpdatePanel19" runat="server">
+                                        <ContentTemplate>
+                                            <asp:DropDownList ID="DDLRegion" runat="server" class="select2 form-control custom-select" style="width: 100%">
+                                                <asp:ListItem Value="0" Text="Seleccione"></asp:ListItem>
+                                                <asp:ListItem Value="1" Text="Centro Sur"></asp:ListItem>
+                                                <asp:ListItem Value="2" Text="Noroccidente"></asp:ListItem>
+                                                <asp:ListItem Value="3" Text="Atlántico"></asp:ListItem>
+                                            </asp:DropDownList>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+                                
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-2" style="margin-left:2%">
+                                    <label>IOS Imagen</label>
+                                </div>
+                                <div class="col-9">
+                                    <asp:UpdatePanel ID="UpdatePanel20" runat="server">
+                                        <ContentTemplate>
+                                            <asp:TextBox ID="TxIOSImage" class="form-control" runat="server"></asp:TextBox>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-2">
+                                    <label>IOS Version</label>
+                                </div>
+                                <div class="col-9">
+                                    <asp:UpdatePanel ID="UpdatePanel21" runat="server">
+                                        <ContentTemplate>
+                                            <asp:TextBox ID="TxIOSVersion" class="form-control" runat="server"></asp:TextBox>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+                                
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-2" style="margin-left:2%">
+                                    <label class="col-form-label">Latitud</label>
+                                </div>
+                                <div class="col-9">
+                                    <asp:UpdatePanel ID="UpdatePanel22" runat="server">
+                                        <ContentTemplate>
+                                            <asp:TextBox ID="TxLatitud" class="form-control" runat="server"></asp:TextBox>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-2">
+                                    <label class="col-form-label">Longitud</label>
+                                </div>
+                                <div class="col-9">
+                                    <asp:UpdatePanel ID="UpdatePanel23" runat="server">
+                                        <ContentTemplate>
+                                            <asp:TextBox ID="TxLongitud" class="form-control" runat="server"></asp:TextBox>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-3" style="margin-left:2%">
+                                    <label class="col-form-label">Ubicación</label>
+                                </div>
+                                <div class="col-8">
+                                    <asp:DropDownList ID="DDLUbicacionEDC" AutoPostBack="true" runat="server" class="select2 form-control custom-select" style="width: 100%"></asp:DropDownList>                                            
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-4">
+                                    <label>Ultimo Mantenimiento</label>
+                                </div>
+                                <div class="col-7">
+                                    <asp:UpdatePanel ID="UpdatePanel24" runat="server">
+                                        <ContentTemplate>
+                                            <asp:TextBox ID="TxFechaMant" TextMode="Date" class="form-control" runat="server"></asp:TextBox>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12" runat="server" visible="false" id="DivEstado">
+                            <div class="form-group row">
+                                <div class="col-2" style="margin-left:2%">
+                                    <label class="col-form-label">Estado</label>
+                                </div>
+                                <div class="col-9">
+                                    <asp:UpdatePanel ID="UpdatePanel25" runat="server">
+                                        <ContentTemplate>
+                                            <asp:DropDownList runat="server" ID="DDLEstadoEDC" CssClass="form-control">
+                                                <asp:ListItem Value="1" Text="Activo"></asp:ListItem>
+                                                <asp:ListItem Value="0" Text="Inactivo"></asp:ListItem>
+                                            </asp:DropDownList>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <asp:UpdatePanel ID="UpdatePanel12" runat="server">
+                                <ContentTemplate>
+                                    <div class="col-12" runat="server" id="DivMensajeEDC" visible="false" style="display: flex; background-color:tomato; justify-content:center">
+                                        <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbMensajeEDC"></asp:Label>
+                                    </div>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <asp:UpdatePanel ID="UpdatePanel13" runat="server">
+                        <ContentTemplate>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <asp:Button ID="BtnAceptarEDC" runat="server" Text="Aceptar" class="btn btn-success" OnClick="BtnAceptarEDC_Click"/>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%--MODAL INFO EDC--%>
+    <div class="modal fade" id="ModalInfoEDC" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="ModalLabelCondiciones">
+                        <asp:UpdatePanel ID="UpdatePanel27" runat="server">
+                            <ContentTemplate>
+                                <asp:Label ID="LbTituloEDC" runat="server" Text=""></asp:Label>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <asp:UpdatePanel ID="UpdatePanel28" runat="server">
+                        <ContentTemplate>
+                            <div class="row">   
+                                <div class="col-12">  
+                                    <asp:Label ID="LbContenido" Text="" runat="server" CssClass="col-form-label"/>
+                                </div>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+                <div class="modal-footer">
+                    <asp:UpdatePanel ID="UpdatePanel29" runat="server">
+                        <ContentTemplate>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
@@ -474,6 +862,75 @@
     <script>
         $(function () {
             $("input[name='tch3']").TouchSpin();
+        });
+    </script>
+    <%--COMBO BUSCADOR--%>
+    <script src="../assets/node_module/select2/dist/js/select2.full.min.js" type="text/javascript"></script>
+    <style>
+        .select2-selection__rendered {line-height: 31px !important;}
+        .select2-container .select2-selection--single {height: 35px !important;}
+        .select2-selection__arrow {height: 34px !important;}
+    </style>
+    <script>
+        $(function () {
+            $(".select2").select2();
+            $(".ajax").select2({
+                ajax: {
+                    url: "https://api.github.com/search/repositories",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            q: params.term, // search term
+                            page: params.page
+                        };
+                    },
+                    processResults: function (data, params) {
+                        params.page = params.page || 1;
+                        return {
+                            results: data.items,
+                            pagination: {
+                                more: (params.page * 30) < data.total_count
+                            }
+                        };
+                    },
+                    cache: true
+                },
+                escapeMarkup: function (markup) {
+                    return markup;
+                },
+                minimumInputLength: 1,
+            });
+        });
+
+        function matchCustom(params, data) {
+            // If there are no search terms, return all of the data
+            if ($.trim(params.term) === '') {
+                return data;
+            }
+
+            // Do not display the item if there is no 'text' property
+            if (typeof data.text === 'undefined') {
+                return null;
+            }
+
+            // `params.term` should be the term that is used for searching
+            // `data.text` is the text that is displayed for the data object
+            if (data.text.indexOf(params.term) > -1) {
+                var modifiedData = $.extend({}, data, true);
+                modifiedData.text += ' (matched)';
+
+                // You can return modified objects from here
+                // This includes matching the `children` how you want in nested data sets
+                return modifiedData;
+            }
+
+            // Return `null` if the term should not be displayed
+            return null;
+        }
+
+        $(".js-example-matcher").select2({
+            matcher: matchCustom
         });
     </script>
 </asp:Content>

@@ -61,7 +61,8 @@ namespace Infatlan_STEI_Inventario.pages
                     DDLUbicacion.Items.Clear();
                     DDLUbicacion.Items.Add(new ListItem { Value = "0", Text = "Seleccione" });
                     foreach (DataRow item in vDatos.Rows){
-                        DDLUbicacion.Items.Add(new ListItem { Value = item["idUbicacion"].ToString(), Text = item["codigo"].ToString() });
+                        int vCarac = item["direccion"].ToString().Length;
+                        DDLUbicacion.Items.Add(new ListItem { Value = item["idUbicacion"].ToString(), Text = item["codigo"].ToString() + " - " + item["direccion"].ToString().Substring(0, vCarac > 20 ? 20 : vCarac) });
                     }
                 }
 
@@ -184,7 +185,7 @@ namespace Infatlan_STEI_Inventario.pages
                     "," + vCantidadActual + 
                     ",'" + vXML + "'";
                 Int32 vInfo = vConexion.ejecutarSql(vQuery);
-                if (vInfo == 3){
+                if (vInfo == 3 || vInfo == 4){
                     limpiarForm();
                     Mensaje("Transacción realizada con éxito.", WarningType.Success);
                 }else{

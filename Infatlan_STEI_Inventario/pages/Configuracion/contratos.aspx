@@ -1,6 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="usuarios.aspx.cs" Inherits="Infatlan_STEI.paginas.configuraciones.usuarios" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="contratos.aspx.cs" Inherits="Infatlan_STEI_Inventario.pages.Configuracion.contratos" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
-    <script type="text/javascript">
+        <script type="text/javascript">
         var updateProgress = null;
         function postbackButtonClick() {
             updateProgress = $find("<%= UpdateProgress1.ClientID %>");
@@ -10,9 +10,9 @@
     </script>
 
     <script type="text/javascript">
-        function openModal() { $('#ModalUser').modal('show'); }
-        function cerrarModal() { $('#ModalUser').modal('hide'); }
-        function ModalConfirmar() { $('#ModalConfirmar').modal('show'); }
+        function openModal() { $('#ModalContratos').modal('show'); }
+        function openModalCond() { $('#ModalCondiciones').modal('show'); }
+        function cerrarModal() { $('#ModalContratos').modal('hide'); }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
@@ -24,13 +24,13 @@
             </div>
         </ProgressTemplate>
     </asp:UpdateProgress>
-    <br />
+    <br /> 
     <asp:UpdatePanel runat="server" ID="UpdatePanel">
         <ContentTemplate>
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Usuarios</h4>
-                    <h6 class="card-subtitle">Usuarios del sistema.</h6>
+                    <h4 class="card-title">Contratos</h4>
+                    <h6 class="card-subtitle">Relacionados al producto existente en inventario.</h6>
                     <br />
                     <div class="row col-7"> 
                         <label class="col-2 col-form-label">Búsqueda</label>
@@ -51,17 +51,19 @@
                             GridLines="None" OnRowCommand="GVBusqueda_RowCommand"
                             PageSize="10" OnPageIndexChanging="GVBusqueda_PageIndexChanging">
                             <Columns>
-                                <asp:BoundField DataField="idUsuario" HeaderText="No."/>
-                                <asp:BoundField DataField="nombre" HeaderText="Nombres"/>
-                                <asp:BoundField DataField="apellidos" HeaderText="Apellidos"/>
-                                <asp:BoundField DataField="telefono" HeaderText="Telefono"/>
-                                <asp:BoundField DataField="correo" HeaderText="Correo"/>
-                                <asp:BoundField DataField="identidad" HeaderText="Identidad"/>
-                                <asp:BoundField DataField="fechaCreacion" HeaderText="Fecha"/>
+                                <asp:BoundField DataField="idContrato" HeaderText="No."/>
+                                <asp:BoundField DataField="contrato" HeaderText="Contrato"/>
+                                <asp:BoundField DataField="tipoContrato" HeaderText="Tipo"/>
+                                <asp:BoundField DataField="proveedor" HeaderText="Proveedor"/>
+                                <asp:BoundField DataField="fechaInicio" HeaderText="Inicio"/>
+                                <asp:BoundField DataField="fechaFinal" HeaderText="Fin"/>
                                 <asp:TemplateField HeaderText="Seleccione">
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-info mr-2" CommandArgument='<%# Eval("idUsuario") %>' CommandName="EditarUser">
+                                        <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-info mr-2" Title="Editar" CommandArgument='<%# Eval("idContrato") %>' CommandName="EditarContrato">
                                             <i class="icon-pencil" ></i>
+                                        </asp:LinkButton>
+                                        <asp:LinkButton ID="BtnCondiciones" runat="server" class="btn btn-success mr-2" Title="Condiciones" CommandArgument='<%# Eval("idContrato") %>' CommandName="verCondiciones">
+                                            <i class="icon-layers" ></i>
                                         </asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
@@ -74,14 +76,14 @@
     </asp:UpdatePanel>
 
     <%--MODAL DE MODIFICACION--%>
-    <div class="modal fade" id="ModalUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="ModalContratos" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="ModalLabelModificacion">
                         <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                             <ContentTemplate>
-                                <asp:Label ID="LbIdMarca" runat="server" Text=""></asp:Label>
+                                <asp:Label ID="LbIdContrato" runat="server" Text=""></asp:Label>
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </h4>
@@ -95,59 +97,61 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group row">
-                                        <div class="col-2" style="margin-left:2%">
-                                            <label class="col-form-label">Usuario</label>
+                                        <div class="col-3" style="margin-left:2%">
+                                            <label class="col-form-label">Contrato No.</labe>
                                         </div>
-                                        <div class="col-sm-9">
-                                            <asp:TextBox ID="TxUsuario" class="form-control text-uppercase" runat="server"></asp:TextBox>                                            
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-2" style="margin-left:2%">
-                                            <label class="col-form-label">Nombres</label>
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <asp:TextBox ID="TxNombres" class="form-control text-uppercase" runat="server"></asp:TextBox>                                            
+                                        <div class="col-8">
+                                            <asp:TextBox ID="TxContrato" class="form-control text-uppercase" runat="server"></asp:TextBox>                                            
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-12">
                                     <div class="form-group row">
-                                        <div class="col-2" style="margin-left:2%">
-                                            <label class="col-form-label">Apellidos</label>
+                                        <div class="col-3" style="margin-left:2%">
+                                            <label class="col-form-label">Tipo de contrato</label>
                                         </div>
-                                        <div class="col-sm-9">
-                                            <asp:TextBox ID="TxApellidos" class="form-control text-uppercase" runat="server"></asp:TextBox>                                            
+                                        <div class="col-8">
+                                            <asp:DropDownList runat="server" ID="DDLTipoContrato" CssClass="form-control"></asp:DropDownList>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-12">
                                     <div class="form-group row">
-                                        <div class="col-2" style="margin-left:2%">
-                                            <label class="col-form-label">Identidad</label>
+                                        <div class="col-3" style="margin-left:2%">
+                                            <label class="col-form-label">Proveedor</label>
                                         </div>
-                                        <div class="col-sm-9">
-                                            <asp:TextBox ID="TxIdentidad" class="form-control" runat="server"></asp:TextBox>                                            
+                                        <div class="col-8">
+                                            <asp:DropDownList runat="server" ID="DDLProveedores" CssClass="form-control"></asp:DropDownList>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-12">
                                     <div class="form-group row">
-                                        <div class="col-2" style="margin-left:2%">
-                                            <label class="col-form-label">Telefono</label>
+                                        <div class="col-3" style="margin-left:2%">
+                                            <label class="col-form-label">Fecha Inicial</label>
                                         </div>
-                                        <div class="col-sm-9">
-                                            <asp:TextBox ID="TxTelefono" class="form-control" runat="server"></asp:TextBox>                                            
+                                        <div class="col-8">
+                                            <asp:TextBox ID="TxFechaInicio" AutoPostBack="true" class="form-control" runat="server" TextMode="Date"></asp:TextBox>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-12">
                                     <div class="form-group row">
-                                        <div class="col-2" style="margin-left:2%">
-                                            <label class="col-form-label">Correo</label>
+                                        <div class="col-3" style="margin-left:2%">
+                                            <label class="col-form-label">Fecha Final</label>
                                         </div>
-                                        <div class="col-sm-9">
-                                            <asp:TextBox ID="TxCorreo" class="form-control" runat="server"></asp:TextBox>                                            
+                                        <div class="col-8">
+                                            <asp:TextBox ID="TxFechaFin" AutoPostBack="true" class="form-control" runat="server" TextMode="Date"></asp:TextBox>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-12">
                                     <div class="form-group row">
-                                        <div class="col-2" style="margin-left:2%">
-                                            <label class="col-form-label">Departamento</label>
+                                        <div class="col-3" style="margin-left:2%">
+                                            <label class="col-form-label">Condiciones</label>
                                         </div>
-                                        <div class="col-sm-9">
-                                            <asp:DropDownList runat="server" ID="DDLDepartamento"></asp:DropDownList>
+                                        <div class="col-8">
+                                            <asp:TextBox ID="TxCondiciones" class="form-control" runat="server" TextMode="MultiLine" Rows="3"></asp:TextBox>
                                         </div>
                                     </div>
                                 </div>
@@ -177,6 +181,44 @@
                         <ContentTemplate>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                             <asp:Button ID="BtnAceptar" runat="server" Text="Aceptar" class="btn btn-success" OnClick="BtnAceptar_Click"/>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%--MODAL CONDICIONES--%>
+    <div class="modal fade" id="ModalCondiciones" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="ModalLabelCondiciones">
+                        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                            <ContentTemplate>
+                                <asp:Label ID="LbTituloCondicion" runat="server" Text=""></asp:Label>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                        <ContentTemplate>
+                            <div class="row">   
+                                <div class="col-12">  
+                                    <asp:Label ID="LbContenido" Text="" runat="server" CssClass="col-form-label"/>
+                                </div>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+                <div class="modal-footer">
+                    <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                        <ContentTemplate>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>

@@ -143,7 +143,7 @@ namespace Infatlan_STEI_Inventario.pages
                     ",'" + vXML + "'";
 
                     Int32 vInfo = vConexion.ejecutarSql(vQuery);
-                    if (vInfo == 4){
+                    if (vInfo == 4 || vInfo == 5){
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "cerrarModal();", true);
                         Mensaje("Cambio realizado con éxito.", WarningType.Success);
                         cargarDatos(TxIdUbicacion.Text);

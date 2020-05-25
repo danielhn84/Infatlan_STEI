@@ -7,11 +7,11 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace Infatlan_STEI.paginas.configuraciones
+namespace Infatlan_STEI_Inventario.pages.Configuracion
 {
 
 
-    public partial class usuarios
+    public partial class contratos
     {
 
         /// <summary>
@@ -69,13 +69,13 @@ namespace Infatlan_STEI.paginas.configuraciones
         protected global::System.Web.UI.UpdatePanel UpdatePanel2;
 
         /// <summary>
-        /// Control LbIdMarca.
+        /// Control LbIdContrato.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LbIdMarca;
+        protected global::System.Web.UI.WebControls.Label LbIdContrato;
 
         /// <summary>
         /// Control UpdatePanelModal.
@@ -87,67 +87,58 @@ namespace Infatlan_STEI.paginas.configuraciones
         protected global::System.Web.UI.UpdatePanel UpdatePanelModal;
 
         /// <summary>
-        /// Control TxUsuario.
+        /// Control TxContrato.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxUsuario;
+        protected global::System.Web.UI.WebControls.TextBox TxContrato;
 
         /// <summary>
-        /// Control TxNombres.
+        /// Control DDLTipoContrato.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxNombres;
+        protected global::System.Web.UI.WebControls.DropDownList DDLTipoContrato;
 
         /// <summary>
-        /// Control TxApellidos.
+        /// Control DDLProveedores.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxApellidos;
+        protected global::System.Web.UI.WebControls.DropDownList DDLProveedores;
 
         /// <summary>
-        /// Control TxIdentidad.
+        /// Control TxFechaInicio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxIdentidad;
+        protected global::System.Web.UI.WebControls.TextBox TxFechaInicio;
 
         /// <summary>
-        /// Control TxTelefono.
+        /// Control TxFechaFin.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxTelefono;
+        protected global::System.Web.UI.WebControls.TextBox TxFechaFin;
 
         /// <summary>
-        /// Control TxCorreo.
+        /// Control TxCondiciones.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxCorreo;
-
-        /// <summary>
-        /// Control DDLDepartamento.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DDLDepartamento;
+        protected global::System.Web.UI.WebControls.TextBox TxCondiciones;
 
         /// <summary>
         /// Control DivEstado.
@@ -202,5 +193,50 @@ namespace Infatlan_STEI.paginas.configuraciones
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnAceptar;
+
+        /// <summary>
+        /// Control UpdatePanel1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+
+        /// <summary>
+        /// Control LbTituloCondicion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LbTituloCondicion;
+
+        /// <summary>
+        /// Control UpdatePanel3.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel3;
+
+        /// <summary>
+        /// Control LbContenido.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LbContenido;
+
+        /// <summary>
+        /// Control UpdatePanel4.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel4;
     }
 }

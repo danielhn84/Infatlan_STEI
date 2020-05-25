@@ -19,10 +19,15 @@ namespace Infatlan_STEI_Inventario.pages
         protected void Page_Load(object sender, EventArgs e){
             Session["AUTH"] = true;
             Session["USUARIO"] = "wpadilla";
+
+            DDLUbicacionEDC.CssClass = "select2 form-control custom-select";
+
             if (!Page.IsPostBack){
                 if (Convert.ToBoolean(Session["AUTH"])){
                     limpiarSessiones();
                     cargarDatos();
+                    cargarDatosEDC();
+                    cargarDatosEnlace();
                 }
             }
         }
@@ -43,7 +48,7 @@ namespace Infatlan_STEI_Inventario.pages
                 }
 
                 //TIPO STOCK
-                vQuery = "STEISP_INVENTARIO_Generales 7";
+                vQuery = "STEISP_INVENTARIO_Generales 7,'False'";
                 vDatos = vConexion.obtenerDataTable(vQuery);
 
                 if (vDatos.Rows.Count > 0){
@@ -100,6 +105,73 @@ namespace Infatlan_STEI_Inventario.pages
                     foreach (DataRow item in vDatos.Rows){
                         DDLEstado.Items.Add(new ListItem { Value = item["idEstadoStock"].ToString(), Text = item["nombre"].ToString() });
                     }
+                }
+            }catch (Exception ex){
+                Mensaje(ex.Message, WarningType.Danger);
+            }
+        }
+
+        private void cargarDatosEDC() {
+            try{
+                String vQuery = "[STEISP_INVENTARIO_StockEDC] 1";
+                DataTable vDatos = vConexion.obtenerDataTable(vQuery);
+
+                if (vDatos.Rows.Count > 0){
+                    GvBusquedaEDC.DataSource = vDatos;
+                    GvBusquedaEDC.DataBind();
+                    Session["INV_STOCKEDC"] = vDatos;
+                }
+
+                //TIPO STOCK EDC
+                vQuery = "[STEISP_INVENTARIO_Generales] 7,'True'";
+                vDatos = vConexion.obtenerDataTable(vQuery);
+
+                if (vDatos.Rows.Count > 0){
+                    DDLTipoEquipoEDC.Items.Clear();
+                    DDLTipoEquipoEDC.Items.Add(new ListItem { Value = "0", Text = "Seleccione" });
+                    foreach (DataRow item in vDatos.Rows){
+                        DDLTipoEquipoEDC.Items.Add(new ListItem { Value = item["idTipoStock"].ToString(), Text = item["nombre"].ToString() });
+                    }
+                }
+
+                // CONTRATOS
+                vQuery = "[STEISP_INVENTARIO_Contratos] 1";
+                vDatos = vConexion.obtenerDataTable(vQuery);
+
+                if (vDatos.Rows.Count > 0){
+                    DDLContratos.Items.Clear();
+                    DDLContratos.Items.Add(new ListItem { Value = "0", Text = "Seleccione" });
+                    foreach (DataRow item in vDatos.Rows){
+                        DDLContratos.Items.Add(new ListItem { Value = item["idContrato"].ToString(), Text = item["contrato"].ToString() });
+                    }
+                }
+
+                // UBICACIONES EDC
+                vQuery = "[STEISP_INVENTARIO_Ubicaciones] 1";
+                vDatos = vConexion.obtenerDataTable(vQuery);
+
+                if (vDatos.Rows.Count > 0){
+                    DDLUbicacionEDC.Items.Clear();
+                    DDLUbicacionEDC.Items.Add(new ListItem { Value = "0", Text = "Seleccione" });
+                    foreach (DataRow item in vDatos.Rows){
+                        int vCarac = item["direccion"].ToString().Length;
+                        DDLUbicacionEDC.Items.Add(new ListItem { Value = item["idUbicacion"].ToString(), Text = item["codigo"].ToString() + " - " + item["direccion"].ToString().Substring(0, vCarac > 20 ? 20 : vCarac) });
+                    }
+                }
+            }catch (Exception ex){
+                Mensaje(ex.Message, WarningType.Danger);
+            }
+        }
+
+        private void cargarDatosEnlace() {
+            try{
+                String vQuery = "[STEISP_INVENTARIO_Enlaces] 1";
+                DataTable vDatos = vConexion.obtenerDataTable(vQuery);
+
+                if (vDatos.Rows.Count > 0){
+                    GvEnlaces.DataSource = vDatos;
+                    GvEnlaces.DataBind();
+                    Session["INV_ENLACES"] = vDatos;
                 }
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);
@@ -327,7 +399,7 @@ namespace Infatlan_STEI_Inventario.pages
                     ",'" + TxDescripcion.Text + "'";
                 int vInfo = vConexion.ejecutarSql(vQuery);
                 if (vInfo == 1){
-                    vQuery = "STEISP_INVENTARIO_Generales 7";
+                    vQuery = "STEISP_INVENTARIO_Generales 7, 0";
                     DataTable vDatos = vConexion.obtenerDataTable(vQuery);
 
                     if (vDatos.Rows.Count > 0){
@@ -337,9 +409,8 @@ namespace Infatlan_STEI_Inventario.pages
                             DDLTipo.Items.Add(new ListItem { Value = item["idTipoStock"].ToString(), Text = item["nombre"].ToString() });
                         }
                     }
-                    DDLTipo.SelectedValue = Convert.ToString( DDLTipo.Items.Count -1);
+                    DDLTipo.SelectedIndex = vDatos.Rows.Count;
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "cerrarArticuloTipo();", true);
-
                 }
             }catch (Exception ex){
                 LbMensajeTA.Text = ex.Message;
@@ -450,6 +521,183 @@ namespace Infatlan_STEI_Inventario.pages
                 LbMensajeMarca.Text = ex.Message;
                 DivMensajeMarca.Visible = true;
             }
+        }
+
+        protected void BtnAceptarEDC_Click(object sender, EventArgs e){
+            try{
+                validarDatosEDC();
+
+                generarxml vMaestro = new generarxml();
+                Object[] vDatosMaestro = new object[13];
+                vDatosMaestro[0] = DDLContratos.SelectedValue;
+                vDatosMaestro[1] = TxNombreNodo.Text;
+                vDatosMaestro[2] = DDLTipoEquipoEDC.SelectedValue;
+                vDatosMaestro[3] = TxSerieEDC.Text;
+                vDatosMaestro[4] = TxIP.Text;
+                vDatosMaestro[5] = DDLRegion.SelectedValue;
+                vDatosMaestro[6] = TxIOSImage.Text;
+                vDatosMaestro[7] = TxIOSVersion.Text; 
+                vDatosMaestro[8] = DDLEstadoEDC.SelectedValue;
+                vDatosMaestro[9] = TxLatitud.Text;
+                vDatosMaestro[10] = TxLongitud.Text;
+                vDatosMaestro[11] = TxFechaMant.Text;
+                vDatosMaestro[12] = Session["USUARIO"].ToString();
+                String vXML = vMaestro.ObtenerMaestroStringEDC(vDatosMaestro);
+                vXML = vXML.Replace("<?xml version=\"1.0\" encoding=\"utf-16\"?>", "");
+
+                String vQuery = "[STEISP_INVENTARIO_StockEDC] 3,0," +
+                    "'" + vXML + "'";
+                Int32 vInfo = vConexion.ejecutarSql(vQuery);
+                if (vInfo == 1){
+                    if (insertarInventario() == 2){
+                        cargarDatosEDC();
+                        Mensaje("Transacción realizada con éxito.", WarningType.Success);
+                    }
+                }else{
+                    Mensaje("Ha ocurrido un error. Favor comunicarse con sistemas.", WarningType.Danger);
+                }
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "cerrarModalEDC();", true);
+
+            }catch (Exception ex){
+                LbMensajeEDC.Text = ex.Message;
+                DivMensajeEDC.Visible = true;
+            }
+        }
+
+        private int insertarInventario() {
+            generarxml vMaestro = new generarxml();
+            Object[] vDatosMaestro = new object[10];
+            vDatosMaestro[0] = "";
+            vDatosMaestro[1] = DDLTipoEquipoEDC.SelectedValue;
+            vDatosMaestro[2] = DDLUbicacionEDC.SelectedValue;
+            vDatosMaestro[3] = ""; //Responsable
+            vDatosMaestro[4] = "CREACION DE EDC";
+            vDatosMaestro[5] = 1;
+            vDatosMaestro[6] = TxSerieEDC.Text; // Serie
+            vDatosMaestro[7] = "";
+            vDatosMaestro[8] = Session["USUARIO"].ToString();
+            vDatosMaestro[9] = 9;
+            String vXML = vMaestro.ObtenerMaestroString(vDatosMaestro);
+            vXML = vXML.Replace("<?xml version=\"1.0\" encoding=\"utf-16\"?>", "");
+
+            String vQuery = "[STEISP_INVENTARIO_Principal] 7" +
+                ",0,0" + ",'" + vXML + "'";
+            Int32 vInfo = vConexion.ejecutarSql(vQuery);
+            return vInfo;
+        }
+
+        protected void BtnNuevoEDC_Click(object sender, EventArgs e){
+            limpiarModalEDC();
+            LbIdArticuloEDC.Text = "Crear Nuevo Equipo de Comunicación";
+            Session["INV_STOCKEDC_ID"] = null;
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModalEDC();", true);
+        }
+
+        void limpiarModalEDC(){
+            TxNombreNodo.Text = string.Empty;
+            DDLTipoEquipoEDC.SelectedValue = "0";
+            DDLContratos.SelectedValue = "0";
+            TxSerieEDC.Text = string.Empty;
+            TxIP.Text = string.Empty;
+            DDLRegion.SelectedValue = "0";
+            TxIOSImage.Text = string.Empty;
+            TxIOSVersion.Text = string.Empty;
+            TxLatitud.Text = string.Empty;
+            TxLongitud.Text = string.Empty;
+            DDLUbicacionEDC.SelectedValue = "0";
+            TxFechaMant.Text = string.Empty;
+            DDLEstadoEDC.SelectedValue = "1";
+            DivMensajeEDC.Visible = false;
+        }
+
+        protected void GvBusquedaEDC_RowCommand(object sender, GridViewCommandEventArgs e){
+            try{
+                DataTable vDatos = new DataTable();
+                String vQuery = "";
+
+                string vIdArticuloEDC = e.CommandArgument.ToString();
+                if (e.CommandName == "EditarArticuloEDC") {
+                    DivMensajeEDC.Visible = false;
+                    LbMensajeEDC.Text = string.Empty;
+                    LbIdArticuloEDC.Text = "Editar Articulo " + vIdArticuloEDC;
+
+                    vQuery = "[STEISP_INVENTARIO_StockEDC] 2," + vIdArticuloEDC + "";
+                    vDatos = vConexion.obtenerDataTable(vQuery);
+
+                    for (int i = 0; i < vDatos.Rows.Count; i++) {
+                        TxNombreNodo.Text = vDatos.Rows[i]["nombreNodo"].ToString();
+                        DDLTipoEquipoEDC.SelectedValue = vDatos.Rows[i]["tipoEquipo"].ToString();
+                        DDLContratos.SelectedValue = vDatos.Rows[i]["idContrato"].ToString();
+                        TxSerieEDC.Text = vDatos.Rows[i]["serie"].ToString();
+                        TxIP.Text = vDatos.Rows[i]["ip"].ToString();
+                        DDLRegion.SelectedValue = vDatos.Rows[i]["region"].ToString();
+                        TxIOSImage.Text = vDatos.Rows[i]["IOSImage"].ToString();
+                        TxIOSVersion.Text = vDatos.Rows[i]["IOSVersion"].ToString();
+                        TxLatitud.Text = vDatos.Rows[i]["latitud"].ToString();
+                        TxLongitud.Text = vDatos.Rows[i]["longitud"].ToString();
+                        //DDLUbicacionEDC.SelectedValue = vDatos.Rows[i]["nombreNodo"].ToString();
+                        TxFechaMant.Text = vDatos.Rows[i]["fechaMantenimiento"].ToString();
+                        DDLEstadoEDC.SelectedValue = vDatos.Rows[i]["estado"].ToString();
+                    }
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalEDC();", true);
+                }else if (e.CommandName == "VerInfoEDC"){ 
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalInfoEDC();", true);
+                }
+                Session["INV_STOCKEDC_ID"] = vIdArticuloEDC;
+            }catch (Exception Ex){
+                Mensaje(Ex.Message, WarningType.Danger);
+            }
+        }
+
+        protected void GvBusquedaEDC_PageIndexChanging(object sender, GridViewPageEventArgs e){
+
+        }
+
+        private void validarDatosEDC() {
+            if (TxNombreNodo.Text == "" || TxNombreNodo.Text == string.Empty)
+                throw new Exception("Favor ingrese el nombre del nodo.");
+            if (DDLTipoEquipoEDC.SelectedValue == "0")
+                throw new Exception("Favor seleccione el tipo de equipo.");
+            if (DDLContratos.SelectedValue == "0")
+                throw new Exception("Favor seleccione el contrato.");
+            if (TxSerieEDC.Text == "" || TxSerieEDC.Text == string.Empty)
+                throw new Exception("Favor ingrese la serie.");
+            if (TxIP.Text == "" || TxIP.Text == string.Empty)
+                throw new Exception("Favor ingrese la dirección IP.");
+            if (DDLRegion.SelectedValue == "0")
+                throw new Exception("Favor seleccione la región.");
+            if (TxIOSImage.Text == "" || TxIOSImage.Text == string.Empty)
+                throw new Exception("Favor ingrese el nombre de la imagen del IOS.");
+            if (TxIOSVersion.Text == "" || TxIOSVersion.Text == string.Empty)
+                throw new Exception("Favor ingrese el nombre de la version del IOS.");
+            if (TxLatitud.Text == "" || TxLatitud.Text == string.Empty)
+                throw new Exception("Favor ingrese la serie del artículo.");
+            if (TxLongitud.Text == "" || TxLongitud.Text == string.Empty)
+                throw new Exception("Favor ingrese la serie del artículo.");
+            if (DDLUbicacionEDC.SelectedValue == "0")
+                throw new Exception("Favor seleccione el estado del artículo.");
+            if (TxFechaMant.Text == "" || TxFechaMant.Text == string.Empty)
+                throw new Exception("Favor ingrese la serie del artículo.");
+        }
+
+        protected void GvEnlaces_RowCommand(object sender, GridViewCommandEventArgs e){
+
+        }
+
+        protected void GvEnlaces_PageIndexChanging(object sender, GridViewPageEventArgs e){
+
+        }
+
+        protected void BtnNuevoEnlace_Click(object sender, EventArgs e){
+
+        }
+
+        protected void TxBusquedaEnlace_TextChanged(object sender, EventArgs e){
+
+        }
+
+        protected void TxBusquedaEDC_TextChanged(object sender, EventArgs e){
+
         }
     }
 }

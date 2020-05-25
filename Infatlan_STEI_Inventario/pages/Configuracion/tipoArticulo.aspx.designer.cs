@@ -7,11 +7,11 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace Infatlan_STEI.paginas.configuraciones
+namespace Infatlan_STEI_Inventario.pages.Configuracion
 {
 
 
-    public partial class usuarios
+    public partial class tipoArticulo
     {
 
         /// <summary>
@@ -69,13 +69,13 @@ namespace Infatlan_STEI.paginas.configuraciones
         protected global::System.Web.UI.UpdatePanel UpdatePanel2;
 
         /// <summary>
-        /// Control LbIdMarca.
+        /// Control LbIdTA.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LbIdMarca;
+        protected global::System.Web.UI.WebControls.Label LbIdTA;
 
         /// <summary>
         /// Control UpdatePanelModal.
@@ -87,67 +87,31 @@ namespace Infatlan_STEI.paginas.configuraciones
         protected global::System.Web.UI.UpdatePanel UpdatePanelModal;
 
         /// <summary>
-        /// Control TxUsuario.
+        /// Control TxNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxUsuario;
+        protected global::System.Web.UI.WebControls.TextBox TxNombre;
 
         /// <summary>
-        /// Control TxNombres.
+        /// Control TxDescripcion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxNombres;
+        protected global::System.Web.UI.WebControls.TextBox TxDescripcion;
 
         /// <summary>
-        /// Control TxApellidos.
+        /// Control DDLArticulosEDC.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxApellidos;
-
-        /// <summary>
-        /// Control TxIdentidad.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxIdentidad;
-
-        /// <summary>
-        /// Control TxTelefono.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxTelefono;
-
-        /// <summary>
-        /// Control TxCorreo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxCorreo;
-
-        /// <summary>
-        /// Control DDLDepartamento.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DDLDepartamento;
+        protected global::System.Web.UI.WebControls.DropDownList DDLArticulosEDC;
 
         /// <summary>
         /// Control DivEstado.

@@ -3318,7 +3318,9 @@
     <Content Include="js\perfect-scrollbar.jquery.min.js" />
     <Content Include="js\sidebarmenu.js" />
     <Content Include="js\waves.js" />
+    <Content Include="pages\Configuracion\contratos.aspx" />
     <Content Include="pages\Configuracion\marcas.aspx" />
+    <Content Include="pages\Configuracion\tipoArticulo.aspx" />
     <Content Include="pages\inventario.aspx" />
     <Content Include="pages\Configuracion\ubicaciones.aspx" />
     <Content Include="pages\articulos.aspx" />
@@ -3350,12 +3352,26 @@
     <Compile Include="main.Master.designer.cs">
       <DependentUpon>main.Master</DependentUpon>
     </Compile>
+    <Compile Include="pages\Configuracion\contratos.aspx.cs">
+      <DependentUpon>contratos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\Configuracion\contratos.aspx.designer.cs">
+      <DependentUpon>contratos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="pages\Configuracion\marcas.aspx.cs">
       <DependentUpon>marcas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="pages\Configuracion\marcas.aspx.designer.cs">
       <DependentUpon>marcas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\Configuracion\tipoArticulo.aspx.cs">
+      <DependentUpon>tipoArticulo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\Configuracion\tipoArticulo.aspx.designer.cs">
+      <DependentUpon>tipoArticulo.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\inventario.aspx.cs">
       <DependentUpon>inventario.aspx</DependentUpon>

@@ -155,7 +155,6 @@
         </div>
     </div>
             
-
     <%--MODAL DE UBICACIONES--%>
     <div class="modal fade" id="ModalUbicaciones" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -169,7 +168,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <asp:UpdatePanel ID="UpdatePanel7" runat="server">
+                    <asp:UpdatePanel ID="UpdatePanel7" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
                             <div class="row">
                                 <div class="col-md-12">

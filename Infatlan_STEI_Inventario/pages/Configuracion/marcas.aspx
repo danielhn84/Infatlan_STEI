@@ -29,7 +29,7 @@
         <ContentTemplate>
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Marcas</h4>
+                    <h4 class="card-title">Tipos de Articulos</h4>
                     <h6 class="card-subtitle">Relacionadas al producto existente en inventario.</h6>
                     <br />
                     <div class="row col-7"> 
@@ -39,7 +39,7 @@
                         </div>
                         <asp:Button runat="server" ID="BtnNuevo" CssClass="btn btn-success" Text="Nuevo" OnClick="BtnNuevo_Click" />
                     </div>
-
+                    
                     <div class="table-responsive m-t-40">
                         <asp:GridView ID="GVBusqueda" runat="server"
                             CssClass="table table-bordered"
