@@ -65,7 +65,8 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
                 UpdatePanel1.Update();
                 if (RbConductorConverido==1)
                 {
-                    DivConductor.Visible = true;
+                    DivConductor.Visible = false;
+
                 }
 
                  vQuery = "STEISP_AGENCIA_Materiales 9," + vIdMantenimiento;
@@ -81,8 +82,8 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
         
         private void validaciones()
         {
-            if (RbConductor.SelectedValue.Equals("1")  && DDLConductor.SelectedValue.Equals("0"))
-                throw new Exception("Falta completar datos, Favor seleccionar el conductor asignado. ");
+            //if (RbConductor.SelectedValue.Equals("1")  && DDLConductor.SelectedValue.Equals("0"))
+            //    throw new Exception("Falta completar datos, Favor seleccionar el conductor asignado. ");
 
         }
         
@@ -117,7 +118,7 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
             GVNewMaterialesAprobar.DataBind();
             UPMaterialesAprobar.Update();
 
-            DDLConductor.SelectedIndex = -1;
+            //DDLConductor.SelectedIndex = -1;
 
         }
         
@@ -166,7 +167,7 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
                         ",'" + vXML + "'";
                     Int32 vInfo = vConexion.ejecutarSql(vQuery);
 
-                    vQuery = "STEISP_AGENCIA_Materiales 10," + Session["AG_ASM_ID_MANTENIMIENTO"] +","+ DDLConductor.SelectedValue + ",'"+ Session["USUARIO"]+"'";
+                    vQuery = "STEISP_AGENCIA_Materiales 10," + Session["AG_ASM_ID_MANTENIMIENTO"] +","+ 1 + ",'"+ Session["USUARIO"]+"'";
                     Int32 vInfo1 = vConexion.ejecutarSql(vQuery);
 
                 }

@@ -24,6 +24,15 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
+        /// Control navCostos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor navCostos;
+
+        /// <summary>
         /// Control udpContabilidad.
         /// </summary>
         /// <remarks>
@@ -40,6 +49,24 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lbNombre;
+
+        /// <summary>
+        /// Control btnEnviarTecnico.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnEnviarTecnico;
+
+        /// <summary>
+        /// Control btnAgregarMaterial.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAgregarMaterial;
 
         /// <summary>
         /// Control udpGVContabilidad.
@@ -76,6 +103,24 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCostoTotalMateriales;
+
+        /// <summary>
+        /// Control lbplano.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbplano;
+
+        /// <summary>
+        /// Control IframePlano.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlIframe IframePlano;
 
         /// <summary>
         /// Control udpHorasExtras.
@@ -249,31 +294,31 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         protected global::System.Web.UI.WebControls.Button btnCalcular;
 
         /// <summary>
-        /// Control lbValorGanancia.
+        /// Control Label1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbValorGanancia;
+        protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// Control udpValorGanancia.
+        /// Control udpCostoTotal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel udpValorGanancia;
+        protected global::System.Web.UI.UpdatePanel udpCostoTotal;
 
         /// <summary>
-        /// Control txtGanancia.
+        /// Control txtCostoTotal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtGanancia;
+        protected global::System.Web.UI.WebControls.TextBox txtCostoTotal;
 
         /// <summary>
         /// Control Label2.
@@ -301,33 +346,6 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtIsvGanancia;
-
-        /// <summary>
-        /// Control Label1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
-
-        /// <summary>
-        /// Control udpCostoTotal.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel udpCostoTotal;
-
-        /// <summary>
-        /// Control txtCostoTotal.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCostoTotal;
 
         /// <summary>
         /// Control Label3.
@@ -735,22 +753,13 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         protected global::System.Web.UI.WebControls.TextBox txtModIdInventario;
 
         /// <summary>
-        /// Control txtModMaterial.
+        /// Control ddlModMaterial.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtModMaterial;
-
-        /// <summary>
-        /// Control txtModCostoUnitario.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtModCostoUnitario;
+        protected global::System.Web.UI.WebControls.DropDownList ddlModMaterial;
 
         /// <summary>
         /// Control txtModCantidad.
@@ -760,6 +769,24 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtModCantidad;
+
+        /// <summary>
+        /// Control lbModCosto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbModCosto;
+
+        /// <summary>
+        /// Control txtModCostoUnitario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtModCostoUnitario;
 
         /// <summary>
         /// Control UpdateUsuarioMensaje.
@@ -780,13 +807,13 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         protected global::System.Web.UI.WebControls.Label lbUsuarioMensaje;
 
         /// <summary>
-        /// Control UpdatePanel13.
+        /// Control UpdModModificar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel13;
+        protected global::System.Web.UI.UpdatePanel UpdModModificar;
 
         /// <summary>
         /// Control BtnModModificarMaterial.
@@ -796,6 +823,15 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnModModificarMaterial;
+
+        /// <summary>
+        /// Control udpModMensajes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel udpModMensajes;
 
         /// <summary>
         /// Control lbMensaje.

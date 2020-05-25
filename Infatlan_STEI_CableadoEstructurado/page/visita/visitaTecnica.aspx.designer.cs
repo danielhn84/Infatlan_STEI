@@ -24,6 +24,42 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
+        /// Control UpdatePanel2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
+
+        /// <summary>
+        /// Control lbTituloVisita.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbTituloVisita;
+
+        /// <summary>
+        /// Control nav.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor nav;
+
+        /// <summary>
+        /// Control navAprobacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor navAprobacion;
+
+        /// <summary>
         /// Control udpResposable.
         /// </summary>
         /// <remarks>
@@ -78,6 +114,15 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         protected global::System.Web.UI.WebControls.DropDownList ddlAgencia;
 
         /// <summary>
+        /// Control ddlArea.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlArea;
+
+        /// <summary>
         /// Control txtDireccion.
         /// </summary>
         /// <remarks>
@@ -114,6 +159,42 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         protected global::System.Web.UI.WebControls.TextBox txtFechaEnvio;
 
         /// <summary>
+        /// Control udpNuevoRemodelacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel udpNuevoRemodelacion;
+
+        /// <summary>
+        /// Control Label1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Label1;
+
+        /// <summary>
+        /// Control rblNuevoRemodelacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rblNuevoRemodelacion;
+
+        /// <summary>
+        /// Control udpOcultarEstudioPrevio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel udpOcultarEstudioPrevio;
+
+        /// <summary>
         /// Control UpdatePanel6.
         /// </summary>
         /// <remarks>
@@ -123,13 +204,13 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         protected global::System.Web.UI.UpdatePanel UpdatePanel6;
 
         /// <summary>
-        /// Control Label11.
+        /// Control Label3.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Label11;
+        protected global::System.Web.UI.WebControls.Label Label3;
 
         /// <summary>
         /// Control fuCuartoTelecomunicaciones.
@@ -150,49 +231,76 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         protected global::System.Web.UI.HtmlControls.HtmlImage imgCuartoTelecomunicaciones;
 
         /// <summary>
-        /// Control UpdatePanel7.
+        /// Control udpDesordenado.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel7;
+        protected global::System.Web.UI.UpdatePanel udpDesordenado;
 
         /// <summary>
-        /// Control Label12.
+        /// Control id.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Label12;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl id;
 
         /// <summary>
-        /// Control rblEtiquetado.
+        /// Control rblDesordenado.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rblEtiquetado;
+        protected global::System.Web.UI.WebControls.RadioButtonList rblDesordenado;
 
         /// <summary>
-        /// Control UpUPS.
+        /// Control fuDesordenado.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpUPS;
+        protected global::System.Web.UI.WebControls.FileUpload fuDesordenado;
 
         /// <summary>
-        /// Control Label10.
+        /// Control imgDesordenado.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Label10;
+        protected global::System.Web.UI.HtmlControls.HtmlImage imgDesordenado;
+
+        /// <summary>
+        /// Control udpReubicar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel udpReubicar;
+
+        /// <summary>
+        /// Control lbReubicarAs.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbReubicarAs;
+
+        /// <summary>
+        /// Control lbReubicar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbReubicar;
 
         /// <summary>
         /// Control rblReubicar.
@@ -229,60 +337,6 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel udpVisible;
-
-        /// <summary>
-        /// Control Div1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div1;
-
-        /// <summary>
-        /// Control udpDesordenado.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel udpDesordenado;
-
-        /// <summary>
-        /// Control lbUps.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbUps;
-
-        /// <summary>
-        /// Control rblDesordenado.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rblDesordenado;
-
-        /// <summary>
-        /// Control fuDesordenado.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fuDesordenado;
-
-        /// <summary>
-        /// Control imgDesordenado.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage imgDesordenado;
 
         /// <summary>
         /// Control udpExpuestoHumedo.
@@ -330,13 +384,13 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         protected global::System.Web.UI.HtmlControls.HtmlImage imgExpuestoHumedo;
 
         /// <summary>
-        /// Control UpdatePanel2.
+        /// Control udpExpuestoRobo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
+        protected global::System.Web.UI.UpdatePanel udpExpuestoRobo;
 
         /// <summary>
         /// Control Label5.
@@ -375,13 +429,13 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         protected global::System.Web.UI.HtmlControls.HtmlImage imgExpuestoRobo;
 
         /// <summary>
-        /// Control UpdatePanel3.
+        /// Control udpExpuestoAjenos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel3;
+        protected global::System.Web.UI.UpdatePanel udpExpuestoAjenos;
 
         /// <summary>
         /// Control Label6.
@@ -420,13 +474,13 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         protected global::System.Web.UI.HtmlControls.HtmlImage imgElementoAjeno;
 
         /// <summary>
-        /// Control UpdatePanel4.
+        /// Control udpUPS.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel4;
+        protected global::System.Web.UI.UpdatePanel udpUPS;
 
         /// <summary>
         /// Control Label7.
@@ -447,6 +501,33 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         protected global::System.Web.UI.WebControls.RadioButtonList rblUps;
 
         /// <summary>
+        /// Control fuUPS.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload fuUPS;
+
+        /// <summary>
+        /// Control imgUPS.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlImage imgUPS;
+
+        /// <summary>
+        /// Control udpAireAcondicionado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel udpAireAcondicionado;
+
+        /// <summary>
         /// Control Label8.
         /// </summary>
         /// <remarks>
@@ -465,13 +546,67 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         protected global::System.Web.UI.WebControls.RadioButtonList rblAire;
 
         /// <summary>
-        /// Control UpdatePanel5.
+        /// Control fuAire.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel5;
+        protected global::System.Web.UI.WebControls.FileUpload fuAire;
+
+        /// <summary>
+        /// Control imgAire.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlImage imgAire;
+
+        /// <summary>
+        /// Control udpEtiquetado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel udpEtiquetado;
+
+        /// <summary>
+        /// Control lbEtiquetadoAs.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbEtiquetadoAs;
+
+        /// <summary>
+        /// Control lbEtiquetado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbEtiquetado;
+
+        /// <summary>
+        /// Control rblEtiquetado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rblEtiquetado;
+
+        /// <summary>
+        /// Control udpCategoria.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel udpCategoria;
 
         /// <summary>
         /// Control Label9.
@@ -483,49 +618,40 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Label9;
 
         /// <summary>
-        /// Control rblCategoria.
+        /// Control Label10.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rblCategoria;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Label10;
 
         /// <summary>
-        /// Control Labe.
+        /// Control txtCategoria.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Labe;
+        protected global::System.Web.UI.WebControls.TextBox txtCategoria;
 
         /// <summary>
-        /// Control rblRotulacion.
+        /// Control udpPDFplano.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rblRotulacion;
+        protected global::System.Web.UI.UpdatePanel udpPDFplano;
 
         /// <summary>
-        /// Control udpImgPlano.
+        /// Control lbplano.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel udpImgPlano;
-
-        /// <summary>
-        /// Control lbPlano.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbPlano;
+        protected global::System.Web.UI.WebControls.Label lbplano;
 
         /// <summary>
         /// Control fuPlano.
@@ -537,13 +663,13 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         protected global::System.Web.UI.WebControls.FileUpload fuPlano;
 
         /// <summary>
-        /// Control imgPlano.
+        /// Control IFramePDF.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage imgPlano;
+        protected global::System.Web.UI.HtmlControls.HtmlIframe IFramePDF;
 
         /// <summary>
         /// Control udpMetariales.
@@ -852,13 +978,13 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         protected global::System.Web.UI.WebControls.Label Label2;
 
         /// <summary>
-        /// Control Label3.
+        /// Control LBCorreo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
+        protected global::System.Web.UI.WebControls.Label LBCorreo;
 
         /// <summary>
         /// Control UpdatePanel1.
@@ -940,6 +1066,24 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField HFEquiposAjeno;
+
+        /// <summary>
+        /// Control HFUPS.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HFUPS;
+
+        /// <summary>
+        /// Control HFAire.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HFAire;
 
         /// <summary>
         /// Control HFPlano.

@@ -7,11 +7,11 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace Infatlan_STEI_CableadoEstructurado.paginas
+namespace Infatlan_STEI_CableadoEstructurado.page.visita
 {
 
 
-    public partial class principalPresupuestos
+    public partial class principalVisitaTecnica
     {
 
         /// <summary>
@@ -33,31 +33,22 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         protected global::System.Web.UI.WebControls.Label Label5;
 
         /// <summary>
-        /// Control lbCotizacionRealizadas.
+        /// Control lbEstudiosCreados.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbCotizacionRealizadas;
+        protected global::System.Web.UI.WebControls.Label lbEstudiosCreados;
 
         /// <summary>
-        /// Control CSSCotizacion.
+        /// Control lbEstudiosEdicion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl CSSCotizacion;
-
-        /// <summary>
-        /// Control lbCotizacionPendientes.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbCotizacionPendientes;
+        protected global::System.Web.UI.WebControls.Label lbEstudiosEdicion;
 
         /// <summary>
         /// Control UpdatePanel5.
@@ -69,30 +60,39 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         protected global::System.Web.UI.UpdatePanel UpdatePanel5;
 
         /// <summary>
-        /// Control TxBuscarEstudio.
+        /// Control TxBuscarVisita.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxBuscarEstudio;
+        protected global::System.Web.UI.WebControls.TextBox TxBuscarVisita;
 
         /// <summary>
-        /// Control udpContabilidad.
+        /// Control btnNuevo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel udpContabilidad;
+        protected global::System.Web.UI.WebControls.Button btnNuevo;
 
         /// <summary>
-        /// Control GVPrincipal.
+        /// Control udpPrincipalVisita.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GVPrincipal;
+        protected global::System.Web.UI.UpdatePanel udpPrincipalVisita;
+
+        /// <summary>
+        /// Control GVPrincipalVisita.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GVPrincipalVisita;
     }
 }

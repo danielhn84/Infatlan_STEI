@@ -3299,6 +3299,7 @@
     <Content Include="bin\roslyn\vbc.exe" />
     <Content Include="bin\roslyn\VBCSCompiler.exe" />
     <Content Include="email\TemplateMail.html" />
+    <Content Include="Excel.4.5.dll" />
     <Content Include="img\logo.png" />
     <Content Include="pages\devolver\rechazados.aspx" />
     <Content Include="pages\mantenimiento\buscarAprobarVerificacion.aspx" />

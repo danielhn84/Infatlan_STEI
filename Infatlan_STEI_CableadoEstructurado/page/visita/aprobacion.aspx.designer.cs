@@ -7,11 +7,11 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace Infatlan_STEI_CableadoEstructurado.paginas
+namespace Infatlan_STEI_CableadoEstructurado.page.visitaTecnica
 {
 
 
-    public partial class principalPresupuestos
+    public partial class aprobacion
     {
 
         /// <summary>
@@ -33,31 +33,31 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         protected global::System.Web.UI.WebControls.Label Label5;
 
         /// <summary>
-        /// Control lbCotizacionRealizadas.
+        /// Control lbEstudiosRevisados.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbCotizacionRealizadas;
+        protected global::System.Web.UI.WebControls.Label lbEstudiosRevisados;
 
         /// <summary>
-        /// Control CSSCotizacion.
+        /// Control EstudiosRevisados.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl CSSCotizacion;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl EstudiosRevisados;
 
         /// <summary>
-        /// Control lbCotizacionPendientes.
+        /// Control lbRevisionesPendientes.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbCotizacionPendientes;
+        protected global::System.Web.UI.WebControls.Label lbRevisionesPendientes;
 
         /// <summary>
         /// Control UpdatePanel5.
@@ -78,21 +78,21 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         protected global::System.Web.UI.WebControls.TextBox TxBuscarEstudio;
 
         /// <summary>
-        /// Control udpContabilidad.
+        /// Control udpAprobacion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel udpContabilidad;
+        protected global::System.Web.UI.UpdatePanel udpAprobacion;
 
         /// <summary>
-        /// Control GVPrincipal.
+        /// Control GVAprobacion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GVPrincipal;
+        protected global::System.Web.UI.WebControls.GridView GVAprobacion;
     }
 }
