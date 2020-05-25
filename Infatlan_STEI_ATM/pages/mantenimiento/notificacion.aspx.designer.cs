@@ -15,6 +15,15 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
     {
 
         /// <summary>
+        /// Control UpdateProgress1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress UpdateProgress1;
+
+        /// <summary>
         /// Control UpNotif.
         /// </summary>
         /// <remarks>
@@ -213,6 +222,15 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         protected global::System.Web.UI.UpdatePanel UpdateTest;
 
         /// <summary>
+        /// Control H3JefeAgencia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl H3JefeAgencia;
+
+        /// <summary>
         /// Control DIVBuscarJefes.
         /// </summary>
         /// <remarks>
@@ -220,15 +238,6 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl DIVBuscarJefes;
-
-        /// <summary>
-        /// Control lbJefeAgencia.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbJefeAgencia;
 
         /// <summary>
         /// Control txtbuscarJefeNotif.
@@ -517,6 +526,15 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lbRep1;
+
+        /// <summary>
+        /// Control txtAlerta1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtAlerta1;
 
         /// <summary>
         /// Control UpdatePanel5.

@@ -424,8 +424,8 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                         //Enviar Correo
                         LimpiarNotificacion();
                         UpNotif.Update();
-                        Session.Clear();
-                        Session["usuATM"] = "acedillo";
+                        //Session.Clear();
+                        //Session["usuATM"] = "acedillo";
                         Response.Redirect("buscarAprobarNotificacion.aspx");
                     }
                     else
@@ -483,7 +483,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                             txtbuscarJefeNotif.Visible = false;
                             btnBuscarJefe.Visible = false;
                             DIVBuscarJefes.Visible = false;
-                            lbJefeAgencia.Visible = false;
+                            H3JefeAgencia.Visible = false;
                             lbSelectJefeAge.Visible = false;
                         }
                         else
@@ -495,8 +495,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     {
                         Mensaje(Ex.Message, WarningType.Danger);
                     }
-                    Session.Clear();
-                    Session["usuATM"] = "acedillo";
+                    
                 }
                 else
                 {
@@ -618,10 +617,10 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 DDLmantemientoPendiente.Items.Add(new ListItem { Value = "0", Text = "Seleccione Mantenimineto pendiente..." });
                 txtbuscarJefeNotif.Text = "";
                 GVjefesAgencias.Visible = false;
-                lbJefeAgencia.Visible = false;
+                H3JefeAgencia.Visible = false;
                 limpiarDatosATM();
                 DIVBuscarJefes.Visible = false;
-                lbJefeAgencia.Visible = false;
+                H3JefeAgencia.Visible = false;
                 lbSelectJefeAge.Visible = false;
                 Session["ATM_EMPLEADOS"] = null;
                 Session["ATM_EMPLEADOS2"] = null;
@@ -725,10 +724,10 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     DDLmantemientoPendiente.Items.Add(new ListItem { Value = "0", Text = "Seleccione Mantenimineto pendiente..." });
                     txtbuscarJefeNotif.Text = "";
                     GVjefesAgencias.Visible = false;
-                    lbJefeAgencia.Visible = false;
+                    H3JefeAgencia.Visible = false;
                     limpiarDatosATM();
                     DIVBuscarJefes.Visible = false;
-                    lbJefeAgencia.Visible = false;
+                    H3JefeAgencia.Visible = false;
                     lbSelectJefeAge.Visible = false;
                     Session["ATM_EMPLEADOS"] = null;
                     Session["ATM_EMPLEADOS2"] = null;
@@ -765,10 +764,10 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     DDLmantemientoPendiente.Items.Add(new ListItem { Value = "0", Text = "Seleccione Mantenimineto pendiente..." });
                     txtbuscarJefeNotif.Text = "";
                     GVjefesAgencias.Visible = false;
-                    lbJefeAgencia.Visible = false;
+                    H3JefeAgencia.Visible = false;
                     limpiarDatosATM();
                     DIVBuscarJefes.Visible = false;
-                    lbJefeAgencia.Visible = false;
+                    H3JefeAgencia.Visible = false;
                     lbSelectJefeAge.Visible = false;
                     Session["ATM_EMPLEADOS"] = null;
                     Session["ATM_EMPLEADOS2"] = null;
@@ -827,7 +826,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     if (Session["IdUbi"].ToString() == "0" || DDLmantemientoPendiente.SelectedValue == "0")
                     {
                         DIVBuscarJefes.Visible = false;
-                        lbJefeAgencia.Visible = false;
+                        H3JefeAgencia.Visible = false;
                         lbSelectJefeAge.Visible = false;
                         Session["ATM_EMPLEADOS"] = null;
                         Session["ATM_EMPLEADOS2"] = null;
@@ -856,7 +855,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                         lbSelectJefeAge.Visible = true;
                         GVjefesAgencias.Visible = true;
                         DIVBuscarJefes.Visible = true;
-                        lbJefeAgencia.Visible = true;
+                        H3JefeAgencia.Visible = true;
                         Session["ATM_EMPLEADOS"] = null;
                         Session["ATM_EMPLEADOS2"] = null;
                         Session["NotifJefeAgenciaATM"] = null;
@@ -870,7 +869,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     else
                     {
                         DIVBuscarJefes.Visible = false;
-                        lbJefeAgencia.Visible = false;
+                        H3JefeAgencia.Visible = false;
                         lbSelectJefeAge.Visible = false;
                         Session["ATM_EMPLEADOS"] = null;
                         Session["ATM_EMPLEADOS2"] = null;
@@ -1055,7 +1054,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
            
             if (txtcomentarioReprogramaNotif.Text == "" || txtcomentarioReprogramaNotif.Text == string.Empty)
             {
-                lbRep1.Text = "No puede dejar el comentario de reprogramación vacio";
+                txtAlerta1.Visible = true;
                 lbRep1.Visible = true;
             }
             else
@@ -1067,6 +1066,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     if (vInfo == 1)
                     {
                         lbRep1.Visible = false;
+                        txtAlerta1.Visible = false;
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal2();", true);
                         Mensaje("Notificación enviada a reprogramación exitoso", WarningType.Success);
                         ////CORREO
@@ -1132,8 +1132,6 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                         ////CORREO
                         LimpiarNotificacion();
                         UpNotif.Update();
-                        Session.Clear();
-                        Session["usuATM"] = "acedillo";
                         Response.Redirect("buscarAprobarNotificacion.aspx");
                     }
                     else
@@ -1151,11 +1149,15 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
         protected void btnCerrarReprogramarNotif_Click(object sender, EventArgs e)
         {
+            txtAlerta1.Visible = false;
+            lbRep1.Visible = false;
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal2();", true);
         }
 
         protected void btnCancelarAprobNotif_Click(object sender, EventArgs e)
         {
+            txtAlerta1.Visible = false;
+            lbRep1.Visible = false;
             lbFchAprobNotif.Text = txtFechaInicio.Text;
             lbCodATMAprobNotif.Text = txtcodATMNotif.Text;
             lbNomATMAprobNotif.Text = DDLmantemientoPendiente.SelectedItem.Text;
@@ -1165,6 +1167,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             TimeSpan horafinal = TimeSpan.Parse(txtHrFinMant.Text);
             Session["resta"] = horafinal - horainicio;
             lbhorasAprobNotif.Text = Session["resta"].ToString() + " horas";
+            lbRep1.Text = "Los campos con(*) son obligatorios.";
             
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal2();", true);
         }

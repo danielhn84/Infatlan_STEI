@@ -7,42 +7,48 @@
     </style>
     <!--PARA LLAMAR MODAL-->
     <script type="text/javascript">
-        function openModal() { $('#modalnotoficacion').modal('show'); }
-        function openModal2() { $('#modalReprogramarnotoficacion').modal('show'); }
+        function openModal() { $('#modalNoti').modal('show'); }
+        function openModal2() { $('#modalReprogramarNoti').modal('show'); }
     </script>
     <!--PARA CERRAR MODAL-->
     <script type="text/javascript">
-        function closeModal() { $('#modalnotoficacion').modal('hide'); }
-        function closeModal2() { $('#modalReprogramarnotoficacion').modal('hide'); }
+        function closeModal() { $('#modalNoti').modal('hide'); }
+        function closeModal2() { $('#modalReprogramarNoti').modal('hide'); }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
+    <asp:UpdateProgress ID="UpdateProgress1" runat="server">
+        <ProgressTemplate>
+            <div style="position: fixed; text-align: center; height: 100%; width: 100%; top: 0; right: 0; left: 0; z-index: 9999999; background-color: #ffffff; opacity: 0.7; margin: 0;">
+                <span style="display: inline-block; height: 100%; vertical-align: middle;"></span>
+                <asp:Image ID="imgUpdateProgress" runat="server" ImageUrl="/images/loading.gif" AlternateText="Loading ..." ToolTip="Loading ..." Style="display: inline-block; vertical-align: middle;" />
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
 
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
-            <h4 class="text-themecolor">Completar Notificación de ATMs</h4>
+            <h3 class="text-themecolor col-12">Notificaciones</h3>
+            <h6 class="text-themecolor col-12">Creación de notificaciones de mantenimiento de ATM</h6>
         </div>
         <div class="col-md-7 align-self-center text-right">
             <div class="d-flex justify-content-end align-items-center">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">Inicio</a></li>
-                    <li class="breadcrumb-item active">Completar Notificación de ATMs</li>
-                </ol>
-
             </div>
         </div>
     </div>
 
     <div class="card">
         <br />
-        <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
-            <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-book"></i>Datos Generales</h3>
-        </div>
-        <br />
+        
         <asp:UpdatePanel runat="server" ID="UpNotif" UpdateMode="Conditional">
             <ContentTemplate>
                 <div class="row col-12" style="margin: 10px 10px 10px 10px">
-
+                    <div class=" col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                        <div class="row">
+                            <div class="col-12 grid-margin stretch-card">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-book"></i>Datos Generales</h3>
                     <!--PRIMERA FILA-->
                     <div class="row col-12">
                         <div class="row col-6">
@@ -61,7 +67,6 @@
                             </div>
                         </div>
                     </div>
-
                     <!--/PRIMERA FILA-->
                     <!--SEGUNDA FILA-->
                     <div runat="server" class="row col-12" visible="false" id="DivCancelaNotif">
@@ -167,98 +172,106 @@
                         </div>
                     </div>
                     <!--/OCTAVA FILA-->
-                </div>
-                <br />
-                <br />
-                <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
-                    <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-user" style="margin-left: 10px"></i>Personal Encargado</h3>
-                </div>
-                <br />
-
-                <div class="row col-12" style="margin: 10px 10px 10px 10px">
-                    <!--PRIMERA FILA-->
-                    <div class="row col-12">
-                        <div class="row col-6">
-                            <label class="col-form-label col-6">Técnico responsable</label>
-                            <div class="row col-12">
-                                <asp:DropDownList ID="DLLtecResponsable" AutoPostBack="true" OnTextChanged="DLLtecResponsable_TextChanged" CssClass="form-control" runat="server">
-                                </asp:DropDownList>
-                            </div>
-                        </div>
-
-                        <div class="row col-6">
-                            <label class=" col-form-label col-6">Identidad</label>
-                            <div class="row col-12">
-                                <asp:TextBox CssClass="form-control" ID="txtidentidadTecResponsable" runat="server" Enabled="false"></asp:TextBox>
-                            </div>
-                        </div>
+                         </div>
+                      </div>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <!--/PRIMERA FILA-->
-                <!--SEGUNDA FILA-->
-                <%-- <asp:UpdatePanel ID="UpdateGridView" runat="server">
-            <ContentTemplate>--%>
-                <div class="row col-12" style="margin: 10px 10px 10px 10px">
-                    <div class="row col-12">
+                
+                <div class=" col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                        <div class="row">
+                            <div class="col-12 grid-margin stretch-card">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-user" style="margin-left: 10px"></i>Personal Encargado</h3>
+                                    </div>
+                                  <%-- <div class="row col-12" style="margin: 10px 10px 10px 10px">--%>
+                                    <!--PRIMERA FILA-->
+                                    <div class="row col-12">
+                                            <div class="row col-6">
+                                                <label class="col-form-label col-6">Técnico responsable</label>
+                                                <div class="row col-12">
+                                                    <asp:DropDownList ID="DLLtecResponsable" AutoPostBack="true" OnTextChanged="DLLtecResponsable_TextChanged" CssClass="form-control" runat="server">
+                                                    </asp:DropDownList>
+                                                </div>
+                                            </div>
 
-                        <label class="col-form-label col-12">Técnicos Participantes</label>
-                        <div class="row col-12">
-                            <asp:DropDownList ID="DLLTecnicoParticipante" AutoPostBack="true" OnTextChanged="DLLTecnicoParticiante_TextChanged" CssClass="form-control" runat="server">
-                            </asp:DropDownList>
-                        </div>
+                                            <div class="row col-6">
+                                                <label class=" col-form-label col-6">Identidad</label>
+                                                <div class="row col-12">
+                                                    <asp:TextBox CssClass="form-control" ID="txtidentidadTecResponsable" runat="server" Enabled="false"></asp:TextBox>
+                                                </div>
+                                            </div>
+                                        </div>                                    
+                                    <!--/PRIMERA FILA-->
+                                       <%--</div>--%>
+                                    <!--SEGUNDA FILA-->                                   
+                                    <div class="row col-12" style="margin: 10px 10px 10px 10px">
+                                        <div class="row col-12">
 
-                    </div>
+                                            <label class="col-form-label col-12">Técnicos Participantes</label>
+                                            <div class="row col-12">
+                                                <asp:DropDownList ID="DLLTecnicoParticipante" AutoPostBack="true" OnTextChanged="DLLTecnicoParticiante_TextChanged" CssClass="form-control" runat="server">
+                                                </asp:DropDownList>
+                                            </div>
+                                        </div>
+                                        <div class="row col-12">
+                                            <div class="table-responsive">
 
-
-                    <div class="row col-12">
-                        <div class="table-responsive">
-
-                            <!--<table id="bootstrap-data-table" class="table table-striped table-bordered"> -->
-                            <asp:GridView ID="GVBusqueda" runat="server"
-                                CssClass="table table-bordered"
-                                PagerStyle-CssClass="pgr"
-                                HeaderStyle-CssClass="table"
-                                RowStyle-CssClass="rows"
-                                AutoGenerateColumns="false"
-                                AllowPaging="true"
-                                GridLines="None"
-                                PageSize="10" OnRowCommand="GVBusqueda_RowCommand"
-                                Style="margin: 30px 0px 20px 0px">
-                                <Columns>
-                                    <asp:TemplateField HeaderStyle-Width="60px">
-                                        <ItemTemplate>
-                                            <!--<button id="btnBorrarGrid" class="btn btn-danger waves-effect waves-light" type="button"><span class="btn-label"><i class="fa fa-trash"></i></span></button>
+                                                <!--<table id="bootstrap-data-table" class="table table-striped table-bordered"> -->
+                                                <asp:GridView ID="GVBusqueda" runat="server"
+                                                    CssClass="table table-bordered"
+                                                    PagerStyle-CssClass="pgr"
+                                                    HeaderStyle-CssClass="table"
+                                                    RowStyle-CssClass="rows"
+                                                    AutoGenerateColumns="false"
+                                                    AllowPaging="true"
+                                                    GridLines="None"
+                                                    PageSize="10" OnRowCommand="GVBusqueda_RowCommand"
+                                                    Style="margin: 30px 0px 20px 0px">
+                                                    <Columns>
+                                                        <asp:TemplateField HeaderStyle-Width="60px">
+                                                            <ItemTemplate>
+                                                                <!--<button id="btnBorrarGrid" class="btn btn-danger waves-effect waves-light" type="button"><span class="btn-label"><i class="fa fa-trash"></i></span></button>
                                                 <!-- <button type="button" class="btn btn-rounded btn-block btn-danger btn-sm"><i class="fa fa-minus-circle"></i></button>-->
-                                            <asp:LinkButton ID="Btnseleccionar" OnClick="Btnseleccionar_Click" Enabled="true" runat="server" Text="" class="btn btn-danger mr-2" CommandArgument='<%# Eval("idUsuario") %>' CommandName="eliminar"><i class="icon-trash"></i></asp:LinkButton>
-                                        </ItemTemplate>
-                                        <ItemStyle Width="10%" />
-                                    </asp:TemplateField>
-                                    <asp:BoundField DataField="idUsuario" HeaderText="Usuario" ItemStyle-Width="30%" />
-                                    <asp:BoundField DataField="nombre" HeaderText="Nombre" ItemStyle-Width="30%" />
-                                    <asp:BoundField DataField="identidad" HeaderText="Identidad" ItemStyle-Width="30%" />
-                                    <asp:BoundField DataField="correo" HeaderText="Correo" Visible="false" ItemStyle-Width="30%" />
-                                </Columns>
-                            </asp:GridView>
+                                                                <asp:LinkButton ID="Btnseleccionar" OnClick="Btnseleccionar_Click" Enabled="true" runat="server" Text="" class="btn btn-danger mr-2" CommandArgument='<%# Eval("idUsuario") %>' CommandName="eliminar"><i class="icon-trash"></i></asp:LinkButton>
+                                                            </ItemTemplate>
+                                                            <ItemStyle Width="10%" />
+                                                        </asp:TemplateField>
+                                                        <asp:BoundField DataField="idUsuario" HeaderText="Usuario" ItemStyle-Width="30%" />
+                                                        <asp:BoundField DataField="nombre" HeaderText="Nombre" ItemStyle-Width="30%" />
+                                                        <asp:BoundField DataField="identidad" HeaderText="Identidad" ItemStyle-Width="30%" />
+                                                        <asp:BoundField DataField="correo" HeaderText="Correo" Visible="false" ItemStyle-Width="30%" />
+                                                    </Columns>
+                                                </asp:GridView>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!--SEGUNDA FILA-->
+                                
+                            </div>
                         </div>
                     </div>
-
-
                 </div>
-
-
-                <%--  </ContentTemplate>
-        </asp:UpdatePanel>--%>
+             
                 <!--/SEGUNDA FILA-->
 
                 <!--TERCERA FILA-->
-                <%-- <asp:UpdatePanel ID="UpdateGridView" runat="server">
-            <ContentTemplate>--%>
-                <div class="row col-12" style="margin: 10px 10px 10px 10px">
-                    <asp:UpdatePanel ID="UpdateTest" UpdateMode="Always" runat="server">
+                <asp:UpdatePanel ID="UpdateTest" UpdateMode="Always" runat="server">
                         <ContentTemplate>
+                            <div class="row col-12" style="margin: 10px 10px 10px 10px">
+                                <div class=" col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                                    <div class="row">
+                                        <div class="col-12 grid-margin stretch-card">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h3 class="text-themecolor" runat="server" id="H3JefeAgencia" style="color: #808080;"><i class="fa fa-user" style="margin-left: 10px"></i> Jefes de agencias</h3>
+                                                </div>
                             <div runat="server" class="row col-12" id="DIVBuscarJefes" visible="false">
-                                <asp:Label runat="server" Visible="false" class="col-form-label col-12" ID="lbJefeAgencia">Jefes de agencias</asp:Label>
+                                <%--<asp:Label runat="server" Visible="false" class="col-form-label col-12" ID="lbJefeAgencia">Jefes de agencias</asp:Label>--%>
                                 <div class="row col-12">
                                     <asp:TextBox runat="server" UseSubmitBehavior="False" ID="txtbuscarJefeNotif" OnTextChanged="txtbuscarJefeNotif_TextChanged" CssClass="form-control col-6"></asp:TextBox>
                                     <asp:LinkButton runat="server" ID="btnBuscarJefe" OnClick="btnBuscarJefe_Click" CssClass="btn btn-info mr-2"><i class="fa fa-search"></i></asp:LinkButton>
@@ -266,50 +279,58 @@
                             </div>
                             <br />
                             <label class="row col-12" runat="server" id="lbSelectJefeAge" visible="false">Seleccionar los jefes de agencia</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </ContentTemplate>
                     </asp:UpdatePanel>
-                    <!--GRID CON TODO PERSONAL BANCATLAN DEL ACTIVE DIRECTORY-->
-                    <div class="row col-12">
-                        <div class="table-responsive">
-
-                            <asp:UpdatePanel ID="UpdatePanel2" UpdateMode="Conditional" runat="server">
-                                <ContentTemplate>
-
-
-                                    <!--<table id="bootstrap-data-table" class="table table-striped table-bordered"> -->
-                                    <asp:GridView ID="GVJefesAD" runat="server"
-                                        CssClass="table table-bordered"
-                                        PagerStyle-CssClass="pgr"
-                                        HeaderStyle-CssClass="table"
-                                        RowStyle-CssClass="rows"
-                                        AutoGenerateColumns="false"
-                                        AllowPaging="true"
-                                        GridLines="None" OnRowCommand="GVJefesAD_RowCommand"
-                                        PageSize="10" OnPageIndexChanging="GVJefesAD_PageIndexChanging"
-                                        Style="margin: 30px 0px 20px 0px">
-                                        <Columns>
-                                            <asp:TemplateField HeaderStyle-Width="60px">
-                                                <ItemTemplate>
-                                                    <asp:LinkButton runat="server" ID="btnCorreoJefe" Text="" CssClass="btn btn-info fa fa-plus mr-2" CommandArgument='<%# Eval("mail") %>' CommandName="correos"></asp:LinkButton>
-                                                    <%-- <asp:Button ID="BtnUsuarioModificar" runat="server" Text="Modificar" CssClass="btn btn-rounded btn-block btn-success" CommandArgument='<%# Eval("codATM") %>' CommandName="Modificar" />--%>
-                                                </ItemTemplate>
-                                                <ItemStyle Width="10%" />
-                                            </asp:TemplateField>
-                                            <asp:BoundField DataField="givenName" HeaderText="Nombre" />
-                                            <asp:BoundField DataField="sn" HeaderText="Apellido" />
-                                            <asp:BoundField DataField="mail" HeaderText="Correo" />
-                                        </Columns>
-                                    </asp:GridView>
-                                    </div>
-                        </div>
+                   
                       
-                                    <!--LLENA JEFES-->
-                        <div class="row col-12">
 
+                <asp:UpdatePanel ID="UpdatePanel2" UpdateMode="Conditional" runat="server">
+                                <ContentTemplate>
+                                    <div class="row col-12" style="margin: 10px 10px 10px 10px">
+                                        <div class=" col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                                            <div class="row">
+                                                <div class="col-12 grid-margin stretch-card">
+                                                    <div class="card">
+                                    <!--GRID CON TODO PERSONAL BANCATLAN DEL ACTIVE DIRECTORY-->
+                                                        <div class="row col-12">
+                                                            <div class="table-responsive">
+                                                                <asp:GridView ID="GVJefesAD" runat="server"
+                                                                    CssClass="table table-bordered"
+                                                                    PagerStyle-CssClass="pgr"
+                                                                    HeaderStyle-CssClass="table"
+                                                                    RowStyle-CssClass="rows"
+                                                                    AutoGenerateColumns="false"
+                                                                    AllowPaging="true"
+                                                                    GridLines="None" OnRowCommand="GVJefesAD_RowCommand"
+                                                                    PageSize="10" OnPageIndexChanging="GVJefesAD_PageIndexChanging"
+                                                                    Style="margin: 30px 0px 20px 0px">
+                                                                    <Columns>
+                                                                        <asp:TemplateField HeaderStyle-Width="60px">
+                                                                            <ItemTemplate>
+                                                                                <asp:LinkButton runat="server" ID="btnCorreoJefe" Text="" CssClass="btn btn-info fa fa-plus mr-2" CommandArgument='<%# Eval("mail") %>' CommandName="correos"></asp:LinkButton>
+                                                                                <%-- <asp:Button ID="BtnUsuarioModificar" runat="server" Text="Modificar" CssClass="btn btn-rounded btn-block btn-success" CommandArgument='<%# Eval("codATM") %>' CommandName="Modificar" />--%>
+                                                                            </ItemTemplate>
+                                                                            <ItemStyle Width="10%" />
+                                                                        </asp:TemplateField>
+                                                                        <asp:BoundField DataField="givenName" HeaderText="Nombre" />
+                                                                        <asp:BoundField DataField="sn" HeaderText="Apellido" />
+                                                                        <asp:BoundField DataField="mail" HeaderText="Correo" />
+                                                                    </Columns>
+                                                                </asp:GridView>
+                                                            </div>
+                                                        </div>
+                                    <!--GRID CON TODO PERSONAL BANCATLAN DEL ACTIVE DIRECTORY-->
+                                                    
+                                    <!--LLENA JEFES-->
+                           <div class="row col-12">
                             <div class="table-responsive">
                                 <asp:UpdatePanel runat="server" ID="UPJefes">
                                     <ContentTemplate>
-                                        <!--<table id="bootstrap-data-table" class="table table-striped table-bordered"> -->
                                         <asp:GridView ID="GVLlenaJefeApruebaNotif" runat="server"
                                             CssClass="table table-bordered"
                                             PagerStyle-CssClass="pgr"
@@ -330,13 +351,11 @@
                                 </asp:UpdatePanel>
                             </div>
                         </div>
-                    <!--LLENA JEFES-->
-                    <!--GRID QUE ES LLENADA POR SELECCION-->
+                                    <!--LLENA JEFES-->
+                                          
+                                    <!--GRID QUE ES LLENADA POR SELECCION-->
                                     <div class="row col-12">
-
                                         <div class="table-responsive">
-
-                                            <!--<table id="bootstrap-data-table" class="table table-striped table-bordered"> -->
                                             <asp:GridView ID="GVjefesAgencias" runat="server"
                                                 CssClass="table table-bordered"
                                                 PagerStyle-CssClass="pgr"
@@ -361,41 +380,56 @@
                                             </asp:GridView>
                                         </div>
                                     </div>
-
-
-                                    </div>
-
-                                </ContentTemplate>
-                            </asp:UpdatePanel>
-                            <%--  </ContentTemplate>
-        </asp:UpdatePanel>--%>
-                            <!--/TERCERA FILA-->
-
-                            <asp:UpdatePanel runat="server">
-                                <ContentTemplate>
-                                    <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
-                                         <div class="modal-footer col-12">
-                                         <div runat="server" id="divBtnEnviar" class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
-                                         <asp:Button runat="server" ID="btnEnviarNotificacion" OnClick="btnEnviarNotificacion_Click" CssClass="btn btn-rounded btn-block btn-outline-success" class="btn btn-info d-none d-lg-block m-l-15" Text="Enviar" />
-                                         </div>
-                                         <div runat="server" id="divRepro" visible="false" class="row col-6">
-                                         <asp:Button runat="server" ID="btnCancelarAprobNotif" Visible="false" OnClick="btnCancelarAprobNotif_Click" CssClass="btn btn-rounded btn-block btn-outline-danger" class="btn btn-info d-none d-lg-block m-l-15" Text="Reprogramar" />
-                                         </div>
-                                         </div>
+                                    <!--GRID QUE ES LLENADA POR SELECCION-->
+                                            </div>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                                   
+
                                 </ContentTemplate>
                             </asp:UpdatePanel>
+                           
+                          
+           
+                            <!--/TERCERA FILA-->
+                <div class="row col-12" style="margin: 10px 10px 10px 10px">
+                    <div class=" col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                        <div class="row">
+                            <div class="col-12 grid-margin stretch-card">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <asp:UpdatePanel runat="server">
+                                            <ContentTemplate>
+
+                                                <div class="row col-6">
+                                                <div runat="server" id="divBtnEnviar" class="row col-6">
+                                                    <asp:Button runat="server" ID="btnEnviarNotificacion" OnClick="btnEnviarNotificacion_Click" CssClass="btn btn-success" Text="Crear notificación" />
+                                                </div>
+                                                <div runat="server" id="divRepro" visible="false" class="row col-6">
+                                                    <asp:Button runat="server" ID="btnCancelarAprobNotif" Visible="false" OnClick="btnCancelarAprobNotif_Click" CssClass="btn btn-danger" Text="Reprogramar" />
+                                                </div>
+                                                </div>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                             <br />
-                            <br />
+                           
             </ContentTemplate>
-
-
         </asp:UpdatePanel>
+        </div>
         <!-- Modal asegurar notificacion -->
-        <div class="modal bs-example-modal-lg" id="modalnotoficacion" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal bs-example-modal-lg" id="modalNoti" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header"  style="background-color:darkslategrey; color:white;">
                         <h4 class="modal-title" id="myLargeModalLabel">¿Seguro que creará notificación?</h4>
                     </div>
                     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -434,10 +468,10 @@
                         <ContentTemplate>
                             <div class="modal-footer col-12">
                                 <div class="row col-3">
-                                    <asp:Button runat="server" ID="btnModalEnviarNotificacion" OnClick="btnModalEnviarNotificacion_Click" CssClass="btn btn-success  mr-3" Text="Enviar" />
+                                    <asp:Button runat="server" ID="btnModalEnviarNotificacion" OnClick="btnModalEnviarNotificacion_Click" CssClass="btn btn-dark  mr-3" Text="Enviar" />
                                 </div>
                                 <div class="row col-3">
-                                    <asp:Button runat="server" ID="btnModalCerrarNotificacion" OnClick="btnModalCerrarNotificacion_Click" CssClass="btn btn-danger  mr-3" Text="Cancelar" />
+                                    <asp:Button runat="server" ID="btnModalCerrarNotificacion" OnClick="btnModalCerrarNotificacion_Click" CssClass="btn btn-secundary  mr-3" Text="Cancelar" />
                                 </div>
                             </div>
                         </ContentTemplate>
@@ -451,10 +485,10 @@
         <!-- /asegurar notificacion -->
 
          <!-- Modal reprogramar notificacion -->
-        <div class="modal bs-example-modal-lg" id="modalReprogramarnotoficacion" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal bs-example-modal-lg" id="modalReprogramarNoti" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header"  style="background-color:darkslategrey; color:white;">
                         <h4 class="modal-title" id="myLargeModalLabel2">¿Seguro que reprogramará notificación?</h4>
                     </div>
                     <asp:UpdatePanel ID="UpdatePanel3" runat="server">
@@ -484,11 +518,14 @@
                                 <asp:Label runat="server" BorderStyle="none" ID="lbhorasAprobNotif" class="col form-control col-6"></asp:Label>
                             </div>
                             <div class="row col-12">
-                                <asp:Label runat="server" BorderStyle="none" class="col form-control col-6"><strong>Motivo de reprogramación: </strong></asp:Label>
+                                <asp:Label runat="server" BorderStyle="none" class="col form-control col-6"><strong>*Motivo de reprogramación: </strong></asp:Label>
                                 <asp:TextBox runat="server" CssClass="form-control col-12" ID="txtcomentarioReprogramaNotif" TextMode="MultiLine" Rows="3"></asp:TextBox>
                             </div>
-                            <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
-                                <asp:Label runat="server" Style="color: red;" Visible="false" BorderStyle="none" ID="lbRep1" CssClass="col form-control"><strong></strong></asp:Label>
+                            <div class="col-md-8 align-self-center" style="margin-left: auto; margin-right: auto">
+                                <asp:Label runat="server" Style="color: red;" Visible="false" Text="Los campos con(*) son obligatorios." BorderStyle="none" ID="lbRep1" CssClass="col form-control"><strong></strong></asp:Label>
+                            </div>
+                             <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                               <asp:TextBox runat="server" Enabled="false" Text="Ingrese motivo por el que reprograma mantenimiento." Visible="false" ID="txtAlerta1" CssClass="form-control" style="background-color:red; color:white; text-align:center;"/>
                             </div>
                         </ContentTemplate>
                     </asp:UpdatePanel>
@@ -496,10 +533,10 @@
                         <ContentTemplate>
                             <div class="modal-footer col-12">
                                 <div class="row col-3">
-                                    <asp:Button runat="server" ID="btnReprogramarNotif" OnClick="btnReprogramarNotif_Click" CssClass="btn btn-success  mr-3" Text="Enviar" />
+                                    <asp:Button runat="server" ID="btnReprogramarNotif" OnClick="btnReprogramarNotif_Click" CssClass="btn btn-dark  mr-3" Text="Enviar" />
                                 </div>
                                 <div class="row col-3">
-                                    <asp:Button runat="server" ID="btnCerrarReprogramarNotif" OnClick="btnCerrarReprogramarNotif_Click" CssClass="btn btn-danger  mr-3" Text="Cancelar" />
+                                    <asp:Button runat="server" ID="btnCerrarReprogramarNotif" OnClick="btnCerrarReprogramarNotif_Click" CssClass="btn btn-secundary  mr-3" Text="Cancelar" />
                                 </div>
                             </div>
                         </ContentTemplate>
@@ -511,7 +548,7 @@
             <!--/.modal-dialog -->
         </div>
         <!-- /reprogramar notificacion -->
-    </div>
+    
 
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Script" runat="server">

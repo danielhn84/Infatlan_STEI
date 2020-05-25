@@ -12,24 +12,24 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
-    <div class="row page-titles">
+     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
-            <h4 class="text-themecolor">Solicitud de materiales</h4>
+            <h3 class="text-themecolor col-12">Solicitud de materiales</h3>
+            <h6 class="text-themecolor col-12">Solicitar materiales necesarios para mantenimiento de ATM</h6>
         </div>
         <div class="col-md-7 align-self-center text-right">
             <div class="d-flex justify-content-end align-items-center">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">Inicio</a></li>
-                    <li class="breadcrumb-item active">Solicitud de materiales</li>
-                </ol>
             </div>
         </div>
     </div>
+
     <div class="card">
         <br />
-        <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
-            <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-book"></i>Solicitar materiales</h3>
-        </div>
+       <div class=" col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+            <div class="row">
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
          <asp:UpdatePanel runat="server" UpdateMode="Conditional" ID="UPtotalATM">
             <ContentTemplate>
                 <!--PRIMERA FILA-->
@@ -166,16 +166,16 @@
                 <%--QUINTA FILA--%>
                  <asp:UpdatePanel ID="UPEnviarVerif" runat="server">
                     <ContentTemplate>
-                        <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
-                            <div class=" row col-12">
-                            <div class="col-md-6 align-self-center" style="margin-left: auto; margin-right: auto">
-                            <asp:Button runat="server" ID="btnguardar" OnClick="btnguardar_Click"  CssClass="btn btn-rounded btn-block btn-outline-success" Text="Enviar" />
+                       <%-- <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">--%>
+                            <div class=" row col-6">
+                            <div class="col-md-3">
+                            <asp:Button runat="server" ID="btnguardar" OnClick="btnguardar_Click"  CssClass="btn btn-success" Text="Confirmar " />
                             </div>
-                            <div class="col-6" runat="server" id="DIVbtnRechazo" visible="false">
-                            <asp:Button runat="server" ID="btnRechazar" OnClick="btnRechazar_Click" CssClass="btn btn-rounded btn-block btn-outline-danger" Text="Devolver" />
+                            <div class="col-3" runat="server" id="DIVbtnRechazo" visible="false">
+                            <asp:Button runat="server" ID="btnRechazar" OnClick="btnRechazar_Click" CssClass="btn btn-danger" Text="Devolver" />
+                           </div>
                             </div>
-                            </div>
-                       </div>
+                       <%--</div>--%>
                     </ContentTemplate>
                 </asp:UpdatePanel>
                 <%--/QUINTA FILA--%>
@@ -183,14 +183,18 @@
                 <br />
                 </ContentTemplate>
              </asp:UpdatePanel>
-
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
 
      <!--MODAL MATERIALES -->
         <div class="modal bs-example-modal-lg" id="modalEquipo" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header"  style="background-color:darkslategrey; color:white;">
                         <h4 class="modal-title" id="myLargeModalLabel1">¿Desea enviar la solicitud?</h4>
                     </div>
                    
@@ -198,10 +202,10 @@
                         <ContentTemplate>
                             <div class="modal-footer col-12">
                                 <div class="row col-3">
-                                    <asp:Button runat="server" ID="btnModalEnviar" OnClick="btnModalEnviar_Click" CssClass="btn btn-success mr-2" Text="Enviar" />
+                                    <asp:Button runat="server" ID="btnModalEnviar" OnClick="btnModalEnviar_Click" CssClass="btn btn-dark mr-2" Text="Enviar" />
                                 </div>
                                 <div class="row col-3">
-                                    <asp:Button runat="server" ID="btnModalCerrar" OnClick="btnModalCerrar_Click" CssClass="btn btn-danger mr-2" Text="Cancelar" />
+                                    <asp:Button runat="server" ID="btnModalCerrar" OnClick="btnModalCerrar_Click" CssClass="btn btn-secundary mr-2" Text="Cancelar" />
                                 </div>
                             </div>
                         </ContentTemplate>
@@ -218,7 +222,7 @@
         <div class="modal bs-example-modal-lg" id="modalEquipoR" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header"  style="background-color:darkslategrey; color:white;">
                         <h4 class="modal-title" id="myLargeModalLabel2">¿Desea devolver la solicitud?</h4>
                     </div>
                    
@@ -226,10 +230,10 @@
                         <ContentTemplate>
                             <div class="modal-footer col-12">
                                 <div class="row col-3">
-                                    <asp:Button runat="server" ID="btnModarDevolver" OnClick="btnModarDevolver_Click"  CssClass="btn btn-success mr-2" Text="Enviar" />
+                                    <asp:Button runat="server" ID="btnModarDevolver" OnClick="btnModarDevolver_Click"  CssClass="btn btn-dark mr-2" Text="Enviar" />
                                 </div>
                                 <div class="row col-3">
-                                    <asp:Button runat="server" ID="btnModalCerrarRechazo" OnClick="btnModalCerrarRechazo_Click"  CssClass="btn btn-danger mr-2" Text="Cancelar" />
+                                    <asp:Button runat="server" ID="btnModalCerrarRechazo" OnClick="btnModalCerrarRechazo_Click"  CssClass="btn btn-secundary mr-2" Text="Cancelar" />
                                 </div>
                             </div>
                         </ContentTemplate>

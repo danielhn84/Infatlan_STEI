@@ -46,15 +46,11 @@
     </asp:UpdateProgress>
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
-            <h4 class="text-themecolor">Aprobar Notificaciones</h4>
+            <h3 class="text-themecolor col-12">Notificación de mantenimiento</h3>
+            <h6 class="text-themecolor col-12">Aprobar notificación de mantenimiento de ATM</h6>
         </div>
         <div class="col-md-7 align-self-center text-right">
             <div class="d-flex justify-content-end align-items-center">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">Inicio</a></li>
-                    <li class="breadcrumb-item active">Aprobar Notificaciones</li>
-                </ol>
-
             </div>
         </div>
     </div>
@@ -62,10 +58,11 @@
 
     <div class="card">
         <br />
-        <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
-            <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-undo"></i>Aprobar Notificación</h3>
-        </div>
-
+       <div class=" col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+            <div class="row">
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
         <!--DATAGRID-->
         <asp:UpdatePanel ID="UpdateDivBusquedas" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
@@ -73,7 +70,7 @@
                     <div class="col-12 grid-margin stretch-card">
                         <div class="card" id="21">
                             <div class="card-body">
-                                <h4 class="card-title">Aprobar notificación</h4>
+                                <%--<h4 class="card-title">Aprobar notificación</h4>--%>
 
                                 <div class="col-md-6">
                                     <div class="form-group row">
@@ -136,6 +133,11 @@
             </ContentTemplate>
         </asp:UpdatePanel>
         <!--/DATAGRID-->
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <br />
 </asp:Content>

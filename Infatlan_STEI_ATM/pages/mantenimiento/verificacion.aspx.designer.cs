@@ -15,6 +15,15 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
     {
 
         /// <summary>
+        /// Control UpdateProgress1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress UpdateProgress1;
+
+        /// <summary>
         /// Control txthsalidaInfa.
         /// </summary>
         /// <remarks>
@@ -681,6 +690,15 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         protected global::System.Web.UI.HtmlControls.HtmlImage imgTeclado;
 
         /// <summary>
+        /// Control RBClima.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList RBClima;
+
+        /// <summary>
         /// Control FUClimatizacion.
         /// </summary>
         /// <remarks>
@@ -699,6 +717,15 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         protected global::System.Web.UI.HtmlControls.HtmlImage imgClimatizacion;
 
         /// <summary>
+        /// Control RBEnergias.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList RBEnergias;
+
+        /// <summary>
         /// Control FUEnergia.
         /// </summary>
         /// <remarks>
@@ -715,6 +742,33 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlImage imgEnergia;
+
+        /// <summary>
+        /// Control txtcomentarioATMLinea.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtcomentarioATMLinea;
+
+        /// <summary>
+        /// Control FUATMLinea.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload FUATMLinea;
+
+        /// <summary>
+        /// Control imgATMLinea.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlImage imgATMLinea;
 
         /// <summary>
         /// Control txtobseracionesVerif.
@@ -915,6 +969,15 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl H5Alerta;
 
         /// <summary>
+        /// Control txtAlerta2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtAlerta2;
+
+        /// <summary>
         /// Control UpdatePanel5.
         /// </summary>
         /// <remarks>
@@ -1039,5 +1102,32 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField HFTeclado;
+
+        /// <summary>
+        /// Control HFATMLinea.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HFATMLinea;
+
+        /// <summary>
+        /// Control HFEnergia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HFEnergia;
+
+        /// <summary>
+        /// Control HFClima.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HFClima;
     }
 }

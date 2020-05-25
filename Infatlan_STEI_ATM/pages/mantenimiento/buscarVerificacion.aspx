@@ -44,17 +44,14 @@
             </div>
         </ProgressTemplate>
     </asp:UpdateProgress>
-    <div class="row page-titles">
+
+     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
-            <h4 class="text-themecolor">Lista de verificación</h4>
+            <h3 class="text-themecolor col-12">Lista de verificación</h3>
+            <h6 class="text-themecolor col-12">Crear una nueva verificación de mantenimiento</h6>
         </div>
         <div class="col-md-7 align-self-center text-right">
             <div class="d-flex justify-content-end align-items-center">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">Inicio</a></li>
-                    <li class="breadcrumb-item active">Lista de verificación</li>
-                </ol>
-
             </div>
         </div>
     </div>
@@ -62,10 +59,12 @@
 
     <div class="card">
         <br />
-        <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
-            <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-undo"></i>Crear lista de verificación</h3>
-        </div>
-
+        
+        <div class=" col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+            <div class="row">
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
         <!--DATAGRID-->
         <asp:UpdatePanel ID="UpdateDivBusquedas" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
@@ -73,7 +72,7 @@
                     <div class="col-12 grid-margin stretch-card">
                         <div class="card" id="21">
                             <div class="card-body">
-                                <h4 class="card-title">Lista de verificación</h4>
+                                <%--<h4 class="card-title">Lista de verificación</h4>--%>
 
                                 <div class="col-md-6">
                                     <div class="form-group row">
@@ -137,13 +136,18 @@
             </ContentTemplate>
         </asp:UpdatePanel>
         <!--/DATAGRID-->
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Modal al no realizar trabajo -->
         <div class="modal bs-example-modal-lg" id="modalverificacion" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header" style="background-color:darkslategrey; color:white;">
                         <h4 class="modal-title" id="myLargeModalLabel">Motivo por el que se canceló el mantenimiento</h4>
-                        <button type="button" id="btnexitModal" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                        <button type="button" id="btnexitModal" style="color:white;" class="close" data-dismiss="modal" aria-hidden="true">X</button>
                     </div>
 
                     <asp:UpdatePanel runat="server" ID="UPModal">
@@ -185,9 +189,12 @@
                                 <div>
                                     <asp:TextBox ID="txtdetalleCancela" runat="server" TextMode="Multiline" Rows="5" CssClass="form-control col-12"></asp:TextBox>
                                 </div>
-                                <div class="col-md-6 align-self-center" style="margin-left: auto; margin-right: auto">
+                                <div class="col-md-8 align-self-center" style="margin-left: auto; margin-right: auto">
                                 <br />
-                                <h5 runat="server" visible="false" id="H5Alerta" class="text-danger"><i class="fa fa-exclamation-triangle"></i>No deje campos vacíos..</h5>
+                                <h6 runat="server" visible="false" id="H5Alerta" class="text-danger col-12" style="text-align:center;">Los campos con(*) son obligatorios.</h6>
+                            </div>
+                             <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                               <asp:TextBox runat="server" Enabled="false" Text="Ingrese motivo por el que cancela verificación." Visible="false" ID="txtAlerta2" CssClass="form-control" style="background-color:red; color:white; text-align:center;"/>
                             </div>
                             </div>
 
@@ -197,7 +204,7 @@
                     <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                         <ContentTemplate>
                             <div class="modal-footer">
-                                <asp:Button runat="server" ID="btnMantSinRealizar" OnClick="btnMantSinRealizar_Click" CssClass="btn btn-success col-12" Text="Enviar" />
+                                <asp:Button runat="server" ID="btnMantSinRealizar" OnClick="btnMantSinRealizar_Click" CssClass="btn btn-dark col-12" Text="Enviar" />
                             </div>
                         </ContentTemplate>
                     </asp:UpdatePanel>

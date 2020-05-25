@@ -145,6 +145,7 @@ namespace Infatlan_STEI_ATM.pages.reprogramar
         protected void GVBusqueda_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             H5Alerta.Visible = false;
+            txtAlerta1.Visible = false;
             txtNewFechaInicio.Text = string.Empty;
             try
             {
@@ -194,7 +195,7 @@ namespace Infatlan_STEI_ATM.pages.reprogramar
             //lbModalFechaMan.Text = "";
             if (txtNewFechaInicio.Text == "" || txtNewFechaInicio.Text == string.Empty)
             {
-               
+                txtAlerta1.Visible = true;
                 H5Alerta.Visible = true;
             }
             else
@@ -209,6 +210,7 @@ namespace Infatlan_STEI_ATM.pages.reprogramar
                     if (vInfo == 1)
                     {
                         H5Alerta.Visible = false;
+                        txtAlerta1.Visible = false;
                         //ELIMINAR JEFES DE AGENCIA
                         string vQuery2 = "STEISP_ATM_Reprogramacion 2, '" + Session["codNotificacionRE"] + "','" + NewFecha + "', '" + Session["usuATM"].ToString() + "'";
                         Int32 vInfo2 = vConexion.ejecutarSQL(vQuery2);
@@ -239,6 +241,8 @@ namespace Infatlan_STEI_ATM.pages.reprogramar
 
         protected void btnCerrarReprogramarNotif_Click(object sender, EventArgs e)
         {
+            txtAlerta1.Visible = false;
+
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
         }
     }

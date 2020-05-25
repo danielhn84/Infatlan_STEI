@@ -11,7 +11,7 @@ namespace Infatlan_STEI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            string usu = Convert.ToString(Session["USUARIO"]);
             classes.rolAplicacion[] vRolAplicacion = new classes.rolAplicacion[2];
             vRolAplicacion[0] = new classes.rolAplicacion()
             { 

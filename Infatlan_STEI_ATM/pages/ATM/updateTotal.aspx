@@ -12,14 +12,12 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
-            <h4 class="text-themecolor">Modificar ATM</h4>
+            <h3 class="text-themecolor col-12">Modificar ATM</h3>
+            <h6 class="text-themecolor col-12">Modificar información general de ATM</h6>
         </div>
         <div class="col-md-7 align-self-center text-right">
             <div class="d-flex justify-content-end align-items-center">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">Inicio</a></li>
-                    <li class="breadcrumb-item active">Modificar ATM</li>
-                </ol>
+               
 
             </div>
         </div>
@@ -28,11 +26,12 @@
 
     <div class="card">
         <br />
-        <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
-            <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-save"></i>Modificar ATM</h3>
-        </div>
-
+       
         <!--<div class="row col-12" style="margin: 10px 10px 10px 10px">-->
+        <div class="row">
+            <div class="col-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
         <asp:UpdatePanel runat="server" UpdateMode="Conditional" ID="UPtotalATM">
             <ContentTemplate>
                 <!--PRIMERA FILA-->
@@ -90,9 +89,7 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
                 <!--/SEGUNDA FILA-->
-                <br />
-                <hr />
-                <br />
+                
                 <!--TERCERA FILA-->
                 <div class="row col-12">
                     <div class="row col-4">
@@ -141,9 +138,7 @@
                     </div>
                 </div>
                 <!--/CUARTA FILA-->
-                <br />
-                <hr />
-                <br />
+                
                 <!--QUINTA FILA-->
                 <div class="row col-12">
                     <div class="row col-4">
@@ -192,9 +187,7 @@
                     </div>
                 </div>
                 <!--/SEXTA FILA-->
-                <br />
-                <hr />
-                <br />
+                
                 <!--SEPTIMA FILA-->
                 <div class="row col-12">
                     <div class="row col-4">
@@ -249,16 +242,32 @@
                     </div>
                 </div>
                 <!--NOVENA FILA-->
+                 </ContentTemplate>
+                     </asp:UpdatePanel>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+                      
                 <br />
                 <asp:UpdatePanel ID="UPEnviarVerif" runat="server">
                     <ContentTemplate>
-                        <div class="col-md-4 align-self-center" style="margin-left: auto; margin-right: auto">
-                            <asp:Button runat="server" ID="btnModificarATM" OnClick="btnModificarATM_Click" CssClass="btn btn-rounded btn-block btn-outline-success" Text="Enviar" />
+                         <div class=" col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                        <div class="row">
+                            <div class="col-12 grid-margin stretch-card">
+                                <div class="card">
+                                    <div class="card-body">
+
+                                         <asp:Button runat="server" ID="btnModificarATM" OnClick="btnModificarATM_Click" CssClass="btn btn-success" Text="Modificar ATM" />
+                                          
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
-            </ContentTemplate>
-        </asp:UpdatePanel>
+          
         <br />
         <br />
         <!--</div>-->
@@ -266,8 +275,8 @@
         <div class="modal bs-example-modal-lg" id="modalcrearATM" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="myLargeModalLabel">¿Seguro que guardará ATM?</h4>
+                    <div class="modal-header" style="background-color:darkslategrey; color:white;">
+                        <h4 class="modal-title" id="myLargeModalLabel">¿Seguro que actualizará ATM?</h4>
                     </div>
                     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                         <ContentTemplate>
@@ -297,10 +306,10 @@
                         <ContentTemplate>
                             <div class="modal-footer col-12">
                                 <div class="row col-3">
-                                    <asp:Button runat="server" ID="btnModalModificarATM" OnClick="btnModalModificarATM_Click" CssClass="btn btn-success mr-2" Text="Modificar" />
+                                    <asp:Button runat="server" ID="btnModalModificarATM" OnClick="btnModalModificarATM_Click" CssClass="btn btn-dark mr-2" Text="Modificar" />
                                 </div>
                                 <div class="row col-3">
-                                    <asp:Button runat="server" ID="btnModalCerrarModificarATM" OnClick="btnModalCerrarModificarATM_Click" CssClass="btn btn-danger mr-2" Text="Cancelar" />
+                                    <asp:Button runat="server" ID="btnModalCerrarModificarATM" OnClick="btnModalCerrarModificarATM_Click" CssClass="btn btn-secondary mr-2" Text="Cancelar" />
                                 </div>
                             </div>
                         </ContentTemplate>

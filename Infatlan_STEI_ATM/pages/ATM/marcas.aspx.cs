@@ -51,6 +51,8 @@ namespace Infatlan_STEI_ATM.pages.ATM
         {
             H5Alerta2.Visible = false;
             H5Alerta.Visible = false;
+            txtAlerta1.Visible = false;
+            txtAlerta2.Visible = false;
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal2();", true);
         }
 
@@ -58,18 +60,20 @@ namespace Infatlan_STEI_ATM.pages.ATM
         {
             H5Alerta.Visible = false;
             H5Alerta2.Visible = false;
+            txtAlerta1.Visible = false;
+            txtAlerta2.Visible = false;
             DataTable vDataa = (DataTable)Session["soATM"];
             string codmarca = e.CommandArgument.ToString();
 
 
             if (e.CommandName == "Codigo")
             {
-                string nom = "";
+               
                 
                 try
                 {
                     DataTable vDatos = new DataTable();
-                    String vQuery = "STEISP_ATMAdminComponentesATM 22,'" + codmarca + "', '" + nom + "', '" + Session["usuATM"].ToString() + "'";
+                    String vQuery = "STEISP_ATMAdminComponentesATM 22,'" + codmarca + "'";
                     vDatos = vConexion.ObtenerTabla(vQuery);
                     foreach (DataRow item in vDatos.Rows)
                     {
@@ -94,6 +98,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
             if (txtModalNewMarcaATM.Text == "" || txtModalNewMarcaATM.Text == string.Empty)
             {
                 H5Alerta2.Visible = true;
+                txtAlerta1.Visible = true;
             }
             else
             {
@@ -126,6 +131,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
 
         protected void btnModalCerrarMarcaATM_Click(object sender, EventArgs e)
         {
+            txtAlerta1.Visible = false;
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
         }
 
@@ -134,7 +140,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
             
             if (txtNewMarcaATM.Text == "" || txtNewMarcaATM.Text == string.Empty)
             {
-                //H5Alerta.InnerText="Ingrese nueva marca";
+                txtAlerta2.Visible = true;
                 H5Alerta.Visible = true;
             }
             else

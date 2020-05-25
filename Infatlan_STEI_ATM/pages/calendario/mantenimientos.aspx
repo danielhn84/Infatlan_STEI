@@ -2,30 +2,22 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
-    <div class="row page-titles">
-        <div class="col-md-6 align-self-center">
-            <h4 class="text-themecolor">Ingresar mantenimientos programados anuales de ATM</h4>
+     <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-themecolor col-12">Mantenimiento de ATM</h3>
+            <h6 class="text-themecolor col-12">Ingresar mantenimientos programados de ATM</h6>
         </div>
-        <div class="col-md-6 align-self-center text-right">
-            <div class="d-flex justify-content-end align-items-center">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">Inicio</a></li>
-                    <li class="breadcrumb-item active">Mantenimientos programados anuales de ATM</li>
-                </ol>
-
-            </div>
-        </div>
+       
     </div>
     <!--/ENCABEZADO-->
 
     <div class="card">
         <br />
-        <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
-            <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-save"></i>Mantenimientos programados de ATM</h3>
-        </div>
-        <hr />
-        <br />
-
+        <div class=" col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+            <div class="row">
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
         <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
             <%--<asp:UpdatePanel runat="server" ID="UPFile">
                 <ContentTemplate>--%>
@@ -53,6 +45,11 @@
                 </div>
             </div>
             <br />
+        </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

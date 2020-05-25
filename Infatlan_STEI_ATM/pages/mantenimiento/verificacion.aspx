@@ -216,7 +216,8 @@
                     //$('#imgClimatizacion').css('visibility', 'visible');
                     //$('#imgClimatizacion').attr('src', e.target.result);
                     var ruta11 = e.target.result;
-                    document.getElementById('<%=imgClimatizacion.ClientID%>').src = ruta11;                    
+                    document.getElementById('<%=imgClimatizacion.ClientID%>').src = ruta11;  
+                    document.getElementById('<%=HFClima.ClientID%>').value = 'si';
                 }
                 reader.readAsDataURL(input.files[0]);
                 //PRIMERA IMAGEN              
@@ -234,39 +235,67 @@
                     //$('#imgEnergia').attr('src', e.target.result);
                     var ruta12 = e.target.result;
                     document.getElementById('<%=imgEnergia.ClientID%>').src = ruta12;
-                    
+                    document.getElementById('<%=HFEnergia.ClientID%>').value = 'si';
                 }
                 reader.readAsDataURL(input.files[0]);
                 //PRIMERA IMAGEN              
             }
         }
         //IMAGEN12
+        //IMAGEN13
+        function img13(input) {
+
+            if (input.files && input.files[0]) {
+                //PRIMERA IMAGEN
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    //$('#imgTeclado').css('visibility', 'visible');
+                    //$('#imgTeclado').attr('src', e.target.result);
+                    var ruta13 = e.target.result;
+                    document.getElementById('<%=imgATMLinea.ClientID%>').src = ruta13;
+                    document.getElementById('<%=HFATMLinea.ClientID%>').value = 'si';
+                }
+                reader.readAsDataURL(input.files[0]);
+                //PRIMERA IMAGEN              
+            }
+        }
+        //IMAGEN13
 
     </script>
     <%--IMAGENES--%>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
+    <asp:UpdateProgress ID="UpdateProgress1" runat="server">
+        <ProgressTemplate>
+            <div style="position: fixed; text-align: center; height: 100%; width: 100%; top: 0; right: 0; left: 0; z-index: 9999999; background-color: #ffffff; opacity: 0.7; margin: 0;">
+                <span style="display: inline-block; height: 100%; vertical-align: middle;"></span>
+                <asp:Image ID="imgUpdateProgress" runat="server" ImageUrl="/images/loading.gif" AlternateText="Loading ..." ToolTip="Loading ..." Style="display: inline-block; vertical-align: middle;" />
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
+
      <div class="row page-titles">
         <div class="col-md-5 align-self-center">
-            <h4 class="text-themecolor">Crear lista de verificación</h4>
+            <h3 class="text-themecolor col-12">Lista de verificación</h3>
+            <h6 class="text-themecolor col-12">Ingresar datos de mantenimiento de ATM</h6>
         </div>
         <div class="col-md-7 align-self-center text-right">
             <div class="d-flex justify-content-end align-items-center">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">Inicio</a></li>
-                    <li class="breadcrumb-item active">Crear lista de verificación</li>
-                </ol>
             </div>
         </div>
     </div>
+
     <div class="card">
         <br />
-        <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
-            <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-book"></i>Datos Generales</h3>
-        </div>
-        <hr />
-        <br />
-        <div class="row col-12" style="margin: 10px 10px 10px 10px">
+             
+         <div class=" col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+            <div class="row">
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                           <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
+                              <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-book"></i>Datos Generales</h3>
+                           </div>                         
             <!--SEGUNDA FILA-->
             <div class="row col-12">
                 <div class="row col-6">
@@ -379,17 +408,21 @@
                 </div>
             </div>
             <!--/OCTAVA FILA-->
+                       </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <br />
-        <br />
-        <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
-            <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-user" style="margin-left: 10px"></i>Técnico Responsable</h3>
-        </div>
-        <br />
-        <hr />
+         <div class=" col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+            <div class="row">
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                           <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
+                               <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-user" style="margin-left: 10px"></i>Técnico Responsable</h3>
+                           </div>  
         <!--PRIMERA FILA-->
-
-        <div class="row col-12" style="margin: 10px 10px 10px 10px">
+        
             <div class="row col-12">
                 <div class="row col-6">
                     <label class="col-form-label col-6">Técnico Responsable</label>
@@ -406,83 +439,95 @@
                     </div>
                 </div>
             </div>
-        </div>
+        
         <!--/PRIMERA FILA-->
-        <br />
-        <br />
-        <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
-            <h3 class="text-themecolor" style="color: #808080;"><i class=" fa fa-wrench" style="margin-left: 10px"></i>Proceso de Mantenimiento</h3>
-        </div>
-        <br />
-        <hr />
-        <div class="row col-12" style="margin: 10px 10px 10px 10px">
-            <div class="row col-12" runat="server" id="DIVPreguntas">
-                <h5 class="text-themecolor col-12" style="color: #808080;"><i class="fa fa-check-square" style="margin-left: 10px"></i>Pasos del mantenimiento</h5>
-                <br />
-                <br />
-                <div class="row col-5">
-                    <asp:CheckBoxList ID="ckpasos1" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
-                        <asp:ListItem Value="1" Text="1. Verificar que ATM este en servicio antes de apagarlo"></asp:ListItem>                       
-                    </asp:CheckBoxList>
-                    <asp:CheckBoxList ID="ckpasos2" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">                       
-                        <asp:ListItem Value="2" Text="2. Solicitar al encargado del ATM sacar contadores"></asp:ListItem>                       
-                    </asp:CheckBoxList>
-                    <asp:CheckBoxList ID="ckpasos3" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">                       
-                        <asp:ListItem Value="3" Text="3. Solicitar al encargado del ATM sacar maleta"></asp:ListItem>                       
-                    </asp:CheckBoxList>
-                     <asp:CheckBoxList ID="ckpasos4" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">                                               
-                        <asp:ListItem Value="4" Text="4. Apagar ATM de forma correcta"></asp:ListItem>                   
-                    </asp:CheckBoxList>
-                    <asp:CheckBoxList ID="ckpasos5" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">                                                                      
-                        <asp:ListItem Value="5" Text="5. Retirar CPU"></asp:ListItem>                       
-                    </asp:CheckBoxList>
-                     <asp:CheckBoxList ID="ckpasos6" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">                                                                                             
-                        <asp:ListItem Value="6" Text="6. Retirar Monitor"></asp:ListItem>                       
-                    </asp:CheckBoxList>
-                     <asp:CheckBoxList ID="ckpasos7" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">                                                                                                                     
-                        <asp:ListItem Value="7" Text="7. Retirar la lectora"></asp:ListItem>                       
-                    </asp:CheckBoxList>
-                    <asp:CheckBoxList ID="ckpasos8" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">                                                                                                                     
-                        <asp:ListItem Value="8" Text="8. Retirar presentador"></asp:ListItem>                      
-                    </asp:CheckBoxList>
-                    <asp:CheckBoxList ID="ckpasos9" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">                                                                                                                                            
-                        <asp:ListItem Value="9" Text="9. Limpieza de stacker"></asp:ListItem>                    
-                    </asp:CheckBoxList>
-                     <asp:CheckBoxList ID="ckpasos10" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">                                                                                                                                                                   
-                        <asp:ListItem Value="10" Text="10. Limpieza de pickers"></asp:ListItem>
-                    </asp:CheckBoxList>
+                       </div>
+                    </div>
                 </div>
-                <div class="row col-7">
-                    <asp:CheckBoxList ID="ckpasos11" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
-                        <asp:ListItem Value="11" Text="11. Sopletear todos los dispositivos"></asp:ListItem>                      
-                    </asp:CheckBoxList>
-                     <asp:CheckBoxList ID="ckpasos12" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">                       
-                        <asp:ListItem Value="12" Text="12. Limpieza general por cada dispositivo"></asp:ListItem>
-                    </asp:CheckBoxList>
-                     <asp:CheckBoxList ID="ckpasos13" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">                                               
-                        <asp:ListItem Value="13" Text="13. Limpieza de pantalla con espuma"></asp:ListItem>                       
-                    </asp:CheckBoxList>
-                     <asp:CheckBoxList ID="ckpasos14" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">                                                                      
-                        <asp:ListItem Value="14" Text="14. Realizar cambios de repuesto"></asp:ListItem>
-                    </asp:CheckBoxList>
-                    <asp:CheckBoxList ID="ckpasos15" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">                                                                                              
-                        <asp:ListItem Value="15" Text="15. Armar ATM"></asp:ListItem>                       
-                    </asp:CheckBoxList>
-                    <asp:CheckBoxList ID="ckpasos16" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">                                                                                                                      
-                        <asp:ListItem Value="16" Text="16. Encender ATM"></asp:ListItem>                      
-                    </asp:CheckBoxList>
-                    <asp:CheckBoxList ID="ckpasos17" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">                                                                                                                                              
-                        <asp:ListItem Value="17" Text="17. Solicitar que ingresen maletas"></asp:ListItem>
-                    </asp:CheckBoxList>
-                     <asp:CheckBoxList ID="ckpasos18" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">                                                                                                                                                                     
-                        <asp:ListItem Value="18" Text="18. Pruebas con los dospositivos(en el vendor)"></asp:ListItem>                     
-                    </asp:CheckBoxList>
-                     <asp:CheckBoxList ID="ckpasos19" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">                                                                                                                                                                                            
-                        <asp:ListItem Value="19" Text="19. Dejar en servicio el ATM"></asp:ListItem>                       
-                    </asp:CheckBoxList>
-                     <asp:CheckBoxList ID="ckpasos20" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">                                                                                                                                                                                             
-                        <asp:ListItem Value="20" Text="20. Contractarse con personal de ATM y verificar que camaras están en linea"></asp:ListItem>
-                    </asp:CheckBoxList>
+            </div>
+        </div>
+
+        <div class=" col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+            <div class="row">
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
+                                <h3 class="text-themecolor" style="color: #808080;"><i class=" fa fa-wrench" style="margin-left: 10px"></i>Proceso de Mantenimiento</h3>
+                            </div>
+                            
+                                <div class="row col-12" runat="server" id="DIVPreguntas">
+                                    <%--<h5 class="text-themecolor col-12" style="color: #808080;"><i class="fa fa-check-square" style="margin-left: 10px"></i>Pasos del mantenimiento</h5>--%>
+                                    <br />
+                                    <br />
+                                    <div class="row col-5">
+                                        <asp:CheckBoxList ID="ckpasos1" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                            <asp:ListItem Value="1" Text="1. Verificar ATM este en servicio antes de apagarlo"></asp:ListItem>
+                                        </asp:CheckBoxList>
+                                        <asp:CheckBoxList ID="ckpasos2" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                            <asp:ListItem Value="2" Text="2. Solicitar al encargado del ATM sacar contadores"></asp:ListItem>
+                                        </asp:CheckBoxList>
+                                        <asp:CheckBoxList ID="ckpasos3" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                            <asp:ListItem Value="3" Text="3. Solicitar al encargado del ATM sacar maleta"></asp:ListItem>
+                                        </asp:CheckBoxList>
+                                        <asp:CheckBoxList ID="ckpasos4" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                            <asp:ListItem Value="4" Text="4. Apagar ATM de forma correcta"></asp:ListItem>
+                                        </asp:CheckBoxList>
+                                        <asp:CheckBoxList ID="ckpasos5" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                            <asp:ListItem Value="5" Text="5. Retirar CPU"></asp:ListItem>
+                                        </asp:CheckBoxList>
+                                        <asp:CheckBoxList ID="ckpasos6" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                            <asp:ListItem Value="6" Text="6. Retirar Monitor"></asp:ListItem>
+                                        </asp:CheckBoxList>
+                                        <asp:CheckBoxList ID="ckpasos7" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                            <asp:ListItem Value="7" Text="7. Retirar la lectora"></asp:ListItem>
+                                        </asp:CheckBoxList>
+                                        <asp:CheckBoxList ID="ckpasos8" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                            <asp:ListItem Value="8" Text="8. Retirar presentador"></asp:ListItem>
+                                        </asp:CheckBoxList>
+                                        <asp:CheckBoxList ID="ckpasos9" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                            <asp:ListItem Value="9" Text="9. Limpieza de stacker"></asp:ListItem>
+                                        </asp:CheckBoxList>
+                                        <asp:CheckBoxList ID="ckpasos10" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                            <asp:ListItem Value="10" Text="10. Limpieza de pickers"></asp:ListItem>
+                                        </asp:CheckBoxList>
+                                    </div>
+                                    <div class="row col-7">
+                                        <asp:CheckBoxList ID="ckpasos11" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                            <asp:ListItem Value="11" Text="11. Sopletear todos los dispositivos"></asp:ListItem>
+                                        </asp:CheckBoxList>
+                                        <asp:CheckBoxList ID="ckpasos12" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                            <asp:ListItem Value="12" Text="12. Limpieza general por cada dispositivo"></asp:ListItem>
+                                        </asp:CheckBoxList>
+                                        <asp:CheckBoxList ID="ckpasos13" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                            <asp:ListItem Value="13" Text="13. Limpieza de pantalla con espuma"></asp:ListItem>
+                                        </asp:CheckBoxList>
+                                        <asp:CheckBoxList ID="ckpasos14" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                            <asp:ListItem Value="14" Text="14. Realizar cambios de repuesto"></asp:ListItem>
+                                        </asp:CheckBoxList>
+                                        <asp:CheckBoxList ID="ckpasos15" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                            <asp:ListItem Value="15" Text="15. Armar ATM"></asp:ListItem>
+                                        </asp:CheckBoxList>
+                                        <asp:CheckBoxList ID="ckpasos16" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                            <asp:ListItem Value="16" Text="16. Encender ATM"></asp:ListItem>
+                                        </asp:CheckBoxList>
+                                        <asp:CheckBoxList ID="ckpasos17" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                            <asp:ListItem Value="17" Text="17. Solicitar que ingresen maletas"></asp:ListItem>
+                                        </asp:CheckBoxList>
+                                        <asp:CheckBoxList ID="ckpasos18" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                            <asp:ListItem Value="18" Text="18. Pruebas con los dospositivos(en el vendor)"></asp:ListItem>
+                                        </asp:CheckBoxList>
+                                        <asp:CheckBoxList ID="ckpasos19" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                            <asp:ListItem Value="19" Text="19. Dejar en servicio el ATM"></asp:ListItem>
+                                        </asp:CheckBoxList>
+                                        <asp:CheckBoxList ID="ckpasos20" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                            <asp:ListItem Value="20" Text="20. Contractarse con personal de ATM y verificar que camaras están en linea"></asp:ListItem>
+                                        </asp:CheckBoxList>
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -490,8 +535,12 @@
         
         <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
-                <div class="row col-12" style="margin: 10px 10px 10px 10px">
-                    <h5 class="text-themecolor" style="color: #808080;"><i class="fa fa-check-square" style="margin-left: 10px"></i>Datos de ATM</h5>
+                <div class=" col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                    <div class="row">
+                        <div class="col-12 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                    <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-check-square" style="margin-left: 10px"></i>Datos de ATM</h3>
                     <br />
                     <!--PRIMERA FILA DESHABILITADA-->
                     <div class="row col-12">
@@ -629,15 +678,21 @@
                         </div>
                     </div>
                     <!--/TERCERA FILA-->
-
+                       </div>
+                    </div>
                 </div>
+            </div>
+        </div>
+               
             </ContentTemplate>
         </asp:UpdatePanel>
 
-        <br />
-        <hr />
-        <br />
-        
+       
+         <div class=" col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+            <div class="row">
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
                 <div class="card-body">
                     <h3 class="card-title" style="color: #808080;"><i class="fa fa-image" style="margin-left: 10px"></i>Comprobación</h3>
                     <h5 class="card-subtitle">Subir imagenes de lo solicitado de mantenimiento</h5>
@@ -661,95 +716,136 @@
                                 <td class="title"><a class="link" href="javascript:void(0)">*Disco duro</a></td>   
                                 <td> <asp:FileUpload ID="FUDiscoDuro" runat="server" onchange="img1(this);" /></td>                                
                                 <%--<td runat="server" id="td1img1" style="display:none"><img id="imgDiscoDuro" runat="server" height="150" width="150" src="" style="border-width: 0px;" /></td>--%>
-                                <td><img id="imgDiscoDuro" runat="server" height="150" width="150" src="/assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>                                                          
+                                <td><img id="imgDiscoDuro" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>                                                          
                             </tr>                              
                             <tr>
                                 <td class="title"><a class="link" href="javascript:void(0)">*ATM desarmado parte superior (limpiar)</a></td>                               
                                 <td> <asp:FileUpload ID="FUATMDesarmadoPS" runat="server" onchange="img2(this);" /></td>
-                                <td> <img id="imgATMDesarmadoPS" runat="server" height="150" width="150" src="/assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                <td> <img id="imgATMDesarmadoPS" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                             </tr>
                             <tr>
                                 <td class="title"><a class="link" href="javascript:void(0)">*ATM desarmado parte inferior (limpiar)</a> </td>    
                                 <td><asp:FileUpload ID="FUATMDesarmadoPI" runat="server" onchange="img3(this);" /></td>
-                                <td> <img id="imgATMDesarmadoPI" runat="server" height="150" width="150" src="/assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                <td> <img id="imgATMDesarmadoPI" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                             </tr>
                             <tr>
                                 <td class="title"><a class="link" href="javascript:void(0)">*Dispositivo modo diagnostico de vendor en linea</a></td>                              
                                 <td><asp:FileUpload ID="FUDispositivoVendor" runat="server" onchange="img4(this);" /></td>
-                                <td><img id="imgDispositivoVendor" runat="server" height="150" width="150" src="/assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                <td><img id="imgDispositivoVendor" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                             </tr>
                             <tr>
                                 <td class="title"><a class="link" href="javascript:void(0)">*Tipo de procesador con el comando "SYSTEMINFO"</a></td>                               
                                 <td><asp:FileUpload ID="FUSYSTEMINFO" runat="server" onchange="img5(this);" /></td>
-                                <td><img id="imgSYSTEMINFO" runat="server" height="150" width="150" src="/assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                <td><img id="imgSYSTEMINFO" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                             </tr>
                             <tr>
                                 <td class="title"><a class="link" href="javascript:void(0)">*Lectora con el antiskimming desarmado y limpio</a></td>           
                                 <td><asp:FileUpload ID="FUAntiskimmin" runat="server" onchange="img6(this);" /></td>
-                                <td><img id="imgAntiskimmin" runat="server" height="150" width="150" src="/assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                <td><img id="imgAntiskimmin" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                             </tr>
                             <tr>
                                 <td class="title"><a class="link" href="javascript:void(0)">*Monitor con el filtro</a></td>                              
                                 <td><asp:FileUpload ID="FUMonitorFiltro" runat="server" onchange="img7(this);" /></td>
-                                <td><img id="imgMonitorFiltro" runat="server" height="150" width="150" src="/assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                <td><img id="imgMonitorFiltro" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                             </tr>
                             <tr>
                                 <td class="title"><a class="link" href="javascript:void(0)">*PadleWheel(rueda de paletas)</a></td>                              
                                 <td><asp:FileUpload ID="FUPadlewheel" runat="server" onchange="img8(this);" /></td>
-                                <td><img id="imgPadlewheel" runat="server" height="150" width="150" src="/assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                <td><img id="imgPadlewheel" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                             </tr>
                             <tr>
                                 <td class="title"><a class="link" href="javascript:void(0)">*Dispositivos desarmado</a></td>
                                 <td> <asp:FileUpload ID="FUDispDesarmado" runat="server" onchange="img9(this);" /></td>
-                                <td><img id="imgDispDesarmado" runat="server" height="150" width="150" src="/assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                <td><img id="imgDispDesarmado" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                             </tr>
                             <tr>
                                 <td class="title"><a class="link" href="javascript:void(0)">*Teclado</a></td>                                
                                 <td><asp:FileUpload ID="FUTeclado" runat="server" onchange="img10(this);" /></td>
-                                <td><img id="imgTeclado" runat="server" height="150" width="150" src="/assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                <td><img id="imgTeclado" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                             </tr>
                             <tr>                                                            
-                                <td class="title"><a class="link" href="javascript:void(0)">¿Cuenta con Climatización adecuada? </a></td>                                
+                                <td class="title"><a class="link" href="javascript:void(0)">¿Cuenta con Climatización adecuada?<br /> </a>
+                                    <asp:UpdatePanel runat="server">
+                                        <ContentTemplate>                             
+                                     <asp:RadioButtonList runat="server" ID="RBClima" AutoPostBack="true" RepeatDirection="Horizontal" CssClass="form-check">
+                                        <asp:ListItem Value="1" Text="Si" />
+                                        <asp:ListItem Value="2" Text="No" />
+                                    </asp:RadioButtonList>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </td>                                
                                 <td><asp:FileUpload ID="FUClimatizacion" runat="server" onchange="img11(this);" /></td>                                
-                                    <td><img id="imgClimatizacion" runat="server" height="150" width="150" src="/assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                    <td><img id="imgClimatizacion" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                                   </tr>
-                            <tr>                                                               
-                                <td class="title"><a class="link" href="javascript:void(0)">¿Cuenta con protección de energía<br /> eléctrica?</a></td>                            
+                            <tr>
+                                <td class="title"><a class="link" href="javascript:void(0)">¿Cuenta con protección de energía eléctrica?<br /></a>
+                                     <asp:UpdatePanel runat="server">
+                                        <ContentTemplate>   
+                                    <asp:RadioButtonList runat="server" ID="RBEnergias" AutoPostBack="true" RepeatDirection="Horizontal" CssClass="form-check" style="border-color:transparent">
+                                        <asp:ListItem Value="1" Text="Si" />
+                                        <asp:ListItem Value="2" Text="No" />
+                                    </asp:RadioButtonList>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </td>
                                 <td><asp:FileUpload ID="FUEnergia" runat="server" onchange="img12(this);" /></td>                                     
-                                <td><img id="imgEnergia" runat="server" height="150" width="150" src="/assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>                                
+                                <td><img id="imgEnergia" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>                                
+                            </tr>
+                            <tr>                                                               
+                                <td class="title"><a class="link" href="javascript:void(0)">*ATM en linea</a><br /><asp:TextBox runat="server" ID="txtcomentarioATMLinea" placeholder="Comentario sobre ATM en línea..." TextMode="MultiLine" Rows="3" CssClass="form-control"/> </td>                            
+                                <td><asp:FileUpload ID="FUATMLinea" runat="server" onchange="img13(this);" /></td>                                     
+                                <td><img id="imgATMLinea" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>                                
                             </tr>
                         </tbody>
                     </table>
                 </div>
+                             </div>
+                    </div>
+                </div>
+            </div>
+        </div>
             
-        <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
+       <div class=" col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+            <div class="row">
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
             <label class="col-form-label">Observaciones y Comentarios</label>
             <br />
             <div class="row col-11 align-self-center">
                 <asp:TextBox runat="server" ID="txtobseracionesVerif" TextMode="MultiLine" Rows="3" PlaceHolder="Ingrese su comentario..." CssClass="form-control col-12"></asp:TextBox>
             </div>
+                       </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <br />
-        <br />
+        
+        
+            <div class="row">
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
         <asp:UpdatePanel ID="UPEnviarVerif" runat="server">
             <ContentTemplate>
-                <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
-                <div class=" row col-12">
-                <div class="col-md-6 align-self-center" style="margin-left: auto; margin-right: auto">
-                    <asp:Button runat="server" OnClick="btnEnviarVerif_Click" ID="btnEnviarVerif" CssClass="btn btn-rounded btn-block btn-outline-success" Text="Guardar" />
+               
+                <div class="row col-6">
+                <div class=" row col-6">
+                    <asp:Button runat="server" OnClick="btnEnviarVerif_Click" ID="btnEnviarVerif" CssClass="btn btn-success" Text="Guardar verificación" />
                 </div>
-                <div class="col-6" runat="server" id="DIVbtnRechazo" visible="false">
-                    <asp:Button runat="server" ID="btnRechazarVerif" OnClick="btnRechazarVerif_Click" CssClass="btn btn-rounded btn-block btn-outline-danger" Text="Devolver" />
+                <div class="row col-6" runat="server" id="DIVbtnRechazo" visible="false">
+                    <asp:Button runat="server" ID="btnRechazarVerif" OnClick="btnRechazarVerif_Click" CssClass="btn btn-danger" Text="Devolver" />
                 </div>
-                </div>
-                    </div>
+               </div>
+                    
 
-            </ContentTemplate>
-                    <%--<Triggers>
-                        <asp:PostBackTrigger ControlID="btnEnviarVerif" />
-                    </Triggers>--%>
+            </ContentTemplate>                   
         </asp:UpdatePanel>
-        <br />
+                       </div>
+                    </div>
+                </div>
+            </div>
+        
         <br />
 
     </div>
@@ -757,7 +853,7 @@
     <div class="modal bs-example-modal-lg" id="modalVerifATM" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header" style="background-color:darkslategrey; color:white;">
                     <h4 class="modal-title" id="myLargeModalLabel">¿Seguro que guardará lista de verificación?</h4>
                 </div>
                 <asp:UpdatePanel ID="UpdatePanel3" runat="server">
@@ -789,10 +885,10 @@
                     <ContentTemplate>
                         <div class="modal-footer col-12">
                             <div class="row col-3">
-                                <asp:Button runat="server" ID="btnModalVerif" UseSubmitBehavior="false" OnClick="btnModalVerif_Click" CssClass="btn btn-success mr-3" Text="Enviar" />
+                                <asp:Button runat="server" ID="btnModalVerif" UseSubmitBehavior="false" OnClick="btnModalVerif_Click" CssClass="btn btn-dark mr-3" Text="Enviar" />
                             </div>
                             <div class="row col-3">
-                                <asp:Button runat="server" ID="btnModalCerrarVerif" OnClick="btnModalCerrarVerif_Click" CssClass="btn btn-danger mr-3" Text="Cancelar" />
+                                <asp:Button runat="server" ID="btnModalCerrarVerif" OnClick="btnModalCerrarVerif_Click" CssClass="btn btn-secundary mr-3" Text="Cancelar" />
                             </div>
                         </div>
                     </ContentTemplate>
@@ -812,7 +908,7 @@
     <div class="modal bs-example-modal-lg" id="modalRechazar" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header" style="background-color:darkslategrey; color:white;">
                     <h4 class="modal-title" id="myLargeModalLabel1">¿Seguro que devolverá lista de verificación?</h4>
                 </div>
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -844,7 +940,10 @@
                         </div>
                          <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
                                 <br />
-                                <h5 runat="server" visible="false" id="H5Alerta" class="text-danger"><i class="fa fa-exclamation-triangle"></i>Ingrese motivo por el que se devuelve lista de verificación.</h5>
+                                <h6 runat="server" visible="false" id="H5Alerta" class="text-danger col-12" style="text-align:center;">Los campos con(*) son obligatorios.</h6>
+                            </div>
+                             <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                               <asp:TextBox runat="server" Enabled="false" Text="Ingrese motivo por el que devuelve verificación." Visible="false" ID="txtAlerta2" CssClass="form-control" style="background-color:red; color:white; text-align:center;"/>
                             </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
@@ -852,10 +951,10 @@
                     <ContentTemplate>
                         <div class="modal-footer col-12">
                             <div class="row col-3">
-                                <asp:Button runat="server" ID="btnRechazarModal" OnClick="btnRechazarModal_Click" CssClass="btn btn-info mr-3" Text="Devolver" />
+                                <asp:Button runat="server" ID="btnRechazarModal" OnClick="btnRechazarModal_Click" CssClass="btn btn-dark mr-3" Text="Devolver" />
                             </div>
                             <div class="row col-3">
-                                <asp:Button runat="server" ID="btnCerrarRechazoModal" OnClick="btnCerrarRechazoModal_Click"  CssClass="btn btn-danger mr-3" Text="Cancelar" />
+                                <asp:Button runat="server" ID="btnCerrarRechazoModal" OnClick="btnCerrarRechazoModal_Click"  CssClass="btn btn-secundary mr-3" Text="Cancelar" />
                             </div>
                         </div>
                     </ContentTemplate>
@@ -883,6 +982,9 @@
             <asp:HiddenField ID="HFPadlewheel" runat="server" />
             <asp:HiddenField ID="HFDispDesarmado" runat="server" />
             <asp:HiddenField ID="HFTeclado" runat="server" />
+            <asp:HiddenField ID="HFATMLinea" runat="server" />
+             <asp:HiddenField ID="HFEnergia" runat="server" />
+            <asp:HiddenField ID="HFClima" runat="server" />
         </ContentTemplate>
     </asp:UpdatePanel>
 

@@ -16,15 +16,16 @@ namespace Infatlan_STEI_ATM
         bd vConexion = new bd();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
-            {
-                Session["usuATM"] = "acedillo";
+
+            //Session["usuATM"] = Convert.ToString(Session["USUARIO"]);
+            //string usu = Convert.ToString(Session["USUARIO"]);
+            Session["usuATM"] = "acedillo";
                 Contar();
-            }
+            
         }
         void Contar()
         {
-            string usu = "acedillo";
+            
             try
             {
                 String vQuery = "STEISP_ATM_ConteosDefault 1";
@@ -32,16 +33,16 @@ namespace Infatlan_STEI_ATM
                 h2ATMDisp.InnerText = vDatos.Rows[0]["Contar"].ToString();
 
            
-                String vQuery2 = "STEISP_ATM_ConteosDefault 2, '"+usu+"'";
+                String vQuery2 = "STEISP_ATM_ConteosDefault 2, '"+ Session["usuATM"] + "'";
                 DataTable vDatos2 = vConexion.ObtenerTabla(vQuery2);
                 H2MantAsignados.InnerText = vDatos2.Rows[0]["Contar"].ToString();
 
-                String vQuery3 = "STEISP_ATM_ConteosDefault 3, '" + usu + "'";
+                String vQuery3 = "STEISP_ATM_ConteosDefault 3, '" + Session["usuATM"] + "'";
                 DataTable vDatos3 = vConexion.ObtenerTabla(vQuery3);
                 H2MantRealizado.InnerText = vDatos3.Rows[0]["Contar"].ToString();
 
                 DataTable vDatos4 = new DataTable();
-                vDatos4 = vConexion.ObtenerTabla("STEISP_ATM_ConteosDefault 4, '" + usu + "'");
+                vDatos4 = vConexion.ObtenerTabla("STEISP_ATM_ConteosDefault 4, '" + Session["usuATM"] + "'");
                 GVMantenimiento.DataSource = vDatos4;
                 GVMantenimiento.DataBind();
                 Session["ATM_DEFAULT_MANTREALIZADO"] = vDatos4;

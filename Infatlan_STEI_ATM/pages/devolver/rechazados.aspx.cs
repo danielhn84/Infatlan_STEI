@@ -105,7 +105,8 @@ namespace Infatlan_STEI_ATM.pages.devolver
                         Session["ATM_SO_VERIF_CREAR"] = item["SO"].ToString();
                         Session["ATM_USUCREADOR_VERIF_CREAR"] = item["UsuarioCreador"].ToString();
                         Session["ATM_USUCORREO_VERIF_CREAR"] = item["CorreoTecnico"].ToString();
-                        Session["ATM_VERSIONSW_VERIF_CREAR"] = item["VersionSw"].ToString();                                             
+                        Session["ATM_VERSIONSW_VERIF_CREAR"] = item["VersionSw"].ToString();
+                        Session["ATM_ATMACTIVO_VERIF_CREAR"] = item["ATMActivo"].ToString();
                     }
 
                     
@@ -167,6 +168,7 @@ namespace Infatlan_STEI_ATM.pages.devolver
                         Session["ATM_VERIF_IMG8"] = item3["padleWheelImg"].ToString();
                         Session["ATM_VERIF_IMG9"] = item3["dispositivoDesarmadoImg"].ToString();
                         Session["ATM_VERIF_IMG10"] = item3["teclado"].ToString();
+                        Session["ATM_VERIF_IMG11"] = item3["ATMActivo"].ToString();
                     }
 
                     Response.Redirect("../../pages/mantenimiento/verificacion.aspx?id=1&tipo=2");
