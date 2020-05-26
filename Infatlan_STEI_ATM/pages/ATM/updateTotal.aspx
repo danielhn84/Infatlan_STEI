@@ -28,32 +28,27 @@
         <br />
        
         <!--<div class="row col-12" style="margin: 10px 10px 10px 10px">-->
+        <asp:UpdatePanel runat="server" UpdateMode="Conditional" ID="UPtotalATM">
+            <ContentTemplate>
         <div class="row">
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-        <asp:UpdatePanel runat="server" UpdateMode="Conditional" ID="UPtotalATM">
-            <ContentTemplate>
+        
                 <!--PRIMERA FILA-->
-                <div class="row col-12">
-                    <div class="row col-4">
+                <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                    <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                         <label class="col-form-label col-12">Código de ATM</label>
-                        <div class="col-12">
                             <asp:TextBox runat="server" CssClass="form-control" ID="txtcodATM" Enabled="false"></asp:TextBox>
-                        </div>
                     </div>
-                    <div class="row col-4">
+                    <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                         <label class="col-form-label col-12">Nombre de ATM</label>
-                        <div class="col-12">
                             <asp:TextBox runat="server" CssClass="form-control" ID="txtnombreATM" Enabled="false"></asp:TextBox>
-                        </div>
                     </div>
 
-                    <div class="row col-4">
+                    <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                         <label class="col-form-label col-12">Sucursal de ATM</label>
-                        <div class="col-12">
                             <asp:DropDownList runat="server" ClientIDMode="AutoID" ID="DDLsucursalATM" AutoPostBack="true" OnTextChanged="DDLsucursalATM_TextChanged" CssClass="form-control"></asp:DropDownList>
-                        </div>
                     </div>
 
 
@@ -62,27 +57,18 @@
                 <!--SEGUNDA FILA-->
                 <asp:UpdatePanel runat="server" UpdateMode="Conditional" ID="UPSegFila">
                     <ContentTemplate>
-                        <div class="row col-12">
-                            <div class="row col-4">
+                        <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                            <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                                 <label class="col-form-label col-12">Ubicación de ATM</label>
-                                <div class="col-12">
                                     <asp:DropDownList runat="server" ID="DDLUbicacionATM" CssClass="form-control"></asp:DropDownList>
-                                </div>
                             </div>
-
-                            <div class="row col-4">
+                            <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                                 <label class="col-form-label col-12">Modelo de ATM</label>
-                                <div class="col-12">
                                     <asp:DropDownList runat="server" AutoPostBack="true" ID="DDLModeloATM" OnTextChanged="DDLModeloATM_TextChanged" CssClass="form-control"></asp:DropDownList>
-                                </div>
                             </div>
-
-                            <div class="row col-4">
+                            <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                                 <label class="col-form-label col-12">Tipo de modelo de ATM</label>
-
-                                <div class="col-12">
                                     <asp:DropDownList runat="server" ID="DDLDetalleModelo" CssClass="form-control col-12"></asp:DropDownList>
-                                </div>
                             </div>
 
                         </div>
@@ -91,164 +77,122 @@
                 <!--/SEGUNDA FILA-->
                 
                 <!--TERCERA FILA-->
-                <div class="row col-12">
-                    <div class="row col-4">
+                <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                   <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                         <label class="col-form-label col-12">Tipo de Carga</label>
-                        <div class="col-12">
                             <asp:DropDownList runat="server" ID="DDLTipoCarga" CssClass="form-control"></asp:DropDownList>
-                        </div>
                     </div>
-
-                    <div class="row col-4">
+                    <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                         <label class="col-form-label col-12">Procesador de ATM</label>
-                        <div class="col-12">
                             <asp:DropDownList runat="server" ID="DDLProcesadorATM" CssClass="form-control"></asp:DropDownList>
-                        </div>
                     </div>
 
-                    <div class="row col-4">
+                    <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                         <label class="col-form-label col-12">Teclado de ATM</label>
-                        <div class="col-12">
                             <asp:DropDownList runat="server" ID="DDLTecladoATM" CssClass="form-control"></asp:DropDownList>
-                        </div>
                     </div>
                 </div>
                 <!--/TERCERA FILA-->
                 <!--CUARTA FILA-->
-                <div class="row col-12">
-                    <div class="row col-4">
+                <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                    <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                         <label class="col-form-label col-12">Serie del ATM</label>
-                        <div class="col-12">
                             <asp:TextBox runat="server" CssClass="form-control" ID="txtserieATM"></asp:TextBox>
-                        </div>
                     </div>
-
-                    <div class="row col-4">
+                    <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                         <label class="col-form-label col-12">Memoria RAM de ATM</label>
-                        <div class="col-12">
                             <asp:TextBox runat="server" CssClass="form-control" ID="txtramATM" TextMode="Number"></asp:TextBox>
-                        </div>
                     </div>
-
-                    <div class="row col-4">
+                    <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                         <label class="col-form-label col-12">N/S de Disco Duro</label>
-                        <div class="col-12">
                             <asp:TextBox runat="server" CssClass="form-control" ID="txtserieDisco"></asp:TextBox>
-                        </div>
                     </div>
                 </div>
                 <!--/CUARTA FILA-->
                 
                 <!--QUINTA FILA-->
-                <div class="row col-12">
-                    <div class="row col-4">
+                <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                    <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                         <label class="col-form-label col-12">Sistema Operativo</label>
-                        <div class="col-12">
                             <asp:DropDownList runat="server" ID="DDLso" CssClass="form-control"></asp:DropDownList>
-                        </div>
                     </div>
-
-                    <div class="row col-4">
+                    <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                         <label class="col-form-label col-12">Version del software</label>
-                        <div class="col-12">
                             <asp:DropDownList runat="server" ID="DDLversionSw" CssClass="form-control"></asp:DropDownList>
-                        </div>
                     </div>
-                    <div class="row col-4">
+                    <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                         <label class="col-form-label col-12">Tipo de ATM</label>
-                        <div class="col-12">
                             <asp:DropDownList runat="server" ID="DDLTipoATM" CssClass="form-control"></asp:DropDownList>
-                        </div>
                     </div>
-
                 </div>
                 <!--/QUINTA FILA-->
                 <!--SEXTA FILA-->
-                <div class="row col-12">
-
-                    <div class="row col-4">
-                        <label class="col-form-label col-12">Marca del Disco Duro</label>
-                        <div class="col-12">
+                <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                   <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
+                        <label class="col-form-label col-12">Marca del Disco Duro</label>                       
                             <asp:DropDownList runat="server" ID="DDLmarca" CssClass="form-control"></asp:DropDownList>
-                        </div>
                     </div>
-                    <div class="row col-4">
+                    <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                         <label class="col-form-label col-12">Capacidad del disco</label>
-                        <div class="col-12">
                             <asp:TextBox runat="server" CssClass="form-control" ID="txtcapacidadDisco" TextMode="Number"></asp:TextBox>
-                        </div>
                     </div>
 
-                    <div class="row col-4">
+                    <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                         <label class="col-form-label col-12">Dirección IP</label>
-                        <div class="col-12">
                             <asp:TextBox runat="server" CssClass="form-control" ID="txtIP"></asp:TextBox>
-                        </div>
                     </div>
                 </div>
                 <!--/SEXTA FILA-->
                 
                 <!--SEPTIMA FILA-->
-                <div class="row col-12">
-                    <div class="row col-4">
+                <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                   <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                         <label class="col-form-label col-12">Puerto</label>
-                        <div class="col-12">
                             <asp:TextBox runat="server" CssClass="form-control" ID="txtpuerto"></asp:TextBox>
-                        </div>
                     </div>
 
-                    <div class="row col-4">
+                    <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                         <label class="col-form-label col-12">Latitud</label>
-                        <div class="col-12">
                             <asp:TextBox runat="server" CssClass="form-control" ID="txtlatitud"></asp:TextBox>
-                        </div>
                     </div>
 
-                    <div class="row col-4">
+                    <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                         <label class="col-form-label col-12">Longitud</label>
-                        <div class="col-12">
                             <asp:TextBox runat="server" CssClass="form-control" ID="txtlongitud"></asp:TextBox>
-                        </div>
                     </div>
                 </div>
                 <!--/SEPTIMA FILA-->
                 <!--OCTAVA FILA-->
-                <div class="row col-12">
-                    <div class="row col-4">
+                <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                    <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                         <label class="col-form-label col-12">Estado de ATM</label>
-                        <div class="col-12">
                             <asp:DropDownList runat="server" ID="DDLestado" CssClass="form-control"></asp:DropDownList>
-                        </div>
                     </div>
-                    <div class="row col-4">
+                    <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                         <label class="col-form-label col-12">Inventario de ATM</label>
-                        <div class="col-12">
                             <asp:TextBox runat="server" CssClass="form-control" ID="txtinventarioATM"></asp:TextBox>
-                        </div>
                     </div>
-                    <div class="row col-4">
+                    <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                         <label class="col-form-label col-12">Código de ubicación</label>
-                        <div class="col-12">
                             <asp:TextBox runat="server" CssClass="form-control" Enabled="false" ID="txtcodUbicacion"></asp:TextBox>
-                        </div>
                     </div>
                 </div>
                 <!--/OCTAVA FILA-->
                 <!--NOVENA FILA-->
-                <div class="row col-12">
+                <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
                     <label class="col-form-label col-12">Dirección</label>
                     <div class="col-12">
                         <asp:TextBox runat="server" CssClass="form-control" ID="txtdireccion" TextMode="MultiLine" Rows="3"></asp:TextBox>
                     </div>
                 </div>
                 <!--NOVENA FILA-->
-                 </ContentTemplate>
-                     </asp:UpdatePanel>
+                
                            </div>
                         </div>
                     </div>
                 </div>
-                      
+                       </ContentTemplate>
+                     </asp:UpdatePanel>
                 <br />
                 <asp:UpdatePanel ID="UPEnviarVerif" runat="server">
                     <ContentTemplate>

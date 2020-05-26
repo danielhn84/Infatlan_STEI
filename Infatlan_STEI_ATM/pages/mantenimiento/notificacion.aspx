@@ -42,182 +42,138 @@
         
         <asp:UpdatePanel runat="server" ID="UpNotif" UpdateMode="Conditional">
             <ContentTemplate>
-                <div class="row col-12" style="margin: 10px 10px 10px 10px">
-                    <div class=" col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                <%--<div class="row col-12" style="margin: 10px 10px 10px 10px">
+                    <div class=" col-12 align-self-center" style="margin-left: auto; margin-right: auto">--%>
                         <div class="row">
                             <div class="col-12 grid-margin stretch-card">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-book"></i>Datos Generales</h3>
+                                         <div class="card-body row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                                        <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-book"></i> Datos Generales</h3>
+                                             </div>
                     <!--PRIMERA FILA-->
-                    <div class="row col-12">
-                        <div class="row col-6">
+                    <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                        <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                             <label class="col-form-label col-6">Fecha de mantenimiento</label>
-                            <div class="row col-12">
                                 <asp:TextBox ID="txtFechaInicio" OnTextChanged="txtFechaInicio_TextChanged" AutoPostBack="true" placeholder="1900-12-31" CssClass="form-control col-12" runat="server" TextMode="Date"></asp:TextBox>
-                            </div>
                         </div>
-                        <div class="row col-6">
+                       <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                             <label class="col-form-label col-6">Realizar mantenimiento</label>
-                            <div class="row col-12">
                                 <asp:DropDownList runat="server" ID="DDLrealizarMant" Enabled="false" OnSelectedIndexChanged="DDLrealizarMant_SelectedIndexChanged" AutoPostBack="true" CssClass="form-control col-12">
                                     <asp:ListItem Value="1" Text="Si"></asp:ListItem>
                                     <asp:ListItem Value="2" Text="No"></asp:ListItem>
                                 </asp:DropDownList>
-                            </div>
                         </div>
                     </div>
                     <!--/PRIMERA FILA-->
                     <!--SEGUNDA FILA-->
-                    <div runat="server" class="row col-12" visible="false" id="DivCancelaNotif">
+                    <div runat="server" class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto" visible="false" id="DivCancelaNotif">
                         <label class="col-form-label col-6">Motivo de cancelación</label>
-                        <div class="row col-12">
                             <asp:TextBox ID="txtcancelarNotif" placeholder="Ingrese su motivo de cancelación..." CssClass="form-control col-12" runat="server" TextMode="MultiLine" Rows="2"></asp:TextBox>
-                        </div>
                     </div>
                     <!--/SEGUNDA FILA-->
                     <!--TERCERA FILA-->
-                    <div class="row col-12">
-                        <div class="row col-6">
+                    <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                        <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                             <label class="col col-form-label col-6">Hora Inicio de mantenimiento</label>
-                            <div class="row col-12">
                                 <asp:TextBox ID="txtHrInicioMant" placeholder="00:00:00" CssClass="form-control" runat="server" TextMode="Time"></asp:TextBox>
-                            </div>
                         </div>
-                        <div class="row col-6">
+                        <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                             <label class="col col-form-label col-6">Hora finaliza mantenimiento</label>
-                            <div class="row col-12">
                                 <asp:TextBox ID="txtHrFinMant" placeholder="00:00:00" CssClass="form-control" runat="server" TextMode="Time"></asp:TextBox>
-                            </div>
                         </div>
                     </div>
                     <!--FIN TERCERA FILA-->
                     <!--CUARTA FILA-->
-                    <div class="row col-12">
-                        <div class="row col-6">
+                    <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                        <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                             <label class="col-form-label col-6">SysAid</label>
-                            <div class="row col-12">
                                 <asp:TextBox CssClass="form-control" ID="txtsysaid" runat="server"></asp:TextBox>
-                            </div>
                         </div>
-                        <div class="row col-6">
+                        <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                             <label class="col-form-label col-6">ATM</label>
-                            <div class="row col-12">
                                 <asp:DropDownList runat="server" ID="DDLmantemientoPendiente" AutoPostBack="true" OnSelectedIndexChanged="DDLmantemientoPendiente_SelectedIndexChanged" CssClass="form-control"></asp:DropDownList>
-                            </div>
                         </div>
                     </div>
                     <!--/CUARTA FILA-->
                     <!--QUINTA FILA-->
-                    <div class="row col-12">
-                        <div class="row col-6">
+                   <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                        <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                             <label class="col-form-label col-6">Código de ATM</label>
-                            <div class="row col-12">
                                 <asp:TextBox CssClass="form-control" ID="txtcodATMNotif" runat="server" Enabled="false"></asp:TextBox>
-                            </div>
                         </div>
-                        <div class="row col-6">
+                        <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                             <label class="col-form-label col-6">Ubicación de ATM</label>
-                            <div class="row col-12">
                                 <asp:TextBox CssClass="form-control" ID="txtUbicacionATM" runat="server" Enabled="false"></asp:TextBox>
-                            </div>
                         </div>
                     </div>
                     <!--/QUINTA FILA-->
                     <!--SEXTA FILA-->
-                    <div class="row col-12">
-                        <div class="row col-6">
+                    <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                        <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                             <label class="col-form-label col-6">Dirección</label>
-                            <div class="row col-12">
                                 <asp:TextBox CssClass="form-control" ID="txtdireccion" runat="server" Enabled="false"></asp:TextBox>
                             </div>
-                        </div>
-                        <div class="row col-6">
+                        <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                             <label class="col-form-label col-6">Sucursal</label>
-                            <div class="row col-12">
                                 <asp:TextBox CssClass="form-control" ID="txtsucursalNotif" runat="server" Enabled="false"></asp:TextBox>
-                            </div>
                         </div>
                     </div>
                     <!--/SEXTA FILA-->
                     <!--SEPTIMA FILA-->
-                    <div class="row col-12">
-                        <div class="row col-6">
+                    <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                        <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                             <label class="col-form-label col-6">Dirección IP</label>
-                            <div class="row col-12">
                                 <asp:TextBox CssClass="form-control" ID="txtipNotif" runat="server" Enabled="false"></asp:TextBox>
-                            </div>
                         </div>
-                        <div class="row col-6">
+                        <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                             <label class="col-form-label col-6">Zona</label>
-                            <div class="row col-12">
                                 <asp:TextBox CssClass="form-control" ID="txtzonaNotif" runat="server" Enabled="false"></asp:TextBox>
-                            </div>
                         </div>
                     </div>
                     <!--/SEPTIMA FILA-->
                     <!--OCTAVA FILA-->
-                    <div class="row col-12">
-                        <div class="row col-6">
+                    <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                        <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                             <label class="col-form-label col-6">Impacto</label>
-                            <div class="row col-12">
                                 <asp:TextBox CssClass="form-control" ID="txtimpacto" runat="server" Enabled="false" TextMode="MultiLine" Rows="2" Text="Durante la ventana de mantenimiento el ATM estará fuera de linea"></asp:TextBox>
-                            </div>
                         </div>
-                        <div class="row col-6">
+                        <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                             <label class="col-form-label col-6">Motivo</label>
-                            <div class="row col-12">
                                 <asp:TextBox CssClass="form-control" ID="txtmotivoNotif" runat="server" Enabled="false" TextMode="MultiLine" Rows="2" Text="Realizar acciones pro activas para prevenir la falla"></asp:TextBox>
-                            </div>
                         </div>
                     </div>
                     <!--/OCTAVA FILA-->
-                         </div>
+                                        
+                       <div class="card-body row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                         <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-user" style="margin-left: 10px"></i> Personal Encargado</h3>
                       </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-                
-                <div class=" col-12 align-self-center" style="margin-left: auto; margin-right: auto">
                         <div class="row">
                             <div class="col-12 grid-margin stretch-card">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-user" style="margin-left: 10px"></i>Personal Encargado</h3>
-                                    </div>
+                                <div class="card">                                 
                                   <%-- <div class="row col-12" style="margin: 10px 10px 10px 10px">--%>
                                     <!--PRIMERA FILA-->
-                                    <div class="row col-12">
-                                            <div class="row col-6">
+                                    <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                                            <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                                                 <label class="col-form-label col-6">Técnico responsable</label>
-                                                <div class="row col-12">
-                                                    <asp:DropDownList ID="DLLtecResponsable" AutoPostBack="true" OnTextChanged="DLLtecResponsable_TextChanged" CssClass="form-control" runat="server">
-                                                    </asp:DropDownList>
-                                                </div>
+                                                    <asp:DropDownList ID="DLLtecResponsable" AutoPostBack="true" OnTextChanged="DLLtecResponsable_TextChanged" CssClass="form-control" runat="server"></asp:DropDownList>
                                             </div>
 
-                                            <div class="row col-6">
+                                            <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                                                 <label class=" col-form-label col-6">Identidad</label>
-                                                <div class="row col-12">
                                                     <asp:TextBox CssClass="form-control" ID="txtidentidadTecResponsable" runat="server" Enabled="false"></asp:TextBox>
-                                                </div>
                                             </div>
                                         </div>                                    
                                     <!--/PRIMERA FILA-->
                                        <%--</div>--%>
                                     <!--SEGUNDA FILA-->                                   
-                                    <div class="row col-12" style="margin: 10px 10px 10px 10px">
-                                        <div class="row col-12">
+                                   <div class="row col-11 align-self-center" style="margin-left: auto; margin-right: auto">
 
                                             <label class="col-form-label col-12">Técnicos Participantes</label>
-                                            <div class="row col-12">
                                                 <asp:DropDownList ID="DLLTecnicoParticipante" AutoPostBack="true" OnTextChanged="DLLTecnicoParticiante_TextChanged" CssClass="form-control" runat="server">
                                                 </asp:DropDownList>
-                                            </div>
                                         </div>
-                                        <div class="row col-12">
+                                        <div class="row col-11 align-self-center" style="margin-left: auto; margin-right: auto">
                                             <div class="table-responsive">
 
                                                 <!--<table id="bootstrap-data-table" class="table table-striped table-bordered"> -->
@@ -248,56 +204,52 @@
                                                 </asp:GridView>
                                             </div>
                                         </div>
-
-                                    </div>
                                     <!--SEGUNDA FILA-->
                                 
                             </div>
                         </div>
-                    </div>
-                </div>
-             
-                <!--/SEGUNDA FILA-->
+                       </div>
 
-                <!--TERCERA FILA-->
+               <!--TERCERA FILA-->
                 <asp:UpdatePanel ID="UpdateTest" UpdateMode="Always" runat="server">
                         <ContentTemplate>
+                             <div class="card-body row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                                <h3 class="text-themecolor" runat="server" id="H3JefeAgencia" style="color: #808080;"><i class="fa fa-user" style="margin-left: 10px"></i> Jefes de agencias</h3>
+                              </div>
                             <div class="row col-12" style="margin: 10px 10px 10px 10px">
-                                <div class=" col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                                <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
                                     <div class="row">
                                         <div class="col-12 grid-margin stretch-card">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <h3 class="text-themecolor" runat="server" id="H3JefeAgencia" style="color: #808080;"><i class="fa fa-user" style="margin-left: 10px"></i> Jefes de agencias</h3>
-                                                </div>
-                            <div runat="server" class="row col-12" id="DIVBuscarJefes" visible="false">
-                                <%--<asp:Label runat="server" Visible="false" class="col-form-label col-12" ID="lbJefeAgencia">Jefes de agencias</asp:Label>--%>
-                                <div class="row col-12">
-                                    <asp:TextBox runat="server" UseSubmitBehavior="False" ID="txtbuscarJefeNotif" OnTextChanged="txtbuscarJefeNotif_TextChanged" CssClass="form-control col-6"></asp:TextBox>
+                                                   
+                                                    </div>
+                            <div runat="server" class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto" id="DIVBuscarJefes" visible="false">
+                                <asp:Label runat="server" Visible="false" class="col-form-label col-12" ID="lbJefeAgencia">Jefes de agencias</asp:Label>
+                                <%--<div class="row col-12">--%>
+                                    <asp:TextBox runat="server" UseSubmitBehavior="False" ID="txtbuscarJefeNotif" OnTextChanged="txtbuscarJefeNotif_TextChanged" CssClass="form-control col-10"></asp:TextBox>
                                     <asp:LinkButton runat="server" ID="btnBuscarJefe" OnClick="btnBuscarJefe_Click" CssClass="btn btn-info mr-2"><i class="fa fa-search"></i></asp:LinkButton>
-                                </div>
-                            </div>
+                                <%--</div>--%>
+                             <br />
                             <br />
                             <label class="row col-12" runat="server" id="lbSelectJefeAge" visible="false">Seleccionar los jefes de agencia</label>
+                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                               </div>
+                             </div>
                         </ContentTemplate>
                     </asp:UpdatePanel>
-                   
-                      
 
                 <asp:UpdatePanel ID="UpdatePanel2" UpdateMode="Conditional" runat="server">
                                 <ContentTemplate>
-                                    <div class="row col-12" style="margin: 10px 10px 10px 10px">
-                                        <div class=" col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                                        
                                             <div class="row">
                                                 <div class="col-12 grid-margin stretch-card">
                                                     <div class="card">
                                     <!--GRID CON TODO PERSONAL BANCATLAN DEL ACTIVE DIRECTORY-->
-                                                        <div class="row col-12">
+                                                        <div class="row col-11 align-self-center" style="margin-left: auto; margin-right: auto">
                                                             <div class="table-responsive">
                                                                 <asp:GridView ID="GVJefesAD" runat="server"
                                                                     CssClass="table table-bordered"
@@ -327,7 +279,7 @@
                                     <!--GRID CON TODO PERSONAL BANCATLAN DEL ACTIVE DIRECTORY-->
                                                     
                                     <!--LLENA JEFES-->
-                           <div class="row col-12">
+                          <div class="row col-11 align-self-center" style="margin-left: auto; margin-right: auto">
                             <div class="table-responsive">
                                 <asp:UpdatePanel runat="server" ID="UPJefes">
                                     <ContentTemplate>
@@ -354,7 +306,7 @@
                                     <!--LLENA JEFES-->
                                           
                                     <!--GRID QUE ES LLENADA POR SELECCION-->
-                                    <div class="row col-12">
+                                    <div class="row col-11 align-self-center" style="margin-left: auto; margin-right: auto">
                                         <div class="table-responsive">
                                             <asp:GridView ID="GVjefesAgencias" runat="server"
                                                 CssClass="table table-bordered"
@@ -384,17 +336,24 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-
-                                   
-
+                                
                                 </ContentTemplate>
                             </asp:UpdatePanel>
-                           
-                          
-           
-                            <!--/TERCERA FILA-->
+
+                 <!--/TERCERA FILA-->
+                         </div>
+                      </div>
+                    </div>
+                </div>
+            <%--</div>
+        </div>--%>
+                                
+                        
+                
+             
+                <!--/SEGUNDA FILA-->
+
+                
                 <div class="row col-12" style="margin: 10px 10px 10px 10px">
                     <div class=" col-12 align-self-center" style="margin-left: auto; margin-right: auto">
                         <div class="row">

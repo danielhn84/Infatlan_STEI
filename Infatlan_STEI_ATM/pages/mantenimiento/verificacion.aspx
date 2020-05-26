@@ -294,117 +294,89 @@
                     <div class="card">
                         <div class="card-body">
                            <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
-                              <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-book"></i>Datos Generales</h3>
+                              <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-book"></i> Datos Generales</h3>
                            </div>                         
             <!--SEGUNDA FILA-->
-            <div class="row col-12">
-                <div class="row col-6">
+            <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                     <label class="col col-form-label col-6">Hora Salida de Infatlan</label>
-                    <div class="row col-12">
                         <asp:TextBox ID="txthsalidaInfa" placeholder="00:00:00" CssClass="form-control" runat="server" TextMode="Time"></asp:TextBox>
-                    </div>
                 </div>
-                <div class="row col-6">
+                <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                     <label class="col col-form-label col-6">Hora llegada a Infatlan</label>
-                    <div class="row col-12">
                         <asp:TextBox ID="txtHllegadaInfatlan" placeholder="00:00:00" CssClass="form-control" runat="server" TextMode="Time"></asp:TextBox>
-                    </div>
                 </div>
             </div>
             <!--/SEGUNDA FILA-->
             <!--TERCERA FILA-->
-            <div class="row col-12">
-                <div class="row col-6">
+            <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                     <label class="col-form-label col-6">Inicio de mantenimiento</label>
-                    <div class="row col-12">
                         <asp:TextBox ID="TxFechaInicio" placeholder="00:00:00" CssClass="form-control" runat="server" TextMode="Time"></asp:TextBox>
-                    </div>
                 </div>
-                <div class="row col-6">
+                <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                     <label class=" col-form-label col-6">Finaliza mantenimiento</label>
-                    <div class="row col-12">
                         <asp:TextBox ID="TxFechaRegreso" placeholder="00:00:00" CssClass="form-control" runat="server" TextMode="Time"></asp:TextBox>
-                    </div>
                 </div>
             </div>
             <!--FIN TERCERA FILA-->
             <!--CUARTA FILA-->
-            <div class="row col-12">
-                <div class="row col-6">
+            <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                     <label class="col-form-label col-6">Lugar(Nombre)</label>
-                    <div class="row col-12">
                         <asp:TextBox runat="server" CssClass="form-control" ID="txtnomATM" Enabled="false"></asp:TextBox>
-                    </div>
                 </div>
-                <div class="row col-6">
+                <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                     <label class="col-form-label col-6">SysAid</label>
-                    <div class="row col-12">
                         <asp:TextBox CssClass="form-control" ID="txtsysaid" runat="server" Enabled="false"></asp:TextBox>
-                    </div>
                 </div>
             </div>
             <!--/CUARTA FILA-->
             <!--QUINTA FILA-->
-            <div class="row col-12">
-                <div class="row col-6">
+            <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                     <label class="col-form-label col-6">Ubicación de ATM</label>
-                    <div class="row col-12">
                         <asp:TextBox CssClass="form-control" ID="txtUbicacionATM" runat="server" Enabled="false"></asp:TextBox>
-                    </div>
                 </div>
-                <div class="row col-6">
+                <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                     <label class="col-form-label col-6">Código de ATM</label>
-                    <div class="row col-12">
                         <asp:TextBox CssClass="form-control" ID="txtcodATM" runat="server" Enabled="false"></asp:TextBox>
-                    </div>
                 </div>
             </div>
             <!--/QUINTA FILA-->
             <!--SEXTA FILA-->
-            <div class="row col-12">
-                <div class="row col-6">
+            <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                     <label class="col-form-label col-6">Dirección</label>
-                    <div class="row col-12">
                         <asp:TextBox CssClass="form-control" ID="txtdireccion" runat="server" Enabled="false"></asp:TextBox>
-                    </div>
                 </div>
-                <div class="row col-6">
+                <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                     <label class="col-form-label col-6">Sucursal</label>
-                    <div class="row col-12">
                         <asp:TextBox CssClass="form-control" ID="txtsucursal" runat="server" Enabled="false"></asp:TextBox>
-                    </div>
                 </div>
             </div>
             <!--/SEXTA FILA-->
             <!--SEPTIMA FILA-->
-            <div class="row col-12">
-                <div class="row col-6">
+            <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                     <label class="col-form-label col-6">Dirección IP</label>
-                    <div class="row col-12">
                         <asp:TextBox CssClass="form-control" ID="txtip" runat="server" Enabled="false"></asp:TextBox>
-                    </div>
                 </div>
-                <div class="row col-6">
+                <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                     <label class="col-form-label col-6">Zona</label>
-                    <div class="row col-12">
                         <asp:TextBox CssClass="form-control" ID="txtzonaVerif" runat="server" Enabled="false"></asp:TextBox>
-                    </div>
                 </div>
             </div>
             <!--/SEPTIMA FILA-->
             <!--OCTAVA FILA-->
-            <div class="row col-12">
-                <div class="row col-6">
+            <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                     <label class="col-form-label col-6">Impacto</label>
-                    <div class="row col-12">
                         <asp:TextBox CssClass="form-control" ID="txtimpacto" runat="server" Enabled="false" Text="Durante la ventana de mantenimiento el ATM estará fuera de linea"></asp:TextBox>
-                    </div>
                 </div>
-                <div class="row col-6">
+                <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                     <label class="col-form-label col-6">Motivo</label>
-                    <div class="row col-12">
                         <asp:TextBox CssClass="form-control" ID="txtmotivoVerif" runat="server" Enabled="false" Text="Realizar acciones pro activas para prevenir la falla"></asp:TextBox>
-                    </div>
                 </div>
             </div>
             <!--/OCTAVA FILA-->
@@ -419,24 +391,19 @@
                     <div class="card">
                         <div class="card-body">
                            <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
-                               <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-user" style="margin-left: 10px"></i>Técnico Responsable</h3>
+                               <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-user" style="margin-left: 10px"></i> Técnico Responsable</h3>
                            </div>  
         <!--PRIMERA FILA-->
         
-            <div class="row col-12">
-                <div class="row col-6">
+            <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                     <label class="col-form-label col-6">Técnico Responsable</label>
-                    <div class="row col-12">
                         <asp:TextBox runat="server" CssClass="form-control" ID="txtTecnicoResponsable" Enabled="false"></asp:TextBox>
-
-                    </div>
                 </div>
 
-                <div class="row col-6">
+                <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                     <label class=" col-form-label col-6">Identidad</label>
-                    <div class="row col-12">
                         <asp:TextBox CssClass="form-control" ID="txtidentidad" runat="server" Enabled="false"></asp:TextBox>
-                    </div>
                 </div>
             </div>
         
@@ -447,20 +414,20 @@
             </div>
         </div>
 
-        <div class=" col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+        <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
             <div class="row">
                 <div class="col-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
                             <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
-                                <h3 class="text-themecolor" style="color: #808080;"><i class=" fa fa-wrench" style="margin-left: 10px"></i>Proceso de Mantenimiento</h3>
+                                <h3 class="text-themecolor" style="color: #808080;"><i class=" fa fa-wrench" style="margin-left: 10px"></i> Proceso de Mantenimiento</h3>
                             </div>
                             
                                 <div class="row col-12" runat="server" id="DIVPreguntas">
                                     <%--<h5 class="text-themecolor col-12" style="color: #808080;"><i class="fa fa-check-square" style="margin-left: 10px"></i>Pasos del mantenimiento</h5>--%>
                                     <br />
                                     <br />
-                                    <div class="row col-5">
+                                    <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                                         <asp:CheckBoxList ID="ckpasos1" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
                                             <asp:ListItem Value="1" Text="1. Verificar ATM este en servicio antes de apagarlo"></asp:ListItem>
                                         </asp:CheckBoxList>
@@ -492,7 +459,7 @@
                                             <asp:ListItem Value="10" Text="10. Limpieza de pickers"></asp:ListItem>
                                         </asp:CheckBoxList>
                                     </div>
-                                    <div class="row col-7">
+                                    <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                                         <asp:CheckBoxList ID="ckpasos11" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
                                             <asp:ListItem Value="11" Text="11. Sopletear todos los dispositivos"></asp:ListItem>
                                         </asp:CheckBoxList>
@@ -540,141 +507,109 @@
                         <div class="col-12 grid-margin stretch-card">
                             <div class="card">
                                 <div class="card-body">
-                    <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-check-square" style="margin-left: 10px"></i>Datos de ATM</h3>
+                                    <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                    <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-check-square" style="margin-left: 10px"></i> Datos de ATM</h3>
+                                        </div>
                     <br />
                     <!--PRIMERA FILA DESHABILITADA-->
-                    <div class="row col-12">
-                        <div class="row col-4">
+                    <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                        <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                             <label class="col-form-label col-12">Sistema Operativo</label>
-                            <div class="row col-12">
                                 <asp:TextBox runat="server" ID="txtsoVerif" CssClass="form-control" Enabled="false"></asp:TextBox>
-                            </div>
                         </div>
 
-                        <div class="row col-4">
+                        <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                             <label class="col-form-label col-12">Versión del software</label>
-                            <div class="row col-12">
                                 <asp:TextBox runat="server" ID="txtversionswVerif" CssClass="form-control" Enabled="false"></asp:TextBox>
-                            </div>
                         </div>
 
-                        <div class="row col-4">
+                        <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                             <label class="col-form-label col-12">Puerto</label>
-                            <div class="row col-12">
                                 <asp:TextBox runat="server" ID="txtpuertoVerif" CssClass="form-control" Enabled="false"></asp:TextBox>
-                            </div>
                         </div>
                     </div>
                     <!--/PRIMERA FILA DESHABILITADA-->
                     <!--PRIMERA FILA-->
-                    <div class="row col-12">
+                    <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
                         <br />
-                        <div class="row col-4">
+                        <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                             <label class="col-form-label col-12">Tipo de Teclado</label>
-                            <div class="row col-12">
                                 <asp:DropDownList ID="DDLtipoTeclado" CssClass="form-control" runat="server">
                                 </asp:DropDownList>
-                            </div>
                         </div>
-                        <div class="row col-4">
+                        <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                             <label class="col-form-label col-12">Tipo de Procesador</label>
-                            <div class="row col-12">
                                 <asp:DropDownList ID="DDLtipoProc" CssClass="form-control" runat="server">
                                 </asp:DropDownList>
-                            </div>
                         </div>
-                        <div class="row col-4">
+                        <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                             <label class="col-form-label col-12">Tipo de Carga</label>
-                            <div class="row col-12">
                                 <asp:DropDownList ID="DDLtipoCargaVerif" CssClass="form-control" runat="server">
                                 </asp:DropDownList>
-                            </div>
                         </div>
                     </div>
                     <!--/PRIMERA FILA-->
                     <!--SEGUNDA FILA-->
-                    <div class="row col-12">
-                        <div class="row col-4">
+                    <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                        <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                             <label class="col-form-label col-12">Marca del disco duro</label>
-                            <div class="row col-12">
                                 <asp:DropDownList AutoPostBack="true" ID="DDLmarcaDiscoDuro" CssClass="form-control col-12" runat="server">
                                 </asp:DropDownList>
-                            </div>
                         </div>
-                        <div class="row col-4">
+                        <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                             <label class="col-form-label col-12">Número Serie de Disco Duro</label>
-                            <div class="row col-12">
                                 <asp:TextBox runat="server" ID="txtSerieDiscoDuro" CssClass="form-control"></asp:TextBox>
-                            </div>
                         </div>
-                        <div class="row col-4">
+                        <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                             <label class="col-form-label col-12">Capacidad de disco duro(GB)</label>
-                            <div class="row col-12">
                                 <asp:TextBox runat="server" ID="txtcapacidadDiscoVerif" CssClass="form-control" TextMode="Number"></asp:TextBox>
-                            </div>
                         </div>
                     </div>
                     <!--/SEGUNDA FILA-->
                     <!--QUINTA FILA-->
-                    <div class="row col-12">
-
-
-                        <div class="row col-4">
+                      <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                        <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                             <label class="col-form-label col-12">Serie ATM</label>
-                            <div class="row col-12">
                                 <asp:TextBox runat="server" ID="txtserieATM" CssClass="form-control"></asp:TextBox>
-                            </div>
                         </div>
-                        <div class="row col-4">
+                        <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                             <label class="col-form-label col-12">Inventario ATM</label>
-                            <div class="row col-12">
                                 <asp:TextBox runat="server" ID="txtinventarioVerif" CssClass="form-control"></asp:TextBox>
-                            </div>
                         </div>
-                        <div class="row col-4">
+                        <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                             <label class="col-form-label col-12">RAM(GB)</label>
-                            <div class="row col-12">
                                 <asp:TextBox runat="server" ID="txtramVerif" CssClass="form-control" TextMode="Number"></asp:TextBox>
-                            </div>
                         </div>
                     </div>
                     <!--/QUINTA FILA-->
                     <!--SEXTA FILA-->
-                    <div class="row col-12">
-
-                        <div class="row col-4">
+                     <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                        <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                             <label class="col-form-label col-12">Latitud ATM</label>
-                            <div class="row col-12">
                                 <asp:TextBox runat="server" ID="txtlatitudATM" Enabled="false" CssClass="form-control"></asp:TextBox>
-                            </div>
                         </div>
-
-                        <div class="row col-4">
+                        <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                             <label class="col-form-label col-12">Longitud ATM</label>
-                            <div class="row col-12">
                                 <asp:TextBox runat="server" ID="txtlongitudATM" Enabled="false" CssClass="form-control"></asp:TextBox>
-                            </div>
                         </div>
+                         <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">                            
+                         </div>
                     </div>
                     <!--/SEXTA FILA-->
                     <!--TERCERA FILA-->
-                    <div class="row col-12">
-                        <div class="row col-4">
+                    <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                        <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                             <label class="col-form-label col-12">¿Lectora tiene antiskimming?</label>
-                            <div class="row col-12">
                                 <asp:DropDownList AutoPostBack="true" OnTextChanged="dropantiskimming_TextChanged" OnSelectedIndexChanged="dropantiskimming_SelectedIndexChanged" ID="dropantiskimming" CssClass="form-control col-12" runat="server">
                                     <asp:ListItem Value="0" Text="Seleccione opción..."></asp:ListItem>
                                     <asp:ListItem Value="1" Text="Si"></asp:ListItem>
                                     <asp:ListItem Value="2" Text="No"></asp:ListItem>
                                 </asp:DropDownList>
-                            </div>
                         </div>
 
-                        <div class="row col-8">
+                        <div class="row col-8 align-self-center" style="margin-left: auto; margin-right: auto">
                             <label class="col-form-label col-12">Comentario por lectora sin antiskimming</label>
-                            <div class="row col-12">
                                 <asp:TextBox runat="server" ID="txtantiSkimming" CssClass="form-control" Enabled="false"></asp:TextBox>
-                            </div>
                         </div>
                     </div>
                     <!--/TERCERA FILA-->
@@ -688,7 +623,7 @@
         </asp:UpdatePanel>
 
        
-         <div class=" col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+         <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
             <div class="row">
                 <div class="col-12 grid-margin stretch-card">
                     <div class="card">
@@ -805,21 +740,21 @@
             </div>
         </div>
             
-       <div class=" col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+       
             <div class="row">
                 <div class="col-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
+                            <div class="row col-11 align-self-center" style="margin-left: auto; margin-right: auto">
             <label class="col-form-label">Observaciones y Comentarios</label>
-            <br />
-            <div class="row col-11 align-self-center">
+            <br />          
                 <asp:TextBox runat="server" ID="txtobseracionesVerif" TextMode="MultiLine" Rows="3" PlaceHolder="Ingrese su comentario..." CssClass="form-control col-12"></asp:TextBox>
-            </div>
+                           </div>
                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        
         
         
             <div class="row">
@@ -827,18 +762,17 @@
                     <div class="card">
                         <div class="card-body">
         <asp:UpdatePanel ID="UPEnviarVerif" runat="server">
-            <ContentTemplate>
-               
-                <div class="row col-6">
-                <div class=" row col-6">
+            <ContentTemplate>              
+                <div class="row col-11 align-self-center" style="margin-left: auto; margin-right: auto">
+                <div class="row col-3 align-self-center" style="margin-left: auto; margin-right: auto">
                     <asp:Button runat="server" OnClick="btnEnviarVerif_Click" ID="btnEnviarVerif" CssClass="btn btn-success" Text="Guardar verificación" />
                 </div>
-                <div class="row col-6" runat="server" id="DIVbtnRechazo" visible="false">
+                <div class="row col-2 align-self-center" style="margin-left: auto; margin-right: auto" runat="server" id="DIVbtnRechazo" visible="false">
                     <asp:Button runat="server" ID="btnRechazarVerif" OnClick="btnRechazarVerif_Click" CssClass="btn btn-danger" Text="Devolver" />
                 </div>
+                     <div class="row col-7 align-self-center" style="margin-left: auto; margin-right: auto">
+                         </div>
                </div>
-                    
-
             </ContentTemplate>                   
         </asp:UpdatePanel>
                        </div>
