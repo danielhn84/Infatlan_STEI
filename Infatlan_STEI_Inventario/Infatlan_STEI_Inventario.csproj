@@ -4501,6 +4501,7 @@
     <Content Include="scss\widgets\weather-widget.scss" />
     <Content Include="scss\widgets\widgets.scss" />
     <Content Include="pages\plantillas\plantillaEDC.xlsx" />
+    <Content Include="pages\plantillas\PlantillaEnlaces.xlsx" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

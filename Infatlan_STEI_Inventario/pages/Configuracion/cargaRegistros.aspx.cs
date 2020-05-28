@@ -75,9 +75,9 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                         
                         Response.Redirect("/sites/inventario/pages/plantillas/plantillaEDC.xlsx");
                     }else if (vId == "2")
-                        Response.Redirect("");
+                        Response.Redirect("/sites/inventario/pages/plantillas/plantillaEDC.xlsx");
                     else if (vId == "3")
-                        Response.Redirect("");
+                        Response.Redirect("/sites/inventario/pages/plantillas/plantillaEDC.xlsx");
                 }else if (e.CommandName == "CargarRegistros"){
                     
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalCarga();", true);
