@@ -51,5 +51,21 @@ namespace Infatlan_STEI_Inventario.clases
             }
             return vResultado;
         }
+
+        public int ejecutarSql1(String vQuery){
+            int vResultado = 0;
+            DataTable vDatos = new DataTable();
+            try{
+                SqlDataAdapter vDataAdapter = new SqlDataAdapter(vQuery, vConexion);
+                vDataAdapter.Fill(vDatos);
+
+                vResultado = Convert.ToInt32(vDatos.Rows[0][0].ToString());
+            }catch (Exception Ex){
+                String vError = Ex.Message;
+                vConexion.Close();
+                throw;
+            }
+            return vResultado;
+        }
     }
 }

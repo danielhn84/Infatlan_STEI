@@ -100,6 +100,7 @@
                                             <asp:TextBox Visible="false" ID="TxCodigo" ReadOnly="true" CssClass="form-control" runat="server"></asp:TextBox>
                                             <asp:TextBox Visible="false" ID="TxPrecio" ReadOnly="true" CssClass="form-control" runat="server"></asp:TextBox>
                                             <asp:TextBox Visible="false" ID="TxCantidadActual" ReadOnly="true" CssClass="form-control" runat="server"></asp:TextBox>
+                                            <asp:TextBox Visible="false" ID="TxProceso" ReadOnly="true" CssClass="form-control" runat="server"></asp:TextBox>
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
                                 </div>

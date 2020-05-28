@@ -79,12 +79,23 @@ namespace Infatlan_STEI_Inventario.pages
                     //UBICACION ACTUAL
                     vQuery = "[STEISP_INVENTARIO_Ubicaciones] 5, " + vIdInventario;
                     vDatos = vConexion.obtenerDataTable(vQuery);
-
+                    string vId = "";
                     if (vDatos.Rows.Count > 0){
                         TxActual.Text = vDatos.Rows[0]["codigo"].ToString();
                         TxIdInventario.Text = vIdInventario;
                         TxIdUbicacion.Text = vDatos.Rows[0]["idUbicacion"].ToString();
-                        TxIdStock.Text = vDatos.Rows[0]["idStock"].ToString();
+                        if (vDatos.Rows[0]["idStock"].ToString() != ""){
+                            vId = vDatos.Rows[0]["idStock"].ToString();
+                            TxProceso.Text = "STOCK";
+                        }else if (vDatos.Rows[0]["idStockEDC"].ToString() != "") { 
+                            vId = vDatos.Rows[0]["idStockEDC"].ToString();
+                            TxProceso.Text = "EDC";
+                        }else if (vDatos.Rows[0]["idStockEnlace"].ToString() != "") { 
+                            vId = vDatos.Rows[0]["idStockEnlace"].ToString();
+                            TxProceso.Text = "Enlace";
+                        }
+
+                        TxIdStock.Text = vId;
                         TxCodigo.Text = vDatos.Rows[0]["codigoInventario"].ToString();
                         TxPrecio.Text = vDatos.Rows[0]["precio"].ToString();
                         TxCantidadActual.Text = vDatos.Rows[0]["cantidad"].ToString();
@@ -103,10 +114,18 @@ namespace Infatlan_STEI_Inventario.pages
                 if (Convert.ToDecimal(TxCantidadActual.Text) < Convert.ToDecimal(TxCantidad.Text))
                     throw new Exception("La cantidad solicitada es mayor que la disponible.");
 
-                String vQuery = "[STEISP_INVENTARIO_Stock] 2," + TxIdStock.Text;
-                DataTable vDataStock = vConexion.obtenerDataTable(vQuery);
-                Decimal vPrecioDec = Convert.ToDecimal(TxCantidad.Text) * Convert.ToDecimal(vDataStock.Rows[0]["precioUnit"].ToString());
-                String vPrecio = vPrecioDec.ToString().Replace(",", ".");
+                String vPrecio = "", vTipoTransaccion = "", vQuery = "";
+
+                if (TxProceso.Text == "STOCK") {
+                    vQuery = "[STEISP_INVENTARIO_Stock] 2," + TxIdStock.Text;
+                    DataTable vDataStock = vConexion.obtenerDataTable(vQuery);
+                    Decimal vPrecioDec = Convert.ToDecimal(TxCantidad.Text) * Convert.ToDecimal(vDataStock.Rows[0]["precioUnit"].ToString());
+                    vPrecio = vPrecioDec.ToString().Replace(",", ".");
+                    vTipoTransaccion = "14";
+                }else if (TxProceso.Text == "EDC") 
+                    vTipoTransaccion = "18"; 
+                else if (TxProceso.Text == "Enlace") 
+                    vTipoTransaccion = "20"; 
 
                 generarxml vMaestro = new generarxml();
                 Object[] vDatosMaestro = new object[10];
@@ -114,15 +133,15 @@ namespace Infatlan_STEI_Inventario.pages
                 vDatosMaestro[1] = TxIdStock.Text;
                 vDatosMaestro[2] = DDLNueva.SelectedValue; // NUEVA
                 vDatosMaestro[3] = Session["USUARIO"].ToString(); //Responsable
-                vDatosMaestro[4] = "TRAN_UBIC";
+                vDatosMaestro[4] = "CAMBIO UBICACION";
                 vDatosMaestro[5] = TxCantidad.Text;
                 vDatosMaestro[6] = ""; // Serie
                 vDatosMaestro[7] = vPrecio;
                 vDatosMaestro[8] = Session["USUARIO"].ToString();
-                vDatosMaestro[9] = 14;
+                vDatosMaestro[9] = vTipoTransaccion;
+
                 String vXML = vMaestro.ObtenerMaestroString(vDatosMaestro);
                 vXML = vXML.Replace("<?xml version=\"1.0\" encoding=\"utf-16\"?>", "");
-
 
                 if (Convert.ToDecimal(TxCantidadActual.Text) == Convert.ToDecimal(TxCantidad.Text)){
                    vQuery = "[STEISP_INVENTARIO_Principal] 3" +

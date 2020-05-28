@@ -17,6 +17,9 @@
         function cerrarModalEDC() { $('#ModalArticulosEDC').modal('hide'); }
         function openModalInfoEDC() { $('#ModalInfoEDC').modal('show'); }
 
+        function openModalEnlace() { $('#ModalArticulosEnlaces').modal('show'); }
+        function cerrarModalEnlace() { $('#ModalArticulosEnlaces').modal('hide'); }
+
         function openArticuloTipo() { $('#ModalArticulosTipo').modal('show'); }
         function cerrarArticuloTipo() { $('#ModalArticulosTipo').modal('hide'); }
 
@@ -118,14 +121,7 @@
                                     </div>
                                     <asp:Button runat="server" ID="BtnNuevoEDC" CssClass="btn btn-success" Text="Nuevo" OnClick="BtnNuevoEDC_Click" />
                                 </div>
-                                <div class="row col-5">
-                                    <label class="col-3 col-form-label">Cargar</label>
-                                    <div class="col-9">
-                                        <asp:FileUpload ID="FUCargaEDC" CssClass="form-control" runat="server"/>
-                                    </div>
-                                </div>
                             </div>
-                            
 
                             <div class="table-responsive m-t-40">
                                 <asp:GridView ID="GvBusquedaEDC" runat="server"
@@ -189,13 +185,14 @@
                                         <asp:BoundField DataField="idEnlace" HeaderText="No." />
                                         <asp:BoundField DataField="nombre" HeaderText="Nombre" />
                                         <asp:BoundField DataField="proveedor" HeaderText="Proveedor" />
-                                        <asp:BoundField DataField="idTipoEnlace" HeaderText="Tipo" />
+                                        <asp:BoundField DataField="tipoEnlace" HeaderText="Tipo" />
                                         <asp:BoundField DataField="IPOrigen" HeaderText="IP Origen" />
                                         <asp:BoundField DataField="IPDestino" HeaderText="IP Destino" />
-                                        <asp:BoundField DataField="equipoOrigen" HeaderText="equipo Origen" />
-                                        <asp:BoundField DataField="equipoDestino" HeaderText="equipo Destino" />
+                                        <asp:BoundField DataField="idOrigen" HeaderText="equipo Origen" />
+                                        <asp:BoundField DataField="idDestino" HeaderText="equipo Destino" />
                                         <asp:BoundField DataField="servicios" HeaderText="servicios" />
                                         <asp:BoundField DataField="contacto" HeaderText="Contacto" />
+                                        <asp:BoundField DataField="telefonoContacto" HeaderText="Telefono" />
                                         <asp:TemplateField HeaderText="Seleccione">
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-info mr-2" Title="Editar" CommandArgument='<%# Eval("idEnlace") %>' CommandName="EditarEnlace">
@@ -374,7 +371,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="ModalLabelModificacionEDC">
-                        <asp:UpdatePanel ID="UpdatePanel11" runat="server">
+                        <asp:UpdatePanel ID="UpdatePanel11" runat="server" >
                             <ContentTemplate>
                                 <asp:Label ID="LbIdArticuloEDC" runat="server" Text=""></asp:Label>
                             </ContentTemplate>
@@ -406,7 +403,7 @@
                                     <label>Tipo Equipo</label>
                                 </div>
                                 <div class="col-9">
-                                    <asp:DropDownList ID="DDLTipoEquipoEDC" AutoPostBack="true" runat="server" class="select2 form-control custom-select" style="width: 100%"></asp:DropDownList>
+                                    <asp:DropDownList ID="DDLTipoEquipoEDC" runat="server" class="select2 form-control custom-select" style="width: 100%"></asp:DropDownList>
                                 </div>
                             </div>
                         </div>
@@ -417,9 +414,9 @@
                                     <label>No. Contrato</label>
                                 </div>
                                 <div class="col-8">
-                                    <asp:UpdatePanel ID="UpdatePanel16" runat="server">
+                                    <asp:UpdatePanel ID="UpdatePanel16" runat="server" >
                                         <ContentTemplate>
-                                            <asp:DropDownList ID="DDLContratos" runat="server" class="form-control"></asp:DropDownList>
+                                            <asp:DropDownList ID="DDLContratos" runat="server" class="select2 form-control custom-select" style="width: 100%"></asp:DropDownList>
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
                                 </div>
@@ -462,12 +459,7 @@
                                 <div class="col-9">
                                     <asp:UpdatePanel ID="UpdatePanel19" runat="server">
                                         <ContentTemplate>
-                                            <asp:DropDownList ID="DDLRegion" runat="server" class="select2 form-control custom-select" style="width: 100%">
-                                                <asp:ListItem Value="0" Text="Seleccione"></asp:ListItem>
-                                                <asp:ListItem Value="1" Text="Centro Sur"></asp:ListItem>
-                                                <asp:ListItem Value="2" Text="Noroccidente"></asp:ListItem>
-                                                <asp:ListItem Value="3" Text="Atlántico"></asp:ListItem>
-                                            </asp:DropDownList>
+                                            <asp:DropDownList ID="DDLRegion" runat="server" class="form-control"></asp:DropDownList>
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
                                 </div>
@@ -538,7 +530,7 @@
                                     <label class="col-form-label">Ubicación</label>
                                 </div>
                                 <div class="col-8">
-                                    <asp:DropDownList ID="DDLUbicacionEDC" AutoPostBack="true" runat="server" class="select2 form-control custom-select" style="width: 100%"></asp:DropDownList>                                            
+                                    <asp:DropDownList ID="DDLUbicacionEDC" runat="server" class="select2 form-control custom-select" style="width: 100%"></asp:DropDownList>                                            
                                 </div>
                             </div>
                         </div>
@@ -600,7 +592,7 @@
 
     <%--MODAL INFO EDC--%>
     <div class="modal fade" id="ModalInfoEDC" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="ModalLabelCondiciones">
@@ -618,8 +610,63 @@
                     <asp:UpdatePanel ID="UpdatePanel28" runat="server">
                         <ContentTemplate>
                             <div class="row">   
-                                <div class="col-12">  
-                                    <asp:Label ID="LbContenido" Text="" runat="server" CssClass="col-form-label"/>
+                                <div class="col-6">  
+                                    <label class="col-4">Nombre</label>
+                                    <asp:Label ID="LbNombre" Text="" runat="server" CssClass="col-form-label"/>
+                                </div>
+                                <div class="col-6">  
+                                    <label class="col-4">Tipo Equipo</label>
+                                    <asp:Label ID="LbTipo" Text="" runat="server" CssClass="col-form-label"/>
+                                </div>
+                            </div>
+                            <div class="row">   
+                                <div class="col-6">  
+                                    <label class="col-4">Contrato</label>
+                                    <asp:Label ID="LbContrato" Text="" runat="server" CssClass="col-form-label"/>
+                                </div>
+                                <div class="col-6">  
+                                    <label class="col-4">Serie</label>
+                                    <asp:Label ID="LbSerie" Text="" runat="server" CssClass="col-form-label"/>
+                                </div>
+                            </div>
+                            <div class="row">   
+                                <div class="col-6">  
+                                    <label class="col-4">IP</label>
+                                    <asp:Label ID="LbIP" Text="" runat="server" CssClass="col-form-label"/>
+                                </div>
+                                <div class="col-6">  
+                                    <label class="col-4">Región</label>
+                                    <asp:Label ID="LbRegion" Text="" runat="server" CssClass="col-form-label"/>
+                                </div>
+                            </div>
+                            <div class="row">   
+                                <div class="col-6">  
+                                    <label class="col-4">IOS Image</label>
+                                    <asp:Label ID="LbIOSImage" Text="" runat="server" CssClass="col-form-label"/>
+                                </div>
+                                <div class="col-6">  
+                                    <label class="col-4">IOS Version</label>
+                                    <asp:Label ID="LbIOSVersion" Text="" runat="server" CssClass="col-form-label"/>
+                                </div>
+                            </div>
+                            <div class="row">   
+                                <div class="col-6">  
+                                    <label class="col-4">Latitud</label>
+                                    <asp:Label ID="LbLatitud" Text="" runat="server" CssClass="col-form-label"/>
+                                </div>
+                                <div class="col-6">  
+                                    <label class="col-4">Longitud</label>
+                                    <asp:Label ID="LbLongitud" Text="" runat="server" CssClass="col-form-label"/>
+                                </div>
+                            </div>
+                            <div class="row">   
+                                <div class="col-6">  
+                                    <label class="col-4">Fecha Mant.</label>
+                                    <asp:Label ID="LbFechaMant" Text="" runat="server" CssClass="col-form-label"/>
+                                </div>
+                                <div class="col-6">  
+                                    <label class="col-4">Direccion</label>
+                                    <asp:Label ID="LbDireccion" Text="" runat="server" CssClass="col-form-label"/>
                                 </div>
                             </div>
                         </ContentTemplate>
@@ -629,6 +676,225 @@
                     <asp:UpdatePanel ID="UpdatePanel29" runat="server">
                         <ContentTemplate>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%--MODAL DE ENLACES--%>
+    <div class="modal fade" id="ModalArticulosEnlaces" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="ModalLabelModificacionEnlaces">
+                        <asp:UpdatePanel ID="UpdatePanel15" runat="server" >
+                            <ContentTemplate>
+                                <asp:Label ID="LbIdArticuloENL" runat="server" Text=""></asp:Label>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-2" style="margin-left:2%">
+                                    <label class="col-form-label">Nombre</label>
+                                </div>
+                                <div class="col-9">
+                                    <asp:UpdatePanel ID="UpdatePanel30" runat="server">
+                                        <ContentTemplate>
+                                            <asp:TextBox ID="TxNombreENL" class="form-control" runat="server"></asp:TextBox>                                            
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-3">
+                                    <label class="col-form-label">Descripción</label>
+                                </div>
+                                <div class="col-8">
+                                    <asp:UpdatePanel ID="UpdatePanel43" runat="server">
+                                        <ContentTemplate>
+                                            <asp:TextBox ID="TxDescripcionENL" TextMode="MultiLine" class="form-control" runat="server"></asp:TextBox>                                            
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-3" style="margin-left:2%">
+                                    <label class="col-form-label">Proveedor</label>
+                                </div>
+                                <div class="col-8">
+                                    <asp:UpdatePanel ID="UpdatePanel31" runat="server" >
+                                        <ContentTemplate>
+                                            <asp:DropDownList ID="DDLProveedorENL" runat="server" class="select2 form-control custom-select" style="width: 100%"></asp:DropDownList>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-2">
+                                    <label>Tipo Enlace</label>
+                                </div>
+                                <div class="col-9">
+                                    <asp:UpdatePanel ID="UpdatePanel44" runat="server" >
+                                        <ContentTemplate>
+                                            <asp:DropDownList ID="DDLTipoEnlace" AutoPostBack="true" runat="server" OnSelectedIndexChanged="DDLTipoEnlace_SelectedIndexChanged" class="form-control"></asp:DropDownList>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-2" style="margin-left:2%">
+                                    <label>Equipo Origen</label>
+                                </div>
+                                <div class="col-9">
+                                    <asp:UpdatePanel ID="UpdatePanel32" runat="server" >
+                                        <ContentTemplate>
+                                            <asp:DropDownList ID="DDLOrigen" runat="server" class="select2 form-control custom-select" style="width: 100%"></asp:DropDownList>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-3">
+                                    <label class="col-form-label">IP Origen</label>
+                                </div>
+                                <div class="col-8">
+                                    <asp:UpdatePanel ID="UpdatePanel33" runat="server" >
+                                        <ContentTemplate>
+                                            <asp:TextBox ID="TxIPOrigen" class="form-control" runat="server"></asp:TextBox>                                            
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-2" style="margin-left:2%">
+                                    <label>Equipo Destino</label>
+                                </div>
+                                <div class="col-9">
+                                    <asp:UpdatePanel ID="UpdatePanel34" runat="server" >
+                                        <ContentTemplate>
+                                            <asp:DropDownList ID="DDLDestino" runat="server" class="select2 form-control custom-select" style="width: 100%"></asp:DropDownList>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-3">
+                                    <label class="col-form-label">IP Destino</label>
+                                </div>
+                                <div class="col-8">
+                                    <asp:UpdatePanel ID="UpdatePanel35" runat="server" >
+                                        <ContentTemplate>
+                                            <asp:TextBox ID="TxIPDestino" class="form-control" runat="server"></asp:TextBox>                                            
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-3" style="margin-left:2%">
+                                    <label class="col-form-label">Contacto</label>
+                                </div>
+                                <div class="col-8">
+                                    <asp:UpdatePanel ID="UpdatePanel36" runat="server" >
+                                        <ContentTemplate>
+                                            <asp:TextBox ID="TxContacto" class="form-control" runat="server"></asp:TextBox>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-3">
+                                    <label class="col-form-label">Telefono</label>
+                                </div>
+                                <div class="col-8">
+                                    <asp:UpdatePanel ID="UpdatePanel37" runat="server" >
+                                        <ContentTemplate>
+                                            <asp:TextBox ID="TxTelefono" class="form-control" runat="server"></asp:TextBox>                                            
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-3" style="margin-left:2%">
+                                    <label class="col-form-label">Servicios</label>
+                                </div>
+                                <div class="col-8">
+                                    <asp:UpdatePanel ID="UpdatePanel38" runat="server" >
+                                        <ContentTemplate>
+                                            <asp:TextBox ID="TxServicios" class="form-control" runat="server"></asp:TextBox>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12" runat="server" visible="false" id="DivEstadoENL">
+                            <div class="form-group row">
+                                <div class="col-2" style="margin-left:2%">
+                                    <label class="col-form-label">Estado</label>
+                                </div>
+                                <div class="col-9">
+                                    <asp:UpdatePanel ID="UpdatePanel40" runat="server">
+                                        <ContentTemplate>
+                                            <asp:DropDownList runat="server" ID="DDLEstadoEnlace" CssClass="form-control">
+                                                <asp:ListItem Value="1" Text="Activo"></asp:ListItem>
+                                                <asp:ListItem Value="0" Text="Inactivo"></asp:ListItem>
+                                            </asp:DropDownList>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <asp:UpdatePanel ID="UpdatePanel41" runat="server">
+                                <ContentTemplate>
+                                    <div class="col-12" runat="server" id="DivMensajeENL" visible="false" style="display: flex; background-color:tomato; justify-content:center">
+                                        <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbMensajeENL"></asp:Label>
+                                    </div>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <asp:UpdatePanel ID="UpdatePanel42" runat="server">
+                        <ContentTemplate>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <asp:Button ID="BtnAceptarEnlace" runat="server" Text="Aceptar" class="btn btn-success" OnClick="BtnAceptarEnlace_Click"/>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
@@ -901,36 +1167,6 @@
                 },
                 minimumInputLength: 1,
             });
-        });
-
-        function matchCustom(params, data) {
-            // If there are no search terms, return all of the data
-            if ($.trim(params.term) === '') {
-                return data;
-            }
-
-            // Do not display the item if there is no 'text' property
-            if (typeof data.text === 'undefined') {
-                return null;
-            }
-
-            // `params.term` should be the term that is used for searching
-            // `data.text` is the text that is displayed for the data object
-            if (data.text.indexOf(params.term) > -1) {
-                var modifiedData = $.extend({}, data, true);
-                modifiedData.text += ' (matched)';
-
-                // You can return modified objects from here
-                // This includes matching the `children` how you want in nested data sets
-                return modifiedData;
-            }
-
-            // Return `null` if the term should not be displayed
-            return null;
-        }
-
-        $(".js-example-matcher").select2({
-            matcher: matchCustom
         });
     </script>
 </asp:Content>

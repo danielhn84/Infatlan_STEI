@@ -3318,6 +3318,7 @@
     <Content Include="js\perfect-scrollbar.jquery.min.js" />
     <Content Include="js\sidebarmenu.js" />
     <Content Include="js\waves.js" />
+    <Content Include="pages\Configuracion\cargaRegistros.aspx" />
     <Content Include="pages\Configuracion\contratos.aspx" />
     <Content Include="pages\Configuracion\marcas.aspx" />
     <Content Include="pages\Configuracion\tipoArticulo.aspx" />
@@ -3351,6 +3352,13 @@
     </Compile>
     <Compile Include="main.Master.designer.cs">
       <DependentUpon>main.Master</DependentUpon>
+    </Compile>
+    <Compile Include="pages\Configuracion\cargaRegistros.aspx.cs">
+      <DependentUpon>cargaRegistros.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\Configuracion\cargaRegistros.aspx.designer.cs">
+      <DependentUpon>cargaRegistros.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\Configuracion\contratos.aspx.cs">
       <DependentUpon>contratos.aspx</DependentUpon>
@@ -4492,6 +4500,7 @@
     <Content Include="scss\widgets\topbar-mail.scss" />
     <Content Include="scss\widgets\weather-widget.scss" />
     <Content Include="scss\widgets\widgets.scss" />
+    <Content Include="pages\plantillas\plantillaEDC.xlsx" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

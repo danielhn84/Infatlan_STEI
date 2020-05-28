@@ -81,6 +81,7 @@
                                 <li><a href="/sites/inventario/pages/Configuracion/marcas.aspx">Marcas</a></li>
                                 <li><a href="/sites/inventario/pages/perfiles.aspx">Perfiles</a></li>
                                 <li><a href="/sites/inventario/pages/Configuracion/ubicaciones.aspx">Ubicaciones</a></li>
+                                <li><a href="/sites/inventario/pages/Configuracion/cargaRegistros.aspx">Cargar Datos</a></li>
                             </ul>
                         </li>
                     </ul>

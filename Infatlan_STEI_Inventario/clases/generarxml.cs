@@ -140,5 +140,73 @@ namespace Infatlan_STEI_Inventario.clases
             }
             return vResultado;
         }
+
+        public String ObtenerMaestroStringENL(Object[] vDatos){
+            String vResultado = "";
+            try{
+                using (StringWriter sw = new StringWriter()){
+                    XmlTextWriter vXmlTW = new XmlTextWriter(sw);
+                    vXmlTW.Formatting = Formatting.None;
+
+                    vXmlTW.WriteStartDocument();
+                    vXmlTW.WriteStartElement("DATOS");
+
+                    vXmlTW.WriteStartElement("idTipoEnlace");
+                    vXmlTW.WriteString(Convert.ToString(vDatos[0]));
+                    vXmlTW.WriteEndElement();
+
+                    vXmlTW.WriteStartElement("idProveedor");
+                    vXmlTW.WriteString(Convert.ToString(vDatos[1]));
+                    vXmlTW.WriteEndElement();
+
+                    vXmlTW.WriteStartElement("nombre");
+                    vXmlTW.WriteString(Convert.ToString(vDatos[2]));
+                    vXmlTW.WriteEndElement();
+
+                    vXmlTW.WriteStartElement("descripcion");
+                    vXmlTW.WriteString(Convert.ToString(vDatos[3]));
+                    vXmlTW.WriteEndElement();
+
+                    vXmlTW.WriteStartElement("idOrigen");
+                    vXmlTW.WriteString(Convert.ToString(vDatos[4]));
+                    vXmlTW.WriteEndElement();
+
+                    vXmlTW.WriteStartElement("idDestino");
+                    vXmlTW.WriteString(Convert.ToString(vDatos[5]));
+                    vXmlTW.WriteEndElement();
+
+                    vXmlTW.WriteStartElement("IPOrigen");
+                    vXmlTW.WriteString(Convert.ToString(vDatos[6]));
+                    vXmlTW.WriteEndElement();
+
+                    vXmlTW.WriteStartElement("IPDestino");
+                    vXmlTW.WriteString(Convert.ToString(vDatos[7]));
+                    vXmlTW.WriteEndElement();
+
+                    vXmlTW.WriteStartElement("servicios");
+                    vXmlTW.WriteString(Convert.ToString(vDatos[8]));
+                    vXmlTW.WriteEndElement();
+
+                    vXmlTW.WriteStartElement("contacto");
+                    vXmlTW.WriteString(Convert.ToString(vDatos[9]));
+                    vXmlTW.WriteEndElement();
+
+                    vXmlTW.WriteStartElement("telefonoContacto");
+                    vXmlTW.WriteString(Convert.ToString(vDatos[10]));
+                    vXmlTW.WriteEndElement();
+
+                    vXmlTW.WriteStartElement("usuarioCreacion");
+                    vXmlTW.WriteString(Convert.ToString(vDatos[11]));
+                    vXmlTW.WriteEndElement();
+
+                    vXmlTW.WriteEndElement();
+                    vXmlTW.WriteEndDocument();
+                    vResultado = sw.ToString();
+                }
+            }catch{
+                throw;
+            }
+            return vResultado;
+        }
     }
 }
