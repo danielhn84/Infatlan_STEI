@@ -33,8 +33,23 @@ namespace Infatlan_STEI_Agencias.pages
                 GVBusqueda.DataSource = vDatos;
                 GVBusqueda.DataBind();
                 Session["AG_CN_MANTENIMIENTOS_PENDIENTES_APROBAR"] = vDatos;
-                
-            }catch (Exception ex){
+
+
+                DDLMotivo.Items.Clear();
+                vQuery = "STEISP_AGENCIA_AprobarNotificacion 7";
+                vDatos = vConexion.obtenerDataTable(vQuery);
+                DDLMotivo.Items.Add(new ListItem { Value = "0", Text = "Seleccione una opción" });
+
+                if (vDatos.Rows.Count > 0)
+                {
+                    foreach (DataRow item in vDatos.Rows)
+                    {
+                        DDLMotivo.Items.Add(new ListItem { Value = item["id"].ToString(), Text = item["motivo"].ToString() });                       
+                    }
+                }
+
+            }
+            catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);
             }
             
@@ -82,7 +97,8 @@ namespace Infatlan_STEI_Agencias.pages
 
                
             }else if(e.CommandName == "Cancelar"){
-            
+                Div2.Visible = false;
+                UpdateModal.Update();
 
                 limpiarModalCancelarNotificacion();
             
@@ -216,7 +232,7 @@ namespace Infatlan_STEI_Agencias.pages
             catch (Exception ex)
             {
                 LbMensajeModalError.Text = ex.Message;
-                UpdateModal.Visible = true;
+                Div2.Visible = true;
                 UpdateModal.Update();
                
             }
@@ -236,7 +252,7 @@ namespace Infatlan_STEI_Agencias.pages
         {
             DDLMotivo.SelectedIndex = -1;
             TxDetalle.Text = string.Empty;
-            UpdateModal.Visible = false;
+       
         }
         
         protected void GVBusqueda_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -251,6 +267,12 @@ namespace Infatlan_STEI_Agencias.pages
             {
                 Mensaje(ex.Message, WarningType.Danger);
             }
+        }
+
+        protected void DDLMotivo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Div2.Visible = false;
+            UpdateModal.Update();
         }
     }
 }

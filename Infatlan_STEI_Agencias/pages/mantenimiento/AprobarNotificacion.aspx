@@ -57,13 +57,12 @@
                                                 <ContentTemplate>
                                                     <div class="row p-t-20">
                                                         <div class="col-md-1">
-                                                            <label class="control-label   text-danger">*</label><label class="control-label">Buscar:</label></label>                                      
+                                                            <label class="control-label">Buscar:</label></label>                                      
                                                         </div>
                                                         <div class="col-md-6">
                                                             <asp:TextBox ID="TxBuscarAgencia" runat="server" placeholder="Búsqueda por agencia o codigo, luego presione Enter..." class="form-control" AutoPostBack="true" OnTextChanged="TxBuscarAgencia_TextChanged"></asp:TextBox>
                                                         </div>
                                                     </div>
-
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
                                         </div>
@@ -120,11 +119,11 @@
                         </asp:UpdatePanel>
                     </div>
 
-                     <div class="row p-t-20 col-md-12">
-                                <div class="col-md-4 " style="margin-left: auto; margin-right: auto">
-                                    <a href="../../default.aspx"" class="btn  btn-block btn-primary">Volver</a>
-                                </div>
-                   </div>
+                    <div class="row p-t-20 col-md-12">
+                        <div class="col-md-4 " style="margin-left: auto; margin-right: auto">
+                              <a href="../../default.aspx"" class="btn  btn-block btn-primary">Volver</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -163,14 +162,6 @@
                                     </div>
                                 </div>
 
-<%--                                <div class="col-md-12" runat="server">
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label">Lugar:</label>
-                                        <div class="col-sm-9">
-                                            <asp:TextBox ID="TxLugar" class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
-                                        </div>
-                                    </div>
-                                </div>--%>
 
                                 <div class="col-md-12" runat="server">
                                     <div class="form-group row">
@@ -209,35 +200,19 @@
                                         </div>
                                     </div>
                                 </div>
-
-
-                           <%--     <div class="col-md-12">
-                                    <label style="color: firebrick; text-align: center"><strong>Nota:Una vez aprobada la notificación el técnico responsable recibirá un correo para que complete la lista de verificación. </strong></label>
-                                </div>--%>
-
-                                <div class="col-md-12" style="margin-left: auto; margin-right: auto" id="Div3" runat="server">
-                                    <div class="alert alert-success  alert-dismissible align-content-md-center" style="align-self: auto">
-                                        <div class="row">
-                                            <div class="col-3">
-                                                <p class="text-center"><img src="https://img.icons8.com/color/70/000000/accept-database.png"/><span class="dashicons dashicons-admin-home"></span></i></p>
-                                            </div>
-                                            <div class="col-9" style="text-align: center">
-                                              <br>
-                                                <h4><strong>¿Desea aprobar la notificación?</strong></h4>
-                                                <p>Si esta seguro dar clic en el botón "Aprobar"</p>
-                                            </div>
-                                            
-                                            <p style="text-align: justify">Una vez aprobada la notificación el técnico responsable recibirá un correo para que complete la solicitud de materiales a contabilidad. </p>                                           
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
                             </div>
 
                         </ContentTemplate>
                     </asp:UpdatePanel>
+
+
+                    <div class="col-md-12" runat="server">
+                        <%--<div class="form-group row">--%>
+                            <div class="col-md-12" runat="server" id="DivAlerta" visible="true" style="display: flex; background-color: green; justify-content: center">
+                                <p style="color: white; text-align:justify">Una vez aprobada la notificación por el coordinador o jefe, el técnico responsable recibirá un correo para que complete la solicitud de materiales.</p>
+                            </div>
+                        <%--</div>--%>
+                    </div>
 
 
                 </div>
@@ -286,10 +261,12 @@
 
                                         
                                         <div class="col-sm-9">
-                                            <asp:DropDownList ID="DDLMotivo" runat="server" class="form-control">
+                                      <%--      <asp:DropDownList ID="DDLMotivo" runat="server" class="form-control"  AutoPostBack="true">
                                                 <asp:ListItem Value="0" Text="Seleccione motivo..."></asp:ListItem>
                                                 <asp:ListItem Value="1" Text="Personal de agencia canceló mantenimiento"></asp:ListItem>
-                                            </asp:DropDownList>
+                                            </asp:DropDownList>--%>
+
+                                            <asp:DropDownList ID="DDLMotivo" runat="server" AutoPostBack="true" CssClass="form-control" OnSelectedIndexChanged="DDLMotivo_SelectedIndexChanged"></asp:DropDownList>
 
                                         </div>
                                     </div>
@@ -311,18 +288,30 @@
                                     </div>
                                 </div>
 
-                                <asp:UpdatePanel ID="UpdateModal" runat="server" UpdateMode="Conditional" Visible ="false" >
+
+                                <div class="col-md-12" style="text-align: center">
+                                    <label class="control-label" style="text-align: center; color: tomato">Los campos con (*) son obligatorios</label>
+                                </div>
+
+                                <asp:UpdatePanel ID="UpdateModal" runat="server" UpdateMode="Conditional" >
                                     <ContentTemplate>
-                                        <div class="col-md-12" style="align-self: center" >
-                                            <div class="alert alert-warning   align-content-md-center">
-                                                <h3 class="text-warning" style="text-align: center"><i class="fa fa-exclamation-triangle"></i>Warning</h3>
-                                                <asp:Label ID="LbMensajeModalError" runat="server" Text="" Width="100%" ></asp:Label>
-                                            </div>                                        
-                                        </div>                                                                                     
+                                        <div class="col-md-12" runat="server">
+                                            <div class="col-md-12" runat="server" id="Div2" visible="false" style="display: flex; background-color: tomato; justify-content: center">
+                                                <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbMensajeModalError"></asp:Label>
+                                            </div>
+                                        </div>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
 
-                                <div class="col-md-12" style="margin-left: auto; margin-right: auto" id="Div1" runat="server">
+
+
+
+
+
+
+
+
+                                <%--                                <div class="col-md-12" style="margin-left: auto; margin-right: auto" id="Div1" runat="server">
                                     <div class="alert alert-success  alert-dismissible align-content-md-center" style="align-self: auto">
                                         <div class="row">
                                             <div class="col-3">
@@ -339,7 +328,7 @@
                                             <p style="text-align: justify">El jefe y suplente recibirán un correo para que procedan a reprogramar el mantenimiento preventivo. </p> 
                                         </div>
                                     </div>
-                                </div>
+                                </div>--%>
                             </div> 
                         </ContentTemplate>
                     </asp:UpdatePanel>

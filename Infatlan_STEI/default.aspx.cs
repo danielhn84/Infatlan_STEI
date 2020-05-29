@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace Infatlan_STEI
 {
@@ -14,7 +9,7 @@ namespace Infatlan_STEI
 
             classes.rolAplicacion[] vRolAplicacion = new classes.rolAplicacion[2];
             vRolAplicacion[0] = new classes.rolAplicacion()
-            { 
+            {
                 NombreAplicacion = "Agencias",
                 Aplicacion = 1,
                 escritura = 1,

@@ -10,6 +10,10 @@
 
         function openModalMaterial() { $('#modalModificarAgencia').modal('show'); }
         function closeModalMaterial() { $('#modalModificarAgencia').modal('hide'); }
+
+        function openModalMaterialCancelar() { $('#ModalCancelacionMateriales').modal('show'); }
+        function closeModalMaterialCancelar() { $('#ModalCancelacionMateriales').modal('hide'); }
+        
     </script>
 
     <link href="../../assets/node_module/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css"  />
@@ -48,7 +52,7 @@
                                         <ContentTemplate>
                                             <div class="row p-t-20">
                                                 <div class="col-md-1">
-                                                    <label class="control-label   text-danger">*</label><label class="control-label">Buscar:</label></label>                                      
+                                                    <label class="control-label">Buscar:</label></label>                                      
                                                 </div>
                                                 <div class="col-md-6">
                                                     <asp:TextBox ID="TxBuscarAgencia" runat="server" placeholder="Búsqueda por agencia o codigo, luego presione Enter..." class="form-control" AutoPostBack="true"></asp:TextBox>
@@ -174,7 +178,7 @@
                                         <asp:TextBox ID="TxUbicacion" class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                                     </div>
                                     <div class="col-md-2">
-                                        <label class="col-form-label">Conductor:</label>
+                                        <label class="col-form-label">Solicitar Conductor:</label>
                                     </div>
                                     <div class="col-md-2">
                                         <asp:RadioButtonList ID="RbConductor" RepeatDirection="Horizontal" Width="90px" runat="server" AutoPostBack="True" Enabled="false">
@@ -185,9 +189,6 @@
                                 </div>
                             </div>
 
-                            <hr>
-                            <hr>
-
                             <div class="col-md-12" runat="server">
                                 <div class="form-group row">
                                     <div class="col-md-2  ">
@@ -195,7 +196,7 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <asp:DropDownList runat="server" ID="DDLArticulo" CssClass="select2 form-control custom-select" Style="width: 100%" OnSelectedIndexChanged="DDLArticulo_SelectedIndexChanged"></asp:DropDownList>
+                                        <asp:DropDownList runat="server"  AutoPostBack="true" ID="DDLArticulo" CssClass="select2 form-control custom-select" Style="width: 100%" OnSelectedIndexChanged="DDLArticulo_SelectedIndexChanged" ></asp:DropDownList>
                                     </div>
 
                                     <div class="col-md-1">
@@ -214,16 +215,8 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
 
-                    <asp:UpdatePanel ID="UpCantidadMaxima" runat="server" UpdateMode="Conditional">
-                        <ContentTemplate>
-                            <div class="col-md-12" style="align-self: center" runat="server" id="DivAlertaCantidad" visible="false">
-                                <div class="alert alert-danger   align-content-md-center">
-                                    <h3 class="text-danger" style="text-align: center"><i class="fa fa-exclamation-triangle"></i>Warning</h3>
-                                    <asp:Label ID="lbCantidad" runat="server" Text="" Width="100%"></asp:Label>
-                                </div>
-                            </div>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
+
+
 
                     <asp:UpdatePanel runat="server" ID="UPMateriales" UpdateMode="Conditional">
                         <ContentTemplate>
@@ -243,12 +236,12 @@
                                         Style="margin: 30px 0px 20px 0px" OnRowCommand="GVNewMateriales_RowCommand">
                                         <Columns>
 
-                                            <asp:BoundField DataField="idStock" HeaderText="Id Stock" Visible="true" ItemStyle-HorizontalAlign="center" />
+                                            <asp:BoundField DataField="idInventario" HeaderText="Id Inv" Visible="true" ItemStyle-HorizontalAlign="center" />
                                             <asp:BoundField DataField="nombre" HeaderText="Material" ItemStyle-HorizontalAlign="center" />
                                             <asp:BoundField DataField="cantidad" HeaderText="Cantidad" ItemStyle-HorizontalAlign="center" />
                                             <asp:TemplateField HeaderStyle-Width="60px" ItemStyle-HorizontalAlign="center">
                                                 <ItemTemplate>
-                                                    <asp:LinkButton ID="Btnseleccionar" Enabled="true" runat="server" Text="" class="btn btn-danger mr-2" CommandArgument='<%# Eval("idStock") %>' CommandName="eliminar"><i class="icon-trash"></i></asp:LinkButton>
+                                                    <asp:LinkButton ID="Btnseleccionar" Enabled="true" runat="server" Text="" class="btn btn-danger mr-2" CommandArgument='<%# Eval("idInventario") %>' CommandName="eliminar"><i class="icon-trash"></i></asp:LinkButton>
                                                 </ItemTemplate>
                                                 <ItemStyle Width="10%" />
                                             </asp:TemplateField>
@@ -260,16 +253,33 @@
                     </asp:UpdatePanel>
 
                 </div>
-                <asp:UpdatePanel ID="UpdateModal" runat="server" UpdateMode="Conditional">
+
+
+                <div class="col-md-12" style="text-align: center">
+                    <label class="control-label text-danger" style="text-align: center">Los campos con (*) son obligatorios</label>
+                </div>
+
+
+                <asp:UpdatePanel ID="UpCantidadMaxima" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
-                        <div class="col-md-12" style="align-self: center" runat="server" id="DivAlerta" visible="false">
-                            <div class="alert alert-danger   align-content-md-center">
-                                <h3 class="text-danger" style="text-align: center"><i class="fa fa-exclamation-triangle"></i>Warning</h3>
-                                <asp:Label ID="LbMensajeModalError" runat="server" Text="" Width="100%"></asp:Label>
-                            </div>
+                        <div class="col-md-12" runat="server" id="DivAlertaCantidad" visible="false" style="display: flex; background-color: tomato; justify-content: center">
+                            <asp:Label runat="server" CssClass="col-form-label text-white" ID="lbCantidad"></asp:Label>
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
+
+
+                <asp:UpdatePanel ID="UpdateModal" runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+                        <div class="col-md-12" runat="server" id="DivAlerta" visible="false" style="display: flex; background-color: tomato; justify-content: center">
+                            <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbMensajeModalError"></asp:Label>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+
+
+
+
 
                 <div class="modal-footer">
                     <asp:UpdatePanel ID="UpdatePanel12" runat="server" UpdateMode="Conditional">
@@ -284,6 +294,112 @@
         </div>
     </div>
     <%--FIN MODAL ENVIAR LV--%>
+
+
+
+        <!-- Modal asegurar notificacion Modal2 -->
+    <div class="modal fade" id="ModalCancelacionMateriales" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="width: 600px; top: 320px; left: 50%; transform: translate(-50%, -50%);">
+                <div class="modal-header  bg-dark" >
+                    <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional">
+                        <ContentTemplate>
+                            <h3 class="modal-title" style="color: white" id="exampleModalLabel" >Cancelar Solicitud Materiales  
+                                <asp:Label ID="Titulo" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label></h3>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                    <button type="button" class="close" style="color: white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                        <ContentTemplate>
+                            <div class="form-group row">
+                                 <div class="col-md-12" runat="server">
+                                    <div class="form-group row">
+                                        <div class="col-md-3">
+                                            <label class="control-label">Id Mantenimiento:</label></label>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <asp:TextBox ID="TxIdMantenimiento" AutoPostBack="true" runat="server"  class="form-control" ReadOnly="true"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12" runat="server">
+                                    <div class="form-group row">
+                                        <div class="col-md-3">
+                                            <label class="control-label text-danger" runat="server" id="lbMotivo" >*</label><label class="control-label">Motivo:</label></label>                                      
+                                        </div>
+                                        <div class="col-sm-9">      
+                                             <asp:DropDownList ID="DDLMotivo" runat="server" AutoPostBack="true" CssClass="form-control" OnSelectedIndexChanged="DDLMotivo_SelectedIndexChanged"></asp:DropDownList>
+                                        </div>
+                                    </div>
+                                </div>
+
+                              
+                                <div class="col-md-12" runat="server">
+                                    <div class="form-group row">
+                                        <div class="col-md-3">
+                                            <label class="control-label   text-danger" runat="server" visible="false" id="asterisco">*</label><label class="control-label" runat="server" visible="false" id="etiqueta">Nuevo Técnico:</label></label>                                       
+                                        </div>
+
+
+                                        <div class="col-sm-9">
+                                            <asp:DropDownList ID="DDLNombreResponsable" runat="server" AutoPostBack="true" CssClass="form-control" Visible="false" ></asp:DropDownList>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12" runat="server">
+                                    <div class="form-group row">
+
+                                        <div class="col-md-3">
+                                            <label class="control-label   text-danger">*</label><label class="control-label">Detalle motivo:</label></label>                                    
+                                        </div>
+
+
+                                        <div class="col-sm-9">
+                                            <asp:TextBox ID="TxDetalle" class="form-control" runat="server" TextMode="MultiLine" Rows="5"  AutoPostBack="true"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12" style="text-align: center">
+                                    <label class="control-label" style="text-align: center; color: tomato">Los campos con (*) son obligatorios</label>
+                                </div>
+
+                                
+                <asp:UpdatePanel ID="UpdatePanel4" runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+                        <div class="col-md-12" runat="server" id="Div2" visible="false" style="display: flex; background-color: tomato; justify-content: center">
+                            <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbMensajeModalErrorMateriales"></asp:Label>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+
+
+
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+
+
+                </div>
+                <div class="modal-footer">
+                    <asp:UpdatePanel ID="UpdatePanel6" runat="server">
+                        <ContentTemplate>
+                            <button type="button" class="btn btn-light" data-dismiss="modal">Cerrar</button>
+                            <asp:Button ID="BtnCancelarMateriales" runat="server" Text="Cancelar Materiales" class="btn btn-dark"  OnClick="BtnCancelarMateriales_Click"/>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Script" runat="server">

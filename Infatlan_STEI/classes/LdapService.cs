@@ -1,10 +1,5 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.DirectoryServices;
-using System.Linq;
-using System.Web;
 
 namespace Infatlan_STEI.classes
 {
@@ -13,7 +8,7 @@ namespace Infatlan_STEI.classes
         public LdapService() { }
         public System.Data.DataTable GetDatosUsuario(string domain, string username)
         {
-            DataTable vDatosAD = new DataTable();           
+            DataTable vDatosAD = new DataTable();
             try
             {
                 DirectorySearcher search = new DirectorySearcher(domain);
@@ -37,9 +32,9 @@ namespace Infatlan_STEI.classes
                             item.Properties["sn"][0].ToString(),
                             item.Properties["mail"][0].ToString()
                             );
-                    
+
                     }
-                    catch {}
+                    catch { }
                 }
             }
             catch

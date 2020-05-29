@@ -42,8 +42,7 @@
                         <h3 class="card-title">Datos Generales</h3>
                         <asp:UpdatePanel runat="server" ID="UPFormulario">
                             <ContentTemplate>
-                                <!--Inicio Fila 1-->
-                                <hr/>
+                                <!--Inicio Fila 1-->                                
                                 <div class="row p-t-20">
                                     <div class="col-md-6">
                                         <label class="control-label   text-danger">*</label><label class="control-label">Fecha Mantenimiento:</label></label>
@@ -148,7 +147,7 @@
                             <ContentTemplate>
                             <h3 class="card-title">Personal Encargado</h3>                             
                                 <br>
-                                <h5 class="card-title">-Técnico Responsable</h5>
+                                <h5 class="card-title">Técnico Responsable</h5>
                                 <div class="row p-t-20">
                                     <div class="col-md-6">
                                          <label class="control-label  text-danger">*</label><label class="control-label">Nombre:</label>
@@ -162,7 +161,7 @@
                                 <br>
                                 <br>
 
-                                <h5 class="card-title">-Técnicos Participantes </h5>
+                                <h5 class="card-title">Técnicos Participantes </h5>
                                 <label class="control-label">Nombre:</label>
                                 <asp:DropDownList ID="DDLNombreParticipantes" AutoPostBack="true" runat="server" CssClass="fstdropdown-select form-control" OnTextChanged="DDLNombreParticipantes_TextChanged" Enabled="false"></asp:DropDownList>
                                 <br>
@@ -201,7 +200,7 @@
                                 <br>
                                 <br>
 
-                                <h5 class="card-title">-Jefes de Agencia </h5>
+                                <h5 class="card-title">Jefes de Agencia </h5>
 
                                 <div class="row col-12" runat="server" visible="true">
                                     <div class="col-md-6">
@@ -329,7 +328,9 @@
                                 </div>
                             </div>--%>
 
-                      
+                                <div class="col-md-12" style="text-align: center">
+                                    <label class="control-label text-danger" style="text-align: center">Los campos con (*) son obligatorios</label>
+                                </div>
                             <div class="row p-t-20 col-md-12">
                                 <div class="col-md-4">
                                     <asp:Button ID="BtnEnviarNotificacion" class="btn btn-block btn-success" runat="server" Text="Enviar" OnClick="BtnEnviarNotificacion_Click" />

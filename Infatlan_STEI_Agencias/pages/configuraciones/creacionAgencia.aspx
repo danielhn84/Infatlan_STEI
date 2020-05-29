@@ -111,11 +111,11 @@
                             <!--Fin Fila 5-->
                             <div class="row p-t-20">
                                 <div class="col-md-6">
-                                    <label class="control-label   text-danger">*</label><label class="control-label">Requiere Conductor:</label></label>                                    
+                                    <label class="control-label   text-danger">*</label><label class="control-label">Requiere Conductor asignado por Contabilidad:</label></label>                                    
                             <%--    </div>
 
                                 <div class="col-md-2">--%>
-                                    <asp:RadioButtonList ID="RblConductor" RepeatDirection="Horizontal" Width="90px" runat="server" AutoPostBack="True">
+                                    <asp:RadioButtonList ID="RblConductor" RepeatDirection="Horizontal" Width="90px" runat="server" AutoPostBack="True" Enabled="false">
                                         <asp:ListItem Value="1">Si</asp:ListItem>
                                         <asp:ListItem Value="0">No</asp:ListItem>
                                     </asp:RadioButtonList>
@@ -133,6 +133,12 @@
 
                             <br />
                             <br />
+                            <div class="col-md-12" style="text-align: center">
+                                <label class="control-label text-danger" style="text-align: center">Los campos con (*) son obligatorios</label>
+                            </div>
+
+
+
 
                             <div class="row p-t-20 col-md-12">
                                 <div class="col-md-4">
@@ -151,6 +157,7 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
+
                 <!--/PRIMER CONTENIDO-->
 
                 <!--SEGUNDO CONTENIDO-->
@@ -227,7 +234,7 @@
     <%--INICIO MODAL ENVIAR LV--%>
     <div class="modal bs-example-modal-lg" id="modalModificarAgencia" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content" style="width: 830px; top: 320px; left: 50%; transform: translate(-50%, -50%);">
+            <div class="modal-content" style="width: 930px; top: 320px; left: 50%; transform: translate(-50%, -50%);">
                 <div class="modal-header bg-dark">
                     <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
@@ -255,7 +262,7 @@
                                     </div>
 
                                     <div class="col-md-4">
-                                        <asp:TextBox ID="TxAgenciaModificar" class="form-control" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="TxAgenciaModificar" class="form-control" runat="server" OnTextChanged="TxAgenciaModificar_TextChanged" MaxLength="100"></asp:TextBox>
                                     </div>
                                 </div>
                             </div>
@@ -267,14 +274,14 @@
                                     </div>
 
                                     <div class="col-md-4">
-                                        <asp:TextBox ID="TxDireccionModificar" class="form-control" runat="server" TextMode="MultiLine" Rows="2"></asp:TextBox>
+                                        <asp:TextBox ID="TxDireccionModificar" class="form-control" runat="server" TextMode="MultiLine" Rows="2" MaxLength="500"></asp:TextBox>
                                     </div>
                                     <div class="col-md-2  ">
                                         <label class="control-label text-danger">*</label><label class="col-form-label">Telefono:</label>
                                     </div>
 
                                     <div class="col-md-4">
-                                        <asp:TextBox ID="TxTelefonoModificar" class="form-control" runat="server" TextMode="MultiLine" Rows="2"></asp:TextBox>
+                                        <asp:TextBox ID="TxTelefonoModificar" class="form-control" runat="server" TextMode="MultiLine" Rows="2" MaxLength="20"></asp:TextBox>
                                     </div>
                                 </div>
                             </div>
@@ -286,14 +293,14 @@
                                     </div>
 
                                     <div class="col-md-4">
-                                        <asp:TextBox ID="TxLatitudModificar" class="form-control" runat="server" TextMode="MultiLine" Rows="2"></asp:TextBox>
+                                        <asp:TextBox ID="TxLatitudModificar" class="form-control" runat="server" TextMode="MultiLine" Rows="2" MaxLength="20"></asp:TextBox>
                                     </div>
                                     <div class="col-md-2  ">
                                         <label class="control-label text-danger">*</label><label class="col-form-label">Longitud:</label>
                                     </div>
 
                                     <div class="col-md-4">
-                                        <asp:TextBox ID="TxLongitudModificar" class="form-control" runat="server" TextMode="MultiLine" Rows="2"></asp:TextBox>
+                                        <asp:TextBox ID="TxLongitudModificar" class="form-control" runat="server" TextMode="MultiLine" Rows="2" MaxLength="20"></asp:TextBox>
                                     </div>
                                 </div>
                             </div>
@@ -369,7 +376,12 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
 
-                    <asp:UpdatePanel ID="UpdateModal" runat="server" UpdateMode="Conditional">
+                    <div class="col-md-12" style="text-align: center">
+                        <label class="control-label text-danger" style="text-align: center">Los campos con (*) son obligatorios</label>
+                    </div>
+
+
+<%--                    <asp:UpdatePanel ID="UpdateModal" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
                             <div class="col-md-12" style="align-self: center" runat="server" id="DivAlerta" visible="false">
                                 <div class="alert alert-danger   align-content-md-center">
@@ -378,9 +390,17 @@
                                 </div>
                             </div>
                         </ContentTemplate>
-                    </asp:UpdatePanel>
+                    </asp:UpdatePanel>--%>
 
-                    <div class="col-md-12" style="margin-left: auto; margin-right: auto" id="Div3" runat="server">
+                            <asp:UpdatePanel ID="UpdateModal" runat="server" UpdateMode="Conditional">
+                                <ContentTemplate>
+                                    <div class="col-md-12" runat="server" id="DivAlerta" visible="false" style="display: flex; background-color: tomato; justify-content: center">
+                                        <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbMensajeModalError"></asp:Label>
+                                    </div>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+
+<%--                    <div class="col-md-12" style="margin-left: auto; margin-right: auto" id="Div3" runat="server">
                         <div class="alert alert-success  alert-dismissible align-content-md-center" style="align-self: auto">
                             <div class="row">
                                 <div class="col-3">
@@ -395,7 +415,7 @@
                                 <br>
                             </div>
                         </div>
-                    </div>
+                    </div>--%>
 
                 </div>
 

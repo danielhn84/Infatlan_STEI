@@ -42,18 +42,7 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
                 //Session["AG_CN_MANTENIMIENTOS_PENDIENTES_APROBAR"] = vDatos;
 
 
-                vQuery = "STEISP_AGENCIA_Materiales 3";
-                vDatos = vConexion.obtenerDataTable(vQuery);
 
-                if (vDatos.Rows.Count > 0)
-                {
-                    DDLArticulo.Items.Clear();
-                    DDLArticulo.Items.Add(new ListItem { Value = "0", Text = "Seleccione" });
-                    foreach (DataRow item in vDatos.Rows)
-                    {
-                        DDLArticulo.Items.Add(new ListItem { Value = item["idStock"].ToString(), Text = item["TipoStock"].ToString() + "  " + item["modelo"].ToString()  +" - " + item["marca"].ToString() + " (" + item["cantidad"].ToString() + ")" });
-                    }
-                }
             }
             catch (Exception ex)
             {
@@ -68,6 +57,22 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
 
             if (e.CommandName == "Aprobar")
             {
+
+                DivAlertaCantidad.Visible = false;
+                UpCantidadMaxima.Update();
+
+                DivAlerta.Visible = false;
+                UpdateModal.Update();
+
+
+
+
+
+                GVNewMateriales.DataSource = null;
+                GVNewMateriales.DataBind();
+                UPMateriales.Update();
+
+
                 String vQuery = "STEISP_AGENCIA_Materiales 2," + vIdMantenimiento;
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
      
@@ -76,12 +81,67 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
                 TxFecha.Text = vDatos.Rows[0]["fecha"].ToString();
                 TxArea.Text = vDatos.Rows[0]["Area"].ToString();
                 TxUbicacion.Text = vDatos.Rows[0]["codigoUbicacion"].ToString();
+                Session["AG_SM_MUNICIPIO"] = vDatos.Rows[0]["idMunicipio"].ToString(); 
                 Int32 RbConductorConverido = Convert.ToInt32(vDatos.Rows[0]["requiereConductor"]);
                 RbConductor.SelectedValue = RbConductorConverido.ToString();
                 lbTitulo.Text = "Solicitud de Materiales " + TxAgencia.Text;
                 UpdatePanel1.Update();
+
+
+                vQuery = "STEISP_AGENCIA_Materiales 11, '" + Session["AG_SM_MUNICIPIO"] + "'";
+                vDatos = vConexion.obtenerDataTable(vQuery);
+                Session["AG_SM_CODIGO_DESCONTAR"] = vDatos.Rows[0]["idUbicacion"].ToString();
+
+                vQuery = "STEISP_AGENCIA_Materiales 3, '"+ Session["AG_SM_CODIGO_DESCONTAR"] + "'";
+                vDatos = vConexion.obtenerDataTable(vQuery);
+
+                if (vDatos.Rows.Count > 0)
+                {
+                    DDLArticulo.Items.Clear();
+                    DDLArticulo.Items.Add(new ListItem { Value = "0", Text = "Seleccione" });
+                    foreach (DataRow item in vDatos.Rows)
+                    {
+                        DDLArticulo.Items.Add(new ListItem { Value = item["idInventario"].ToString(), Text = item["TipoStock"].ToString() + "  " + item["modelo"].ToString() + " - " + item["marca"].ToString() + " (" + item["cantidad"].ToString() + ")" });
+                    }
+                }
+
+
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModalMaterial();", true);
-             }
+            }
+            else if (e.CommandName == "Cancelar")
+            {
+                TxDetalle.Text = "";
+                Div2.Visible = false;
+                UpdatePanel4.Update();
+
+                string vIdMantenimientoMateriales = e.CommandArgument.ToString();
+                Session["AG_SM_ID_MANTENIMIENTO"] = vIdMantenimientoMateriales;
+
+                TxIdMantenimiento.Text = vIdMantenimientoMateriales;
+
+
+                DDLMotivo.Items.Clear();
+                string vQuery = "STEISP_AGENCIA_AprobarNotificacion 8";
+                DataTable vDatos = vConexion.obtenerDataTable(vQuery);
+                DDLMotivo.Items.Add(new ListItem { Value = "0", Text = "Seleccione una opción" });
+
+                if (vDatos.Rows.Count > 0)
+                {
+                    foreach (DataRow item in vDatos.Rows)
+                    {
+                        DDLMotivo.Items.Add(new ListItem { Value = item["id"].ToString(), Text = item["motivo"].ToString() });
+                    }
+                }
+               
+                tecnicosResponsable();
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModalMaterialCancelar();", true);
+
+
+
+
+
+            }
+
         }
         
         protected void btnAgregar_Click(object sender, EventArgs e)
@@ -90,9 +150,9 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
             {
                 validaciones();
                 if (Convert.ToInt32(TxCantidad.Text) > Convert.ToInt32(Session["AG_SM_CANTIDAD_MATERIALES"]))
-                {
+                {                    
+                    lbCantidad.Text = "La cantidad solicitada: "+ TxCantidad.Text + " de " + DDLArticulo.SelectedItem.Text + " excede a la cantidad en existencia, favor verificar la cantidad a solicitar";
                     TxCantidad.Text = string.Empty;
-                    lbCantidad.Text = "La cantidad solicitada: "+ TxCantidad.Text + " excede a la cantidad en existencia, favor verificar la cantidad a solicitar";
                     DivAlertaCantidad.Visible = true;
                     UpCantidadMaxima.Update();
                 }
@@ -106,14 +166,12 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
 
                     string vNombreMaterialMatriz = vNombreMaterial[0];
 
-                    vData.Columns.Add("idStock");
+                    vData.Columns.Add("idInventario");
                     vData.Columns.Add("nombre");
                     vData.Columns.Add("cantidad");
 
-
                     if (vDatos == null)
                         vDatos = vData.Clone();
-
                     if (vDatos != null)
                     {
                         if (vDatos.Rows.Count < 1)
@@ -148,14 +206,12 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
                     DDLArticulo.SelectedIndex = -1;
                     TxCantidad.Text = "";
                 }               
-
             }
             catch (Exception ex)
             {
                 lbCantidad.Text = ex.Message;
                 DivAlertaCantidad.Visible = true;
                 UpCantidadMaxima.Update();
-
             }  
         }
 
@@ -167,10 +223,18 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
 
         protected void DDLArticulo_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+            DivAlertaCantidad.Visible = false;
+            UpCantidadMaxima.Update();
+
+            DivAlerta.Visible = false;
+            UpdateModal.Update();
+
             //STOCK
             String vQuery = "STEISP_AGENCIA_Materiales 4, '" + DDLArticulo.SelectedValue + "'";
             DataTable vDatos = vConexion.obtenerDataTable(vQuery);
-            int cant=Convert.ToInt32(vDatos.Rows[0]["cantidad"].ToString());
+        
+            Decimal cant = Convert.ToDecimal(vDatos.Rows[0]["cantidad"].ToString());
             Session["AG_SM_CANTIDAD_MATERIALES"] = cant;
 
             DivAlertaCantidad.Visible = false;
@@ -189,7 +253,7 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
                     DataRow[] result = vDatos.Select("idStock = '" + vID + "'");
                     foreach (DataRow row in result)
                     {
-                        if (row["idStock"].ToString().Contains(vID))
+                        if (row["idInventario"].ToString().Contains(vID))
                             vDatos.Rows.Remove(row);
                     }
                 }
@@ -201,14 +265,7 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
             UpCantidadMaxima.Update();
         }
         
-        private void validaciones()
-        {
-            if (DDLArticulo.SelectedValue.Equals("0"))
-                throw new Exception("Falta completar datos, Favor seleccionar un tipo de material a solicitar. ");
 
-            if (TxCantidad.Text.Equals(""))
-                throw new Exception("Falta completar datos, Favor ingrese la cantidad de material a solicitar. ");
-        }
         
         protected void btnModalEnviar_Click(object sender, EventArgs e)
         {
@@ -222,11 +279,11 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
                     for (int num = 0; num < vDatosMaterialesSolicitar.Rows.Count; num++)
                     {
                         
-                        string vIdStock = vDatosMaterialesSolicitar.Rows[num]["idStock"].ToString();
+                        string vIdInventario = vDatosMaterialesSolicitar.Rows[num]["idInventario"].ToString();
                         string vCantidad = vDatosMaterialesSolicitar.Rows[num]["cantidad"].ToString();
 
                         String vQuery4 = "STEISP_AGENCIA_Materiales 5,'" + vIdMantenimiento + 
-                            "','" + vIdStock + 
+                            "','" + vIdInventario + 
                             "','"+ vCantidad+
                             "','"+ Session["USUARIO"]+ "'";
                         Int32 vInfo4 = vConexion.ejecutarSql(vQuery4);
@@ -269,5 +326,115 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
             if (Session["AG_SM_MATERIALES"] == null)
                 throw new Exception("Lista de materiales vacia, favor seleccionar material a solicitar. ");
         }
+
+        private void tecnicosResponsable()
+        {
+            try
+            {
+                DDLNombreResponsable.Items.Clear();
+                String vQuery = "STEISP_AGENCIA_CreacionNotificacion 5";
+                DataTable vDatos = vConexion.obtenerDataTable(vQuery);
+                DDLNombreResponsable.Items.Add(new ListItem { Value = "0", Text = "Seleccione una opción" });
+
+                if (vDatos.Rows.Count > 0)
+                {
+                    foreach (DataRow item in vDatos.Rows)
+                    {
+                        DDLNombreResponsable.Items.Add(new ListItem { Value = item["idUsuario"].ToString(), Text = item["nombre"].ToString() + "  " + item["apellidos"].ToString() });
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Mensaje(ex.Message, WarningType.Danger);
+            }
+        }
+
+        protected void DDLMotivo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (DDLMotivo.SelectedValue.Equals("4"))
+            {
+                asterisco.Visible = true;
+                DDLNombreResponsable.Visible = true;
+                etiqueta.Visible = true;
+            }
+            else
+            {
+                asterisco.Visible = false;
+                DDLNombreResponsable.Visible = false;
+                etiqueta.Visible = false;
+                funcionCambioTecnicoResponsable();
+            }
+        }
+
+        private void funcionCambioTecnicoResponsable()
+        {
+            LbMensajeModalErrorMateriales.Text = "";
+            Div2.Visible = false;
+            UpdatePanel4.Update();
+        }
+
+        protected void BtnCancelarMateriales_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                validacionesCancelarMateriales();
+                String vQuery = "STEISP_AGENCIA_AprobarNotificacion  4," + Session["AG_SM_ID_MANTENIMIENTO"] + "," + Session["USUARIO"] + "," + "'" + DDLMotivo.SelectedItem.Text + "'" + "," + "'" + TxDetalle.Text + "'";
+                Int32 vInfo = vConexion.ejecutarSql(vQuery);
+
+                String vQuery1 = "STEISP_AGENCIA_AprobarNotificacion  6," + Session["AG_SM_ID_MANTENIMIENTO"];
+                Int32 vInfo1 = vConexion.ejecutarSql(vQuery1);
+
+                if (vInfo == 1)
+                {
+                    Mensaje("Solicitud cancelada con exito, esta pendiente que el jefe o suplente reprogramen el mantenimiento", WarningType.Success);
+                    LimpiarModalCancelar();
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModalMaterialCancelar();", true);
+                }
+                cargarDatos();
+
+            }
+            catch (Exception ex)
+            {
+                LbMensajeModalErrorMateriales.Text = ex.Message;
+                Div2.Visible = true;
+                UpdatePanel4.Update();
+
+            }
+        }
+
+        private void validaciones()
+        {
+            if (DDLArticulo.SelectedValue.Equals("0"))
+                throw new Exception("Falta completar datos, Favor seleccionar un tipo de material a solicitar. ");
+
+            if (TxCantidad.Text.Equals(""))
+                throw new Exception("Falta completar datos, Favor ingrese la cantidad de material a solicitar. ");
+        }
+
+
+        private void validacionesCancelarMateriales()
+        {
+            if (DDLMotivo.SelectedValue.Equals("0"))
+                throw new Exception("Falta completar datos, Favor seleccionar un motivo de cancelación del mantenimiento. ");
+
+
+            if (TxDetalle.Text.Equals(""))
+                throw new Exception("Falta completar datos, Favor ingrese detalle de la cancelación del mantenimiento. ");
+        }
+
+
+
+        private void LimpiarModalCancelar()
+        {
+            DDLMotivo.SelectedIndex = -1;
+            DDLNombreResponsable.SelectedIndex = -1;
+
+            TxDetalle.Text = String.Empty;
+        }
+
+
     }
 }
