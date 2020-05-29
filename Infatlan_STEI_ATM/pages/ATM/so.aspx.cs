@@ -52,6 +52,8 @@ namespace Infatlan_STEI_ATM.pages.ATM
         {
             H5Alerta1.Visible = false;
             H5Alerta2.Visible = false;
+            txtAlerta1.Visible = false;
+            txtAlerta2.Visible = false;
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal2();", true);
         }
 
@@ -59,7 +61,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
         {
             if (txtModalNewSOATM.Text == "" || txtModalNewSOATM.Text == string.Empty)
             {
-              
+                txtAlerta1.Visible = true;
                 H5Alerta1.Visible = true;
             }
             else
@@ -100,18 +102,20 @@ namespace Infatlan_STEI_ATM.pages.ATM
         {
             H5Alerta1.Visible = false;
             H5Alerta2.Visible = false;
+            txtAlerta1.Visible = false;
+            txtAlerta2.Visible = false;
             DataTable vDataa = (DataTable)Session["soATM"];
             string codsoATMs = e.CommandArgument.ToString();
 
 
             if (e.CommandName == "Codigo")
             {
-                string nom = "";
+                
                 
                 try
                 {
                     DataTable vDatos = new DataTable();
-                    String vQuery = "STEISP_ATMAdminComponentesATM 16,'" + codsoATMs + "', '" + nom + "', '" + Session["usuATM"].ToString() + "'";
+                    String vQuery = "STEISP_ATMAdminComponentesATM 16,'" + codsoATMs + "'";
                     vDatos = vConexion.ObtenerTabla(vQuery);
                     foreach (DataRow item in vDatos.Rows)
                     {
@@ -136,7 +140,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
            
             if (txtNewSOATM.Text == "" || txtNewSOATM.Text == string.Empty)
             {
-              
+                txtAlerta2.Visible = true;
                 H5Alerta2.Visible = true;
             }
             else

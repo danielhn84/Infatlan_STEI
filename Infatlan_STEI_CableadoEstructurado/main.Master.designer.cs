@@ -24,6 +24,24 @@ namespace Infatlan_STEI_CableadoEstructurado
         protected global::System.Web.UI.WebControls.ContentPlaceHolder Head;
 
         /// <summary>
+        /// Control sidebarnav.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sidebarnav;
+
+        /// <summary>
+        /// Control aprobacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl aprobacion;
+
+        /// <summary>
         /// Control FormaPrincipal.
         /// </summary>
         /// <remarks>

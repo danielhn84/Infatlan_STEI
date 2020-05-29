@@ -97,6 +97,8 @@ namespace Infatlan_STEI_ATM.pages.ATM
         {
             H5Alerta2.Visible = false;
             H5Alerta1.Visible = false;
+            txtAlerta1.Visible = false;
+            txtAlerta2.Visible = false;
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal2();", true);
         }
 
@@ -104,18 +106,20 @@ namespace Infatlan_STEI_ATM.pages.ATM
         {
             H5Alerta2.Visible = false;
             H5Alerta1.Visible = false;
+            txtAlerta1.Visible = false;
+            txtAlerta2.Visible = false;
             DataTable vDataa = (DataTable)Session["detMATM"];
             string coddetM = e.CommandArgument.ToString();
 
 
             if (e.CommandName == "Codigo")
             {
-                string nom = "";
+               
                 
                 try
                 {
                     DataTable vDatos = new DataTable();
-                    String vQuery = "STEISP_ATM_DetalleModelo 1,1,'" + coddetM + "', '" + nom + "', '" + Session["usuATM"].ToString() + "'";
+                    String vQuery = "STEISP_ATM_DetalleModelo 1,'" + coddetM + "'";
                     vDatos = vConexion.ObtenerTabla(vQuery);
                     foreach (DataRow item in vDatos.Rows)
                     {
@@ -131,7 +135,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
                 }
 
                 lbcoddetMATM.Text = coddetM;
-                lbNombredetMATM.Text = Session["nombredetM"].ToString();
+                lbNombredetMATM.Text = Convert.ToString(Session["nombredetM"]);
                 DDLModeloATM.SelectedIndex= CargarInformacionDDL(DDLModeloATM, Session["idModelo"].ToString());
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal();", true);
             }
@@ -143,6 +147,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
             {
               
                 H5Alerta1.Visible = true;
+                txtAlerta1.Visible = true;
             }
             else
             {
@@ -175,6 +180,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
 
         protected void btnModalCerrardetMATM_Click(object sender, EventArgs e)
         {
+            txtAlerta1.Visible = false;
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
         }
 
@@ -186,6 +192,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
             {
               
                 H5Alerta2.Visible = true;
+                txtAlerta2.Visible = true;
             }
             else
             {
@@ -219,6 +226,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
 
         protected void btnModalCerrarNuevidetMATM_Click(object sender, EventArgs e)
         {
+            txtAlerta2.Visible = false;
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal2();", true);
         }
 

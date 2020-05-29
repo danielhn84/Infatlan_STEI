@@ -369,10 +369,11 @@ namespace Infatlan_STEI_ATM.pages.ATM
                 DataTable vDatos3 = vConexion.ObtenerTabla(vQuery3);
 
                 if (vInfo == 1){
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
                     Limpiar();
                     cargarDataATM();
                     
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
+                    
                     Mensaje("ATM creada con éxito", WarningType.Success);
                     
                 }else{

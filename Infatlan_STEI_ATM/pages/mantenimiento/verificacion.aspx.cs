@@ -16,11 +16,14 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         bd vConexion = new bd();
         protected void Page_Load(object sender, EventArgs e)
         {
+           
             string id = Request.QueryString["id"];
             string tipo = Request.QueryString["tipo"];
             Session["VERIF"] = null;
             if (!Page.IsPostBack)
             {
+                RBEnergias.SelectedValue = "1";
+                RBClima.SelectedValue = "1";
                 vaciarValorImg();
                 if (dropantiskimming.SelectedValue == "1")
                 {
@@ -36,14 +39,15 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 switch (tipo)
                 {
                     case "2":
-                        //td1img1.Attributes.Add("style", "DISPLAY: block");
-                        //td2img1.Attributes.Add("style", "DISPLAY: none");
+                       
                         llenarFormRechazado();
                         llenarImagenes();
                         break;
                     case "4":
-                        //td1img1.Attributes.Add("style", "DISPLAY: block");
-                        //td2img1.Attributes.Add("style", "DISPLAY: none");
+                        RBClima.Enabled = false;
+                        RBEnergias.Enabled = false;
+                        FUATMLinea.Enabled = false;
+                        txtcomentarioATMLinea.Enabled = false;
                         DIVbtnRechazo.Visible = true;
                         llenarFormRechazado();
                         llenarImagenes();
@@ -65,7 +69,11 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             HFPadlewheel.Value = "";
             HFDispDesarmado.Value = "";
             HFTeclado.Value = "";
-
+            HFATMLinea.Value = "";
+            HFEnergia.Value = "";
+            HFClima.Value ="";
+            RBEnergias.SelectedValue = "1";
+            RBClima.SelectedValue = "1";
         }
         void aprobacionCampos()
         {
@@ -182,18 +190,27 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             HFTeclado.Value = "si";
             //IMAGEN11
             string vImagen11 = Session["ATM_VERIF_IMG21"].ToString();
-            string srcImgen11 = "data:image;base64," + vImagen11;            
+            string srcImgen11 = "data:image;base64," + vImagen11;
+            HFEnergia.Value = "si";
             if (vImagen11 == "")
-                imgClimatizacion.Src = "/assets/images/vistaPrevia1.JPG";
+                
+                imgClimatizacion.Src = "../../assets/images/vistaPrevia1.JPG";
             else
                 imgClimatizacion.Src = srcImgen11;
             //IMAGEN12
             string vImagen12 = Session["ATM_VERIF_IMG22"].ToString();
             string srcImgen12 = "data:image;base64," + vImagen12;
+            HFClima.Value = "si";
             if (vImagen12 == "")
-                imgEnergia.Src = "/assets/images/vistaPrevia1.JPG";
+                
+                imgEnergia.Src = "../../assets/images/vistaPrevia1.JPG";
             else
                 imgEnergia.Src = srcImgen12;
+            //IMAGEN13
+            string vImagen13 = Session["ATM_VERIF_IMG11"].ToString();
+            string srcImgen13 = "data:image;base64," + vImagen13;
+            imgATMLinea.Src = srcImgen13;
+            HFATMLinea.Value = "si";
 
         }
         void llenarFormRechazado()
@@ -255,6 +272,16 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 txtantiSkimming.Enabled = false;
             }
             txtantiSkimming.Text = Session["ATM_VERIF_RESP23"].ToString();
+            if (Session["ATM_VERIF_PREG21"].ToString() == "Si")
+                RBClima.SelectedValue = "1";
+            else
+                RBClima.SelectedValue = "2";
+           
+            if (Session["ATM_VERIF_PREG22"].ToString() == "Si")
+                RBEnergias.SelectedValue = "1";
+            else
+                RBEnergias.SelectedValue = "2";
+
         }
         void llenarForm()
         {
@@ -293,6 +320,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             txtidentidad.Text = Session["ATM_IDENTIDAD_VERIF_CREAR"].ToString();
             txtsoVerif.Text = Session["ATM_SO_VERIF_CREAR"].ToString();
             txtversionswVerif.Text = Session["ATM_VERSIONSW_VERIF_CREAR"].ToString();
+            txtcomentarioATMLinea.Text = Session["ATM_ATMACTIVO_VERIF_CREAR"].ToString();
             //txtcodATM.Text = Session["codATM"].ToString();
             // DDLsucursalATM.SelectedIndex = CargarInformacionDDL(DDLsucursalATM, Session["sucursalATM"].ToString());
         }
@@ -360,6 +388,14 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 throw new Exception("Favor agregar imagen de dispositivo desarmado.");
             if (HFTeclado.Value == string.Empty)
                 throw new Exception("Favor agregar imagen de teclado.");
+            if (HFEnergia.Value == string.Empty)
+                throw new Exception("Favor agregar imagen de energia.");
+            if (HFClima.Value == string.Empty)
+                throw new Exception("Favor agregar imagen de climatización.");
+            if (HFATMLinea.Value == string.Empty)
+                throw new Exception("Favor agregar imagen de ATM en línea.");
+            if (txtcomentarioATMLinea.Text == "" || txtcomentarioATMLinea.Text == string.Empty)
+                throw new Exception("Favor ingrese comentario sobre ATM en línea.");
         }
 
         int CargarInformacionDDL(DropDownList vList, String vValue)
@@ -521,31 +557,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     return "application/octet-stream";
             }
         }
-        protected void btnEnviarVerif_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                validar();
-                //ActualizarATM();
-                //ActualizarVerifATM();
-                //ImgVerificacion();
-                //PreguntasVerif();
-                //Response.Redirect("buscarVerificacion.aspx");
-                lbcodATM.Text = txtcodATM.Text;
-                lbNombreATM.Text = txtnomATM.Text;
-                lbsucursalATM.Text = txtsucursal.Text;
-                lbInventarioATM.Text = txtinventarioVerif.Text;
-                lbtecnico.Text = txtTecnicoResponsable.Text;
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal();", true);
-            }
-            catch (Exception Ex)
-            {
-
-                Mensaje(Ex.Message, WarningType.Danger);
-            }
-
-
-        }
+       
 
         void EnviarCorreo()
         {
@@ -628,15 +640,15 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             }
         }
 
-            void ActualizarVerifATM()
-            {
+        void ActualizarVerifATM()
+        {
 
 
             try
             {
                 string vQuery = "STEISP_ATM_VerificacionTotal 1, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + txthsalidaInfa.Text + "','" + txtHllegadaInfatlan.Text + "'," +
-                    "'" + TxFechaInicio.Text + "','" + TxFechaRegreso.Text + "','" + txtobseracionesVerif.Text + "','" + Session["usuATM"].ToString() + "','" + txtserieATM.Text + "'," +
-                    "'" + txtinventarioVerif.Text + "','" + txtramVerif.Text + "GB" + "','" + Session["usuATM"].ToString() + "'";
+                    "'" + TxFechaInicio.Text + "','" + TxFechaRegreso.Text + "','" + txtobseracionesVerif.Text + "','" + Session["usuATM"].ToString() + "','" + txtcomentarioATMLinea.Text + "'";
+                    
                 Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                 if (vInfo == 1)
                 {
@@ -871,12 +883,12 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             /////////////////////////////////////////////////////////////////////
             string climatizacion = null;
             string energia = null;
-            if (FUClimatizacion.HasFile == false)
+            if (RBClima.SelectedValue == "2")
                 climatizacion = "No";
             else
                 climatizacion = "Si";
 
-            if (FUEnergia.HasFile == false)
+            if (RBEnergias.SelectedValue == "2")
                 energia = "No";
             else
                 energia = "Si";
@@ -1117,6 +1129,24 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             String vArchivo10 = String.Empty;
             if (vFileDeposito10 != null)
                 vArchivo10 = Convert.ToBase64String(vFileDeposito10);
+            ////////////////////////////////////////////////////////////////////////////////
+            //IMAGENES11
+            String vNombreDepot11 = String.Empty;
+            HttpPostedFile bufferDeposito11 = FUATMLinea.PostedFile;
+            byte[] vFileDeposito11 = null;
+            string vExtension11 = string.Empty;
+
+            if (bufferDeposito11 != null)
+            {
+                vNombreDepot11 = FUATMLinea.FileName;
+                Stream vStream11 = bufferDeposito11.InputStream;
+                BinaryReader vReader11 = new BinaryReader(vStream11);
+                vFileDeposito11 = vReader11.ReadBytes((int)vStream11.Length);
+                vExtension11 = System.IO.Path.GetExtension(FUATMLinea.FileName);
+            }
+            String vArchivo11 = String.Empty;
+            if (vFileDeposito11 != null)
+                vArchivo11 = Convert.ToBase64String(vFileDeposito11);
 
             if (tipo == "2")
             {
@@ -1172,6 +1202,11 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                         string vQuery = "STEI_ATM_Actualizar_Imagenes 10, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo10 + "'";
                         Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                     }
+                    if (FUATMLinea.HasFile != false)
+                    {
+                        string vQuery = "STEI_ATM_Actualizar_Imagenes 13, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo11 + "'";
+                        Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                    }
                 }
                 catch (Exception Ex)
                 {
@@ -1183,7 +1218,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 try
                 {
                     string vQuery = "STEISP_ATM_ImagenesVerif 1, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo1 + "','" + vArchivo2 + "','" + vArchivo3 + "'," +
-                        "'" + vArchivo4 + "','" + vArchivo5 + "','" + vArchivo6 + "','" + vArchivo7 + "','" + vArchivo8 + "','" + vArchivo9 + "', '" + vArchivo10 + "'";
+                        "'" + vArchivo4 + "','" + vArchivo5 + "','" + vArchivo6 + "','" + vArchivo7 + "','" + vArchivo8 + "','" + vArchivo9 + "', '" + vArchivo10 + "','" + vArchivo11 + "'";
                     Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                     if (vInfo == 1)
                     {
@@ -1262,11 +1297,10 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 }
                 else
                 {
-
                     ActualizarATM();
                     ActualizarVerifATM();
                     ImgVerificacion();
-                    PreguntasVerif();
+                    PreguntasVerif();                    
                     //EnviarCorreo();
                     vaciarValorImg();
                     if (tipo == "2")
@@ -1294,6 +1328,8 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
             protected void btnRechazarVerif_Click(object sender, EventArgs e)
             {
+            txtAlerta2.Visible = false;
+            H5Alerta.Visible = false;
             txtmotivoRechazo.Text = string.Empty;
             H5Alerta.Visible = false;
             lbcodATM2.Text = txtcodATM.Text;
@@ -1308,7 +1344,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             {
             if (txtmotivoRechazo.Text == "" || txtmotivoRechazo.Text == string.Empty)
             {
-
+                txtAlerta2.Visible = true;
                 H5Alerta.Visible = true;
             }
             else
@@ -1316,7 +1352,8 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
                 try
                 {
-                    string vQuery = "STEISP_ATM_VERIFICACION 6, '" + Session["usuATM"].ToString() + "','" + Session["ATM_IDMANT_VERIF_CREAR"] + "'";
+                    
+                    string vQuery = "STEISP_ATM_VERIFICACION 6, '" + Session["usuATM"].ToString() + "','" + Session["ATM_IDMANT_VERIF_CREAR"].ToString() + "'";
                     Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                     if (vInfo == 1)
                     {
@@ -1338,7 +1375,9 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
             protected void btnCerrarRechazoModal_Click(object sender, EventArgs e)
             {
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal2();", true);
+            txtAlerta2.Visible = false;
+            H5Alerta.Visible = false;
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal2();", true);
             }
 
             protected void btnborrar_Click(object sender, EventArgs e)
@@ -1353,5 +1392,31 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             {           
                 imgEnergia.Src = string.Empty;
             }
+
+        protected void btnEnviarVerif_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                validar();
+                //ActualizarATM();
+                //ActualizarVerifATM();
+                //ImgVerificacion();
+                //PreguntasVerif();
+                //Response.Redirect("buscarVerificacion.aspx");
+                lbcodATM.Text = txtcodATM.Text;
+                lbNombreATM.Text = txtnomATM.Text;
+                lbsucursalATM.Text = txtsucursal.Text;
+                lbInventarioATM.Text = txtinventarioVerif.Text;
+                lbtecnico.Text = txtTecnicoResponsable.Text;
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal();", true);
+            }
+            catch (Exception Ex)
+            {
+
+                Mensaje(Ex.Message, WarningType.Danger);
+            }
         }
+
+       
+    }
 }

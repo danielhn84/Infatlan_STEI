@@ -446,6 +446,7 @@
     <Content Include="assets\images\icon\warning.svg" />
     <Content Include="assets\images\icon\zip.png" />
     <Content Include="assets\images\imac.png" />
+    <Content Include="assets\images\image_not_available.png" />
     <Content Include="assets\images\img1.jpg" />
     <Content Include="assets\images\img2.jpg" />
     <Content Include="assets\images\img3.jpg" />
@@ -3347,8 +3348,11 @@
     <Content Include="js\sidebarmenu.js" />
     <Content Include="js\waves.js" />
     <Content Include="page\cotizacion\aprobacionContabilidad.aspx" />
+    <Content Include="page\cotizacion\ofertaEconomica.aspx" />
     <Content Include="page\cotizacion\principalPresupuestos.aspx" />
-    <Content Include="page\visitaTecnica.aspx" />
+    <Content Include="page\visita\aprobacion.aspx" />
+    <Content Include="page\visita\principalVisitaTecnica.aspx" />
+    <Content Include="page\visita\visitaTecnica.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -3379,6 +3383,13 @@
     <Compile Include="page\cotizacion\aprobacionContabilidad.aspx.designer.cs">
       <DependentUpon>aprobacionContabilidad.aspx</DependentUpon>
     </Compile>
+    <Compile Include="page\cotizacion\ofertaEconomica.aspx.cs">
+      <DependentUpon>ofertaEconomica.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="page\cotizacion\ofertaEconomica.aspx.designer.cs">
+      <DependentUpon>ofertaEconomica.aspx</DependentUpon>
+    </Compile>
     <Compile Include="page\cotizacion\principalPresupuestos.aspx.cs">
       <DependentUpon>principalPresupuestos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3386,11 +3397,25 @@
     <Compile Include="page\cotizacion\principalPresupuestos.aspx.designer.cs">
       <DependentUpon>principalPresupuestos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="page\visitaTecnica.aspx.cs">
+    <Compile Include="page\visita\aprobacion.aspx.cs">
+      <DependentUpon>aprobacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="page\visita\aprobacion.aspx.designer.cs">
+      <DependentUpon>aprobacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="page\visita\principalVisitaTecnica.aspx.cs">
+      <DependentUpon>principalVisitaTecnica.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="page\visita\principalVisitaTecnica.aspx.designer.cs">
+      <DependentUpon>principalVisitaTecnica.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="page\visita\visitaTecnica.aspx.cs">
       <DependentUpon>visitaTecnica.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="page\visitaTecnica.aspx.designer.cs">
+    <Compile Include="page\visita\visitaTecnica.aspx.designer.cs">
       <DependentUpon>visitaTecnica.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -4464,6 +4489,7 @@
     <Content Include="scss\widgets\topbar-mail.scss" />
     <Content Include="scss\widgets\weather-widget.scss" />
     <Content Include="scss\widgets\widgets.scss" />
+    <Content Include="page\plantillas\Estructura del Cableado Estructurado.pdf" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -32,7 +32,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
 
         void llenarForm()
         {
-            txtcodATM.Text = Session["codATM"].ToString() ;
+            txtcodATM.Text = Convert.ToString(Session["codATM"]) ;
             DDLsucursalATM.SelectedIndex = CargarInformacionDDL(DDLsucursalATM, Session["sucursalATM"].ToString());
             txtnombreATM.Text = Session["nombreATM"].ToString();
             DDLestado.SelectedIndex = CargarInformacionDDL(DDLestado, Session["idEstado"].ToString());

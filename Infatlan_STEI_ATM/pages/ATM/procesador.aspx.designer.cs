@@ -15,6 +15,15 @@ namespace Infatlan_STEI_ATM.pages.ATM
     {
 
         /// <summary>
+        /// Control UpdateProgress1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress UpdateProgress1;
+
+        /// <summary>
         /// Control UpdateDivBusquedas.
         /// </summary>
         /// <remarks>
@@ -105,6 +114,15 @@ namespace Infatlan_STEI_ATM.pages.ATM
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl H5Alerta1;
 
         /// <summary>
+        /// Control txtAlerta1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtAlerta1;
+
+        /// <summary>
         /// Control UpdatePanel4.
         /// </summary>
         /// <remarks>
@@ -157,6 +175,15 @@ namespace Infatlan_STEI_ATM.pages.ATM
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl H5Alerta2;
+
+        /// <summary>
+        /// Control txtAlerta2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtAlerta2;
 
         /// <summary>
         /// Control UpdatePanel3.

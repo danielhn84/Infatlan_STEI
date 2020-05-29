@@ -51,18 +51,20 @@ namespace Infatlan_STEI_ATM.pages.ATM
         {
             H5Alerta1.Visible = false;
             H5Alerta2.Visible = false;
+            txtAlerta1.Visible = false;
+            txtAlerta2.Visible = false;
             DataTable vDataa = (DataTable)Session["procesadorATM"];
             string codProcesadorATMs = e.CommandArgument.ToString();
 
 
             if (e.CommandName == "Codigo")
             {
-                string nom = "";
+              
                 
                 try
                 {
                     DataTable vDatos = new DataTable();
-                    String vQuery = "STEISP_ATMAdminComponentesATM 10,'" + codProcesadorATMs + "', '" + nom + "', '" + Session["usuATM"].ToString() + "'";
+                    String vQuery = "STEISP_ATMAdminComponentesATM 10,'" + codProcesadorATMs + "'";
                     vDatos = vConexion.ObtenerTabla(vQuery);
                     foreach (DataRow item in vDatos.Rows)
                     {
@@ -86,12 +88,18 @@ namespace Infatlan_STEI_ATM.pages.ATM
         {
             H5Alerta1.Visible = false;
             H5Alerta2.Visible = false;
+            txtAlerta1.Visible = false;
+            txtAlerta2.Visible = false;
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal2();", true);
            
         }
 
         protected void btnModalCerrarprocesadorATM_Click(object sender, EventArgs e)
         {
+            H5Alerta1.Visible = false;
+            H5Alerta2.Visible = false;
+            txtAlerta1.Visible = false;
+            txtAlerta2.Visible = false;
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
         }
 
@@ -101,6 +109,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
             {
               
                 H5Alerta1.Visible = true;
+                txtAlerta1.Visible = true;
             }
             else
             {
@@ -138,6 +147,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
             {
               
                 H5Alerta2.Visible = true;
+                txtAlerta2.Visible = true;
             }
             else
             {
