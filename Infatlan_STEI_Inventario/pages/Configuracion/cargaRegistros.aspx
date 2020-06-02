@@ -12,32 +12,32 @@
             <h6 class="card-subtitle">Descargue la plantilla respectiva.</h6>
             <asp:UpdatePanel runat="server" ID="UpdatePanel10" >
                 <ContentTemplate>
-                    <div class="table-responsive m-t-40">
-                        <asp:GridView ID="GvBusqueda" runat="server"
-                            CssClass="table table-bordered embed-responsive"
-                            PagerStyle-CssClass="pgr"
-                            HeaderStyle-CssClass="table"
-                            RowStyle-CssClass="rows"
-                            AutoGenerateColumns="false"
-                            AllowPaging="true"
-                            GridLines="None" OnRowCommand="GvBusqueda_RowCommand"
-                            PageSize="10">
-                            <Columns>
-                                <asp:BoundField DataField="id" HeaderText="No." />
-                                <asp:BoundField DataField="proceso" HeaderText="Proceso" />
-                                <asp:TemplateField HeaderText="Seleccione">
-                                    <ItemTemplate>
-                                        <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-primary mr-2" Title="Descargar Planilla" CommandArgument='<%# Eval("id") %>' CommandName="DescargarPlantilla">
-                                                    <i class="icon-arrow-down-circle"></i>
-                                        </asp:LinkButton>
-                                        <asp:LinkButton ID="BtnInfo" runat="server" class="btn btn-success mr-2" Title="Cargar Registros" CommandArgument='<%# Eval("id") %>' CommandName="CargarRegistros">
-                                                    <i class="icon-arrow-up-circle"></i>
-                                        </asp:LinkButton>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                            </Columns>
-                        </asp:GridView>
-                    </div>
+                        <div class="table-responsive m-t-40">
+                            <asp:GridView ID="GvBusqueda" runat="server"
+                                CssClass="table table-bordered"
+                                PagerStyle-CssClass="pgr"
+                                HeaderStyle-CssClass="table"
+                                RowStyle-CssClass="rows"
+                                AutoGenerateColumns="false"
+                                AllowPaging="true"
+                                GridLines="None" OnRowCommand="GvBusqueda_RowCommand"
+                                PageSize="10">
+                                <Columns>
+                                    <asp:BoundField DataField="id" HeaderText="No." />
+                                    <asp:BoundField DataField="proceso" HeaderText="Proceso" />
+                                    <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                        <ItemTemplate>
+                                            <asp:LinkButton Text="Plantilla" ID="BtnEditar" runat="server" class="btn btn-info" Title="Descargar Planilla" CommandArgument='<%# Eval("id") %>' CommandName="DescargarPlantilla"></asp:LinkButton>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                        <ItemTemplate>
+                                            <asp:LinkButton Text="Cargar" ID="BtnInfo" runat="server" class="btn btn-success" Title="Cargar Registros" CommandArgument='<%# Eval("id") %>' CommandName="CargarRegistros"></asp:LinkButton>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                </Columns>
+                            </asp:GridView>
+                        </div>
                 </ContentTemplate>
             </asp:UpdatePanel>
 
@@ -65,12 +65,22 @@
                     <div class="form-group">
                         <label class="control-label col-12">Carga</label>
                         <div class="col-9">
-                            <asp:FileUpload ID="FUCarga" CssClass="form-control" runat="server"/>
+                            <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                                <ContentTemplate>
+                                    <asp:FileUpload ID="FUCarga" CssClass="form-control" runat="server" AllowMultiple="false" ClientIDMode="AutoID"/>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12" runat="server" id="DivMensajeCarga" visible="false" style="display: flex; background-color:tomato; justify-content:center">
-                            <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbAdvertenciaCarga"></asp:Label>
+                        <div class="col-12">
+                            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                <ContentTemplate>
+                                    <div class="col-12" runat="server" id="DivMensajeCarga" visible="false" style="display: flex; background-color: tomato; justify-content: center">
+                                        <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbAdvertenciaCarga"></asp:Label>
+                                    </div>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
                         </div>
                     </div>
                 </div>
@@ -80,6 +90,9 @@
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                             <asp:Button ID="BtnCargar" runat="server" Text="Aceptar" class="btn btn-info" OnClick="BtnCargar_Click"/>
                         </ContentTemplate>
+                        <Triggers>
+                            <asp:PostBackTrigger ControlID="BtnCargar" />
+                        </Triggers>
                     </asp:UpdatePanel>
                 </div>
             </div>

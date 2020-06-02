@@ -19,6 +19,8 @@
 
         function openModalEnlace() { $('#ModalArticulosEnlaces').modal('show'); }
         function cerrarModalEnlace() { $('#ModalArticulosEnlaces').modal('hide'); }
+        function openModalInfoEnlace() { $('#ModalInfoENL').modal('show'); }
+        function openModalAdjunto() { $('#ModalCarga').modal('show'); }
 
         function openArticuloTipo() { $('#ModalArticulosTipo').modal('show'); }
         function cerrarArticuloTipo() { $('#ModalArticulosTipo').modal('hide'); }
@@ -64,47 +66,49 @@
                 <div class="tab-pane fade show active" id="navNuevo" role="tabpanel" aria-labelledby="nav-cargar-tab">
                     <asp:UpdatePanel runat="server" ID="UpdatePanel">
                         <ContentTemplate>
-                            <div class="row col-7">
-                                <label class="col-2 col-form-label">Búsqueda</label>
-                                <div class="col-8">
-                                    <asp:TextBox runat="server" PlaceHolder="Ingrese texto y presione Enter" ID="TxBusqueda" AutoPostBack="true" OnTextChanged="TxBusqueda_TextChanged" CssClass="form-control form-control-line"></asp:TextBox>
+                            <div class="card-body">
+                                <div class="row col-7">
+                                    <label class="col-2 col-form-label">Búsqueda</label>
+                                    <div class="col-8">
+                                        <asp:TextBox runat="server" PlaceHolder="Ingrese texto y presione Enter" ID="TxBusqueda" AutoPostBack="true" OnTextChanged="TxBusqueda_TextChanged" CssClass="form-control form-control-line"></asp:TextBox>
+                                    </div>
+                                    <asp:Button runat="server" ID="BtnNuevo" CssClass="btn btn-success" Text="Nuevo" OnClick="BtnNuevo_Click" />
                                 </div>
-                                <asp:Button runat="server" ID="BtnNuevo" CssClass="btn btn-success" Text="Nuevo" OnClick="BtnNuevo_Click" />
-                            </div>
 
-                            <div class="table-responsive m-t-40">
-                                <asp:GridView ID="GVBusqueda" runat="server"
-                                    CssClass="table table-bordered embed-responsive"
-                                    PagerStyle-CssClass="pgr"
-                                    HeaderStyle-CssClass="table"
-                                    RowStyle-CssClass="rows"
-                                    AutoGenerateColumns="false"
-                                    AllowPaging="true"
-                                    GridLines="None" OnRowCommand="GVBusqueda_RowCommand"
-                                    PageSize="10" OnPageIndexChanging="GVBusqueda_PageIndexChanging">
-                                    <Columns>
-                                        <asp:BoundField DataField="idStock" HeaderText="No." />
-                                        <asp:BoundField DataField="TipoStock" HeaderText="TipoStock" />
-                                        <asp:BoundField DataField="Marca" HeaderText="Marca" />
-                                        <asp:BoundField DataField="modelo" HeaderText="Modelo" />
-                                        <asp:BoundField DataField="cantidad" HeaderText="Cantidad" />
-                                        <asp:BoundField DataField="precioUnit" HeaderText="Precio" />
-                                        <asp:BoundField DataField="Proveedor" HeaderText="Proveedor" />
-                                        <asp:BoundField DataField="descripcion" HeaderText="Detalle" />
-                                        <asp:BoundField DataField="series" HeaderText="Serie" />
-                                        <asp:TemplateField HeaderText="Seleccione">
-                                            <ItemTemplate>
-                                                <asp:LinkButton ID="BtnEditar" Style="padding: 8%" runat="server" class="btn btn-info mr-2" Title="Editar" CommandArgument='<%# Eval("idStock") %>' CommandName="EditarArticulo">
-                                            <i class="icon-pencil"></i>
-                                                </asp:LinkButton>
+                                <div class="table-responsive m-t-20">
+                                    <asp:GridView ID="GVBusqueda" runat="server"
+                                        CssClass="table table-bordered embed-responsive"
+                                        PagerStyle-CssClass="pgr"
+                                        HeaderStyle-CssClass="table"
+                                        RowStyle-CssClass="rows"
+                                        AutoGenerateColumns="false"
+                                        AllowPaging="true"
+                                        GridLines="None" OnRowCommand="GVBusqueda_RowCommand"
+                                        PageSize="10" OnPageIndexChanging="GVBusqueda_PageIndexChanging">
+                                        <Columns>
+                                            <asp:BoundField DataField="idStock" HeaderText="#" />
+                                            <asp:BoundField DataField="TipoStock" HeaderText="Tipo" />
+                                            <asp:BoundField DataField="Marca" HeaderText="Marca" />
+                                            <asp:BoundField DataField="modelo" HeaderText="Modelo" />
+                                            <asp:BoundField DataField="cantidad" HeaderText="Cant" />
+                                            <asp:BoundField DataField="precioUnit" HeaderText="Precio" />
+                                            <asp:BoundField DataField="Proveedor" HeaderText="Proveedor" />
+                                            <asp:BoundField DataField="descripcion" HeaderText="Detalle" />
+                                            <asp:BoundField DataField="series" HeaderText="Serie" />
+                                            <asp:TemplateField HeaderText="" HeaderStyle-Width="120">
+                                                <ItemTemplate>
+                                                    <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-info" Title="Editar" CommandArgument='<%# Eval("idStock") %>' CommandName="EditarArticulo">
+                                                        <i class="icon-pencil"></i>
+                                                    </asp:LinkButton>
 
-                                                <asp:LinkButton ID="BtnEditar2" Style="padding: 8%" runat="server" class="btn btn-success mr-2" Title="Aregar" CommandArgument='<%# Eval("idStock") %>' CommandName="EliminarArticulo">
-                                            <i class="icon-plus" ></i>
-                                                </asp:LinkButton>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                    </Columns>
-                                </asp:GridView>
+                                                    <asp:LinkButton ID="BtnEditar2" runat="server" class="btn btn-success" Title="Aregar" CommandArgument='<%# Eval("idStock") %>' CommandName="EliminarArticulo">
+                                                        <i class="icon-plus" ></i>
+                                                    </asp:LinkButton>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                        </Columns>
+                                    </asp:GridView>
+                                </div>
                             </div>
                         </ContentTemplate>
                     </asp:UpdatePanel>
@@ -113,48 +117,50 @@
                 <div class="tab-pane fade" id="navEDC" role="tabpanel" aria-labelledby="nav-tecnicos-tab">
                     <asp:UpdatePanel runat="server" ID="UpdatePanel10">
                         <ContentTemplate>
-                            <div class="row col-12">
-                                <div class="row col-7">
-                                    <label class="col-2 col-form-label">Búsqueda</label>
-                                    <div class="col-8">
-                                        <asp:TextBox runat="server" PlaceHolder="Ingrese texto y presione Enter" ID="TxBusquedaEDC" AutoPostBack="true" OnTextChanged="TxBusquedaEDC_TextChanged" CssClass="form-control form-control-line"></asp:TextBox>
+                            <div class="card-body">
+                                <div class="row col-12">
+                                    <div class="row col-7">
+                                        <label class="col-2 col-form-label">Búsqueda</label>
+                                        <div class="col-8">
+                                            <asp:TextBox runat="server" PlaceHolder="Ingrese texto y presione Enter" ID="TxBusquedaEDC" AutoPostBack="true" OnTextChanged="TxBusquedaEDC_TextChanged" CssClass="form-control form-control-line"></asp:TextBox>
+                                        </div>
+                                        <asp:Button runat="server" ID="BtnNuevoEDC" CssClass="btn btn-success" Text="Nuevo" OnClick="BtnNuevoEDC_Click" />
                                     </div>
-                                    <asp:Button runat="server" ID="BtnNuevoEDC" CssClass="btn btn-success" Text="Nuevo" OnClick="BtnNuevoEDC_Click" />
                                 </div>
-                            </div>
-
-                            <div class="table-responsive m-t-40">
-                                <asp:GridView ID="GvBusquedaEDC" runat="server"
-                                    CssClass="table table-bordered embed-responsive"
-                                    PagerStyle-CssClass="pgr"
-                                    HeaderStyle-CssClass="table"
-                                    RowStyle-CssClass="rows"
-                                    AutoGenerateColumns="false"
-                                    AllowPaging="true"
-                                    GridLines="None" OnRowCommand="GvBusquedaEDC_RowCommand"
-                                    PageSize="10" OnPageIndexChanging="GvBusquedaEDC_PageIndexChanging">
-                                    <Columns>
-                                        <asp:BoundField DataField="idStockEDC" HeaderText="No." />
-                                        <asp:BoundField DataField="nombreNodo" HeaderText="Nombre" />
-                                        <asp:BoundField DataField="contrato" HeaderText="Contrato" />
-                                        <asp:BoundField DataField="serie" HeaderText="Serie" />
-                                        <asp:BoundField DataField="ip" HeaderText="IP" />
-                                        <asp:BoundField DataField="regiones" HeaderText="Region" />
-                                        <asp:BoundField DataField="latitud" HeaderText="Latitud" />
-                                        <asp:BoundField DataField="longitud" HeaderText="Longitud" />
-                                        <asp:BoundField DataField="fechaMantenimiento" HeaderText="Mantenimiento" />
-                                        <asp:TemplateField HeaderText="Seleccione">
-                                            <ItemTemplate>
-                                                <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-info mr-2" Title="Editar" CommandArgument='<%# Eval("idStockEDC") %>' CommandName="EditarArticuloEDC">
-                                                    <i class="icon-pencil"></i>
-                                                </asp:LinkButton>
-                                                <asp:LinkButton ID="BtnInfo" runat="server" class="btn btn-secondary mr-2" Title="Ver" CommandArgument='<%# Eval("idStockEDC") %>' CommandName="VerInfoEDC">
-                                                    <i class="icon-info"></i>
-                                                </asp:LinkButton>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                    </Columns>
-                                </asp:GridView>
+                            
+                                <div class="table-responsive m-t-20">
+                                    <asp:GridView ID="GvBusquedaEDC" runat="server"
+                                        CssClass="table table-bordered"
+                                        PagerStyle-CssClass="pgr"
+                                        HeaderStyle-CssClass="table"
+                                        RowStyle-CssClass="rows"
+                                        AutoGenerateColumns="false"
+                                        AllowPaging="true"
+                                        GridLines="None" OnRowCommand="GvBusquedaEDC_RowCommand"
+                                        PageSize="10" OnPageIndexChanging="GvBusquedaEDC_PageIndexChanging">
+                                        <Columns>
+                                            <asp:BoundField DataField="idStockEDC" HeaderText="No." />
+                                            <asp:BoundField DataField="nombreNodo" HeaderText="Nombre" />
+                                            <asp:BoundField DataField="contrato" HeaderText="Contrato" />
+                                            <asp:BoundField DataField="serie" HeaderText="Serie" />
+                                            <asp:BoundField DataField="ip" HeaderText="IP" />
+                                            <asp:BoundField DataField="regiones" HeaderText="Region" />
+                                            <asp:BoundField DataField="latitud" HeaderText="Latitud" />
+                                            <asp:BoundField DataField="longitud" HeaderText="Longitud" />
+                                            <asp:BoundField DataField="fechaMantenimiento" HeaderText="Mantenimiento" />
+                                            <asp:TemplateField HeaderText="">
+                                                <ItemTemplate>
+                                                    <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-info" Title="Editar" CommandArgument='<%# Eval("idStockEDC") %>' CommandName="EditarArticuloEDC">
+                                                        <i class="icon-pencil"></i>
+                                                    </asp:LinkButton>
+                                                    <asp:LinkButton ID="BtnInfo" runat="server" class="btn btn-secondary" Title="Ver" CommandArgument='<%# Eval("idStockEDC") %>' CommandName="VerInfoEDC">
+                                                        <i class="icon-info"></i>
+                                                    </asp:LinkButton>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                        </Columns>
+                                    </asp:GridView>
+                                </div>
                             </div>
                         </ContentTemplate>
                     </asp:UpdatePanel>
@@ -163,45 +169,52 @@
                 <div class="tab-pane fade" id="navEnlace" role="tabpanel" aria-labelledby="nav-tecnicos-tab">
                     <asp:UpdatePanel runat="server" ID="UpdatePanel26">
                         <ContentTemplate>
-                            <div class="row col-7">
-                                <label class="col-2 col-form-label">Búsqueda</label>
-                                <div class="col-8">
-                                    <asp:TextBox runat="server" PlaceHolder="Ingrese texto y presione Enter" ID="TxBusquedaEnlace" AutoPostBack="true" OnTextChanged="TxBusquedaEnlace_TextChanged" CssClass="form-control form-control-line"></asp:TextBox>
+                            <div class="card-body">
+                                <div class="row col-7">
+                                    <label class="col-2 col-form-label">Búsqueda</label>
+                                    <div class="col-8">
+                                        <asp:TextBox runat="server" PlaceHolder="Ingrese texto y presione Enter" ID="TxBusquedaEnlace" AutoPostBack="true" OnTextChanged="TxBusquedaEnlace_TextChanged" CssClass="form-control form-control-line"></asp:TextBox>
+                                    </div>
+                                    <asp:Button runat="server" ID="BtnNuevoEnlace" CssClass="btn btn-success" Text="Nuevo" OnClick="BtnNuevoEnlace_Click" />
                                 </div>
-                                <asp:Button runat="server" ID="BtnNuevoEnlace" CssClass="btn btn-success" Text="Nuevo" OnClick="BtnNuevoEnlace_Click" />
-                            </div>
 
-                            <div class="table-responsive m-t-40">
-                                <asp:GridView ID="GvEnlaces" runat="server"
-                                    CssClass="table table-bordered embed-responsive"
-                                    PagerStyle-CssClass="pgr"
-                                    HeaderStyle-CssClass="table"
-                                    RowStyle-CssClass="rows"
-                                    AutoGenerateColumns="false"
-                                    AllowPaging="true"
-                                    GridLines="None" OnRowCommand="GvEnlaces_RowCommand"
-                                    PageSize="10" OnPageIndexChanging="GvEnlaces_PageIndexChanging">
-                                    <Columns>
-                                        <asp:BoundField DataField="idEnlace" HeaderText="No." />
-                                        <asp:BoundField DataField="nombre" HeaderText="Nombre" />
-                                        <asp:BoundField DataField="proveedor" HeaderText="Proveedor" />
-                                        <asp:BoundField DataField="tipoEnlace" HeaderText="Tipo" />
-                                        <asp:BoundField DataField="IPOrigen" HeaderText="IP Origen" />
-                                        <asp:BoundField DataField="IPDestino" HeaderText="IP Destino" />
-                                        <asp:BoundField DataField="idOrigen" HeaderText="equipo Origen" />
-                                        <asp:BoundField DataField="idDestino" HeaderText="equipo Destino" />
-                                        <asp:BoundField DataField="servicios" HeaderText="servicios" />
-                                        <asp:BoundField DataField="contacto" HeaderText="Contacto" />
-                                        <asp:BoundField DataField="telefonoContacto" HeaderText="Telefono" />
-                                        <asp:TemplateField HeaderText="Seleccione">
-                                            <ItemTemplate>
-                                                <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-info mr-2" Title="Editar" CommandArgument='<%# Eval("idEnlace") %>' CommandName="EditarEnlace">
-                                                    <i class="icon-pencil"></i>
-                                                </asp:LinkButton>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                    </Columns>
-                                </asp:GridView>
+                                <div class="table-responsive m-t-20">
+                                    <asp:GridView ID="GvEnlaces" runat="server"
+                                        CssClass="table table-bordered"
+                                        PagerStyle-CssClass="pgr"
+                                        HeaderStyle-CssClass="table"
+                                        RowStyle-CssClass="rows"
+                                        AutoGenerateColumns="false"
+                                        AllowPaging="true"
+                                        GridLines="None" OnRowCommand="GvEnlaces_RowCommand"
+                                        PageSize="10" OnPageIndexChanging="GvEnlaces_PageIndexChanging">
+                                        <Columns>
+                                            <asp:BoundField DataField="idEnlace" HeaderText="No." />
+                                            <asp:BoundField DataField="nombre" HeaderText="Nombre" />
+                                            <asp:BoundField DataField="proveedor" HeaderText="Proveedor" />
+                                            <asp:BoundField DataField="tipoEnlace" HeaderText="Tipo" />
+                                            <asp:BoundField DataField="origen" HeaderText="Origen" />
+                                            <asp:BoundField DataField="destino" HeaderText="Destino" />
+                                            <asp:BoundField DataField="servicios" HeaderText="servicios" />
+                                            <asp:BoundField DataField="contacto" HeaderText="Contacto" />
+                                            <asp:TemplateField>
+                                                <ItemTemplate>
+                                                    <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-info" Title="Editar" CommandArgument='<%# Eval("idEnlace") %>' CommandName="EditarEnlace">
+                                                        <i class="icon-pencil"></i>
+                                                    </asp:LinkButton>
+
+                                                    <asp:LinkButton ID="BtnAdjunto" runat="server" class="btn btn-primary" Title="Adjunto" CommandArgument='<%# Eval("idEnlace") %>' CommandName="SubirAdjunto">
+                                                        <i class="icon-arrow-up-circle"></i>
+                                                    </asp:LinkButton>
+
+                                                    <asp:LinkButton ID="BtnInfo" runat="server" class="btn btn-secondary" Title="Info" CommandArgument='<%# Eval("idEnlace") %>' CommandName="VerInfo">
+                                                        <i class="icon-info"></i>
+                                                    </asp:LinkButton>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                        </Columns>
+                                    </asp:GridView>
+                                </div>
                             </div>
                         </ContentTemplate>
                     </asp:UpdatePanel>
@@ -286,7 +299,7 @@
                                             <label class="">Precio Unitario</label>
                                         </div>
                                         <div class="col-8">
-                                            <asp:TextBox ID="TxPrecio" placeholder="" TextMode="Number" class="form-control" runat="server"></asp:TextBox>                                            
+                                            <asp:TextBox ID="TxPrecio" placeholder="" TextMode="Number" step="0.01" class="form-control" runat="server"></asp:TextBox>
                                         </div>
                                     </div>
                                 </div>
@@ -385,10 +398,10 @@
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group row">
-                                <div class="col-2" style="margin-left:2%">
+                                <div class="col-3" style="margin-left:2%">
                                     <label class="col-form-label">Nombre</label>
                                 </div>
-                                <div class="col-9">
+                                <div class="col-8">
                                     <asp:UpdatePanel ID="UpdatePanel14" runat="server">
                                         <ContentTemplate>
                                             <asp:TextBox ID="TxNombreNodo" class="form-control" runat="server"></asp:TextBox>                                            
@@ -399,10 +412,10 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group row">
-                                <div class="col-2">
-                                    <label>Tipo Equipo</label>
+                                <div class="col-3">
+                                    <label class="col-form-label">Tipo</label>
                                 </div>
-                                <div class="col-9">
+                                <div class="col-8">
                                     <asp:DropDownList ID="DDLTipoEquipoEDC" runat="server" class="select2 form-control custom-select" style="width: 100%"></asp:DropDownList>
                                 </div>
                             </div>
@@ -411,7 +424,7 @@
                         <div class="col-6">
                             <div class="form-group row">
                                 <div class="col-3" style="margin-left:2%">
-                                    <label>No. Contrato</label>
+                                    <label class="col-form-label">Contratos</label>
                                 </div>
                                 <div class="col-8">
                                     <asp:UpdatePanel ID="UpdatePanel16" runat="server" >
@@ -424,10 +437,10 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group row">
-                                <div class="col-2">
+                                <div class="col-3">
                                     <label class="col-form-label">Serie</label>
                                 </div>
-                                <div class="col-9">
+                                <div class="col-8">
                                     <asp:UpdatePanel ID="UpdatePanel17" runat="server">
                                         <ContentTemplate>
                                             <asp:TextBox ID="TxSerieEDC" class="form-control" runat="server"></asp:TextBox>
@@ -439,10 +452,10 @@
                                 
                         <div class="col-6">
                             <div class="form-group row">
-                                <div class="col-2" style="margin-left:2%">
+                                <div class="col-3" style="margin-left:2%">
                                     <label class="col-form-label">IP</label>
                                 </div>
-                                <div class="col-9">
+                                <div class="col-8">
                                     <asp:UpdatePanel ID="UpdatePanel18" runat="server">
                                         <ContentTemplate>
                                             <asp:TextBox ID="TxIP" placeholder="" class="form-control" runat="server"></asp:TextBox>
@@ -453,10 +466,10 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group row">
-                                <div class="col-2">
+                                <div class="col-3">
                                     <label class="col-form-label">Región</label>
                                 </div>
-                                <div class="col-9">
+                                <div class="col-8">
                                     <asp:UpdatePanel ID="UpdatePanel19" runat="server">
                                         <ContentTemplate>
                                             <asp:DropDownList ID="DDLRegion" runat="server" class="form-control"></asp:DropDownList>
@@ -468,10 +481,10 @@
                                 
                         <div class="col-6">
                             <div class="form-group row">
-                                <div class="col-2" style="margin-left:2%">
-                                    <label>IOS Imagen</label>
+                                <div class="col-3" style="margin-left:2%">
+                                    <label class="col-form-label">IOS Image</label>
                                 </div>
-                                <div class="col-9">
+                                <div class="col-8">
                                     <asp:UpdatePanel ID="UpdatePanel20" runat="server">
                                         <ContentTemplate>
                                             <asp:TextBox ID="TxIOSImage" class="form-control" runat="server"></asp:TextBox>
@@ -482,10 +495,10 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group row">
-                                <div class="col-2">
-                                    <label>IOS Version</label>
+                                <div class="col-3">
+                                    <label class="col-form-label">IOS Version</label>
                                 </div>
-                                <div class="col-9">
+                                <div class="col-8">
                                     <asp:UpdatePanel ID="UpdatePanel21" runat="server">
                                         <ContentTemplate>
                                             <asp:TextBox ID="TxIOSVersion" class="form-control" runat="server"></asp:TextBox>
@@ -497,10 +510,10 @@
                                 
                         <div class="col-6">
                             <div class="form-group row">
-                                <div class="col-2" style="margin-left:2%">
+                                <div class="col-3" style="margin-left:2%">
                                     <label class="col-form-label">Latitud</label>
                                 </div>
-                                <div class="col-9">
+                                <div class="col-8">
                                     <asp:UpdatePanel ID="UpdatePanel22" runat="server">
                                         <ContentTemplate>
                                             <asp:TextBox ID="TxLatitud" class="form-control" runat="server"></asp:TextBox>
@@ -511,10 +524,10 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group row">
-                                <div class="col-2">
+                                <div class="col-3">
                                     <label class="col-form-label">Longitud</label>
                                 </div>
-                                <div class="col-9">
+                                <div class="col-8">
                                     <asp:UpdatePanel ID="UpdatePanel23" runat="server">
                                         <ContentTemplate>
                                             <asp:TextBox ID="TxLongitud" class="form-control" runat="server"></asp:TextBox>
@@ -703,10 +716,10 @@
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group row">
-                                <div class="col-2" style="margin-left:2%">
+                                <div class="col-3" style="margin-left:2%">
                                     <label class="col-form-label">Nombre</label>
                                 </div>
-                                <div class="col-9">
+                                <div class="col-8">
                                     <asp:UpdatePanel ID="UpdatePanel30" runat="server">
                                         <ContentTemplate>
                                             <asp:TextBox ID="TxNombreENL" class="form-control" runat="server"></asp:TextBox>                                            
@@ -746,10 +759,10 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group row">
-                                <div class="col-2">
-                                    <label>Tipo Enlace</label>
+                                <div class="col-3">
+                                    <label class="col-form-label">Tipo</label>
                                 </div>
-                                <div class="col-9">
+                                <div class="col-8">
                                     <asp:UpdatePanel ID="UpdatePanel44" runat="server" >
                                         <ContentTemplate>
                                             <asp:DropDownList ID="DDLTipoEnlace" AutoPostBack="true" runat="server" OnSelectedIndexChanged="DDLTipoEnlace_SelectedIndexChanged" class="form-control"></asp:DropDownList>
@@ -761,10 +774,10 @@
 
                         <div class="col-6">
                             <div class="form-group row">
-                                <div class="col-2" style="margin-left:2%">
-                                    <label>Equipo Origen</label>
+                                <div class="col-3" style="margin-left:2%">
+                                    <label class="col-form-label">Origen</label>
                                 </div>
-                                <div class="col-9">
+                                <div class="col-8">
                                     <asp:UpdatePanel ID="UpdatePanel32" runat="server" >
                                         <ContentTemplate>
                                             <asp:DropDownList ID="DDLOrigen" runat="server" class="select2 form-control custom-select" style="width: 100%"></asp:DropDownList>
@@ -790,10 +803,10 @@
 
                         <div class="col-6">
                             <div class="form-group row">
-                                <div class="col-2" style="margin-left:2%">
-                                    <label>Equipo Destino</label>
+                                <div class="col-3" style="margin-left:2%">
+                                    <label class="col-form-label"> Destino</label>
                                 </div>
-                                <div class="col-9">
+                                <div class="col-8">
                                     <asp:UpdatePanel ID="UpdatePanel34" runat="server" >
                                         <ContentTemplate>
                                             <asp:DropDownList ID="DDLDestino" runat="server" class="select2 form-control custom-select" style="width: 100%"></asp:DropDownList>
@@ -862,10 +875,10 @@
                         </div>
                         <div class="col-12" runat="server" visible="false" id="DivEstadoENL">
                             <div class="form-group row">
-                                <div class="col-2" style="margin-left:2%">
+                                <div class="col-3" style="margin-left:2%">
                                     <label class="col-form-label">Estado</label>
                                 </div>
-                                <div class="col-9">
+                                <div class="col-8">
                                     <asp:UpdatePanel ID="UpdatePanel40" runat="server">
                                         <ContentTemplate>
                                             <asp:DropDownList runat="server" ID="DDLEstadoEnlace" CssClass="form-control">
@@ -896,6 +909,160 @@
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                             <asp:Button ID="BtnAceptarEnlace" runat="server" Text="Aceptar" class="btn btn-success" OnClick="BtnAceptarEnlace_Click"/>
                         </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%--MODAL INFO ENLACES--%>
+    <div class="modal fade" id="ModalInfoENL" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="ModalLabelInfoENL">
+                        <asp:UpdatePanel ID="UpdatePanel39" runat="server">
+                            <ContentTemplate>
+                                <asp:Label ID="LbTituloENL" runat="server" Text=""></asp:Label>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <asp:UpdatePanel ID="UpdatePanel45" runat="server">
+                        <ContentTemplate>
+                            <div class="row">   
+                                <div class="col-6">  
+                                    <label class="col-4">Nombre</label>
+                                    <asp:Label ID="LbNombreENL" Text="" runat="server" CssClass="col-form-label"/>
+                                </div>
+                                <div class="col-6">  
+                                    <label class="col-4">Descripción</label>
+                                    <asp:Label ID="LbDescripcionENL" Text="" runat="server" CssClass="col-form-label"/>
+                                </div>
+                            </div>
+                            <div class="row">   
+                                <div class="col-6">  
+                                    <label class="col-4">Proveedor</label>
+                                    <asp:Label ID="LbProveedorENL" Text="" runat="server" CssClass="col-form-label"/>
+                                </div>
+                                <div class="col-6">  
+                                    <label class="col-4">Tipo</label>
+                                    <asp:Label ID="LbTipoENL" Text="" runat="server" CssClass="col-form-label"/>
+                                </div>
+                            </div>
+                            <div class="row">   
+                                <div class="col-6">  
+                                    <label class="col-4">Origen</label>
+                                    <asp:Label ID="LbOrigenENL" Text="" runat="server" CssClass="col-form-label"/>
+                                </div>
+                                <div class="col-6">  
+                                    <label class="col-4">Destino</label>
+                                    <asp:Label ID="LbDestinoENL" Text="" runat="server" CssClass="col-form-label"/>
+                                </div>
+                            </div>
+                            <div class="row">   
+                                <div class="col-6">  
+                                    <label class="col-4">IP Origen</label>
+                                    <asp:Label ID="LbIPOrigenENL" Text="" runat="server" CssClass="col-form-label"/>
+                                </div>
+                                <div class="col-6">  
+                                    <label class="col-4">IP Destino</label>
+                                    <asp:Label ID="LbIPDestinoENL" Text="" runat="server" CssClass="col-form-label"/>
+                                </div>
+                            </div>
+                            <div class="row">   
+                                <div class="col-6">  
+                                    <label class="col-4">Servicios</label>
+                                    <asp:Label ID="LbServiciosENL" Text="" runat="server" CssClass="col-form-label"/>
+                                </div>
+                                <div class="col-6">  
+                                    <label class="col-4">Contacto</label>
+                                    <asp:Label ID="LbContactoENL" Text="" runat="server" CssClass="col-form-label"/>
+                                </div>
+                            </div>
+                            <div class="row">   
+                                <div class="col-6">  
+                                    <label class="col-4">Teléfono</label>
+                                    <asp:Label ID="LbTelefonoENL" Text="" runat="server" CssClass="col-form-label"/>
+                                </div>
+                                <div class="col-6">  
+                                    <label class="col-4">Archivo</label>
+                                    <asp:LinkButton ID="LBAdjuntoENL" Text="" CssClass="col-form-label" runat="server" OnClick="LBAdjuntoENL_Click" />
+                                </div>
+                            </div>
+                            <div class="row">   
+                                <div class="col-6">  
+                                    <label class="col-4">Creación</label>
+                                    <asp:Label ID="LbFechaENL" Text="" runat="server" CssClass="col-form-label"/>
+                                </div>
+                                <div class="col-6">  
+                                    <label class="col-4">Usuario</label>
+                                    <asp:Label ID="LbUsuarioENL" Text="" runat="server" CssClass="col-form-label"/>
+                                </div>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+                <div class="modal-footer">
+                    <asp:UpdatePanel ID="UpdatePanel46" runat="server">
+                        <ContentTemplate>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%--MODAL DE CARGA ARCHIVO--%>
+    <div class="modal fade" id="ModalCarga" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <asp:UpdatePanel ID="UpdatePanel47" runat="server">
+                        <ContentTemplate>
+                            <h4 class="modal-title" id="ModalLabelCargar">
+                                <b><asp:Label runat="server" ID="LbTituloCarga" CssClass="col-form-label" Text="Cargar Archivo"></asp:Label></b>
+                            </h4>
+                            <asp:Label runat="server" ID="Label16" CssClass="col-form-label"></asp:Label>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label col-12">Carga</label>
+                        <div class="col-9">
+                            <asp:FileUpload ID="FUCarga" CssClass="form-control" runat="server" AllowMultiple="false" ClientIDMode="AutoID"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <asp:UpdatePanel ID="UpdatePanel48" runat="server">
+                                <ContentTemplate>
+                                    <div class="col-12" runat="server" id="DivMensajeCarga" visible="false" style="display: flex; background-color: tomato; justify-content: center">
+                                        <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbAdvertenciaCarga"></asp:Label>
+                                    </div>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <asp:UpdatePanel ID="UpdatePanel49" runat="server">
+                        <ContentTemplate>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <asp:Button ID="BtnCargar" runat="server" Text="Aceptar" class="btn btn-info" OnClick="BtnCargar_Click"/>
+                        </ContentTemplate>
+                        <Triggers>
+                            <asp:PostBackTrigger ControlID="BtnCargar" />
+                        </Triggers>
                     </asp:UpdatePanel>
                 </div>
             </div>

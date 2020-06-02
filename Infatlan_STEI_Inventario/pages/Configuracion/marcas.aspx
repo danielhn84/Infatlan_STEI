@@ -31,43 +31,44 @@
                 <div class="card-body">
                     <h4 class="card-title">Tipos de Articulos</h4>
                     <h6 class="card-subtitle">Relacionadas al producto existente en inventario.</h6>
-                    <br />
-                    <div class="row col-7"> 
-                        <label class="col-2 col-form-label">Búsqueda</label>
-                        <div class="col-8">
-                            <asp:TextBox runat="server" PlaceHolder="Ingrese texto y presione Enter" ID="TxBusqueda" AutoPostBack="true" OnTextChanged="TxBusqueda_TextChanged" CssClass="form-control form-control-line"></asp:TextBox>
+                    <div class="card-body">
+                        <div class="row col-7"> 
+                            <label class="col-2 col-form-label">Búsqueda</label>
+                            <div class="col-8">
+                                <asp:TextBox runat="server" PlaceHolder="Ingrese texto y presione Enter" ID="TxBusqueda" AutoPostBack="true" OnTextChanged="TxBusqueda_TextChanged" CssClass="form-control form-control-line"></asp:TextBox>
+                            </div>
+                            <asp:Button runat="server" ID="BtnNuevo" CssClass="btn btn-success" Text="Nuevo" OnClick="BtnNuevo_Click" />
                         </div>
-                        <asp:Button runat="server" ID="BtnNuevo" CssClass="btn btn-success" Text="Nuevo" OnClick="BtnNuevo_Click" />
-                    </div>
                     
-                    <div class="table-responsive m-t-40">
-                        <asp:GridView ID="GVBusqueda" runat="server"
-                            CssClass="table table-bordered"
-                            PagerStyle-CssClass="pgr"
-                            HeaderStyle-CssClass="table"
-                            RowStyle-CssClass="rows"
-                            AutoGenerateColumns="false"
-                            AllowPaging="true"
-                            GridLines="None" OnRowCommand="GVBusqueda_RowCommand"
-                            PageSize="10" OnPageIndexChanging="GVBusqueda_PageIndexChanging">
-                            <Columns>
-                                <asp:BoundField DataField="idMarca" HeaderText="No."/>
-                                <asp:BoundField DataField="nombre" HeaderText="Marca"/>
-                                <asp:BoundField DataField="fechaCreacion" HeaderText="Fecha"/>
-                                <asp:TemplateField HeaderText="Seleccione">
-                                    <ItemTemplate>
-                                        <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-info mr-2" CommandArgument='<%# Eval("idMarca") %>' CommandName="EditarMarca">
-                                            <i class="icon-pencil" ></i>
-                                        </asp:LinkButton>
+                        <div class="table-responsive m-t-20">
+                            <asp:GridView ID="GVBusqueda" runat="server"
+                                CssClass="table table-bordered"
+                                PagerStyle-CssClass="pgr"
+                                HeaderStyle-CssClass="table"
+                                RowStyle-CssClass="rows"
+                                AutoGenerateColumns="false"
+                                AllowPaging="true"
+                                GridLines="None" OnRowCommand="GVBusqueda_RowCommand"
+                                PageSize="10" OnPageIndexChanging="GVBusqueda_PageIndexChanging">
+                                <Columns>
+                                    <asp:BoundField DataField="idMarca" HeaderText="No."/>
+                                    <asp:BoundField DataField="nombre" HeaderText="Marca"/>
+                                    <asp:BoundField DataField="fechaCreacion" HeaderText="Fecha"/>
+                                    <asp:TemplateField HeaderText="Seleccione">
+                                        <ItemTemplate>
+                                            <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-info mr-2" CommandArgument='<%# Eval("idMarca") %>' CommandName="EditarMarca">
+                                                <i class="icon-pencil" ></i>
+                                            </asp:LinkButton>
                             
-                                        <asp:LinkButton ID="BtnEliminar" runat="server" class="btn btn-primary mr-2" CommandArgument='<%# Eval("idMarca") %>' CommandName="EliminarMarca">
-                                            <i class="icon-trash" ></i>
-                                        </asp:LinkButton>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
+                                            <asp:LinkButton ID="BtnEliminar" runat="server" class="btn btn-primary mr-2" CommandArgument='<%# Eval("idMarca") %>' CommandName="EliminarMarca">
+                                                <i class="icon-trash" ></i>
+                                            </asp:LinkButton>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
                                 
-                            </Columns>
-                        </asp:GridView>
+                                </Columns>
+                            </asp:GridView>
+                        </div>
                     </div>
                 </div>
             </div>

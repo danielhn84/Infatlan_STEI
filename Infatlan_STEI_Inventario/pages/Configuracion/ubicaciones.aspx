@@ -33,43 +33,44 @@
                 <div class="card-body">
                     <h4 class="card-title">Ubicaciones</h4>
                     <h6 class="card-subtitle">Lugar donde se encuentra el equipo.</h6>
-                    <br />
-                    <div class="row col-7"> 
-                        <label class="col-2 col-form-label">Búsqueda</label>
-                        <div class="col-8">
-                            <asp:TextBox runat="server" PlaceHolder="Ingrese texto y presione Enter" ID="TxBusqueda" AutoPostBack="true" OnTextChanged="TxBusqueda_TextChanged" CssClass="form-control"></asp:TextBox>
+                    <div class="card-body">
+                        <div class="row col-7"> 
+                            <label class="col-2 col-form-label">Búsqueda</label>
+                            <div class="col-8">
+                                <asp:TextBox runat="server" PlaceHolder="Ingrese texto y presione Enter" ID="TxBusqueda" AutoPostBack="true" OnTextChanged="TxBusqueda_TextChanged" CssClass="form-control"></asp:TextBox>
+                            </div>
+                            <asp:Button runat="server" ID="BtnNuevo" CssClass="btn btn-success" Text="Nuevo" OnClick="BtnNuevo_Click" />
                         </div>
-                        <asp:Button runat="server" ID="BtnNuevo" CssClass="btn btn-success" Text="Nuevo" OnClick="BtnNuevo_Click" />
-                    </div>
 
-                    <div class="table-responsive m-t-40">
-                        <asp:GridView ID="GVBusqueda" runat="server"
-                            CssClass="table table-bordered"
-                            PagerStyle-CssClass="pgr"
-                            HeaderStyle-CssClass="table"
-                            RowStyle-CssClass="rows"
-                            AutoGenerateColumns="false"
-                            AllowPaging="true"
-                            GridLines="None" OnRowCommand="GVBusqueda_RowCommand"
-                            PageSize="10" OnPageIndexChanging="GVBusqueda_PageIndexChanging">
-                            <Columns>
-                                <asp:BoundField DataField="idUbicacion" HeaderText="No." />
-                                <asp:BoundField DataField="tipo" HeaderText="Tipo" />
-                                <asp:BoundField DataField="codigo" HeaderText="Código" />
-                                <asp:BoundField DataField="direccion" HeaderText="Dirección"/>
-                                <asp:TemplateField HeaderText="Seleccione" HeaderStyle-Width="13%">
-                                    <ItemTemplate>
-                                        <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-info mr-2" CommandArgument='<%# Eval("idUbicacion") %>' CommandName="EditarUbicacion">
-                                            <i class="icon-pencil" ></i>
-                                        </asp:LinkButton>
+                        <div class="table-responsive m-t-20">
+                            <asp:GridView ID="GVBusqueda" runat="server"
+                                CssClass="table table-bordered"
+                                PagerStyle-CssClass="pgr"
+                                HeaderStyle-CssClass="table"
+                                RowStyle-CssClass="rows"
+                                AutoGenerateColumns="false"
+                                AllowPaging="true"
+                                GridLines="None" OnRowCommand="GVBusqueda_RowCommand"
+                                PageSize="10" OnPageIndexChanging="GVBusqueda_PageIndexChanging">
+                                <Columns>
+                                    <asp:BoundField DataField="idUbicacion" HeaderText="No." />
+                                    <asp:BoundField DataField="tipo" HeaderText="Tipo" />
+                                    <asp:BoundField DataField="codigo" HeaderText="Código" />
+                                    <asp:BoundField DataField="direccion" HeaderText="Dirección"/>
+                                    <asp:TemplateField HeaderText="Seleccione" HeaderStyle-Width="13%">
+                                        <ItemTemplate>
+                                            <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-info" CommandArgument='<%# Eval("idUbicacion") %>' CommandName="EditarUbicacion">
+                                                <i class="icon-pencil" ></i>
+                                            </asp:LinkButton>
                             
-                                        <asp:LinkButton ID="BtnEditar2" runat="server" class="btn btn-primary mr-2" CommandArgument='<%# Eval("idUbicacion") %>' CommandName="EliminarUbicacion">
-                                            <i class="icon-trash"></i>
-                                        </asp:LinkButton>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                            </Columns>
-                        </asp:GridView>
+                                            <asp:LinkButton ID="BtnEditar2" runat="server" class="btn btn-primary" CommandArgument='<%# Eval("idUbicacion") %>' CommandName="EliminarUbicacion">
+                                                <i class="icon-trash"></i>
+                                            </asp:LinkButton>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                </Columns>
+                            </asp:GridView>
+                        </div>
                     </div>
                 </div>
             </div>

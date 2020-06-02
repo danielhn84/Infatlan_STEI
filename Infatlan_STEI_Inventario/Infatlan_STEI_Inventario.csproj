@@ -43,6 +43,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Excel.4.5, Version=2.1.2.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\danielhn84\Infatlan_Biometrico\Biometrico\bin\Debug\Excel.4.5.dll</HintPath>
+    </Reference>
     <Reference Include="Interop.zkemkeeper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>False</EmbedInteropTypes>
@@ -3318,6 +3322,7 @@
     <Content Include="js\perfect-scrollbar.jquery.min.js" />
     <Content Include="js\sidebarmenu.js" />
     <Content Include="js\waves.js" />
+    <Content Include="pages\adjuntosENL\Imagen1.png" />
     <Content Include="pages\Configuracion\cargaRegistros.aspx" />
     <Content Include="pages\Configuracion\contratos.aspx" />
     <Content Include="pages\Configuracion\marcas.aspx" />
@@ -4502,6 +4507,10 @@
     <Content Include="scss\widgets\widgets.scss" />
     <Content Include="pages\plantillas\plantillaEDC.xlsx" />
     <Content Include="pages\plantillas\PlantillaEnlaces.xlsx" />
+    <Content Include="pages\adjuntosENL\PlantillaStock.xlsx" />
+    <Content Include="pages\plantillas\PlantillaProveedores.xlsx" />
+    <Content Include="pages\plantillas\PlantillaContratos.xlsx" />
+    <Content Include="pages\plantillas\plantillaArticulos.xlsx" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -4511,6 +4520,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="pages\Cargas\" />
     <Folder Include="paginas\" />
   </ItemGroup>
   <PropertyGroup>

@@ -387,6 +387,10 @@ namespace Infatlan_STEI_Inventario.pages
                     vDatos = vConexion.obtenerDataTable(vQuery);
 
                     for (int i = 0; i < vDatos.Rows.Count; i++){
+
+                        String vPrecio = vDatos.Rows[i]["precioUnit"].ToString();
+                        vPrecio = vPrecio.Replace(",",".");
+
                         DDLEstado.SelectedValue = vDatos.Rows[i]["idEstadoStock"].ToString();
                         DDLTipo.SelectedValue = vDatos.Rows[i]["idTipoStock"].ToString();
                         DDLProveedor.SelectedValue = vDatos.Rows[i]["idProveedor"].ToString();
@@ -394,7 +398,7 @@ namespace Infatlan_STEI_Inventario.pages
                         TxModelo.Text = vDatos.Rows[i]["modelo"].ToString();
                         TxDetalle.Text = vDatos.Rows[i]["descripcion"].ToString();
                         TxSerie.Text = vDatos.Rows[i]["series"].ToString();
-                        TxPrecio.Text = vDatos.Rows[i]["precioUnit"].ToString();
+                        TxPrecio.Text = vPrecio;
                         CBxATM.Checked = Convert.ToBoolean(vDatos.Rows[i]["atm"].ToString());
                         CBxAgencia.Checked = Convert.ToBoolean(vDatos.Rows[i]["agencias"].ToString());
                         CBxCE.Checked = Convert.ToBoolean(vDatos.Rows[i]["cableadoEstructurado"].ToString());
@@ -623,7 +627,7 @@ namespace Infatlan_STEI_Inventario.pages
             }
         }
 
-        private int insertarInventario(int vInfo, String vUbicacion, String vDescripcion, String vSerie) {
+        public int insertarInventario(int vInfo, String vUbicacion, String vDescripcion, String vSerie) {
             generarxml vMaestro = new generarxml();
             Object[] vDatosMaestro = new object[10];
             vDatosMaestro[0] = "";
@@ -782,6 +786,30 @@ namespace Infatlan_STEI_Inventario.pages
                     }
                     activarCampos();
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalEnlace();", true);
+                }else if (e.CommandName == "VerInfo") {
+                    for (int i = 0; i < vDatos.Rows.Count; i++) {
+                        LbTituloENL.Text = "Información del Enlace " + vDatos.Rows[i]["nombre"].ToString();
+                        LbNombreENL.Text = vDatos.Rows[i]["nombre"].ToString();
+                        LbTipoENL.Text = vDatos.Rows[i]["tipoEnlace"].ToString();
+                        LbProveedorENL.Text = vDatos.Rows[i]["proveedor"].ToString();
+                        LbDescripcionENL.Text = vDatos.Rows[i]["descripcion"].ToString();
+                        LbOrigenENL.Text = vDatos.Rows[i]["origen"].ToString();
+                        LbDestinoENL.Text = vDatos.Rows[i]["destino"].ToString();
+                        LbIPOrigenENL.Text = vDatos.Rows[i]["IPOrigen"].ToString();
+                        LbIPDestinoENL.Text = vDatos.Rows[i]["IPDestino"].ToString();
+                        LbServiciosENL.Text = vDatos.Rows[i]["servicios"].ToString();
+                        LbContactoENL.Text = vDatos.Rows[i]["contacto"].ToString();
+                        LbTelefonoENL.Text = vDatos.Rows[i]["telefonoContacto"].ToString();
+                        LbFechaENL.Text = vDatos.Rows[i]["fechaCreacion"].ToString();
+                        LbUsuarioENL.Text = vDatos.Rows[i]["usuarioCreacion"].ToString();
+                        LBAdjuntoENL.Text = vDatos.Rows[i]["adjunto"].ToString() != "" ? "Descargar" : "";
+
+                        if (vDatos.Rows[i]["adjunto"].ToString() != "")
+                            Session["INV_ENLACE_ADJUNTO"] = ConfigurationManager.AppSettings["RUTA_ENLACES"] + "/" + vDatos.Rows[i]["adjunto"].ToString();
+                    }
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalInfoEnlace();", true);
+                }else if (e.CommandName == "SubirAdjunto") { 
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalAdjunto();", true);
                 }
                 Session["INV_STOCKENL_ID"] = vIdEnlace;
             }catch (Exception Ex){
@@ -797,7 +825,7 @@ namespace Infatlan_STEI_Inventario.pages
             limpiarModalEnlace();
             activarCampos();
             LbIdArticuloENL.Text = "Crear Nuevo Enlace";
-            Session["INV_STOCKENLACE_ID"] = null;
+            Session["INV_STOCKENL_ID"] = null;
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModalEnlace();", true);
         }
 
@@ -806,10 +834,6 @@ namespace Infatlan_STEI_Inventario.pages
         }
 
         protected void TxBusquedaEDC_TextChanged(object sender, EventArgs e){
-
-        }
-
-        protected void BtnCargar_Click(object sender, EventArgs e){
 
         }
 
@@ -942,6 +966,8 @@ namespace Infatlan_STEI_Inventario.pages
                     throw new Exception("Favor seleccione el equipo de destino.");
                 if (TxIPDestino.Text == "" || TxIPDestino.Text == string.Empty)
                     throw new Exception("Favor ingrese la IP del equipo de destino.");
+                if (DDLDestino.SelectedValue == DDLOrigen.SelectedValue)
+                    throw new Exception("El equipo de origen debe ser diferente al de destino.");
             }else if (DDLTipoEnlace.SelectedValue == "3" || DDLTipoEnlace.SelectedValue == "6"){
                 if (TxServicios.Text == "" || TxServicios.Text == string.Empty)
                     throw new Exception("Favor ingrese el servicio.");
@@ -958,6 +984,56 @@ namespace Infatlan_STEI_Inventario.pages
                     throw new Exception("Favor ingrese el contacto.");
                 if (TxTelefono.Text == "" || TxTelefono.Text == string.Empty)
                     throw new Exception("Favor ingrese el telefono del contacto.");
+            }
+        }
+
+        protected void BtnCargar_Click(object sender, EventArgs e){
+            try{
+                String vIdArticuloENL = Session["INV_STOCKENL_ID"].ToString();
+
+                String archivoLog = string.Format("{0}_{1}", Convert.ToString(Session["USUARIO"]), DateTime.Now.ToString("yyyyMMddHHmmss"));
+                String vDireccionCarga = ConfigurationManager.AppSettings["RUTA_ENLACES"].ToString();
+                if (FUCarga.HasFile){
+                    String vNombreArchivo = FUCarga.FileName;
+                    vDireccionCarga += "/" + archivoLog + "_" + vNombreArchivo;
+
+                    FUCarga.SaveAs(vDireccionCarga);
+                    if (File.Exists(vDireccionCarga)) {
+                        String vQuery = "[STEISP_INVENTARIO_Enlaces] 5" +
+                            "," + vIdArticuloENL + ", null " +
+                            ",'" + archivoLog + "_" + vNombreArchivo + "'";
+                        int vInfo = vConexion.ejecutarSql(vQuery);
+                        if (vInfo == 1){
+                            Mensaje("Archivo cargado con éxito!", WarningType.Success);
+                        }else { 
+                            Mensaje("Hubo un error al insertar en la base de datos. Favor comuníquese con sistemas.", WarningType.Danger);
+                        }
+                    }
+                }else{
+                    DivMensajeCarga.Visible = true;
+                    LbAdvertenciaCarga.Text = "No se encontró ningún archivo a cargar.";
+                }
+            }catch (Exception ex){
+                Mensaje(ex.Message, WarningType.Danger);
+            }
+        }
+
+        protected void LBAdjuntoENL_Click(object sender, EventArgs e){
+            try{
+                String vIdEnlace = Session["INV_ENLACE_ADJUNTO"].ToString();
+                //vIdEnlace = "/sites/inventario/pages/adjuntosENL/wpadilla_20200601021905_progress.xlsx";
+                
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "window.open('" + vIdEnlace + "');", true);
+
+
+                //Response.ContentType = "application/excel";
+                //Response.AppendHeader("Content-Disposition", "attachment; filename=MyFile.pdf");
+                //Response.TransmitFile(Server.MapPath(vIdEnlace));
+                //Response.Flush();
+                //Response.End();
+
+            }catch (Exception ex){
+                Mensaje(ex.Message, WarningType.Danger);
             }
         }
     }
