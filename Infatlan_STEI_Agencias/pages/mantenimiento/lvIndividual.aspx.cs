@@ -118,7 +118,7 @@ namespace Infatlan_STEI_Agencias.pages
         {
             try
             {
-                //DATOS GENERALES
+                //DATOS GENERALESs
                 DataTable vDatos = new DataTable();
                 vDatos = (DataTable)Session["AG_LvPA_DATOS_GENERALES"];
                 TxFechaMant.Text = vDatos.Rows[0]["fecha"].ToString();        
