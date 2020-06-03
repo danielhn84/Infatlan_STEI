@@ -62,7 +62,7 @@ namespace Infatlan_STEI_Inventario.pages
                     DDLUbicacion.Items.Add(new ListItem { Value = "0", Text = "Seleccione" });
                     foreach (DataRow item in vDatos.Rows){
                         int vCarac = item["direccion"].ToString().Length;
-                        DDLUbicacion.Items.Add(new ListItem { Value = item["idUbicacion"].ToString(), Text = item["codigo"].ToString() + " - " + item["direccion"].ToString().Substring(0, vCarac > 20 ? 20 : vCarac) });
+                        DDLUbicacion.Items.Add(new ListItem { Value = item["idUbicacion"].ToString(), Text = item["codigo"].ToString() + " - " + item["direccion"].ToString().Substring(0, vCarac > 35 ? 35 : vCarac) });
                     }
                 }
 

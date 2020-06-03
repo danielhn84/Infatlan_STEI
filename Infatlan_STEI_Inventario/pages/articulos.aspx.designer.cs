@@ -555,22 +555,22 @@ namespace Infatlan_STEI_Inventario.pages
         protected global::System.Web.UI.WebControls.TextBox TxFechaMant;
 
         /// <summary>
-        /// Control DivEstado.
+        /// Control UpdatePanel50.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivEstado;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel50;
 
         /// <summary>
-        /// Control UpdatePanel25.
+        /// Control DivEstadoEDC.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel25;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivEstadoEDC;
 
         /// <summary>
         /// Control DDLEstadoEDC.
@@ -987,15 +987,6 @@ namespace Infatlan_STEI_Inventario.pages
         protected global::System.Web.UI.WebControls.TextBox TxServicios;
 
         /// <summary>
-        /// Control DivEstadoENL.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivEstadoENL;
-
-        /// <summary>
         /// Control UpdatePanel40.
         /// </summary>
         /// <remarks>
@@ -1003,6 +994,15 @@ namespace Infatlan_STEI_Inventario.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel40;
+
+        /// <summary>
+        /// Control DivEstadoENL.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivEstadoENL;
 
         /// <summary>
         /// Control DDLEstadoEnlace.
@@ -1210,6 +1210,15 @@ namespace Infatlan_STEI_Inventario.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LbUsuarioENL;
+
+        /// <summary>
+        /// Control LbEstadoENL.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LbEstadoENL;
 
         /// <summary>
         /// Control UpdatePanel46.

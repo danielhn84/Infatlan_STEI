@@ -157,7 +157,7 @@ namespace Infatlan_STEI_Inventario.pages
                     DDLUbicacionEDC.Items.Add(new ListItem { Value = "0", Text = "Seleccione" });
                     foreach (DataRow item in vDatos.Rows){
                         int vCarac = item["direccion"].ToString().Length;
-                        DDLUbicacionEDC.Items.Add(new ListItem { Value = item["idUbicacion"].ToString(), Text = item["codigo"].ToString() + " - " + item["direccion"].ToString().Substring(0, vCarac > 20 ? 20 : vCarac) });
+                        DDLUbicacionEDC.Items.Add(new ListItem { Value = item["idUbicacion"].ToString(), Text = item["codigo"].ToString() + " - " + item["direccion"].ToString().Substring(0, vCarac > 25 ? 25 : vCarac) });
                     }
                 }
 
@@ -226,7 +226,7 @@ namespace Infatlan_STEI_Inventario.pages
         protected void TxBusqueda_TextChanged(object sender, EventArgs e){
             try{
                 cargarDatos();
-                String vBusqueda = TxBusqueda.Text;
+                String vBusqueda = TxBusqueda.Text.ToUpper();
                 DataTable vDatos = (DataTable)Session["INV_STOCK"];
                 if (vBusqueda.Equals("")){
                     GVBusqueda.DataSource = vDatos;
@@ -250,6 +250,7 @@ namespace Infatlan_STEI_Inventario.pages
                     vDatosFiltrados.Columns.Add("Marca");
                     vDatosFiltrados.Columns.Add("modelo");
                     vDatosFiltrados.Columns.Add("cantidad");
+                    vDatosFiltrados.Columns.Add("precioUnit");
                     vDatosFiltrados.Columns.Add("Proveedor");
                     vDatosFiltrados.Columns.Add("descripcion");
                     vDatosFiltrados.Columns.Add("series");
@@ -261,6 +262,7 @@ namespace Infatlan_STEI_Inventario.pages
                             item["Marca"].ToString(),
                             item["modelo"].ToString(),
                             item["cantidad"].ToString(),
+                            item["precioUnit"].ToString(),
                             item["Proveedor"].ToString(),
                             item["descripcion"].ToString(),
                             item["series"].ToString()
@@ -659,6 +661,60 @@ namespace Infatlan_STEI_Inventario.pages
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModalEDC();", true);
         }
 
+        protected void TxBusquedaEDC_TextChanged(object sender, EventArgs e){
+            try{
+                cargarDatosEDC();
+                String vBusqueda = TxBusquedaEDC.Text.ToUpper();
+                DataTable vDatos = (DataTable)Session["INV_STOCKEDC"];
+                if (vBusqueda.Equals("")){
+                    GvBusquedaEDC.DataSource = vDatos;
+                    GvBusquedaEDC.DataBind();
+                }else{ 
+                    EnumerableRowCollection<DataRow> filtered = vDatos.AsEnumerable()
+                        .Where(r => r.Field<String>("nombreNodo").Contains(vBusqueda));
+
+                    Boolean isNumeric = int.TryParse(vBusqueda, out int n);
+
+                    if (isNumeric){
+                        if (filtered.Count() == 0){
+                            filtered = vDatos.AsEnumerable().Where(r =>
+                                Convert.ToInt32(r["idStockEDC"]) == Convert.ToInt32(vBusqueda));
+                        }
+                    }
+
+                    DataTable vDatosFiltrados = new DataTable();
+                    vDatosFiltrados.Columns.Add("idStockEDC");
+                    vDatosFiltrados.Columns.Add("nombreNodo");
+                    vDatosFiltrados.Columns.Add("contrato");
+                    vDatosFiltrados.Columns.Add("serie");
+                    vDatosFiltrados.Columns.Add("ip");
+                    vDatosFiltrados.Columns.Add("regiones");
+                    vDatosFiltrados.Columns.Add("latitud");
+                    vDatosFiltrados.Columns.Add("longitud");
+                    vDatosFiltrados.Columns.Add("fechaMantenimiento");
+
+                    foreach (DataRow item in filtered){
+                        vDatosFiltrados.Rows.Add(
+                            item["idStockEDC"].ToString(),
+                            item["nombreNodo"].ToString(),
+                            item["contrato"].ToString(),
+                            item["serie"].ToString(),
+                            item["ip"].ToString(),
+                            item["regiones"].ToString(),
+                            item["latitud"].ToString(),
+                            item["longitud"].ToString(),
+                            item["fechaMantenimiento"].ToString()
+                            );
+                    }
+                    GvBusquedaEDC.DataSource = vDatosFiltrados;
+                    GvBusquedaEDC.DataBind();
+                    Session["INV_STOCKEDC"] = vDatosFiltrados;
+                }
+            }catch (Exception ex){
+                Mensaje(ex.Message, WarningType.Danger);
+            }
+        }
+
         void limpiarModalEDC(){
             TxNombreNodo.Text = string.Empty;
             DDLTipoEquipoEDC.SelectedValue = "0";
@@ -674,6 +730,7 @@ namespace Infatlan_STEI_Inventario.pages
             TxFechaMant.Text = string.Empty;
             DDLEstadoEDC.SelectedValue = "1";
             DivMensajeEDC.Visible = false;
+            DivEstadoEDC.Visible = false;
         }
 
         protected void GvBusquedaEDC_RowCommand(object sender, GridViewCommandEventArgs e){
@@ -686,10 +743,10 @@ namespace Infatlan_STEI_Inventario.pages
                     DivMensajeEDC.Visible = false;
                     LbMensajeEDC.Text = string.Empty;
                     LbIdArticuloEDC.Text = "Editar Articulo " + vIdArticuloEDC;
-
+                    DivEstadoEDC.Visible = true;
                     for (int i = 0; i < vDatos.Rows.Count; i++) {
                         TxNombreNodo.Text = vDatos.Rows[i]["nombreNodo"].ToString();
-                        DDLTipoEquipoEDC.SelectedValue = vDatos.Rows[i]["tipoEquipo"].ToString();
+                        //DDLTipoEquipoEDC.SelectedValue = vDatos.Rows[i]["tipoEquipo"].ToString();
                         DDLContratos.SelectedValue = vDatos.Rows[i]["idContrato"].ToString();
                         TxSerieEDC.Text = vDatos.Rows[i]["serie"].ToString();
                         TxIP.Text = vDatos.Rows[i]["ip"].ToString();
@@ -730,7 +787,14 @@ namespace Infatlan_STEI_Inventario.pages
         }
 
         protected void GvBusquedaEDC_PageIndexChanging(object sender, GridViewPageEventArgs e){
+            try{
+                GvBusquedaEDC.PageIndex = e.NewPageIndex;
+                GvBusquedaEDC.DataSource = (DataTable)Session["INV_STOCKEDC"];
+                GvBusquedaEDC.DataBind();
 
+            }catch (Exception ex){
+                Mensaje(ex.Message, WarningType.Danger);
+            }
         }
 
         private void validarDatosEDC() {
@@ -770,6 +834,7 @@ namespace Infatlan_STEI_Inventario.pages
                     DivMensajeENL.Visible = false;
                     LbMensajeENL.Text = string.Empty;
                     LbIdArticuloENL.Text = "Editar Enlace " + vIdEnlace;
+                    DivEstadoENL.Visible = true;
 
                     for (int i = 0; i < vDatos.Rows.Count; i++) {
                         DDLTipoEnlace.SelectedValue = vDatos.Rows[i]["idTipoEnlace"].ToString();
@@ -783,6 +848,7 @@ namespace Infatlan_STEI_Inventario.pages
                         TxServicios.Text = vDatos.Rows[i]["servicios"].ToString();
                         TxContacto.Text = vDatos.Rows[i]["contacto"].ToString();
                         TxTelefono.Text = vDatos.Rows[i]["telefonoContacto"].ToString();
+                        DDLEstadoEnlace.SelectedValue = vDatos.Rows[i]["estado"].ToString();
                     }
                     activarCampos();
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalEnlace();", true);
@@ -803,12 +869,14 @@ namespace Infatlan_STEI_Inventario.pages
                         LbFechaENL.Text = vDatos.Rows[i]["fechaCreacion"].ToString();
                         LbUsuarioENL.Text = vDatos.Rows[i]["usuarioCreacion"].ToString();
                         LBAdjuntoENL.Text = vDatos.Rows[i]["adjunto"].ToString() != "" ? "Descargar" : "";
-
+                        LbEstadoENL.Text = vDatos.Rows[i]["estado"].ToString();
                         if (vDatos.Rows[i]["adjunto"].ToString() != "")
-                            Session["INV_ENLACE_ADJUNTO"] = ConfigurationManager.AppSettings["RUTA_ENLACES"] + "/" + vDatos.Rows[i]["adjunto"].ToString();
+                            Session["INV_ENLACE_ADJUNTO"] = ConfigurationManager.AppSettings["RUTA_ENLACES2"] + vDatos.Rows[i]["adjunto"].ToString();
                     }
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalInfoEnlace();", true);
-                }else if (e.CommandName == "SubirAdjunto") { 
+                }else if (e.CommandName == "SubirAdjunto") {
+                    DivMensajeCarga.Visible = false;
+                    LbAdvertenciaCarga.Text = string.Empty;
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalAdjunto();", true);
                 }
                 Session["INV_STOCKENL_ID"] = vIdEnlace;
@@ -818,7 +886,14 @@ namespace Infatlan_STEI_Inventario.pages
         }
 
         protected void GvEnlaces_PageIndexChanging(object sender, GridViewPageEventArgs e){
+            try{
+                GvEnlaces.PageIndex = e.NewPageIndex;
+                GvEnlaces.DataSource = (DataTable)Session["INV_ENLACES"];
+                GvEnlaces.DataBind();
 
+            }catch (Exception ex){
+                Mensaje(ex.Message, WarningType.Danger);
+            }
         }
 
         protected void BtnNuevoEnlace_Click(object sender, EventArgs e){
@@ -830,11 +905,55 @@ namespace Infatlan_STEI_Inventario.pages
         }
 
         protected void TxBusquedaEnlace_TextChanged(object sender, EventArgs e){
+            try{
+                cargarDatosEnlace();
+                String vBusqueda = TxBusquedaEnlace.Text.ToUpper();
+                DataTable vDatos = (DataTable)Session["INV_ENLACES"];
+                if (vBusqueda.Equals("")){
+                    GvEnlaces.DataSource = vDatos;
+                    GvEnlaces.DataBind();
+                }else{ 
+                    EnumerableRowCollection<DataRow> filtered = vDatos.AsEnumerable()
+                        .Where(r => r.Field<String>("nombre").Contains(vBusqueda));
 
-        }
+                    Boolean isNumeric = int.TryParse(vBusqueda, out int n);
 
-        protected void TxBusquedaEDC_TextChanged(object sender, EventArgs e){
+                    if (isNumeric){
+                        if (filtered.Count() == 0){
+                            filtered = vDatos.AsEnumerable().Where(r =>
+                                Convert.ToInt32(r["idEnlace"]) == Convert.ToInt32(vBusqueda));
+                        }
+                    }
 
+                    DataTable vDatosFiltrados = new DataTable();
+                    vDatosFiltrados.Columns.Add("idEnlace");
+                    vDatosFiltrados.Columns.Add("nombre");
+                    vDatosFiltrados.Columns.Add("proveedor");
+                    vDatosFiltrados.Columns.Add("tipoEnlace");
+                    vDatosFiltrados.Columns.Add("origen");
+                    vDatosFiltrados.Columns.Add("destino");
+                    vDatosFiltrados.Columns.Add("servicios");
+                    vDatosFiltrados.Columns.Add("contacto");
+
+                    foreach (DataRow item in filtered){
+                        vDatosFiltrados.Rows.Add(
+                            item["idEnlace"].ToString(),
+                            item["nombre"].ToString(),
+                            item["proveedor"].ToString(),
+                            item["tipoEnlace"].ToString(),
+                            item["origen"].ToString(),
+                            item["destino"].ToString(),
+                            item["servicios"].ToString(),
+                            item["contacto"].ToString()
+                            );
+                    }
+                    GvEnlaces.DataSource = vDatosFiltrados;
+                    GvEnlaces.DataBind();
+                    Session["INV_ENLACES"] = vDatosFiltrados;
+                }
+            }catch (Exception ex){
+                Mensaje(ex.Message, WarningType.Danger);
+            }
         }
 
         protected void BtnAceptarEnlace_Click(object sender, EventArgs e){
@@ -842,7 +961,7 @@ namespace Infatlan_STEI_Inventario.pages
                 validarDatosENL();
 
                 generarxml vMaestro = new generarxml();
-                Object[] vDatosMaestro = new object[12];
+                Object[] vDatosMaestro = new object[13];
                 vDatosMaestro[0] = DDLTipoEnlace.SelectedValue;
                 vDatosMaestro[1] = DDLProveedorENL.SelectedValue;
                 vDatosMaestro[2] = TxNombreENL.Text;
@@ -855,6 +974,7 @@ namespace Infatlan_STEI_Inventario.pages
                 vDatosMaestro[9] = TxContacto.Text;
                 vDatosMaestro[10] = TxTelefono.Text;
                 vDatosMaestro[11] = Session["USUARIO"].ToString();
+                vDatosMaestro[12] = DDLEstadoEnlace.SelectedValue;
                 String vXML = vMaestro.ObtenerMaestroStringENL(vDatosMaestro);
                 vXML = vXML.Replace("<?xml version=\"1.0\" encoding=\"utf-16\"?>", "");
 
@@ -910,6 +1030,7 @@ namespace Infatlan_STEI_Inventario.pages
             DDLDestino.SelectedValue = "0";
             DDLEstadoEnlace.SelectedValue = "1";
             DivMensajeENL.Visible = false;
+            DivEstadoENL.Visible = false;
         }
 
         protected void DDLTipoEnlace_SelectedIndexChanged(object sender, EventArgs e){
@@ -984,6 +1105,8 @@ namespace Infatlan_STEI_Inventario.pages
                     throw new Exception("Favor ingrese el contacto.");
                 if (TxTelefono.Text == "" || TxTelefono.Text == string.Empty)
                     throw new Exception("Favor ingrese el telefono del contacto.");
+                if (DDLDestino.SelectedValue == DDLOrigen.SelectedValue)
+                    throw new Exception("El equipo de origen debe ser diferente al de destino.");
             }
         }
 
@@ -992,7 +1115,7 @@ namespace Infatlan_STEI_Inventario.pages
                 String vIdArticuloENL = Session["INV_STOCKENL_ID"].ToString();
 
                 String archivoLog = string.Format("{0}_{1}", Convert.ToString(Session["USUARIO"]), DateTime.Now.ToString("yyyyMMddHHmmss"));
-                String vDireccionCarga = ConfigurationManager.AppSettings["RUTA_ENLACES"].ToString();
+                String vDireccionCarga = ConfigurationManager.AppSettings["RUTA_ENLACES1"].ToString();
                 if (FUCarga.HasFile){
                     String vNombreArchivo = FUCarga.FileName;
                     vDireccionCarga += "/" + archivoLog + "_" + vNombreArchivo;
@@ -1014,24 +1137,15 @@ namespace Infatlan_STEI_Inventario.pages
                     LbAdvertenciaCarga.Text = "No se encontró ningún archivo a cargar.";
                 }
             }catch (Exception ex){
-                Mensaje(ex.Message, WarningType.Danger);
+                DivMensajeCarga.Visible = true;
+                LbAdvertenciaCarga.Text = ex.Message;
             }
         }
 
         protected void LBAdjuntoENL_Click(object sender, EventArgs e){
             try{
                 String vIdEnlace = Session["INV_ENLACE_ADJUNTO"].ToString();
-                //vIdEnlace = "/sites/inventario/pages/adjuntosENL/wpadilla_20200601021905_progress.xlsx";
-                
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "window.open('" + vIdEnlace + "');", true);
-
-
-                //Response.ContentType = "application/excel";
-                //Response.AppendHeader("Content-Disposition", "attachment; filename=MyFile.pdf");
-                //Response.TransmitFile(Server.MapPath(vIdEnlace));
-                //Response.Flush();
-                //Response.End();
-
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);
             }

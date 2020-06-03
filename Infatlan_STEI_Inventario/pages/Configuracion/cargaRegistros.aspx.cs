@@ -314,7 +314,7 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
 
                         if (par1 && par2 && par3 && par4 && par5 && par6 && par7 && par8 && par9 && par10 && par11){
                             for (int i = 0; i < vDatos.Rows.Count; i++){
-                                Object[] vDatosMaestro = new object[12];
+                                Object[] vDatosMaestro = new object[13];
                                 vDatosMaestro[0] = vDatos.Rows[i]["ID_TIPO"].ToString();
                                 vDatosMaestro[1] = vDatos.Rows[i]["ID_PROVEEDOR"].ToString();
                                 vDatosMaestro[2] = vDatos.Rows[i]["NOMBRE"].ToString();
@@ -327,6 +327,7 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                                 vDatosMaestro[9] = vDatos.Rows[i]["CONTACTO"].ToString();
                                 vDatosMaestro[10] = vDatos.Rows[i]["TELEFONO"].ToString();
                                 vDatosMaestro[11] = Session["USUARIO"].ToString();
+                                vDatosMaestro[12] = 1;
                                 String vXML = vMaestro.ObtenerMaestroStringEDC(vDatosMaestro);
                                 vXML = vXML.Replace("<?xml version=\"1.0\" encoding=\"utf-16\"?>", "");
 

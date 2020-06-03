@@ -199,6 +199,10 @@ namespace Infatlan_STEI_Inventario.clases
                     vXmlTW.WriteString(Convert.ToString(vDatos[11]));
                     vXmlTW.WriteEndElement();
 
+                    vXmlTW.WriteStartElement("estado");
+                    vXmlTW.WriteString(Convert.ToString(vDatos[12]));
+                    vXmlTW.WriteEndElement();
+
                     vXmlTW.WriteEndElement();
                     vXmlTW.WriteEndDocument();
                     vResultado = sw.ToString();

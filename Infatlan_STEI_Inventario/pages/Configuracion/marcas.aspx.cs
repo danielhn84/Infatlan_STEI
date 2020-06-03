@@ -70,12 +70,14 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                     vDatosFiltrados.Columns.Add("idMarca");
                     vDatosFiltrados.Columns.Add("nombre");
                     vDatosFiltrados.Columns.Add("estado");
+                    vDatosFiltrados.Columns.Add("fechaCreacion");
 
                     foreach (DataRow item in filtered){
                         vDatosFiltrados.Rows.Add(
                             item["idMarca"].ToString(),
                             item["nombre"].ToString(),
-                            item["estado"].ToString()
+                            item["estado"].ToString(),
+                            item["fechaCreacion"].ToString()
                             );
                     }
 

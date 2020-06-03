@@ -70,14 +70,14 @@
                                 <div class="row col-7">
                                     <label class="col-2 col-form-label">Búsqueda</label>
                                     <div class="col-8">
-                                        <asp:TextBox runat="server" PlaceHolder="Ingrese texto y presione Enter" ID="TxBusqueda" AutoPostBack="true" OnTextChanged="TxBusqueda_TextChanged" CssClass="form-control form-control-line"></asp:TextBox>
+                                        <asp:TextBox runat="server" PlaceHolder="Ingrese Id o Tipo y presione Enter" ID="TxBusqueda" AutoPostBack="true" OnTextChanged="TxBusqueda_TextChanged" CssClass="form-control form-control-line"></asp:TextBox>
                                     </div>
                                     <asp:Button runat="server" ID="BtnNuevo" CssClass="btn btn-success" Text="Nuevo" OnClick="BtnNuevo_Click" />
                                 </div>
 
                                 <div class="table-responsive m-t-20">
                                     <asp:GridView ID="GVBusqueda" runat="server"
-                                        CssClass="table table-bordered embed-responsive"
+                                        CssClass="table table-bordered"
                                         PagerStyle-CssClass="pgr"
                                         HeaderStyle-CssClass="table"
                                         RowStyle-CssClass="rows"
@@ -86,7 +86,7 @@
                                         GridLines="None" OnRowCommand="GVBusqueda_RowCommand"
                                         PageSize="10" OnPageIndexChanging="GVBusqueda_PageIndexChanging">
                                         <Columns>
-                                            <asp:BoundField DataField="idStock" HeaderText="#" />
+                                            <asp:BoundField DataField="idStock" HeaderText="Id" />
                                             <asp:BoundField DataField="TipoStock" HeaderText="Tipo" />
                                             <asp:BoundField DataField="Marca" HeaderText="Marca" />
                                             <asp:BoundField DataField="modelo" HeaderText="Modelo" />
@@ -122,7 +122,7 @@
                                     <div class="row col-7">
                                         <label class="col-2 col-form-label">Búsqueda</label>
                                         <div class="col-8">
-                                            <asp:TextBox runat="server" PlaceHolder="Ingrese texto y presione Enter" ID="TxBusquedaEDC" AutoPostBack="true" OnTextChanged="TxBusquedaEDC_TextChanged" CssClass="form-control form-control-line"></asp:TextBox>
+                                            <asp:TextBox runat="server" PlaceHolder="Ingrese Id o Nombre y presione Enter" ID="TxBusquedaEDC" AutoPostBack="true" OnTextChanged="TxBusquedaEDC_TextChanged" CssClass="form-control form-control-line"></asp:TextBox>
                                         </div>
                                         <asp:Button runat="server" ID="BtnNuevoEDC" CssClass="btn btn-success" Text="Nuevo" OnClick="BtnNuevoEDC_Click" />
                                     </div>
@@ -561,25 +561,24 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12" runat="server" visible="false" id="DivEstado">
-                            <div class="form-group row">
-                                <div class="col-2" style="margin-left:2%">
-                                    <label class="col-form-label">Estado</label>
-                                </div>
-                                <div class="col-9">
-                                    <asp:UpdatePanel ID="UpdatePanel25" runat="server">
-                                        <ContentTemplate>
-                                            <asp:DropDownList runat="server" ID="DDLEstadoEDC" CssClass="form-control">
-                                                <asp:ListItem Value="1" Text="Activo"></asp:ListItem>
-                                                <asp:ListItem Value="0" Text="Inactivo"></asp:ListItem>
-                                            </asp:DropDownList>
-                                        </ContentTemplate>
-                                    </asp:UpdatePanel>
-                                    
-                                </div>
-                            </div>
+                        <div class="col-6">
+                            <asp:UpdatePanel ID="UpdatePanel50" runat="server">
+                                <ContentTemplate>
+                                        <div class="form-group row" runat="server" visible="false" id="DivEstadoEDC">
+                                            <div class="col-3" style="margin-left:2%">
+                                                <label class="col-form-label">Estado</label>
+                                            </div>
+                                            <div class="col-8">
+                                                <asp:DropDownList runat="server" ID="DDLEstadoEDC" CssClass="form-control">
+                                                    <asp:ListItem Value="1" Text="Activo"></asp:ListItem>
+                                                    <asp:ListItem Value="0" Text="Inactivo"></asp:ListItem>
+                                                </asp:DropDownList>
+                                            </div>
+                                        </div>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
                         </div>
-
+                        
                         <div class="col-12">
                             <asp:UpdatePanel ID="UpdatePanel12" runat="server">
                                 <ContentTemplate>
@@ -873,24 +872,24 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12" runat="server" visible="false" id="DivEstadoENL">
-                            <div class="form-group row">
-                                <div class="col-3" style="margin-left:2%">
-                                    <label class="col-form-label">Estado</label>
-                                </div>
-                                <div class="col-8">
-                                    <asp:UpdatePanel ID="UpdatePanel40" runat="server">
-                                        <ContentTemplate>
-                                            <asp:DropDownList runat="server" ID="DDLEstadoEnlace" CssClass="form-control">
-                                                <asp:ListItem Value="1" Text="Activo"></asp:ListItem>
-                                                <asp:ListItem Value="0" Text="Inactivo"></asp:ListItem>
-                                            </asp:DropDownList>
-                                        </ContentTemplate>
-                                    </asp:UpdatePanel>
-                                    
-                                </div>
-                            </div>
+                        <div class="col-6">
+                            <asp:UpdatePanel ID="UpdatePanel40" runat="server">
+                                <ContentTemplate>
+                                        <div class="form-group row" runat="server" visible="false" id="DivEstadoENL">
+                                            <div class="col-3">
+                                                <label class="col-form-label">Estado</label>
+                                            </div>
+                                            <div class="col-8">
+                                                <asp:DropDownList runat="server" ID="DDLEstadoEnlace" CssClass="form-control">
+                                                    <asp:ListItem Value="1" Text="Activo"></asp:ListItem>
+                                                    <asp:ListItem Value="0" Text="Inactivo"></asp:ListItem>
+                                                </asp:DropDownList>
+                                            </div>
+                                        </div>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
                         </div>
+                        
 
                         <div class="col-12">
                             <asp:UpdatePanel ID="UpdatePanel41" runat="server">
@@ -1004,6 +1003,12 @@
                                     <asp:Label ID="LbUsuarioENL" Text="" runat="server" CssClass="col-form-label"/>
                                 </div>
                             </div>
+                            <div class="row">   
+                                <div class="col-6">  
+                                    <label class="col-4">Estado</label>
+                                    <asp:Label ID="LbEstadoENL" Text="" runat="server" CssClass="col-form-label"/>
+                                </div>
+                            </div>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
@@ -1039,7 +1044,7 @@
                     <div class="form-group">
                         <label class="control-label col-12">Carga</label>
                         <div class="col-9">
-                            <asp:FileUpload ID="FUCarga" CssClass="form-control" runat="server" AllowMultiple="false" ClientIDMode="AutoID"/>
+                            <asp:FileUpload ID="FUCarga" CssClass="form-control" runat="server" AllowMultiple="false"/>
                         </div>
                     </div>
                     <div class="row">

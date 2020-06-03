@@ -29,7 +29,7 @@
         <ContentTemplate>
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Tipos de Articulos</h4>
+                    <h4 class="card-title">Marcas</h4>
                     <h6 class="card-subtitle">Relacionadas al producto existente en inventario.</h6>
                     <div class="card-body">
                         <div class="row col-7"> 

@@ -69,12 +69,14 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                     vDatosFiltrados.Columns.Add("idTipoStock");
                     vDatosFiltrados.Columns.Add("nombre");
                     vDatosFiltrados.Columns.Add("descripcion");
+                    vDatosFiltrados.Columns.Add("edc");
 
                     foreach (DataRow item in filtered){
                         vDatosFiltrados.Rows.Add(
                             item["idTipoStock"].ToString(),
                             item["nombre"].ToString(),
-                            item["descripcion"].ToString()
+                            item["descripcion"].ToString(),
+                            item["edc"].ToString()
                             );
                     }
 
