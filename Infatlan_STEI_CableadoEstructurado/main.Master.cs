@@ -11,7 +11,7 @@ namespace Infatlan_STEI_CableadoEstructurado
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+           
         }
     }
 }

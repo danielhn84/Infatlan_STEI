@@ -183,35 +183,8 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="col-md-12" runat="server" id="DivConductor" visible="false">
-                                <div class="form-group row">
-                                    <div class="col-md-2">
-                                        <label class="col-form-label">Conductor Asignado:</label>
-                                    </div>
-
-                                    <div class="col-md-8">
-                                            <asp:DropDownList ID="DDLConductor" runat="server" class="form-control"  OnTextChanged="DDLConductor_TextChanged" AutoPostBack="true">
-                                                <asp:ListItem Value="0" Text="Seleccione un conductor..."></asp:ListItem>
-                                                <asp:ListItem Value="1" Text="Anibal Edgardo Figueroa Lopez"></asp:ListItem>
-                                                <asp:ListItem Value="2" Text="Omar Antonio Ramos"></asp:ListItem>
-                                            </asp:DropDownList>
-                                    </div>
-                                </div>
-                            </div>
                         </ContentTemplate>
                     </asp:UpdatePanel>
-
-<%--                    <asp:UpdatePanel ID="UpAlerta" runat="server" UpdateMode="Conditional">
-                        <ContentTemplate>
-                            <div class="col-md-12" style="align-self: center" runat="server" id="DivAlertaCantidad" visible="false">
-                                <div class="alert alert-danger   align-content-md-center">
-                                    <h3 class="text-danger" style="text-align: center"><i class="fa fa-exclamation-triangle"></i>Warning</h3>
-                                    <asp:Label ID="lbAlerta" runat="server" Text="" Width="100%"></asp:Label>
-                                </div>
-                            </div>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>--%>
 
                     <asp:UpdatePanel runat="server" ID="UPMaterialesAprobar" UpdateMode="Conditional">
                         <ContentTemplate>
@@ -231,15 +204,35 @@
                                         Style="margin: 30px 0px 20px 0px" >
                                         <Columns>
 
-                                            <asp:BoundField DataField="idStock" HeaderText="Id Stock" Visible="true" ItemStyle-HorizontalAlign="center" />
+                                            <asp:BoundField DataField="idInventario" HeaderText="Id Inv" Visible="true" ItemStyle-HorizontalAlign="center" />
                                             <asp:BoundField DataField="nombre" HeaderText="Material" ItemStyle-HorizontalAlign="center" />
                                             <asp:BoundField DataField="cantidad" HeaderText="Cantidad" ItemStyle-HorizontalAlign="center" />
+                                            <asp:BoundField DataField="idStock" HeaderText="Id Stock" ItemStyle-HorizontalAlign="center" Visible="false" />
                                         </Columns>
                                     </asp:GridView>
                                 </div>
                             </div>
                         </ContentTemplate>
                     </asp:UpdatePanel>
+
+
+                    <div class="col-md-12" runat="server">
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label">Aprueba solicitud:</label>
+                            <div class="col-md-3">
+                                <asp:RadioButtonList ID="rbApruebaMateriales" RepeatDirection="Horizontal" Width="90px" runat="server">
+                                    <asp:ListItem Value="1">Si</asp:ListItem>
+                                    <asp:ListItem Value="0">No</asp:ListItem>
+                                </asp:RadioButtonList>
+                            </div>
+                            <div class="col-md-1  ">
+                                <label class="col-form-label">Motivo:</label>
+                            </div>
+                            <div class="col-md-6">
+                                <asp:TextBox ID="TxMotivo" class="form-control" runat="server" TextMode="MultiLine" Rows="3"></asp:TextBox>
+                            </div>                         
+                        </div>
+                    </div>
 
                 </div>
                 <asp:UpdatePanel ID="UpdateModal" runat="server" UpdateMode="Conditional">

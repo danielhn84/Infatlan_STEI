@@ -38,14 +38,14 @@
 
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Tipos de motivo</h4>
-            <p>Motivos para cancelar las notificaciones y lista de verificación.</p>
+            <h4 class="card-title">Listado de motivos</h4>
+            <p>Motivos para cancelar notificaciones o lista de verificación.</p>
 
             <!--MENU DE SELECCION-->
 
             <ul class="nav nav-tabs" role="tablist">
-                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#home" role="tab"><span class="hidden-sm-up"><i class="fa fa-save"></i></span><span class="hidden-xs-down">Guardar</span></a> </li>
-                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="icon-pencil"></i></span><span class="hidden-xs-down">Modificar</span></a> </li>
+                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#home" role="tab"><span class="hidden-sm-up"><i class="fa fa-save"></i></span><span class="hidden-xs-down"> Guardar</span></a> </li>
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="icon-pencil"></i></span><span class="hidden-xs-down"> Modificar</span></a> </li>
             </ul>
             <div class="tab-content tabcontent-border">
                 <!--PRIMER CONTENIDO-->
@@ -57,7 +57,7 @@
                                     <label class="control-label text-danger">*</label><label class="control-label ">Motivo:</label>
                                 </div>
                                 <div class="col-md-10">
-                                    <asp:TextBox runat="server" ID="TxMotivoCancelacion" TextMode="MultiLine" Rows="3" CssClass="form-control" placeholder="Ingrese un motivo.."></asp:TextBox>
+                                    <asp:TextBox runat="server" ID="TxMotivoCancelacion" MaxLength="350" TextMode="MultiLine" Rows="3" CssClass="form-control" placeholder="Ingrese un motivo.."></asp:TextBox>
                                 </div>
                             </div>
 
@@ -75,6 +75,9 @@
                             </div>
                             <br />
                             <br />
+                            <div class="col-md-12"  style="text-align:center">
+                                <label class="control-label text-danger" style="text-align:center" >Los campos con (*) son obligatorios</label>
+                            </div>
                             <div class="row p-t-20 col-md-12">
                                 <div class="col-md-4">
                                     <asp:Button ID="BtnEnviar" class="btn  btn-block btn-success" runat="server" Text="Enviar" OnClick="BtnEnviar_Click" />
@@ -103,10 +106,10 @@
                                     <ContentTemplate>
                                         <div class="row p-t-20">
                                             <div class="col-md-1">
-                                                <label class="control-label   text-danger">*</label><label class="control-label">Buscar:</label></label>                                      
+                                                <label class="control-label">Buscar:</label></label>                                      
                                             </div>
                                             <div class="col-md-6">
-                                                <asp:TextBox ID="TxBuscarMotivo" runat="server" placeholder="Búsqueda por motivoo id, luego presione Enter" class="form-control" AutoPostBack="true" OnTextChanged="TxBuscarMotivo_TextChanged"></asp:TextBox>
+                                                <asp:TextBox ID="TxBuscarMotivo" runat="server" placeholder="Búsqueda por motivo o Id, luego presione Enter" class="form-control" AutoPostBack="true" OnTextChanged="TxBuscarMotivo_TextChanged"></asp:TextBox>
                                             </div>
                                         </div>
                                     </ContentTemplate>
@@ -133,7 +136,7 @@
                                             <Columns>
                                                 <asp:TemplateField HeaderText="Acción" ItemStyle-HorizontalAlign="center">
                                                     <ItemTemplate>
-                                                        <asp:LinkButton ID="LbModificar" class="btn btn-info mr-2" runat="server" CommandName="Modifcar" CommandArgument='<%# Eval("id") %>'>
+                                                        <asp:LinkButton ID="LbModificar" Title="Modificar" class="btn btn-info mr-2" runat="server" CommandName="Modifcar" CommandArgument='<%# Eval("id") %>'>
                                                        <i class="icon-pencil" ></i>
                                                         </asp:LinkButton>
 
@@ -198,7 +201,7 @@
                                         <label class="control-label text-danger">*</label><label class="col-form-label">Motivo:</label>
                                     </div>
                                     <div class="col-md-9">
-                                        <asp:TextBox ID="TxMotivoModal" class="form-control" runat="server" TextMode="MultiLine" Rows="3" OnTextChanged="TxMotivoModal_TextChanged"></asp:TextBox>
+                                        <asp:TextBox ID="TxMotivoModal" MaxLength="350"  class="form-control" runat="server" TextMode="MultiLine" Rows="3" OnTextChanged="TxMotivoModal_TextChanged"></asp:TextBox>
                                     </div>
                                 </div>
                             </div>
@@ -209,10 +212,10 @@
                                         <label class="control-label text-danger">*</label><label class="col-form-label">Tipo:</label>
                                     </div>
                                     <div class="col-md-9">
-                                        <asp:DropDownList ID="DDLTipo" runat="server" class="form-control" AutoPostBack="true" OnSelectedIndexChanged="DDLTipo_SelectedIndexChanged">
-                                            <asp:ListItem Value="0" Text="Cancelar LV"></asp:ListItem>
-                                            <asp:ListItem Value="1" Text="Cancelar Notificación"></asp:ListItem>
+                                        <asp:DropDownList ID="DDLTipo" runat="server" class="form-control" AutoPostBack="true" OnSelectedIndexChanged="DDLTipo_SelectedIndexChanged">                                           
                                             <asp:ListItem Value="2" Text="Ambos"></asp:ListItem>
+                                            <asp:ListItem Value="1" Text="Cancelar Notificación"></asp:ListItem>
+                                             <asp:ListItem Value="0" Text="Cancelar LV"></asp:ListItem>
                                         </asp:DropDownList>
                                     </div>
                                 </div>
@@ -221,7 +224,7 @@
                             <div class="col-md-12" runat="server">
                                 <div class="form-group row">
                                     <div class="col-md-3 ">
-                                        <label class="control-label text-danger">*</label><label class="col-form-label">Tipo:</label>
+                                        <label class="control-label text-danger">*</label><label class="col-form-label">Estado:</label>
                                     </div>
 
                                     <div class="col-md-9">
@@ -232,19 +235,25 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <div class="col-md-12" style="text-align: center">
+                                <label class="control-label" style="text-align: center; color: tomato">Los campos con (*) son obligatorios</label>
+                            </div>
                             <asp:UpdatePanel ID="UpdateModal" runat="server" UpdateMode="Conditional">
                                 <ContentTemplate>
-                                    <div class="col-md-12" style="align-self: center" runat="server" id="DivAlerta" visible="false">
+                 <%--                   <div class="col-md-12" style="align-self: center" runat="server" id="DivAlerta" visible="false">
                                         <div class="alert alert-danger   align-content-md-center">
                                             <h3 class="text-danger" style="text-align: center"><i class="fa fa-exclamation-triangle"></i>Warning</h3>
                                             <asp:Label ID="LbMensajeModalError" runat="server" Text="" Width="100%"></asp:Label>
                                         </div>
+                                    </div>--%>
+
+                                     <div class="col-md-12" runat="server" id="DivAlerta" visible="false" style="display: flex; background-color: tomato; justify-content: center">
+                                        <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbMensajeModalError"></asp:Label>
                                     </div>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
 
-                            <div class="col-md-12" style="margin-left: auto; margin-right: auto" runat="server" visible="true">
+<%--                            <div class="col-md-12" style="margin-left: auto; margin-right: auto" runat="server" visible="true">
                                 <div class="alert alert-success  alert-dismissible align-content-md-center" style="align-self: auto">
                                     <div class="row">
                                         <div class="col-3">
@@ -260,7 +269,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>--%>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
@@ -271,7 +280,7 @@
                             <button type="button" class="btn btn-light"
                                 data-dismiss="modal">
                                 Close</button>
-                            <asp:Button ID="btnModalModificarEstado" runat="server" Text="Enviar" class="btn btn-dark" OnClick="btnModalModificarEstado_Click" />
+                            <asp:Button ID="btnModalModificarEstado" runat="server" Text="Modificar" class="btn btn-dark" OnClick="btnModalModificarEstado_Click" />
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>

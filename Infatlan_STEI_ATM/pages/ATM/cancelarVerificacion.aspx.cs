@@ -64,7 +64,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
         {
             DataTable vDataa = (DataTable)Session["MotivoCancelarATM"];
             string codmotivo = e.CommandArgument.ToString();
-            string nom = "";
+           
             
 
             if (e.CommandName == "Codigo")
@@ -73,7 +73,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
                 try
                 {
                     DataTable vDatos = new DataTable();
-                    String vQuery = "STEISP_ATMAdminComponentesATM 25,'" + codmotivo + "', '" + nom + "', '" + Session["usuATM"].ToString() + "'";
+                    String vQuery = "STEISP_ATMAdminComponentesATM 25,'" + codmotivo + "'";
                     vDatos = vConexion.ObtenerTabla(vQuery);
                     foreach (DataRow item in vDatos.Rows)
                     {
@@ -98,7 +98,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
             if(txtModalNewmotivoATM.Text=="" || txtModalNewmotivoATM.Text == string.Empty)
             {
                 H5Alerta1.Visible = true;
-                
+                txtAlerta1.Visible = true;
             }
             else
             {
@@ -139,7 +139,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
            
             if (txtNewMotivoCancelATM.Text == "" || txtNewMotivoCancelATM.Text == string.Empty)
             {
-                
+                txtAlerta2.Visible = true;
                 H5Alerta2.Visible = true;
             }
             else

@@ -62,12 +62,12 @@ namespace Infatlan_STEI_ATM.pages.ATM
             H5Alerta1.Visible = false;
             if (e.CommandName == "Codigo")
             {
-                string nom = "";
+                
                 
                 try
                 {
                     DataTable vDatos = new DataTable();
-                    String vQuery = "STEISP_ATMAdminComponentesATM 1,'" + codtipoATMs + "', '"+nom+"', '"+ Session["usuATM"].ToString() + "'";
+                    String vQuery = "STEISP_ATMAdminComponentesATM 1,'" + codtipoATMs + "'";
                     vDatos = vConexion.ObtenerTabla(vQuery);
                     foreach (DataRow item in vDatos.Rows)
                     {
@@ -92,7 +92,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
         {
             if (txtModalNewTipoATM.Text == "" || txtModalNewTipoATM.Text == string.Empty)
             {
-                
+                txtAlerta1.Visible = true;
                 H5Alerta1.Visible = true;
             }
             else
@@ -142,7 +142,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
             
             if (txtNewTipoATM.Text == "" || txtNewTipoATM.Text == string.Empty)
             {
-               
+                txtAlerta2.Visible = true;
                 H5Alerta2.Visible = true;
             }
             else

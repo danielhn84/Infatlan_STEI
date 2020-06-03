@@ -79,6 +79,10 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
         {
             if (e.CommandName == "Modifcar")
             {
+
+                DivAlerta.Visible = false;
+                UpdateModal.Update();
+
                 string vIdAreaModificar = e.CommandArgument.ToString();
                 Session["AG_TA_ID_AREA_MODIFICAR"] = vIdAreaModificar;
 
@@ -103,14 +107,8 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             try
 
             {
-                string estado = "";
-                if (DdlEstadoArea.SelectedValue == "True")
-                { estado = "1"; }
-                else
-                {
-                    estado = "0";
-                }
-
+                validarModificarAreaModal();
+                string estado = DdlEstadoArea.SelectedValue == "True" ? "1" : "0";
                 String vQuery3 = " STEISP_AGENCIA_AreasMantenimiento 4,"
                                    + Session["AG_TA_ID_AREA_MODIFICAR"] +
                                    ",'" + TxAreaModal.Text +
@@ -128,7 +126,9 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             }
             catch (Exception ex)
             {
-                Mensaje(ex.Message, WarningType.Danger);
+                LbMensajeModalError.Text = ex.Message;
+                DivAlerta.Visible = true;
+                UpdateModal.Update();
             }
         }
         
@@ -216,5 +216,16 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
+
+        private void validarModificarAreaModal()
+        {
+
+            TxAreaModal.Text = TxAreaModal.Text.Replace("\n", "");
+            if (TxAreaModal.Text == "" || TxAreaModal.Text == string.Empty)
+                throw new Exception("Falta ingresar el area de mantenimiento.");
+
+
+        }
+
     }
 }

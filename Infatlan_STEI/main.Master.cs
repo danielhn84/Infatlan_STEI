@@ -1,27 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace Infatlan_STEI
 {
     public partial class main : System.Web.UI.MasterPage
     {
-        protected void Page_Load(object sender, EventArgs e){
-            if (!Convert.ToBoolean(Session["AUTH"])){
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!Convert.ToBoolean(Session["AUTH"]))
+            {
                 Response.Redirect("/login.aspx");
             }
 
-            if (!Page.IsPostBack){
+            if (!Page.IsPostBack)
+            {
                 String vError = "";
-                try{
+                try
+                {
                     DataTable vDatos = (DataTable)Session["AUTHCLASS"];
                     LitUsuario.Text = vDatos.Rows[0]["nombre"].ToString().ToUpper() + " " + vDatos.Rows[0]["apellidos"].ToString().ToUpper();
 
-                }catch (Exception ex){
+                }
+                catch (Exception ex)
+                {
                     vError = ex.Message;
                 }
             }

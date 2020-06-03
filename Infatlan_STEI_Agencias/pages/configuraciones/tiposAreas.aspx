@@ -23,7 +23,6 @@
                 <span style="display: inline-block; height: 100%; vertical-align: middle;"></span>
                 <asp:Image ID="imgUpdateProgress" runat="server" ImageUrl="/assets/images/loading.gif" AlternateText="Loading ..." ToolTip="Loading ..." Style="display: inline-block; vertical-align: middle;" />
             </div>
-
         </ProgressTemplate>
     </asp:UpdateProgress>
 
@@ -58,11 +57,15 @@
                                     <label class="control-label text-danger">*</label><label class="control-label ">Area:</label>
                                 </div>
                                 <div class="col-md-10">
-                                    <asp:TextBox runat="server" ID="TxArea" TextMode="MultiLine" Rows="3" CssClass="form-control" placeholder="Ingrese una area.."></asp:TextBox>
+                                    <asp:TextBox runat="server" ID="TxArea" MaxLength="150"  TextMode="MultiLine" Rows="3" CssClass="form-control" placeholder="Ingrese una area.."></asp:TextBox>
                                 </div>
                             </div>
                             <br />
                             <br />
+                            <div class="col-md-12"  style="text-align:center">
+                                <label class="control-label text-danger" style="text-align:center" >Los campos con (*) son obligatorios</label>
+                            </div>
+
                             <div class="row p-t-20 col-md-12">
                                  <div class="col-md-4">
                                     <asp:Button ID="BtnEnviar" class="btn btn-block btn-success" runat="server" Text="Enviar" OnClick="BtnEnviar_Click"/>
@@ -95,7 +98,7 @@
 
                                 <div class="row p-t-20">
                                     <div class="col-md-1">
-                                        <label class="control-label   text-danger">*</label><label class="control-label">Buscar:</label></label>                                      
+                                      <label class="control-label">Buscar:</label></label>                                      
                                     </div>
                                     <div class="col-md-6">
                                        <asp:TextBox ID="TxBuscarArea" runat="server" placeholder="Búsqueda por area o id, luego presione Enter" class="form-control" AutoPostBack="true" OnTextChanged="TxBuscarArea_TextChanged"></asp:TextBox>
@@ -181,23 +184,30 @@
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label">Id Area:</label>
                                     <div class="col-md-9">
-                                        <asp:TextBox ID="TxIdAreaModal" class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+                                        <asp:TextBox ID="TxIdAreaModal" MaxLength="150" class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-md-12" runat="server">
                                 <div class="form-group row">
-                                    <label class="col-md-3 col-form-label">Area:</label>
+                                    <div class="col-md-3">
+                                         <label class="control-label text-danger">*</label><label class="col-form-label">Area:</label>
+                                    </div>
+
                                     <div class="col-md-9">
-                                        <asp:TextBox ID="TxAreaModal" class="form-control" runat="server"  TextMode="MultiLine" Rows="3"></asp:TextBox>
+                                        <asp:TextBox ID="TxAreaModal" class="form-control" runat="server" TextMode="MultiLine" Rows="3"></asp:TextBox>
                                     </div>
                                 </div>
-                            </div>                          
+                            </div>
 
                             <div class="col-md-12" runat="server">
                                 <div class="form-group row">
-                                    <label class="col-md-3 col-form-label">Estado:</label>
+                                    <div class="col-md-3">
+                                        <label class="control-label text-danger">*</label><label class="col-form-label">Estado:</label>
+                                    </div>
+
+                                    
                                     <div class="col-md-9">
                                        <asp:DropDownList ID="DdlEstadoArea" runat="server" class="form-control" AutoPostBack="true">                                              
                                                 <asp:ListItem Value="False" Text="Inactivo"></asp:ListItem>
@@ -207,7 +217,18 @@
                                 </div>
                             </div>
 
-                           
+                            <div class="col-md-12"  style="text-align:center">
+                                <label class="control-label text-danger" style="text-align:center" >Los campos con (*) son obligatorios</label>
+                            </div>
+
+                            <asp:UpdatePanel ID="UpdateModal" runat="server" UpdateMode="Conditional">
+                                <ContentTemplate>
+                                    <div class="col-md-12" runat="server" id="DivAlerta" visible="false" style="display: flex; background-color: tomato; justify-content: center">
+                                        <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbMensajeModalError"></asp:Label>
+                                    </div>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+<%--                           
                             <div class="col-md-12" style="margin-left: auto; margin-right: auto" id="DivAprobarLV" runat="server" visible="true">
                                 <div class="alert alert-success  alert-dismissible align-content-md-center" style="align-self: auto">
                                     <div class="row">
@@ -224,7 +245,7 @@
                                
                                     </div>
                                 </div>
-                            </div>   
+                            </div> --%>  
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>

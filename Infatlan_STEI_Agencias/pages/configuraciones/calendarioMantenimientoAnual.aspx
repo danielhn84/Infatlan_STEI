@@ -53,8 +53,10 @@
 
             <br><br>
 
-
-            <asp:UpdatePanel ID="UpdateModal" runat="server" UpdateMode="Conditional">
+            <div class="col-md-12" style="text-align: center">
+                <label class="control-label text-danger" style="text-align: center">Los campos con (*) son obligatorios</label>
+            </div>
+<%--            <asp:UpdatePanel ID="UpdateModal" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
                     <div class="col-md-12" style="align-self: center" runat="server" id="DivAlerta" visible="false">
                         <div class="alert alert-danger   align-content-md-center">
@@ -63,8 +65,19 @@
                         </div>
                     </div>
                 </ContentTemplate>
+            </asp:UpdatePanel>--%>
+
+
+            <asp:UpdatePanel ID="UpdateModal" runat="server" UpdateMode="Conditional">
+                <ContentTemplate>
+                    <div class="col-md-12" runat="server" id="DivAlerta" visible="false" style="display: flex; background-color: tomato; justify-content: center">
+                        <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbMensaje"></asp:Label>
+                    </div>
+                </ContentTemplate>
             </asp:UpdatePanel>
-            <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+
+
+<%--            <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
                     <div class="col-md-12" style="align-self: center" runat="server" id="Div1" visible="false">
                         <div class="alert alert-success   align-content-md-center">
@@ -73,7 +86,17 @@
                         </div>
                     </div>
                 </ContentTemplate>
+            </asp:UpdatePanel>--%>
+
+
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+                <ContentTemplate>
+                    <div class="col-md-12" runat="server" id="Div1" visible="false" style="display: flex; background-color:darkgreen; justify-content: center">
+                        <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbMensajeSuccsess"></asp:Label>
+                    </div>
+                </ContentTemplate>
             </asp:UpdatePanel>
+
 
 
             <div class="row p-t-20 col-md-12">

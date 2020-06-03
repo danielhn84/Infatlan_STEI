@@ -40,21 +40,18 @@
         <ProgressTemplate>
             <div style="position: fixed; text-align: center; height: 100%; width: 100%; top: 0; right: 0; left: 0; z-index: 9999999; background-color: #ffffff; opacity: 0.7; margin: 0;">
                 <span style="display: inline-block; height: 100%; vertical-align: middle;"></span>
-                <asp:Image ID="imgUpdateProgress" runat="server" ImageUrl="/images/loading.gif" AlternateText="Loading ..." ToolTip="Loading ..." Style="display: inline-block; vertical-align: middle;" />
+                <asp:Image ID="imgUpdateProgress" runat="server" ImageUrl="../../assets/images/loading.gif" AlternateText="Loading ..." ToolTip="Loading ..." Style="display: inline-block; vertical-align: middle;" />
             </div>
         </ProgressTemplate>
     </asp:UpdateProgress>
-    <div class="row page-titles">
+
+     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
-            <h4 class="text-themecolor">Aprobar Verificación</h4>
+            <h3 class="text-themecolor col-12">Lista de verificación</h3>
+            <h6 class="text-themecolor col-12">Aprobar lista de verificación de mantenimiento de ATM</h6>
         </div>
         <div class="col-md-7 align-self-center text-right">
             <div class="d-flex justify-content-end align-items-center">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">Inicio</a></li>
-                    <li class="breadcrumb-item active">Aprobar verificación</li>
-                </ol>
-
             </div>
         </div>
     </div>
@@ -62,10 +59,12 @@
 
     <div class="card">
         <br />
-        <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
-            <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-undo"></i>Aprobar verificación</h3>
-        </div>
-
+       
+        <div class=" col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+            <div class="row">
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
         <!--DATAGRID-->
         <asp:UpdatePanel ID="UpdateDivBusquedas" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
@@ -73,7 +72,7 @@
                     <div class="col-12 grid-margin stretch-card">
                         <div class="card" id="21">
                             <div class="card-body">
-                                <h4 class="card-title">Aprobar verificación</h4>
+                                <%--<h4 class="card-title">Aprobar verificación</h4>--%>
 
                                 <div class="col-md-6">
                                     <div class="form-group row">
@@ -136,6 +135,11 @@
             </ContentTemplate>
         </asp:UpdatePanel>
         <!--/DATAGRID-->
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <br />
 </asp:Content>

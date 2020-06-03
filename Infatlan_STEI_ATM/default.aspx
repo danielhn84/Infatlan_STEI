@@ -26,7 +26,7 @@
                         <div class="d-flex no-block align-items-center">
                             <div>
                                 <h3><i class="icon-screen-desktop"></i></h3>
-                                <p class="text-muted">ATM disponibles</p>
+                                <p class="text-muted">ATM</p>
                             </div>
                             <div class="ml-auto">
                                 <h2 runat="server" id="h2ATMDisp" class="counter text-primary"></h2>

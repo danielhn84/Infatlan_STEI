@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
 
 namespace Infatlan_STEI.classes
 {
@@ -18,24 +15,31 @@ namespace Infatlan_STEI.classes
     public class db
     {
         SqlConnection vConexion = new SqlConnection(ConfigurationManager.AppSettings["SQLServer"]);
-        public db(){
+        public db()
+        {
             vConexion = new SqlConnection(ConfigurationManager.AppSettings["SQLServer"]);
         }
 
-        public DataTable obtenerDataTable(String vQuery){
+        public DataTable obtenerDataTable(String vQuery)
+        {
             DataTable vDatos = new DataTable();
-            try{
+            try
+            {
                 SqlDataAdapter vDataAdapter = new SqlDataAdapter(vQuery, vConexion);
                 vDataAdapter.Fill(vDatos);
-            }catch{
+            }
+            catch
+            {
                 throw;
             }
             return vDatos;
         }
 
-        public int ejecutarSql(String vQuery){
+        public int ejecutarSql(String vQuery)
+        {
             int vResultado = 0;
-            try{
+            try
+            {
                 SqlCommand vSqlCommand = new SqlCommand(vQuery, vConexion);
                 vSqlCommand.CommandType = CommandType.Text;
 
@@ -43,7 +47,9 @@ namespace Infatlan_STEI.classes
                 vResultado = vSqlCommand.ExecuteNonQuery();
                 vConexion.Close();
 
-            }catch (Exception Ex){
+            }
+            catch (Exception Ex)
+            {
                 String vError = Ex.Message;
                 vConexion.Close();
                 throw;

@@ -20,11 +20,13 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
         
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["USUARIO"] = "acamador";
+            //Session["USUARIO"] = "acamador";
             if (!Page.IsPostBack)
             {
                 cargarData();
                 cargarDataAgencias();
+
+
             }
         }
         
@@ -302,7 +304,6 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             {
 
                 DivAlerta.Visible = false;
-                UpdateModal.Visible = false;
                 UpdateModal.Update();
 
                 string vIdAgenciaModificar = e.CommandArgument.ToString();
@@ -376,6 +377,12 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 throw new Exception("Falta completar opción ¿Si requiere de conductorn para el traslado hacia la agencia?.");
         }
         
+        private void limpiarDivAlertaModal()
+        {
+            DivAlerta.Visible = false;
+            UpdateModal.Visible = false;
+            UpdateModal.Update();
+        }
         protected void btnModalModificar_Click(object sender, EventArgs e)
         {
             try
@@ -447,6 +454,16 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
         {
             try
             {
+                if (DDLDepartamento.SelectedValue.Equals("8"))
+                {
+                    RblConductor.Enabled= true;
+                    RblConductor.SelectedIndex = -1;
+                }
+                else
+                {
+                    RblConductor.Enabled = false;
+                    RblConductor.SelectedValue = "0";
+                }
                 cargarMunicipios(DDLDepartamento.SelectedValue);
             }
             catch (Exception ex)
@@ -479,6 +496,18 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
         
         protected void DDLDepartamentoModificar_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+            if (DDLDepartamentoModificar.SelectedValue.Equals("8"))
+            {
+                RbConductorModificar.Enabled = true;
+                RbConductorModificar.SelectedIndex = -1;
+            }
+            else
+            {
+                RbConductorModificar.Enabled = false;
+                RbConductorModificar.SelectedValue = "0";
+            }
+
             String vQuery = "STEISP_INVENTARIO_Generales 2," + DDLDepartamentoModificar.SelectedValue;
             DataTable vDatos = vConexion.obtenerDataTable(vQuery);
 
@@ -506,6 +535,11 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             { txtcodUbicacion.Text = Session["AG_CA_CODIGO_UBICACION"].ToString();}
             else { txtcodUbicacion.Text = codigoUbicacion;
             }
+        }
+
+        protected void TxAgenciaModificar_TextChanged(object sender, EventArgs e)
+        {
+            limpiarDivAlertaModal();
         }
     }
 }

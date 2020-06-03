@@ -35,7 +35,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             {
                 validarGuardarMotivo();
                 String vQuery1 = " STEISP_AGENCIA_MotivosCancelacion 1,'"
-                                   + TxMotivoCancelacion.Text + "',"
+                                   + TxMotivoCancelacion.Text.Substring(0, 1).ToUpper() + TxMotivoCancelacion.Text.Substring(1)  + "',"
                                    + RblTipo.SelectedValue;
                 Int32 vInformacion1 = vConexion.ejecutarSql(vQuery1);
 
@@ -69,6 +69,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
         
         private void validarGuardarMotivo()
         {
+            TxMotivoCancelacion.Text = TxMotivoCancelacion.Text.Replace("\n", "");
             if (TxMotivoCancelacion.Text == "" || TxMotivoCancelacion.Text == string.Empty)
                 throw new Exception("Falta completar el campo Motivo de cancelación.");
 
@@ -135,6 +136,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
         
         private void validarModificarMotivo()
         {
+            TxMotivoModal.Text = TxMotivoModal.Text.Replace("\n", "");
             if (TxMotivoModal.Text == "" || TxMotivoModal.Text == string.Empty)
                 throw new Exception("Falta completar el campo Motivo de cancelación.");
 
@@ -152,7 +154,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 validarModificarMotivo();
                 String vQuery3 = " STEISP_AGENCIA_MotivosCancelacion 4,"
                                    + Session["AG_MCM_ID_ESTADO_MODIFICAR"] +
-                                   ",'" + TxMotivoModal.Text+
+                                   ",'" + TxMotivoModal.Text.Substring(0, 1).ToUpper() + TxMotivoModal.Text.Substring(1)+
                                     "'," + DDLTipo.SelectedValue +
                                     "," + DdlEstado.SelectedValue;
 

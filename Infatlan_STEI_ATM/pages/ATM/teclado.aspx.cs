@@ -52,6 +52,8 @@ namespace Infatlan_STEI_ATM.pages.ATM
         {
             H5Alerta1.Visible = false;
             H5Alerta2.Visible = false;
+            txtAlerta1.Visible = false;
+            txtAlerta2.Visible = false;
             DataTable vDataa = (DataTable)Session["tecladoATM"];
             string codtecladoATMs = e.CommandArgument.ToString();
 
@@ -63,7 +65,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
                 try
                 {
                     DataTable vDatos = new DataTable();
-                    String vQuery = "STEISP_ATMAdminComponentesATM 13,'" + codtecladoATMs + "', '" + nom + "', '" + Session["usuATM"].ToString() + "'";
+                    String vQuery = "STEISP_ATMAdminComponentesATM 13,'" + codtecladoATMs + "'";
                     vDatos = vConexion.ObtenerTabla(vQuery);
                     foreach (DataRow item in vDatos.Rows)
                     {
@@ -87,7 +89,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
         {
             if (txtModalNewTecladoATM.Text == "" || txtModalNewTecladoATM.Text == string.Empty)
             {
-              
+                txtAlerta1.Visible = true;
                 H5Alerta1.Visible = true;
             }
             else
@@ -131,6 +133,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
             {
                
                 H5Alerta2.Visible = true;
+                txtAlerta2.Visible = true;
             }
             else
             {

@@ -36,7 +36,7 @@
 
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Tipos de agencias</h4>
+            <h4 class="card-title">Categorías de agencias</h4>
             <p>Tipo de agencias que se le da mantenimiento preventivo</p>
 
             <ul class="nav nav-tabs" role="tablist">
@@ -58,6 +58,9 @@
                                 </div>
                             </div>
                             <br />
+                            <div class="col-md-12"  style="text-align:center">
+                                <label class="control-label text-danger" style="text-align:center" >Los campos con (*) son obligatorios</label>
+                            </div>
 
                             <div class="row p-t-20 col-md-12">
                                 <div class="col-md-4">
@@ -120,7 +123,7 @@
                                             <Columns>
                                                 <asp:TemplateField HeaderText="Acción" ItemStyle-HorizontalAlign="center">
                                                     <ItemTemplate>
-                                                        <asp:LinkButton ID="LbModificar" class="btn btn-info mr-2"   runat="server" CommandName="Modifcar" CommandArgument='<%# Eval("idTipoAgencia") %>'>
+                                                        <asp:LinkButton ID="LbModificar" class="btn btn-info mr-2"  Title="Modificar" runat="server" CommandName="Modifcar" CommandArgument='<%# Eval("idTipoAgencia") %>'>
                                                         <i class="icon-pencil" ></i>
                                                         </asp:LinkButton>
 
@@ -184,7 +187,7 @@
                                         <label class="control-label text-danger">*</label><label class="col-form-label">Tipo Agencia:</label>
                                     </div>
                                     <div class="col-md-9">
-                                        <asp:TextBox ID="TxTipoAgenciaModal" class="form-control" runat="server" TextMode="MultiLine" Rows="3" OnTextChanged="TxTipoAgenciaModal_TextChanged"></asp:TextBox>
+                                        <asp:TextBox ID="TxTipoAgenciaModal" class="form-control" MaxLength="250" runat="server" TextMode="MultiLine" Rows="3" OnTextChanged="TxTipoAgenciaModal_TextChanged"></asp:TextBox>
                                     </div>
                                 </div>
                             </div>
@@ -203,19 +206,24 @@
                                 </div>
                             </div>
 
+                            <div class="col-md-12" style="text-align: center">
+                                <label class="control-label" style="text-align:center; color:tomato">Los campos con (*) son obligatorios</label>
+                            </div>
+
+
                             <asp:UpdatePanel ID="UpdateModal" runat="server" UpdateMode="Conditional">
                                 <ContentTemplate>
-                                    <div class="col-md-12" style="align-self: center" runat="server" id="DivAlerta" visible="false">
-                                        <div class="alert alert-danger   align-content-md-center">
-                                            <h3 class="text-danger" style="text-align: center"><i class="fa fa-exclamation-triangle"></i>Warning</h3>
-                                            <asp:Label ID="LbMensajeModalError" runat="server" Text="" Width="100%"></asp:Label>
-                                        </div>
+                                    <div class="col-md-12" runat="server" id="DivAlerta" visible="false" style="display: flex; background-color: tomato; justify-content: center">
+                                        <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbMensajeModalError"></asp:Label>
                                     </div>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
 
 
-                            <div class="col-md-12" style="margin-left: auto; margin-right: auto" runat="server" visible="true">
+
+
+
+                            <%--                            <div class="col-md-12" style="margin-left: auto; margin-right: auto" runat="server" visible="true">
                                 <div class="alert alert-success  alert-dismissible align-content-md-center" style="align-self: auto">
                                     <div class="row">
                                         <div class="col-3">                                           
@@ -231,7 +239,7 @@
 
                                     </div>
                                 </div>
-                            </div>
+                            </div>--%>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
