@@ -17,8 +17,6 @@ namespace Infatlan_STEI_Inventario.pages
     {
         db vConexion = new db();
         protected void Page_Load(object sender, EventArgs e){
-            Session["AUTH"] = true;
-            Session["USUARIO"] = "wpadilla";
             DDLContratos.CssClass = "select2 form-control custom-select";
 
             if (!Page.IsPostBack){
@@ -27,6 +25,8 @@ namespace Infatlan_STEI_Inventario.pages
                     cargarDatos();
                     cargarDatosEDC();
                     cargarDatosEnlace();
+                }else {
+                    Response.Redirect("/login.aspx");
                 }
             }
         }

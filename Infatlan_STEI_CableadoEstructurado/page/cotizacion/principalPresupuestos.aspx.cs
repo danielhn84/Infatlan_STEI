@@ -8,17 +8,9 @@ using System.Data;
 using Infatlan_STEI_CableadoEstructurado.clases;
 using System.Data.Sql;
 using System.Text;
-using System.Drawing;
-using System.Threading.Tasks;
 using System.Web.UI.HtmlControls;
 using System.Configuration;
-using System.Web.ApplicationServices;
 
-using Word = Microsoft.Office.Interop.Word;
-using iTextSharp.text.pdf;
-using iTextSharp.text;
-using Microsoft.Office.Interop.Word;
-    
 using DataTable = System.Data.DataTable;
 using Page = System.Web.UI.Page;
 using System.IO;
@@ -31,23 +23,20 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         db vConexion = new db();
         //private object Content;
 
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            if (!Page.IsPostBack)
-            {
-                CargarProceso();
+        protected void Page_Load(object sender, EventArgs e){
+            if (!Page.IsPostBack){
+                if (Convert.ToBoolean(Session["AUTH"])){
+                    CargarProceso();
+                    DataTable vDatos = vConexion.obtenerDataTable("STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 27");
 
-                DataTable vDatos = new DataTable();
-                vDatos = vConexion.obtenerDataTable("STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 27");
-
-                lbCotizacionRealizadas.Text = vDatos.Rows[0]["realizados"].ToString();
-                lbCotizacionPendientes.Text = vDatos.Rows[0]["pendientes"].ToString();
-
-                //CSSCotizacion.Style.Size.width = 300;
-                //CSSCotizacion.Style.Value = width:300;
+                    lbCotizacionRealizadas.Text = vDatos.Rows[0]["realizados"].ToString();
+                    lbCotizacionPendientes.Text = vDatos.Rows[0]["pendientes"].ToString();
+                }else {
+                    Response.Redirect("/login.aspx");
+                }
             }
-
         }
+
         public void Mensaje(string vMensaje, WarningType type)
         {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);

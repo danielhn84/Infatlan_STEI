@@ -13,21 +13,19 @@ namespace Infatlan_STEI_CableadoEstructurado.page.visitaTecnica
     {
         db vConexion = new db();
 
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            if (!Page.IsPostBack)
-            {
-                CargarProceso();
-                DataTable vDatos = new DataTable();
-                vDatos = vConexion.obtenerDataTable("STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 29");
+        protected void Page_Load(object sender, EventArgs e){
+            if (!Page.IsPostBack){
+                if (Convert.ToBoolean(Session["AUTH"])){
+                    CargarProceso();
+                    DataTable vDatos = new DataTable();
+                    vDatos = vConexion.obtenerDataTable("STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 29");
 
-                lbRevisionesPendientes.Text = vDatos.Rows[0]["revisionpendiente"].ToString();
-                lbEstudiosRevisados.Text = vDatos.Rows[0]["revisados"].ToString();
-
-               // EstudiosRevisados.Style.Width = 60 %;
-
+                    lbRevisionesPendientes.Text = vDatos.Rows[0]["revisionpendiente"].ToString();
+                    lbEstudiosRevisados.Text = vDatos.Rows[0]["revisados"].ToString();
+                }else {
+                    Response.Redirect("/login.aspx");
+                }
             }
-
         }
 
         public void Mensaje(string vMensaje, WarningType type)

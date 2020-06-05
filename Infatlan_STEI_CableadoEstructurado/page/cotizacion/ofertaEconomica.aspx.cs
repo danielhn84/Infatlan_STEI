@@ -28,12 +28,13 @@ namespace Infatlan_STEI_CableadoEstructurado.page.cotizacion
     public partial class ofertaEconomica : System.Web.UI.Page
     {
         db vConexion = new db();
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            if (!Page.IsPostBack)
-            {
-                CargarProceso();
-                
+        protected void Page_Load(object sender, EventArgs e){
+            if (!Page.IsPostBack){
+                if (Convert.ToBoolean(Session["AUTH"])){
+                    CargarProceso();
+                }else {
+                    Response.Redirect("/login.aspx");
+                }
             }
         }
 

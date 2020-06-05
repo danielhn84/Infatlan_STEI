@@ -16,13 +16,16 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
     public partial class aprobarVerificacion : System.Web.UI.Page
     {
         bd vConexion = new bd();
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            if (!Page.IsPostBack)
-            {
-                //llenarForm();
+        protected void Page_Load(object sender, EventArgs e){
+            if (!Page.IsPostBack){
+                if (Convert.ToBoolean(Session["AUTH"])){
+
+                }else {
+                    Response.Redirect("/login.aspx");
+                }
             }
         }
+
         //public Image LoadImage()
         //{
 

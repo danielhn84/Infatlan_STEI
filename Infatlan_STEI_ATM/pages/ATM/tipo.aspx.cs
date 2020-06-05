@@ -14,12 +14,14 @@ namespace Infatlan_STEI_ATM.pages.ATM
     public partial class tipo : System.Web.UI.Page
     {
         bd vConexion = new bd();
-        protected void Page_Load(object sender, EventArgs e)
-        {
+        protected void Page_Load(object sender, EventArgs e){
             Session["TIPO_ATM"] = null;
-            if (!Page.IsPostBack)
-            {
-                cargarData();
+            if (!Page.IsPostBack){
+                if (Convert.ToBoolean(Session["AUTH"])){
+                    cargarData();
+                }else {
+                    Response.Redirect("/login.aspx");
+                }
             }
         }
 
@@ -27,6 +29,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
         {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
+
         void cargarData()
         {
             if (HttpContext.Current.Session["TIPO_ATM"] == null)
@@ -48,6 +51,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
                 Session["TIPO_ATM"] = 1;
             }
         }
+
         protected void GVBusqueda_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
 

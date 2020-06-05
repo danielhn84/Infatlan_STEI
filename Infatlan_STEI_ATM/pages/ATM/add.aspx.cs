@@ -14,13 +14,14 @@ namespace Infatlan_STEI_ATM.pages.ATM
     public partial class add : System.Web.UI.Page
     {
         bd vConexion = new bd();
-        protected void Page_Load(object sender, EventArgs e)
-        {
+        protected void Page_Load(object sender, EventArgs e){
             Session["ATM_ADD"] = null;
-            if (!Page.IsPostBack)
-            {
-                //Limpiar();
-                cargarDataATM();
+            if (!Page.IsPostBack){
+                if (Convert.ToBoolean(Session["AUTH"])){
+                    cargarDataATM();
+                }else {
+                    Response.Redirect("/login.aspx");
+                }
             }
         }
 

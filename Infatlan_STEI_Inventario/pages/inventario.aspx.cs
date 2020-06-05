@@ -17,12 +17,12 @@ namespace Infatlan_STEI_Inventario.pages
     {
         db vConexion = new db();
         protected void Page_Load(object sender, EventArgs e){
-            Session["AUTH"] = true;
-            Session["USUARIO"] = "wpadilla";
             if (!Page.IsPostBack){
                 if (Convert.ToBoolean(Session["AUTH"])){
                     limpiarSessiones();
                     cargarDatos();
+                }else {
+                    Response.Redirect("/login.aspx");
                 }
             }
         }

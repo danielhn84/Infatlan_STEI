@@ -14,11 +14,13 @@ namespace Infatlan_STEI_ATM.pages.devolver
     public partial class rechazados : System.Web.UI.Page
     {
         bd vConexion = new bd();
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            if (!Page.IsPostBack)
-            {
-                cargarData();
+        protected void Page_Load(object sender, EventArgs e){
+            if (!Page.IsPostBack){
+                if (Convert.ToBoolean(Session["AUTH"])){
+                    cargarData();
+                }else {
+                    Response.Redirect("/login.aspx");
+                }
             }
         }
 

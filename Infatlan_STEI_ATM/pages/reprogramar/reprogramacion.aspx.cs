@@ -9,10 +9,16 @@ namespace Infatlan_STEI_ATM.pages.reprogramar
 {
     public partial class reprogramacion : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            LimpiarReprogramacion();
+        protected void Page_Load(object sender, EventArgs e){
+            if (!Page.IsPostBack){
+                if (Convert.ToBoolean(Session["AUTH"])){
+                    LimpiarReprogramacion();
+                }else {
+                    Response.Redirect("/login.aspx");
+                }
+            }
         }
+
         void LimpiarReprogramacion()
         {
             dllmantPendientesReprogramado.SelectedValue = "0";

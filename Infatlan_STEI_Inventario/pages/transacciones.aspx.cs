@@ -17,11 +17,11 @@ namespace Infatlan_STEI_Inventario.pages
     {
         db vConexion = new db();
         protected void Page_Load(object sender, EventArgs e){
-            Session["AUTH"] = true;
-
             if (!Page.IsPostBack){
                 if (Convert.ToBoolean(Session["AUTH"])){
                     cargarDatos();
+                }else {
+                    Response.Redirect("/login.aspx");
                 }
             }
         }

@@ -19,13 +19,15 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
         
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            Session["USUARIO"] = "acamador";
+        protected void Page_Load(object sender, EventArgs e){
             DDLArticulo.CssClass = "select2 form-control custom-select";
-            if (!Page.IsPostBack)
-            {              
-                cargarDatos();
+
+            if (!Page.IsPostBack){
+                if (Convert.ToBoolean(Session["AUTH"])){
+                    cargarDatos();
+                }else {
+                    Response.Redirect("/login.aspx");
+                }
             }
         }
 

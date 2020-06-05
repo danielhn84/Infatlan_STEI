@@ -14,36 +14,38 @@ namespace Infatlan_STEI_ATM.pages.material
     public partial class material : System.Web.UI.Page
     {
         bd vConexion = new bd();
-        protected void Page_Load(object sender, EventArgs e)
-        {
+        protected void Page_Load(object sender, EventArgs e){
             Session["CARGAR_STOCK"] = null;
             string id = Request.QueryString["id"];
             string tipo = Request.QueryString["tipo"];
-           
-            if (!Page.IsPostBack)
-            {
-                cargarData();
-                RBConductor.SelectedValue = "1";
-                //LBMotivo.InnerText = "Motivo por el que solicita equipo";
-                switch (tipo)
-                {
-                    case "2":
-                        DDLStock.Enabled = false;
-                        txtcantidad.Enabled = false;
-                        btnVerifATM.Enabled = false;
-                        GVNewMateriales.Enabled = false;
-                        DIVbtnRechazo.Visible = true;
-                        LBMotivo.InnerText = "Motivo de rechazo";
-                        LBComentario.InnerText = "*Comentario: "+Convert.ToString(Session["ATM_COMENTARIO_MATERIAL"]);
-                        //txtmotivo.Text= Convert.ToString(Session["ATM_COMENTARIOAPRO_MATERIAL"]);
-                        txtmotivo.Text = "";
-                        RBConductor.Enabled = false;
-                        DDLConductor.Enabled = false;
-                        DDLConductor.SelectedIndex = CargarInformacionDDL(DDLConductor, Session["ATM_IDCHOFER_MATERIAL"].ToString());
-                        break;
+            
+            if (!Page.IsPostBack){
+                if (Convert.ToBoolean(Session["AUTH"])){
+                    cargarData();
+                    RBConductor.SelectedValue = "1";
+                    //LBMotivo.InnerText = "Motivo por el que solicita equipo";
+                    switch (tipo){
+                        case "2":
+                            DDLStock.Enabled = false;
+                            txtcantidad.Enabled = false;
+                            btnVerifATM.Enabled = false;
+                            GVNewMateriales.Enabled = false;
+                            DIVbtnRechazo.Visible = true;
+                            LBMotivo.InnerText = "Motivo de rechazo";
+                            LBComentario.InnerText = "*Comentario: "+Convert.ToString(Session["ATM_COMENTARIO_MATERIAL"]);
+                            //txtmotivo.Text= Convert.ToString(Session["ATM_COMENTARIOAPRO_MATERIAL"]);
+                            txtmotivo.Text = "";
+                            RBConductor.Enabled = false;
+                            DDLConductor.Enabled = false;
+                            DDLConductor.SelectedIndex = CargarInformacionDDL(DDLConductor, Session["ATM_IDCHOFER_MATERIAL"].ToString());
+                            break;
+                    }
+                }else {
+                    Response.Redirect("/login.aspx");
                 }
             }
         }
+
         int CargarInformacionDDL(DropDownList vList, String vValue)
         {
             int vIndex = 0;
@@ -62,6 +64,7 @@ namespace Infatlan_STEI_ATM.pages.material
             catch { throw; }
             return vIndex;
         }
+
         void TransaccionInventario()
         {
             
@@ -123,6 +126,7 @@ namespace Infatlan_STEI_ATM.pages.material
                 }
             
         }
+        
         void cargarData()
         {
             txtNom.Text = Session["ATM_TECNICO_MATERIAL"].ToString();
@@ -165,10 +169,12 @@ namespace Infatlan_STEI_ATM.pages.material
                 Session["CARGAR_STOCK"] = "1";
             }
         }
+        
         public void Mensaje(string vMensaje, WarningType type)
         {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
+        
         protected void txtcantidad_TextChanged(object sender, EventArgs e)
         {
             if(Convert.ToInt32(txtcantidad.Text)> Convert.ToInt32(Session["STOCK_CANTIDAD_ATM"]))

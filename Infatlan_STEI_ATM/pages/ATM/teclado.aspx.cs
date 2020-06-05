@@ -14,12 +14,14 @@ namespace Infatlan_STEI_ATM.pages.ATM
     public partial class teclado : System.Web.UI.Page
     {
         bd vConexion = new bd();
-        protected void Page_Load(object sender, EventArgs e)
-        {
+        protected void Page_Load(object sender, EventArgs e){
             Session["TECLADOS_ATM"] = null;
-            if (!Page.IsPostBack)
-            {
-                cargarData();
+            if (!Page.IsPostBack){
+                if (Convert.ToBoolean(Session["AUTH"])){
+                    cargarData();
+                }else {
+                    Response.Redirect("/login.aspx");
+                }
             }
         }
         public void Mensaje(string vMensaje, WarningType type)

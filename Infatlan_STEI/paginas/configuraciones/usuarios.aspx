@@ -57,8 +57,8 @@
                                 <asp:BoundField DataField="telefono" HeaderText="Telefono"/>
                                 <asp:BoundField DataField="correo" HeaderText="Correo"/>
                                 <asp:BoundField DataField="identidad" HeaderText="Identidad"/>
-                                <asp:BoundField DataField="fechaCreacion" HeaderText="Fecha"/>
-                                <asp:TemplateField HeaderText="Seleccione">
+                                <asp:BoundField DataField="EsadoDesc" HeaderText="Estado"/>
+                                <asp:TemplateField>
                                     <ItemTemplate>
                                         <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-info mr-2" CommandArgument='<%# Eval("idUsuario") %>' CommandName="EditarUser">
                                             <i class="icon-pencil" ></i>
@@ -95,59 +95,59 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group row">
-                                        <div class="col-2" style="margin-left:2%">
+                                        <div class="col-3" style="margin-left:2%">
                                             <label class="col-form-label">Usuario</label>
                                         </div>
-                                        <div class="col-sm-9">
-                                            <asp:TextBox ID="TxUsuario" class="form-control text-uppercase" runat="server"></asp:TextBox>                                            
+                                        <div class="col-8">
+                                            <asp:TextBox ID="TxUsuario" class="form-control" runat="server"></asp:TextBox>                                            
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <div class="col-2" style="margin-left:2%">
+                                        <div class="col-3" style="margin-left:2%">
                                             <label class="col-form-label">Nombres</label>
                                         </div>
-                                        <div class="col-sm-9">
+                                        <div class="col-8">
                                             <asp:TextBox ID="TxNombres" class="form-control text-uppercase" runat="server"></asp:TextBox>                                            
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <div class="col-2" style="margin-left:2%">
+                                        <div class="col-3" style="margin-left:2%">
                                             <label class="col-form-label">Apellidos</label>
                                         </div>
-                                        <div class="col-sm-9">
+                                        <div class="col-8">
                                             <asp:TextBox ID="TxApellidos" class="form-control text-uppercase" runat="server"></asp:TextBox>                                            
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <div class="col-2" style="margin-left:2%">
+                                        <div class="col-3" style="margin-left:2%">
                                             <label class="col-form-label">Identidad</label>
                                         </div>
-                                        <div class="col-sm-9">
+                                        <div class="col-8">
                                             <asp:TextBox ID="TxIdentidad" class="form-control" runat="server"></asp:TextBox>                                            
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <div class="col-2" style="margin-left:2%">
+                                        <div class="col-3" style="margin-left:2%">
                                             <label class="col-form-label">Telefono</label>
                                         </div>
-                                        <div class="col-sm-9">
+                                        <div class="col-8">
                                             <asp:TextBox ID="TxTelefono" class="form-control" runat="server"></asp:TextBox>                                            
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <div class="col-2" style="margin-left:2%">
+                                        <div class="col-3" style="margin-left:2%">
                                             <label class="col-form-label">Correo</label>
                                         </div>
-                                        <div class="col-sm-9">
+                                        <div class="col-8">
                                             <asp:TextBox ID="TxCorreo" class="form-control" runat="server"></asp:TextBox>                                            
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <div class="col-2" style="margin-left:2%">
+                                        <div class="col-3" style="margin-left:2%">
                                             <label class="col-form-label">Departamento</label>
                                         </div>
-                                        <div class="col-sm-9">
-                                            <asp:DropDownList runat="server" ID="DDLDepartamento"></asp:DropDownList>
+                                        <div class="col-8">
+                                            <asp:DropDownList runat="server" CssClass="form-control" ID="DDLDepartamento"></asp:DropDownList>
                                         </div>
                                     </div>
                                 </div>

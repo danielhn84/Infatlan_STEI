@@ -16,9 +16,12 @@ namespace Infatlan_STEI_ATM.pages.calendario
     {
         bd vConexion = new bd();
         protected void Page_Load(object sender, EventArgs e){
-            
             if (!Page.IsPostBack){
+                if (Convert.ToBoolean(Session["AUTH"])){
 
+                }else {
+                    Response.Redirect("/login.aspx");
+                }
             }
         }
 

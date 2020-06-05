@@ -18,12 +18,13 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
 
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            Session["USUARIO"] = "acamador";
-            if (!Page.IsPostBack)
-            {
-                cargarDatos();
+        protected void Page_Load(object sender, EventArgs e){
+            if (!Page.IsPostBack){
+                if (Convert.ToBoolean(Session["AUTH"])){
+                    cargarDatos();
+                }else {
+                    Response.Redirect("/login.aspx");
+                }
             }
         }
         

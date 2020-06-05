@@ -14,16 +14,17 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
     public partial class aprobarNotificacion : System.Web.UI.Page
     {
         bd vConexion = new bd();
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            if (!Page.IsPostBack)
-            {
-                //Limpiar();
-                cargarDataNotificacion();
-                llenarForm();
-
+        protected void Page_Load(object sender, EventArgs e){
+            if (!Page.IsPostBack){
+                if (Convert.ToBoolean(Session["AUTH"])){
+                    cargarDataNotificacion();
+                    llenarForm();
+                }else {
+                    Response.Redirect("/login.aspx");
+                }
             }
         }
+
         int CargarInformacionDDL(DropDownList vList, String vValue)
         {
             int vIndex = 0;

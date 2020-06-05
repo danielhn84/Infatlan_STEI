@@ -18,36 +18,29 @@ namespace Infatlan_STEI_Agencias.pages
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
 
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            Session["USUARIO"] = "acamador";
+        protected void Page_Load(object sender, EventArgs e){
             String vEx = Request.QueryString["ex"];
-
-            if (!Page.IsPostBack){              
-
-
-                if (vEx != null)
-                {
-                    if (vEx.Equals("2"))
-                    {
-                        modoVistaCampos(true);
-                        cargarDataVista();
+            
+            if (!Page.IsPostBack){
+                if (Convert.ToBoolean(Session["AUTH"])){
+                    if (vEx != null){
+                        if (vEx.Equals("2")){
+                            modoVistaCampos(true);
+                            cargarDataVista();
+                        }else if (vEx.Equals("1")){
+                            cargarDataLlenado();
+                            OcultarTarjeta();
+                            mostrarAsteriscos();
+                        }else if (vEx.Equals("3")){
+                            cargarDataModificar();
+                            OcultarTarjeta();
+                            mostrarAsteriscos();
+                            habilitarFU();
+                        }
                     }
-                    else if (vEx.Equals("1"))
-                    {
-                        cargarDataLlenado();
-                        OcultarTarjeta();
-                        mostrarAsteriscos();
-                    }
-                    else if (vEx.Equals("3"))
-                    {
-                        cargarDataModificar();
-                        OcultarTarjeta();
-                        mostrarAsteriscos();
-                        habilitarFU();
-                    }
+                }else {
+                    Response.Redirect("/login.aspx");
                 }
-
             }
         }
 

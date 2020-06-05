@@ -16,48 +16,41 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
     {
         db vConexion = new db();
       
-        protected void Page_Load(object sender, EventArgs e)
-        {
+        protected void Page_Load(object sender, EventArgs e){
             navAprobacion.Visible = false;
+            if (!Page.IsPostBack){
+                if (Convert.ToBoolean(Session["AUTH"])){
+                    HFCuartoTelecomunicaciones.Value = string.Empty;
+                    HFReubicar.Value = string.Empty;
+                    HFDesordenado.Value = string.Empty;
+                    HFExpuestoHumedo.Value = string.Empty;
+                    HFExpuestoRobo.Value = string.Empty;
+                    HFEquiposAjeno.Value = string.Empty;
+                    HFUPS.Value = string.Empty;
+                    HFAire.Value = string.Empty;
+                    HFPlano.Value = string.Empty;
+                    EliminarSesiones();
+                    CargarDatos();
 
-            if (!Page.IsPostBack)
-            {
-                HFCuartoTelecomunicaciones.Value = string.Empty;
-                HFReubicar.Value = string.Empty;
-                HFDesordenado.Value = string.Empty;
-                HFExpuestoHumedo.Value = string.Empty;
-                HFExpuestoRobo.Value = string.Empty;
-                HFEquiposAjeno.Value = string.Empty;
-                HFUPS.Value = string.Empty;
-                HFAire.Value = string.Empty;
-                HFPlano.Value = string.Empty;
-                EliminarSesiones();
-                CargarDatos();
+                    string vPestaña = Request.QueryString["a"];
+                    string vEdicion = Request.QueryString["c"];
 
-               string vPestaña = Request.QueryString["a"];
-                string vEdicion = Request.QueryString["c"];
-
-                //if (vPestaña != null)
-                //{
-                    if (Convert.ToInt32(vPestaña) == 2)
-                    {
+                    if (Convert.ToInt32(vPestaña) == 2){
                         lbTituloVisita.Text = "Revisión de Visita Ténica";
                         navAprobacion.Visible = true;
                         OcultarCampos();
                         ObtenerDatos();
                     }
 
-                    if (Convert.ToInt32(vEdicion) == 3)
-                    {
+                    if (Convert.ToInt32(vEdicion) == 3){
                         lbTituloVisita.Text = "Edición de Visita Ténica";
                         navAprobacion.Visible = true;
                         ObtenerDatos();
                     }
-
-                //}
-
+                }else {
+                    Response.Redirect("/login.aspx");
+                }
             }
-
         }
 
         public void OcultarCampos()

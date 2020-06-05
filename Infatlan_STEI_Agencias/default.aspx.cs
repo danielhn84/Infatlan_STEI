@@ -12,12 +12,14 @@ namespace Infatlan_STEI_Agencias
     public partial class _default : System.Web.UI.Page
     {
         db vConexion = new db();
+        protected void Page_Load(object sender, EventArgs e){
+            if (!Page.IsPostBack){
+                if (Convert.ToBoolean(Session["AUTH"])){
 
-
-
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            Session["USUARIO"] = "acamador";
+                }else {
+                    Response.Redirect("/login.aspx");
+                }
+            }
         }
     }
 }

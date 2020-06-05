@@ -29,16 +29,17 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         int vColor = 0;
         decimal vCantidadEditada;
 
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            CargarProceso();
-            Session["USUARIO"] = "svalle";
-
-            if (vColor == 1)
-            {
-                navCostos.Visible = false;
+        protected void Page_Load(object sender, EventArgs e){
+            if (!Page.IsPostBack){
+                if (Convert.ToBoolean(Session["AUTH"])){
+                    CargarProceso();
+                    if (vColor == 1){
+                        navCostos.Visible = false;
+                    }
+                }else {
+                    Response.Redirect("/login.aspx");
+                }
             }
-            
         }
 
         public void Mensaje(string vMensaje, WarningType type)

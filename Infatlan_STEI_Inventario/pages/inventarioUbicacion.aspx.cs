@@ -17,14 +17,14 @@ namespace Infatlan_STEI_Inventario.pages
         protected void Page_Load(object sender, EventArgs e){
             String vIdUbicacion = " " + Request.QueryString["i"];
             LbUbicacion.Text = " " + Request.QueryString["c"];
-            Session["AUTH"] = true;
-            Session["USUARIO"] = "wpadilla";
             DDLNueva.CssClass = "select2 form-control custom-select";
 
             if (!Page.IsPostBack){
                 if (Convert.ToBoolean(Session["AUTH"])){
                     limpiarSessiones();
                     cargarDatos(vIdUbicacion);
+                }else {
+                    Response.Redirect("/login.aspx");
                 }
             }
         }

@@ -15,26 +15,26 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
     public partial class notificacion : System.Web.UI.Page
     {
         bd vConexion = new bd();
-        protected void Page_Load(object sender, EventArgs e)
-        {
+        protected void Page_Load(object sender, EventArgs e){
             Session["NOTI"] = null;
-            
-            if (!Page.IsPostBack)
-            {
-                txtFechaInicio.TextMode = TextBoxMode.Date;
-                cargarData();
-                string id = Request.QueryString["id"];
-                string tipo = Request.QueryString["tipo"];
-                switch (tipo)
-                {
-                    case "3":
-                        txtFechaInicio.TextMode = TextBoxMode.SingleLine;
-                        llenarForm();
-                        cargarDataNotificacion();
-                        habilitar();
-                        btnCancelarAprobNotif.Visible = true;
-                        divRepro.Visible = true;
-                        break;
+            if (!Page.IsPostBack){
+                if (Convert.ToBoolean(Session["AUTH"])){
+                    txtFechaInicio.TextMode = TextBoxMode.Date;
+                    cargarData();
+                    string id = Request.QueryString["id"];
+                    string tipo = Request.QueryString["tipo"];
+                    switch (tipo){
+                        case "3":
+                            txtFechaInicio.TextMode = TextBoxMode.SingleLine;
+                            llenarForm();
+                            cargarDataNotificacion();
+                            habilitar();
+                            btnCancelarAprobNotif.Visible = true;
+                            divRepro.Visible = true;
+                            break;
+                    }
+                }else {
+                    Response.Redirect("/login.aspx");
                 }
             }
         }
@@ -84,7 +84,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             btnBuscarJefe.Enabled = false;
             GVBusqueda.Enabled = false;
         }
-
+        
         void validacionesNotificacion()
         {
             if (DLLtecResponsable.SelectedValue == "0")

@@ -20,12 +20,14 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
         
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            if (!Page.IsPostBack)
-            {
-                cargar();
-                UPMotivos.Update();
+        protected void Page_Load(object sender, EventArgs e){
+            if (!Page.IsPostBack){
+                if (Convert.ToBoolean(Session["AUTH"])){
+                    cargar();
+                    UPMotivos.Update();
+                }else {
+                    Response.Redirect("/login.aspx");
+                }
             }
         }
         

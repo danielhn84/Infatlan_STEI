@@ -7,17 +7,6 @@ using System.Web.UI.WebControls;
 using System.Data;
 using Infatlan_STEI_CableadoEstructurado.clases;
 using System.Data.Sql;
-using System.Text;
-using System.Drawing;
-using System.Threading.Tasks;
-using System.Web.UI.HtmlControls;
-using System.Configuration;
-using System.Web.ApplicationServices;
-
-using Word = Microsoft.Office.Interop.Word;
-using iTextSharp.text.pdf;
-using iTextSharp.text;
-using Microsoft.Office.Interop.Word;
 
 using DataTable = System.Data.DataTable;
 using Page = System.Web.UI.Page;
@@ -30,16 +19,16 @@ namespace Infatlan_STEI_CableadoEstructurado.page.visita
         db vConexion = new db();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
-            {
-                CargarProceso();
+            if (!Page.IsPostBack){
+                if (Convert.ToBoolean(Session["AUTH"])){
+                    CargarProceso();
+                    DataTable vDatos = vConexion.obtenerDataTable("STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 28");
 
-                DataTable vDatos = new DataTable();
-                vDatos = vConexion.obtenerDataTable("STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 28");
-
-                lbEstudiosCreados.Text = vDatos.Rows[0]["creados"].ToString();
-                lbEstudiosEdicion.Text = vDatos.Rows[0]["edicion"].ToString();
-
+                    lbEstudiosCreados.Text = vDatos.Rows[0]["creados"].ToString();
+                    lbEstudiosEdicion.Text = vDatos.Rows[0]["edicion"].ToString();
+                }else {
+                    Response.Redirect("/login.aspx");
+                }
             }
         }
 
