@@ -54,8 +54,7 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                     GVBusqueda.DataSource = vDatos;
                     GVBusqueda.DataBind();
                 }else{ 
-                    EnumerableRowCollection<DataRow> filtered = vDatos.AsEnumerable()
-                        .Where(r => r.Field<String>("nombre").Contains(vBusqueda.ToUpper()));
+                    EnumerableRowCollection<DataRow> filtered = vDatos.AsEnumerable().Where(r => r.Field<String>("nombre").Contains(vBusqueda.ToUpper()));
 
                     Boolean isNumeric = int.TryParse(vBusqueda, out int n);
 
@@ -70,6 +69,7 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                     vDatosFiltrados.Columns.Add("idTipoStock");
                     vDatosFiltrados.Columns.Add("nombre");
                     vDatosFiltrados.Columns.Add("descripcion");
+                    vDatosFiltrados.Columns.Add("estadoDesc");
                     vDatosFiltrados.Columns.Add("edc");
 
                     foreach (DataRow item in filtered){
@@ -77,10 +77,33 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                             item["idTipoStock"].ToString(),
                             item["nombre"].ToString(),
                             item["descripcion"].ToString(),
+                            item["estadoDesc"].ToString(),
                             item["edc"].ToString()
                             );
                     }
+                    EnumerableRowCollection<DataRow> filtered2 = null;
 
+                    if (DDLProceso.SelectedValue == "1")
+                        filtered2 = vDatosFiltrados.AsEnumerable().Where(r => r.Field<String>("edc").Contains("Si"));
+                    else if(DDLProceso.SelectedValue == "0")
+                        filtered2 = vDatosFiltrados.AsEnumerable().Where(r => r.Field<String>("edc").Contains("No"));
+
+                    DataTable vDatosFiltrados2 = new DataTable();
+                    vDatosFiltrados2.Columns.Add("idTipoStock");
+                    vDatosFiltrados2.Columns.Add("nombre");
+                    vDatosFiltrados2.Columns.Add("descripcion");
+                    vDatosFiltrados2.Columns.Add("estadoDesc");
+                    vDatosFiltrados2.Columns.Add("edc");
+
+                    foreach (DataRow items in filtered2){
+                        vDatosFiltrados2.Rows.Add(
+                            items["idTipoStock"].ToString(),
+                            items["nombre"].ToString(),
+                            items["descripcion"].ToString(),
+                            items["estadoDesc"].ToString(),
+                            items["edc"].ToString()
+                            );
+                    }
                     GVBusqueda.DataSource = vDatosFiltrados;
                     GVBusqueda.DataBind();
                     Session["INV_TIPO_ARTICULO"] = vDatosFiltrados;

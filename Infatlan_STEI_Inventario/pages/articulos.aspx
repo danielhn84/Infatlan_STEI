@@ -681,6 +681,12 @@
                                     <asp:Label ID="LbDireccion" Text="" runat="server" CssClass="col-form-label"/>
                                 </div>
                             </div>
+                            <div class="row">   
+                                <div class="col-6">  
+                                    <label class="col-4">Estado</label>
+                                    <asp:Label ID="LbEstadoEDC" Text="" runat="server" CssClass="col-form-label"/>
+                                </div>
+                            </div>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>

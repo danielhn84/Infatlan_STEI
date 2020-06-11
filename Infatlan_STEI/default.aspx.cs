@@ -7,6 +7,8 @@ namespace Infatlan_STEI
         protected void Page_Load(object sender, EventArgs e)
         {
             string usu = Convert.ToString(Session["USUARIO"]);
+            bool au = Convert.ToBoolean(Session["AUTH"]);
+
             classes.rolAplicacion[] vRolAplicacion = new classes.rolAplicacion[2];
             vRolAplicacion[0] = new classes.rolAplicacion()
             {
@@ -42,7 +44,6 @@ namespace Infatlan_STEI
             getRol();
         }
 
-
         public void getRol()
         {
             classes.roles vRol = (classes.roles)Session["ROL"];
@@ -60,6 +61,5 @@ namespace Infatlan_STEI
             }
 
         }
-
     }
 }

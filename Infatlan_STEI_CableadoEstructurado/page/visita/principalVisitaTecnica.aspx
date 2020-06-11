@@ -2,8 +2,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-
      <div class="row page-titles">
         <div class="col-md-12 align-self-center">
             <h3 class="text-themecolor">

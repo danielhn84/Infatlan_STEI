@@ -38,7 +38,6 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                 vDatos.Rows.Add("3", "Enlaces");
                 vDatos.Rows.Add("4", "Proveedores");
                 vDatos.Rows.Add("5", "Contratos");
-                vDatos.Rows.Add("6", "Tipo de Equipo");
 
                 if (vDatos.Rows.Count > 0){
                     GvBusqueda.DataSource = vDatos;
@@ -52,7 +51,7 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
         }
 
         public void Mensaje(string vMensaje, WarningType type){
-            ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
+            ScriptManager.RegisterClientScriptBlock(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
 
         protected void GvBusqueda_RowCommand(object sender, GridViewCommandEventArgs e){
@@ -114,8 +113,7 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                     LbAdvertenciaCarga.Text = "No se encontró ningún archivo a cargar.";
                 }
             }catch (Exception Ex){
-                DivMensajeCarga.Visible = true;
-                LbAdvertenciaCarga.Text = Ex.Message;
+                Mensaje(Ex.Message, WarningType.Danger);
             }
         }
 
@@ -328,11 +326,11 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                                 vDatosMaestro[10] = vDatos.Rows[i]["TELEFONO"].ToString();
                                 vDatosMaestro[11] = Session["USUARIO"].ToString();
                                 vDatosMaestro[12] = 1;
-                                String vXML = vMaestro.ObtenerMaestroStringEDC(vDatosMaestro);
+                                String vXML = vMaestro.ObtenerMaestroStringENL(vDatosMaestro);
                                 vXML = vXML.Replace("<?xml version=\"1.0\" encoding=\"utf-16\"?>", "");
 
                                 Int32 vInfo;
-                                vQuery = "[STEISP_INVENTARIO_Enlaces] {0},{1}," +
+                                vQuery = "[STEISP_INVENTARIO_Enlaces] 3,0," +
                                     "'" + vXML + "'";
 
                                 vInfo = vConexion.ejecutarSql1(vQuery);

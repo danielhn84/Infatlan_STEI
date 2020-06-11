@@ -7,9 +7,11 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace Infatlan_STEI {
-    
-    
-    public partial class _default {
+namespace Infatlan_STEI_Inventario
+{
+
+
+    public partial class _default
+    {
     }
 }

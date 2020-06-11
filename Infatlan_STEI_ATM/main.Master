@@ -17,21 +17,20 @@
     <link href="/css/animate.min.css" rel="stylesheet" />
     <link href="/css/pages/dashboard1.css" rel="stylesheet">
 
-     <!--PARA ALERTAS-->
-       <script type="text/javascript">
-           infatlan = {
-               showNotification: function (from, align, mensaje, tipo) {
-                   color = Math.floor((Math.random() * 4) + 1);
-                   $.notify({
-                       icon: "pe - 7s - gift",
-                       message: mensaje
-                   }, {
-                       type: tipo,
-                       timer: 4000,
-                       placement: { from: from, align: align }
-                   });
-               }
-           }
+    <script type="text/javascript">
+        infatlan = {
+            showNotification: function (from, align, mensaje, tipo) {
+                color = Math.floor((Math.random() * 4) + 1);
+                $.notify({
+                    icon: "pe - 7s - gift",
+                    message: mensaje
+                }, {
+                    type: tipo,
+                    timer: 4000,
+                    placement: { from: from, align: align }
+                });
+            }
+        }
     </script>
 
     <script type="text/javascript">
@@ -50,97 +49,96 @@
 
     
     <div id="main-wrapper">
-        <header class="topbar">
-            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html" style="margin-left: 35px;">
-                        <b>                           
-                            <img src="/assets/images/logo.png" alt="homepage" class="dark-logo" />
-                        </b>
-                    </a>
-                </div>
-                <div class="navbar-collapse">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item"><a class="nav-link nav-toggler d-block d-sm-none waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a></li>
-                        <li class="nav-item"><a class="nav-link sidebartoggler d-none d-lg-block d-md-block waves-effect waves-dark" href="javascript:void(0)"><i class="icon-menu"></i></a></li>
-                        <li class="nav-item">
-                            <form class="app-search d-none d-md-block d-lg-block">
-                                <h3></h3>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
+        <form id="FormaPrincipal" runat="server">
+            <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
-        <aside class="left-sidebar">
-            <div class="scroll-sidebar">
+            <header class="topbar">
+                <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="index.html" style="margin-left: 35px;">
+                            <b><img src="/assets/images/logo.png" alt="homepage" class="dark-logo" /></b>
+                        </a>
+                    </div>
+                    <div class="navbar-collapse">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item"><a class="nav-link nav-toggler d-block d-sm-none waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a></li>
+                            <li class="nav-item"><a class="nav-link sidebartoggler d-none d-lg-block d-md-block waves-effect waves-dark" href="javascript:void(0)"><i class="icon-menu"></i></a></li>
+                        </ul>
 
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav"> 
-
-                        <li><a  href="/default.aspx" aria-expanded="false"><i class="icon-action-undo"></i><span class="hide-menu">Volver</span></a></li>
-                         <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-desktop"></i><span class="hide-menu">ATM<span class="badge badge-pill badge-cyan ml-auto">13</span></span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="/sites/ATM/pages/ATM/add.aspx">Agregar</a></li>
-                                <li><a href="/sites/ATM/pages/ATM/update.aspx">Modificar</a></li>    
-                                <li><a href="/sites/ATM/pages/ATM/tipo.aspx">Tipo ATM</a></li>
-                                <li><a href="/sites/ATM/pages/ATM/modelo.aspx">Modelo</a></li>
-                                <li><a href="/sites/ATM/pages/ATM/detalleModelo.aspx">Detalle Modelo</a></li>
-                                <li><a href="/sites/ATM/pages/ATM/tipoCarga.aspx">Tipo Carga</a></li>
-                                <li><a href="/sites/ATM/pages/ATM/procesador.aspx">Procesador</a></li>
-                                <li><a href="/sites/ATM/pages/ATM/teclado.aspx">Teclado</a></li>                               
-                                <li><a href="/sites/ATM/pages/ATM/so.aspx">Sistema Operativo</a></li>
-                                <li><a href="/sites/ATM/pages/ATM/versionSw.aspx">Versión Software</a></li>
-                                <li><a href="/sites/ATM/pages/ATM/marcas.aspx">Marcas de Disco</a></li>
-                                <li><a href="/sites/ATM/pages/ATM/cancelarVerificacion.aspx">Motivo cancelar</a></li>
-                            </ul>
-                        </li>
-                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-wrench"></i><span class="hide-menu">Mantenimiento<span class="badge badge-pill badge-cyan ml-auto">2</span></span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                 <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><span class="hide-menu">Notificación<span class="badge badge-pill badge-cyan ml-auto"></span></span></a>
-                                     <ul aria-expanded="false" class="collapse">
-                                        <li><a href="/sites/ATM/pages/mantenimiento/notificacion.aspx">Crear</a></li>
-                                        <li><a href="/sites/ATM/pages/mantenimiento/buscarAprobarNotificacion.aspx">Aprobar</a></li>                                        
-                                     </ul>
-                                 </li>
-                                  <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><span class="hide-menu">Verificación<span class="badge badge-pill badge-cyan ml-auto"></span></span></a>
-                                     <ul aria-expanded="false" class="collapse">
-                                         <li><a href="/sites/ATM/pages/mantenimiento/buscarVerificacion.aspx">Crear</a></li>   
-                                        <li><a href="/sites/ATM/pages/mantenimiento/buscarAprobarVerificacion.aspx">Aprobar</a></li>
-                                     </ul>
-                                 </li>
-                               <li><a  href="/sites/ATM/pages/devolver/rechazados.aspx" aria-expanded="false"><span class="hide-menu">Devoluciones</span></a></li>
-                            </ul>
-                        </li>
-                         <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-write"></i><span class="hide-menu">Materiales<span class="badge badge-pill badge-cyan ml-auto">2</span></span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="/sites/ATM/pages/material/buscarMaterial.aspx">Solicitar</a></li>
-                                <li><a href="/sites/ATM/pages/material/buscarAprobar.aspx">Aprobar</a></li>
-                                
-                            </ul>
-                        </li>
-                        
-                        <li><a  href="/sites/ATM/pages/reprogramar/buscarReprogramar.aspx" aria-expanded="false"><i class="ti-timer"></i><span class="hide-menu">Reprogramación</span></a></li>
-                        <li><a  href="/sites/ATM/pages/calendario/mantenimientos.aspx" aria-expanded="false"><i class=" ti-calendar"></i><span class="hide-menu">Calendario</span></a></li>
-                    </ul>
+                        <ul class="navbar-nav my-lg-0">
+                            <li class="nav-item dropdown u-pro">
+                                <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="hidden-md-down"><asp:Literal Text="" ID="LitUsuario" runat="server" /> &nbsp;<i class="fa fa-angle-down"></i></span> 
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right animated flipInY">
+                                    <a href="/logout.aspx" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
+                                </div> 
+                            </li>
+                        </ul>
+                    </div>
                 </nav>
-            </div>
-        </aside>
+            </header>
 
-        <div class="page-wrapper">
-          
-            <div class="container-fluid">
-                <form id="FormaPrincipal" runat="server">
-                    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+            <aside class="left-sidebar">
+                <div class="scroll-sidebar">
+                    <nav class="sidebar-nav">
+                        <ul id="sidebarnav"> 
+                            <li><a  href="/default.aspx" aria-expanded="false"><i class="icon-action-undo"></i><span class="hide-menu">Volver</span></a></li>
+                             <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-desktop"></i><span class="hide-menu">ATM<span class="badge badge-pill badge-cyan ml-auto">13</span></span></a>
+                                <ul aria-expanded="false" class="collapse">
+                                    <li><a href="/sites/ATM/pages/ATM/add.aspx">Agregar</a></li>
+                                    <li><a href="/sites/ATM/pages/ATM/update.aspx">Modificar</a></li>    
+                                    <li><a href="/sites/ATM/pages/ATM/tipo.aspx">Tipo ATM</a></li>
+                                    <li><a href="/sites/ATM/pages/ATM/modelo.aspx">Modelo</a></li>
+                                    <li><a href="/sites/ATM/pages/ATM/detalleModelo.aspx">Detalle Modelo</a></li>
+                                    <li><a href="/sites/ATM/pages/ATM/tipoCarga.aspx">Tipo Carga</a></li>
+                                    <li><a href="/sites/ATM/pages/ATM/procesador.aspx">Procesador</a></li>
+                                    <li><a href="/sites/ATM/pages/ATM/teclado.aspx">Teclado</a></li>                               
+                                    <li><a href="/sites/ATM/pages/ATM/so.aspx">Sistema Operativo</a></li>
+                                    <li><a href="/sites/ATM/pages/ATM/versionSw.aspx">Versión Software</a></li>
+                                    <li><a href="/sites/ATM/pages/ATM/marcas.aspx">Marcas de Disco</a></li>
+                                    <li><a href="/sites/ATM/pages/ATM/cancelarVerificacion.aspx">Motivo cancelar</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-wrench"></i><span class="hide-menu">Mantenimiento<span class="badge badge-pill badge-cyan ml-auto">2</span></span></a>
+                                <ul aria-expanded="false" class="collapse">
+                                     <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><span class="hide-menu">Notificación<span class="badge badge-pill badge-cyan ml-auto"></span></span></a>
+                                         <ul aria-expanded="false" class="collapse">
+                                            <li><a href="/sites/ATM/pages/mantenimiento/notificacion.aspx">Crear</a></li>
+                                            <li><a href="/sites/ATM/pages/mantenimiento/buscarAprobarNotificacion.aspx">Aprobar</a></li>                                        
+                                         </ul>
+                                     </li>
+                                      <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><span class="hide-menu">Verificación<span class="badge badge-pill badge-cyan ml-auto"></span></span></a>
+                                         <ul aria-expanded="false" class="collapse">
+                                             <li><a href="/sites/ATM/pages/mantenimiento/buscarVerificacion.aspx">Crear</a></li>   
+                                            <li><a href="/sites/ATM/pages/mantenimiento/buscarAprobarVerificacion.aspx">Aprobar</a></li>
+                                         </ul>
+                                     </li>
+                                   <li><a  href="/sites/ATM/pages/devolver/rechazados.aspx" aria-expanded="false"><span class="hide-menu">Devoluciones</span></a></li>
+                                </ul>
+                            </li>
+                             <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-write"></i><span class="hide-menu">Materiales<span class="badge badge-pill badge-cyan ml-auto">2</span></span></a>
+                                <ul aria-expanded="false" class="collapse">
+                                    <li><a href="/sites/ATM/pages/material/buscarMaterial.aspx">Solicitar</a></li>
+                                    <li><a href="/sites/ATM/pages/material/buscarAprobar.aspx">Aprobar</a></li>
+                                </ul>
+                            </li>
+                            <li><a  href="/sites/ATM/pages/reprogramar/buscarReprogramar.aspx" aria-expanded="false"><i class="ti-timer"></i><span class="hide-menu">Reprogramación</span></a></li>
+                            <li><a  href="/sites/ATM/pages/calendario/mantenimientos.aspx" aria-expanded="false"><i class=" ti-calendar"></i><span class="hide-menu">Calendario</span></a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </aside>
+
+            <div class="page-wrapper">
+                <div class="container-fluid">
                     <div>
                         <asp:ContentPlaceHolder ID="Content" runat="server">
                         </asp:ContentPlaceHolder>
                     </div>
-                </form>
-
+                </div>
             </div>
-        </div>
+        </form>
 
         <footer class="footer">
             © 2020 Infatlan

@@ -10,6 +10,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
+            <asp:TextBox runat="server" Text="" ID="TxUsuario" Visible="false" />
         </div>
     </form>
 </body>

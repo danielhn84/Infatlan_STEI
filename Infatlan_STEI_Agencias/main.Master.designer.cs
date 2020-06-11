@@ -24,13 +24,13 @@ namespace Infatlan_STEI
         protected global::System.Web.UI.WebControls.ContentPlaceHolder Head;
 
         /// <summary>
-        /// Control FormaPrincipal.
+        /// Control Form1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm FormaPrincipal;
+        protected global::System.Web.UI.HtmlControls.HtmlForm Form1;
 
         /// <summary>
         /// Control SM1.
@@ -40,6 +40,15 @@ namespace Infatlan_STEI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.ScriptManager SM1;
+
+        /// <summary>
+        /// Control LitUsuario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal LitUsuario;
 
         /// <summary>
         /// Control Content.

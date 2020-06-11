@@ -1,16 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="visitaTecnica.aspx.cs" Inherits="Infatlan_STEI_CableadoEstructurado.paginas.estudioEstructurado" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
-
-
-
     <script src="http://code.jquery.com/jquery-1.10.2.min.js" type="text/javascript"></script>
     <script src="js/execute.js"></script>
-
     <script type="text/javascript">
         //Imagen 1
         function img1(input) {
-
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
@@ -157,16 +152,12 @@
     </script>
 
     <script type="text/javascript">
-
         function mostrarIframePDF() {
             document.getElementById('IFramePDF').style.display = 'block';
             //document.getElementById("IFramePDF").style.display= "block";
             return true;
         }
-
     </script>
-
-
 
     <script type="text/javascript">
         //Abrir modal Datos Generales
@@ -193,8 +184,6 @@
     <link href="../assets/node_modules/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-
     <asp:UpdatePanel runat="server" ID="UpdatePanel2" UpdateMode="Conditional">
         <ContentTemplate>
             <div class="row page-titles">

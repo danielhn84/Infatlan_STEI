@@ -31,6 +31,7 @@
             }
         }
     </script>
+
     <asp:ContentPlaceHolder ID="Head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -45,6 +46,8 @@
     <div id="main-wrapper">
 
         <form id="FormaPrincipal" runat="server">
+            <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
             <header class="topbar">
                 <nav class="navbar top-navbar navbar-expand-md navbar-dark">
                     <div class="navbar-header">
@@ -67,7 +70,15 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right animated flipInY">
                                     <a href="/logout.aspx" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
-                                </div>
+                                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                                        <ContentTemplate>
+                                            <a class="dropdown-item" style="display:none">
+                                                <input class="dropdown-item" type="Text" id="TxUser" value="" runat="server" ClientIDMode="AutoID" />
+                                                <asp:Literal Text="" ID="LitUser" ClientIDMode="AutoID" runat="server" />
+                                            </a>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div> 
                             </li>
                         </ul>
                     </div>
@@ -80,11 +91,10 @@
                         <ul id="sidebarnav">
                             <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Modulos <span class="badge badge-pill badge-cyan ml-auto">4</span></span></a>
                                 <ul aria-expanded="false" class="collapse">
-                                    <li><a href="/sites/agencias/default.aspx">Agencias</a></li>
-                                    <li><a href="/sites/ATM/default.aspx">ATM</a></li>
-                                    <li><a href="/sites/cableado/default.aspx">Cableado</a></li>
-                                    <li><a href="sites/inventario/default.aspx">Inventarios</a></li>
-
+                                    <li><a href="#" onclick="window.location.href = '/sites/agencias/default.aspx?u=' + document.getElementById('<%= TxUser.ClientID %>').value">Agencias</a></li>
+                                    <li><a href="#" onclick="window.location.href = '/sites/ATM/default.aspx?u=' + document.getElementById('<%= TxUser.ClientID %>').value">ATM</a></li>
+                                    <li><a href="#" onclick="window.location.href = '/sites/cableado/default.aspx?u=' + document.getElementById('<%= TxUser.ClientID %>').value">Cableado</a></li>
+                                    <li><a href="#" onclick="window.location.href = '/sites/inventario/default.aspx?u=' + document.getElementById('<%= TxUser.ClientID %>').value">Inventarios</a></li>
                                 </ul>
                             </li>
                             <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-wrench"></i><span class="hide-menu">Configuración<span class="badge badge-pill badge-cyan ml-auto">2</span></span></a>
@@ -103,7 +113,6 @@
 
             <div class="page-wrapper">
                 <div class="container-fluid">
-                    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                     <div>
                         <asp:ContentPlaceHolder ID="Content" runat="server">
                         </asp:ContentPlaceHolder>

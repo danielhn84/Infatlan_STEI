@@ -15,12 +15,25 @@ namespace Infatlan_STEI_ATM
     {
         bd vConexion = new bd();
         protected void Page_Load(object sender, EventArgs e){
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
-                    Contar();
-                }else {
-                    Response.Redirect("/login.aspx");
+            try{
+                if (!Page.IsPostBack){
+                    String vUsuario = Request.QueryString["u"];
+                    String vQuery = "[STEISP_Login] 3, '" + vUsuario + "'";
+                    DataTable vDatos = vConexion.ObtenerTabla(vQuery);
+                    if (vDatos.Rows.Count > 0){
+                        if (vDatos.Rows[0]["auth"].ToString() != "1"){
+                            Response.Redirect("/login.aspx");
+                        }else {
+                            Session["AUTHCLASS"] = vDatos;
+                            Session["USUARIO"] = vDatos.Rows[0]["idUsuario"].ToString();
+                            Session["AUTH"] = true;
+                        }
+                    }else {
+                        Response.Redirect("/login.aspx");
+                    }
                 }
+            }catch (Exception ex){
+                String vError = ex.Message;
             }
         }
 

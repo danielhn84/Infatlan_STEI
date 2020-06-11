@@ -34,6 +34,12 @@
                     <div class="card-body">
                         <div class="row col-7"> 
                             <label class="col-2 col-form-label">Búsqueda</label>
+                            <div class="col-3">
+                                <asp:DropDownList runat="server" ID="DDLProceso" CssClass="form-control">
+                                    <asp:ListItem Value="0" Text="Generales"></asp:ListItem>
+                                    <asp:ListItem Value="1" Text="Equipos de Comunicación"></asp:ListItem>
+                                </asp:DropDownList>
+                            </div>
                             <div class="col-8">
                                 <asp:TextBox runat="server" PlaceHolder="Ingrese texto y presione Enter" ID="TxBusqueda" AutoPostBack="true" OnTextChanged="TxBusqueda_TextChanged" CssClass="form-control form-control-line"></asp:TextBox>
                             </div>
@@ -54,6 +60,7 @@
                                     <asp:BoundField DataField="idTipoStock" HeaderText="No."/>
                                     <asp:BoundField DataField="nombre" HeaderText="Nombre"/>
                                     <asp:BoundField DataField="descripcion" HeaderText="Descripcion"/>
+                                    <asp:BoundField DataField="estadoDesc" HeaderText="Estado"/>
                                     <asp:BoundField DataField="edc" HeaderText="EDC"/>
                                     <asp:TemplateField HeaderText="Seleccione">
                                         <ItemTemplate>

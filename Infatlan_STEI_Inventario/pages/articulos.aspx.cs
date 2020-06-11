@@ -137,7 +137,7 @@ namespace Infatlan_STEI_Inventario.pages
                 }
 
                 // CONTRATOS
-                vQuery = "[STEISP_INVENTARIO_Contratos] 1";
+                vQuery = "[STEISP_INVENTARIO_Generales] 12";
                 vDatos = vConexion.obtenerDataTable(vQuery);
 
                 if (vDatos.Rows.Count > 0){
@@ -221,6 +221,10 @@ namespace Infatlan_STEI_Inventario.pages
 
         public void Mensaje(string vMensaje, WarningType type){
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
+        }
+
+        public void MensajeBlock(string vMensaje, WarningType type){
+            ScriptManager.RegisterClientScriptBlock(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
 
         protected void TxBusqueda_TextChanged(object sender, EventArgs e){
@@ -605,6 +609,7 @@ namespace Infatlan_STEI_Inventario.pages
                     if (vInfo > 0){
                         if (insertarInventario(vInfo, DDLUbicacionEDC.SelectedValue, "CREACION DE EDC", TxSerieEDC.Text) == 2){
                             cargarDatosEDC();
+                            cargarDatosEnlace();
                             Mensaje(vMensaje, WarningType.Success);
                         }
                     }else{
@@ -616,6 +621,7 @@ namespace Infatlan_STEI_Inventario.pages
                     vMensaje = "Equipo actualizado con éxito";
                     if (vInfo == 1){
                         cargarDatosEDC();
+                        cargarDatosEnlace();
                         Mensaje(vMensaje, WarningType.Success);
                     }else{
                         Mensaje("Ha ocurrido un error. Favor comunicarse con sistemas.", WarningType.Danger);
@@ -746,7 +752,7 @@ namespace Infatlan_STEI_Inventario.pages
                     DivEstadoEDC.Visible = true;
                     for (int i = 0; i < vDatos.Rows.Count; i++) {
                         TxNombreNodo.Text = vDatos.Rows[i]["nombreNodo"].ToString();
-                        //DDLTipoEquipoEDC.SelectedValue = vDatos.Rows[i]["tipoEquipo"].ToString();
+                        DDLTipoEquipoEDC.SelectedValue = vDatos.Rows[i]["tipoEquipo"].ToString();
                         DDLContratos.SelectedValue = vDatos.Rows[i]["idContrato"].ToString();
                         TxSerieEDC.Text = vDatos.Rows[i]["serie"].ToString();
                         TxIP.Text = vDatos.Rows[i]["ip"].ToString();
@@ -774,15 +780,24 @@ namespace Infatlan_STEI_Inventario.pages
                         LbIOSVersion.Text = vDatos.Rows[i]["IOSVersion"].ToString();
                         LbLatitud.Text = vDatos.Rows[i]["latitud"].ToString();
                         LbLongitud.Text = vDatos.Rows[i]["longitud"].ToString();
-                        //DDLUbicacionEDC.SelectedValue = vDatos.Rows[i]["nombreNodo"].ToString();
                         LbFechaMant.Text = Convert.ToDateTime(vDatos.Rows[i]["fechaMantenimiento"]).ToString("yyyy-MM-dd");
                         LbDireccion.Text = vDatos.Rows[i]["direccion"].ToString();
+                        LbEstadoEDC.Text = vDatos.Rows[i]["estados"].ToString();
                     }
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalInfoEDC();", true);
                 }
                 Session["INV_STOCKEDC_ID"] = vIdArticuloEDC;
             }catch (Exception Ex){
-                Mensaje(Ex.Message, WarningType.Danger);
+                if (Ex.Message.Contains("'DDLContratos' tiene un SelectedValue que no es válido"))
+                    MensajeBlock("El contrato está deshabilitado.", WarningType.Danger);
+                else if(Ex.Message.Contains("'DDLTipoEquipoEDC' tiene un SelectedValue que no es válido"))
+                    MensajeBlock("El tipo de Equipo está deshabilitado.", WarningType.Danger);
+                else if (Ex.Message.Contains("'DDLRegion' tiene un SelectedValue que no es válido"))
+                    MensajeBlock("La región está deshabilitada.", WarningType.Danger);
+                else if (Ex.Message.Contains("'DDLUbicacionEDC' tiene un SelectedValue que no es válido"))
+                    MensajeBlock("La ubicación está deshabilitada.", WarningType.Danger);
+                else
+                    MensajeBlock(Ex.Message, WarningType.Danger);
             }
         }
 
@@ -881,7 +896,16 @@ namespace Infatlan_STEI_Inventario.pages
                 }
                 Session["INV_STOCKENL_ID"] = vIdEnlace;
             }catch (Exception Ex){
-                Mensaje(Ex.Message, WarningType.Danger);
+                if (Ex.Message.Contains("'DDLTipoEnlace' tiene un SelectedValue que no es válido"))
+                    MensajeBlock("El Tipo de Enlace está deshabilitado.", WarningType.Danger);
+                else if (Ex.Message.Contains("'DDLProveedorENL' tiene un SelectedValue que no es válido"))
+                    MensajeBlock("El proveedor está deshabilitado.", WarningType.Danger);
+                else if (Ex.Message.Contains("'DDLRegion' tiene un SelectedValue que no es válido"))
+                    MensajeBlock("La región está deshabilitada.", WarningType.Danger);
+                else if (Ex.Message.Contains("'DDLUbicacionEDC' tiene un SelectedValue que no es válido"))
+                    MensajeBlock("La ubicación está deshabilitada.", WarningType.Danger);
+                else
+                    MensajeBlock(Ex.Message, WarningType.Danger);
             }
         }
 

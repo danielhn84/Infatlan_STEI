@@ -28,7 +28,7 @@ namespace Infatlan_STEI_Inventario.pages
 
         private void cargarDatos() {
             try{
-                String vQuery = "[STEISP_INVENTARIO_Generales] 4";
+                String vQuery = "[STEISP_INVENTARIO_Proveedores] 1";
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
 
                 if (vDatos.Rows.Count > 0){

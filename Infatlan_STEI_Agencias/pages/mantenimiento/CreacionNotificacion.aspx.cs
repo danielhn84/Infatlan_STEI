@@ -11,10 +11,13 @@ namespace Infatlan_STEI_Agencias.pages{
     {
         db vConexion = new db();
         protected void Page_Load(object sender, EventArgs e){
-            if (!IsPostBack){
-                cargarData();
+            if (!Page.IsPostBack){
+                if (Convert.ToBoolean(Session["AUTH"])){
+                    cargarData();
+                }else {
+                    Response.Redirect("/login.aspx");
+                }
             }
-           
         }
 
         internal void cargarData()

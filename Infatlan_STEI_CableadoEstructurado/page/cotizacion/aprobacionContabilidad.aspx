@@ -4,45 +4,29 @@
 
     <script type="text/javascript">
         //Abrir modal
-        function openModal() {
-            $('#ModificarMaterialModal').modal('show');
-        }
+        function openModal() {$('#ModificarMaterialModal').modal('show');}
 
         // Cerrar modal
-        function closeModal() {
-            $('#ModificarMaterialModal').modal('hide');
-        }
+        function closeModal() {$('#ModificarMaterialModal').modal('hide');}
 
         //Abrir modal
-        function openModalConta() {
-            $('#MensajeAceptacionModalContabilidad').modal('show');
-        }
+        function openModalConta() {$('#MensajeAceptacionModalContabilidad').modal('show');}
 
         // Cerrar modal
-        function closeModalConta() {
-            $('#MensajeAceptacionModalContabilidad').modal('hide');
-        }
+        function closeModalConta() {$('#MensajeAceptacionModalContabilidad').modal('hide');}
 
         //Abrir modal
-        function openModalBanco() {
-            $('#MensajeAceptacionModalBanco').modal('show');
-        }
+        function openModalBanco() {$('#MensajeAceptacionModalBanco').modal('show');}
 
         // Cerrar modal
-        function closeModalBanco() {
-            $('#MensajeAceptacionModalBanco').modal('hide');
-        }
-        function ShowPopupModal() {
-            $("#BtnModGuardarConta").click();
-        }
+        function closeModalBanco() { $('#MensajeAceptacionModalBanco').modal('hide'); }
 
+        function ShowPopupModal() { $("#BtnModGuardarConta").click(); }
     </script>
 
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-
     <div class="row page-titles">
         <div class="col-md-12 align-self-center">
             <h3 class="text-themecolor">Cotización de Estudios</h3>

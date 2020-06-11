@@ -2,7 +2,6 @@
 
 <!DOCTYPE html>
 
-
 <html>
 <head runat="server">
     <meta charset="utf-8">
@@ -56,105 +55,80 @@
 
 
     <div id="main-wrapper">
-        <header class="topbar">
-            <nav class="navbar top-navbar navbar-expand-md navbar-dark   ">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html" style="margin-left: 35px;">
-                        <b>
-
-                            <img src="/assets/images/logo.png" alt="homepage" class="dark-logo" />
-                        </b>
-                    </a>
-                </div>
-                <div class="navbar-collapse">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item"><a class="nav-link nav-toggler d-block d-sm-none waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a></li>
-                        <li class="nav-item"><a class="nav-link sidebartoggler d-none d-lg-block d-md-block waves-effect waves-dark" href="javascript:void(0)"><i class="icon-menu"></i></a></li>
-                        <li class="nav-item">
-                      
-                        </li>
-                    </ul>
-
-                   
-                </div>
-            </nav>
-        </header>
-
-        <aside class="left-sidebar">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-                <!-- User Profile-->
-                <div class="user-profile">
-                    <div class="user-pro-body">
-                        <div>
-
-                            <%--<img src="/assets/images/users/usuario.png" alt="user-img" class="img-circle"></div>--%>
-<%--                        <div class="dropdown">
-                            <a href="javascript:void(0)" class="dropdown-toggle u-dropdown link hide-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuario <span class="caret"></span></a>
-                            <div class="dropdown-menu animated flipInY">
-
-                                <!-- text-->
-                                <a href="javascript:void(0)" class="dropdown-item"><i class="ti-settings"></i>Account Setting</a>
-                                <!-- text-->
-                                <div class="dropdown-divider"></div>
-                                <!-- text-->
-                                <a href="login.html" class="dropdown-item"><i class="fa fa-power-off"></i>Logout</a>
-                                <!-- text-->
-                            </div>--%>
-                        </div>
+        <form id="Form1" runat="server">
+            <asp:ScriptManager runat="server" ID="SM1"></asp:ScriptManager>
+            <header class="topbar">
+                <nav class="navbar top-navbar navbar-expand-md navbar-dark   ">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="index.html" style="margin-left: 35px;">
+                            <b><img src="/assets/images/logo.png" alt="homepage" class="dark-logo" /></b>
+                        </a>
                     </div>
-                </div>
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <li><a  href="/default.aspx" aria-expanded="false"><i class="icon-action-undo"></i><span class="hide-menu">Volver</span></a></li>
-                       
-                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-home"></i><span class="hide-menu">Configuraciones</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="/sites/agencias/pages/configuraciones/creacionAgencia.aspx">Agencias</a></li>
-                                <li><a href="/sites/agencias/pages/configuraciones/agenciaTipo.aspx">Tipos de Agencia</a></li>                               
-                                <li><a href="/sites/agencias/pages/configuraciones/motivosCancelacionMantenimientos.aspx">Motivos</a></li>
-                                <li><a href="/sites/agencias/pages/configuraciones/tiposAreas.aspx">Areas</a></li>
-                                <li><a href="/sites/agencias/pages/configuraciones/calendarioMantenimientoAnual.aspx">Calendario Anual</a></li>
-                            </ul>
-                        </li>                   
-                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-wrench"></i><span class="hide-menu">Mantenimiento</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="/sites/agencias/pages/mantenimiento/creacionNotificacion.aspx">Crear Notificación</a></li>
-                                <li><a href="/sites/agencias/pages/mantenimiento/aprobarNotificacion.aspx">Aprobar Notificacion</a></li>
-                                <li><a href="/sites/agencias/pages/mantenimiento/solicitudMateriales.aspx">Solicitar Materiales</a></li>
-                                <li><a href="/sites/agencias/pages/mantenimiento/aprobarSolicitudMateriales.aspx">Aprobar Materiales</a></li>
-                                <li><a href="/sites/agencias/pages/mantenimiento/lvPendientesCompletar.aspx">Completar LV</a></li>
-                                <li><a href="/sites/agencias/pages/mantenimiento/lvPendientesAprobarJefes.aspx">Aprobar LV</a></li>
-                                <li><a href="/sites/agencias/pages/mantenimiento/lvPendientesModificar.aspx">Modificar LV</a></li>
-                                <li><a href="/sites/agencias/pages/mantenimiento/reprogramarMantenimiento.aspx">Reprogramar</a></li>
-                            </ul>
-                        </li>
-                        
-                        <li><a class="waves-effect waves-dark" href="pages-faq.html" aria-expanded="false"><i class="icon-bubble"></i><span class="hide-menu">FAQs</span></a></li>                  
-      </ul>
-
-
-
+                    <div class="navbar-collapse">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item"><a class="nav-link nav-toggler d-block d-sm-none waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a></li>
+                            <li class="nav-item"><a class="nav-link sidebartoggler d-none d-lg-block d-md-block waves-effect waves-dark" href="javascript:void(0)"><i class="icon-menu"></i></a></li>
+                        </ul>
+                        <ul class="navbar-nav my-lg-0">
+                            <li class="nav-item dropdown u-pro">
+                                <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="hidden-md-down"><asp:Literal Text="" ID="LitUsuario" runat="server" /> &nbsp;<i class="fa fa-angle-down"></i></span> 
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right animated flipInY">
+                                    <a href="/logout.aspx" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
+                                </div> 
+                            </li>
+                        </ul>
+                    </div>
                 </nav>
-                <!-- End Sidebar navigation -->
-            </div>
-            <!-- End Sidebar scroll-->
-        </aside>
+            </header>
 
-        <div class="page-wrapper">
+            <aside class="left-sidebar">
+                <div class="scroll-sidebar">
+                    <nav class="sidebar-nav">
+                        <ul id="sidebarnav">
+                            <li><a  href="/default.aspx" aria-expanded="false"><i class="icon-action-undo"></i><span class="hide-menu">Volver</span></a></li>
+                       
+                            <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-home"></i><span class="hide-menu">Configuraciones</span></a>
+                                <ul aria-expanded="false" class="collapse">
+                                    <li><a href="/sites/agencias/pages/configuraciones/creacionAgencia.aspx">Agencias</a></li>
+                                    <li><a href="/sites/agencias/pages/configuraciones/agenciaTipo.aspx">Tipos de Agencia</a></li>                               
+                                    <li><a href="/sites/agencias/pages/configuraciones/motivosCancelacionMantenimientos.aspx">Motivos</a></li>
+                                    <li><a href="/sites/agencias/pages/configuraciones/tiposAreas.aspx">Areas</a></li>
+                                    <li><a href="/sites/agencias/pages/configuraciones/calendarioMantenimientoAnual.aspx">Calendario Anual</a></li>
+                                </ul>
+                            </li>                   
+                            <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-wrench"></i><span class="hide-menu">Mantenimiento</span></a>
+                                <ul aria-expanded="false" class="collapse">
+                                    <li><a href="/sites/agencias/pages/mantenimiento/creacionNotificacion.aspx">Crear Notificación</a></li>
+                                    <li><a href="/sites/agencias/pages/mantenimiento/aprobarNotificacion.aspx">Aprobar Notificacion</a></li>
+                                    <li><a href="/sites/agencias/pages/mantenimiento/solicitudMateriales.aspx">Solicitar Materiales</a></li>
+                                    <li><a href="/sites/agencias/pages/mantenimiento/aprobarSolicitudMateriales.aspx">Aprobar Materiales</a></li>
+                                    <li><a href="/sites/agencias/pages/mantenimiento/lvPendientesCompletar.aspx">Completar LV</a></li>
+                                    <li><a href="/sites/agencias/pages/mantenimiento/lvPendientesAprobarJefes.aspx">Aprobar LV</a></li>
+                                    <li><a href="/sites/agencias/pages/mantenimiento/lvPendientesModificar.aspx">Modificar LV</a></li>
+                                    <li><a href="/sites/agencias/pages/mantenimiento/reprogramarMantenimiento.aspx">Reprogramar</a></li>
+                                </ul>
+                            </li>
+                        
+                            <li><a class="waves-effect waves-dark" href="pages-faq.html" aria-expanded="false"><i class="icon-bubble"></i><span class="hide-menu">FAQs</span></a></li>                  
+          </ul>
 
-            <div class="container-fluid">
-                <form id="FormaPrincipal" runat="server">
-                    <asp:ScriptManager runat="server" ID="SM1"></asp:ScriptManager>
+
+
+                    </nav>
+                </div>
+            </aside>
+
+            <div class="page-wrapper">
+                <div class="container-fluid">
                     <div>
                         <asp:ContentPlaceHolder ID="Content" runat="server">
                         </asp:ContentPlaceHolder>
                     </div>
-                </form>
-
+                </div>
             </div>
-        </div>
+        </form>
 
         <footer class="footer">
             © 2020 Infatlan
