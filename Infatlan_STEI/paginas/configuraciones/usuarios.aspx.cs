@@ -17,8 +17,6 @@ namespace Infatlan_STEI.paginas.configuraciones
     {
         db vConexion = new db();
         protected void Page_Load(object sender, EventArgs e){
-            Session["USUARIO"] = "wpadilla";
-            Session["AUTH"] = true;
             if (!Page.IsPostBack){
                 if (Convert.ToBoolean(Session["AUTH"])){
                     cargarDatos();

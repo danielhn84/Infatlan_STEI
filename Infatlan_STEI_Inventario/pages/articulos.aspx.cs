@@ -446,7 +446,7 @@ namespace Infatlan_STEI_Inventario.pages
             try{
                 validarDatosTA();
                 String vQuery = "[STEISP_INVENTARIO_Stock] 5" +
-                    ",'" + TxNombreTA.Text + "'" +
+                    ",'" + TxNombreTA.Text.ToUpper() + "'" +
                     ",'" + TxDescripcion.Text + "'";
                 int vInfo = vConexion.ejecutarSql(vQuery);
                 if (vInfo == 1){
@@ -501,7 +501,7 @@ namespace Infatlan_STEI_Inventario.pages
             try{
                 validarDatosProv();
                 String vQuery = "[STEISP_INVENTARIO_Proveedores] 3" +
-                    ",'" + TxNombreProv.Text + "'" +
+                    ",'" + TxNombreProv.Text.ToUpper() + "'" +
                     ",'" + TxDireccionProv.Text + "'" +
                     ",'" + TxTelefonoProv.Text + "'" + 
                     ",'" + TxResponsableProv.Text + "'";

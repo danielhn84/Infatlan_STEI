@@ -83,7 +83,7 @@
                         <ul id="sidebarnav" runat="server">
                             <li><a href="/default.aspx" aria-expanded="false"><i class="icon-action-undo"></i><span class="hide-menu">Volver</span></a></li>
                             <li><a class="waves-effect waves-dark" href="/sites/cableado/page/visita/principalVisitaTecnica.aspx" aria-expanded="false"><i class="icon-plane"></i><span class="hide-menu">Visita Técnica</span></a></li>
-                            <li class="active"><a class="waves-effect waves-dark" href="/sites/cableado/page/visita/aprobacion.aspx" aria-expanded="false"><i id="aprobacion" runat="server" class="icon-check"></i><span class="hide-menu">Revisión</span></a></li>
+                            <li><a class="waves-effect waves-dark" href="/sites/cableado/page/visita/aprobacion.aspx" aria-expanded="false"><i id="aprobacion" runat="server" class="icon-check"></i><span class="hide-menu">Revisión</span></a></li>
                             <li><a class="waves-effect waves-dark" href="/sites/cableado/page/cotizacion/principalPresupuestos.aspx" aria-expanded="false"><i class="icon-basket"></i><span class="hide-menu">Cotización</span></a></li>
                             <li><a class="waves-effect waves-dark" href="/sites/cableado/page/cotizacion/ofertaEconomica.aspx" aria-expanded="false"><i class="icon-basket"></i><span class="hide-menu">Oferta Económica</span></a></li>
                         </ul>

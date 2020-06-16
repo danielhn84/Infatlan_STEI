@@ -91,16 +91,25 @@
                         <ul id="sidebarnav">
                             <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Modulos <span class="badge badge-pill badge-cyan ml-auto">4</span></span></a>
                                 <ul aria-expanded="false" class="collapse">
-                                    <li><a href="#" onclick="window.location.href = '/sites/agencias/default.aspx?u=' + document.getElementById('<%= TxUser.ClientID %>').value">Agencias</a></li>
-                                    <li><a href="#" onclick="window.location.href = '/sites/ATM/default.aspx?u=' + document.getElementById('<%= TxUser.ClientID %>').value">ATM</a></li>
-                                    <li><a href="#" onclick="window.location.href = '/sites/cableado/default.aspx?u=' + document.getElementById('<%= TxUser.ClientID %>').value">Cableado</a></li>
-                                    <li><a href="#" onclick="window.location.href = '/sites/inventario/default.aspx?u=' + document.getElementById('<%= TxUser.ClientID %>').value">Inventarios</a></li>
+                                    <li runat="server" id="LIAgencias" visible="false">
+                                        <a href="#" onclick="window.location.href = '/sites/agencias/default.aspx?u=' + document.getElementById('<%= TxUser.ClientID %>').value">Agencias</a>
+                                    </li>
+                                    <li runat="server" id="LIATM" visible="false">
+                                        <a href="#" onclick="window.location.href = '/sites/ATM/default.aspx?u=' + document.getElementById('<%= TxUser.ClientID %>').value">ATM</a>
+
+                                    </li>
+                                    <li runat="server" id="LICableado" visible="false">
+                                        <a href="#" onclick="window.location.href = '/sites/cableado/default.aspx?u=' + document.getElementById('<%= TxUser.ClientID %>').value">Cableado</a>
+                                    </li>
+                                    <li runat="server" id="LIInventario" visible="false">
+                                        <a href="#" onclick="window.location.href = '/sites/inventario/default.aspx?u=' + document.getElementById('<%= TxUser.ClientID %>').value">Inventarios</a>
+                                    </li>
                                 </ul>
                             </li>
                             <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-wrench"></i><span class="hide-menu">Configuración<span class="badge badge-pill badge-cyan ml-auto">2</span></span></a>
                                 <ul aria-expanded="false" class="collapse">
                                     <li><a href="/paginas/configuraciones/usuarios.aspx">Usuarios</a></li>
-                                    <li><a href="#">Permisos</a></li>
+                                    <li><a href="/paginas/configuraciones/permisos.aspx">Permisos</a></li>
                                 </ul>
                             </li>
                             <li><a class="waves-effect waves-dark" href="pages-faq.html" aria-expanded="false"><i class="icon-bubble"></i><span class="hide-menu">FAQs</span></a></li>

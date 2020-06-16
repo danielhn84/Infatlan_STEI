@@ -32,15 +32,20 @@
                     <h6 class="card-subtitle">Tipo de material o equipo existente en inventario.</h6>
                     
                     <div class="card-body">
-                        <div class="row col-7"> 
-                            <label class="col-2 col-form-label">Búsqueda</label>
+                        <div class="row col-12"> 
+                            <div class="col-1">
+                                <label class="col-form-label">Búsqueda</label>
+                            </div>
+
                             <div class="col-3">
-                                <asp:DropDownList runat="server" ID="DDLProceso" CssClass="form-control">
-                                    <asp:ListItem Value="0" Text="Generales"></asp:ListItem>
-                                    <asp:ListItem Value="1" Text="Equipos de Comunicación"></asp:ListItem>
+                                <asp:DropDownList runat="server" AutoPostBack="true" ID="DDLProceso" CssClass="form-control" OnSelectedIndexChanged="DDLProceso_SelectedIndexChanged">
+                                    <asp:ListItem Value="0" Text="Todos"></asp:ListItem>
+                                    <asp:ListItem Value="1" Text="General"></asp:ListItem>
+                                    <asp:ListItem Value="2" Text="Equipos de Comunicación"></asp:ListItem>
                                 </asp:DropDownList>
                             </div>
-                            <div class="col-8">
+                            
+                            <div class="col-5">
                                 <asp:TextBox runat="server" PlaceHolder="Ingrese texto y presione Enter" ID="TxBusqueda" AutoPostBack="true" OnTextChanged="TxBusqueda_TextChanged" CssClass="form-control form-control-line"></asp:TextBox>
                             </div>
                             <asp:Button runat="server" ID="BtnNuevo" CssClass="btn btn-success" Text="Nuevo" OnClick="BtnNuevo_Click" />
@@ -62,9 +67,9 @@
                                     <asp:BoundField DataField="descripcion" HeaderText="Descripcion"/>
                                     <asp:BoundField DataField="estadoDesc" HeaderText="Estado"/>
                                     <asp:BoundField DataField="edc" HeaderText="EDC"/>
-                                    <asp:TemplateField HeaderText="Seleccione">
+                                    <asp:TemplateField>
                                         <ItemTemplate>
-                                            <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-info mr-2" CommandArgument='<%# Eval("idTipoStock") %>' CommandName="EditarArticulo">
+                                            <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-info" CommandArgument='<%# Eval("idTipoStock") %>' CommandName="EditarArticulo">
                                                 <i class="icon-pencil" ></i>
                                             </asp:LinkButton>
                                         </ItemTemplate>

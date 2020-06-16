@@ -3251,34 +3251,13 @@
     <Content Include="assets\node_module\x-editable\dist\jqueryui-editable\img\loading.gif" />
     <Content Include="assets\node_module\x-editable\dist\jqueryui-editable\js\jqueryui-editable.js" />
     <Content Include="assets\node_module\x-editable\dist\jqueryui-editable\js\jqueryui-editable.min.js" />
-    <Content Include="bin\AntiXSSLibrary.dll" />
     <Content Include="bin\Infatlan_STEI.dll" />
     <Content Include="bin\Infatlan_STEI.pdb" />
-    <Content Include="bin\Infatlan_STEI_CableadoEstructurado.dll" />
-    <Content Include="bin\Infatlan_STEI_CableadoEstructurado.pdb" />
-    <Content Include="bin\itextsharp.dll" />
-    <Content Include="bin\itextsharp.xml" />
-    <Content Include="bin\itextsharp.xmlworker.dll" />
-    <Content Include="bin\JsonPath.dll" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
-    <Content Include="bin\Microsoft.Crm.Sdk.Proxy.dll" />
-    <Content Include="bin\Microsoft.Crm.Sdk.Proxy.xml" />
-    <Content Include="bin\microsoft.identitymodel.dll" />
-    <Content Include="bin\Microsoft.Office.Interop.Word.dll" />
-    <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
-    <Content Include="bin\Microsoft.Xrm.Client.CodeGeneration.dll" />
-    <Content Include="bin\Microsoft.Xrm.Client.dll" />
-    <Content Include="bin\Microsoft.Xrm.Portal.dll" />
-    <Content Include="bin\Microsoft.Xrm.Portal.Files.dll" />
-    <Content Include="bin\Microsoft.Xrm.Sdk.Deployment.dll" />
-    <Content Include="bin\Microsoft.Xrm.Sdk.Deployment.xml" />
-    <Content Include="bin\Microsoft.Xrm.Sdk.dll" />
-    <Content Include="bin\Microsoft.Xrm.Sdk.xml" />
-    <Content Include="bin\Newtonsoft.Json.dll" />
-    <Content Include="bin\Newtonsoft.Json.xml" />
     <Content Include="bin\roslyn\csc.exe" />
     <Content Include="bin\roslyn\csi.exe" />
+    <Content Include="bin\roslyn\Infatlan_STEI.dll" />
     <Content Include="bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll" />
     <Content Include="bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll" />
     <Content Include="bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll" />
@@ -3313,18 +3292,6 @@
     <Content Include="bin\roslyn\System.Xml.XPath.XDocument.dll" />
     <Content Include="bin\roslyn\vbc.exe" />
     <Content Include="bin\roslyn\VBCSCompiler.exe" />
-    <Content Include="bin\System.Web.Helpers.dll" />
-    <Content Include="bin\System.Web.Helpers.xml" />
-    <Content Include="bin\System.Web.Mvc.dll" />
-    <Content Include="bin\System.Web.Mvc.xml" />
-    <Content Include="bin\System.Web.Razor.dll" />
-    <Content Include="bin\System.Web.Razor.xml" />
-    <Content Include="bin\System.Web.WebPages.Deployment.dll" />
-    <Content Include="bin\System.Web.WebPages.Deployment.xml" />
-    <Content Include="bin\System.Web.WebPages.dll" />
-    <Content Include="bin\System.Web.WebPages.Razor.dll" />
-    <Content Include="bin\System.Web.WebPages.Razor.xml" />
-    <Content Include="bin\System.Web.WebPages.xml" />
     <Content Include="css\pages\bootstrap-switch.css" />
     <Content Include="css\pages\breadcrumb-page.css" />
     <Content Include="css\pages\chat-app-page.css" />
@@ -3381,6 +3348,7 @@
     <Content Include="js\waves.js" />
     <Content Include="login.aspx" />
     <Content Include="logout.aspx" />
+    <Content Include="paginas\configuraciones\permisos.aspx" />
     <Content Include="paginas\configuraciones\usuarios.aspx" />
     <Content Include="paginas\mail\TemplateMail.html" />
     <Content Include="Web.config" />
@@ -3418,6 +3386,13 @@
     </Compile>
     <Compile Include="main.Master.designer.cs">
       <DependentUpon>main.Master</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\configuraciones\permisos.aspx.cs">
+      <DependentUpon>permisos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\configuraciones\permisos.aspx.designer.cs">
+      <DependentUpon>permisos.aspx</DependentUpon>
     </Compile>
     <Compile Include="paginas\configuraciones\usuarios.aspx.cs">
       <DependentUpon>usuarios.aspx</DependentUpon>
@@ -4414,7 +4389,6 @@
     <Content Include="assets\node_module\typeahead.js-master\README.md" />
     <Content Include="assets\node_module\typeahead.js-master\test\ci" />
     <Content Include="assets\node_module\typeahead.js-master\typeahead.js.jquery.json" />
-    <Content Include="bin\Infatlan_STEI_CableadoEstructurado.dll.config" />
     <Content Include="bin\roslyn\csc.exe.config" />
     <Content Include="bin\roslyn\csc.rsp" />
     <Content Include="bin\roslyn\csi.exe.config" />
@@ -4507,6 +4481,7 @@
     <Content Include="scss\widgets\weather-widget.scss" />
     <Content Include="scss\widgets\widgets.scss" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

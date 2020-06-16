@@ -28,9 +28,16 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
 
         private void cargarDatos() {
             try{
-                String vQuery = "[STEISP_INVENTARIO_TipoArticulos] 1";
-                DataTable vDatos = vConexion.obtenerDataTable(vQuery);
+                String vQuery = "";
 
+                if (DDLProceso.SelectedValue == "0")
+                    vQuery = "[STEISP_INVENTARIO_TipoArticulos] 1";
+                else if (DDLProceso.SelectedValue == "1")
+                    vQuery = "[STEISP_INVENTARIO_TipoArticulos] 5, 'False'";
+                else if (DDLProceso.SelectedValue == "2")
+                    vQuery = "[STEISP_INVENTARIO_TipoArticulos] 5, 'True'";
+
+                DataTable vDatos = vConexion.obtenerDataTable(vQuery);
                 if (vDatos.Rows.Count > 0){
                     GVBusqueda.DataSource = vDatos;
                     GVBusqueda.DataBind();
@@ -81,34 +88,11 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                             item["edc"].ToString()
                             );
                     }
-                    EnumerableRowCollection<DataRow> filtered2 = null;
 
-                    if (DDLProceso.SelectedValue == "1")
-                        filtered2 = vDatosFiltrados.AsEnumerable().Where(r => r.Field<String>("edc").Contains("Si"));
-                    else if(DDLProceso.SelectedValue == "0")
-                        filtered2 = vDatosFiltrados.AsEnumerable().Where(r => r.Field<String>("edc").Contains("No"));
-
-                    DataTable vDatosFiltrados2 = new DataTable();
-                    vDatosFiltrados2.Columns.Add("idTipoStock");
-                    vDatosFiltrados2.Columns.Add("nombre");
-                    vDatosFiltrados2.Columns.Add("descripcion");
-                    vDatosFiltrados2.Columns.Add("estadoDesc");
-                    vDatosFiltrados2.Columns.Add("edc");
-
-                    foreach (DataRow items in filtered2){
-                        vDatosFiltrados2.Rows.Add(
-                            items["idTipoStock"].ToString(),
-                            items["nombre"].ToString(),
-                            items["descripcion"].ToString(),
-                            items["estadoDesc"].ToString(),
-                            items["edc"].ToString()
-                            );
-                    }
                     GVBusqueda.DataSource = vDatosFiltrados;
                     GVBusqueda.DataBind();
                     Session["INV_TIPO_ARTICULO"] = vDatosFiltrados;
                 }
-
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);
             }
@@ -208,6 +192,14 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                 throw new Exception("Favor ingrese el nombre.");
             if (TxDescripcion.Text == "" || TxDescripcion.Text == string.Empty)
                 throw new Exception("Favor ingrese la descripción.");
+        }
+
+        protected void DDLProceso_SelectedIndexChanged(object sender, EventArgs e){
+            try{
+                cargarDatos();
+            }catch (Exception ex){
+                Mensaje(ex.Message, WarningType.Danger);
+            }
         }
     }
 }
