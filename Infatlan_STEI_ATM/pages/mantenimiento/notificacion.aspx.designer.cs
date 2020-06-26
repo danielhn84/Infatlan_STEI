@@ -213,15 +213,6 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         protected global::System.Web.UI.WebControls.GridView GVBusqueda;
 
         /// <summary>
-        /// Control UpdateTest.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdateTest;
-
-        /// <summary>
         /// Control H3JefeAgencia.
         /// </summary>
         /// <remarks>
@@ -229,6 +220,15 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl H3JefeAgencia;
+
+        /// <summary>
+        /// Control UpdateTest.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdateTest;
 
         /// <summary>
         /// Control DIVBuscarJefes.
@@ -321,15 +321,6 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         protected global::System.Web.UI.WebControls.GridView GVjefesAgencias;
 
         /// <summary>
-        /// Control divBtnEnviar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divBtnEnviar;
-
-        /// <summary>
         /// Control btnEnviarNotificacion.
         /// </summary>
         /// <remarks>
@@ -337,15 +328,6 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnEnviarNotificacion;
-
-        /// <summary>
-        /// Control divRepro.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divRepro;
 
         /// <summary>
         /// Control btnCancelarAprobNotif.

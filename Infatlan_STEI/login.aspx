@@ -105,9 +105,9 @@
         </div>
     </section>
 
-    <script src="/assets/node_module/jquery/jquery-3.2.1.min.js"></script>
-    <script src="/assets/node_module/popper/popper.min.js"></script>
-    <script src="/assets/node_module/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
+    <script src="/assets/node_modules/popper/popper.min.js"></script>
+    <script src="/assets/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
     
 </body>

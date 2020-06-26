@@ -18,7 +18,19 @@
             </div>
         </ProgressTemplate>
     </asp:UpdateProgress>
-    <br />
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h4 class="text-themecolor">STEI</h4>
+        </div>
+        <div class="col-md-7 align-self-center text-right">
+            <div class="d-flex justify-content-end align-items-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Configuración</a></li>
+                    <li class="breadcrumb-item active">Permisos</li>
+                </ol>
+            </div> 
+        </div>
+    </div>
 
     <asp:UpdatePanel runat="server" ID="UpdatePanel">
         <ContentTemplate>
@@ -30,7 +42,7 @@
                     <div class="row col-7"> 
                         <label class="col-2 col-form-label">Usuario</label>
                         <div class="col-8">
-                            <asp:dropdownlist id="DDLUsuarios" CssClass="form-control" runat="server" OnSelectedIndexChanged="DDLUsuarios_SelectedIndexChanged"></asp:dropdownlist>
+                            <asp:dropdownlist AutoPostBack="true" id="DDLUsuarios" CssClass="form-control" runat="server" OnSelectedIndexChanged="DDLUsuarios_SelectedIndexChanged"></asp:dropdownlist>
                         </div>
                     </div>
 
@@ -42,7 +54,7 @@
                             RowStyle-CssClass="rows"
                             AutoGenerateColumns="false"
                             AllowPaging="true"
-                            GridLines="None" OnRowDataBound="GVBusqueda_RowDataBound"
+                            GridLines="None"
                             PageSize="10">
                             <Columns>
                                 <asp:BoundField DataField="idAplicacion" HeaderText="No."/>
@@ -50,25 +62,25 @@
                                 <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Right">
                                     <HeaderTemplate>Consultar</HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:CheckBox ID="CBxConsulta" runat="server"/>
+                                        <asp:CheckBox ID="CBxConsulta" runat="server" Checked='<%# Convert.ToBoolean(Eval("consulta")) %>'/>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField ItemStyle-HorizontalAlign="Center">
                                     <HeaderTemplate>Crear</HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:CheckBox ID="CBxCrear" runat="server"/>
+                                        <asp:CheckBox ID="CBxCrear" runat="server" Checked='<%# Convert.ToBoolean(Eval("escritura")) %>'/>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField ItemStyle-HorizontalAlign="Center">
                                     <HeaderTemplate>Editar</HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:CheckBox ID="CBxEditar" runat="server"/>
+                                        <asp:CheckBox ID="CBxEditar" runat="server" Checked='<%# Convert.ToBoolean(Eval("edicion")) %>'/>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField ItemStyle-HorizontalAlign="Center">
                                     <HeaderTemplate>Borrar</HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:CheckBox ID="CBxBorrar" runat="server"/>
+                                        <asp:CheckBox ID="CBxBorrar" runat="server" Checked='<%# Convert.ToBoolean(Eval("borrar")) %>'/>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>

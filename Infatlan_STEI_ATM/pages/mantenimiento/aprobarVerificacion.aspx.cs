@@ -192,7 +192,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             
             try
             {
-                string vQuery = "STEISP_ATM_VERIFICACION 5, '" + Session["usuATM"].ToString() + "','" + Session["ATM_CODVERIF"] + "'";                   
+                string vQuery = "STEISP_ATM_VERIFICACION 5, '" + Session["USUARIO"].ToString() + "','" + Session["ATM_CODVERIF"] + "'";                   
                 Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                 if (vInfo == 1)
                 {
@@ -228,7 +228,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 
                 try
                 {
-                    string vQuery = "STEISP_ATM_VERIFICACION 6, '" + Session["usuATM"].ToString() + "','" + Session["ATM_CODVERIF"] + "'";
+                    string vQuery = "STEISP_ATM_VERIFICACION 6, '" + Session["USUARIO"].ToString() + "','" + Session["ATM_CODVERIF"] + "'";
                     Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                     if (vInfo == 1)
                     {

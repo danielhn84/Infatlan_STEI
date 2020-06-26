@@ -62,7 +62,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
             try
             {
                 DataTable vDatos = new DataTable();
-                vDatos = vConexion.ObtenerTabla("STEISP_ATM_DetalleModelo 4,1,1,'"+det+"','"+ Session["usuATM"].ToString() + "'");
+                vDatos = vConexion.ObtenerTabla("STEISP_ATM_DetalleModelo 4,1,1,'"+det+"','"+ Session["USUARIO"].ToString() + "'");
                 GVBusqueda.DataSource = vDatos;
                 GVBusqueda.DataBind();
                 Session["detMATM"] = vDatos;
@@ -156,7 +156,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
                 
                 try
                 {
-                    string vQuery = "STEISP_ATM_DetalleModelo 3, '" + DDLModeloATM.SelectedValue + "','"+ Session["coddetM"] + "','" + txtModalNewdetMATM.Text + "','" + Session["usuATM"].ToString() + "'";
+                    string vQuery = "STEISP_ATM_DetalleModelo 3, '" + DDLModeloATM.SelectedValue + "','"+ Session["coddetM"] + "','" + txtModalNewdetMATM.Text + "','" + Session["USUARIO"].ToString() + "'";
                     Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                     if (vInfo == 1)
                     {
@@ -200,7 +200,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
             {
                 try
                 {
-                    string vQuery = "STEISP_ATM_DetalleModelo 2, '" + DDLNewModelo.SelectedValue + "',6,'" + txtNewdetMATM.Text + "','" + Session["usuATM"].ToString() + "'";
+                    string vQuery = "STEISP_ATM_DetalleModelo 2, '" + DDLNewModelo.SelectedValue + "',6,'" + txtNewdetMATM.Text + "','" + Session["USUARIO"].ToString() + "'";
                     Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                     if (vInfo == 1)
                     {

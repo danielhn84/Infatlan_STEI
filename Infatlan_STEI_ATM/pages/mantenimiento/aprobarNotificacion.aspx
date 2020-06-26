@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="aprobarNotificacion.aspx.cs" Inherits="Infatlan_STEI_ATM.pages.mantenimiento.aprobarNotificacion" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
     <style>
         .hatm {
@@ -19,15 +20,28 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
-            <h4 class="text-themecolor">Completar Notificación de ATMs</h4>
+            <h4 class="text-themecolor">STEI</h4>
         </div>
         <div class="col-md-7 align-self-center text-right">
             <div class="d-flex justify-content-end align-items-center">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">Inicio</a></li>
-                    <li class="breadcrumb-item active">Completar Notificación de ATMs</li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Módulos</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">ATM</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Mantenimiento</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Notificación</a></li>
+                    <li class="breadcrumb-item active">Aprobar</li>
                 </ol>
+            </div>
+        </div>
+    </div>
 
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Aprobar Notificación</h4>
+            <h6 class="card-subtitle">Completar Notificación de ATM</h6>
+            <div class="row col-12">
+                <div class="col-12 grid-margin stretch-card">
+                </div>
             </div>
         </div>
     </div>
@@ -290,125 +304,122 @@
 
 
         </asp:UpdatePanel>
-        <!-- Modal asegurar notificacion -->
-        <div class="modal bs-example-modal-lg" id="modalnotoficacion" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
-            <div class="modal-dialog modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="myLargeModalLabel">¿Seguro que aprobará notificación?</h4>
-                    </div>
-                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                        <ContentTemplate>
-                            <div class="row col-12">
-                                <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Fecha mantenimiento: </strong></asp:Label>
-                                <asp:Label runat="server" BorderStyle="None" ID="lbFechaInicia" class="col form-control col-6"></asp:Label>
-                            </div>
-                            <div class="row col-12">
-                                <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Código de ATM: </strong></asp:Label>
-                                <asp:Label runat="server" BorderStyle="None" ID="lbcodATM" class="col form-control col-6"></asp:Label>
-                            </div>
-                            <div class="row col-12">
-                                <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Nombre de ATM: </strong></asp:Label>
-                                <asp:Label runat="server" BorderStyle="None" ID="lbNombreATM" class="col form-control col-6"></asp:Label>
-                            </div>
-                            <div class="row col-12">
-                                <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Sucursal de ATM: </strong></asp:Label>
-                                <asp:Label runat="server" BorderStyle="None" ID="lbsucursalATM" class="col form-control col-6"></asp:Label>
-                            </div>
-                            <div class="row col-12">
-                                <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Técnico Responsable: </strong>  </asp:Label>
-                                <asp:Label runat="server" BorderStyle="None" ID="lbTecnicoResp" class="col form-control col-6"></asp:Label>
-                            </div>
-                            <div class="row col-12">
-                                <asp:Label runat="server" BorderStyle="none" class="col form-control col-6"><strong>tiempo de mantenimiento: </strong></asp:Label>
-                                <asp:Label runat="server" BorderStyle="none" ID="lbHrMantenimiento" class="col form-control col-6"></asp:Label>
-                            </div>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-                    <asp:UpdatePanel ID="UpdatePanel4" runat="server">
-                        <ContentTemplate>
-                            <div class="modal-footer col-12">
-                                <div class="row col-6">
-                                    <asp:Button runat="server" ID="btnModalAprobNotificacion" OnClick="btnModalAprobNotificacion_Click" CssClass="btn btn-rounded btn-block btn-outline-success" Text="Enviar" />
-                                </div>
-                                <div class="row col-6">
-                                    <asp:Button runat="server" ID="btnModalCerrarAprobNotificacion" OnClick="btnModalCerrarAprobNotificacion_Click" CssClass="btn btn-rounded btn-block btn-outline-danger" Text="Cancelar" />
-                                </div>
-                            </div>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-
-                </div>
-                <!-- /.modal-content -->
-            </div>
-            <!--/.modal-dialog -->
-        </div>
-        <!-- /asegurar notificacion -->
-
-        <!-- Modal asegurar notificacion -->
-        <div class="modal bs-example-modal-lg" id="modalReprogramarnotoficacion" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
-            <div class="modal-dialog modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="myLargeModalLabel2">¿Seguro que reprogramará notificación?</h4>
-                    </div>
-                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                        <ContentTemplate>
-                            <div class="row col-12">
-                                <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Fecha mantenimiento: </strong></asp:Label>
-                                <asp:Label runat="server" BorderStyle="None" ID="lbFchAprobNotif" class="col form-control col-6"></asp:Label>
-                            </div>
-                            <div class="row col-12">
-                                <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Código de ATM: </strong></asp:Label>
-                                <asp:Label runat="server" BorderStyle="None" ID="lbCodATMAprobNotif" class="col form-control col-6"></asp:Label>
-                            </div>
-                            <div class="row col-12">
-                                <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Nombre de ATM: </strong></asp:Label>
-                                <asp:Label runat="server" BorderStyle="None" ID="lbNomATMAprobNotif" class="col form-control col-6"></asp:Label>
-                            </div>
-                            <div class="row col-12">
-                                <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Sucursal de ATM: </strong></asp:Label>
-                                <asp:Label runat="server" BorderStyle="None" ID="lbSucursalAprobNotif" class="col form-control col-6"></asp:Label>
-                            </div>
-                            <div class="row col-12">
-                                <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Técnico Responsable: </strong>  </asp:Label>
-                                <asp:Label runat="server" BorderStyle="None" ID="lbTecnicoAprobNotif" class="col form-control col-6"></asp:Label>
-                            </div>
-                            <div class="row col-12">
-                                <asp:Label runat="server" BorderStyle="none" class="col form-control col-6"><strong>Tiempo de mantenimiento: </strong></asp:Label>
-                                <asp:Label runat="server" BorderStyle="none" ID="lbhorasAprobNotif" class="col form-control col-6"></asp:Label>
-                            </div>
-                            <div class="row col-12">
-                                <asp:Label runat="server" BorderStyle="none" class="col form-control col-6"><strong>Motivo de reprogramación: </strong></asp:Label>
-                                <asp:TextBox runat="server" CssClass="form-control col-12" ID="txtcomentarioReprogramaNotif" TextMode="MultiLine" Rows="3"></asp:TextBox>
-                            </div>
-                            <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
-                                <asp:Label runat="server" Style="color: red;" Visible="false" BorderStyle="none" ID="lbRep1" CssClass="col form-control"><strong></strong></asp:Label>
-                            </div>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-                    <asp:UpdatePanel ID="UpdatePanel3" runat="server">
-                        <ContentTemplate>
-                            <div class="modal-footer col-12">
-                                <div class="row col-6">
-                                    <asp:Button runat="server" ID="btnReprogramarNotif" OnClick="btnReprogramarNotif_Click" CssClass="btn btn-success" Text="Enviar" />
-                                </div>
-                                <div class="row col-6">
-                                    <asp:Button runat="server" ID="btnCerrarReprogramarNotif" OnClick="btnCerrarReprogramarNotif_Click" CssClass="btn btn-danger" Text="Cancelar" />
-                                </div>
-                            </div>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-
-                </div>
-                <!-- /.modal-content -->
-            </div>
-            <!--/.modal-dialog -->
-        </div>
-        <!-- /asegurar notificacion -->
-
     </div>
 
+    <!-- Modal asegurar notificacion -->
+    <div class="modal fade bs-example-modal-lg" id="modalnotoficacion" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myLargeModalLabel">¿Seguro que aprobará notificación?</h4>
+                </div>
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                    <ContentTemplate>
+                        <div class="row col-12">
+                            <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Fecha mantenimiento: </strong></asp:Label>
+                            <asp:Label runat="server" BorderStyle="None" ID="lbFechaInicia" class="col form-control col-6"></asp:Label>
+                        </div>
+                        <div class="row col-12">
+                            <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Código de ATM: </strong></asp:Label>
+                            <asp:Label runat="server" BorderStyle="None" ID="lbcodATM" class="col form-control col-6"></asp:Label>
+                        </div>
+                        <div class="row col-12">
+                            <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Nombre de ATM: </strong></asp:Label>
+                            <asp:Label runat="server" BorderStyle="None" ID="lbNombreATM" class="col form-control col-6"></asp:Label>
+                        </div>
+                        <div class="row col-12">
+                            <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Sucursal de ATM: </strong></asp:Label>
+                            <asp:Label runat="server" BorderStyle="None" ID="lbsucursalATM" class="col form-control col-6"></asp:Label>
+                        </div>
+                        <div class="row col-12">
+                            <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Técnico Responsable: </strong>  </asp:Label>
+                            <asp:Label runat="server" BorderStyle="None" ID="lbTecnicoResp" class="col form-control col-6"></asp:Label>
+                        </div>
+                        <div class="row col-12">
+                            <asp:Label runat="server" BorderStyle="none" class="col form-control col-6"><strong>tiempo de mantenimiento: </strong></asp:Label>
+                            <asp:Label runat="server" BorderStyle="none" ID="lbHrMantenimiento" class="col form-control col-6"></asp:Label>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+                <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                    <ContentTemplate>
+                        <div class="modal-footer col-12">
+                            <div class="row col-6">
+                                <asp:Button runat="server" ID="btnModalAprobNotificacion" OnClick="btnModalAprobNotificacion_Click" CssClass="btn btn-rounded btn-block btn-outline-success" Text="Enviar" />
+                            </div>
+                            <div class="row col-6">
+                                <asp:Button runat="server" ID="btnModalCerrarAprobNotificacion" OnClick="btnModalCerrarAprobNotificacion_Click" CssClass="btn btn-rounded btn-block btn-outline-danger" Text="Cancelar" />
+                            </div>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!--/.modal-dialog -->
+    </div>
+
+    <!-- Modal asegurar notificacion -->
+    <div class="modal fade bs-example-modal-lg" id="modalReprogramarnotoficacion" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myLargeModalLabel2">¿Seguro que reprogramará notificación?</h4>
+                </div>
+                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                    <ContentTemplate>
+                        <div class="row col-12">
+                            <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Fecha mantenimiento: </strong></asp:Label>
+                            <asp:Label runat="server" BorderStyle="None" ID="lbFchAprobNotif" class="col form-control col-6"></asp:Label>
+                        </div>
+                        <div class="row col-12">
+                            <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Código de ATM: </strong></asp:Label>
+                            <asp:Label runat="server" BorderStyle="None" ID="lbCodATMAprobNotif" class="col form-control col-6"></asp:Label>
+                        </div>
+                        <div class="row col-12">
+                            <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Nombre de ATM: </strong></asp:Label>
+                            <asp:Label runat="server" BorderStyle="None" ID="lbNomATMAprobNotif" class="col form-control col-6"></asp:Label>
+                        </div>
+                        <div class="row col-12">
+                            <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Sucursal de ATM: </strong></asp:Label>
+                            <asp:Label runat="server" BorderStyle="None" ID="lbSucursalAprobNotif" class="col form-control col-6"></asp:Label>
+                        </div>
+                        <div class="row col-12">
+                            <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Técnico Responsable: </strong>  </asp:Label>
+                            <asp:Label runat="server" BorderStyle="None" ID="lbTecnicoAprobNotif" class="col form-control col-6"></asp:Label>
+                        </div>
+                        <div class="row col-12">
+                            <asp:Label runat="server" BorderStyle="none" class="col form-control col-6"><strong>Tiempo de mantenimiento: </strong></asp:Label>
+                            <asp:Label runat="server" BorderStyle="none" ID="lbhorasAprobNotif" class="col form-control col-6"></asp:Label>
+                        </div>
+                        <div class="row col-12">
+                            <asp:Label runat="server" BorderStyle="none" class="col form-control col-6"><strong>Motivo de reprogramación: </strong></asp:Label>
+                            <asp:TextBox runat="server" CssClass="form-control col-12" ID="txtcomentarioReprogramaNotif" TextMode="MultiLine" Rows="3"></asp:TextBox>
+                        </div>
+                        <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                            <asp:Label runat="server" Style="color: red;" Visible="false" BorderStyle="none" ID="lbRep1" CssClass="col form-control"><strong></strong></asp:Label>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+                <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                    <ContentTemplate>
+                        <div class="modal-footer col-12">
+                            <div class="row col-6">
+                                <asp:Button runat="server" ID="btnReprogramarNotif" OnClick="btnReprogramarNotif_Click" CssClass="btn btn-success" Text="Enviar" />
+                            </div>
+                            <div class="row col-6">
+                                <asp:Button runat="server" ID="btnCerrarReprogramarNotif" OnClick="btnCerrarReprogramarNotif_Click" CssClass="btn btn-danger" Text="Cancelar" />
+                            </div>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!--/.modal-dialog -->
+    </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Script" runat="server">
 </asp:Content>

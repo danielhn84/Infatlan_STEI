@@ -118,7 +118,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
                 
                 try
                 {
-                    string vQuery = "STEISP_ATMAdminComponentesATM 12, '" + Session["codprocesadorATM"] + "','" + txtModalNewprocesadorATM.Text + "', '" + Session["usuATM"].ToString() + "'";
+                    string vQuery = "STEISP_ATMAdminComponentesATM 12, '" + Session["codprocesadorATM"] + "','" + txtModalNewprocesadorATM.Text + "', '" + Session["USUARIO"].ToString() + "'";
                     Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                     if (vInfo == 1)
                     {
@@ -155,7 +155,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
             {
                 try
                 {
-                    string vQuery = "STEISP_ATMAdminComponentesATM 11, '" + Session["codprocesadorATM"] + "','" + txtNewProcesadorATM.Text + "','" + Session["usuATM"].ToString() + "'";
+                    string vQuery = "STEISP_ATMAdminComponentesATM 11, '" + Session["codprocesadorATM"] + "','" + txtNewProcesadorATM.Text + "','" + Session["USUARIO"].ToString() + "'";
                     Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                     if (vInfo == 1)
                     {

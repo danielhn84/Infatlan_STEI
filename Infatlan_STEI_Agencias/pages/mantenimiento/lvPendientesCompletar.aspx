@@ -25,22 +25,25 @@
             </div>
         </ProgressTemplate>
     </asp:UpdateProgress>
-
     <div class="row page-titles">
-        <div class="col-md-7 align-self-center">
-            <h2 class="text-themecolor">Listas de Verificación Pendientes Completar</h2>
-            <div class="mr-md-3 mr-xl-5">
-                <%-- <h2>Creación de Notificación</h2>--%>
-                <p class="mb-md-0">Soporte Técnico y Comunicaciones</p>
-            </div>
+        <div class="col-md-5 align-self-center">
+            <h4 class="text-themecolor">STEI</h4>
         </div>
-
-        
+        <div class="col-md-7 align-self-center text-right">
+            <div class="d-flex justify-content-end align-items-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Módulos</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Agencias</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Mantenimiento</a></li>
+                    <li class="breadcrumb-item active">Completar LV</li>
+                </ol>
+            </div> 
+        </div>
     </div>
 
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">LV Pendientes</h4>
+            <h4 class="card-title">Listas Pendientes Completar</h4>
             <p>Listas de verificación pendientes de completar que estan asignadas a su persona.</p>
             <div class="col-md-12">
                 <div class="form-group row">

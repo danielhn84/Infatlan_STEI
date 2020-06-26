@@ -149,7 +149,7 @@ namespace Infatlan_STEI_ATM.pages.calendario
 
                                     vQuery = "STEISP_ATM_Mantenimientos '" + vFechaMant + "'" +
                                         ",'" + CodATM + "'" +
-                                        ",'" + Session["usuATM"].ToString() + "'";
+                                        ",'" + Session["USUARIO"].ToString() + "'";
 
                                     
                                     int vRespuesta = vConexion.ejecutarSQL(vQuery);
@@ -175,7 +175,7 @@ namespace Infatlan_STEI_ATM.pages.calendario
         }
 
         protected void BtnEnviar_Click1(object sender, EventArgs e){
-            String archivoLog = string.Format("{0}_{1}", Convert.ToString(Session["usuATM"]), DateTime.Now.ToString("yyyyMMdd"));
+            String archivoLog = string.Format("{0}_{1}", Convert.ToString(Session["USUARIO"]), DateTime.Now.ToString("yyyyMMdd"));
 
             try{
                 String vDireccionCarga = ConfigurationManager.AppSettings["RUTA_SERVER"].ToString();
@@ -187,7 +187,7 @@ namespace Infatlan_STEI_ATM.pages.calendario
                     Boolean vCargado = false;
                     int vSuccess = 0, vError = 0;
                     if (File.Exists(vDireccionCarga))
-                        vCargado = cargarArchivo(vDireccionCarga, ref vSuccess, ref vError, Convert.ToString(Session["usuATM"]), vTipoPermiso);
+                        vCargado = cargarArchivo(vDireccionCarga, ref vSuccess, ref vError, Convert.ToString(Session["USUARIO"]), vTipoPermiso);
 
                     if (vCargado)  
                         LbMensaje.Text = "Archivo cargado con exito." + "<br>" + "<b style='color:green;'>Success:</b> " + vSuccess.ToString() + "&emsp;";

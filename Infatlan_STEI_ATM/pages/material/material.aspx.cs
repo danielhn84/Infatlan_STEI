@@ -18,7 +18,7 @@ namespace Infatlan_STEI_ATM.pages.material
             Session["CARGAR_STOCK"] = null;
             string id = Request.QueryString["id"];
             string tipo = Request.QueryString["tipo"];
-            
+            LitRuta.Text = id != null ? "Aprobar" : "Solicitar";
             if (!Page.IsPostBack){
                 if (Convert.ToBoolean(Session["AUTH"])){
                     cargarData();
@@ -93,7 +93,7 @@ namespace Infatlan_STEI_ATM.pages.material
                         Decimal vPrecioDec = Convert.ToDecimal(vCantidadSolicitada) * Convert.ToDecimal(vDataStock.Rows[0]["precioUnit"].ToString());
                         String vPrecio = vPrecioDec.ToString().Replace(",", ".");
                         String vCodigoUbi= Session["ATM_CODUBI_MATERIAL"].ToString();
-                        String vUsuario= Session["usuATM"].ToString();
+                        String vUsuario= Session["USUARIO"].ToString();
                         String vUsuResponsable = Session["ATM_USUARIO_MATERIAL"].ToString();
                     //Session["ATM_USUARIO_MATERIAL"].ToString()
                     generarxml vMaestro = new generarxml();
@@ -205,7 +205,7 @@ namespace Infatlan_STEI_ATM.pages.material
                 if (tipo == "2")
                 {
                     TransaccionInventario();
-                    string vQuery2 = "STEISP_ATM_VerificacionTotal 7, '" + Session["ATM_IDMANT_MATERIAL"].ToString() + "','" + Session["usuATM"].ToString() + "','" + txtmotivo.Text + "'";
+                    string vQuery2 = "STEISP_ATM_VerificacionTotal 7, '" + Session["ATM_IDMANT_MATERIAL"].ToString() + "','" + Session["USUARIO"].ToString() + "','" + txtmotivo.Text + "'";
                     vConexion.ejecutarSQL(vQuery2);
                     //string vQuery3 = "STEISP_ATM_VerificacionTotal 6, '" + Session["ATM_IDMANT_MATERIAL"].ToString() + "'";
                     //vConexion.ejecutarSQL(vQuery3);
@@ -227,7 +227,7 @@ namespace Infatlan_STEI_ATM.pages.material
 
                     }
 
-                    string vQuery2 = "STEISP_ATM_VerificacionTotal 4, '" + Session["ATM_IDMANT_MATERIAL"].ToString() + "','" + Session["usuATM"].ToString() + "','" + txtmotivo.Text + "', '"+RBConductor.SelectedValue+"','"+DDLConductor.SelectedValue+"'";
+                    string vQuery2 = "STEISP_ATM_VerificacionTotal 4, '" + Session["ATM_IDMANT_MATERIAL"].ToString() + "','" + Session["USUARIO"].ToString() + "','" + txtmotivo.Text + "', '"+RBConductor.SelectedValue+"','"+DDLConductor.SelectedValue+"'";
                     vConexion.ejecutarSQL(vQuery2);
                     
                 }
@@ -381,7 +381,7 @@ namespace Infatlan_STEI_ATM.pages.material
 
         protected void btnModarDevolver_Click(object sender, EventArgs e)
         {
-            string vQuery2 = "STEISP_ATM_VerificacionTotal 5, '" + Session["ATM_IDMANT_MATERIAL"].ToString() + "','" + Session["usuATM"].ToString() + "','" + txtmotivo.Text + "'";
+            string vQuery2 = "STEISP_ATM_VerificacionTotal 5, '" + Session["ATM_IDMANT_MATERIAL"].ToString() + "','" + Session["USUARIO"].ToString() + "','" + txtmotivo.Text + "'";
             vConexion.ejecutarSQL(vQuery2);
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal2();", true);
             Response.Redirect("buscarAprobar.aspx");

@@ -34,7 +34,7 @@ namespace Infatlan_STEI_ATM.pages.devolver
             try
             {
                 DataTable vDatos = new DataTable();
-                vDatos = vConexion.ObtenerTabla("STEISP_ATM_VERIFICACION 3,'" + Session["usuATM"].ToString() + "',1");
+                vDatos = vConexion.ObtenerTabla("STEISP_ATM_VERIFICACION 3,'" + Session["USUARIO"].ToString() + "',1");
                 GVBusqueda.DataSource = vDatos;
                 GVBusqueda.DataBind();
                 Session["ATM_RECHAZADOVERIF_CARGAR"] = vDatos;

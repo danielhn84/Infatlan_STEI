@@ -24,15 +24,22 @@
             </div>
         </ProgressTemplate>
     </asp:UpdateProgress>
-
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
-            <h2 class="text-themecolor">Creación de Notificación</h2>
-            <div class="mr-md-3 mr-xl-5">
-                <p class="mb-md-0">Soporte Técnico y Comunicaciones</p>
-            </div>
+            <h4 class="text-themecolor">STEI</h4>
+        </div>
+        <div class="col-md-7 align-self-center text-right">
+            <div class="d-flex justify-content-end align-items-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Módulos</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Agencias</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Mantenimiento</a></li>
+                    <li class="breadcrumb-item active">Crear Notificación</li>
+                </ol>
+            </div> 
         </div>
     </div>
+
     <!-- (INICIO)Tarjeta Datos Generales -->
     <div class="row">
         <div class="col-lg-12">

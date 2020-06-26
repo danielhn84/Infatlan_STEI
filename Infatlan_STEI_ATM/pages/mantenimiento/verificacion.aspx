@@ -3,12 +3,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
     <link href="/assets/node_modules/icheck/skins/all.css" rel="stylesheet">
     <link href="/css/pages/form-icheck.css" rel="stylesheet">
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon.png">
-    <title>Elite Admin Template - The Ultimate Multipurpose admin template</title>
     <link rel="stylesheet" href="/assets/node_modules/dropify/dist/css/dropify.min.css">
     <!-- Custom CSS -->
-    <link href="/css/style.min.css" rel="stylesheet">
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 
@@ -16,23 +12,20 @@
     <script type="text/javascript">
         function openModal() { $('#modalVerifATM').modal('show'); }
         function openModal2() { $('#modalRechazar').modal('show'); }
-    </script>
-    <!--PARA CERRAR MODAL-->
-    <script type="text/javascript">
         function closeModal() { $('#modalVerifATM').modal('hide'); }
         function closeModal2() { $('#modalRechazar').modal('hide'); }
     </script>
-     
-    
+
     <script src="http://code.jquery.com/jquery-1.10.2.min.js" type="text/javascript"></script>
+
     <%--IMAGENES--%>
     <script type="text/javascript">
         //IMAGEN1        
-        function img1(input) {          
+        function img1(input) {
             if (input.files && input.files[0]) {
                 //PRIMERA IMAGEN              
                 var reader = new FileReader();
-                reader.onload = function (e) {           
+                reader.onload = function (e) {
                     //$('#imgDiscoDuro').css('visibility', 'visible');
                     //$('#imgDiscoDuro').attr('src', e.target.result);  
                     var ruta1 = e.target.result;
@@ -216,7 +209,7 @@
                     //$('#imgClimatizacion').css('visibility', 'visible');
                     //$('#imgClimatizacion').attr('src', e.target.result);
                     var ruta11 = e.target.result;
-                    document.getElementById('<%=imgClimatizacion.ClientID%>').src = ruta11;  
+                    document.getElementById('<%=imgClimatizacion.ClientID%>').src = ruta11;
                     document.getElementById('<%=HFClima.ClientID%>').value = 'si';
                 }
                 reader.readAsDataURL(input.files[0]);
@@ -262,7 +255,6 @@
         //IMAGEN13
 
     </script>
-    <%--IMAGENES--%>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
     <asp:UpdateProgress ID="UpdateProgress1" runat="server">
@@ -274,520 +266,493 @@
         </ProgressTemplate>
     </asp:UpdateProgress>
 
-     <div class="row page-titles">
+    <div class="row page-titles">
         <div class="col-md-5 align-self-center">
-            <h3 class="text-themecolor col-12">Lista de verificación</h3>
-            <h6 class="text-themecolor col-12">Ingresar datos de mantenimiento de ATM</h6>
+            <h4 class="text-themecolor">STEI</h4>
         </div>
         <div class="col-md-7 align-self-center text-right">
             <div class="d-flex justify-content-end align-items-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Módulos</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">ATM</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Mantenimiento</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Verificación</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Aprobar</a></li>
+                    <li class="breadcrumb-item active">Lista de verificación</li>
+                </ol>
             </div>
         </div>
     </div>
 
     <div class="card">
-        <br />
-             
-         <div class=" col-12 align-self-center" style="margin-left: auto; margin-right: auto">
-            <div class="row">
+        <div class="card-body">
+            <h4 class="card-title">Lista de verificación</h4>
+            <h6 class="card-subtitle">Ingresar datos de mantenimiento de ATM</h6>
+            <div class="row col-12">
                 <div class="col-12 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                           <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
-                              <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-book"></i> Datos Generales</h3>
-                           </div>                         
-            <!--SEGUNDA FILA-->
-            <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
-                <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
-                    <label class="col col-form-label col-6">Hora Salida de Infatlan</label>
-                        <asp:TextBox ID="txthsalidaInfa" placeholder="00:00:00" CssClass="form-control" runat="server" TextMode="Time"></asp:TextBox>
-                </div>
-                <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
-                    <label class="col col-form-label col-6">Hora llegada a Infatlan</label>
-                        <asp:TextBox ID="txtHllegadaInfatlan" placeholder="00:00:00" CssClass="form-control" runat="server" TextMode="Time"></asp:TextBox>
-                </div>
-            </div>
-            <!--/SEGUNDA FILA-->
-            <!--TERCERA FILA-->
-            <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
-                <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
-                    <label class="col-form-label col-6">Inicio de mantenimiento</label>
-                        <asp:TextBox ID="TxFechaInicio" placeholder="00:00:00" CssClass="form-control" runat="server" TextMode="Time"></asp:TextBox>
-                </div>
-                <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
-                    <label class=" col-form-label col-6">Finaliza mantenimiento</label>
-                        <asp:TextBox ID="TxFechaRegreso" placeholder="00:00:00" CssClass="form-control" runat="server" TextMode="Time"></asp:TextBox>
-                </div>
-            </div>
-            <!--FIN TERCERA FILA-->
-            <!--CUARTA FILA-->
-            <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
-                <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
-                    <label class="col-form-label col-6">Lugar(Nombre)</label>
-                        <asp:TextBox runat="server" CssClass="form-control" ID="txtnomATM" Enabled="false"></asp:TextBox>
-                </div>
-                <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
-                    <label class="col-form-label col-6">SysAid</label>
-                        <asp:TextBox CssClass="form-control" ID="txtsysaid" runat="server" Enabled="false"></asp:TextBox>
-                </div>
-            </div>
-            <!--/CUARTA FILA-->
-            <!--QUINTA FILA-->
-            <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
-                <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
-                    <label class="col-form-label col-6">Ubicación de ATM</label>
-                        <asp:TextBox CssClass="form-control" ID="txtUbicacionATM" runat="server" Enabled="false"></asp:TextBox>
-                </div>
-                <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
-                    <label class="col-form-label col-6">Código de ATM</label>
-                        <asp:TextBox CssClass="form-control" ID="txtcodATM" runat="server" Enabled="false"></asp:TextBox>
-                </div>
-            </div>
-            <!--/QUINTA FILA-->
-            <!--SEXTA FILA-->
-            <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
-                <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
-                    <label class="col-form-label col-6">Dirección</label>
-                        <asp:TextBox CssClass="form-control" ID="txtdireccion" runat="server" Enabled="false"></asp:TextBox>
-                </div>
-                <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
-                    <label class="col-form-label col-6">Sucursal</label>
-                        <asp:TextBox CssClass="form-control" ID="txtsucursal" runat="server" Enabled="false"></asp:TextBox>
-                </div>
-            </div>
-            <!--/SEXTA FILA-->
-            <!--SEPTIMA FILA-->
-            <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
-                <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
-                    <label class="col-form-label col-6">Dirección IP</label>
-                        <asp:TextBox CssClass="form-control" ID="txtip" runat="server" Enabled="false"></asp:TextBox>
-                </div>
-                <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
-                    <label class="col-form-label col-6">Zona</label>
-                        <asp:TextBox CssClass="form-control" ID="txtzonaVerif" runat="server" Enabled="false"></asp:TextBox>
-                </div>
-            </div>
-            <!--/SEPTIMA FILA-->
-            <!--OCTAVA FILA-->
-            <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
-                <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
-                    <label class="col-form-label col-6">Impacto</label>
-                        <asp:TextBox CssClass="form-control" ID="txtimpacto" runat="server" Enabled="false" Text="Durante la ventana de mantenimiento el ATM estará fuera de linea"></asp:TextBox>
-                </div>
-                <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
-                    <label class="col-form-label col-6">Motivo</label>
-                        <asp:TextBox CssClass="form-control" ID="txtmotivoVerif" runat="server" Enabled="false" Text="Realizar acciones pro activas para prevenir la falla"></asp:TextBox>
-                </div>
-            </div>
-            <!--/OCTAVA FILA-->
-                       </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-         <div class=" col-12 align-self-center" style="margin-left: auto; margin-right: auto">
-            <div class="row">
-                <div class="col-12 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                           <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
-                               <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-user" style="margin-left: 10px"></i> Técnico Responsable</h3>
-                           </div>  
-        <!--PRIMERA FILA-->
-        
-            <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
-                <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
-                    <label class="col-form-label col-6">Técnico Responsable</label>
-                        <asp:TextBox runat="server" CssClass="form-control" ID="txtTecnicoResponsable" Enabled="false"></asp:TextBox>
-                </div>
+                    <h5 class="card-subtitle m-t-10"><i class="fa fa-book"></i><b> DATOS GENERALES</b></h5>
 
-                <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
-                    <label class=" col-form-label col-6">Identidad</label>
-                        <asp:TextBox CssClass="form-control" ID="txtidentidad" runat="server" Enabled="false"></asp:TextBox>
-                </div>
-            </div>
-        
-        <!--/PRIMERA FILA-->
-                       </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
-            <div class="row">
-                <div class="col-12 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row col-12" style="margin-left: 10px; margin-left: 10px;">
-                                <h3 class="text-themecolor" style="color: #808080;"><i class=" fa fa-wrench" style="margin-left: 10px"></i> Proceso de Mantenimiento</h3>
-                            </div>
-                            
-                                <div class="row col-12" runat="server" id="DIVPreguntas">
-                                    <%--<h5 class="text-themecolor col-12" style="color: #808080;"><i class="fa fa-check-square" style="margin-left: 10px"></i>Pasos del mantenimiento</h5>--%>
-                                    <br />
-                                    <br />
-                                    <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
-                                        <asp:CheckBoxList ID="ckpasos1" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
-                                            <asp:ListItem Value="1" Text="1. Verificar ATM este en servicio antes de apagarlo"></asp:ListItem>
-                                        </asp:CheckBoxList>
-                                        <asp:CheckBoxList ID="ckpasos2" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
-                                            <asp:ListItem Value="2" Text="2. Solicitar al encargado del ATM sacar contadores"></asp:ListItem>
-                                        </asp:CheckBoxList>
-                                        <asp:CheckBoxList ID="ckpasos3" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
-                                            <asp:ListItem Value="3" Text="3. Solicitar al encargado del ATM sacar maleta"></asp:ListItem>
-                                        </asp:CheckBoxList>
-                                        <asp:CheckBoxList ID="ckpasos4" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
-                                            <asp:ListItem Value="4" Text="4. Apagar ATM de forma correcta"></asp:ListItem>
-                                        </asp:CheckBoxList>
-                                        <asp:CheckBoxList ID="ckpasos5" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
-                                            <asp:ListItem Value="5" Text="5. Retirar CPU"></asp:ListItem>
-                                        </asp:CheckBoxList>
-                                        <asp:CheckBoxList ID="ckpasos6" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
-                                            <asp:ListItem Value="6" Text="6. Retirar Monitor"></asp:ListItem>
-                                        </asp:CheckBoxList>
-                                        <asp:CheckBoxList ID="ckpasos7" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
-                                            <asp:ListItem Value="7" Text="7. Retirar la lectora"></asp:ListItem>
-                                        </asp:CheckBoxList>
-                                        <asp:CheckBoxList ID="ckpasos8" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
-                                            <asp:ListItem Value="8" Text="8. Retirar presentador"></asp:ListItem>
-                                        </asp:CheckBoxList>
-                                        <asp:CheckBoxList ID="ckpasos9" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
-                                            <asp:ListItem Value="9" Text="9. Limpieza de stacker"></asp:ListItem>
-                                        </asp:CheckBoxList>
-                                        <asp:CheckBoxList ID="ckpasos10" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
-                                            <asp:ListItem Value="10" Text="10. Limpieza de pickers"></asp:ListItem>
-                                        </asp:CheckBoxList>
-                                    </div>
-                                    <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
-                                        <asp:CheckBoxList ID="ckpasos11" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
-                                            <asp:ListItem Value="11" Text="11. Sopletear todos los dispositivos"></asp:ListItem>
-                                        </asp:CheckBoxList>
-                                        <asp:CheckBoxList ID="ckpasos12" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
-                                            <asp:ListItem Value="12" Text="12. Limpieza general por cada dispositivo"></asp:ListItem>
-                                        </asp:CheckBoxList>
-                                        <asp:CheckBoxList ID="ckpasos13" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
-                                            <asp:ListItem Value="13" Text="13. Limpieza de pantalla con espuma"></asp:ListItem>
-                                        </asp:CheckBoxList>
-                                        <asp:CheckBoxList ID="ckpasos14" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
-                                            <asp:ListItem Value="14" Text="14. Realizar cambios de repuesto"></asp:ListItem>
-                                        </asp:CheckBoxList>
-                                        <asp:CheckBoxList ID="ckpasos15" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
-                                            <asp:ListItem Value="15" Text="15. Armar ATM"></asp:ListItem>
-                                        </asp:CheckBoxList>
-                                        <asp:CheckBoxList ID="ckpasos16" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
-                                            <asp:ListItem Value="16" Text="16. Encender ATM"></asp:ListItem>
-                                        </asp:CheckBoxList>
-                                        <asp:CheckBoxList ID="ckpasos17" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
-                                            <asp:ListItem Value="17" Text="17. Solicitar que ingresen maletas"></asp:ListItem>
-                                        </asp:CheckBoxList>
-                                        <asp:CheckBoxList ID="ckpasos18" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
-                                            <asp:ListItem Value="18" Text="18. Pruebas con los dospositivos(en el vendor)"></asp:ListItem>
-                                        </asp:CheckBoxList>
-                                        <asp:CheckBoxList ID="ckpasos19" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
-                                            <asp:ListItem Value="19" Text="19. Dejar en servicio el ATM"></asp:ListItem>
-                                        </asp:CheckBoxList>
-                                        <asp:CheckBoxList ID="ckpasos20" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
-                                            <asp:ListItem Value="20" Text="20. Contractarse con personal de ATM y verificar que camaras están en linea"></asp:ListItem>
-                                        </asp:CheckBoxList>
-                                    </div>
-                                </div>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br />
-        
-        <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
-            <ContentTemplate>
-                <div class=" col-12 align-self-center" style="margin-left: auto; margin-right: auto">
-                    <div class="row">
-                        <div class="col-12 grid-margin stretch-card">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
-                    <h3 class="text-themecolor" style="color: #808080;"><i class="fa fa-check-square" style="margin-left: 10px"></i> Datos de ATM</h3>
-                                        </div>
-                    <br />
-                    <!--PRIMERA FILA DESHABILITADA-->
-                    <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
-                        <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
-                            <label class="col-form-label col-12">Sistema Operativo</label>
-                                <asp:TextBox runat="server" ID="txtsoVerif" CssClass="form-control" Enabled="false"></asp:TextBox>
-                        </div>
-
-                        <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
-                            <label class="col-form-label col-12">Versión del software</label>
-                                <asp:TextBox runat="server" ID="txtversionswVerif" CssClass="form-control" Enabled="false"></asp:TextBox>
-                        </div>
-
-                        <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
-                            <label class="col-form-label col-12">Puerto</label>
-                                <asp:TextBox runat="server" ID="txtpuertoVerif" CssClass="form-control" Enabled="false"></asp:TextBox>
-                        </div>
-                    </div>
-                    <!--/PRIMERA FILA DESHABILITADA-->
-                    <!--PRIMERA FILA-->
-                    <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
-                        <br />
-                        <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
-                            <label class="col-form-label col-12">Tipo de Teclado</label>
-                                <asp:DropDownList ID="DDLtipoTeclado" CssClass="form-control" runat="server">
-                                </asp:DropDownList>
-                        </div>
-                        <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
-                            <label class="col-form-label col-12">Tipo de Procesador</label>
-                                <asp:DropDownList ID="DDLtipoProc" CssClass="form-control" runat="server">
-                                </asp:DropDownList>
-                        </div>
-                        <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
-                            <label class="col-form-label col-12">Tipo de Carga</label>
-                                <asp:DropDownList ID="DDLtipoCargaVerif" CssClass="form-control" runat="server">
-                                </asp:DropDownList>
-                        </div>
-                    </div>
-                    <!--/PRIMERA FILA-->
                     <!--SEGUNDA FILA-->
                     <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
-                        <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
-                            <label class="col-form-label col-12">Marca del disco duro</label>
-                                <asp:DropDownList AutoPostBack="true" ID="DDLmarcaDiscoDuro" CssClass="form-control col-12" runat="server">
-                                </asp:DropDownList>
+                        <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
+                            <label class="col-form-label">Hora Salida de Infatlan</label>
+                            <asp:TextBox ID="txthsalidaInfa" placeholder="00:00:00" CssClass="form-control" runat="server" TextMode="Time"></asp:TextBox>
                         </div>
-                        <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
-                            <label class="col-form-label col-12">Número Serie de Disco Duro</label>
-                                <asp:TextBox runat="server" ID="txtSerieDiscoDuro" CssClass="form-control"></asp:TextBox>
-                        </div>
-                        <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
-                            <label class="col-form-label col-12">Capacidad de disco duro(GB)</label>
-                                <asp:TextBox runat="server" ID="txtcapacidadDiscoVerif" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                        <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
+                            <label class="col-form-label">Hora llegada a Infatlan</label>
+                            <asp:TextBox ID="txtHllegadaInfatlan" placeholder="00:00:00" CssClass="form-control" runat="server" TextMode="Time"></asp:TextBox>
                         </div>
                     </div>
-                    <!--/SEGUNDA FILA-->
-                    <!--QUINTA FILA-->
-                      <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
-                        <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
-                            <label class="col-form-label col-12">Serie ATM</label>
-                                <asp:TextBox runat="server" ID="txtserieATM" CssClass="form-control"></asp:TextBox>
-                        </div>
-                        <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
-                            <label class="col-form-label col-12">Inventario ATM</label>
-                                <asp:TextBox runat="server" ID="txtinventarioVerif" CssClass="form-control"></asp:TextBox>
-                        </div>
-                        <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
-                            <label class="col-form-label col-12">RAM(GB)</label>
-                                <asp:TextBox runat="server" ID="txtramVerif" CssClass="form-control" TextMode="Number"></asp:TextBox>
-                        </div>
-                    </div>
-                    <!--/QUINTA FILA-->
-                    <!--SEXTA FILA-->
-                     <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
-                        <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
-                            <label class="col-form-label col-12">Latitud ATM</label>
-                                <asp:TextBox runat="server" ID="txtlatitudATM" Enabled="false" CssClass="form-control"></asp:TextBox>
-                        </div>
-                        <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
-                            <label class="col-form-label col-12">Longitud ATM</label>
-                                <asp:TextBox runat="server" ID="txtlongitudATM" Enabled="false" CssClass="form-control"></asp:TextBox>
-                        </div>
-                         <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">                            
-                         </div>
-                    </div>
-                    <!--/SEXTA FILA-->
+
                     <!--TERCERA FILA-->
                     <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
-                        <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
-                            <label class="col-form-label col-12">¿Lectora tiene antiskimming?</label>
-                                <asp:DropDownList AutoPostBack="true" OnTextChanged="dropantiskimming_TextChanged" OnSelectedIndexChanged="dropantiskimming_SelectedIndexChanged" ID="dropantiskimming" CssClass="form-control col-12" runat="server">
-                                    <asp:ListItem Value="0" Text="Seleccione opción..."></asp:ListItem>
-                                    <asp:ListItem Value="1" Text="Si"></asp:ListItem>
-                                    <asp:ListItem Value="2" Text="No"></asp:ListItem>
-                                </asp:DropDownList>
+                        <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
+                            <label class="col-form-label">Inicio de mantenimiento</label>
+                            <asp:TextBox ID="TxFechaInicio" placeholder="00:00:00" CssClass="form-control" runat="server" TextMode="Time"></asp:TextBox>
                         </div>
-
-                        <div class="row col-8 align-self-center" style="margin-left: auto; margin-right: auto">
-                            <label class="col-form-label col-12">Comentario por lectora sin antiskimming</label>
-                                <asp:TextBox runat="server" ID="txtantiSkimming" CssClass="form-control" Enabled="false"></asp:TextBox>
+                        <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
+                            <label class=" col-form-label">Finaliza mantenimiento</label>
+                            <asp:TextBox ID="TxFechaRegreso" placeholder="00:00:00" CssClass="form-control" runat="server" TextMode="Time"></asp:TextBox>
                         </div>
                     </div>
-                    <!--/TERCERA FILA-->
-                       </div>
+
+                    <!--CUARTA FILA-->
+                    <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                        <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
+                            <label class="col-form-label">Lugar(Nombre)</label>
+                            <asp:TextBox runat="server" CssClass="form-control" ID="txtnomATM" Enabled="false"></asp:TextBox>
+                        </div>
+                        <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
+                            <label class="col-form-label">SysAid</label>
+                            <asp:TextBox CssClass="form-control" ID="txtsysaid" runat="server" Enabled="false"></asp:TextBox>
+                        </div>
+                    </div>
+
+                    <!--QUINTA FILA-->
+                    <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                        <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
+                            <label class="col-form-label">Ubicación de ATM</label>
+                            <asp:TextBox CssClass="form-control" ID="txtUbicacionATM" runat="server" Enabled="false"></asp:TextBox>
+                        </div>
+                        <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
+                            <label class="col-form-label">Código de ATM</label>
+                            <asp:TextBox CssClass="form-control" ID="txtcodATM" runat="server" Enabled="false"></asp:TextBox>
+                        </div>
+                    </div>
+
+                    <!--SEXTA FILA-->
+                    <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                        <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
+                            <label class="col-form-label">Dirección</label>
+                            <asp:TextBox CssClass="form-control" ID="txtdireccion" runat="server" Enabled="false"></asp:TextBox>
+                        </div>
+                        <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
+                            <label class="col-form-label">Sucursal</label>
+                            <asp:TextBox CssClass="form-control" ID="txtsucursal" runat="server" Enabled="false"></asp:TextBox>
+                        </div>
+                    </div>
+
+                    <!--SEPTIMA FILA-->
+                    <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                        <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
+                            <label class="col-form-label">Dirección IP</label>
+                            <asp:TextBox CssClass="form-control" ID="txtip" runat="server" Enabled="false"></asp:TextBox>
+                        </div>
+                        <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
+                            <label class="col-form-label">Zona</label>
+                            <asp:TextBox CssClass="form-control" ID="txtzonaVerif" runat="server" Enabled="false"></asp:TextBox>
+                        </div>
+                    </div>
+
+                    <!--OCTAVA FILA-->
+                    <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                        <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
+                            <label class="col-form-label">Impacto</label>
+                            <asp:TextBox CssClass="form-control" ID="txtimpacto" runat="server" Enabled="false" Text="Durante la ventana de mantenimiento el ATM estará fuera de linea"></asp:TextBox>
+                        </div>
+                        <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
+                            <label class="col-form-label">Motivo</label>
+                            <asp:TextBox CssClass="form-control" ID="txtmotivoVerif" runat="server" Enabled="false" Text="Realizar acciones pro activas para prevenir la falla"></asp:TextBox>
+                        </div>
+                    </div>
+
+                    <h5 class="card-subtitle m-t-30"><i class="fa fa-user"></i><b> TECNICO RESPONSABLE</b></h5>
+
+                    <!--PRIMERA FILA-->
+                    <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                        <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
+                            <label class="col-form-label">Técnico Responsable</label>
+                            <asp:TextBox runat="server" CssClass="form-control" ID="txtTecnicoResponsable" Enabled="false"></asp:TextBox>
+                        </div>
+
+                        <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
+                            <label class=" col-form-label">Identidad</label>
+                            <asp:TextBox CssClass="form-control" ID="txtidentidad" runat="server" Enabled="false"></asp:TextBox>
+                        </div>
+                    </div>
+
+                    <h5 class="card-subtitle m-t-30"><i class="fa fa-wrench"></i><b> PROCESO DE MANTENIMIENTO</b></h5>
+
+                    <div class="row col-12" runat="server" id="DIVPreguntas">
+                        <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
+                            <asp:CheckBoxList ID="ckpasos1" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                <asp:ListItem Value="1" Text="1. Verificar ATM este en servicio antes de apagarlo"></asp:ListItem>
+                            </asp:CheckBoxList>
+                            <asp:CheckBoxList ID="ckpasos2" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                <asp:ListItem Value="2" Text="2. Solicitar al encargado del ATM sacar contadores"></asp:ListItem>
+                            </asp:CheckBoxList>
+                            <asp:CheckBoxList ID="ckpasos3" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                <asp:ListItem Value="3" Text="3. Solicitar al encargado del ATM sacar maleta"></asp:ListItem>
+                            </asp:CheckBoxList>
+                            <asp:CheckBoxList ID="ckpasos4" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                <asp:ListItem Value="4" Text="4. Apagar ATM de forma correcta"></asp:ListItem>
+                            </asp:CheckBoxList>
+                            <asp:CheckBoxList ID="ckpasos5" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                <asp:ListItem Value="5" Text="5. Retirar CPU"></asp:ListItem>
+                            </asp:CheckBoxList>
+                            <asp:CheckBoxList ID="ckpasos6" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                <asp:ListItem Value="6" Text="6. Retirar Monitor"></asp:ListItem>
+                            </asp:CheckBoxList>
+                            <asp:CheckBoxList ID="ckpasos7" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                <asp:ListItem Value="7" Text="7. Retirar la lectora"></asp:ListItem>
+                            </asp:CheckBoxList>
+                            <asp:CheckBoxList ID="ckpasos8" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                <asp:ListItem Value="8" Text="8. Retirar presentador"></asp:ListItem>
+                            </asp:CheckBoxList>
+                            <asp:CheckBoxList ID="ckpasos9" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                <asp:ListItem Value="9" Text="9. Limpieza de stacker"></asp:ListItem>
+                            </asp:CheckBoxList>
+                            <asp:CheckBoxList ID="ckpasos10" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                <asp:ListItem Value="10" Text="10. Limpieza de pickers"></asp:ListItem>
+                            </asp:CheckBoxList>
+                        </div>
+
+                        <div class="row col-6">
+                            <asp:CheckBoxList ID="ckpasos11" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                <asp:ListItem Value="11" Text="11. Sopletear todos los dispositivos"></asp:ListItem>
+                            </asp:CheckBoxList>
+                            <asp:CheckBoxList ID="ckpasos12" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                <asp:ListItem Value="12" Text="12. Limpieza general por cada dispositivo"></asp:ListItem>
+                            </asp:CheckBoxList>
+                            <asp:CheckBoxList ID="ckpasos13" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                <asp:ListItem Value="13" Text="13. Limpieza de pantalla con espuma"></asp:ListItem>
+                            </asp:CheckBoxList>
+                            <asp:CheckBoxList ID="ckpasos14" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                <asp:ListItem Value="14" Text="14. Realizar cambios de repuesto"></asp:ListItem>
+                            </asp:CheckBoxList>
+                            <asp:CheckBoxList ID="ckpasos15" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                <asp:ListItem Value="15" Text="15. Armar ATM"></asp:ListItem>
+                            </asp:CheckBoxList>
+                            <asp:CheckBoxList ID="ckpasos16" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                <asp:ListItem Value="16" Text="16. Encender ATM"></asp:ListItem>
+                            </asp:CheckBoxList>
+                            <asp:CheckBoxList ID="ckpasos17" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                <asp:ListItem Value="17" Text="17. Solicitar que ingresen maletas"></asp:ListItem>
+                            </asp:CheckBoxList>
+                            <asp:CheckBoxList ID="ckpasos18" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                <asp:ListItem Value="18" Text="18. Pruebas con los dospositivos(en el vendor)"></asp:ListItem>
+                            </asp:CheckBoxList>
+                            <asp:CheckBoxList ID="ckpasos19" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                <asp:ListItem Value="19" Text="19. Dejar en servicio el ATM"></asp:ListItem>
+                            </asp:CheckBoxList>
+                            <asp:CheckBoxList ID="ckpasos20" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
+                                <asp:ListItem Value="20" Text="20. Contractarse con personal de ATM y verificar que camaras están en linea"></asp:ListItem>
+                            </asp:CheckBoxList>
+                        </div>
+                    </div>
+
+                    <h5 class="card-subtitle m-t-20"><i class="fa fa-check-square"></i><b> DATOS DE ATM</b></h5>
+
+                    <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
+                        <ContentTemplate>
+                            <!--PRIMERA FILA DESHABILITADA-->
+                            <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                                <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
+                                    <label class="col-form-label">Sistema Operativo</label>
+                                    <asp:TextBox runat="server" ID="txtsoVerif" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                </div>
+
+                                <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
+                                    <label class="col-form-label">Versión del software</label>
+                                    <asp:TextBox runat="server" ID="txtversionswVerif" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                </div>
+
+                                <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
+                                    <label class="col-form-label">Puerto</label>
+                                    <asp:TextBox runat="server" ID="txtpuertoVerif" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                </div>
+                            </div>
+
+                            <!--PRIMERA FILA-->
+                            <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                                <br />
+                                <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
+                                    <label class="col-form-label">Tipo de Teclado</label>
+                                    <asp:DropDownList ID="DDLtipoTeclado" CssClass="form-control" runat="server">
+                                    </asp:DropDownList>
+                                </div>
+                                <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
+                                    <label class="col-form-label">Tipo de Procesador</label>
+                                    <asp:DropDownList ID="DDLtipoProc" CssClass="form-control" runat="server">
+                                    </asp:DropDownList>
+                                </div>
+                                <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
+                                    <label class="col-form-label">Tipo de Carga</label>
+                                    <asp:DropDownList ID="DDLtipoCargaVerif" CssClass="form-control" runat="server">
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
+
+                            <!--SEGUNDA FILA-->
+                            <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                                <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
+                                    <label class="col-form-label">Marca del disco duro</label>
+                                    <asp:DropDownList AutoPostBack="true" ID="DDLmarcaDiscoDuro" CssClass="form-control col-12" runat="server">
+                                    </asp:DropDownList>
+                                </div>
+                                <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
+                                    <label class="col-form-label">Número Serie de Disco Duro</label>
+                                    <asp:TextBox runat="server" ID="txtSerieDiscoDuro" CssClass="form-control"></asp:TextBox>
+                                </div>
+                                <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
+                                    <label class="col-form-label">Capacidad de disco duro(GB)</label>
+                                    <asp:TextBox runat="server" ID="txtcapacidadDiscoVerif" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                                </div>
+                            </div>
+
+                            <!--QUINTA FILA-->
+                            <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                                <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
+                                    <label class="col-form-label">Serie ATM</label>
+                                    <asp:TextBox runat="server" ID="txtserieATM" CssClass="form-control"></asp:TextBox>
+                                </div>
+                                <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
+                                    <label class="col-form-label">Inventario ATM</label>
+                                    <asp:TextBox runat="server" ID="txtinventarioVerif" CssClass="form-control"></asp:TextBox>
+                                </div>
+                                <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
+                                    <label class="col-form-label">RAM(GB)</label>
+                                    <asp:TextBox runat="server" ID="txtramVerif" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                                </div>
+                            </div>
+
+                            <!--SEXTA FILA-->
+                            <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                                <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
+                                    <label class="col-form-label">Latitud ATM</label>
+                                    <asp:TextBox runat="server" ID="txtlatitudATM" Enabled="false" CssClass="form-control"></asp:TextBox>
+                                </div>
+                                <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
+                                    <label class="col-form-label">Longitud ATM</label>
+                                    <asp:TextBox runat="server" ID="txtlongitudATM" Enabled="false" CssClass="form-control"></asp:TextBox>
+                                </div>
+                                <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
+                                </div>
+                            </div>
+
+                            <!--TERCERA FILA-->
+                            <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                                <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
+                                    <label class="col-form-label">¿Lectora tiene antiskimming?</label>
+                                    <asp:DropDownList AutoPostBack="true" OnTextChanged="dropantiskimming_TextChanged" OnSelectedIndexChanged="dropantiskimming_SelectedIndexChanged" ID="dropantiskimming" CssClass="form-control col-12" runat="server">
+                                        <asp:ListItem Value="0" Text="Seleccione opción..."></asp:ListItem>
+                                        <asp:ListItem Value="1" Text="Si"></asp:ListItem>
+                                        <asp:ListItem Value="2" Text="No"></asp:ListItem>
+                                    </asp:DropDownList>
+                                </div>
+
+                                <div class="row col-8 align-self-center" style="margin-left: auto; margin-right: auto">
+                                    <label class="col-form-label">Comentario por lectora sin antiskimming</label>
+                                    <asp:TextBox runat="server" ID="txtantiSkimming" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                </div>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+
+                    <h5 class="card-subtitle m-t-30"><i class="fa fa-image"></i><b> COMPROBACION</b></h5>
+
+                    <div class="card-body">
+                        <h5 class="card-subtitle">Subir imagenes de lo solicitado de mantenimiento</h5>
+                        <h6 class="card-subtitle" style="color: red;">Campos con * son obligatorios</h6>
+                        <table class="tablesaw table-bordered table-hover table no-wrap" data-tablesaw-mode="swipe"
+                            data-tablesaw-sortable data-tablesaw-sortable-switch data-tablesaw-minimap
+                            data-tablesaw-mode-switch>
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="background-color: #5D6D7E; color: #D5DBDB;" data-tablesaw-sortable-col data-tablesaw-priority="persist" class="border">Imagen a subir</th>
+                                    <th scope="col" style="background-color: #5D6D7E; color: #D5DBDB;" data-tablesaw-sortable-col data-tablesaw-priority="2" class="border">Seleccione imagen </th>
+                                    <th scope="col" style="background-color: #5D6D7E; color: #D5DBDB;" data-tablesaw-sortable-col data-tablesaw-priority="1" class="border">
+                                        <abbr title="Haga click a la imagen para verla más grande">Mostrar imagen</abbr>
+                                    </th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr>
+                                    <td class="title"><a class="link" href="javascript:void(0)">*Disco duro</a></td>
+                                    <td>
+                                        <asp:FileUpload ID="FUDiscoDuro" runat="server" onchange="img1(this);" /></td>
+                                    <%--<td runat="server" id="td1img1" style="display:none"><img id="imgDiscoDuro" runat="server" height="150" width="150" src="" style="border-width: 0px;" /></td>--%>
+                                    <td>
+                                        <img id="imgDiscoDuro" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="title"><a class="link" href="javascript:void(0)">*ATM desarmado parte superior (limpiar)</a></td>
+                                    <td>
+                                        <asp:FileUpload ID="FUATMDesarmadoPS" runat="server" onchange="img2(this);" /></td>
+                                    <td>
+                                        <img id="imgATMDesarmadoPS" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="title"><a class="link" href="javascript:void(0)">*ATM desarmado parte inferior (limpiar)</a> </td>
+                                    <td>
+                                        <asp:FileUpload ID="FUATMDesarmadoPI" runat="server" onchange="img3(this);" /></td>
+                                    <td>
+                                        <img id="imgATMDesarmadoPI" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="title"><a class="link" href="javascript:void(0)">*Dispositivo modo diagnostico de vendor en linea</a></td>
+                                    <td>
+                                        <asp:FileUpload ID="FUDispositivoVendor" runat="server" onchange="img4(this);" /></td>
+                                    <td>
+                                        <img id="imgDispositivoVendor" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="title"><a class="link" href="javascript:void(0)">*Tipo de procesador con el comando "SYSTEMINFO"</a></td>
+                                    <td>
+                                        <asp:FileUpload ID="FUSYSTEMINFO" runat="server" onchange="img5(this);" /></td>
+                                    <td>
+                                        <img id="imgSYSTEMINFO" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="title"><a class="link" href="javascript:void(0)">*Lectora con el antiskimming desarmado y limpio</a></td>
+                                    <td>
+                                        <asp:FileUpload ID="FUAntiskimmin" runat="server" onchange="img6(this);" /></td>
+                                    <td>
+                                        <img id="imgAntiskimmin" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="title"><a class="link" href="javascript:void(0)">*Monitor con el filtro</a></td>
+                                    <td>
+                                        <asp:FileUpload ID="FUMonitorFiltro" runat="server" onchange="img7(this);" /></td>
+                                    <td>
+                                        <img id="imgMonitorFiltro" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="title"><a class="link" href="javascript:void(0)">*PadleWheel(rueda de paletas)</a></td>
+                                    <td>
+                                        <asp:FileUpload ID="FUPadlewheel" runat="server" onchange="img8(this);" /></td>
+                                    <td>
+                                        <img id="imgPadlewheel" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="title"><a class="link" href="javascript:void(0)">*Dispositivos desarmado</a></td>
+                                    <td>
+                                        <asp:FileUpload ID="FUDispDesarmado" runat="server" onchange="img9(this);" /></td>
+                                    <td>
+                                        <img id="imgDispDesarmado" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="title"><a class="link" href="javascript:void(0)">*Teclado</a></td>
+                                    <td>
+                                        <asp:FileUpload ID="FUTeclado" runat="server" onchange="img10(this);" /></td>
+                                    <td>
+                                        <img id="imgTeclado" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="title"><a class="link" href="javascript:void(0)">¿Cuenta con Climatización adecuada?<br />
+                                    </a>
+                                        <asp:UpdatePanel runat="server">
+                                            <ContentTemplate>
+                                                <asp:RadioButtonList runat="server" ID="RBClima" AutoPostBack="true" RepeatDirection="Horizontal" CssClass="form-check">
+                                                    <asp:ListItem Value="1" Text="Si" />
+                                                    <asp:ListItem Value="2" Text="No" />
+                                                </asp:RadioButtonList>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                    </td>
+                                    <td>
+                                        <asp:FileUpload ID="FUClimatizacion" runat="server" onchange="img11(this);" /></td>
+                                    <td>
+                                        <img id="imgClimatizacion" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="title"><a class="link" href="javascript:void(0)">¿Cuenta con protección de energía eléctrica?<br />
+                                    </a>
+                                        <asp:UpdatePanel runat="server">
+                                            <ContentTemplate>
+                                                <asp:RadioButtonList runat="server" ID="RBEnergias" AutoPostBack="true" RepeatDirection="Horizontal" CssClass="form-check" Style="border-color: transparent">
+                                                    <asp:ListItem Value="1" Text="Si" />
+                                                    <asp:ListItem Value="2" Text="No" />
+                                                </asp:RadioButtonList>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                    </td>
+                                    <td>
+                                        <asp:FileUpload ID="FUEnergia" runat="server" onchange="img12(this);" /></td>
+                                    <td>
+                                        <img id="imgEnergia" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="title"><a class="link" href="javascript:void(0)">*ATM en linea</a><br />
+                                        <asp:TextBox runat="server" ID="txtcomentarioATMLinea" placeholder="Comentario sobre ATM en línea..." TextMode="MultiLine" Rows="3" CssClass="form-control" />
+                                    </td>
+                                    <td>
+                                        <asp:FileUpload ID="FUATMLinea" runat="server" onchange="img13(this);" /></td>
+                                    <td>
+                                        <img id="imgATMLinea" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="col-form-label">Observaciones y Comentarios</label>
+                        <asp:TextBox runat="server" ID="txtobseracionesVerif" TextMode="MultiLine" Rows="3" PlaceHolder="Ingrese su comentario..." CssClass="form-control"></asp:TextBox>
                     </div>
                 </div>
             </div>
-        </div>
-               
-            </ContentTemplate>
-        </asp:UpdatePanel>
-
-       
-         <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
-            <div class="row">
-                <div class="col-12 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                <div class="card-body">
-                    <h3 class="card-title" style="color: #808080;"><i class="fa fa-image" style="margin-left: 10px"></i>Comprobación</h3>
-                    <h5 class="card-subtitle">Subir imagenes de lo solicitado de mantenimiento</h5>
-                    <h6 class="card-subtitle" style="color:red;">Campos con * son obligatorios</h6>
-                    <table class="tablesaw table-bordered table-hover table no-wrap" data-tablesaw-mode="swipe"
-                        data-tablesaw-sortable data-tablesaw-sortable-switch data-tablesaw-minimap
-                        data-tablesaw-mode-switch>
-                        <thead>
-                            <tr>
-                                <th scope="col" style="background-color:#5D6D7E;color:#D5DBDB;" data-tablesaw-sortable-col data-tablesaw-priority="persist" class="border">Imagen a subir</th>                              
-                                <th scope="col" style="background-color:#5D6D7E;color:#D5DBDB;" data-tablesaw-sortable-col data-tablesaw-priority="2" class="border">Seleccione imagen </th>
-                                <th scope="col" style="background-color:#5D6D7E;color:#D5DBDB;" data-tablesaw-sortable-col data-tablesaw-priority="1" class="border">
-                                    <abbr title="Haga click a la imagen para verla más grande">Mostrar imagen</abbr> </th>
-                                
-
-                            </tr>
-                        </thead>
-                        <tbody>  
-                           
-                            <tr>                               
-                                <td class="title"><a class="link" href="javascript:void(0)">*Disco duro</a></td>   
-                                <td> <asp:FileUpload ID="FUDiscoDuro" runat="server" onchange="img1(this);" /></td>                                
-                                <%--<td runat="server" id="td1img1" style="display:none"><img id="imgDiscoDuro" runat="server" height="150" width="150" src="" style="border-width: 0px;" /></td>--%>
-                                <td><img id="imgDiscoDuro" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>                                                          
-                            </tr>                              
-                            <tr>
-                                <td class="title"><a class="link" href="javascript:void(0)">*ATM desarmado parte superior (limpiar)</a></td>                               
-                                <td> <asp:FileUpload ID="FUATMDesarmadoPS" runat="server" onchange="img2(this);" /></td>
-                                <td> <img id="imgATMDesarmadoPS" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
-                            </tr>
-                            <tr>
-                                <td class="title"><a class="link" href="javascript:void(0)">*ATM desarmado parte inferior (limpiar)</a> </td>    
-                                <td><asp:FileUpload ID="FUATMDesarmadoPI" runat="server" onchange="img3(this);" /></td>
-                                <td> <img id="imgATMDesarmadoPI" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
-                            </tr>
-                            <tr>
-                                <td class="title"><a class="link" href="javascript:void(0)">*Dispositivo modo diagnostico de vendor en linea</a></td>                              
-                                <td><asp:FileUpload ID="FUDispositivoVendor" runat="server" onchange="img4(this);" /></td>
-                                <td><img id="imgDispositivoVendor" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
-                            </tr>
-                            <tr>
-                                <td class="title"><a class="link" href="javascript:void(0)">*Tipo de procesador con el comando "SYSTEMINFO"</a></td>                               
-                                <td><asp:FileUpload ID="FUSYSTEMINFO" runat="server" onchange="img5(this);" /></td>
-                                <td><img id="imgSYSTEMINFO" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
-                            </tr>
-                            <tr>
-                                <td class="title"><a class="link" href="javascript:void(0)">*Lectora con el antiskimming desarmado y limpio</a></td>           
-                                <td><asp:FileUpload ID="FUAntiskimmin" runat="server" onchange="img6(this);" /></td>
-                                <td><img id="imgAntiskimmin" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
-                            </tr>
-                            <tr>
-                                <td class="title"><a class="link" href="javascript:void(0)">*Monitor con el filtro</a></td>                              
-                                <td><asp:FileUpload ID="FUMonitorFiltro" runat="server" onchange="img7(this);" /></td>
-                                <td><img id="imgMonitorFiltro" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
-                            </tr>
-                            <tr>
-                                <td class="title"><a class="link" href="javascript:void(0)">*PadleWheel(rueda de paletas)</a></td>                              
-                                <td><asp:FileUpload ID="FUPadlewheel" runat="server" onchange="img8(this);" /></td>
-                                <td><img id="imgPadlewheel" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
-                            </tr>
-                            <tr>
-                                <td class="title"><a class="link" href="javascript:void(0)">*Dispositivos desarmado</a></td>
-                                <td> <asp:FileUpload ID="FUDispDesarmado" runat="server" onchange="img9(this);" /></td>
-                                <td><img id="imgDispDesarmado" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
-                            </tr>
-                            <tr>
-                                <td class="title"><a class="link" href="javascript:void(0)">*Teclado</a></td>                                
-                                <td><asp:FileUpload ID="FUTeclado" runat="server" onchange="img10(this);" /></td>
-                                <td><img id="imgTeclado" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
-                            </tr>
-                            <tr>                                                            
-                                <td class="title"><a class="link" href="javascript:void(0)">¿Cuenta con Climatización adecuada?<br /> </a>
-                                    <asp:UpdatePanel runat="server">
-                                        <ContentTemplate>                             
-                                     <asp:RadioButtonList runat="server" ID="RBClima" AutoPostBack="true" RepeatDirection="Horizontal" CssClass="form-check">
-                                        <asp:ListItem Value="1" Text="Si" />
-                                        <asp:ListItem Value="2" Text="No" />
-                                    </asp:RadioButtonList>
-                                        </ContentTemplate>
-                                    </asp:UpdatePanel>
-                                </td>                                
-                                <td><asp:FileUpload ID="FUClimatizacion" runat="server" onchange="img11(this);" /></td>                                
-                                    <td><img id="imgClimatizacion" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
-                                  </tr>
-                            <tr>
-                                <td class="title"><a class="link" href="javascript:void(0)">¿Cuenta con protección de energía eléctrica?<br /></a>
-                                     <asp:UpdatePanel runat="server">
-                                        <ContentTemplate>   
-                                    <asp:RadioButtonList runat="server" ID="RBEnergias" AutoPostBack="true" RepeatDirection="Horizontal" CssClass="form-check" style="border-color:transparent">
-                                        <asp:ListItem Value="1" Text="Si" />
-                                        <asp:ListItem Value="2" Text="No" />
-                                    </asp:RadioButtonList>
-                                        </ContentTemplate>
-                                    </asp:UpdatePanel>
-                                </td>
-                                <td><asp:FileUpload ID="FUEnergia" runat="server" onchange="img12(this);" /></td>                                     
-                                <td><img id="imgEnergia" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>                                
-                            </tr>
-                            <tr>                                                               
-                                <td class="title"><a class="link" href="javascript:void(0)">*ATM en linea</a><br /><asp:TextBox runat="server" ID="txtcomentarioATMLinea" placeholder="Comentario sobre ATM en línea..." TextMode="MultiLine" Rows="3" CssClass="form-control"/> </td>                            
-                                <td><asp:FileUpload ID="FUATMLinea" runat="server" onchange="img13(this);" /></td>                                     
-                                <td><img id="imgATMLinea" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>                                
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                             </div>
-                    </div>
-                </div>
-            </div>
-        </div>
             
-       
-            <div class="row">
-                <div class="col-12 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row col-11 align-self-center" style="margin-left: auto; margin-right: auto">
-            <label class="col-form-label">Observaciones y Comentarios</label>
-            <br />          
-                <asp:TextBox runat="server" ID="txtobseracionesVerif" TextMode="MultiLine" Rows="3" PlaceHolder="Ingrese su comentario..." CssClass="form-control col-12"></asp:TextBox>
-                           </div>
-                       </div>
-                    </div>
+            <div class="row m-t-20">
+                <div class="col-12">
+                    <asp:UpdatePanel ID="UPEnviarVerif" runat="server">
+                        <ContentTemplate>
+                            <div class="col-12">
+                                <asp:Button runat="server" OnClick="btnEnviarVerif_Click" ID="btnEnviarVerif" CssClass="btn btn-success" Text="Guardar verificación" />
+                                <asp:Button runat="server" ID="btnRechazarVerif" OnClick="btnRechazarVerif_Click" CssClass="btn btn-danger" Text="Devolver" />
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </div>
             </div>
-        
-        
-        
-            <div class="row">
-                <div class="col-12 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-        <asp:UpdatePanel ID="UPEnviarVerif" runat="server">
-            <ContentTemplate>              
-                <div class="row col-11 align-self-center" style="margin-left: auto; margin-right: auto">
-                <div class="row col-3 align-self-center" style="margin-left: auto; margin-right: auto">
-                    <asp:Button runat="server" OnClick="btnEnviarVerif_Click" ID="btnEnviarVerif" CssClass="btn btn-success" Text="Guardar verificación" />
-                </div>
-                <div class="row col-2 align-self-center" style="margin-left: auto; margin-right: auto" runat="server" id="DIVbtnRechazo" visible="false">
-                    <asp:Button runat="server" ID="btnRechazarVerif" OnClick="btnRechazarVerif_Click" CssClass="btn btn-danger" Text="Devolver" />
-                </div>
-                     <div class="row col-7 align-self-center" style="margin-left: auto; margin-right: auto">
-                         </div>
-               </div>
-            </ContentTemplate>                   
-        </asp:UpdatePanel>
-                       </div>
-                    </div>
-                </div>
-            </div>
-        
-        <br />
-
+        </div>
     </div>
+
+    <asp:UpdatePanel ID="UpdatePanel8" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
+            <asp:HiddenField ID="HFDiscoDuro" runat="server" />
+            <asp:HiddenField ID="HFATMDesarmadoPS" runat="server" />
+            <asp:HiddenField ID="HFATMDesarmadoPI" runat="server" />
+            <asp:HiddenField ID="HFDispositivoVendor" runat="server" />
+            <asp:HiddenField ID="HFSYSTEMINFO" runat="server" />
+            <asp:HiddenField ID="HFMonitorFiltro" runat="server" />
+            <asp:HiddenField ID="HFAntiskimmin" runat="server" />
+            <asp:HiddenField ID="HFPadlewheel" runat="server" />
+            <asp:HiddenField ID="HFDispDesarmado" runat="server" />
+            <asp:HiddenField ID="HFTeclado" runat="server" />
+            <asp:HiddenField ID="HFATMLinea" runat="server" />
+            <asp:HiddenField ID="HFEnergia" runat="server" />
+            <asp:HiddenField ID="HFClima" runat="server" />
+        </ContentTemplate>
+    </asp:UpdatePanel>
+
     <!--MODAL VERIF ATM -->
-    <div class="modal bs-example-modal-lg" id="modalVerifATM" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal fade bs-example-modal-lg" id="modalVerifATM" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <div class="modal-header" style="background-color:darkslategrey; color:white;">
+                <div class="modal-header" style="background-color: darkslategrey; color: white;">
                     <h4 class="modal-title" id="myLargeModalLabel">¿Seguro que guardará lista de verificación?</h4>
                 </div>
                 <asp:UpdatePanel ID="UpdatePanel3" runat="server">
@@ -836,13 +801,12 @@
         </div>
         <!--/.modal-dialog -->
     </div>
-    <!-- /MODAL VERIF ATM -->
 
-     <!--MODAL RECHAZAR VERIF ATM -->
-    <div class="modal bs-example-modal-lg" id="modalRechazar" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+    <!--MODAL RECHAZAR VERIF ATM -->
+    <div class="modal fade bs-example-modal-lg" id="modalRechazar" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <div class="modal-header" style="background-color:darkslategrey; color:white;">
+                <div class="modal-header" style="background-color: darkslategrey; color: white;">
                     <h4 class="modal-title" id="myLargeModalLabel1">¿Seguro que devolverá lista de verificación?</h4>
                 </div>
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -872,13 +836,13 @@
                             <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Motivo de rechazo: </strong>  </asp:Label>
                             <asp:TextBox runat="server" ID="txtmotivoRechazo" CssClass="form-control" TextMode="MultiLine" Rows="3"></asp:TextBox>
                         </div>
-                         <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
-                                <br />
-                                <h6 runat="server" visible="false" id="H5Alerta" class="text-danger col-12" style="text-align:center;">Los campos con(*) son obligatorios.</h6>
-                            </div>
-                             <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
-                               <asp:TextBox runat="server" Enabled="false" Text="Ingrese motivo por el que devuelve verificación." Visible="false" ID="txtAlerta2" CssClass="form-control" style="background-color:red; color:white; text-align:center;"/>
-                            </div>
+                        <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                            <br />
+                            <h6 runat="server" visible="false" id="H5Alerta" class="text-danger col-12" style="text-align: center;">Los campos con(*) son obligatorios.</h6>
+                        </div>
+                        <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                            <asp:TextBox runat="server" Enabled="false" Text="Ingrese motivo por el que devuelve verificación." Visible="false" ID="txtAlerta2" CssClass="form-control" Style="background-color: red; color: white; text-align: center;" />
+                        </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
                 <asp:UpdatePanel ID="UpdatePanel5" runat="server">
@@ -888,7 +852,7 @@
                                 <asp:Button runat="server" ID="btnRechazarModal" OnClick="btnRechazarModal_Click" CssClass="btn btn-dark mr-3" Text="Devolver" />
                             </div>
                             <div class="row col-3">
-                                <asp:Button runat="server" ID="btnCerrarRechazoModal" OnClick="btnCerrarRechazoModal_Click"  CssClass="btn btn-secundary mr-3" Text="Cancelar" />
+                                <asp:Button runat="server" ID="btnCerrarRechazoModal" OnClick="btnCerrarRechazoModal_Click" CssClass="btn btn-secundary mr-3" Text="Cancelar" />
                             </div>
                         </div>
                     </ContentTemplate>
@@ -902,26 +866,6 @@
         </div>
         <!--/.modal-dialog -->
     </div>
-    <!-- /MODAL RECHAZAR VERIF ATM -->
-
-    <asp:UpdatePanel ID="UpdatePanel8" runat="server" UpdateMode="Conditional">
-        <ContentTemplate>
-            <asp:HiddenField ID="HFDiscoDuro" runat="server" />
-            <asp:HiddenField ID="HFATMDesarmadoPS" runat="server" />
-            <asp:HiddenField ID="HFATMDesarmadoPI" runat="server" />
-            <asp:HiddenField ID="HFDispositivoVendor" runat="server" />
-            <asp:HiddenField ID="HFSYSTEMINFO" runat="server" />
-            <asp:HiddenField ID="HFMonitorFiltro" runat="server" />
-            <asp:HiddenField ID="HFAntiskimmin" runat="server" />
-            <asp:HiddenField ID="HFPadlewheel" runat="server" />
-            <asp:HiddenField ID="HFDispDesarmado" runat="server" />
-            <asp:HiddenField ID="HFTeclado" runat="server" />
-            <asp:HiddenField ID="HFATMLinea" runat="server" />
-             <asp:HiddenField ID="HFEnergia" runat="server" />
-            <asp:HiddenField ID="HFClima" runat="server" />
-        </ContentTemplate>
-    </asp:UpdatePanel>
-
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="Script" runat="server">
@@ -971,33 +915,6 @@
         });
     </script>
     <script src="/assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
-
-
-    <%--    <script src="/assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-    <script src="/assets/node_modules/popper/popper.min.js"></script>
-    <script src="/assets/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="/js/perfect-scrollbar.jquery.min.js"></script>
-    <!--Wave Effects -->
-    <script src="/js/waves.js"></script>
-    <!--Menu sidebar -->
-    <script src="/js/sidebarmenu.js"></script>
-    <!--stickey kit -->
-    <script src="/assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
-    <!--Custom JavaScript -->
-    <script src="/js/custom.min.js"></script>
-    <!-- icheck -->--%>
-
-
     <!--FILEUP-->
-
-    <!--Custom JavaScript -->
     <script src="/js/custom.min.js"></script>
-    <!-- ============================================================== -->
-    <!-- Plugins for this page -->
-    <!-- ============================================================== -->
-    <!-- jQuery file upload -->
-
-    <!--FILEUP-->
 </asp:Content>

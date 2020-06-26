@@ -195,9 +195,25 @@
             </div>
         </ProgressTemplate>
     </asp:UpdateProgress>
-
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
+            <h4 class="text-themecolor">STEI</h4>
+        </div>
+        <div class="col-md-7 align-self-center text-right">
+            <div class="d-flex justify-content-end align-items-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Módulos</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Agencias</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Mantenimiento</a></li>
+                    <li class="breadcrumb-item active">Individual</li>
+                </ol>
+            </div> 
+        </div>
+    </div>
+
+    <%--(INICIO) Targeta Datos Generales --%>
+    <div class="card">
+        <div class="card-body">
             <asp:UpdatePanel ID="UpTitulo" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
                     <h2 class="text-themecolor">
@@ -205,17 +221,7 @@
                     </h2>
                 </ContentTemplate>
             </asp:UpdatePanel>
-                            <div class="mr-md-3 mr-xl-5">
-                <%-- <h2>Creación de Notificación</h2>--%>
-                <p class="mb-md-0">Soporte Técnico y Comunicaciones</p>
-            </div>
-        </div>
-    </div>
-
-    <%--(INICIO) Targeta Datos Generales --%>
-    <div class="card">
-        <div class="card-body">
-            <h3 class="card-title">Datos Generales</h3>
+            <h6 class="card-title">Datos Generales</h6>
 
             <div class="row p-t-20">
                 <div class="col-md-6">

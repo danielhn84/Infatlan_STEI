@@ -44,7 +44,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             try
             {
                 DataTable vDatos = new DataTable();
-                vDatos = vConexion.ObtenerTabla("STEISP_ATM_VERIFICACION 1, '"+ Session["usuATM"].ToString() + "','"+Session["COD_VERIFMANTE_ATM"]+"'");
+                vDatos = vConexion.ObtenerTabla("STEISP_ATM_VERIFICACION 1, '"+ Session["USUARIO"].ToString() + "','"+Session["COD_VERIFMANTE_ATM"]+"'");
                 GVBusqueda.DataSource = vDatos;
                 GVBusqueda.DataBind();
                 Session["ATM_VERIF_CARGAR"] = vDatos;
@@ -197,7 +197,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 string vMsg = "Mantenimiento asignado correctamente.";
                 vService.EnviarMensaje(vCorreo,
                    typeBody.Solicitante,
-                   Session["usuATM"].ToString(),
+                   Session["USUARIO"].ToString(),
                    vNombre,
                    vMotivo,
                    vMsg
@@ -237,7 +237,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     string vMsg = "Puede continuar con el proceso.";
                     vService.EnviarMensaje(vCorreo,
                        typeBody.Solicitante,
-                       Session["usuATM"].ToString(),
+                       Session["USUARIO"].ToString(),
                        vNombre,
                        vMotivo,
                        vMsg
@@ -274,7 +274,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     string vMsg = "Puede continuar con el proceso.";
                     vService.EnviarMensaje(vCorreo,
                        typeBody.Solicitante,
-                       Session["usuATM"].ToString(),
+                       Session["USUARIO"].ToString(),
                        vNombre,
                        vMotivo,
                        vMsg
@@ -311,7 +311,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     string vMsg = "Puede continuar con el proceso.";
                     vService.EnviarMensaje(vCorreo,
                        typeBody.Solicitante,
-                       Session["usuATM"].ToString(),
+                       Session["USUARIO"].ToString(),
                        vNombre,
                        vMotivo,
                        vMsg
@@ -356,7 +356,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     {
                         try
                         {
-                            string vQuery = "STEISP_ATM_CancelarVerificacion 2, '" + Session["ATM_ID_CANCELAR_VERIF_MODAL"] + "','" + DDLModalMotivo.SelectedValue + "','" + DDLModalcambioPor.SelectedValue + "','" + Session["usuATM"].ToString() + "', '" + DDLModalNewTecnico.SelectedValue + "','" + txtdetalleCancela.Text + "'";
+                            string vQuery = "STEISP_ATM_CancelarVerificacion 2, '" + Session["ATM_ID_CANCELAR_VERIF_MODAL"] + "','" + DDLModalMotivo.SelectedValue + "','" + DDLModalcambioPor.SelectedValue + "','" + Session["USUARIO"].ToString() + "', '" + DDLModalNewTecnico.SelectedValue + "','" + txtdetalleCancela.Text + "'";
                             Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                             if (vInfo == 1)
                             {
@@ -384,7 +384,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     {
                         try
                         {
-                            string vQuery = "STEISP_ATM_CancelarVerificacion 1, '" + Session["ATM_ID_CANCELAR_VERIF_MODAL"] + "','" + DDLModalMotivo.SelectedValue + "','" + DDLModalcambioPor.SelectedValue + "','" + Session["usuATM"].ToString() + "', '" + DDLModalNewTecnico.SelectedValue + "','" + txtdetalleCancela.Text + "'";
+                            string vQuery = "STEISP_ATM_CancelarVerificacion 1, '" + Session["ATM_ID_CANCELAR_VERIF_MODAL"] + "','" + DDLModalMotivo.SelectedValue + "','" + DDLModalcambioPor.SelectedValue + "','" + Session["USUARIO"].ToString() + "', '" + DDLModalNewTecnico.SelectedValue + "','" + txtdetalleCancela.Text + "'";
                             Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                             if (vInfo == 1)
                             {

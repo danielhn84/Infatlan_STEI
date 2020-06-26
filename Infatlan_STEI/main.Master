@@ -11,11 +11,11 @@
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/logo_mini.png">
     <title>Infatlan - STEI</title>
-    <link href="/assets/node_module/morrisjs/morris.css" rel="stylesheet">
-    <link href="/assets/node_module/toast-master/css/jquery.toast.css" rel="stylesheet">
-    <link href="/css/animate.min.css" rel="stylesheet" />
-    <link href="/css/style.min.css" rel="stylesheet">
-    <link href="/css/pages/dashboard1.css" rel="stylesheet">
+    <link href="/assets/node_modules/morrisjs/morris.css" rel="stylesheet">
+    <link href="/assets/node_modules/toast-master/css/jquery.toast.css" rel="stylesheet">
+    <link href="/dist/css/animate.min.css" rel="stylesheet" />
+    <link href="/dist/css/style.min.css" rel="stylesheet">
+    <link href="/dist/css/pages/dashboard1.css" rel="stylesheet">
     <script type="text/javascript"> 
         infatlan = {
             showNotification: function (from, align, mensaje, tipo) {
@@ -35,7 +35,7 @@
     <asp:ContentPlaceHolder ID="Head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body class="skin-default fixed-layout">
+<body class="skin-default dark fixed-layout">
 
     <div class="preloader">
         <div class="loader">
@@ -44,82 +44,102 @@
         </div>
     </div>
     <div id="main-wrapper">
+        <header class="topbar">
+            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/default.aspx">
+                        <b style="margin-left: 10px">
+                            <img src="/assets/images/logo-text.png" alt="homepage" class="dark-logo" />
+                            <img src="/assets/images/logo_mini.png" alt="homepage" class="light-logo" />
+                        </b>
+                        <span>
+                            <img src="/assets/images/logo-text.png" alt="homepage" class="dark-logo" />
+                            <img src="/assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
+                        </span>
+                    </a>
+                </div>
+                <div class="navbar-collapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item"><a class="nav-link nav-toggler d-block d-sm-none waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a></li>
+                        <li class="nav-item"><a class="nav-link sidebartoggler d-none d-lg-block d-md-block waves-effect waves-dark" href="javascript:void(0)"><i class="icon-menu"></i></a></li>
 
+                        <%--<li class="nav-item">
+                                <form class="app-search d-none d-md-block d-lg-block">
+                                    <input type="text" class="form-control" placeholder="Search & enter">
+                                </form>
+                            </li>--%>
+                    </ul>
+                    <ul class="navbar-nav my-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ti-email"></i>
+                                <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right mailbox scale-up">
+                                <ul>
+                                    <li><div class="drop-title">Mensajes</div></li>
+                                    <li>
+                                        <div class="message-center">
+                                            <asp:Literal Text="" ID="LitNotificaciones" runat="server" />
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown u-pro">
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="/assets/images/users/face5.jpg" alt="user" class="">
+                                <span class="hidden-md-down">
+                                    <asp:Literal Text="" ID="LitUsuario" runat="server" />
+                                    &nbsp;<i class="fa fa-angle-down"></i></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right animated flipInY">
+                                <a href="/logout.aspx" class="dropdown-item"><i class="fa fa-power-off"></i>Logout</a>
+                                <a class="dropdown-item" style="display: none">
+                                    <input class="dropdown-item" type="Text" id="TxUser" value="" runat="server" clientidmode="AutoID" />
+                                    <asp:Literal Text="" ID="LitUser" ClientIDMode="AutoID" runat="server" />
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <aside class="left-sidebar">
+            <div class="scroll-sidebar">
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Modulos <span class="badge badge-pill badge-cyan ml-auto">4</span></span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li runat="server" id="LIAgencias" visible="false">
+                                    <a href="#" onclick="window.location.href = '/sites/agencias/default.aspx?u=' + document.getElementById('<%= TxUser.ClientID %>').value">Agencias</a>
+                                </li>
+                                <li runat="server" id="LIATM" visible="false">
+                                    <a href="#" onclick="window.location.href = '/sites/ATM/default.aspx?u=' + document.getElementById('<%= TxUser.ClientID %>').value">ATM</a>
+                                </li>
+                                <li runat="server" id="LICableado" visible="false">
+                                    <a href="#" onclick="window.location.href = '/sites/cableado/default.aspx?u=' + document.getElementById('<%= TxUser.ClientID %>').value">Cableado</a>
+                                </li>
+                                <li runat="server" id="LIInventario" visible="false">
+                                    <a href="#" onclick="window.location.href = '/sites/inventario/default.aspx?u=' + document.getElementById('<%= TxUser.ClientID %>').value">Inventarios</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-wrench"></i><span class="hide-menu">Configuración<span class="badge badge-pill badge-cyan ml-auto">2</span></span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="/paginas/configuraciones/usuarios.aspx">Usuarios</a></li>
+                                <li><a href="/paginas/configuraciones/permisos.aspx">Permisos</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="waves-effect waves-dark" href="pages-faq.html" aria-expanded="false"><i class="icon-bubble"></i><span class="hide-menu">FAQs</span></a></li>
+                        <li><a class="waves-effect waves-dark" href="pages-faq.html" aria-expanded="false"><i class="icon-doc"></i><span class="hide-menu">Reportes</span></a></li>
+                        <li><a class="waves-effect waves-dark" href="/paginas/messages.aspx"><i class="icon-envelope-open"></i><span class="hide-menu">Mensajes</span></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
         <form id="FormaPrincipal" runat="server">
             <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-
-            <header class="topbar">
-                <nav class="navbar top-navbar navbar-expand-md navbar-dark">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="index.html" style="margin-left: 35px;">
-                            <b>
-                                <img src="/assets/images/logo.png" alt="homepage" class="dark-logo" />
-                            </b>
-                        </a>
-                    </div>
-                    <div class="navbar-collapse">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item"><a class="nav-link nav-toggler d-block d-sm-none waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a></li>
-                            <li class="nav-item"><a class="nav-link sidebartoggler d-none d-lg-block d-md-block waves-effect waves-dark" href="javascript:void(0)"><i class="icon-menu"></i></a></li>
-
-                        </ul>
-                        <ul class="navbar-nav my-lg-0">
-                            <li class="nav-item dropdown u-pro">
-                                <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="hidden-md-down"><asp:Literal Text="" ID="LitUsuario" runat="server" /> &nbsp;<i class="fa fa-angle-down"></i></span> 
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right animated flipInY">
-                                    <a href="/logout.aspx" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
-                                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                                        <ContentTemplate>
-                                            <a class="dropdown-item" style="display:none">
-                                                <input class="dropdown-item" type="Text" id="TxUser" value="" runat="server" ClientIDMode="AutoID" />
-                                                <asp:Literal Text="" ID="LitUser" ClientIDMode="AutoID" runat="server" />
-                                            </a>
-                                        </ContentTemplate>
-                                    </asp:UpdatePanel>
-                                </div> 
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </header>
-
-            <aside class="left-sidebar">
-                <div class="scroll-sidebar">
-                    <nav class="sidebar-nav">
-                        <ul id="sidebarnav">
-                            <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Modulos <span class="badge badge-pill badge-cyan ml-auto">4</span></span></a>
-                                <ul aria-expanded="false" class="collapse">
-                                    <li runat="server" id="LIAgencias" visible="false">
-                                        <a href="#" onclick="window.location.href = '/sites/agencias/default.aspx?u=' + document.getElementById('<%= TxUser.ClientID %>').value">Agencias</a>
-                                    </li>
-                                    <li runat="server" id="LIATM" visible="false">
-                                        <a href="#" onclick="window.location.href = '/sites/ATM/default.aspx?u=' + document.getElementById('<%= TxUser.ClientID %>').value">ATM</a>
-
-                                    </li>
-                                    <li runat="server" id="LICableado" visible="false">
-                                        <a href="#" onclick="window.location.href = '/sites/cableado/default.aspx?u=' + document.getElementById('<%= TxUser.ClientID %>').value">Cableado</a>
-                                    </li>
-                                    <li runat="server" id="LIInventario" visible="false">
-                                        <a href="#" onclick="window.location.href = '/sites/inventario/default.aspx?u=' + document.getElementById('<%= TxUser.ClientID %>').value">Inventarios</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-wrench"></i><span class="hide-menu">Configuración<span class="badge badge-pill badge-cyan ml-auto">2</span></span></a>
-                                <ul aria-expanded="false" class="collapse">
-                                    <li><a href="/paginas/configuraciones/usuarios.aspx">Usuarios</a></li>
-                                    <li><a href="/paginas/configuraciones/permisos.aspx">Permisos</a></li>
-                                </ul>
-                            </li>
-                            <li><a class="waves-effect waves-dark" href="pages-faq.html" aria-expanded="false"><i class="icon-bubble"></i><span class="hide-menu">FAQs</span></a></li>
-                            <li><a class="waves-effect waves-dark" href="pages-faq.html" aria-expanded="false"><i class="icon-doc"></i><span class="hide-menu">Reportes</span></a></li>
-
-                        </ul>
-                    </nav>
-                </div>
-            </aside>
-
             <div class="page-wrapper">
                 <div class="container-fluid">
                     <div>
@@ -136,21 +156,21 @@
 
     </div>
 
-    <script src="/assets/node_module/jquery/jquery-3.2.1.min.js"></script>
-    <script src="/assets/node_module/popper/popper.min.js"></script>
-    <script src="/assets/node_module/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js"></script>
-    <script src="/js/waves.js"></script>
-    <script src="/js/sidebarmenu.js"></script>
-    <script src="/js/custom.min.js"></script>
+    <script src="/assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
+    <script src="/assets/node_modules/popper/popper.min.js"></script>
+    <script src="/assets/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/dist/js/perfect-scrollbar.jquery.min.js"></script>
+    <script src="/dist/js/waves.js"></script>
+    <script src="/dist/js/sidebarmenu.js"></script>
+    <script src="/dist/js/custom.min.js"></script>
 
-    <script src="/assets/node_module/raphael/raphael-min.js"></script>
-    <script src="/assets/node_module/morrisjs/morris.min.js"></script>
-    <script src="/assets/node_module/jquery-sparkline/jquery.sparkline.min.js"></script>
-    <script src="/assets/node_module/toast-master/js/jquery.toast.js"></script>
-    <script src="/js/dashboard1.js"></script>
-    <script src="/assets/node_module/toast-master/js/jquery.toast.js"></script>
-    <script src="/js/bootstrap-notify.js"></script>
+    <script src="/assets/node_modules/raphael/raphael-min.js"></script>
+    <script src="/assets/node_modules/morrisjs/morris.min.js"></script>
+    <script src="/assets/node_modules/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <script src="/assets/node_modules/toast-master/js/jquery.toast.js"></script>
+
+    <script src="/assets/node_modules/toast-master/js/jquery.toast.js"></script>
+    <script src="/dist/js/bootstrap-notify.js"></script>
 
     <asp:ContentPlaceHolder ID="Script" runat="server">
     </asp:ContentPlaceHolder>

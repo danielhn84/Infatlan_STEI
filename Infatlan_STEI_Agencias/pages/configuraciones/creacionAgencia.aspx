@@ -2,14 +2,12 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
 
     <script type="text/javascript">
-
         var updateProgress = null;
         function postbackButtonClick() {
             updateProgress = $find("<%= UpdateProgress1.ClientID %>");
             window.setTimeout("updateProgress.set_visible(true)", updateProgress.get_displayAfter());
             return true;
         }
-
 
         function openModalModificarAgencia() { $('#modalModificarAgencia').modal('show'); }
         function closeModalModificarAgencia() { $('#modalModificarAgencia').modal('hide'); }
@@ -26,14 +24,19 @@
             
         </ProgressTemplate>
     </asp:UpdateProgress>
-
     <div class="row page-titles">
-        <div class="col-md-7 align-self-center">
-            <h2 class="text-themecolor">Agencias BASA</h2>
-            <div class="mr-md-3 mr-xl-5">
-                <%-- <h2>Creación Agencia</h2>--%>
-                <p class="mb-md-0">Soporte Técnico y Comunicaciones</p>
-            </div>
+        <div class="col-md-5 align-self-center">
+            <h4 class="text-themecolor">STEI</h4>
+        </div>
+        <div class="col-md-7 align-self-center text-right">
+            <div class="d-flex justify-content-end align-items-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Módulos</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Agencias</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Configuraciones</a></li>
+                    <li class="breadcrumb-item active">Crear Agencia</li>
+                </ol>
+            </div> 
         </div>
     </div>
 

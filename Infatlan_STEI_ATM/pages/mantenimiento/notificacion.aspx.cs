@@ -30,7 +30,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                             cargarDataNotificacion();
                             habilitar();
                             btnCancelarAprobNotif.Visible = true;
-                            divRepro.Visible = true;
+                            btnCancelarAprobNotif.Visible = true;
                             break;
                     }
                 }else {
@@ -301,7 +301,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 string vMsg2 = "Solicitud fue aprobado exitosamente.";
                 vService.EnviarMensaje(vCorreo,
                    typeBody.Supervisor,
-                   Session["usuATM"].ToString(),
+                   Session["USUARIO"].ToString(),
                    vNombre,
                    vMotivo2,
                    vMsg2
@@ -350,7 +350,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 string vMsg = "Su solicitud debe ser aprobado por su jefe inmediato.";
                 vService.EnviarMensaje(vCorreo,
                    typeBody.Solicitante,
-                   Session["usuATM"].ToString(),
+                   Session["USUARIO"].ToString(),
                    vNombre,
                    vMotivo,
                    vMsg
@@ -360,7 +360,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 string vMsg2 = "Para continuar con el proceso de notificación debe aprobar dicha solicitud.";
                 vService.EnviarMensaje(vCorreo,
                    typeBody.Supervisor,
-                   Session["usuATM"].ToString(),
+                   Session["USUARIO"].ToString(),
                    vNombre,
                    vMotivo2,
                    vMsg2
@@ -413,7 +413,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 
                 try
                 {
-                    string vQuery = "STEISP_ATM_Aprobaciones 1, '" + Session["codNotificacion"] + "','" + txtcomentarioReprogramaNotif.Text + "', '" + Session["usuATM"].ToString() + "'";
+                    string vQuery = "STEISP_ATM_Aprobaciones 1, '" + Session["codNotificacion"] + "','" + txtcomentarioReprogramaNotif.Text + "', '" + Session["USUARIO"].ToString() + "'";
                     Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                     if (vInfo == 1)
                     {
@@ -425,7 +425,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                         LimpiarNotificacion();
                         UpNotif.Update();
                         //Session.Clear();
-                        //Session["usuATM"] = "acedillo";
+                        //Session["USUARIO"] = "acedillo";
                         Response.Redirect("buscarAprobarNotificacion.aspx");
                     }
                     else
@@ -458,7 +458,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     try
                     {
                         string vQuery = "STEISP_ATM_Notificaciones 1, '" + Session["ID"] + "','" + txtHrInicioMant.Text + "', '" + txtHrFinMant.Text + "'," +
-                            "'" + autorizarATM + "','" + DLLtecResponsable.SelectedValue + "','" + txtsysaid.Text + "', " + estado + ",'" + Session["usuATM"].ToString() + "'";
+                            "'" + autorizarATM + "','" + DLLtecResponsable.SelectedValue + "','" + txtsysaid.Text + "', " + estado + ",'" + Session["USUARIO"].ToString() + "'";
                         Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                         if (vInfo == 1)
                         {
@@ -514,7 +514,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             try
             {
                 string vQuery = "STEISP_ATM_Notificaciones 2, '" + Session["ID"] + "','" + txtcancelarNotif.Text + "', '" + txtHrFinMant.Text + "'," +
-                    "'" + autorizarATM + "','" + DLLtecResponsable.SelectedItem.Text + "','" + txtsysaid.Text + "', " + estado + ",'" + Session["usuATM"].ToString() + "'";
+                    "'" + autorizarATM + "','" + DLLtecResponsable.SelectedItem.Text + "','" + txtsysaid.Text + "', " + estado + ",'" + Session["USUARIO"].ToString() + "'";
                 Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                 if (vInfo == 1)
                 {
@@ -1061,7 +1061,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             {
                 try
                 {
-                    string vQuery = "STEISP_ATM_Aprobaciones 2, '" + Session["codNotificacion"] + "','" + txtcomentarioReprogramaNotif.Text + "', '" + Session["usuATM"].ToString() + "'";
+                    string vQuery = "STEISP_ATM_Aprobaciones 2, '" + Session["codNotificacion"] + "','" + txtcomentarioReprogramaNotif.Text + "', '" + Session["USUARIO"].ToString() + "'";
                     Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                     if (vInfo == 1)
                     {
@@ -1088,7 +1088,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                         //string vMsg2 = "Solicitud fue aprobado exitosamente.";
                         //vService.EnviarMensaje(vCorreo,
                         //   typeBody.Supervisor,
-                        //   Session["usuATM"].ToString(),
+                        //   Session["USUARIO"].ToString(),
                         //   vNombre,
                         //   vMotivo2,
                         //   vMsg2

@@ -35,7 +35,7 @@ namespace Infatlan_STEI_ATM.pages.material
             {
 
                 DataTable vDatos = new DataTable();
-                vDatos = vConexion.ObtenerTabla("STEISP_ATM_VERIFICACION 10, '" + Session["usuATM"].ToString() + "'");
+                vDatos = vConexion.ObtenerTabla("STEISP_ATM_VERIFICACION 10, '" + Session["USUARIO"].ToString() + "'");
                 GVBusqueda.DataSource = vDatos;
                 GVBusqueda.DataBind();
                 Session["ATM_MATERIALES_MANTENIMIENTO"] = vDatos;            

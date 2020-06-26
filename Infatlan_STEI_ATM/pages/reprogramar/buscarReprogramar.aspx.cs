@@ -129,7 +129,7 @@ namespace Infatlan_STEI_ATM.pages.reprogramar
                 string vMsg = "Puede continuar con el proceso.";
                 vService.EnviarMensaje(vCorreo,
                    typeBody.Aprobado,
-                   Session["usuATM"].ToString(),
+                   Session["USUARIO"].ToString(),
                    vNombre,
                    vMotivo,
                    vMsg
@@ -208,17 +208,17 @@ namespace Infatlan_STEI_ATM.pages.reprogramar
                 string NewFecha = Convert.ToDateTime(txtNewFechaInicio.Text).ToString(vFormato);
                 try
                 {
-                    string vQuery = "STEISP_ATM_Reprogramacion 1, '" + Session["codNotificacionRE"] + "','" + NewFecha + "', '" + Session["usuATM"].ToString() + "'";
+                    string vQuery = "STEISP_ATM_Reprogramacion 1, '" + Session["codNotificacionRE"] + "','" + NewFecha + "', '" + Session["USUARIO"].ToString() + "'";
                     Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                     if (vInfo == 1)
                     {
                         H5Alerta.Visible = false;
                         txtAlerta1.Visible = false;
                         //ELIMINAR JEFES DE AGENCIA
-                        string vQuery2 = "STEISP_ATM_Reprogramacion 2, '" + Session["codNotificacionRE"] + "','" + NewFecha + "', '" + Session["usuATM"].ToString() + "'";
+                        string vQuery2 = "STEISP_ATM_Reprogramacion 2, '" + Session["codNotificacionRE"] + "','" + NewFecha + "', '" + Session["USUARIO"].ToString() + "'";
                         Int32 vInfo2 = vConexion.ejecutarSQL(vQuery2);
                         //ELIMINAR TECNICOS PARTICIPANTES
-                        string vQuery3 = "STEISP_ATM_Reprogramacion 3, '" + Session["codNotificacionRE"] + "','" + NewFecha + "', '" + Session["usuATM"].ToString() + "'";
+                        string vQuery3 = "STEISP_ATM_Reprogramacion 3, '" + Session["codNotificacionRE"] + "','" + NewFecha + "', '" + Session["USUARIO"].ToString() + "'";
                         Int32 vInfo3 = vConexion.ejecutarSQL(vQuery3);
                         H5Alerta.Visible = false;
 

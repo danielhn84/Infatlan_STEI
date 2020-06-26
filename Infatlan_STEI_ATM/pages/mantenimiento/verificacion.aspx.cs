@@ -43,7 +43,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                             RBEnergias.Enabled = false;
                             FUATMLinea.Enabled = false;
                             txtcomentarioATMLinea.Enabled = false;
-                            DIVbtnRechazo.Visible = true;
+                            btnRechazarVerif.Visible = true;
                             llenarFormRechazado();
                             llenarImagenes();
                             aprobacionCampos();
@@ -582,7 +582,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 string vMsg2 = "Solicitud fue aprobado exitosamente.";
                 vService.EnviarMensaje(vCorreo,
                    typeBody.Supervisor,
-                   Session["usuATM"].ToString(),
+                   Session["USUARIO"].ToString(),
                    txtTecnicoResponsable.Text,
                    vMotivo2,
                    vMsg2
@@ -596,7 +596,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 string vMsg = "Su solicitud debe ser aprobado por su jefe inmediato.";
                 vService.EnviarMensaje(vCorreo,
                    typeBody.Solicitante,
-                   Session["usuATM"].ToString(),
+                   Session["USUARIO"].ToString(),
                    Session["ATM_TECNICO_VERIF_CREAR"].ToString(),
                    vMotivo,
                    vMsg
@@ -624,7 +624,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
                 string vQuery = "STEISP_ATM_VerificacionTotal 2, '" + Session["ATM_CODATM_VERIF_CREAR"] + "','" + DDLtipoTeclado.SelectedValue + "','" + DDLtipoProc.SelectedValue + "'," +
                     "'" + DDLtipoCargaVerif.SelectedValue + "','" + DDLmarcaDiscoDuro.SelectedValue + "','" + txtSerieDiscoDuro.Text + "','" + txtcapacidadDiscoVerif.Text + " GB" + "','" + txtserieATM.Text + "'," +
-                    "'" + txtinventarioVerif.Text + "','" + txtramVerif.Text + " GB" + "','" + Session["usuATM"].ToString() + "'";
+                    "'" + txtinventarioVerif.Text + "','" + txtramVerif.Text + " GB" + "','" + Session["USUARIO"].ToString() + "'";
                 Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                 if (vInfo == 1)
                 {
@@ -645,7 +645,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             try
             {
                 string vQuery = "STEISP_ATM_VerificacionTotal 1, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + txthsalidaInfa.Text + "','" + txtHllegadaInfatlan.Text + "'," +
-                    "'" + TxFechaInicio.Text + "','" + TxFechaRegreso.Text + "','" + txtobseracionesVerif.Text + "','" + Session["usuATM"].ToString() + "','" + txtcomentarioATMLinea.Text + "'";
+                    "'" + TxFechaInicio.Text + "','" + TxFechaRegreso.Text + "','" + txtobseracionesVerif.Text + "','" + Session["USUARIO"].ToString() + "','" + txtcomentarioATMLinea.Text + "'";
                     
                 Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                 if (vInfo == 1)
@@ -1272,7 +1272,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     
                     try
                     {
-                        string vQuery = "STEISP_ATM_VERIFICACION 5, '" + Session["usuATM"].ToString() + "','" + Session["ATM_IDMANT_VERIF_CREAR"] + "'";
+                        string vQuery = "STEISP_ATM_VERIFICACION 5, '" + Session["USUARIO"].ToString() + "','" + Session["ATM_IDMANT_VERIF_CREAR"] + "'";
                         Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                         if (vInfo == 1)
                         {
@@ -1350,7 +1350,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 try
                 {
                     
-                    string vQuery = "STEISP_ATM_VERIFICACION 6, '" + Session["usuATM"].ToString() + "','" + Session["ATM_IDMANT_VERIF_CREAR"].ToString() + "'";
+                    string vQuery = "STEISP_ATM_VERIFICACION 6, '" + Session["USUARIO"].ToString() + "','" + Session["ATM_IDMANT_VERIF_CREAR"].ToString() + "'";
                     Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                     if (vInfo == 1)
                     {

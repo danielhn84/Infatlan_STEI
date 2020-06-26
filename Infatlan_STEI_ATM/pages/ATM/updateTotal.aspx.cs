@@ -466,14 +466,14 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     "'" + txtserieATM.Text + "','" + txtramATM.Text + " GB" + "', " + DDLso.SelectedValue + "," +
                     "'" + txtserieDisco.Text + "','" + txtcapacidadDisco.Text + " GB" + "'," + DDLmarca.SelectedValue + "," +
                     "'" + txtIP.Text + "','" + txtpuerto.Text + "','" + txtlatitud.Text + "','" + txtlongitud.Text + "'," +
-                    "'" + txtdireccion.Text + "','" + Session["usuATM"].ToString() + "','" + txtinventarioATM.Text + "', '" + DDLversionSw.SelectedValue + "','" + txtcodUbicacion.Text + "'";
+                    "'" + txtdireccion.Text + "','" + Session["USUARIO"].ToString() + "','" + txtinventarioATM.Text + "', '" + DDLversionSw.SelectedValue + "','" + txtcodUbicacion.Text + "'";
                 Int32 vInfo = vConexion.ejecutarSQL(vQuery);
 
 
                 //ACTUALIZAR UBICACIONES
                 string IDUbi = "5";
                 int vEstado = 1;
-                String vQuery3 = "STEISP_INVENTARIO_Ubicaciones 4, '"+ Session["InvUbicacion"] + "','" + IDUbi + "', '" + DDLsucursalATM.SelectedValue + "','" + txtcodUbicacion.Text + "','" + txtdireccion.Text + "','"+vEstado+"','" + Session["usuATM"].ToString() + "','" + txtnombreATM.Text + "'";
+                String vQuery3 = "STEISP_INVENTARIO_Ubicaciones 4, '"+ Session["InvUbicacion"] + "','" + IDUbi + "', '" + DDLsucursalATM.SelectedValue + "','" + txtcodUbicacion.Text + "','" + txtdireccion.Text + "','"+vEstado+"','" + Session["USUARIO"].ToString() + "','" + txtnombreATM.Text + "'";
                 DataTable vDatos3 = vConexion.ObtenerTabla(vQuery3);
 
                 //VALIDA QUE ATM ESTE ACTIVO

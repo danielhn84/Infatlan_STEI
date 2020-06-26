@@ -1,9 +1,15 @@
 ﻿using System;
+using System.Data;
+using Infatlan_STEI.classes;
+using System.Web.UI;
+using System.Configuration;
+
 
 namespace Infatlan_STEI
 {
     public partial class _default : System.Web.UI.Page
     {
+        db vConexion = new db();
         protected void Page_Load(object sender, EventArgs e)
         {
             string usu = Convert.ToString(Session["USUARIO"]);
@@ -43,6 +49,10 @@ namespace Infatlan_STEI
             Session["ROL"] = vRol;
             getRol();
         }
+        
+        public void Mensaje(string vMensaje, WarningType type){
+            ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
+        }
 
         public void getRol()
         {
@@ -60,6 +70,47 @@ namespace Infatlan_STEI
                 throw new Exception("");
             }
 
+        }
+
+        protected void BtnEnviarBug_Click(object sender, EventArgs e){
+            try{
+                DataTable vDatos = (DataTable)Session["AUTHCLASS"];
+                if (vDatos.Rows.Count > 0){
+                    SmtpService vService = new SmtpService();
+                    Boolean vFlagEnvio = false;
+                    String vDestino = "";
+
+                    if (DDLTipo.SelectedValue == "1")
+                        vDestino = ConfigurationManager.AppSettings["SmtpSTEI"].ToString();
+                    else if(DDLTipo.SelectedValue == "2")
+                        vDestino = ConfigurationManager.AppSettings["SmtpAGENCIAS"].ToString();
+                    else if (DDLTipo.SelectedValue == "3")
+                        vDestino = ConfigurationManager.AppSettings["SmtpATM"].ToString();
+                    else if (DDLTipo.SelectedValue == "4")
+                        vDestino = ConfigurationManager.AppSettings["SmtpCABLEADO"].ToString();
+                    else if (DDLTipo.SelectedValue == "5")
+                        vDestino = ConfigurationManager.AppSettings["SmtpINVENTARIO"].ToString();
+
+                    foreach (DataRow item in vDatos.Rows){
+                        if (!item["emailEmpresa"].ToString().Trim().Equals("")){
+                            vService.EnviarMensaje(
+                                vDestino,
+                                typeBody.Bugs,
+                                item["nombre"].ToString(),
+                                vDatos.Rows[0]["nombre"].ToString()
+                                );
+                            vFlagEnvio = true;
+                        }
+                    }
+
+                    if (vFlagEnvio)
+                        Mensaje("Insidencia enviada con éxito.", WarningType.Success);
+                    else
+                        Mensaje("El Mensaje no se pudo enviar. Favor intente de nuevo.", WarningType.Success);
+                }
+            }catch (Exception ex){
+
+            }
         }
     }
 }

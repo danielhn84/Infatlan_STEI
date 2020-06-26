@@ -20,7 +20,39 @@ namespace Infatlan_STEI
                     LitUsuario.Text = vDatos.Rows[0]["nombre"].ToString().ToUpper() + " " + vDatos.Rows[0]["apellidos"].ToString().ToUpper();
                     TxUser.Value = vDatos.Rows[0]["idUsuario"].ToString();
 
-                    String vQuery = "[STEISP_Permisos] 3,'" + Session["USUARIO"].ToString() + "'";
+                    String vString = "";
+                    String vQuery = "[STEISP_Mensajes] 3,'" + Session["USUARIO"].ToString() + "'";
+                    vDatos = vConexion.obtenerDataTable(vQuery);
+
+                    for (int i = 0; i < vDatos.Rows.Count; i++){
+                        String vColor = "", vLogo = "";
+                        if (vDatos.Rows[i]["idAplicacion"].ToString() == "1"){
+                            vColor = "primary";
+                            vLogo = "ti ti-shopping-cart";
+                        }else if (vDatos.Rows[i]["idAplicacion"].ToString() == "2"){
+                            vColor = "success";
+                            vLogo = "ti ti-home";
+                        }else if (vDatos.Rows[i]["idAplicacion"].ToString() == "3"){
+                            vColor = "info";
+                            vLogo = "ti ti-desktop";
+                        }else if (vDatos.Rows[i]["idAplicacion"].ToString() == "4"){
+                            vColor = "danger";
+                            vLogo = "ti ti-plug";
+                        }
+
+                        vString += "<a href = 'javascript:void(0)'>" +
+                                    "<div class='btn btn-" + vColor + " btn-circle'><i class='" + vLogo + "'></i></div>" +
+                                    "<div class='mail-contnet'>" +
+                                    "<h5>" + vDatos.Rows[i]["asunto"].ToString() + "</h5>" +
+                                    "<span class='mail-desc'>" + vDatos.Rows[i]["mensaje"].ToString() +
+                                    "</span> <span class='time'>" + vDatos.Rows[i]["nombre"].ToString() + "</span>" +
+                                    "</div>" +
+                                    "</a>";
+                    }
+
+                    LitNotificaciones.Text = vString;
+
+                    vQuery = "[STEISP_Permisos] 3,'" + Session["USUARIO"].ToString() + "'";
                     vDatos = vConexion.obtenerDataTable(vQuery);
 
                     if (vDatos.Rows.Count > 0){
