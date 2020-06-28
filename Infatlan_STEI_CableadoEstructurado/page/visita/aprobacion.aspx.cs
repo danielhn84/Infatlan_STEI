@@ -17,27 +17,20 @@ namespace Infatlan_STEI_CableadoEstructurado.page.visitaTecnica
             if (!Page.IsPostBack){
                 if (Convert.ToBoolean(Session["AUTH"])){
                     CargarProceso();
-                    DataTable vDatos = new DataTable();
-                    vDatos = vConexion.obtenerDataTable("STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 29");
-
-                    lbRevisionesPendientes.Text = vDatos.Rows[0]["revisionpendiente"].ToString();
-                    lbEstudiosRevisados.Text = vDatos.Rows[0]["revisados"].ToString();
+                    //String vQuery = "STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 29 ,'" + Session["USUARIO"] + "'";
+                    //DataTable vDatos = vConexion.obtenerDataTable(vQuery);
+                    //lbRevisionesPendientes.Text = vDatos.Rows[0]["revisionpendiente"].ToString();
+                    //lbEstudiosRevisados.Text = vDatos.Rows[0]["revisados"].ToString();
+                    // EstudiosRevisados.Style.Width = 60 %;
                 }else {
                     Response.Redirect("/login.aspx");
                 }
             }
         }
 
-        public void Mensaje(string vMensaje, WarningType type)
-        {
-            ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
-        }
-
         void CargarProceso()
         {
-            try
-            {
-
+            try{
                 String vQuery = "STEISP_CABLESTRUCTURADO_Aprobacion 4";
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
 
@@ -46,9 +39,10 @@ namespace Infatlan_STEI_CableadoEstructurado.page.visitaTecnica
                 Session["CE_DATOSAPROBACION"] = vDatos;
                 udpAprobacion.Update();
 
-            }
-            catch (Exception Ex)
-            {
+                if (vDatos.Rows.Count == 0){
+                    LbDescripcionGV.Text = "No hay estudios pendientes";
+                }
+            }catch (Exception Ex) {
                 Mensaje(Ex.Message, WarningType.Danger);
             }
         }
@@ -78,7 +72,7 @@ namespace Infatlan_STEI_CableadoEstructurado.page.visitaTecnica
                 
                 int vCondicion = 2;
 
-                Response.Redirect("/sites/cableado/page/visita/visitaTecnica.aspx?a=" + vCondicion + "&i=" + vId);
+                Response.Redirect("/sites/cableado/page/visita/visitaTecnica.aspx?a=" + vCondicion + "&ia=" + vId);
 
             }
         }
@@ -143,6 +137,11 @@ namespace Infatlan_STEI_CableadoEstructurado.page.visitaTecnica
                 Mensaje(ex.Message, WarningType.Danger);
             }
 
+        }
+
+        public void Mensaje(string vMensaje, WarningType type)
+        {
+            ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
     }
 }

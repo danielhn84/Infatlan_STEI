@@ -9,7 +9,7 @@ using System.Text;
 using System.Web;
 using System.Web.UI;
 
-namespace BiometricoWeb.clases
+namespace Infatlan_STEI_CableadoEstructurado.clases
 {
     public enum typeBody{
         Supervisor,

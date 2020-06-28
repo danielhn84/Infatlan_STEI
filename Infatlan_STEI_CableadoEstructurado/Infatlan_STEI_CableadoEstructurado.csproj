@@ -3405,6 +3405,7 @@
     <Content Include="page\cotizacion\aprobacionContabilidad.aspx" />
     <Content Include="page\cotizacion\ofertaEconomica.aspx" />
     <Content Include="page\cotizacion\principalPresupuestos.aspx" />
+    <Content Include="page\mail\TemplateMail.html" />
     <Content Include="page\visita\aprobacion.aspx" />
     <Content Include="page\visita\principalVisitaTecnica.aspx" />
     <Content Include="page\visita\visitaTecnica.aspx" />

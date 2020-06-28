@@ -8,9 +8,11 @@ using System.Data;
 using Infatlan_STEI_CableadoEstructurado.clases;
 using System.Data.Sql;
 using System.Text;
+using System.Drawing;
+using System.Threading.Tasks;
 using System.Web.UI.HtmlControls;
 using System.Configuration;
-
+using System.Web.ApplicationServices;
 using DataTable = System.Data.DataTable;
 using Page = System.Web.UI.Page;
 using System.IO;
@@ -20,44 +22,43 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
 {
     public partial class principalPresupuestos : System.Web.UI.Page
     {
-        db vConexion = new db();
         //private object Content;
-
+        db vConexion = new db();
         protected void Page_Load(object sender, EventArgs e){
             if (!Page.IsPostBack){
                 if (Convert.ToBoolean(Session["AUTH"])){
                     CargarProceso();
-                    DataTable vDatos = vConexion.obtenerDataTable("STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 27");
-
-                    lbCotizacionRealizadas.Text = vDatos.Rows[0]["realizados"].ToString();
-                    lbCotizacionPendientes.Text = vDatos.Rows[0]["pendientes"].ToString();
+                    //String vQuery = "STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 27 ,'" + Session["USUARIO"] + "'";
+                    //DataTable vDatos = vConexion.obtenerDataTable(vQuery);
+                    //lbCotizacionRealizadas.Text = vDatos.Rows[0]["realizados"].ToString();
+                    //lbCotizacionPendientes.Text = vDatos.Rows[0]["pendientes"].ToString();
+                    //LbFechaDashboard.Text = DateTime.Now.ToString("dd-MM-yyyy");
+                    //CSSCotizacion.Style.Size.width = 300;
+                    //CSSCotizacion.Style.Value = width:300;
                 }else {
                     Response.Redirect("/login.aspx");
                 }
             }
         }
-
-        public void Mensaje(string vMensaje, WarningType type)
-        {
+        
+        public void Mensaje(string vMensaje, WarningType type){
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
 
-        void CargarProceso()
-        {
-            try
-            {
-
+        void CargarProceso(){
+            try{
                 DataTable vDatos = new DataTable();
                 vDatos = vConexion.obtenerDataTable("STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 15 ");
 
                 GVPrincipal.DataSource = vDatos;
                 GVPrincipal.DataBind();
                 Session["CE_BUSCAQUEDAESTUDIO"] = vDatos;
-               udpContabilidad.Update();
+                udpContabilidad.Update();
 
-            }
-            catch (Exception Ex)
-            {
+                if (vDatos.Rows.Count == 0){
+                    LbDescripcionAprobacion.Text = "No hay estudios pendientes";
+                }
+            }catch (Exception Ex){
                 Mensaje(Ex.Message, WarningType.Danger);
             }
         }
@@ -93,7 +94,7 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
                     String vNombre = arg[1];
                     //String vMaterial = e.CommandArgument.ToString();
 
-                    Response.Redirect("/sites/cableado/page/cotizacion/aprobacionContabilidad.aspx?i=" + vId + "&n=" + vNombre);
+                    Response.Redirect("/sites/cableado/page/cotizacion/aprobacionContabilidad.aspx?i=" + vId);
 
                 }
 

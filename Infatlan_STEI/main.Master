@@ -16,6 +16,7 @@
     <link href="/dist/css/animate.min.css" rel="stylesheet" />
     <link href="/dist/css/style.min.css" rel="stylesheet">
     <link href="/dist/css/pages/dashboard1.css" rel="stylesheet">
+    <link href="/dist/css/pages/dashboard4.css" rel="stylesheet">
     <script type="text/javascript"> 
         infatlan = {
             showNotification: function (from, align, mensaje, tipo) {
@@ -131,9 +132,13 @@
                                 <li><a href="/paginas/configuraciones/permisos.aspx">Permisos</a></li>
                             </ul>
                         </li>
-                        <li><a class="waves-effect waves-dark" href="pages-faq.html" aria-expanded="false"><i class="icon-bubble"></i><span class="hide-menu">FAQs</span></a></li>
-                        <li><a class="waves-effect waves-dark" href="pages-faq.html" aria-expanded="false"><i class="icon-doc"></i><span class="hide-menu">Reportes</span></a></li>
                         <li><a class="waves-effect waves-dark" href="/paginas/messages.aspx"><i class="icon-envelope-open"></i><span class="hide-menu">Mensajes</span></a></li>
+                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-pie-chart"></i><span class="hide-menu">Reportes<span class="badge badge-pill badge-cyan ml-auto">1</span></span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="/paginas/reportes/metasCumplimiento.aspx">Metas</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="waves-effect waves-dark" href="pages-faq.html" aria-expanded="false"><i class="icon-bubbles"></i><span class="hide-menu">FAQs</span></a></li>
                     </ul>
                 </nav>
             </div>
@@ -172,6 +177,9 @@
     <script src="/assets/node_modules/toast-master/js/jquery.toast.js"></script>
     <script src="/dist/js/bootstrap-notify.js"></script>
 
+    <script src="/assets/node_modules/skycons/skycons.js"></script>
+    <script src="/dist/js/dashboard1.js"></script>
+    <script src="/dist/js/dashboard4.js"></script>
     <asp:ContentPlaceHolder ID="Script" runat="server">
     </asp:ContentPlaceHolder>
 </body>

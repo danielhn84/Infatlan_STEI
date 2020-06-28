@@ -28,13 +28,13 @@ namespace Infatlan_STEI
                         String vColor = "", vLogo = "";
                         if (vDatos.Rows[i]["idAplicacion"].ToString() == "1"){
                             vColor = "primary";
-                            vLogo = "ti ti-shopping-cart";
+                            vLogo = "ti ti-package";
                         }else if (vDatos.Rows[i]["idAplicacion"].ToString() == "2"){
                             vColor = "success";
-                            vLogo = "ti ti-home";
+                            vLogo = "icon icon-home";
                         }else if (vDatos.Rows[i]["idAplicacion"].ToString() == "3"){
                             vColor = "info";
-                            vLogo = "ti ti-desktop";
+                            vLogo = "icon icon-screen-desktop";
                         }else if (vDatos.Rows[i]["idAplicacion"].ToString() == "4"){
                             vColor = "danger";
                             vLogo = "ti ti-plug";

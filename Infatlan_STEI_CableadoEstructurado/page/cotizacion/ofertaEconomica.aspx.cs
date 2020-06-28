@@ -22,13 +22,16 @@ using Microsoft.Office.Interop.Word;
 using DataTable = System.Data.DataTable;
 using Page = System.Web.UI.Page;
 using System.IO;
+using Infatlan_STEI_Inventario.clases;
 
 namespace Infatlan_STEI_CableadoEstructurado.page.cotizacion
 {
     public partial class ofertaEconomica : System.Web.UI.Page
     {
         db vConexion = new db();
-        protected void Page_Load(object sender, EventArgs e){
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
             if (!Page.IsPostBack){
                 if (Convert.ToBoolean(Session["AUTH"])){
                     CargarProceso();
@@ -38,8 +41,7 @@ namespace Infatlan_STEI_CableadoEstructurado.page.cotizacion
             }
         }
 
-        public void Mensaje(string vMensaje, WarningType type)
-        {
+        public void Mensaje(string vMensaje, WarningType type){
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
 
@@ -49,17 +51,27 @@ namespace Infatlan_STEI_CableadoEstructurado.page.cotizacion
             {
                 string vIdEstudio = Request.QueryString["i"];
                 string vCondicion = Request.QueryString["a"];
- 
+
                 if (vCondicion == Convert.ToString(2))
                 {
 
                     DataTable vDatos = new DataTable();
                     vDatos = vConexion.obtenerDataTable("STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 23," + vIdEstudio);
-
+                    LbTituloferta.Text = "Oferta económica";
+                    LbDescripcionOferta.Text = "Detalle de la oferta creada.";
+                    udpContabilidad.Update();
+                   
                     GVOfertaEconomica.DataSource = vDatos;
                     GVOfertaEconomica.DataBind();
                     Session["CE_DATOSESTUDIOOFERTA"] = vDatos;
 
+                    foreach (GridViewRow row in GVOfertaEconomica.Rows)
+                    {
+                        LinkButton button = row.FindControl("BtnAprobar") as LinkButton;
+                        button.Enabled = false;
+                        button.CssClass = "btn btn-secondary";
+                       // button.Title = "Aprobado";
+                    }
                 }
                 else
                 {
@@ -70,8 +82,36 @@ namespace Infatlan_STEI_CableadoEstructurado.page.cotizacion
                     GVOfertaEconomica.DataBind();
                     Session["CE_DATOSESTUDIOOFERTA"] = vDatos;
                     updBuscarAprobacion.Visible = true;
+
+                    foreach (GridViewRow row in GVOfertaEconomica.Rows)
+                    {
+                        string  vQuery = "STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 34,'" + row.Cells[0].Text + "'";
+                        DataTable vDatosBusqueda = vConexion.obtenerDataTable(vQuery);
+
+                        foreach (DataRow item in vDatosBusqueda.Rows)
+                        {
+                            if (item["estado"].ToString() == "OfertaAprobada")
+                            {
+                                LinkButton button = row.FindControl("BtnAprobar") as LinkButton;
+                                button.Enabled = false;
+                                button.CssClass = "btn btn-secondary";
+
+                                LinkButton button1 = row.FindControl("BtnModificar") as LinkButton;
+                                button1.Enabled = false;
+                                button1.CssClass = "btn btn-secondary";
+                            }
+                            else
+                            {
+                                LinkButton button = row.FindControl("BtnAprobar") as LinkButton;
+                                button.Enabled = true;
+
+                                LinkButton button1 = row.FindControl("BtnModificar") as LinkButton;
+                                button1.Enabled = true;
+                            }
+                        }
+                    }
+
                 }
-               
 
             }
             catch (Exception Ex)
@@ -85,7 +125,7 @@ namespace Infatlan_STEI_CableadoEstructurado.page.cotizacion
 
             try
             {
-               GVOfertaEconomica.DataSource = (DataTable)Session["CE_DATOSESTUDIOOFERTA"];
+                GVOfertaEconomica.DataSource = (DataTable)Session["CE_DATOSESTUDIOOFERTA"];
                 GVOfertaEconomica.PageIndex = e.NewPageIndex;
                 GVOfertaEconomica.DataBind();
             }
@@ -102,10 +142,11 @@ namespace Infatlan_STEI_CableadoEstructurado.page.cotizacion
             try
             {
                 DataTable vDatos = (DataTable)Session["CE_DATOSESTUDIOOFERTA"];
-               
+
                 string vDatoPrincipal = e.CommandArgument.ToString();
 
                 string vIdEstudio = e.CommandArgument.ToString();
+                Session["CE_OFERTAIDESTUDIO"] = vIdEstudio;
                 if (e.CommandName == "Descargar")
                 {
 
@@ -147,7 +188,7 @@ namespace Infatlan_STEI_CableadoEstructurado.page.cotizacion
                     vManoObra = vDataCosto.Rows[0]["costoManoObra"].ToString();
                     vCostoTotalProyecto = vDataCosto.Rows[0]["costoTotalProyecto"].ToString();
                     vIsv = vDataCosto.Rows[0]["isvCostoFinal"].ToString();
-                    vTotalCotizacion = vDataCosto.Rows[0]["costoTotalCotizacion1"].ToString();
+                    vTotalCotizacion = vDataCosto.Rows[0]["totalCotizacion"].ToString();
                     vNombreEstudio = vDataCosto.Rows[0]["nombre"].ToString();
 
                     //Ingreso Datos Materiales y Costos
@@ -176,7 +217,7 @@ namespace Infatlan_STEI_CableadoEstructurado.page.cotizacion
                     object vObjNombreMat = "nombreEstudioMat";
 
                     Word.Document ObjDoc = ObjWord.Documents.Open(parametro, ObjMIss);
-                  
+
                     Word.Range vRangeCostoTotalCotizacion = ObjDoc.Bookmarks.get_Item(ref vObjCostoCotizacion).Range;
                     vRangeCostoTotalCotizacion.Text = vCostoTotalCotizacion;
 
@@ -242,8 +283,8 @@ namespace Infatlan_STEI_CableadoEstructurado.page.cotizacion
                     ObjDoc.Bookmarks.Add("nombreEstudioMat", ref rango12);
 
                     //Rando de donde comenzara la tabla dinamica
-                    object start = 1073;
-                    object end = 1074;
+                    object start = 1077;
+                    object end = 1078;
 
                     Word.Range rng = ObjDoc.Range(ref start, ref end);
                     Word.Table tbl = ObjDoc.Tables.Add(rng, 1, 4, ref ObjMIss, ref ObjMIss);
@@ -283,6 +324,27 @@ namespace Infatlan_STEI_CableadoEstructurado.page.cotizacion
 
                     ObjWord.Visible = true;
 
+                }
+
+                if (e.CommandName == "Aprobar")
+                {
+                    String vQueryCosto = "STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 16, " + vIdEstudio;
+                    //Int32 vInformacion = vConexion.ejecutarSql(vQueryCosto);
+                    DataTable vDataCosto = vConexion.obtenerDataTable(vQueryCosto);
+
+                    LbModNombreEstudio.Text = vDataCosto.Rows[0]["nombre"].ToString();
+                    string vValor = vDataCosto.Rows[0]["costoTotalCotizacion"].ToString();
+                    LbModValorCotizacion.Text = "L." + Convert.ToDecimal(vValor).ToString("##,###.00");
+
+                    UdpDatosOferta.Update();
+
+                    //LbModResponsable.Text = vDataCosto.Rows[0]["costoTotalCotizacion"].ToString();
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+
+                }
+                if (e.CommandName == "Modificar")
+                {
+                    Response.Redirect("/sites/cableado/page/cotizacion/aprobacionContabilidad.aspx?io=" + vIdEstudio);
                 }
 
             }
@@ -369,8 +431,78 @@ namespace Infatlan_STEI_CableadoEstructurado.page.cotizacion
             }
 
         }
+
+        protected void BtnAprobar_Click(object sender, EventArgs e)
+        {
+            //GENERAR XML Para disminucion
+            
+            String vQueryXML = "STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 22," + Session["CE_OFERTAIDESTUDIO"];
+
+            DataTable vDataStock = vConexion.obtenerDataTable(vQueryXML);
+
+            for (int i = 0; i < vDataStock.Rows.Count; i++)
+            {
+                String vCodigo = vDataStock.Rows[i]["codigo"].ToString();
+                String vIdStock = vDataStock.Rows[i]["idStock"].ToString();
+                String vIdUbicacion = vDataStock.Rows[i]["idUbicacion"].ToString();
+                String vIdResponsable = vDataStock.Rows[i]["idResponsable"].ToString();
+                String vSerie = vDataStock.Rows[i]["series"].ToString();
+
+                Decimal vCantidadInventario = Convert.ToDecimal(vDataStock.Rows[i]["cantidadInventario"].ToString());
+                Decimal vCantidadSolicitada = Convert.ToDecimal(vDataStock.Rows[i]["cantidadSolicitada"].ToString());
+                Decimal vPrecioInventario = Convert.ToDecimal(vDataStock.Rows[i]["precioUnit"].ToString());
+
+                if (vCantidadInventario >= vCantidadSolicitada)
+                {
+                    Decimal vCantidadActual = vCantidadInventario - vCantidadSolicitada;
+                    Decimal vPrecioDec = vCantidadActual * vPrecioInventario;
+                    String vPrecio = vPrecioDec.ToString().Replace(",", ".");
+
+                    generarxml vMaestro = new generarxml();
+                    Object[] vDatosMaestro = new object[10];
+                    vDatosMaestro[0] = vCodigo;
+                    vDatosMaestro[1] = vIdStock;
+                    vDatosMaestro[2] = vIdUbicacion;
+                    vDatosMaestro[3] = vIdResponsable;
+                    vDatosMaestro[4] = "";
+                    vDatosMaestro[5] = vCantidadActual;
+                    vDatosMaestro[6] = vSerie;
+                    vDatosMaestro[7] = vPrecio;
+                    vDatosMaestro[8] = Session["USUARIO"].ToString();
+                    vDatosMaestro[9] = 6;
+                    String vXML = vMaestro.ObtenerMaestroString(vDatosMaestro);
+                    vXML = vXML.Replace("<?xml version=\"1.0\" encoding=\"utf-16\"?>", "");
+
+                    String vQueryPrincipal = "[STEISP_INVENTARIO_Principal] 1" +
+                                            "," + vIdStock +
+                                            "," + vCantidadActual +
+                                            ",'" + vXML + "'";
+
+                    Int32 vInfo = vConexion.ejecutarSql(vQueryPrincipal);
+
+                    if (vInfo == 4)
+                    {
+                        //vMensaje = "Transacción realizada con éxito.";
+                        DataTable vDatos = new DataTable();
+                        string vQuery = "STEISP_CABLESTRUCTURADO_IngresarDatosEstudio 11 ,'" + Session["CE_OFERTAIDESTUDIO"] + "','OfertaAprobada'";
+                        vDatos = vConexion.obtenerDataTable(vQuery);
+                        
+                    }
+                    else
+                    {
+
+                        throw new Exception("Ha ocurrido un error.");
+                    }
+                    //ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "cerrarModal();", true);
+                }
+                else
+                {
+                    throw new Exception("La Cantidad Solicitada es Mayor a Inventario.");
+                }
+
+            }
+        }
+
     }
-
-
 
  }

@@ -3407,6 +3407,7 @@
     <Content Include="paginas\configuraciones\usuarios.aspx" />
     <Content Include="paginas\mail\TemplateMail.html" />
     <Content Include="paginas\messages.aspx" />
+    <Content Include="paginas\reportes\metasCumplimiento.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -3466,6 +3467,13 @@
     </Compile>
     <Compile Include="paginas\messages.aspx.designer.cs">
       <DependentUpon>messages.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\reportes\metasCumplimiento.aspx.cs">
+      <DependentUpon>metasCumplimiento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\reportes\metasCumplimiento.aspx.designer.cs">
+      <DependentUpon>metasCumplimiento.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
