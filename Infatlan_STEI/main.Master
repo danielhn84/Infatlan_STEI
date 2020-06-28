@@ -179,7 +179,6 @@
 
     <script src="/assets/node_modules/skycons/skycons.js"></script>
     <script src="/dist/js/dashboard1.js"></script>
-    <script src="/dist/js/dashboard4.js"></script>
     <asp:ContentPlaceHolder ID="Script" runat="server">
     </asp:ContentPlaceHolder>
 </body>

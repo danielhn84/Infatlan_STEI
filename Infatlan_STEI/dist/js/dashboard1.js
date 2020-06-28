@@ -1,15 +1,15 @@
 $(function () {
     "use strict";
     //This is for the Notification top right
-    $.toast({
-            heading: 'Bienvenidos al STEI'
-            , text: 'Sistema de Telecomunicaciones e inventarios'
-            , position: 'top-center'
-            , loaderBg: '#c4c4c4'
-            , icon: 'info'
-            , hideAfter: 3500
-            , stack: 6
-        })
+    //$.toast({
+    //        heading: 'Bienvenidos al STEI'
+    //        , text: 'Sistema de Telecomunicaciones e inventarios'
+    //        , position: 'top-center'
+    //        , loaderBg: '#c4c4c4'
+    //        , icon: 'info'
+    //        , hideAfter: 3500
+    //        , stack: 6
+    //    })
         // Dashboard 1 Morris-chart
     Morris.Area({
         element: 'morris-area-chart'
@@ -126,7 +126,38 @@ $(function () {
             barSpacing: '10',
             barColor: '#25a6f7'
         });
-        
+        $('#sparklinedash').sparkline([0, 5, 6, 10, 9, 12, 4, 9], {
+            type: 'bar'
+            , height: '30'
+            , barWidth: '4'
+            , resize: true
+            , barSpacing: '5'
+            , barColor: '#4caf50'
+        });
+        $('#sparklinedash2').sparkline([0, 5, 6, 10, 9, 12, 4, 9], {
+            type: 'bar'
+            , height: '30'
+            , barWidth: '4'
+            , resize: true
+            , barSpacing: '5'
+            , barColor: '#9675ce'
+        });
+        $('#sparklinedash3').sparkline([0, 5, 6, 10, 9, 12, 4, 9], {
+            type: 'bar'
+            , height: '30'
+            , barWidth: '4'
+            , resize: true
+            , barSpacing: '5'
+            , barColor: '#03a9f3'
+        });
+        $('#sparklinedash4').sparkline([0, 5, 6, 10, 9, 12, 4, 9], {
+            type: 'bar'
+            , height: '30'
+            , barWidth: '4'
+            , resize: true
+            , barSpacing: '5'
+            , barColor: '#f96262'
+        });
     };    
     var sparkResize;
  

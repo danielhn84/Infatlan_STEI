@@ -160,8 +160,10 @@ namespace Infatlan_STEI
         private void cargarInventario() {
             String vQuery = "[STEISP_INVENTARIO_Generales] 15";
             DataTable vDatos = vConexion.obtenerDataTable(vQuery);
-
-
+            LbStock.Text = vDatos.Rows[0]["Stock"].ToString();
+            LbEDC.Text = vDatos.Rows[0]["EDC"].ToString();
+            LbEnlace.Text = vDatos.Rows[0]["Enl"].ToString();
+            LbTran.Text = vDatos.Rows[0]["Trans"].ToString();
         }
     }
 }

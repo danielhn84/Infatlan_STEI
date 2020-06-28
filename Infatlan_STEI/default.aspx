@@ -116,7 +116,7 @@
         <div class="card-body">
             <nav>
                 <div class="nav nav-pills" id="nav-tab" role="tablist">
-                    <a class="nav-item nav-link active" id="agencias" data-toggle="tab" href="#navAgencias" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="icon-home"></i>Agencias</a>
+                    <a class="nav-item nav-link active" id="agencias" data-toggle="tab" href="#navAgencias" role="tab" aria-controls="nav-profile" aria-selected="false"><i style="margin-right: 5px" class="icon icon-home"></i>Agencias</a>
                     <a class="nav-item nav-link" id="atm" data-toggle="tab" href="#navATM" role="tab" aria-controls="nav-profile" aria-selected="false"><i style="margin-right: 5px" class="icon-screen-desktop"></i>ATM</a>
                     <a class="nav-item nav-link" id="cableado" data-toggle="tab" href="#navCableado" role="tab" aria-controls="nav-profile" aria-selected="false"><i style="margin-right: 5px" class="ti-plug"></i>Cableado</a>
                     <a class="nav-item nav-link" id="invenrario" data-toggle="tab" href="#navInventario" role="tab" aria-controls="nav-profile" aria-selected="false"><i style="margin-right: 5px" class="ti-package"></i>Inventarios</a>
@@ -251,14 +251,14 @@
                 </div>
 
                 <div class="tab-pane fade" id="navInventario" role="tabpanel" aria-labelledby="nav-cargar-tab">
-                    <div class="row">
+                    <div class="row m-t-10">
                         <div class="col-lg-3 col-md-6">
                             <div class="card-body">
-                                <h5 class="card-title">TOTAL VISIT</h5>
+                                <h5 class="card-title">TOTAL STOCK</h5>
                                 <div class="d-flex no-block align-items-center m-t-20 m-b-20">
                                     <div id="sparklinedash"></div>
                                     <div class="ml-auto">
-                                        <h2 class="text-success"><i class="ti-arrow-up"></i> <span class="counter">8659</span></h2>
+                                        <h2 class="text-success"><i class="ti-arrow-up"></i> <span class="counter"><asp:Label runat="server" ID="LbStock"></asp:Label></span></h2>
                                     </div>
                                 </div>
                             </div>
@@ -266,11 +266,11 @@
                         </div>
                         <div class="col-lg-3 col-md-6">
                             <div class="card-body">
-                                <h5 class="card-title">TOTAL PAGE VIEWS</h5>
+                                <h5 class="card-title">EQUIPOS COMUNICACION</h5>
                                 <div class="d-flex no-block align-items-center m-t-20 m-b-20">
                                     <div id="sparklinedash2"></div>
                                     <div class="ml-auto">
-                                        <h2 class="text-purple"><i class="ti-arrow-up"></i> <span class="counter">7469</span></h2>
+                                        <h2 class="text-purple"><i class="ti-arrow-up"></i> <span class="counter"><asp:Label runat="server" ID="LbEDC"></asp:Label></span></h2>
                                     </div>
                                 </div>
                             </div>
@@ -278,11 +278,11 @@
                         </div>
                         <div class="col-lg-3 col-md-6">
                             <div class="card-body">
-                                <h5 class="card-title">UNIQUE VISITOR</h5>
+                                <h5 class="card-title">ENLACES</h5>
                                 <div class="d-flex no-block align-items-center m-t-20 m-b-20">
                                     <div id="sparklinedash3"></div>
                                     <div class="ml-auto">
-                                        <h2 class="text-info"><i class="ti-arrow-up"></i> <span class="counter">6011</span></h2>
+                                        <h2 class="text-info"><i class="ti-arrow-up"></i> <span class="counter"><asp:Label runat="server" ID="LbEnlace"></asp:Label></span></h2>
                                     </div>
                                 </div>
                             </div>
@@ -290,15 +290,15 @@
                         </div>
                         <div class="col-lg-3 col-md-6">
                             <div class="card-body">
-                                <h5 class="card-title">BOUNCE RATE</h5>
+                                <h5 class="card-title">TRANSACCIONES</h5>
                                 <div class="d-flex no-block align-items-center m-t-20 m-b-20">
                                     <div id="sparklinedash4"></div>
                                     <div class="ml-auto">
-                                        <h2 class="text-danger"><i class="ti-arrow-down"></i> <span class="counter">18%</span></h2>
+                                        <h2 class="text-danger"><i class="ti-arrow-down"></i> <span class="counter"><asp:Label runat="server" ID="LbTran"></asp:Label></span></h2>
                                     </div>
                                 </div>
                             </div>
-                            <div id="sparkline12" class="sparkchart"></div>
+                            <div id="sparkline12"  class="sparkchart"></div>
                         </div>
                     </div>
                 </div>

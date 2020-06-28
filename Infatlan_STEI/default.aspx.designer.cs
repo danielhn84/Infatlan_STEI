@@ -69,6 +69,42 @@ namespace Infatlan_STEI
         protected global::System.Web.UI.WebControls.Label lbPendientes;
 
         /// <summary>
+        /// Control LbStock.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LbStock;
+
+        /// <summary>
+        /// Control LbEDC.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LbEDC;
+
+        /// <summary>
+        /// Control LbEnlace.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LbEnlace;
+
+        /// <summary>
+        /// Control LbTran.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LbTran;
+
+        /// <summary>
         /// Control UpdatePanel28.
         /// </summary>
         /// <remarks>
