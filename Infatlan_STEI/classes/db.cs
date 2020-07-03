@@ -15,8 +15,8 @@ namespace Infatlan_STEI.classes
     public class db
     {
         SqlConnection vConexion = new SqlConnection(ConfigurationManager.AppSettings["SQLServer"]);
-        public db()
-        {
+        SqlConnection vConexionSysAid = new SqlConnection(ConfigurationManager.AppSettings["SQLServerSysAid"]);
+        public db(){
             vConexion = new SqlConnection(ConfigurationManager.AppSettings["SQLServer"]);
         }
 
@@ -62,6 +62,28 @@ namespace Infatlan_STEI.classes
             DataSet vDatos = new DataSet();
             try{
                 SqlDataAdapter vDataAdapter = new SqlDataAdapter(vQuery, vConexion);
+                vDataAdapter.Fill(vDatos);
+            }catch{
+                throw;
+            }
+            return vDatos;
+        }
+
+        public DataTable obtenerDataTableSA(String vQuery){
+            DataTable vDatos = new DataTable();
+            try{
+                SqlDataAdapter vDataAdapter = new SqlDataAdapter(vQuery, vConexionSysAid);
+                vDataAdapter.Fill(vDatos);
+            }catch{
+                throw;
+            }
+            return vDatos;
+        }
+
+        public DataSet obtenerDataSetSA(String vQuery){
+            DataSet vDatos = new DataSet();
+            try{
+                SqlDataAdapter vDataAdapter = new SqlDataAdapter(vQuery, vConexionSysAid);
                 vDataAdapter.Fill(vDatos);
             }catch{
                 throw;

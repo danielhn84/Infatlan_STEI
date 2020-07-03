@@ -16,6 +16,7 @@
     <link href="/css/style.min.css" rel="stylesheet">
 </head>
 <body>
+
     <%--<div class="container-scroller">
         <div class="container-fluid page-body-wrapper full-page-wrapper">
             <div class="content-wrapper d-flex align-items-stretch auth auth-img-bg">
@@ -71,36 +72,34 @@
             </div>
         </div>
     </div>--%>
+    <section id="wrapper" class="login-register login-sidebar" style="background-image:url(../assets/images/opacity.png);">
+        <div class="login-box card">
+            <div class="card-body">
+                <form class="form-horizontal form-material m-t-40 text-center" id="loginform" runat="server">
+                    <a class="db"><img src="../assets/images/logo.png" alt="Home" /></a>
+                    <h3 class="m-t-20"><b>Bienvenidos | STEI</b></h3>
+                    <h6 class="font-weight-light">Ingrese sus credenciales.</h6>
+                    <br />
+                        <div class="form-group m-t-40">
+                            <div class="col-xs-12">
+                                <asp:TextBox ID="TxUsername" class="form-control form-control-lg border-left-0" placeholder="Usuario" runat="server"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <asp:TextBox ID="TxPassword" TextMode="Password" class="form-control form-control-lg border-left-0" placeholder="Contraseña" runat="server"></asp:TextBox>
+                            </div>
+                        </div>
 
-    <section id="wrapper">
-        <div class="login-register" style="background-image:url(../assets/images/background/user-info2.jpg);">
-            <div class="login-box card">
-                <div class="card-body">
-                    <form class="form-horizontal form-material" id="form1" runat="server">
-                        <h3 class=""><b>Bienvenidos | STEI</b></h3>
-                        <h6 class="font-weight-light">Ingrese sus credenciales.</h6>
                         <br />
-                            <div class="form-group ">
-                                <div class="col-xs-12">
-                                    <asp:TextBox ID="TxUsername" class="form-control form-control-lg border-left-0" placeholder="Usuario" runat="server"></asp:TextBox>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <asp:TextBox ID="TxPassword" TextMode="Password" class="form-control form-control-lg border-left-0" placeholder="Contraseña" runat="server"></asp:TextBox>
-                                </div>
-                            </div>
+                        <div class="form-group text-center">
+                                <asp:Button ID="BtnLogin" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" runat="server" Text="Entrar" OnClick="BtnLogin_Click" />                              
+                        </div>
 
-                            <br />
-                            <div class="form-group text-center">
-                                    <asp:Button ID="BtnLogin" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" runat="server" Text="Entrar" OnClick="BtnLogin_Click" />                              
-                            </div>
-
-                            <div class="my-2 d-flex justify-content-center align-center" style="color:indianred;">
-                                <asp:Label ID="LbMensaje" runat="server" Text=""></asp:Label>
-                            </div>
-                    </form>
-                </div>
+                        <div class="my-2 d-flex justify-content-center align-center" style="color:indianred;">
+                            <asp:Label ID="LbMensaje" runat="server" Text=""></asp:Label>
+                        </div>
+                </form>
             </div>
         </div>
     </section>

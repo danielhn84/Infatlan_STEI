@@ -112,11 +112,11 @@ $(function () {
 });    
     // sparkline
     var sparklineLogin = function() { 
-        $('#sales1').sparkline([20, 40, 30], {
+        $('#sales1').sparkline([40, 60], {
             type: 'pie',
             height: '90',
             resize: true,
-            sliceColors: ['#01c0c8', '#7d5ab6', '#ffffff']
+            sliceColors: ['#01c0c8', '#7d5ab6']
         });
         $('#sparkline2dash').sparkline([6, 10, 9, 11, 9, 10, 12], {
             type: 'bar',
@@ -165,4 +165,5 @@ $(function () {
             clearTimeout(sparkResize);
             sparkResize = setTimeout(sparklineLogin, 500);
         });
-        sparklineLogin();
+sparklineLogin();
+

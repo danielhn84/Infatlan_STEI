@@ -40,8 +40,8 @@ namespace Infatlan_STEI.classes
                     case typeBody.Bugs:
                         mail.AlternateViews.Add(CreateHtmlMessage(PopulateBody(
                             Usuario,
-                            "El empleado " + Nombre + " ha notificado una incidencia.",
-                            "Te informamos que el permiso tiene que ser autorizado, para que sea procesado por Recursos Humanos."
+                            "El empleado " + Usuario + " ha notificado una incidencia.",
+                            Nombre
                             ), Server.MapPath("/images/logo.png")));
                         break;
                 }

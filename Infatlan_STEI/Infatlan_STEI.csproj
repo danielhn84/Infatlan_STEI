@@ -423,6 +423,7 @@
     <Content Include="assets\images\news\gradiant-bg.png" />
     <Content Include="assets\images\news\slide1.jpg" />
     <Content Include="assets\images\news\slide6.jpg" />
+    <Content Include="assets\images\opacity.png" />
     <Content Include="assets\images\property\heart.png" />
     <Content Include="assets\images\property\pro-bath.png" />
     <Content Include="assets\images\property\pro-bed.png" />
@@ -458,6 +459,7 @@
     <Content Include="assets\images\users\d4.jpg" />
     <Content Include="assets\images\users\d5.jpg" />
     <Content Include="assets\images\users\profile.png" />
+    <Content Include="assets\images\waves.jpg" />
     <Content Include="assets\node_modules\blockUI\jquery.blockUI.js" />
     <Content Include="assets\node_modules\bootstrap-datepicker\bootstrap-datepicker.min.css" />
     <Content Include="assets\node_modules\bootstrap-datepicker\bootstrap-datepicker.min.js" />
@@ -3326,6 +3328,7 @@
     <Content Include="css\style.min.css" />
     <Content Include="default.aspx" />
     <Content Include="dist\css\animate.min.css" />
+    <Content Include="dist\css\app.css" />
     <Content Include="dist\css\pages\bootstrap-switch.css" />
     <Content Include="dist\css\pages\breadcrumb-page.css" />
     <Content Include="dist\css\pages\chat-app-page.css" />
@@ -3405,8 +3408,10 @@
     <Content Include="logout.aspx" />
     <Content Include="paginas\configuraciones\permisos.aspx" />
     <Content Include="paginas\configuraciones\usuarios.aspx" />
+    <Content Include="paginas\faqs.aspx" />
     <Content Include="paginas\mail\TemplateMail.html" />
     <Content Include="paginas\messages.aspx" />
+    <Content Include="paginas\reportes\ajustes\motivos.aspx" />
     <Content Include="paginas\reportes\metasCumplimiento.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -3461,12 +3466,26 @@
     <Compile Include="paginas\configuraciones\usuarios.aspx.designer.cs">
       <DependentUpon>usuarios.aspx</DependentUpon>
     </Compile>
+    <Compile Include="paginas\faqs.aspx.cs">
+      <DependentUpon>faqs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\faqs.aspx.designer.cs">
+      <DependentUpon>faqs.aspx</DependentUpon>
+    </Compile>
     <Compile Include="paginas\messages.aspx.cs">
       <DependentUpon>messages.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="paginas\messages.aspx.designer.cs">
       <DependentUpon>messages.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\reportes\ajustes\motivos.aspx.cs">
+      <DependentUpon>motivos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\reportes\ajustes\motivos.aspx.designer.cs">
+      <DependentUpon>motivos.aspx</DependentUpon>
     </Compile>
     <Compile Include="paginas\reportes\metasCumplimiento.aspx.cs">
       <DependentUpon>metasCumplimiento.aspx</DependentUpon>

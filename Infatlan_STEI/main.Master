@@ -72,8 +72,8 @@
                     </ul>
                     <ul class="navbar-nav my-lg-0">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ti-email"></i>
-                                <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-bell"></i>
+                                <div class="notify"><asp:Literal Text="" ID="LitPointer" runat="server" /></div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right mailbox scale-up">
                                 <ul>
@@ -82,6 +82,9 @@
                                         <div class="message-center">
                                             <asp:Literal Text="" ID="LitNotificaciones" runat="server" />
                                         </div>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link text-center link" href="/paginas/messages.aspx"> <strong>Ver Mensajes</strong> <i class="fa fa-angle-right"></i> </a>
                                     </li>
                                 </ul>
                             </div>
@@ -132,13 +135,22 @@
                                 <li><a href="/paginas/configuraciones/permisos.aspx">Permisos</a></li>
                             </ul>
                         </li>
-                        <li><a class="waves-effect waves-dark" href="/paginas/messages.aspx"><i class="icon-envelope-open"></i><span class="hide-menu">Mensajes</span></a></li>
+                        <li><a class="waves-effect waves-dark" href="/paginas/messages.aspx"><i class="icon-envelope"></i><span class="hide-menu">Mensajes</span></a></li>
                         <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-pie-chart"></i><span class="hide-menu">Reportes<span class="badge badge-pill badge-cyan ml-auto">1</span></span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="/paginas/reportes/metasCumplimiento.aspx">Metas</a></li>
+                                <li><a class="has-arrow waves-effect waves-dark" aria-expanded="false" href="javascript:void(0)"><span class="hide-menu">Cumplimiento<span class="badge badge-pill badge-cyan ml-auto"></span></span></a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li><a href="/paginas/reportes/metasCumplimiento.aspx">Formulario</a></li>
+                                    </ul>
+                                </li>
+                                <li><a class="has-arrow waves-effect waves-dark" aria-expanded="false" href="javascript:void(0)"><span class="hide-menu">Ajustes<span class="badge badge-pill badge-cyan ml-auto"></span></span></a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li><a href="/paginas/reportes/ajustes/motivos.aspx">Motivos</a></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
-                        <li><a class="waves-effect waves-dark" href="pages-faq.html" aria-expanded="false"><i class="icon-bubbles"></i><span class="hide-menu">FAQs</span></a></li>
+                        <li><a class="waves-effect waves-dark" href="/paginas/faqs.aspx"><i class="icon-bubbles"></i><span class="hide-menu">FAQs</span></a></li>
                     </ul>
                 </nav>
             </div>

@@ -1,0 +1,65 @@
+﻿.card-header {
+    border-bottom: none
+}
+
+    .card-header .card-title {
+        margin-bottom: 0
+    }
+
+    .card-header .heading-elements, .card-header .heading-elements-toggle {
+        background-color: inherit;
+        position: absolute;
+        top: 20px;
+        right: 20px
+    }
+
+        .card-header .heading-elements-toggle.heading-top-elements .page-item, .card-header .heading-elements.heading-top-elements .page-item {
+            display: inline-block
+        }
+
+        .card-header .heading-elements a, .card-header .heading-elements-toggle a {
+            padding: 0 8px
+        }
+
+            .card-header .heading-elements a.btn, .card-header .heading-elements-toggle a.btn {
+                padding-top: 6px;
+                padding-bottom: 6px
+            }
+
+.card-head-inverse, .card-head-inverse .heading-elements i, .text-white .heading-elements i {
+    color: #FFF
+}
+
+@media (max-width:991.98px) {
+    .heading-elements {
+        text-align: center
+    }
+
+        .heading-elements .list-inline {
+            display: none
+        }
+
+        .heading-elements.visible {
+            display: block;
+            margin-top: 0;
+            top: 100%;
+            top: 50px;
+            height: auto;
+            left: 0;
+            padding: 10px;
+            border: 1px solid #EEE;
+            z-index: 997;
+            position: absolute;
+            width: 100%
+        }
+
+            .heading-elements.visible .list-inline {
+                display: block
+            }
+}
+
+@media (min-width:992px) {
+    .heading-elements-toggle {
+        display: none
+    }
+}

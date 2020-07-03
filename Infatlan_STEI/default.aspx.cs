@@ -99,8 +99,8 @@ namespace Infatlan_STEI
                             vService.EnviarMensaje(
                                 vDestino,
                                 typeBody.Bugs,
-                                item["nombre"].ToString(),
-                                vDatos.Rows[0]["nombre"].ToString()
+                                item["idEmpleado"].ToString(),
+                                TxMensaje.Text
                                 );
                             vFlagEnvio = true;
                         }

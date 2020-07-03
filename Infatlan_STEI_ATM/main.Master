@@ -137,7 +137,7 @@
                                 <li><a  href="/sites/ATM/pages/devolver/rechazados.aspx" aria-expanded="false"><span class="hide-menu">Devoluciones</span></a></li>
                             </ul>
                         </li>
-                            <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-write"></i><span class="hide-menu">Materiales<span class="badge badge-pill badge-cyan ml-auto">2</span></span></a>
+                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-write"></i><span class="hide-menu">Materiales<span class="badge badge-pill badge-cyan ml-auto">2</span></span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="/sites/ATM/pages/material/buscarMaterial.aspx">Solicitar</a></li>
                                 <li><a href="/sites/ATM/pages/material/buscarAprobar.aspx">Aprobar</a></li>

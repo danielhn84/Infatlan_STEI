@@ -666,7 +666,7 @@
                                     </a>
                                         <asp:UpdatePanel runat="server">
                                             <ContentTemplate>
-                                                <asp:RadioButtonList runat="server" ID="RBClima" AutoPostBack="true" RepeatDirection="Horizontal" CssClass="form-check">
+                                                <asp:RadioButtonList runat="server" style="border-color:transparent" ID="RBClima" AutoPostBack="true" RepeatDirection="Horizontal" CssClass="form-check">
                                                     <asp:ListItem Value="1" Text="Si" />
                                                     <asp:ListItem Value="2" Text="No" />
                                                 </asp:RadioButtonList>
