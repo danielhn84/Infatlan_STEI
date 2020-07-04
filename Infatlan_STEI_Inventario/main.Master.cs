@@ -22,11 +22,13 @@ namespace Infatlan_STEI_Inventario
                     DataTable vDatos = (DataTable)Session["AUTHCLASS"];
                     LitUsuario.Text = vDatos.Rows[0]["nombre"].ToString().ToUpper() + " " + vDatos.Rows[0]["apellidos"].ToString().ToUpper();
 
-                    String vString = "";
+                    String vString = "", vPointer = "";
                     String vQuery = "[STEISP_Mensajes] 3,'" + Session["USUARIO"].ToString() + "'";
                     vDatos = vConexion.obtenerDataTable(vQuery);
 
                     for (int i = 0; i < vDatos.Rows.Count; i++){
+                        vPointer = "<span class='heartbit'></span><span class='point'></span>";
+
                         String vColor = "", vLogo = "";
                         if (vDatos.Rows[i]["idAplicacion"].ToString() == "1"){
                             vColor = "primary";
@@ -52,6 +54,8 @@ namespace Infatlan_STEI_Inventario
                                     "</a>";
                     }
                     LitNotificaciones.Text = vString;
+                    LitPointer.Text = vPointer;
+
                 }
             }catch (Exception ex){
                 string vas = ex.Message;

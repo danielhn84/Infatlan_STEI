@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="metasCumplimiento.aspx.cs" Inherits="Infatlan_STEI.paginas.reportes.metasCumplimiento" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
+    <link href="/assets/node_modules/css-chart/css-chart.css" rel="stylesheet">
     <link href="dist/css/pages/easy-pie-chart.css" rel="stylesheet">
     <style>
         .columnas {
@@ -222,10 +223,11 @@
                         </div>
                     </div>
                 </div>
-                <h4 class="m-t-20">Solicitudes en "No Cumpliento"</h4>
-                <hr />
-                <div class="table-responsive m-t-20">
-                    <asp:GridView ID="GVBusqueda" runat="server"
+                <div runat="server" id="DivKPI" visible="true">
+                    <h4 class="m-t-20">Solicitudes en "No Cumpliento"</h4>
+                    <hr />
+                    <div class="table-responsive m-t-20">
+                    <asp:GridView ID="GvKPISolicitudes" runat="server"
                         CssClass="table table-bordered"
                         PagerStyle-CssClass="pgr"
                         HeaderStyle-CssClass="table"
@@ -235,21 +237,14 @@
                         GridLines="None" 
                         PageSize="10" >
                         <Columns>
-                            <asp:BoundField DataField="idOrden" HeaderText="Orden"/>
-                            <asp:BoundField DataField="" HeaderText="Orden"/>
-                            <asp:BoundField DataField="" HeaderText="Tiempo"/>
-                            <asp:BoundField DataField="" HeaderText="Categoría 1"/>
-                            <asp:BoundField DataField="" HeaderText="Categoría 2"/>
-                            <asp:BoundField DataField="" HeaderText="Categoría 3"/>
-                            <asp:TemplateField>
-                                <ItemTemplate>
-                                    <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-info" CommandArgument='<%# Eval("idOrden") %>' CommandName="EditarMotivo">
-                                        <i class="icon-pencil" ></i>
-                                    </asp:LinkButton>
-                                </ItemTemplate>
-                            </asp:TemplateField>
+                            <asp:BoundField DataField="id" HeaderText="Orden"/>
+                            <asp:BoundField DataField="tiempo" HeaderText="Tiempo"/>
+                            <asp:BoundField DataField="problem_type" HeaderText="Categoría 1"/>
+                            <asp:BoundField DataField="problem_sub_type" HeaderText="Categoría 2"/>
+                            <asp:BoundField DataField="third_level_category" HeaderText="Categoría 3"/>
                         </Columns>
                     </asp:GridView>
+                </div>
                 </div>
             </div>
         </div>
@@ -312,34 +307,38 @@
                     <asp:Label Text="No hay ordenes de servicio esperando respuesta" runat="server" ID="LbResOSER" />
                     <div class="row col-12">
                         <div class="table-responsive">
-                            <asp:GridView ID="GvOSER" runat="server"
-                                CssClass="table table-bordered"
-                                PagerStyle-CssClass="pgr"
-                                HeaderStyle-CssClass="table-success"
-                                RowStyle-CssClass="rows"
-                                AutoGenerateColumns="false"
-                                AllowPaging="true"
-                                GridLines="None" OnRowDataBound="GvOSER_RowDataBound"
-                                PageSize="10">
-                                <Columns>
-                                    <asp:BoundField DataField="id" HeaderText="Orden" ItemStyle-Width="50"/>
-                                    <asp:BoundField DataField="tiempoRespuesta" HeaderText="Tiempo" ItemStyle-Width="10"/>
-                                    <asp:BoundField DataField="responsibility" HeaderText="Responsable" ItemStyle-Width="100"/>
-                                    <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="240">
-                                        <HeaderTemplate>Razón</HeaderTemplate>
-                                        <ItemTemplate>
-                                            <asp:DropDownList runat="server" ID="DDLRazonER" CssClass="form-control"></asp:DropDownList>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-
-                                    <asp:TemplateField>
-                                        <HeaderTemplate>Observaciones</HeaderTemplate>
-                                        <ItemTemplate>
-                                            <asp:TextBox runat="server" CssClass="form-control"></asp:TextBox>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                </Columns>
-                            </asp:GridView>
+                            <asp:UpdatePanel runat="server" ID="UPanelOSER">
+                                <ContentTemplate>
+                                    <asp:GridView ID="GvOSER" runat="server"
+                                        CssClass="table table-bordered"
+                                        PagerStyle-CssClass="pgr"
+                                        HeaderStyle-CssClass="table-success"
+                                        RowStyle-CssClass="rows"
+                                        AutoGenerateColumns="false"
+                                        AllowPaging="true"
+                                        GridLines="None" OnRowDataBound="GvOSER_RowDataBound"
+                                        PageSize="10" OnPageIndexChanging="GvOSER_PageIndexChanging">
+                                        <Columns>
+                                            <asp:BoundField DataField="id" HeaderText="Orden" ItemStyle-Width="50" />
+                                            <asp:BoundField DataField="tiempoRespuesta" HeaderText="Tiempo" ItemStyle-Width="10" />
+                                            <asp:BoundField DataField="responsibility" HeaderText="Responsable" ItemStyle-Width="100" />
+                                            <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="240">
+                                                <HeaderTemplate>Razón</HeaderTemplate>
+                                                <ItemTemplate>
+                                                    <asp:DropDownList runat="server" ID="DDLRazonER" CssClass="form-control"></asp:DropDownList>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField>
+                                                <HeaderTemplate>Observaciones</HeaderTemplate>
+                                                <ItemTemplate>
+                                                    <asp:TextBox runat="server" CssClass="form-control"></asp:TextBox>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                        </Columns>
+                                    </asp:GridView>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                            
                         </div>
                     </div>
                 </div>

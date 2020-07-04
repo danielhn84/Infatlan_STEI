@@ -294,13 +294,22 @@ namespace Infatlan_STEI.paginas.reportes
         protected global::System.Web.UI.WebControls.TextBox TextBox24;
 
         /// <summary>
-        /// Control GVBusqueda.
+        /// Control DivKPI.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GVBusqueda;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivKPI;
+
+        /// <summary>
+        /// Control GvKPISolicitudes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GvKPISolicitudes;
 
         /// <summary>
         /// Control GridView1.
@@ -319,6 +328,15 @@ namespace Infatlan_STEI.paginas.reportes
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LbResOSER;
+
+        /// <summary>
+        /// Control UPanelOSER.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UPanelOSER;
 
         /// <summary>
         /// Control GvOSER.
