@@ -13,7 +13,7 @@ using System.Configuration;
 
 namespace Infatlan_STEI.paginas.reportes.ajustes
 {
-    public partial class motivos : System.Web.UI.Page
+    public partial class cursos : System.Web.UI.Page
     {
         db vConexion = new db();
         protected void Page_Load(object sender, EventArgs e){
@@ -25,35 +25,15 @@ namespace Infatlan_STEI.paginas.reportes.ajustes
                 }
             }
         }
-
+        
         private void cargarDatos() {
             try{
-                String vQuery = "";
-
-                if (DDLProceso.SelectedValue == "0")
-                    vQuery = "[STEISP_CUMPLIMIENTO_Ajustes] 1";
-                else if (DDLProceso.SelectedValue == "4")
-                    vQuery = "[STEISP_CUMPLIMIENTO_Ajustes] 6," + DDLProceso.SelectedValue;
-                else if (DDLProceso.SelectedValue == "5")
-                    vQuery = "[STEISP_CUMPLIMIENTO_Ajustes] 6," + DDLProceso.SelectedValue;
-
+                String vQuery = "[STEISP_CUMPLIMIENTO_Ajustes] 7";
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
                 if (vDatos.Rows.Count > 0){
                     GVBusqueda.DataSource = vDatos;
                     GVBusqueda.DataBind();
-                    Session["CUMPL_MOTIVOS"] = vDatos;
-                }
-
-                //SECCIONES
-                vQuery = "[STEISP_CUMPLIMIENTO_Ajustes] 2";
-                vDatos = vConexion.obtenerDataTable(vQuery);
-
-                if (vDatos.Rows.Count > 0){
-                    DDLSecciones.Items.Clear();
-                    DDLSecciones.Items.Add(new ListItem { Value = "0", Text = "Seleccione una opción" });
-                    foreach (DataRow item in vDatos.Rows){
-                        DDLSecciones.Items.Add(new ListItem { Value = item["idSeccion"].ToString(), Text = item["nombre"].ToString() });
-                    }
+                    Session["CUMPL_CURSOS"] = vDatos;
                 }
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);
@@ -64,19 +44,11 @@ namespace Infatlan_STEI.paginas.reportes.ajustes
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
 
-        protected void DDLProceso_SelectedIndexChanged(object sender, EventArgs e){
-            try{
-                cargarDatos();
-            }catch (Exception ex){
-                Mensaje(ex.Message, WarningType.Danger);
-            }
-        }
-
         protected void TxBusqueda_TextChanged(object sender, EventArgs e){
             try{
                 cargarDatos();
                 String vBusqueda = TxBusqueda.Text;
-                DataTable vDatos = (DataTable)Session["CUMPL_MOTIVOS"];
+                DataTable vDatos = (DataTable)Session["CUMPL_CURSOS"];
                 if (vBusqueda.Equals("")){
                     GVBusqueda.DataSource = vDatos;
                     GVBusqueda.DataBind();
@@ -89,28 +61,26 @@ namespace Infatlan_STEI.paginas.reportes.ajustes
                     if (isNumeric){
                         if (filtered.Count() == 0){
                             filtered = vDatos.AsEnumerable().Where(r =>
-                                Convert.ToInt32(r["idMotivo"]) == Convert.ToInt32(vBusqueda));
+                                Convert.ToInt32(r["idCurso"]) == Convert.ToInt32(vBusqueda));
                         }
                     }
 
                     DataTable vDatosFiltrados = new DataTable();
-                    vDatosFiltrados.Columns.Add("idMotivo");
+                    vDatosFiltrados.Columns.Add("idCurso");
                     vDatosFiltrados.Columns.Add("nombre");
-                    vDatosFiltrados.Columns.Add("idSeccion");
                     vDatosFiltrados.Columns.Add("estado");
 
                     foreach (DataRow item in filtered){
                         vDatosFiltrados.Rows.Add(
-                            item["idMotivo"].ToString(),
+                            item["idCurso"].ToString(),
                             item["nombre"].ToString(),
-                            item["idSeccion"].ToString(),
                             item["estado"].ToString()
                         );
                     }
 
                     GVBusqueda.DataSource = vDatosFiltrados;
                     GVBusqueda.DataBind();
-                    Session["CUMPL_MOTIVOS"] = vDatosFiltrados;
+                    Session["CUMPL_CURSOS"] = vDatosFiltrados;
                 }
 
             }catch (Exception ex){
@@ -121,9 +91,9 @@ namespace Infatlan_STEI.paginas.reportes.ajustes
         protected void BtnNuevo_Click(object sender, EventArgs e){
             try{
                 limpiarModal();
-                LbTituloModal.Text = "Crear Nuevo Motivo";
+                LbTituloModal.Text = "Crear Nuevo Curso";
                 DivEstado.Visible = false;
-                Session["CUMPL_MOTIVO_ID"] = null;
+                Session["CUMPL_CURSOS_ID"] = null;
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal();", true);
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);
@@ -133,25 +103,61 @@ namespace Infatlan_STEI.paginas.reportes.ajustes
         void limpiarModal(){
             TxNombre.Text = string.Empty;
             DDLEstado.SelectedValue = "1";
-            DDLSecciones.SelectedValue = "0";
-            DDLProceso.SelectedValue = "0";
             DivMensaje.Visible = false;
+        }
+
+        protected void BtnAceptar_Click(object sender, EventArgs e){
+            try{
+                validarDatos();
+                String vQuery = "", vMensaje = "";
+                int vInfo;
+                DataTable vDatos = new DataTable();
+                String vUser = Session["USUARIO"].ToString();
+
+                vQuery = "[STEISP_CUMPLIMIENTO_Ajustes] {0}" +
+                        ",'" + TxNombre.Text.ToString().ToUpper() + "'" +
+                        "," + DDLEstado.SelectedValue +
+                        ",'" + Session["USUARIO"].ToString() + "'";
+
+                if (HttpContext.Current.Session["CUMPL_CURSOS_ID"] == null){
+                    vQuery = string.Format(vQuery, "9");
+                    vInfo = vConexion.ejecutarSql(vQuery);
+                    vMensaje = "Curso registrado con éxito.";
+                }else{
+                    vQuery = string.Format(vQuery, "10," + Session["CUMPL_CURSOS_ID"].ToString());
+                    vInfo = vConexion.ejecutarSql(vQuery);
+                    vMensaje = "Curso actualizado con éxito.";
+                }
+
+                if (vInfo == 1){
+                    Mensaje(vMensaje, WarningType.Success);
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "cerrarModal();", true);
+                    cargarDatos();
+                }
+            }catch (Exception ex){
+                LbAdvertencia.Text = ex.Message;
+                DivMensaje.Visible = true;
+            }
+        }
+
+        private void validarDatos() {
+            if (TxNombre.Text == string.Empty || TxNombre.Text == "")
+                throw new Exception("Favor ingrese el nombre del curso.");
         }
 
         protected void GVBusqueda_RowCommand(object sender, GridViewCommandEventArgs e){
             try{
-                string vIdMotivo = e.CommandArgument.ToString();
-                if (e.CommandName == "EditarMotivo"){
+                string vIdCurso = e.CommandArgument.ToString();
+                if (e.CommandName == "EditarCurso"){
                     DivMensaje.Visible = false;
-                    LbTituloModal.Text = "Editar Motivo " + vIdMotivo;
-                    Session["CUMPL_MOTIVO_ID"] = vIdMotivo;
+                    LbTituloModal.Text = "Editar Curso " + vIdCurso;
+                    Session["CUMPL_CURSOS_ID"] = vIdCurso;
                     DivEstado.Visible = true;
 
-                    String vQuery = "[STEISP_CUMPLIMIENTO_Ajustes] 3," + vIdMotivo + "";
+                    String vQuery = "[STEISP_CUMPLIMIENTO_Ajustes] 8," + vIdCurso + "";
                     DataTable vDatos = vConexion.obtenerDataTable(vQuery);
                     for (int i = 0; i < vDatos.Rows.Count; i++){
                         TxNombre.Text = vDatos.Rows[i]["nombre"].ToString();
-                        DDLSecciones.SelectedValue = vDatos.Rows[i]["idSeccion"].ToString();
                         DDLEstado.SelectedValue = vDatos.Rows[i]["estado"].ToString();
                     }
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
@@ -169,45 +175,6 @@ namespace Infatlan_STEI.paginas.reportes.ajustes
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);
             }
-        }
-
-        protected void BtnAceptar_Click(object sender, EventArgs e){
-            try{
-                validarDatos();
-                String vQuery = "", vMensaje = "";
-                int vInfo;
-                DataTable vDatos = new DataTable();
-                vQuery = "[STEISP_CUMPLIMIENTO_Ajustes] {0}" +
-                        ",'" + TxNombre.Text.ToString().ToUpper() + "'" +
-                        "," + DDLEstado.SelectedValue +
-                        ",'" + Session["USUARIO"].ToString() + "'";
-
-                if (HttpContext.Current.Session["CUMPL_MOTIVO_ID"] == null){
-                    vQuery = string.Format(vQuery, "9");
-                    vInfo = vConexion.ejecutarSql(vQuery);
-                    vMensaje = "Curso registrado con éxito.";
-                }else{
-                    vQuery = string.Format(vQuery, "10," + Session["CUMPL_MOTIVO_ID"].ToString());
-                    vInfo = vConexion.ejecutarSql(vQuery);
-                    vMensaje = "Curso actualizado con éxito.";
-                }
-
-                if (vInfo == 1){
-                    Mensaje(vMensaje, WarningType.Success);
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "cerrarModal();", true);
-                    cargarDatos();
-                }
-            }catch (Exception ex){
-                LbAdvertencia.Text = ex.Message;
-                DivMensaje.Visible = true;
-            }
-        }
-        
-        private void validarDatos() {
-            if (TxNombre.Text == string.Empty || TxNombre.Text == "")
-                throw new Exception("Favor ingrese el nombre del motivo.");
-            if (DDLSecciones.SelectedValue == "0")
-                throw new Exception("Favor seleccione la sección.");
         }
     }
 }

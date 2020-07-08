@@ -72,7 +72,7 @@
         </div>
     </div>
 
-    <%--MDP--%>
+    <%--Medios de Pago--%>
     <div class="card">
         <div class="card-header" role="tab" id="heading2">
             <a class="link" data-toggle="collapse" data-parent="#accordion2" href="#collapse2" aria-expanded="true" aria-controls="collapseOne11">
@@ -91,23 +91,23 @@
                         </div>
                         <div class="columnas">
                             <label>% Cumplimiento</label>
-                            <asp:TextBox runat="server" ID="TextBox2" ReadOnly="true" CssClass="form-control" />
+                            <asp:TextBox runat="server" ID="TxATMPorcentaje" ReadOnly="true" CssClass="form-control" />
                         </div>
                         <div class="columnas">
                             <label>En Cumplimiento</label>
-                            <asp:TextBox runat="server" ID="TextBox3" ReadOnly="true" CssClass="form-control" />
+                            <asp:TextBox runat="server" ID="TxATMCumplimiento" ReadOnly="true" CssClass="form-control" />
                         </div>
                         <div class="columnas">
-                            <label>En No Cumplimiento</label>
-                            <asp:TextBox runat="server" ID="TextBox4" ReadOnly="true" CssClass="form-control" />
+                            <label>No Cumplimiento</label>
+                            <asp:TextBox runat="server" ID="TxATMCumplimientoNo" ReadOnly="true" CssClass="form-control" />
                         </div>
                         <div class="columnas">
                             <label>Total</label>
-                            <asp:TextBox runat="server" ID="TextBox5" ReadOnly="true" CssClass="form-control" />
+                            <asp:TextBox runat="server" ID="TxATMTotal" ReadOnly="true" CssClass="form-control" />
                         </div>
                         <div style="width: 60%">
                             <label>Observaciones</label>
-                            <asp:TextBox runat="server" ID="TextBox6" TextMode="MultiLine" Rows="2" CssClass="form-control" />
+                            <asp:TextBox runat="server" ID="TxATMObs" TextMode="MultiLine" Rows="2" CssClass="form-control" />
                         </div>
                         <div style="width: 40%;">
                             <div class="text-center">
@@ -124,23 +124,23 @@
                         </div>
                         <div class="columnas">
                             <label>% Cumplimiento</label>
-                            <asp:TextBox runat="server" ID="TextBox1" ReadOnly="true" CssClass="form-control" />
+                            <asp:TextBox runat="server" ID="TxABAPorcentaje" ReadOnly="true" CssClass="form-control" />
                         </div>
                         <div class="columnas">
                             <label>En Cumplimiento</label>
-                            <asp:TextBox runat="server" ID="TextBox25" ReadOnly="true" CssClass="form-control" />
+                            <asp:TextBox runat="server" ID="TxABACumplimiento" ReadOnly="true" CssClass="form-control" />
                         </div>
                         <div class="columnas">
-                            <label>En No Cumplimiento</label>
-                            <asp:TextBox runat="server" ID="TextBox26" ReadOnly="true" CssClass="form-control" />
+                            <label>No Cumplimiento</label>
+                            <asp:TextBox runat="server" ID="TxABACumplimientoNo" ReadOnly="true" CssClass="form-control" />
                         </div>
                         <div class="columnas">
                             <label>Total</label>
-                            <asp:TextBox runat="server" ID="TextBox27" ReadOnly="true" CssClass="form-control" />
+                            <asp:TextBox runat="server" ID="TxABATotal" ReadOnly="true" CssClass="form-control" />
                         </div>
                         <div style="width: 60%">
                             <label>Observaciones</label>
-                            <asp:TextBox runat="server" ID="TextBox28" TextMode="MultiLine" Rows="2" CssClass="form-control" />
+                            <asp:TextBox runat="server" ID="TxABAObs" TextMode="MultiLine" Rows="2" CssClass="form-control" />
                         </div>
                         <div style="width: 40%;">
                             <div class="text-center">
@@ -157,23 +157,23 @@
                         </div>
                         <div class="columnas">
                             <label>% Cumplimiento</label>
-                            <asp:TextBox runat="server" ID="TextBox7" ReadOnly="true" CssClass="form-control" />
+                            <asp:TextBox runat="server" ID="TxCajaPorcentaje" ReadOnly="true" CssClass="form-control" />
                         </div>
                         <div class="columnas">
                             <label>En Cumplimiento</label>
-                            <asp:TextBox runat="server" ID="TextBox8" ReadOnly="true" CssClass="form-control" />
+                            <asp:TextBox runat="server" ID="TxCajaCumplidas" ReadOnly="true" CssClass="form-control" />
                         </div>
                         <div class="columnas">
-                            <label>En No Cumplimiento</label>
-                            <asp:TextBox runat="server" ID="TextBox9" ReadOnly="true" CssClass="form-control" />
+                            <label>No Cumplimiento</label>
+                            <asp:TextBox runat="server" ID="TxCajaCumplidasNo" ReadOnly="true" CssClass="form-control" />
                         </div>
                         <div class="columnas">
                             <label>Total</label>
-                            <asp:TextBox runat="server" ID="TextBox10" ReadOnly="true" CssClass="form-control" />
+                            <asp:TextBox runat="server" ID="TxCajaTotal" ReadOnly="true" CssClass="form-control" />
                         </div>
                         <div style="width: 60%">
                             <label>Observaciones</label>
-                            <asp:TextBox runat="server" ID="TextBox11" TextMode="MultiLine" Rows="2" CssClass="form-control" />
+                            <asp:TextBox runat="server" ID="TxCajaObs" TextMode="MultiLine" Rows="2" CssClass="form-control" />
                         </div>
                         <div style="width: 40%;">
                             <div class="text-center">
@@ -221,30 +221,36 @@
                             <label>Observaciones</label>
                             <asp:TextBox runat="server" ID="TextBox24" TextMode="MultiLine" Rows="2" CssClass="form-control" />
                         </div>
+
+                        <asp:UpdatePanel runat="server" ID="UPanelKPI">
+                            <ContentTemplate>
+                                <div runat="server" id="DivKPI" visible="false">
+                                    <h4 class="card-subtitle m-t-20"><b>Solicitudes en "No Cumpliento"</b></h4>
+                                    <hr />
+                                    <div class="table-responsive m-t-20">
+                                        <asp:GridView ID="GvKPISolicitudes" runat="server"
+                                            CssClass="table table-bordered"
+                                            PagerStyle-CssClass="pgr"
+                                            HeaderStyle-CssClass="table table-success"
+                                            RowStyle-CssClass="rows"
+                                            AutoGenerateColumns="false"
+                                            AllowPaging="true"
+                                            GridLines="None" OnPageIndexChanging="GvKPISolicitudes_PageIndexChanging"
+                                            PageSize="10" >
+                                            <Columns>
+                                                <asp:BoundField DataField="id" HeaderText="Orden"/>
+                                                <asp:BoundField DataField="tiempo" HeaderText="Tiempo"/>
+                                                <asp:BoundField DataField="problem_type" HeaderText="Categoría 1"/>
+                                                <asp:BoundField DataField="problem_sub_type" HeaderText="Categoría 2"/>
+                                                <asp:BoundField DataField="third_level_category" HeaderText="Categoría 3"/>
+                                            </Columns>
+                                        </asp:GridView>
+                                    </div>
+                                </div>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                        
                     </div>
-                </div>
-                <div runat="server" id="DivKPI" visible="true">
-                    <h4 class="m-t-20">Solicitudes en "No Cumpliento"</h4>
-                    <hr />
-                    <div class="table-responsive m-t-20">
-                    <asp:GridView ID="GvKPISolicitudes" runat="server"
-                        CssClass="table table-bordered"
-                        PagerStyle-CssClass="pgr"
-                        HeaderStyle-CssClass="table"
-                        RowStyle-CssClass="rows"
-                        AutoGenerateColumns="false"
-                        AllowPaging="true"
-                        GridLines="None" 
-                        PageSize="10" >
-                        <Columns>
-                            <asp:BoundField DataField="id" HeaderText="Orden"/>
-                            <asp:BoundField DataField="tiempo" HeaderText="Tiempo"/>
-                            <asp:BoundField DataField="problem_type" HeaderText="Categoría 1"/>
-                            <asp:BoundField DataField="problem_sub_type" HeaderText="Categoría 2"/>
-                            <asp:BoundField DataField="third_level_category" HeaderText="Categoría 3"/>
-                        </Columns>
-                    </asp:GridView>
-                </div>
                 </div>
             </div>
         </div>
@@ -278,13 +284,6 @@
                                     <asp:BoundField  HeaderText="Categoría 1"/>
                                     <asp:BoundField  HeaderText="Categoría 2"/>
                                     <asp:BoundField  HeaderText="Categoría 3"/>
-                                    <%--<asp:TemplateField>
-                                        <ItemTemplate>
-                                            <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-info" CommandArgument='<%# Eval("idOrden") %>' CommandName="EditarMotivo">
-                                                <i class="icon-pencil" ></i>
-                                            </asp:LinkButton>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>--%>
                                 </Columns>
                             </asp:GridView>
                         </div>
@@ -338,7 +337,6 @@
                                     </asp:GridView>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
-                            
                         </div>
                     </div>
                 </div>

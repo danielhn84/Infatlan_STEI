@@ -288,7 +288,6 @@ namespace Infatlan_STEI_Inventario.pages
                 GVBusqueda.PageIndex = e.NewPageIndex;
                 GVBusqueda.DataSource = (DataTable)Session["INV_STOCK"];
                 GVBusqueda.DataBind();
-
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);
             }

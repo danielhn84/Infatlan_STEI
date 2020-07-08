@@ -87,49 +87,49 @@ namespace Infatlan_STEI.paginas.reportes
         protected global::System.Web.UI.WebControls.Literal LitCall;
 
         /// <summary>
-        /// Control TextBox2.
+        /// Control TxATMPorcentaje.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        protected global::System.Web.UI.WebControls.TextBox TxATMPorcentaje;
 
         /// <summary>
-        /// Control TextBox3.
+        /// Control TxATMCumplimiento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox3;
+        protected global::System.Web.UI.WebControls.TextBox TxATMCumplimiento;
 
         /// <summary>
-        /// Control TextBox4.
+        /// Control TxATMCumplimientoNo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox4;
+        protected global::System.Web.UI.WebControls.TextBox TxATMCumplimientoNo;
 
         /// <summary>
-        /// Control TextBox5.
+        /// Control TxATMTotal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox5;
+        protected global::System.Web.UI.WebControls.TextBox TxATMTotal;
 
         /// <summary>
-        /// Control TextBox6.
+        /// Control TxATMObs.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox6;
+        protected global::System.Web.UI.WebControls.TextBox TxATMObs;
 
         /// <summary>
         /// Control LitATM.
@@ -141,49 +141,49 @@ namespace Infatlan_STEI.paginas.reportes
         protected global::System.Web.UI.WebControls.Literal LitATM;
 
         /// <summary>
-        /// Control TextBox1.
+        /// Control TxABAPorcentaje.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox TxABAPorcentaje;
 
         /// <summary>
-        /// Control TextBox25.
+        /// Control TxABACumplimiento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox25;
+        protected global::System.Web.UI.WebControls.TextBox TxABACumplimiento;
 
         /// <summary>
-        /// Control TextBox26.
+        /// Control TxABACumplimientoNo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox26;
+        protected global::System.Web.UI.WebControls.TextBox TxABACumplimientoNo;
 
         /// <summary>
-        /// Control TextBox27.
+        /// Control TxABATotal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox27;
+        protected global::System.Web.UI.WebControls.TextBox TxABATotal;
 
         /// <summary>
-        /// Control TextBox28.
+        /// Control TxABAObs.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox28;
+        protected global::System.Web.UI.WebControls.TextBox TxABAObs;
 
         /// <summary>
         /// Control LitABA.
@@ -195,49 +195,49 @@ namespace Infatlan_STEI.paginas.reportes
         protected global::System.Web.UI.WebControls.Literal LitABA;
 
         /// <summary>
-        /// Control TextBox7.
+        /// Control TxCajaPorcentaje.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox7;
+        protected global::System.Web.UI.WebControls.TextBox TxCajaPorcentaje;
 
         /// <summary>
-        /// Control TextBox8.
+        /// Control TxCajaCumplidas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox8;
+        protected global::System.Web.UI.WebControls.TextBox TxCajaCumplidas;
 
         /// <summary>
-        /// Control TextBox9.
+        /// Control TxCajaCumplidasNo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox9;
+        protected global::System.Web.UI.WebControls.TextBox TxCajaCumplidasNo;
 
         /// <summary>
-        /// Control TextBox10.
+        /// Control TxCajaTotal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox10;
+        protected global::System.Web.UI.WebControls.TextBox TxCajaTotal;
 
         /// <summary>
-        /// Control TextBox11.
+        /// Control TxCajaObs.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox11;
+        protected global::System.Web.UI.WebControls.TextBox TxCajaObs;
 
         /// <summary>
         /// Control LitCaja.
@@ -292,6 +292,15 @@ namespace Infatlan_STEI.paginas.reportes
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBox24;
+
+        /// <summary>
+        /// Control UPanelKPI.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UPanelKPI;
 
         /// <summary>
         /// Control DivKPI.

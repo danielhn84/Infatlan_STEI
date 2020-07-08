@@ -45,6 +45,18 @@ namespace Infatlan_STEI.paginas.configuraciones
                         DDLDepartamento.Items.Add(new ListItem { Value = item["idDepartamento"].ToString(), Text = item["nombre"].ToString() });
                     }
                 }
+                
+                vQuery = "[STEISP_Usuarios] 5";
+                vDatos = vConexion.obtenerDataTable(vQuery);
+                
+                if (vDatos.Rows.Count > 0){
+                    DDLJefe.Items.Clear();
+                    DDLJefe.Items.Add(new ListItem { Value = "0", Text = "Seleccione una opción" });
+                    foreach (DataRow item in vDatos.Rows){
+                        DDLJefe.Items.Add(new ListItem { Value = item["idUsuario"].ToString(), Text = item["nombre"].ToString() + " " + item["apellidos"].ToString() });
+                    }
+                }
+
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);
             }
@@ -65,15 +77,6 @@ namespace Infatlan_STEI.paginas.configuraciones
                 }else{ 
                     EnumerableRowCollection<DataRow> filtered = vDatos.AsEnumerable()
                         .Where(r => r.Field<String>("nombre").Contains(vBusqueda.ToUpper()));
-
-                    Boolean isNumeric = int.TryParse(vBusqueda, out int n);
-
-                    if (isNumeric){
-                        if (filtered.Count() == 0){
-                            filtered = vDatos.AsEnumerable().Where(r =>
-                                Convert.ToInt32(r["idUsuario"]) == Convert.ToInt32(vBusqueda));
-                        }
-                    }
 
                     DataTable vDatosFiltrados = new DataTable();
                     vDatosFiltrados.Columns.Add("idUsuario");
@@ -108,7 +111,7 @@ namespace Infatlan_STEI.paginas.configuraciones
             try{
                 limpiarModal();
                 TxUsuario.ReadOnly = false;
-                LbIdMarca.Text = "Crear Nuevo Usuario";
+                LbIdUser.Text = "Crear Nuevo Usuario";
                 DivEstado.Visible = false;
                 Session["STEI_USUARIO_ID"] = null;
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal();", true);
@@ -124,7 +127,10 @@ namespace Infatlan_STEI.paginas.configuraciones
             TxIdentidad.Text = string.Empty;
             TxUsuario.Text = string.Empty;
             TxTelefono.Text = string.Empty;
+            TxSysAid.Text = string.Empty;
             DDLDepartamento.SelectedValue = "0";
+            DDLGroups.SelectedValue = "0";
+            DDLJefe.SelectedValue = "0";
             DDLEstado.SelectedValue = "1";
             DivMensaje.Visible = false;
         }
@@ -134,6 +140,7 @@ namespace Infatlan_STEI.paginas.configuraciones
                 validarDatos();
                 String vQuery = "", vMensaje = "";
                 int vInfo;
+
                 DataTable vDatos = new DataTable();
                 vQuery = "STEISP_Usuarios {0}" +
                         ",'" + TxUsuario.Text + "'" +
@@ -144,7 +151,10 @@ namespace Infatlan_STEI.paginas.configuraciones
                         ",'" + TxIdentidad.Text + "'" +
                         "," + DDLEstado.SelectedValue + 
                         ",'" + Session["USUARIO"].ToString() + "'" +
-                        "," + DDLDepartamento.SelectedValue;
+                        "," + DDLDepartamento.SelectedValue + 
+                        ",'" + TxSysAid.Text + "'" +
+                        ",'" + DDLJefe.SelectedValue + "'" +
+                        ",'" + DDLGroups.SelectedValue + "'";
 
                 if (HttpContext.Current.Session["STEI_USUARIO_ID"] == null){
                     vQuery = string.Format(vQuery, "3");
@@ -161,8 +171,7 @@ namespace Infatlan_STEI.paginas.configuraciones
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "cerrarModal();", true);
                     cargarDatos();
                 }
-            }
-            catch (Exception ex){
+            }catch (Exception ex){
                 LbAdvertencia.Text = ex.Message;
                 DivMensaje.Visible = true;
             }
@@ -190,24 +199,27 @@ namespace Infatlan_STEI.paginas.configuraciones
                 DataTable vDatos = new DataTable();
                 String vQuery = "";
                 string vIdUser = e.CommandArgument.ToString();
-                
-                if (e.CommandName == "EditarUser"){
+
+                if (e.CommandName == "EditarUser") {
                     DivMensaje.Visible = false;
-                    LbIdMarca.Text = "Editar usuario <b>" + vIdUser + "</b>";
+                    LbIdUser.Text = "Editar usuario <b>" + vIdUser + "</b>";
                     Session["STEI_USUARIO_ID"] = vIdUser;
                     DivEstado.Visible = true;
                     TxUsuario.ReadOnly = true;
                     vQuery = "[STEISP_Usuarios] 2," + vIdUser + "";
                     vDatos = vConexion.obtenerDataTable(vQuery);
 
-                    for (int i = 0; i < vDatos.Rows.Count; i++){
-                        TxNombres.Text = vDatos.Rows[i]["nombre"].ToString();
+                    for (int i = 0; i < vDatos.Rows.Count; i++) {
                         TxUsuario.Text = vDatos.Rows[i]["idUsuario"].ToString();
+                        TxSysAid.Text = vDatos.Rows[i]["sysAid"].ToString();
+                        TxNombres.Text = vDatos.Rows[i]["nombre"].ToString();
                         TxApellidos.Text = vDatos.Rows[i]["apellidos"].ToString();
                         TxIdentidad.Text = vDatos.Rows[i]["identidad"].ToString();
                         TxTelefono.Text = vDatos.Rows[i]["telefono"].ToString();
                         TxCorreo.Text = vDatos.Rows[i]["correo"].ToString();
                         DDLDepartamento.SelectedValue = vDatos.Rows[i]["idDepartamento"].ToString();
+                        DDLJefe.SelectedValue = vDatos.Rows[i]["idJefe"].ToString();
+                        DDLGroups.SelectedValue = vDatos.Rows[i]["assignedGroup"].ToString();
                         DDLEstado.SelectedValue = vDatos.Rows[i]["estado"].ToString();
                     }
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
@@ -222,6 +234,19 @@ namespace Infatlan_STEI.paginas.configuraciones
                 GVBusqueda.PageIndex = e.NewPageIndex;
                 GVBusqueda.DataSource = (DataTable)Session["STEI_USUARIOS"];
                 GVBusqueda.DataBind();
+            }catch (Exception ex){
+                Mensaje(ex.Message, WarningType.Danger);
+            }
+        }
+
+        protected void DDLJefe_SelectedIndexChanged(object sender, EventArgs e){
+            try{
+                String vQuery = "[STEISP_Usuarios] 2,'" + DDLJefe.SelectedValue + "'";
+                DataTable vData = vConexion.obtenerDataTable(vQuery);
+                if (vData.Rows.Count > 0){
+                    DDLGroups.SelectedValue = vData.Rows[0]["assignedGroup"].ToString();
+                    DDLGroups.Enabled = false;
+                }
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);
             }

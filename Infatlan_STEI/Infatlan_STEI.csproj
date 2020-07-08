@@ -3411,7 +3411,9 @@
     <Content Include="paginas\faqs.aspx" />
     <Content Include="paginas\mail\TemplateMail.html" />
     <Content Include="paginas\messages.aspx" />
+    <Content Include="paginas\reportes\ajustes\cursos.aspx" />
     <Content Include="paginas\reportes\ajustes\motivos.aspx" />
+    <Content Include="paginas\reportes\cursosEmpleados.aspx" />
     <Content Include="paginas\reportes\metasCumplimiento.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -3480,12 +3482,26 @@
     <Compile Include="paginas\messages.aspx.designer.cs">
       <DependentUpon>messages.aspx</DependentUpon>
     </Compile>
+    <Compile Include="paginas\reportes\ajustes\cursos.aspx.cs">
+      <DependentUpon>cursos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\reportes\ajustes\cursos.aspx.designer.cs">
+      <DependentUpon>cursos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="paginas\reportes\ajustes\motivos.aspx.cs">
       <DependentUpon>motivos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="paginas\reportes\ajustes\motivos.aspx.designer.cs">
       <DependentUpon>motivos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\reportes\cursosEmpleados.aspx.cs">
+      <DependentUpon>cursosEmpleados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\reportes\cursosEmpleados.aspx.designer.cs">
+      <DependentUpon>cursosEmpleados.aspx</DependentUpon>
     </Compile>
     <Compile Include="paginas\reportes\metasCumplimiento.aspx.cs">
       <DependentUpon>metasCumplimiento.aspx</DependentUpon>
