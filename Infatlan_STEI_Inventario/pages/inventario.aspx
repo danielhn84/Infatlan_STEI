@@ -17,7 +17,7 @@
         function openModalU() { $('#ModalUbicaciones').modal('show'); }
         function closeModalU() { $('#ModalUbicaciones').modal('hide'); }
     </script>
-    <link href="../assets/node_module/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/node_modules/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
     <asp:UpdateProgress ID="UpdateProgress1" runat="server">
@@ -282,7 +282,7 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Script" runat="server">
-    <script src="../assets/node_module/select2/dist/js/select2.full.min.js" type="text/javascript"></script>
+    <script src="../assets/node_modules/select2/dist/js/select2.full.min.js" type="text/javascript"></script>
     <style>
         .select2-selection__rendered {line-height: 31px !important;}
         .select2-container .select2-selection--single {height: 35px !important;}

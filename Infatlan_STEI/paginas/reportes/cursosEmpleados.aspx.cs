@@ -69,7 +69,34 @@ namespace Infatlan_STEI.paginas.reportes
         }
 
         protected void BtnAceptar_Click(object sender, EventArgs e){
+            try{
+                if (HttpContext.Current.Session["CUMPL_EVALUACION_ASIGNAR"] == null)
+                    throw new Exception("Favor agregue empleados.");
+                
+                DataTable vData = (DataTable)Session["CUMPL_EVALUACION_ASIGNAR"];
+                if (vData.Rows.Count > 0){
+                    String vQuery = "";
+                    int vInfo = 0;
+                    for (int i = 0; i < vData.Rows.Count; i++){
+                        vQuery = "[STEISP_CUMPLIMIENTO_Evaluaciones] 3" +
+                                "," + vData.Rows[i]["idCurso"].ToString() +
+                                ",'" + vData.Rows[i]["idUsuario"].ToString() + "'" +
+                                ",0,0,'" + Session["USUARIO"].ToString() + "'";
+                        vInfo = vConexion.ejecutarSql(vQuery);
+                    }
 
+                    if (vInfo == 1){
+                        Mensaje("Curso asignado con éxito.", WarningType.Success);
+                        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "cerrarModal();", true);
+                        cargarDatos();
+                    }
+                }else
+                    throw new Exception("Favor agregue empleados.");
+                
+            }catch (Exception ex){
+                LbAdvertencia.Text = ex.Message;
+                DivMensaje.Visible = true;
+            }
         }
 
         protected void TxBusqueda_TextChanged(object sender, EventArgs e){
@@ -102,17 +129,17 @@ namespace Infatlan_STEI.paginas.reportes
             try{
                 string vIdEvaluacion = e.CommandArgument.ToString();
                 if (e.CommandName == "EditarEvaluacion"){
-                    DivMensaje.Visible = false;
-                    LbTituloModal.Text = "Editar Evaluación " + vIdEvaluacion;
+                    DivMensajeNota.Visible = false;
                     Session["CUMPL_EVALUACION_ID"] = vIdEvaluacion;
 
-                    String vQuery = "[STEISP_CUMPLIMIENTO_Evaluaciones] 3," + vIdEvaluacion + "";
+                    String vQuery = "[STEISP_CUMPLIMIENTO_Evaluaciones] 2," + vIdEvaluacion;
                     DataTable vDatos = vConexion.obtenerDataTable(vQuery);
                     for (int i = 0; i < vDatos.Rows.Count; i++){
-                        DDLCursos.SelectedValue = vDatos.Rows[i]["idCurso"].ToString();
-                        DDLEmpleado.SelectedValue = vDatos.Rows[i]["idUsuario"].ToString();
+                        TxCurso.Text = vDatos.Rows[i]["nombre"].ToString();
+                        TxEmpleado.Text = vDatos.Rows[i]["empleado"].ToString();
                     }
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+                    LbTituloNotas.Text = "Evaluar a " + vDatos.Rows[0]["empleado"].ToString();
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalNotas();", true);
                 }
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);
@@ -162,21 +189,24 @@ namespace Infatlan_STEI.paginas.reportes
                 if (vData == null)
                     vData = vNewDatos.Clone();
 
+                Boolean vFlag = true;
                 if (vData.Rows.Count > 0){
-                    Boolean vFlag = true;
                     for (int i = 0; i < vData.Rows.Count; i++){
                         if (vData.Rows[i]["idUsuario"].ToString() == DDLEmpleado.SelectedValue && vData.Rows[i]["idCurso"].ToString() == DDLCursos.SelectedValue) { 
                             vFlag = false;
                             break;
                         }
                     }
-                    
+                    vFlag = vFlag ? verificarAsignacion(vFlag) : vFlag;
                     if (vFlag)
                         vData.Rows.Add(vData.Rows.Count + 1, DDLCursos.SelectedValue, DDLCursos.SelectedItem, DDLEmpleado.SelectedValue, DDLEmpleado.SelectedItem);
-                }else
-                    vData.Rows.Add(vData.Rows.Count + 1, DDLCursos.SelectedValue, DDLCursos.SelectedItem, DDLEmpleado.SelectedValue, DDLEmpleado.SelectedItem);
+                }else{
+                    vFlag = verificarAsignacion(vFlag);
+                    if (vFlag)
+                        vData.Rows.Add(vData.Rows.Count + 1, DDLCursos.SelectedValue, DDLCursos.SelectedItem, DDLEmpleado.SelectedValue, DDLEmpleado.SelectedItem);
+                }
 
-                if (vData.Rows.Count > 0){
+                if (vData.Rows.Count > 0 && vFlag){
                     Session["CUMPL_EVALUACION_ASIGNAR"] = vData;
                     GvAsignar.DataSource = vData;
                     GvAsignar.DataBind();
@@ -185,6 +215,23 @@ namespace Infatlan_STEI.paginas.reportes
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);
             }
+        }
+
+        private Boolean verificarAsignacion(Boolean vFlag) {
+            try{
+                String vQuery = "[STEISP_CUMPLIMIENTO_Evaluaciones] 5,'" + DDLEmpleado.SelectedValue + "'," + DDLCursos.SelectedValue;
+                DataTable vDatos = vConexion.obtenerDataTable(vQuery);
+                if (vDatos.Rows.Count > 0 && vDatos.Rows[0][0].ToString() == "1"){
+                    vFlag = false;
+                }
+            }catch (Exception ex){
+
+            }
+            return vFlag;
+        }
+
+        protected void BtnEvaluar_Click(object sender, EventArgs e){
+            String vQuery = "[STEISP_CUMPLIMIENTO_Evaluaciones] 4," + TxNota.Text + "";
         }
     }
 }

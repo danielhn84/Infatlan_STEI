@@ -27,6 +27,7 @@ namespace Infatlan_STEI_ATM
                             Session["AUTHCLASS"] = vDatos;
                             Session["USUARIO"] = vDatos.Rows[0]["idUsuario"].ToString();
                             Session["AUTH"] = true;
+                            Contar();
                         }
                     }else {
                         Response.Redirect("/login.aspx");

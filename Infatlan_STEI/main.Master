@@ -193,6 +193,14 @@
 
     <script src="/assets/node_modules/skycons/skycons.js"></script>
     <script src="/dist/js/dashboard1.js"></script>
+
+    <script src="/js/off-canvas.js"></script>
+    <script src="/js/hoverable-collapse.js"></script>
+    <script src="/js/template.js"></script>
+    <script src="/js/dashboard.js"></script>
+    <script src="/js/data-table.js"></script>
+    <script src="/js/jquery.dataTables.js"></script>
+    <script src="/js/dataTables.bootstrap4.js"></script>
     <asp:ContentPlaceHolder ID="Script" runat="server">
     </asp:ContentPlaceHolder>
 </body>

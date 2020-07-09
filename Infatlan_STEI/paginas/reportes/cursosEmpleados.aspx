@@ -11,6 +11,10 @@
 
     <script type="text/javascript">
         function openModal() { $('#ModalCursoEmpleado').modal('show'); }
+        function openModalNotas() {
+            $('#ModalNotas').modal('show');
+            //document.getElementById('tch3').value = '';
+        }
         function cerrarModal() { $('#ModalCursoEmpleado').modal('hide'); }
     </script>
 </asp:Content>
@@ -70,14 +74,17 @@
                                 PageSize="10" OnPageIndexChanging="GVBusqueda_PageIndexChanging">
                                 <Columns>
                                     <asp:BoundField DataField="id" HeaderText="Id"/>
-                                    <asp:BoundField DataField="idCurso" HeaderText="Curso"/>
-                                    <asp:BoundField DataField="idEmpleado" HeaderText="Empleado"/>
+                                    <asp:BoundField DataField="nombre" HeaderText="Curso"/>
+                                    <asp:BoundField DataField="idUsuario" HeaderText="Empleado"/>
                                     <asp:BoundField DataField="activo" HeaderText="Estado"/>
                                     <asp:BoundField DataField="nota" HeaderText="Nota"/>
                                     <asp:TemplateField>
                                         <ItemTemplate>
                                             <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-info" CommandArgument='<%# Eval("id") %>' CommandName="EditarEvaluacion">
                                                 <i class="icon-pencil" ></i>
+                                            </asp:LinkButton>
+                                            <asp:LinkButton ID="BtnBorrar" runat="server" class="btn btn-primary" CommandArgument='<%# Eval("id") %>' CommandName="borrarAsignacion">
+                                                <i class="icon-trash" ></i>
                                             </asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>
@@ -176,6 +183,81 @@
             </div>
         </div>
     </div>
+
+    <%--MODAL DE NOTAS--%>
+    <div class="modal fade" id="ModalNotas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                            <ContentTemplate>
+                                <asp:Label ID="LbTituloNotas" runat="server" Text=""></asp:Label>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                        <ContentTemplate>
+                            <div class="row">
+                                <div class="form-group row col-12">
+                                    <div class="col-3" style="margin-left:2%">
+                                        <label class="col-form-label">Empleado:</label>
+                                    </div>
+                                    <div class="col-8">
+                                        <asp:TextBox runat="server" CssClass="form-control" ReadOnly="true" ID="TxEmpleado" />
+                                    </div>
+                                </div>
+                                <div class="form-group row col-12">
+                                    <div class="col-3" style="margin-left:2%">
+                                        <label class="col-form-label">Curso:</label>
+                                    </div>
+                                    <div class="col-8">
+                                        <asp:TextBox runat="server" CssClass="form-control" ReadOnly="true" ID="TxCurso" />
+                                    </div>
+                                </div>
+                                <div class="form-group row col-12">
+                                    <div class="col-3" style="margin-left:2%">
+                                        <label class="col-form-label">Nota</label>
+                                    </div>
+                                    <div class="col-8">
+                                        <asp:TextBox runat="server" TextMode="Number" ID="TxNota" CssClass="form-control"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <%--<div class="form-group">
+                                    <label class="control-label">Cantidad</label>
+                                    <input id="tch3" type="text" value="" name="tch3" data-bts-button-down-class="btn btn-secondary btn-outline" data-bts-button-up-class="btn btn-secondary btn-outline">
+                                </div>--%>
+                                <div class="col-12" runat="server" id="DivMensajeNota" visible="false" style="display: flex; background-color:tomato; justify-content:center">
+                                    <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbAdvertenciaNota"></asp:Label>
+                                </div>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+                <div class="modal-footer">
+                    <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                        <ContentTemplate>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <asp:Button ID="BtnEvaluar" runat="server" Text="Evaluar" class="btn btn-success" OnClick="BtnEvaluar_Click"/>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+            </div>
+        </div>
+    </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Script" runat="server">
+    <script src="../assets/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.js" type="text/javascript"></script>
+    <script src="/assets/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.js" type="text/javascript"></script>
+    <script src="assets/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+    <script>
+        $(function () {
+            $("input[name='tch3']").TouchSpin();
+        });
+    </script>
 </asp:Content>
