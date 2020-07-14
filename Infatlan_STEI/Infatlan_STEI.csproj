@@ -43,6 +43,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Excel.4.5, Version=2.1.2.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Excel.4.5.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.5.452, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.DirectoryServices.AccountManagement" />
@@ -3414,13 +3422,16 @@
     <Content Include="paginas\reportes\ajustes\cursos.aspx" />
     <Content Include="paginas\reportes\ajustes\motivos.aspx" />
     <Content Include="paginas\reportes\cursosEmpleados.aspx" />
+    <Content Include="paginas\reportes\metasAprobacion.aspx" />
     <Content Include="paginas\reportes\metasCumplimiento.aspx" />
+    <Content Include="paginas\reportes\metasPendientes.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="classes\Class1.cs" />
     <Compile Include="classes\db.cs" />
     <Compile Include="classes\generales.cs" />
+    <Compile Include="classes\GenerarXML.cs" />
     <Compile Include="classes\LdapService.cs" />
     <Compile Include="classes\roles.cs" />
     <Compile Include="classes\SmtpService.cs">
@@ -3503,12 +3514,26 @@
     <Compile Include="paginas\reportes\cursosEmpleados.aspx.designer.cs">
       <DependentUpon>cursosEmpleados.aspx</DependentUpon>
     </Compile>
+    <Compile Include="paginas\reportes\metasAprobacion.aspx.cs">
+      <DependentUpon>metasAprobacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\reportes\metasAprobacion.aspx.designer.cs">
+      <DependentUpon>metasAprobacion.aspx</DependentUpon>
+    </Compile>
     <Compile Include="paginas\reportes\metasCumplimiento.aspx.cs">
       <DependentUpon>metasCumplimiento.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="paginas\reportes\metasCumplimiento.aspx.designer.cs">
       <DependentUpon>metasCumplimiento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\reportes\metasPendientes.aspx.cs">
+      <DependentUpon>metasPendientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\reportes\metasPendientes.aspx.designer.cs">
+      <DependentUpon>metasPendientes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -4675,6 +4700,7 @@
     <Content Include="scss\widgets\topbar-mail.scss" />
     <Content Include="scss\widgets\weather-widget.scss" />
     <Content Include="scss\widgets\widgets.scss" />
+    <Content Include="paginas\plantillas\plantillaEvaluacion.xlsx" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Web.Debug.config">

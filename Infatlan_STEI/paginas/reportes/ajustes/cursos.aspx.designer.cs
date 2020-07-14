@@ -96,15 +96,6 @@ namespace Infatlan_STEI.paginas.reportes.ajustes
         protected global::System.Web.UI.WebControls.TextBox TxNombre;
 
         /// <summary>
-        /// Control DDLSecciones.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DDLSecciones;
-
-        /// <summary>
         /// Control DivEstado.
         /// </summary>
         /// <remarks>

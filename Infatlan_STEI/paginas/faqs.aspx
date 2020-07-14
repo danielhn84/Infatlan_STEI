@@ -34,8 +34,8 @@
                 <h5 class="m-t-20"><b>¿Qué significa STEI?</b></h5>
                 Por sus siglas Sistema de Telecomunicaciones E Inventarios
 
-                <h5 class="m-t-20"><b>¿Qué procesos tiene STEI?</b></h5>
-                Mantenimientos de Agencias, ATMs, Cableado Estructurado y control de Inventarios.
+                <h5 class="m-t-20"><b>¿Qué procesos conforman STEI?</b></h5>
+                Mantenimientos de Agencias, ATMs, Cableado Estructurado, control de Inventarios, gestión de equipos de comunicación y procesos de medición de desempeño como las metas de cumplimientos.
                 
                 <h5 class="m-t-20"><b>¿Cómo puedo enviar una notificación?</b></h5>
                 Entrando a la sección de Mensajes en la menú de la izquierda, seleccione el destinatario, asunto, aplicación, escriba el mensaje y presione Enviar.

@@ -134,6 +134,7 @@
                                 <li><a class="has-arrow waves-effect waves-dark" aria-expanded="false" href="javascript:void(0)"><span class="hide-menu">Cumplimiento<span class="badge badge-pill badge-cyan ml-auto"></span></span></a>
                                     <ul aria-expanded="false" class="collapse">
                                         <li><a href="/paginas/reportes/metasCumplimiento.aspx">Formulario</a></li>
+                                        <li><a href="/paginas/reportes/metasPendientes.aspx">Pendientes</a></li>
                                         <li><a href="/paginas/reportes/cursosEmpleados.aspx">Evaluaciones</a></li>
                                     </ul>
                                 </li>
