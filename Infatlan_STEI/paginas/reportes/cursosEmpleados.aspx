@@ -11,10 +11,11 @@
 
     <script type="text/javascript">
         function openModal() { $('#ModalCursoEmpleado').modal('show'); }
-        function openModalNotas() {
-            $('#ModalNotas').modal('show');
-            //document.getElementById('tch3').value = '';
-        }
+        function openModalCarga() { $('#ModalCarga').modal('show'); }
+        function openConfirmacion() { $('#ModalConfirmacion').modal('show'); }
+        function cerrarConfirmacion() { $('#ModalConfirmacion').modal('hide'); }
+        function openModalNotas() {$('#ModalNotas').modal('show');}
+        function cerrarModalNotas() {$('#ModalNotas').modal('hide');}
         function cerrarModal() { $('#ModalCursoEmpleado').modal('hide'); }
     </script>
 </asp:Content>
@@ -55,11 +56,17 @@
                             <div class="col-1">
                                 <label class="col-form-label">Búsqueda</label>
                             </div>
+                            <div class="col-3">
+                                <asp:DropDownList runat="server" AutoPostBack="true" ID="DDLSortCurso" CssClass="form-control" OnSelectedIndexChanged="DDLSortCurso_SelectedIndexChanged"></asp:DropDownList>
+                            </div>
                             <div class="col-5">
                                 <asp:TextBox runat="server" PlaceHolder="Ingrese texto y presione Enter" ID="TxBusqueda" AutoPostBack="true" OnTextChanged="TxBusqueda_TextChanged" CssClass="form-control form-control-line"></asp:TextBox>
                             </div>
                             <asp:Button runat="server" ID="BtnNuevo" CssClass="btn btn-success mr-2" Text="Nuevo" OnClick="BtnNuevo_Click" />
-                            <asp:Button runat="server" ID="BtnCargar" CssClass="btn btn-primary" Text="Cargar" OnClick="BtnCargar_Click" />
+                            <button type="button" class="btn btn-primary" onclick="openModalCarga();">
+                                <span class="icon-arrow-up-circle"></span> Carga
+                            </button>
+                            <%--<input type="button" value="Carga" runat="server" class="btn btn-primary" onclick="openModalCarga();" />--%>
                         </div>
 
                         <div class="table-responsive m-t-20">
@@ -81,7 +88,7 @@
                                     <asp:TemplateField>
                                         <ItemTemplate>
                                             <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-info" CommandArgument='<%# Eval("id") %>' CommandName="EditarEvaluacion">
-                                                <i class="icon-pencil" ></i>
+                                                <i class="icon-note" ></i>
                                             </asp:LinkButton>
                                             <asp:LinkButton ID="BtnBorrar" runat="server" class="btn btn-primary" CommandArgument='<%# Eval("id") %>' CommandName="borrarAsignacion">
                                                 <i class="icon-trash" ></i>
@@ -225,13 +232,9 @@
                                         <label class="col-form-label">Nota</label>
                                     </div>
                                     <div class="col-8">
-                                        <asp:TextBox runat="server" TextMode="Number" ID="TxNota" CssClass="form-control"></asp:TextBox>
+                                        <asp:TextBox runat="server" TextMode="Number" min="0" step="1" max="100" ID="TxNota" CssClass="form-control"></asp:TextBox>
                                     </div>
                                 </div>
-                                <%--<div class="form-group">
-                                    <label class="control-label">Cantidad</label>
-                                    <input id="tch3" type="text" value="" name="tch3" data-bts-button-down-class="btn btn-secondary btn-outline" data-bts-button-up-class="btn btn-secondary btn-outline">
-                                </div>--%>
                                 <div class="col-12" runat="server" id="DivMensajeNota" visible="false" style="display: flex; background-color:tomato; justify-content:center">
                                     <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbAdvertenciaNota"></asp:Label>
                                 </div>
@@ -250,10 +253,85 @@
             </div>
         </div>
     </div>
+
+    <%--MODAL DE CONFIRMACION--%>
+    <div class="modal fade" id="ModalConfirmacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+                            <ContentTemplate>
+                                <asp:Label ID="LbConfirmacion" runat="server" Text=""></asp:Label>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </h4>
+                </div>
+                <div class="modal-footer">
+                    <asp:UpdatePanel ID="UpdatePanel7" runat="server">
+                        <ContentTemplate>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <asp:Button ID="BtnCornfirmar" runat="server" Text="Borrar" class="btn btn-primary" OnClick="BtnCornfirmar_Click"/>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%--MODAL DE CARGA--%>
+    <div class="modal fade" id="ModalCarga" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Carga Masiva de Calificaciones</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <asp:UpdatePanel ID="UpdatePanel8" runat="server">
+                        <ContentTemplate>
+                            <div class="row">
+                                <div class="form-group row col-12">
+                                    <div class="col-3" style="margin-left:2%">
+                                        <label>Plantilla:</label>
+                                    </div>
+                                    <div class="col-8">
+                                        <a href="../plantillas/plantillaEvaluacion.xlsx">Descargar</a>
+                                    </div>
+                                </div>
+                                <div class="form-group row col-12">
+                                    <div class="col-3" style="margin-left:2%">
+                                        <label class="col-form-label">Cargar:</label>
+                                    </div>
+                                    <div class="col-8">
+                                        <asp:FileUpload runat="server" ID="FUEvaluar" CssClass="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="col-12" runat="server" id="DivAdvertencia" visible="false" style="display: flex; background-color:tomato; justify-content:center">
+                                    <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbAdvertenciaCarga"></asp:Label>
+                                </div>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+                <div class="modal-footer">
+                    <asp:UpdatePanel ID="UpdatePanel9" runat="server">
+                        <ContentTemplate>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <asp:Button ID="BtnInsertar" runat="server" Text="Aceptar" class="btn btn-success" OnClick="BtnInsertar_Click"/>
+                        </ContentTemplate>
+                        <Triggers>
+                            <asp:PostBackTrigger ControlID="BtnInsertar" />
+                        </Triggers>
+                    </asp:UpdatePanel>
+                </div>
+            </div>
+        </div>
+    </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Script" runat="server">
-    <script src="../assets/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.js" type="text/javascript"></script>
-    <script src="/assets/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.js" type="text/javascript"></script>
     <script src="assets/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
     <script>
         $(function () {

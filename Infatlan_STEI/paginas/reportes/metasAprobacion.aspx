@@ -1,5 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="metasCumplimiento.aspx.cs" Inherits="Infatlan_STEI.paginas.reportes.metasCumplimiento" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="metasAprobacion.aspx.cs" Inherits="Infatlan_STEI.paginas.reportes.metasAprobacion" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
     <link href="/assets/node_modules/css-chart/css-chart.css" rel="stylesheet">
     <link href="dist/css/pages/easy-pie-chart.css" rel="stylesheet">
@@ -20,7 +19,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Reportes</a></li>
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Cumplimiento</a></li>
-                    <li class="breadcrumb-item active">Formulario</li>
+                    <li class="breadcrumb-item active">Aprobación</li>
                 </ol>
             </div>
         </div>
@@ -249,7 +248,6 @@
                                 </div>
                             </ContentTemplate>
                         </asp:UpdatePanel>
-                        
                     </div>
                 </div>
             </div>
@@ -278,27 +276,17 @@
                                             HeaderStyle-CssClass="table-success"
                                             RowStyle-CssClass="rows"
                                             AutoGenerateColumns="false"
-                                            AllowPaging="true" OnPageIndexChanging="GvRuptura_PageIndexChanging"
-                                            GridLines="None" OnRowDataBound="GvRuptura_RowDataBound"
+                                            AllowPaging="true" 
+                                            GridLines="None" OnPageIndexChanging="GvRuptura_PageIndexChanging"
                                             PageSize="10">
                                             <Columns>
-                                                <asp:BoundField DataField="id" HeaderText="Orden" ItemStyle-Width="50"/>
-                                                <asp:BoundField DataField="tiempoRespuesta" HeaderText="Respuesta" ItemStyle-Width="50"/>
-                                                <asp:BoundField DataField="tiempoAtencion" HeaderText="Atención" ItemStyle-Width="50"/>
-                                                <asp:BoundField DataField="responsibility" HeaderText="Responsable" ItemStyle-Width="50"/>
-                                                <asp:BoundField DataField="Satisfaccion" HeaderText="Nota" ItemStyle-Width="50"/>
-                                                <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="200">
-                                                    <HeaderTemplate>Razón</HeaderTemplate>
-                                                    <ItemTemplate>
-                                                        <asp:DropDownList runat="server" ID="DDLRazonRuptura" CssClass="form-control"></asp:DropDownList>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField>
-                                                <HeaderTemplate>Observaciones</HeaderTemplate>
-                                                <ItemTemplate>
-                                                    <asp:TextBox runat="server" CssClass="form-control" ID="TxRupturaObs"></asp:TextBox>
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
+                                                <asp:BoundField HeaderText="Orden" ItemStyle-Width="50"/>
+                                                <asp:BoundField HeaderText="Respuesta" ItemStyle-Width="50"/>
+                                                <asp:BoundField HeaderText="Atención" ItemStyle-Width="50"/>
+                                                <asp:BoundField HeaderText="Responsable" ItemStyle-Width="50"/>
+                                                <asp:BoundField HeaderText="Nota" ItemStyle-Width="50"/>
+                                                <asp:BoundField HeaderText="Razon" ItemStyle-Width="150"/>
+                                                <asp:BoundField HeaderText="Obs"/>
                                             </Columns>
                                         </asp:GridView>
                                     </ContentTemplate>
@@ -333,24 +321,14 @@
                                         RowStyle-CssClass="rows"
                                         AutoGenerateColumns="false"
                                         AllowPaging="true"
-                                        GridLines="None" OnRowDataBound="GvOSER_RowDataBound"
+                                        GridLines="None"
                                         PageSize="10" OnPageIndexChanging="GvOSER_PageIndexChanging">
                                         <Columns>
-                                            <asp:BoundField DataField="id" HeaderText="Orden" ItemStyle-Width="50" />
-                                            <asp:BoundField DataField="tiempoRespuesta" HeaderText="Tiempo" ItemStyle-Width="10" />
-                                            <asp:BoundField DataField="responsibility" HeaderText="Responsable" ItemStyle-Width="100" />
-                                            <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="240">
-                                                <HeaderTemplate>Razón</HeaderTemplate>
-                                                <ItemTemplate>
-                                                    <asp:DropDownList runat="server" ID="DDLRazonER" CssClass="form-control"></asp:DropDownList>
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField>
-                                                <HeaderTemplate>Observaciones</HeaderTemplate>
-                                                <ItemTemplate>
-                                                    <asp:TextBox runat="server" CssClass="form-control" ID="TxOSERObs"></asp:TextBox>
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
+                                            <asp:BoundField  HeaderText="Orden" ItemStyle-Width="50" />
+                                            <asp:BoundField  HeaderText="Tiempo" ItemStyle-Width="10" />
+                                            <asp:BoundField  HeaderText="Responsable" ItemStyle-Width="100" />
+                                            <asp:BoundField  HeaderText="Razón" ItemStyle-Width="100" />
+                                            <asp:BoundField  HeaderText="Obs" ItemStyle-Width="100" />
                                         </Columns>
                                     </asp:GridView>
                                 </ContentTemplate>
@@ -386,22 +364,17 @@
                                         GridLines="None"
                                         PageSize="10" OnPageIndexChanging="GvRendimiento_PageIndexChanging">
                                         <Columns>
-                                            <asp:BoundField DataField="idUsuario" Visible="false" />
-                                            <asp:BoundField DataField="nombre" HeaderText="Nombre" HeaderStyle-Width="100"/>
-                                            <asp:BoundField DataField="conocimiento" HeaderText="Cursos"/>
-                                            <asp:BoundField DataField="tareas" HeaderText="Tareas"/>
+                                            <asp:BoundField  Visible="false" />
+                                            <asp:BoundField  HeaderText="Nombre" HeaderStyle-Width="100"/>
+                                            <asp:BoundField  HeaderText="Cursos"/>
+                                            <asp:BoundField  HeaderText="Tareas"/>
                                             <asp:BoundField  HeaderText="Rupturas"/>
                                             <asp:BoundField  HeaderText="%Sin Respuesta"/>
                                             <asp:BoundField  HeaderText="%Satisfaccion"/>
                                             <asp:BoundField  HeaderText="%Produccion"/>
                                             <asp:BoundField  HeaderText="%Eficiencia"/>
                                             <asp:BoundField  HeaderText="Total"/>
-                                            <asp:TemplateField>
-                                                <HeaderTemplate>Observaciones</HeaderTemplate>
-                                                <ItemTemplate>
-                                                    <asp:TextBox runat="server" CssClass="form-control" ID="TxRGObs" TextMode="MultiLine" Rows="2"></asp:TextBox>
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
+                                            <asp:BoundField  HeaderText="Observaciones"/>
                                         </Columns>
                                     </asp:GridView>
                                 </ContentTemplate>
@@ -409,7 +382,8 @@
                         </div>
 
                         <div class="row m-t-10">
-                            <asp:Button Text="Enviar" runat="server" ID="BtnEnviar" CssClass="btn btn-primary" OnClick="BtnEnviar_Click"/>
+                            <asp:Button Text="Aprobar" runat="server" ID="BtnAprobar" CssClass="btn btn-primary" OnClick="BtnAprobar_Click"/>
+                            <asp:Button Text="Rechazar" runat="server" ID="BtnRechazar" CssClass="btn btn-danger"/>
                         </div>
                     </div>
                 </div>
@@ -418,6 +392,4 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Script" runat="server">
-    <script src="/assets/node_modules/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
-    <script src="/assets/node_modules/jquery.easy-pie-chart/easy-pie-chart.init.js"></script>
 </asp:Content>

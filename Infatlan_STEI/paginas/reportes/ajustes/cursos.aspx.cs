@@ -129,6 +129,14 @@ namespace Infatlan_STEI.paginas.reportes.ajustes
                     vMensaje = "Curso actualizado con éxito.";
                 }
 
+                //ACTUALIZAR TODOS LOS QUE ESTEN ASIGNADOS AL CURSO
+                if (DDLEstado.SelectedValue == "0"){
+                    vQuery = "[STEISP_CUMPLIMIENTO_Evaluaciones] 7" +
+                        "," + Session["CUMPL_CURSOS_ID"].ToString() +
+                        ",2,'" + Session["USUARIO"].ToString() +"'";
+                    int vInfo2 = vConexion.ejecutarSql(vQuery);
+                }
+
                 if (vInfo == 1){
                     Mensaje(vMensaje, WarningType.Success);
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "cerrarModal();", true);

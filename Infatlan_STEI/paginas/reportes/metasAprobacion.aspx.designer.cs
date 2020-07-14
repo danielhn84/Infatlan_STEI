@@ -11,7 +11,7 @@ namespace Infatlan_STEI.paginas.reportes
 {
 
 
-    public partial class metasCumplimiento
+    public partial class metasAprobacion
     {
 
         /// <summary>
@@ -402,12 +402,21 @@ namespace Infatlan_STEI.paginas.reportes
         protected global::System.Web.UI.WebControls.GridView GvRendimiento;
 
         /// <summary>
-        /// Control BtnEnviar.
+        /// Control BtnAprobar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnEnviar;
+        protected global::System.Web.UI.WebControls.Button BtnAprobar;
+
+        /// <summary>
+        /// Control BtnRechazar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnRechazar;
     }
 }
