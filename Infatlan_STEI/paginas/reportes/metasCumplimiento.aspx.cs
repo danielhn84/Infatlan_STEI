@@ -24,7 +24,7 @@ namespace Infatlan_STEI.paginas.reportes
 
         private void cargarData(){
             try{
-                String vFecha = DateTime.Now.AddDays(-1).ToString("MM/dd/yyyy");
+                String vFecha = DateTime.Now.AddDays(-5).ToString("MM/dd/yyyy");
                 String vAssignedGroup = "Infa-tgu";
                 cargarCalls(vFecha, vAssignedGroup);
                 cargarKPI(vFecha, vAssignedGroup);
@@ -86,36 +86,79 @@ namespace Infatlan_STEI.paginas.reportes
             }
         }
 
+        private void cargarCalls(String vFecha, String vAssignedGroup) {
+
+            String vColor;
+            String vPorcentaje = "9";
+            if (Convert.ToInt32(vPorcentaje) < 11)
+                vColor = "css-bar-danger";
+            else if (Convert.ToInt32(vPorcentaje) < 50)
+                vColor = "css-bar-warning";
+            else 
+                vColor = "css-bar-success";
+
+            String vConstruccion = "<div data-label = '" + vPorcentaje + "%' class='css-bar css-bar-" + vPorcentaje + " css-bar-lg " + vColor + "'></div>";
+            LitCall.Text = vConstruccion;
+        }
+        
         private void cargarKPI(String vFecha, String vAssignedGroup) { 
             String vQuery = "[STEISP_CUMPLIMIENTO_Generales] 2,'" + vAssignedGroup + "','" + vFecha + "'";
             DataSet vDSkpi = vConexion.obtenerDataSetSA(vQuery);
 
             int vCumplidas = Convert.ToInt32(vDSkpi.Tables[1].Rows[0]["Cumplidas"].ToString());
             int vIncumplidas = Convert.ToInt32(vDSkpi.Tables[0].Rows[0]["Incumplidas"].ToString());
+            Decimal vPorcentaje = obtenerPorcentaje(vCumplidas, vIncumplidas);
             int vSuma = vCumplidas + vIncumplidas;
 
-            Decimal vKPIPercent = 100;
-            if (vSuma != 0){
-                float vKPI = float.Parse(vCumplidas.ToString()) / float.Parse(vSuma.ToString()) * 100;
-                vKPIPercent = Convert.ToDecimal(Math.Round(vKPI, 2));
-            }
-
             if (vDSkpi.Tables[2].Rows.Count > 0){
+                DivKPI.Visible = true;
                 GvKPISolicitudes.DataSource = vDSkpi.Tables[2];
                 GvKPISolicitudes.DataBind();
                 Session["CUMPL_KPI"] = vDSkpi.Tables[2];
             }
 
-            TxKPIPorcentaje.Text = vKPIPercent.ToString() + "%";
+            TxKPIPorcentaje.Text = vPorcentaje.ToString() + "%";
             TxKPITotal.Text = Convert.ToString(vSuma);
             TxKPICumplimiento.Text = vCumplidas.ToString();
             TxKPICumplimientoNo.Text = vIncumplidas.ToString();
         }
 
         private void cargarMediosPago(String vFecha, String vAssignedGroup) {
-            LitCaja.Text = "<div class='chart easy-pie-chart-4' data-percent='30'><span class='percent'></span></div>";
-            LitABA.Text = "<div class='chart easy-pie-chart-4' data-percent='30'><span class='percent'></span></div>";
-            LitATM.Text = "<div class='chart easy-pie-chart-4' data-percent='30'><span class='percent'></span></div>";
+            String vQuery = "[STEISP_CUMPLIMIENTO_Generales] 4,'" + vAssignedGroup + "','" + vFecha + "'";
+            DataSet vDSMedios = vConexion.obtenerDataSetSA(vQuery);
+
+            int vCumplidas = Convert.ToInt32(vDSMedios.Tables[0].Rows[0]["Cumplimiento"].ToString());
+            int vIncumplidas = Convert.ToInt32(vDSMedios.Tables[1].Rows[0]["Incumplimiento"].ToString());
+            Decimal vPorcentaje = obtenerPorcentaje(vCumplidas, vIncumplidas);
+
+            TxATMCumplimiento.Text = vCumplidas.ToString();
+            TxATMCumplimientoNo.Text = vIncumplidas.ToString();
+            TxATMPorcentaje.Text = vPorcentaje.ToString();
+            LitATM.Text = "<div class='chart easy-pie-chart-4' data-percent='" + vPorcentaje.ToString() + "'><span class='percent'></span></div>";
+
+            vQuery = "[STEISP_CUMPLIMIENTO_Generales] 5,'" + vAssignedGroup + "','" + vFecha + "'";
+            vDSMedios = vConexion.obtenerDataSetSA(vQuery);
+
+            vCumplidas = Convert.ToInt32(vDSMedios.Tables[0].Rows[0]["Cumplimiento"].ToString());
+            vIncumplidas = Convert.ToInt32(vDSMedios.Tables[1].Rows[0]["Incumplimiento"].ToString());
+            vPorcentaje = obtenerPorcentaje(vCumplidas, vIncumplidas);
+
+            TxABACumplimiento.Text = vCumplidas.ToString();
+            TxABACumplimientoNo.Text = vIncumplidas.ToString();
+            TxABAPorcentaje.Text = vPorcentaje.ToString();
+            LitABA.Text = "<div class='chart easy-pie-chart-4' data-percent='" + vPorcentaje.ToString() + "'><span class='percent'></span></div>";
+
+            vQuery = "[STEISP_CUMPLIMIENTO_Generales] 6,'" + vAssignedGroup + "','" + vFecha + "'";
+            vDSMedios = vConexion.obtenerDataSetSA(vQuery);
+
+            vCumplidas = Convert.ToInt32(vDSMedios.Tables[0].Rows[0]["Cumplimiento"].ToString());
+            vIncumplidas = Convert.ToInt32(vDSMedios.Tables[1].Rows[0]["Incumplimiento"].ToString());
+            vPorcentaje = obtenerPorcentaje(vCumplidas, vIncumplidas);
+
+            TxCajaCumplidas.Text = vCumplidas.ToString();
+            TxCajaCumplidasNo.Text = vIncumplidas.ToString();
+            TxCajaPorcentaje.Text = vPorcentaje.ToString();
+            LitCaja.Text = "<div class='chart easy-pie-chart-4' data-percent='" + vPorcentaje.ToString() + "'><span class='percent'></span></div>";
         }
 
         private void cargarOSER(String vFecha, String vAssignedGroup) { 
@@ -129,21 +172,27 @@ namespace Infatlan_STEI.paginas.reportes
                 Session["CUMPL_OSER"] = vDatos;
             }
         }        
-        
-        private void cargarCalls(String vFecha, String vAssignedGroup) {
 
-            String vColor;
-            String vPorcentaje = "11";
-            if (Convert.ToInt32(vPorcentaje) < 11)
-                vColor = "css-bar-danger";
-            else if (Convert.ToInt32(vPorcentaje) < 50)
-                vColor = "css-bar-warning";
-            else 
-                vColor = "css-bar-success";
+        protected void GvKPISolicitudes_PageIndexChanging(object sender, GridViewPageEventArgs e){
+            try{
+                GvKPISolicitudes.PageIndex = e.NewPageIndex;
+                GvKPISolicitudes.DataSource = (DataTable)Session["CUMPL_KPI"];
+                GvKPISolicitudes.DataBind();
+            }catch (Exception ex){
+                Mensaje(ex.Message, WarningType.Danger);
+            }
+        }
 
-            String vConstruccion = "<div data-label = '" + vPorcentaje + "%' class='css-bar css-bar-" + vPorcentaje + " css-bar-lg " + vColor + "'></div>";
+        private Decimal obtenerPorcentaje(int vCumplidas, int vIncumplidas) {
+            int vSuma = vCumplidas + vIncumplidas;
 
-            LitCall.Text = vConstruccion;
+            Decimal vPorcentaje = 100;
+            if (vSuma != 0){
+                float vPrevio = float.Parse(vCumplidas.ToString()) / float.Parse(vSuma.ToString()) * 100;
+                vPorcentaje = Convert.ToDecimal(Math.Round(vPrevio, 2));
+            }
+
+            return vPorcentaje;
         }
     }
 }

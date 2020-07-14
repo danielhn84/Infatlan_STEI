@@ -382,6 +382,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             UpdateModal.Visible = false;
             UpdateModal.Update();
         }
+
         protected void btnModalModificar_Click(object sender, EventArgs e)
         {
             try

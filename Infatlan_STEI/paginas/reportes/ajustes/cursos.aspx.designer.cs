@@ -7,11 +7,11 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace Infatlan_STEI.paginas.configuraciones
+namespace Infatlan_STEI.paginas.reportes.ajustes
 {
 
 
-    public partial class usuarios
+    public partial class cursos
     {
 
         /// <summary>
@@ -69,13 +69,13 @@ namespace Infatlan_STEI.paginas.configuraciones
         protected global::System.Web.UI.UpdatePanel UpdatePanel2;
 
         /// <summary>
-        /// Control LbIdUser.
+        /// Control LbTituloModal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LbIdUser;
+        protected global::System.Web.UI.WebControls.Label LbTituloModal;
 
         /// <summary>
         /// Control UpdatePanelModal.
@@ -87,94 +87,22 @@ namespace Infatlan_STEI.paginas.configuraciones
         protected global::System.Web.UI.UpdatePanel UpdatePanelModal;
 
         /// <summary>
-        /// Control TxUsuario.
+        /// Control TxNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxUsuario;
+        protected global::System.Web.UI.WebControls.TextBox TxNombre;
 
         /// <summary>
-        /// Control TxSysAid.
+        /// Control DDLSecciones.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxSysAid;
-
-        /// <summary>
-        /// Control TxNombres.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxNombres;
-
-        /// <summary>
-        /// Control TxApellidos.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxApellidos;
-
-        /// <summary>
-        /// Control TxIdentidad.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxIdentidad;
-
-        /// <summary>
-        /// Control TxTelefono.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxTelefono;
-
-        /// <summary>
-        /// Control TxCorreo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxCorreo;
-
-        /// <summary>
-        /// Control DDLDepartamento.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DDLDepartamento;
-
-        /// <summary>
-        /// Control DDLJefe.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DDLJefe;
-
-        /// <summary>
-        /// Control DDLGroups.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DDLGroups;
+        protected global::System.Web.UI.WebControls.DropDownList DDLSecciones;
 
         /// <summary>
         /// Control DivEstado.
