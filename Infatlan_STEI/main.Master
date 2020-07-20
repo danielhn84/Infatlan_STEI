@@ -113,7 +113,7 @@
             <div class="scroll-sidebar">
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Modulos <span class="badge badge-pill badge-cyan ml-auto">4</span></span></a>
+                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Modulos</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li runat="server" id="LIAgencias" visible="false">
                                     <a href="#" onclick="window.location.href = '/sites/agencias/default.aspx?u=' + document.getElementById('<%= TxUser.ClientID %>').value">Agencias</a>

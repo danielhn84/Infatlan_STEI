@@ -362,7 +362,7 @@
         </div>
     </div>
 
-    <%--GENERAL--%>
+    <%--RENDIMIENTO--%>
     <div class="card">
         <div class="card-header" role="tab" id="heading6">
             <a class="link" data-toggle="collapse" data-parent="#accordion2" href="#collapse6" aria-expanded="true" aria-controls="collapse6">
@@ -387,19 +387,19 @@
                                         PageSize="10" OnPageIndexChanging="GvRendimiento_PageIndexChanging">
                                         <Columns>
                                             <asp:BoundField DataField="idUsuario" Visible="false" />
-                                            <asp:BoundField DataField="nombre" HeaderText="Nombre" HeaderStyle-Width="100"/>
+                                            <asp:BoundField DataField="nombre" HeaderText="Nombre" ControlStyle-Width="200" ItemStyle-Width="200%"/>
                                             <asp:BoundField DataField="conocimiento" HeaderText="Cursos"/>
                                             <asp:BoundField DataField="tareas" HeaderText="Tareas"/>
-                                            <asp:BoundField  HeaderText="Rupturas"/>
-                                            <asp:BoundField  HeaderText="%Sin Respuesta"/>
-                                            <asp:BoundField  HeaderText="%Satisfaccion"/>
-                                            <asp:BoundField  HeaderText="%Produccion"/>
-                                            <asp:BoundField  HeaderText="%Eficiencia"/>
+                                            <asp:BoundField DataField="rupturas" HeaderText="Rupturas"/>
+                                            <asp:BoundField DataField="sinRupturaProm" HeaderText="Sin Ruptura"/>
+                                            <asp:BoundField DataField="satisfaccion" HeaderText="Satisfaccion"/>
+                                            <asp:BoundField DataField="produccion" HeaderText="Produccion"/>
+                                            <asp:BoundField DataField="eficiencia" HeaderText="Eficiencia"/>
                                             <asp:BoundField  HeaderText="Total"/>
                                             <asp:TemplateField>
                                                 <HeaderTemplate>Observaciones</HeaderTemplate>
                                                 <ItemTemplate>
-                                                    <asp:TextBox runat="server" CssClass="form-control" ID="TxRGObs" TextMode="MultiLine" Rows="2"></asp:TextBox>
+                                                    <asp:TextBox runat="server" CssClass="form-control" ID="TxRGObs"></asp:TextBox>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                         </Columns>
@@ -407,11 +407,12 @@
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
-
-                        <div class="row m-t-10">
-                            <asp:Button Text="Enviar" runat="server" ID="BtnEnviar" CssClass="btn btn-primary" OnClick="BtnEnviar_Click"/>
-                        </div>
                     </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="row m-t-10">
+                    <asp:Button Text="Enviar" runat="server" ID="BtnEnviar" CssClass="btn btn-primary" OnClick="BtnEnviar_Click"/>
                 </div>
             </div>
         </div>
