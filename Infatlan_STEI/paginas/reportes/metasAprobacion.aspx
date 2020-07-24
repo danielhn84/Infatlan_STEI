@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="metasAprobacion.aspx.cs" Inherits="Infatlan_STEI.paginas.reportes.metasAprobacion" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
-    <link href="/assets/node_modules/css-chart/css-chart.css" rel="stylesheet">
-    <link href="dist/css/pages/easy-pie-chart.css" rel="stylesheet">
+    <link href="/dist/css/pages/easy-pie-chart.css" rel="stylesheet">
     <style>
         .columnas {
             width: 19%;
@@ -19,7 +18,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Reportes</a></li>
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Cumplimiento</a></li>
-                    <li class="breadcrumb-item active">Aprobación</li>
+                    <li class="breadcrumb-item active">Formulario</li>
                 </ol>
             </div>
         </div>
@@ -35,37 +34,50 @@
         <div id="collapseOne11" class="collapse show" role="tabpanel" aria-labelledby="headingOne11">
             <div class="card-body">
                 <div class="card-body">
-                    <div class="row col-12">
-                        <div class="columnas">
-                            <label>Total</label>
-                            <asp:TextBox runat="server" ID="TxCallTotal" CssClass="form-control" />
-                        </div>
-                        <div class="columnas">
-                            <label>Atendidas</label>
-                            <asp:TextBox runat="server" ID="TxCallAtendidas" CssClass="form-control" />
-                        </div>
-                        <div class="columnas">
-                            <label>No Atendidas</label>
-                            <asp:TextBox runat="server" ID="TxCallAtendidasNo" CssClass="form-control" />
-                        </div>
-                        <div class="columnas">
-                            <label>% Atendidas</label>
-                            <asp:TextBox runat="server" ID="TxCallPorcentajeSi" CssClass="form-control" />
-                        </div>
-                        <div class="columnas">
-                            <label>% No Atendidas</label>
-                            <asp:TextBox runat="server" ID="TxCallPorcentajeNo" CssClass="form-control" />
-                        </div>
-                        <div style="width: 60%">
-                            <label>Observaciones</label>
-                            <asp:TextBox runat="server" ID="TxCallObs" TextMode="MultiLine" Rows="2" CssClass="form-control" />
-                        </div>
-                        <div style="width: 40%">
-                            <div class="text-center" runat="server" visible="true" id="DivCallGrafic">
-                                <asp:Literal Text="" ID="LitCall" runat="server" />
+                    <asp:UpdatePanel runat="server" ID="UPCalls" UpdateMode="Conditional">
+                        <ContentTemplate>
+                            <div class="row col-12">
+                                <div class="columnas">
+                                    <label>Total</label>
+                                    <asp:TextBox runat="server" ID="TxCallTotal" CssClass="form-control" ReadOnly="true"/>
+                                </div>
+                                <div class="columnas">
+                                    <label>Atendidas</label>
+                                    <asp:TextBox runat="server" ID="TxCallAtendidas" CssClass="form-control" ReadOnly="true" />
+                                </div>
+                                <div class="columnas">
+                                    <label>No Atendidas</label>
+                                    <asp:TextBox runat="server" ID="TxCallAtendidasNo" CssClass="form-control" ReadOnly="true" />
+                                </div>
+                                <div class="columnas">
+                                    <label>% Atendidas</label>
+                                    <asp:TextBox runat="server" ID="TxCallPorcentajeSi" CssClass="form-control" ReadOnly="true" />
+                                </div>
+                                <div class="columnas">
+                                    <label>% No Atendidas</label>
+                                    <asp:TextBox runat="server" ID="TxCallPorcentajeNo" CssClass="form-control" ReadOnly="true"/>
+                                </div>
+                                <div style="width: 60%">
+                                    <label>Observaciones</label>
+                                    <asp:TextBox runat="server" ID="TxCallObs" TextMode="MultiLine" Rows="2" CssClass="form-control" ReadOnly="true"/>
+                                </div>
+                                <div style="width: 40%">
+                                    <div class="text-center" runat="server" visible="true" id="DivCallGrafic">
+                                        <div runat="server" id="CCall" class="chart easy-pie-chart-4" data-percent="0"><span class="percent"></span></div>
+                                    </div>
+                                </div>
+                                <div style="display:none">
+                                    <input type="text" readonly id="TxGraf1" value="0" runat="server" />
+                                    <input type="text" readonly id="TxGraf2" value="0" runat="server" />
+                                    <input type="text" readonly id="TxGraf3" value="0" runat="server" />
+                                    <input type="text" readonly id="TxGraf4" value="0" runat="server" />
+                                    <input type="text" readonly id="TxGraf5" value="0" runat="server" />
+                                    <input type="text" readonly id="TxGraf6" value="0" runat="server" />
+                                    <input type="text" readonly id="TxGraf7" value="0" runat="server" />
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </div>
             </div>
         </div>
@@ -78,7 +90,7 @@
                 <h4 class="card-title">Medios de Pago</h4>
             </a>
         </div>
-        <div id="collapse2" class="collapse show" role="tabpanel" aria-labelledby="headingOne11">
+        <div id="collapse2" class="collapse" role="tabpanel" aria-labelledby="headingOne11">
             <div class="card-body">
                 <div class="card-body">
                     <h4 class="card-subtitle"><b> ATM</b></h4>
@@ -106,7 +118,7 @@
                         </div>
                         <div style="width: 60%">
                             <label>Observaciones</label>
-                            <asp:TextBox runat="server" ID="TxATMObs" TextMode="MultiLine" Rows="2" CssClass="form-control" />
+                            <asp:TextBox runat="server" ID="TxATMObs" TextMode="MultiLine" Rows="2" ReadOnly="true" CssClass="form-control" />
                         </div>
                         <div style="width: 40%;">
                             <div class="text-center">
@@ -139,7 +151,7 @@
                         </div>
                         <div style="width: 60%">
                             <label>Observaciones</label>
-                            <asp:TextBox runat="server" ID="TxABAObs" TextMode="MultiLine" Rows="2" CssClass="form-control" />
+                            <asp:TextBox runat="server" ID="TxABAObs" TextMode="MultiLine" Rows="2" ReadOnly="true" CssClass="form-control" />
                         </div>
                         <div style="width: 40%;">
                             <div class="text-center">
@@ -172,7 +184,7 @@
                         </div>
                         <div style="width: 60%">
                             <label>Observaciones</label>
-                            <asp:TextBox runat="server" ID="TxCajaObs" TextMode="MultiLine" Rows="2" CssClass="form-control" />
+                            <asp:TextBox runat="server" ID="TxCajaObs" TextMode="MultiLine" Rows="2" ReadOnly="true" CssClass="form-control" />
                         </div>
                         <div style="width: 40%;">
                             <div class="text-center">
@@ -192,7 +204,7 @@
                 <h4 class="card-title">KPIs Globales</h4>
             </a>
         </div>
-        <div id="collapse3" class="collapse show" role="tabpanel" aria-labelledby="headingOne11">
+        <div id="collapse3" class="collapse" role="tabpanel" aria-labelledby="headingOne11">
             <div class="card-body">
                 <div class="card-body">
                     <div class="row col-12">
@@ -218,7 +230,7 @@
                         </div>
                         <div style="width: 100%">
                             <label>Observaciones</label>
-                            <asp:TextBox runat="server" ID="TxKPIObs" TextMode="MultiLine" Rows="2" CssClass="form-control" />
+                            <asp:TextBox runat="server" ID="TxKPIObs" TextMode="MultiLine" Rows="2" ReadOnly="true" CssClass="form-control" />
                         </div>
 
                         <asp:UpdatePanel runat="server" ID="UPanelKPI">
@@ -248,6 +260,7 @@
                                 </div>
                             </ContentTemplate>
                         </asp:UpdatePanel>
+                        
                     </div>
                 </div>
             </div>
@@ -261,7 +274,7 @@
                 <h4 class="card-title">Ordenes de Servicio con Rupturas</h4>
             </a>
         </div>
-        <div id="collapse4" class="collapse show" role="tabpanel" aria-labelledby="headingOne11">
+        <div id="collapse4" class="collapse" role="tabpanel" aria-labelledby="headingOne11">
             <div class="card-body">
                 <div class="card-body">
                     <asp:Label Text="No hay ordenes de servicio con ruptura" runat="server" ID="LbResRuptura"/>
@@ -276,17 +289,17 @@
                                             HeaderStyle-CssClass="table-success"
                                             RowStyle-CssClass="rows"
                                             AutoGenerateColumns="false"
-                                            AllowPaging="true" 
-                                            GridLines="None" OnPageIndexChanging="GvRuptura_PageIndexChanging"
+                                            AllowPaging="true" OnPageIndexChanging="GvRuptura_PageIndexChanging"
+                                            GridLines="None"
                                             PageSize="10">
                                             <Columns>
-                                                <asp:BoundField HeaderText="Orden" ItemStyle-Width="50"/>
-                                                <asp:BoundField HeaderText="Respuesta" ItemStyle-Width="50"/>
-                                                <asp:BoundField HeaderText="Atención" ItemStyle-Width="50"/>
-                                                <asp:BoundField HeaderText="Responsable" ItemStyle-Width="50"/>
-                                                <asp:BoundField HeaderText="Nota" ItemStyle-Width="50"/>
-                                                <asp:BoundField HeaderText="Razon" ItemStyle-Width="150"/>
-                                                <asp:BoundField HeaderText="Obs"/>
+                                                <asp:BoundField DataField="id" HeaderText="Orden" ItemStyle-Width="50"/>
+                                                <asp:BoundField DataField="tiempoRespuesta" HeaderText="Respuesta" ItemStyle-Width="50"/>
+                                                <asp:BoundField DataField="tiempoAtencion" HeaderText="Atención" ItemStyle-Width="50"/>
+                                                <asp:BoundField DataField="responsibility" HeaderText="Responsable" ItemStyle-Width="50"/>
+                                                <asp:BoundField DataField="Satisfaccion" HeaderText="Nota" ItemStyle-Width="50"/>
+                                                <asp:BoundField DataField="idRazon" HeaderText="Razon"/>
+                                                <asp:BoundField DataField="comentario" HeaderText="Observaciones"/>
                                             </Columns>
                                         </asp:GridView>
                                     </ContentTemplate>
@@ -306,7 +319,7 @@
                 <h4 class="card-title">Ordenes de Servicio Esperando Respuesta</h4>
             </a>
         </div>
-        <div id="collapse5" class="collapse show" role="tabpanel" aria-labelledby="headingOne11">
+        <div id="collapse5" class="collapse" role="tabpanel" aria-labelledby="headingOne11">
             <div class="card-body">
                 <div class="card-body">
                     <asp:Label Text="No hay ordenes de servicio esperando respuesta" runat="server" ID="LbResOSER" />
@@ -324,11 +337,11 @@
                                         GridLines="None"
                                         PageSize="10" OnPageIndexChanging="GvOSER_PageIndexChanging">
                                         <Columns>
-                                            <asp:BoundField  HeaderText="Orden" ItemStyle-Width="50" />
-                                            <asp:BoundField  HeaderText="Tiempo" ItemStyle-Width="10" />
-                                            <asp:BoundField  HeaderText="Responsable" ItemStyle-Width="100" />
-                                            <asp:BoundField  HeaderText="Razón" ItemStyle-Width="100" />
-                                            <asp:BoundField  HeaderText="Obs" ItemStyle-Width="100" />
+                                            <asp:BoundField DataField="id" HeaderText="Orden" ItemStyle-Width="50" />
+                                            <asp:BoundField DataField="tiempoRespuesta" HeaderText="Tiempo" ItemStyle-Width="10" />
+                                            <asp:BoundField DataField="responsibility" HeaderText="Responsable" ItemStyle-Width="100" />
+                                            <asp:BoundField DataField="idRazon" HeaderText="Razon"/>
+                                            <asp:BoundField DataField="comentario" HeaderText="Obs"/>
                                         </Columns>
                                     </asp:GridView>
                                 </ContentTemplate>
@@ -340,7 +353,7 @@
         </div>
     </div>
 
-    <%--GENERAL--%>
+    <%--RENDIMIENTO--%>
     <div class="card">
         <div class="card-header" role="tab" id="heading6">
             <a class="link" data-toggle="collapse" data-parent="#accordion2" href="#collapse6" aria-expanded="true" aria-controls="collapse6">
@@ -350,7 +363,65 @@
         <div id="collapse6" class="collapse show" role="tabpanel" aria-labelledby="headingOne11">
             <div class="card-body">
                 <div class="card-body">
-                    <div class="row col-12">
+                    <asp:UpdatePanel runat="server" ID="UPanelRendimientoGrafic" UpdateMode="Conditional">
+                        <ContentTemplate>
+                            <div class="row col-12">
+                                <div class="card-body col-4">
+                                    <h6 class="card-title">Solicitudes Cerradas</h6>
+                                    <div class="row form-group">
+                                        <div class="col-6">
+                                            <span class="label label-info"></span>
+                                            <label style="font-size:smaller">Sin ruptura</label>
+                                            <br />
+                                            <span class="label label-warning"></span>
+                                            <label style="font-size:smaller">Con ruptura</label>
+                                        </div>
+                                        <div class="col-6">
+                                            <div id="sparkline1" class="text-center"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body col-4">
+                                    <h6 class="card-title">Eficiencia</h6>
+                                    <div class="row form-group">
+                                        <div class="col-6">
+                                            <span class="label label-info"></span>
+                                            <label style="font-size:smaller">Sin ruptura</label>
+                                            <br />
+                                            <span class="label label-warning"></span>
+                                            <label style="font-size:smaller">Con ruptura</label>
+                                        </div>
+                                        <div class="col-6">
+                                            <div id="sparkline2" class="text-center"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body col-4">
+                                    <h6 class="card-title">Productividad</h6>
+                                    <div class="row form-group">
+                                        <div class="col-6">
+                                            <span class="label label-info"></span>
+                                            <label style="font-size:smaller">Real Tareas</label>
+                                            <br />
+                                            <span class="label label-warning"></span>
+                                            <label style="font-size:smaller">Transporte</label>
+                                            <br />
+                                            <span class="label label-danger"></span>
+                                            <label style="font-size:smaller">Tareas No</label>
+                                        </div>
+                                        <div class="col-6">
+                                            <div id="sparkline3" class="text-center"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ContentTemplate>
+                        <%--<Triggers>
+                            <asp:PostBackTrigger ControlID="TxCallAtendidas" />
+                        </Triggers>--%>
+                    </asp:UpdatePanel>
+                    
+                    <div class="row col-12 m-t-20">
                         <div class="table-responsive">
                             <asp:UpdatePanel runat="server" ID="UPanelRendimiento">
                                 <ContentTemplate>
@@ -364,32 +435,83 @@
                                         GridLines="None"
                                         PageSize="10" OnPageIndexChanging="GvRendimiento_PageIndexChanging">
                                         <Columns>
-                                            <asp:BoundField  Visible="false" />
-                                            <asp:BoundField  HeaderText="Nombre" HeaderStyle-Width="100"/>
-                                            <asp:BoundField  HeaderText="Cursos"/>
-                                            <asp:BoundField  HeaderText="Tareas"/>
-                                            <asp:BoundField  HeaderText="Rupturas"/>
-                                            <asp:BoundField  HeaderText="%Sin Respuesta"/>
-                                            <asp:BoundField  HeaderText="%Satisfaccion"/>
-                                            <asp:BoundField  HeaderText="%Produccion"/>
-                                            <asp:BoundField  HeaderText="%Eficiencia"/>
-                                            <asp:BoundField  HeaderText="Total"/>
-                                            <asp:BoundField  HeaderText="Observaciones"/>
+                                            <asp:BoundField DataField="idUsuario" Visible="false" />
+                                            <asp:BoundField DataField="nombre" HeaderText="Nombre" ControlStyle-Width="200" ItemStyle-Width="200"/>
+                                            <asp:BoundField DataField="conocimiento" HeaderText="Cursos"/>
+                                            <asp:BoundField DataField="tareas" HeaderText="Tareas"/>
+                                            <asp:BoundField DataField="rupturas" HeaderText="Rupturas"/>
+                                            <asp:BoundField DataField="sinRupturaProm" HeaderText="Sin Ruptura"/>
+                                            <asp:BoundField DataField="satisfaccion" HeaderText="Satisfaccion"/>
+                                            <asp:BoundField DataField="produccion" HeaderText="Produccion"/>
+                                            <asp:BoundField DataField="eficiencia" HeaderText="Eficiencia"/>
+                                            <asp:BoundField DataField="total" HeaderText="Total"/>
+                                            <asp:TemplateField ItemStyle-Width="200">
+                                                <HeaderTemplate>Observaciones</HeaderTemplate>
+                                                <ItemTemplate>
+                                                    <asp:TextBox runat="server" CssClass="form-control" ID="TxRGObs"></asp:TextBox>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
                                         </Columns>
                                     </asp:GridView>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
-
-                        <div class="row m-t-10">
-                            <asp:Button Text="Aprobar" runat="server" ID="BtnAprobar" CssClass="btn btn-primary" OnClick="BtnAprobar_Click"/>
-                            <asp:Button Text="Rechazar" runat="server" ID="BtnRechazar" CssClass="btn btn-danger"/>
-                        </div>
                     </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="row m-t-10">
+                    <asp:Button Text="Aprobar" runat="server" ID="BtnAprobar" CssClass="btn btn-success" OnClick="BtnAprobar_Click"/>
                 </div>
             </div>
         </div>
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Script" runat="server">
+    <script src="/assets/node_modules/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
+    <script src="/assets/node_modules/jquery.easy-pie-chart/easy-pie-chart.init.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var sparklineLogin = function () {
+                
+                var valor1 = document.getElementById('<%=TxGraf1.ClientID%>').value;
+                var valor2 = document.getElementById('<%=TxGraf2.ClientID%>').value;
+                var valor3 = document.getElementById('<%=TxGraf3.ClientID%>').value;
+                var valor4 = document.getElementById('<%=TxGraf4.ClientID%>').value;
+                var valor5 = document.getElementById('<%=TxGraf5.ClientID%>').value;
+                var valor6 = document.getElementById('<%=TxGraf6.ClientID%>').value;
+                var valor7 = document.getElementById('<%=TxGraf7.ClientID%>').value;
+
+                $('#sparkline1').sparkline([valor1, valor2], {
+                    type: 'pie',
+                    height: '100',
+                    resize: true,
+                    sliceColors: ['#f0ad4e', '#5bc0de']
+                });
+                
+                $('#sparkline2').sparkline([valor3, valor4], {
+                    type: 'pie',
+                    height: '100',
+                    resize: true,
+                    sliceColors: ['#f0ad4e', '#5bc0de']
+                });
+                $('#sparkline3').sparkline([valor5, valor6, valor7], {
+                    type: 'pie',
+                    height: '100',
+                    resize: true,
+                    sliceColors: ['#f0ad4e', '#5bc0de', '#d9534f']
+                });
+                
+            }
+            var sparkResize;
+            $(window).resize(function (e) {
+                clearTimeout(sparkResize);
+                sparkResize = setTimeout(sparklineLogin, 500);
+            });
+            sparklineLogin();
+
+        });
+    </script>
+
+    <script src="/assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
 </asp:Content>

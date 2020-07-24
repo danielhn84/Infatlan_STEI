@@ -15,6 +15,15 @@ namespace Infatlan_STEI.paginas.reportes
     {
 
         /// <summary>
+        /// Control UPCalls.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UPCalls;
+
+        /// <summary>
         /// Control TxCallTotal.
         /// </summary>
         /// <remarks>
@@ -78,13 +87,76 @@ namespace Infatlan_STEI.paginas.reportes
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivCallGrafic;
 
         /// <summary>
-        /// Control LitCall.
+        /// Control CCall.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal LitCall;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl CCall;
+
+        /// <summary>
+        /// Control TxGraf1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText TxGraf1;
+
+        /// <summary>
+        /// Control TxGraf2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText TxGraf2;
+
+        /// <summary>
+        /// Control TxGraf3.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText TxGraf3;
+
+        /// <summary>
+        /// Control TxGraf4.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText TxGraf4;
+
+        /// <summary>
+        /// Control TxGraf5.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText TxGraf5;
+
+        /// <summary>
+        /// Control TxGraf6.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText TxGraf6;
+
+        /// <summary>
+        /// Control TxGraf7.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText TxGraf7;
 
         /// <summary>
         /// Control TxATMPorcentaje.
@@ -384,6 +456,15 @@ namespace Infatlan_STEI.paginas.reportes
         protected global::System.Web.UI.WebControls.GridView GvOSER;
 
         /// <summary>
+        /// Control UPanelRendimientoGrafic.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UPanelRendimientoGrafic;
+
+        /// <summary>
         /// Control UPanelRendimiento.
         /// </summary>
         /// <remarks>
@@ -409,14 +490,5 @@ namespace Infatlan_STEI.paginas.reportes
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnAprobar;
-
-        /// <summary>
-        /// Control BtnRechazar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnRechazar;
     }
 }

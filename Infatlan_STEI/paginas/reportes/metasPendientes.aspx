@@ -62,10 +62,12 @@
                                 GridLines="None" OnRowCommand="GVBusqueda_RowCommand"
                                 PageSize="10" OnPageIndexChanging="GVBusqueda_PageIndexChanging">
                                 <Columns>
-                                    <asp:BoundField HeaderText="No."/>
+                                    <asp:BoundField DataField="idReporte" HeaderText="No."/>
+                                    <asp:BoundField DataField="nombre" HeaderText="Usuario"/>
+                                    <asp:BoundField DataField="fechaRegistro" HeaderText="Fecha"/>
                                     <asp:TemplateField>
                                         <ItemTemplate>
-                                            <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-primary" CommandArgument='<%# Eval("id") %>' CommandName="verReporte">
+                                            <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-primary" CommandArgument='<%# Eval("idReporte") %>' CommandName="verReporte">
                                                 <i class="icon-pencil" ></i>
                                             </asp:LinkButton>
                                         </ItemTemplate>

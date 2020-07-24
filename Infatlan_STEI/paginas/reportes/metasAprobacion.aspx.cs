@@ -21,34 +21,50 @@ namespace Infatlan_STEI.paginas.reportes
                 if (!Page.IsPostBack){
                     if (Convert.ToBoolean(Session["AUTH"])){
                         String vId = Session["CUMPL_ID_REPORTE"].ToString();
-                        cargarDatos();
+                        cargarDatos(vId);
                     }else {
                         Response.Redirect("/login.aspx");
                     }
                 }
             }catch (Exception ex){
-
+                Mensaje(ex.Message, WarningType.Danger);
             }
         }
 
-        private void cargarDatos() { 
-            
+        private void cargarDatos(String vId) {
+            try{
+                String vQuery = "[STEISP_CUMPLIMIENTO_Reportes] 4," + vId;
+            }catch (Exception ex){
+                Mensaje(ex.Message, WarningType.Danger);
+            }
         }
 
         public void Mensaje(string vMensaje, WarningType type){
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
 
-        protected void GvRuptura_PageIndexChanging(object sender, GridViewPageEventArgs e){
-
-        }
-
         protected void GvKPISolicitudes_PageIndexChanging(object sender, GridViewPageEventArgs e){
+            try{
 
+            }catch (Exception ex){
+                Mensaje(ex.Message, WarningType.Danger);
+            }
         }
 
         protected void GvOSER_PageIndexChanging(object sender, GridViewPageEventArgs e){
+            try{
 
+            }catch (Exception ex){
+                Mensaje(ex.Message, WarningType.Danger);
+            }
+        }
+
+        protected void GvRuptura_PageIndexChanging(object sender, GridViewPageEventArgs e){
+            try{
+
+            }catch (Exception ex){
+                Mensaje(ex.Message, WarningType.Danger);
+            }
         }
 
         protected void BtnAprobar_Click(object sender, EventArgs e){
@@ -62,6 +78,10 @@ namespace Infatlan_STEI.paginas.reportes
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);   
             }
+        }
+
+        protected void GvRendimiento_PageIndexChanging(object sender, GridViewPageEventArgs e){
+
         }
     }
 }

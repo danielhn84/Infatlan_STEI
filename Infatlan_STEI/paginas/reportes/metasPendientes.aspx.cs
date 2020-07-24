@@ -28,7 +28,7 @@ namespace Infatlan_STEI.paginas.reportes
 
         private void cargarDatos() {
             try{
-                String vQuery = "";
+                String vQuery = "[STEISP_CUMPLIMIENTO_Reportes] 3";
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
 
                 if (vDatos.Rows.Count > 0){
@@ -37,7 +37,7 @@ namespace Infatlan_STEI.paginas.reportes
                     Session["CUMPL_PENDIENTES"] = vDatos;
                 }
             }catch (Exception ex){
-
+                Mensaje(ex.Message, WarningType.Danger);
             }
         }
 

@@ -9,7 +9,7 @@ namespace Infatlan_STEI.classes
 {
     public class GenerarXML
     {
-        public String ObtenerReporteCumplimiento(Object[] vDatos){
+        public String ObtenerCumplimiento(Object[] vDatos){
             String vResultado = "";
             try{
                 using (StringWriter sw = new StringWriter()){
@@ -97,7 +97,7 @@ namespace Infatlan_STEI.classes
             return vResultado;
         }
 
-        public String ObtenerReporteCumplimientoKPI(Object[] vDatos){
+        public String ObtenerCumplimientoKPI(Object[] vDatos){
             String vResultado = "";
             try{
                 using (StringWriter sw = new StringWriter()){
@@ -141,7 +141,7 @@ namespace Infatlan_STEI.classes
             return vResultado;
         }
 
-        public String ObtenerReporteCumplimientoRupturas(Object[] vDatos){
+        public String ObtenerCumplimientoOSER(Object[] vDatos){
             String vResultado = "";
             try{
                 using (StringWriter sw = new StringWriter()){
@@ -185,7 +185,7 @@ namespace Infatlan_STEI.classes
             return vResultado;
         }
 
-        public String ObtenerReporteCumplimientoOSER(Object[] vDatos){
+        public String ObtenerCumplimientoRupturas(Object[] vDatos){
             String vResultado = "";
             try{
                 using (StringWriter sw = new StringWriter()){
@@ -225,6 +225,70 @@ namespace Infatlan_STEI.classes
 
                     vXmlTW.WriteStartElement("comentario");
                     vXmlTW.WriteString(Convert.ToString(vDatos[7]));
+                    vXmlTW.WriteEndElement();
+
+                    vXmlTW.WriteEndElement();
+                    vXmlTW.WriteEndDocument();
+                    vResultado = sw.ToString();
+                }
+            }catch{
+                throw;
+            }
+            return vResultado;
+        }
+
+        public String ObtenerCumplimientoUsuarios(Object[] vDatos){
+            String vResultado = "";
+            try{
+                using (StringWriter sw = new StringWriter()){
+                    XmlTextWriter vXmlTW = new XmlTextWriter(sw);
+                    vXmlTW.Formatting = Formatting.None;
+
+                    vXmlTW.WriteStartDocument();
+                    vXmlTW.WriteStartElement("DATOS");
+
+                    vXmlTW.WriteStartElement("idReporte");
+                    vXmlTW.WriteString(Convert.ToString(vDatos[0]));
+                    vXmlTW.WriteEndElement();
+
+                    vXmlTW.WriteStartElement("idUsuario");
+                    vXmlTW.WriteString(Convert.ToString(vDatos[1]));
+                    vXmlTW.WriteEndElement();
+
+                    vXmlTW.WriteStartElement("conocimiento");
+                    vXmlTW.WriteString(Convert.ToString(vDatos[2]));
+                    vXmlTW.WriteEndElement();
+
+                    vXmlTW.WriteStartElement("tareas");
+                    vXmlTW.WriteString(Convert.ToString(vDatos[3]));
+                    vXmlTW.WriteEndElement();
+
+                    vXmlTW.WriteStartElement("rupturas");
+                    vXmlTW.WriteString(Convert.ToString(vDatos[4]));
+                    vXmlTW.WriteEndElement(); 
+                    
+                    vXmlTW.WriteStartElement("noRupturas");
+                    vXmlTW.WriteString(Convert.ToString(vDatos[5]));
+                    vXmlTW.WriteEndElement();
+
+                    vXmlTW.WriteStartElement("satisfaccion");
+                    vXmlTW.WriteString(Convert.ToString(vDatos[6]));
+                    vXmlTW.WriteEndElement();
+
+                    vXmlTW.WriteStartElement("produccion");
+                    vXmlTW.WriteString(Convert.ToString(vDatos[7]));
+                    vXmlTW.WriteEndElement();
+
+                    vXmlTW.WriteStartElement("eficiencia");
+                    vXmlTW.WriteString(Convert.ToString(vDatos[8]));
+                    vXmlTW.WriteEndElement();
+
+                    vXmlTW.WriteStartElement("total");
+                    vXmlTW.WriteString(Convert.ToString(vDatos[9]));
+                    vXmlTW.WriteEndElement();
+
+                    vXmlTW.WriteStartElement("comentario");
+                    vXmlTW.WriteString(Convert.ToString(vDatos[10]));
                     vXmlTW.WriteEndElement();
 
                     vXmlTW.WriteEndElement();
