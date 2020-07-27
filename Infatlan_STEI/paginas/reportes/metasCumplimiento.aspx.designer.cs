@@ -159,6 +159,15 @@ namespace Infatlan_STEI.paginas.reportes
         protected global::System.Web.UI.HtmlControls.HtmlInputText TxGraf7;
 
         /// <summary>
+        /// Control UPanelMedios.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UPanelMedios;
+
+        /// <summary>
         /// Control TxATMPorcentaje.
         /// </summary>
         /// <remarks>
@@ -321,6 +330,15 @@ namespace Infatlan_STEI.paginas.reportes
         protected global::System.Web.UI.WebControls.Literal LitCaja;
 
         /// <summary>
+        /// Control UPanelKPI.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UPanelKPI;
+
+        /// <summary>
         /// Control TxKPIPorcentaje.
         /// </summary>
         /// <remarks>
@@ -364,15 +382,6 @@ namespace Infatlan_STEI.paginas.reportes
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TxKPIObs;
-
-        /// <summary>
-        /// Control UPanelKPI.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UPanelKPI;
 
         /// <summary>
         /// Control DivKPI.
@@ -465,6 +474,15 @@ namespace Infatlan_STEI.paginas.reportes
         protected global::System.Web.UI.UpdatePanel UPanelRendimientoGrafic;
 
         /// <summary>
+        /// Control DivGraficos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivGraficos;
+
+        /// <summary>
         /// Control UPanelRendimiento.
         /// </summary>
         /// <remarks>
@@ -483,6 +501,15 @@ namespace Infatlan_STEI.paginas.reportes
         protected global::System.Web.UI.WebControls.GridView GvRendimiento;
 
         /// <summary>
+        /// Control UPanelEnviar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UPanelEnviar;
+
+        /// <summary>
         /// Control BtnEnviar.
         /// </summary>
         /// <remarks>
@@ -490,5 +517,32 @@ namespace Infatlan_STEI.paginas.reportes
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnEnviar;
+
+        /// <summary>
+        /// Control LbTitulo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LbTitulo;
+
+        /// <summary>
+        /// Control UpdatePanel4.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel4;
+
+        /// <summary>
+        /// Control BtnConfirmar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnConfirmar;
     }
 }

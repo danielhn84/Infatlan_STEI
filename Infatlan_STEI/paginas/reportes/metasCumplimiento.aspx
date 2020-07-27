@@ -8,7 +8,10 @@
             margin: 0% 1% 2% 0%;
         }
     </style>
-    
+    <script type="text/javascript">
+        function openModal() { $('#ModalConfirmar').modal('show'); }
+        function closeModal() { $('#ModalConfirmar').modal('hide'); }
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
     <div class="row page-titles">
@@ -98,105 +101,109 @@
         <div id="collapse2" class="collapse" role="tabpanel" aria-labelledby="headingOne11">
             <div class="card-body">
                 <div class="card-body">
-                    <h4 class="card-subtitle"><b> ATM</b></h4>
-                    <hr />
-                    <div class="row col-12">
-                        <div class="columnas">
-                            <label>SLA</label>
-                            <asp:TextBox runat="server" Text="ATMs (8 Horas)" ReadOnly="true" CssClass="form-control" />
-                        </div>
-                        <div class="columnas">
-                            <label>% Cumplimiento</label>
-                            <asp:TextBox runat="server" ID="TxATMPorcentaje" ReadOnly="true" CssClass="form-control" />
-                        </div>
-                        <div class="columnas">
-                            <label>En Cumplimiento</label>
-                            <asp:TextBox runat="server" ID="TxATMCumplimiento" ReadOnly="true" CssClass="form-control" />
-                        </div>
-                        <div class="columnas">
-                            <label>No Cumplimiento</label>
-                            <asp:TextBox runat="server" ID="TxATMCumplimientoNo" ReadOnly="true" CssClass="form-control" />
-                        </div>
-                        <div class="columnas">
-                            <label>Total</label>
-                            <asp:TextBox runat="server" ID="TxATMTotal" ReadOnly="true" CssClass="form-control" />
-                        </div>
-                        <div style="width: 60%">
-                            <label>Observaciones</label>
-                            <asp:TextBox runat="server" ID="TxATMObs" TextMode="MultiLine" Rows="2" CssClass="form-control" />
-                        </div>
-                        <div style="width: 40%;">
-                            <div class="text-center">
-                                <asp:Literal Text="" ID="LitATM" runat="server" />
+                    <asp:UpdatePanel runat="server" ID="UPanelMedios">
+                        <ContentTemplate>
+                            <h4 class="card-subtitle"><b> ATM</b></h4>
+                            <hr />
+                            <div class="row col-12">
+                                <div class="columnas">
+                                    <label>SLA</label>
+                                    <asp:TextBox runat="server" Text="ATMs (8 Horas)" ReadOnly="true" CssClass="form-control" />
+                                </div>
+                                <div class="columnas">
+                                    <label>% Cumplimiento</label>
+                                    <asp:TextBox runat="server" ID="TxATMPorcentaje" ReadOnly="true" CssClass="form-control" />
+                                </div>
+                                <div class="columnas">
+                                    <label>En Cumplimiento</label>
+                                    <asp:TextBox runat="server" ID="TxATMCumplimiento" ReadOnly="true" CssClass="form-control" />
+                                </div>
+                                <div class="columnas">
+                                    <label>No Cumplimiento</label>
+                                    <asp:TextBox runat="server" ID="TxATMCumplimientoNo" ReadOnly="true" CssClass="form-control" />
+                                </div>
+                                <div class="columnas">
+                                    <label>Total</label>
+                                    <asp:TextBox runat="server" ID="TxATMTotal" ReadOnly="true" CssClass="form-control" />
+                                </div>
+                                <div style="width: 60%">
+                                    <label>Observaciones</label>
+                                    <asp:TextBox runat="server" ID="TxATMObs" TextMode="MultiLine" Rows="2" CssClass="form-control" />
+                                </div>
+                                <div style="width: 40%;">
+                                    <div class="text-center">
+                                        <asp:Literal Text="" ID="LitATM" runat="server" />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <h4 class="card-subtitle m-t-20"><b>ABA </b></h4>
-                    <hr />
-                    <div class="row col-12">
-                        <div class="columnas">
-                            <label>SLA</label>
-                            <asp:TextBox runat="server" Text="ABAs (16 Horas)" ReadOnly="true" CssClass="form-control" />
-                        </div>
-                        <div class="columnas">
-                            <label>% Cumplimiento</label>
-                            <asp:TextBox runat="server" ID="TxABAPorcentaje" ReadOnly="true" CssClass="form-control" />
-                        </div>
-                        <div class="columnas">
-                            <label>En Cumplimiento</label>
-                            <asp:TextBox runat="server" ID="TxABACumplimiento" ReadOnly="true" CssClass="form-control" />
-                        </div>
-                        <div class="columnas">
-                            <label>No Cumplimiento</label>
-                            <asp:TextBox runat="server" ID="TxABACumplimientoNo" ReadOnly="true" CssClass="form-control" />
-                        </div>
-                        <div class="columnas">
-                            <label>Total</label>
-                            <asp:TextBox runat="server" ID="TxABATotal" ReadOnly="true" CssClass="form-control" />
-                        </div>
-                        <div style="width: 60%">
-                            <label>Observaciones</label>
-                            <asp:TextBox runat="server" ID="TxABAObs" TextMode="MultiLine" Rows="2" CssClass="form-control" />
-                        </div>
-                        <div style="width: 40%;">
-                            <div class="text-center">
-                                <asp:Literal Text="" ID="LitABA" runat="server" />
+                            <h4 class="card-subtitle m-t-20"><b>ABA </b></h4>
+                            <hr />
+                            <div class="row col-12">
+                                <div class="columnas">
+                                    <label>SLA</label>
+                                    <asp:TextBox runat="server" Text="ABAs (16 Horas)" ReadOnly="true" CssClass="form-control" />
+                                </div>
+                                <div class="columnas">
+                                    <label>% Cumplimiento</label>
+                                    <asp:TextBox runat="server" ID="TxABAPorcentaje" ReadOnly="true" CssClass="form-control" />
+                                </div>
+                                <div class="columnas">
+                                    <label>En Cumplimiento</label>
+                                    <asp:TextBox runat="server" ID="TxABACumplimiento" ReadOnly="true" CssClass="form-control" />
+                                </div>
+                                <div class="columnas">
+                                    <label>No Cumplimiento</label>
+                                    <asp:TextBox runat="server" ID="TxABACumplimientoNo" ReadOnly="true" CssClass="form-control" />
+                                </div>
+                                <div class="columnas">
+                                    <label>Total</label>
+                                    <asp:TextBox runat="server" ID="TxABATotal" ReadOnly="true" CssClass="form-control" />
+                                </div>
+                                <div style="width: 60%">
+                                    <label>Observaciones</label>
+                                    <asp:TextBox runat="server" ID="TxABAObs" TextMode="MultiLine" Rows="2" CssClass="form-control" />
+                                </div>
+                                <div style="width: 40%;">
+                                    <div class="text-center">
+                                        <asp:Literal Text="" ID="LitABA" runat="server" />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <h4 class="card-subtitle m-t-20"><b>CAJA</b></h4>
-                    <hr />
-                    <div class="row col-12">
-                        <div class="columnas">
-                            <label>SLA</label>
-                            <asp:TextBox runat="server" Text="CAJA (4 Horas)" ReadOnly="true" CssClass="form-control" />
-                        </div>
-                        <div class="columnas">
-                            <label>% Cumplimiento</label>
-                            <asp:TextBox runat="server" ID="TxCajaPorcentaje" ReadOnly="true" CssClass="form-control" />
-                        </div>
-                        <div class="columnas">
-                            <label>En Cumplimiento</label>
-                            <asp:TextBox runat="server" ID="TxCajaCumplidas" ReadOnly="true" CssClass="form-control" />
-                        </div>
-                        <div class="columnas">
-                            <label>No Cumplimiento</label>
-                            <asp:TextBox runat="server" ID="TxCajaCumplidasNo" ReadOnly="true" CssClass="form-control" />
-                        </div>
-                        <div class="columnas">
-                            <label>Total</label>
-                            <asp:TextBox runat="server" ID="TxCajaTotal" ReadOnly="true" CssClass="form-control" />
-                        </div>
-                        <div style="width: 60%">
-                            <label>Observaciones</label>
-                            <asp:TextBox runat="server" ID="TxCajaObs" TextMode="MultiLine" Rows="2" CssClass="form-control" />
-                        </div>
-                        <div style="width: 40%;">
-                            <div class="text-center">
-                                <asp:Literal Text="" ID="LitCaja" runat="server" />
+                            <h4 class="card-subtitle m-t-20"><b>CAJA</b></h4>
+                            <hr />
+                            <div class="row col-12">
+                                <div class="columnas">
+                                    <label>SLA</label>
+                                    <asp:TextBox runat="server" Text="CAJA (4 Horas)" ReadOnly="true" CssClass="form-control" />
+                                </div>
+                                <div class="columnas">
+                                    <label>% Cumplimiento</label>
+                                    <asp:TextBox runat="server" ID="TxCajaPorcentaje" ReadOnly="true" CssClass="form-control" />
+                                </div>
+                                <div class="columnas">
+                                    <label>En Cumplimiento</label>
+                                    <asp:TextBox runat="server" ID="TxCajaCumplidas" ReadOnly="true" CssClass="form-control" />
+                                </div>
+                                <div class="columnas">
+                                    <label>No Cumplimiento</label>
+                                    <asp:TextBox runat="server" ID="TxCajaCumplidasNo" ReadOnly="true" CssClass="form-control" />
+                                </div>
+                                <div class="columnas">
+                                    <label>Total</label>
+                                    <asp:TextBox runat="server" ID="TxCajaTotal" ReadOnly="true" CssClass="form-control" />
+                                </div>
+                                <div style="width: 60%">
+                                    <label>Observaciones</label>
+                                    <asp:TextBox runat="server" ID="TxCajaObs" TextMode="MultiLine" Rows="2" CssClass="form-control" />
+                                </div>
+                                <div style="width: 40%;">
+                                    <div class="text-center">
+                                        <asp:Literal Text="" ID="LitCaja" runat="server" />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </div>
             </div>
         </div>
@@ -212,34 +219,34 @@
         <div id="collapse3" class="collapse" role="tabpanel" aria-labelledby="headingOne11">
             <div class="card-body">
                 <div class="card-body">
-                    <div class="row col-12">
-                        <div class="columnas">
-                            <label>KPIs</label>
-                            <asp:TextBox runat="server" Text="Tiempo de Respuesta" ReadOnly="true" CssClass="form-control" />
-                        </div>
-                        <div class="columnas">
-                            <label>% de Cumplimiento</label>
-                            <asp:TextBox runat="server" ID="TxKPIPorcentaje" ReadOnly="true" CssClass="form-control" />
-                        </div>
-                        <div class="columnas">
-                            <label>En Cumplimiento</label>
-                            <asp:TextBox runat="server" ID="TxKPICumplimiento" ReadOnly="true" CssClass="form-control" />
-                        </div>
-                        <div class="columnas">
-                            <label>No Cumplimiento</label>
-                            <asp:TextBox runat="server" ID="TxKPICumplimientoNo" ReadOnly="true" CssClass="form-control" />
-                        </div>
-                        <div class="columnas">
-                            <label>Total</label>
-                            <asp:TextBox runat="server" ID="TxKPITotal" ReadOnly="true" CssClass="form-control" />
-                        </div>
-                        <div style="width: 100%">
-                            <label>Observaciones</label>
-                            <asp:TextBox runat="server" ID="TxKPIObs" TextMode="MultiLine" Rows="2" CssClass="form-control" />
-                        </div>
-
-                        <asp:UpdatePanel runat="server" ID="UPanelKPI">
-                            <ContentTemplate>
+                    <asp:UpdatePanel runat="server" ID="UPanelKPI">
+                        <ContentTemplate>
+                            <div class="row col-12">
+                                <div class="columnas">
+                                    <label>KPIs</label>
+                                    <asp:TextBox runat="server" Text="Tiempo de Respuesta" ReadOnly="true" CssClass="form-control" />
+                                </div>
+                                <div class="columnas">
+                                    <label>% de Cumplimiento</label>
+                                    <asp:TextBox runat="server" ID="TxKPIPorcentaje" ReadOnly="true" CssClass="form-control" />
+                                </div>
+                                <div class="columnas">
+                                    <label>En Cumplimiento</label>
+                                    <asp:TextBox runat="server" ID="TxKPICumplimiento" ReadOnly="true" CssClass="form-control" />
+                                </div>
+                                <div class="columnas">
+                                    <label>No Cumplimiento</label>
+                                    <asp:TextBox runat="server" ID="TxKPICumplimientoNo" ReadOnly="true" CssClass="form-control" />
+                                </div>
+                                <div class="columnas">
+                                    <label>Total</label>
+                                    <asp:TextBox runat="server" ID="TxKPITotal" ReadOnly="true" CssClass="form-control" />
+                                </div>
+                                <div style="width: 100%">
+                                    <label>Observaciones</label>
+                                    <asp:TextBox runat="server" ID="TxKPIObs" TextMode="MultiLine" Rows="2" CssClass="form-control" />
+                                </div>
+                                
                                 <div runat="server" id="DivKPI" visible="false">
                                     <h4 class="card-subtitle m-t-20"><b>Solicitudes en "No Cumpliento"</b></h4>
                                     <hr />
@@ -263,10 +270,9 @@
                                         </asp:GridView>
                                     </div>
                                 </div>
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
-                        
-                    </div>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </div>
             </div>
         </div>
@@ -390,7 +396,7 @@
                 <div class="card-body">
                     <asp:UpdatePanel runat="server" ID="UPanelRendimientoGrafic" UpdateMode="Conditional">
                         <ContentTemplate>
-                            <div class="row col-12">
+                            <div class="row col-12" runat="server" id="DivGraficos" visible="false">
                                 <div class="card-body col-4">
                                     <h6 class="card-title">Solicitudes Cerradas</h6>
                                     <div class="row form-group">
@@ -432,7 +438,7 @@
                                             <label style="font-size:smaller">Transporte</label>
                                             <br />
                                             <span class="label label-danger"></span>
-                                            <label style="font-size:smaller">Tareas No</label>
+                                            <label style="font-size:smaller">No Procesadas</label>
                                         </div>
                                         <div class="col-6">
                                             <div id="sparkline3" class="text-center"></div>
@@ -441,9 +447,6 @@
                                 </div>
                             </div>
                         </ContentTemplate>
-                        <%--<Triggers>
-                            <asp:PostBackTrigger ControlID="TxCallAtendidas" />
-                        </Triggers>--%>
                     </asp:UpdatePanel>
                     
                     <div class="row col-12 m-t-20">
@@ -486,7 +489,32 @@
             </div>
             <div class="card-footer">
                 <div class="row m-t-10">
-                    <asp:Button Text="Enviar" runat="server" ID="BtnEnviar" CssClass="btn btn-primary" OnClick="BtnEnviar_Click"/>
+                    <asp:UpdatePanel runat="server" ID="UPanelEnviar">
+                        <ContentTemplate>
+                            <asp:Button Text="Enviar" runat="server" ID="BtnEnviar" CssClass="btn btn-primary" OnClick="BtnEnviar_Click"/>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%--MODAL DE CONFIRMACION--%>
+    <div class="modal fade" id="ModalConfirmar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="ModalLabelConfirmar">
+                        <b><asp:Label runat="server" ID="LbTitulo" Text="Seguro que desea enviar el formulario?" CssClass="col-form-label"></asp:Label></b>
+                    </h4>
+                </div>
+                <div class="modal-footer">
+                    <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                        <ContentTemplate>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <asp:Button ID="BtnConfirmar" runat="server" Text="Aceptar" class="btn btn-info" OnClick="BtnConfirmar_Click"/>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </div>
             </div>
         </div>

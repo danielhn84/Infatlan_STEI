@@ -58,7 +58,7 @@ namespace Infatlan_STEI.paginas.reportes
                 string vIdReporte = e.CommandArgument.ToString();
                 if (e.CommandName == "verReporte"){
                     Session["CUMPL_ID_REPORTE"] = vIdReporte;
-                    Response.Redirect("reportes/metasAprobacion.aspx");
+                    Response.Redirect("metasAprobacion.aspx");
                 }
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);

@@ -7,6 +7,11 @@
             margin: 0% 1% 2% 0%;
         }
     </style>
+
+    <script type="text/javascript">
+        function openModal() { $('#ModalConfirmar').modal('show'); }
+        function closeModal() { $('#ModalConfirmar').modal('hide'); }
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
     <div class="row page-titles">
@@ -39,23 +44,23 @@
                             <div class="row col-12">
                                 <div class="columnas">
                                     <label>Total</label>
-                                    <asp:TextBox runat="server" ID="TxCallTotal" CssClass="form-control" ReadOnly="true"/>
+                                    <asp:TextBox runat="server" Text="0" ID="TxCallTotal" CssClass="form-control" ReadOnly="true"/>
                                 </div>
                                 <div class="columnas">
                                     <label>Atendidas</label>
-                                    <asp:TextBox runat="server" ID="TxCallAtendidas" CssClass="form-control" ReadOnly="true" />
+                                    <asp:TextBox runat="server" Text="0" ID="TxCallAtendidas" CssClass="form-control" ReadOnly="true" />
                                 </div>
                                 <div class="columnas">
                                     <label>No Atendidas</label>
-                                    <asp:TextBox runat="server" ID="TxCallAtendidasNo" CssClass="form-control" ReadOnly="true" />
+                                    <asp:TextBox runat="server" Text="0" ID="TxCallAtendidasNo" CssClass="form-control" ReadOnly="true" />
                                 </div>
                                 <div class="columnas">
                                     <label>% Atendidas</label>
-                                    <asp:TextBox runat="server" ID="TxCallPorcentajeSi" CssClass="form-control" ReadOnly="true" />
+                                    <asp:TextBox runat="server" Text="0" ID="TxCallPorcentajeSi" CssClass="form-control" ReadOnly="true" />
                                 </div>
                                 <div class="columnas">
                                     <label>% No Atendidas</label>
-                                    <asp:TextBox runat="server" ID="TxCallPorcentajeNo" CssClass="form-control" ReadOnly="true"/>
+                                    <asp:TextBox runat="server" Text="0" ID="TxCallPorcentajeNo" CssClass="form-control" ReadOnly="true"/>
                                 </div>
                                 <div style="width: 60%">
                                     <label>Observaciones</label>
@@ -90,7 +95,7 @@
                 <h4 class="card-title">Medios de Pago</h4>
             </a>
         </div>
-        <div id="collapse2" class="collapse" role="tabpanel" aria-labelledby="headingOne11">
+        <div id="collapse2" class="collapse show" role="tabpanel" aria-labelledby="headingOne11">
             <div class="card-body">
                 <div class="card-body">
                     <h4 class="card-subtitle"><b> ATM</b></h4>
@@ -204,7 +209,7 @@
                 <h4 class="card-title">KPIs Globales</h4>
             </a>
         </div>
-        <div id="collapse3" class="collapse" role="tabpanel" aria-labelledby="headingOne11">
+        <div id="collapse3" class="collapse show" role="tabpanel" aria-labelledby="headingOne11">
             <div class="card-body">
                 <div class="card-body">
                     <div class="row col-12">
@@ -249,11 +254,11 @@
                                             GridLines="None" OnPageIndexChanging="GvKPISolicitudes_PageIndexChanging"
                                             PageSize="10" >
                                             <Columns>
-                                                <asp:BoundField DataField="id" HeaderText="Orden" ItemStyle-Width="50"/>
+                                                <asp:BoundField DataField="orden" HeaderText="Orden" ItemStyle-Width="50"/>
                                                 <asp:BoundField DataField="tiempo" HeaderText="Tiempo" ItemStyle-Width="150"/>
-                                                <asp:BoundField DataField="problem_type" HeaderText="Categoría 1" ItemStyle-Width="250"/>
-                                                <asp:BoundField DataField="problem_sub_type" HeaderText="Categoría 2" ItemStyle-Width="250"/>
-                                                <asp:BoundField DataField="third_level_category" HeaderText="Categoría 3" ItemStyle-Width="250"/>
+                                                <asp:BoundField DataField="cat1" HeaderText="Categoría 1" ItemStyle-Width="250"/>
+                                                <asp:BoundField DataField="cat2" HeaderText="Categoría 2" ItemStyle-Width="250"/>
+                                                <asp:BoundField DataField="cat3" HeaderText="Categoría 3" ItemStyle-Width="250"/>
                                             </Columns>
                                         </asp:GridView>
                                     </div>
@@ -274,7 +279,7 @@
                 <h4 class="card-title">Ordenes de Servicio con Rupturas</h4>
             </a>
         </div>
-        <div id="collapse4" class="collapse" role="tabpanel" aria-labelledby="headingOne11">
+        <div id="collapse4" class="collapse show" role="tabpanel" aria-labelledby="headingOne11">
             <div class="card-body">
                 <div class="card-body">
                     <asp:Label Text="No hay ordenes de servicio con ruptura" runat="server" ID="LbResRuptura"/>
@@ -293,12 +298,12 @@
                                             GridLines="None"
                                             PageSize="10">
                                             <Columns>
-                                                <asp:BoundField DataField="id" HeaderText="Orden" ItemStyle-Width="50"/>
+                                                <asp:BoundField DataField="orden" HeaderText="Orden" ItemStyle-Width="50"/>
                                                 <asp:BoundField DataField="tiempoRespuesta" HeaderText="Respuesta" ItemStyle-Width="50"/>
                                                 <asp:BoundField DataField="tiempoAtencion" HeaderText="Atención" ItemStyle-Width="50"/>
-                                                <asp:BoundField DataField="responsibility" HeaderText="Responsable" ItemStyle-Width="50"/>
-                                                <asp:BoundField DataField="Satisfaccion" HeaderText="Nota" ItemStyle-Width="50"/>
-                                                <asp:BoundField DataField="idRazon" HeaderText="Razon"/>
+                                                <asp:BoundField DataField="responsable" HeaderText="Responsable" ItemStyle-Width="50"/>
+                                                <asp:BoundField DataField="satisfaccionCliente" HeaderText="Nota" ItemStyle-Width="50"/>
+                                                <asp:BoundField DataField="razon" HeaderText="Razon"/>
                                                 <asp:BoundField DataField="comentario" HeaderText="Observaciones"/>
                                             </Columns>
                                         </asp:GridView>
@@ -319,7 +324,7 @@
                 <h4 class="card-title">Ordenes de Servicio Esperando Respuesta</h4>
             </a>
         </div>
-        <div id="collapse5" class="collapse" role="tabpanel" aria-labelledby="headingOne11">
+        <div id="collapse5" class="collapse show" role="tabpanel" aria-labelledby="headingOne11">
             <div class="card-body">
                 <div class="card-body">
                     <asp:Label Text="No hay ordenes de servicio esperando respuesta" runat="server" ID="LbResOSER" />
@@ -337,10 +342,10 @@
                                         GridLines="None"
                                         PageSize="10" OnPageIndexChanging="GvOSER_PageIndexChanging">
                                         <Columns>
-                                            <asp:BoundField DataField="id" HeaderText="Orden" ItemStyle-Width="50" />
-                                            <asp:BoundField DataField="tiempoRespuesta" HeaderText="Tiempo" ItemStyle-Width="10" />
-                                            <asp:BoundField DataField="responsibility" HeaderText="Responsable" ItemStyle-Width="100" />
-                                            <asp:BoundField DataField="idRazon" HeaderText="Razon"/>
+                                            <asp:BoundField DataField="orden" HeaderText="Orden" ItemStyle-Width="50" />
+                                            <asp:BoundField DataField="tiempo" HeaderText="Tiempo" ItemStyle-Width="10" />
+                                            <asp:BoundField DataField="responsable" HeaderText="Responsable" ItemStyle-Width="100" />
+                                            <asp:BoundField DataField="razon" HeaderText="Razon"/>
                                             <asp:BoundField DataField="comentario" HeaderText="Obs"/>
                                         </Columns>
                                     </asp:GridView>
@@ -365,7 +370,7 @@
                 <div class="card-body">
                     <asp:UpdatePanel runat="server" ID="UPanelRendimientoGrafic" UpdateMode="Conditional">
                         <ContentTemplate>
-                            <div class="row col-12">
+                            <div class="row col-12" runat="server" id="DivGraficos" visible="false">
                                 <div class="card-body col-4">
                                     <h6 class="card-title">Solicitudes Cerradas</h6>
                                     <div class="row form-group">
@@ -407,7 +412,7 @@
                                             <label style="font-size:smaller">Transporte</label>
                                             <br />
                                             <span class="label label-danger"></span>
-                                            <label style="font-size:smaller">Tareas No</label>
+                                            <label style="font-size:smaller">No Procesadas</label>
                                         </div>
                                         <div class="col-6">
                                             <div id="sparkline3" class="text-center"></div>
@@ -416,9 +421,6 @@
                                 </div>
                             </div>
                         </ContentTemplate>
-                        <%--<Triggers>
-                            <asp:PostBackTrigger ControlID="TxCallAtendidas" />
-                        </Triggers>--%>
                     </asp:UpdatePanel>
                     
                     <div class="row col-12 m-t-20">
@@ -440,17 +442,12 @@
                                             <asp:BoundField DataField="conocimiento" HeaderText="Cursos"/>
                                             <asp:BoundField DataField="tareas" HeaderText="Tareas"/>
                                             <asp:BoundField DataField="rupturas" HeaderText="Rupturas"/>
-                                            <asp:BoundField DataField="sinRupturaProm" HeaderText="Sin Ruptura"/>
+                                            <asp:BoundField DataField="noRupturas" HeaderText="Sin Ruptura"/>
                                             <asp:BoundField DataField="satisfaccion" HeaderText="Satisfaccion"/>
                                             <asp:BoundField DataField="produccion" HeaderText="Produccion"/>
                                             <asp:BoundField DataField="eficiencia" HeaderText="Eficiencia"/>
                                             <asp:BoundField DataField="total" HeaderText="Total"/>
-                                            <asp:TemplateField ItemStyle-Width="200">
-                                                <HeaderTemplate>Observaciones</HeaderTemplate>
-                                                <ItemTemplate>
-                                                    <asp:TextBox runat="server" CssClass="form-control" ID="TxRGObs"></asp:TextBox>
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
+                                            <asp:BoundField DataField="comentario" HeaderText="Comentario"/>
                                         </Columns>
                                     </asp:GridView>
                                 </ContentTemplate>
@@ -461,11 +458,61 @@
             </div>
             <div class="card-footer">
                 <div class="row m-t-10">
-                    <asp:Button Text="Aprobar" runat="server" ID="BtnAprobar" CssClass="btn btn-success" OnClick="BtnAprobar_Click"/>
+                    <asp:UpdatePanel runat="server">
+                        <ContentTemplate>
+                            <asp:Button Text="Aprobar" runat="server" ID="BtnAprobar" CssClass="btn btn-success" OnClick="BtnAprobar_Click"/>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </div>
             </div>
         </div>
     </div>
+
+    <%--MODAL DE CONFIRMACION--%>
+    <div class="modal fade" id="ModalConfirmar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="ModalLabelConfirmar">
+                        <b><asp:Label runat="server" ID="LbTitulo" Text="Aprobacion de Reporte" CssClass="col-form-label"></asp:Label></b>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row col-12">
+                        <label class="col-12">Accion</label>
+                        <asp:DropDownList runat="server" CssClass="form-control" ID="DDLAccion">
+                            <asp:ListItem Text="Aprobar" Value="0" />
+                            <asp:ListItem Text="Rechazar" Value="1" />
+                        </asp:DropDownList>
+                    </div>
+                    
+                    <div class="row col-12 m-t-10">
+                        <label class="col-12">Comentario</label>
+                        <asp:TextBox runat="server" ID="TxComentario" TextMode="MultiLine" Rows="3" CssClass="form-control col-12"></asp:TextBox>
+                    </div>
+                    
+                    <asp:UpdatePanel runat="server">
+                        <ContentTemplate>
+                            <div class="row m-t-20">
+                                <div class="col-12" runat="server" id="DivMensaje" visible="false" style="display: flex; background-color:tomato; justify-content:center">
+                                    <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbMensaje"></asp:Label>
+                                </div>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+                <div class="modal-footer">
+                    <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                        <ContentTemplate>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <asp:Button ID="BtnConfirmar" runat="server" Text="Aceptar" class="btn btn-info" OnClick="BtnConfirmar_Click"/>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Script" runat="server">
     <script src="/assets/node_modules/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>

@@ -287,8 +287,24 @@ namespace Infatlan_STEI.classes
                     vXmlTW.WriteString(Convert.ToString(vDatos[9]));
                     vXmlTW.WriteEndElement();
 
-                    vXmlTW.WriteStartElement("comentario");
+                    vXmlTW.WriteStartElement("eficienciaRup");
                     vXmlTW.WriteString(Convert.ToString(vDatos[10]));
+                    vXmlTW.WriteEndElement();
+
+                    vXmlTW.WriteStartElement("eficienciaNoRup");
+                    vXmlTW.WriteString(Convert.ToString(vDatos[11]));
+                    vXmlTW.WriteEndElement();
+
+                    vXmlTW.WriteStartElement("tiempoReal");
+                    vXmlTW.WriteString(Convert.ToString(vDatos[12]));
+                    vXmlTW.WriteEndElement();
+
+                    vXmlTW.WriteStartElement("tiempoTransporte");
+                    vXmlTW.WriteString(Convert.ToString(vDatos[13]));
+                    vXmlTW.WriteEndElement();
+
+                    vXmlTW.WriteStartElement("comentario");
+                    vXmlTW.WriteString(Convert.ToString(vDatos[14]));
                     vXmlTW.WriteEndElement();
 
                     vXmlTW.WriteEndElement();

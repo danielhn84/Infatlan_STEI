@@ -22,8 +22,18 @@ namespace Infatlan_STEI.paginas.reportes
                     else if (vEx == "2") { 
                         ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "alert('Reporte enviado con éxito.')", true);
                         cargarData();
-                    }else  
+                    }else if (vEx == "3") { 
+                        ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "alert('Favor ingrese las observaciones de las llamadas.')", true);
                         cargarData();
+                    }
+                    else {
+                        String vQuery = "[STEISP_CUMPLIMIENTO_Reportes] 9, '" + Session["USUARIO"].ToString() + "'";
+                        int vInfo = vConexion.obtenerId(vQuery);
+                        if (vInfo == 1)
+                            cargarData();
+                        else
+                            Mensaje("Ya tiene un formulario pendiente de revisión.", WarningType.Warning);
+                    }  
                 }else{
                     Response.Redirect("/login.aspx");
                 }
@@ -118,7 +128,7 @@ namespace Infatlan_STEI.paginas.reportes
                 Session["CUMPL_KPI"] = vDSkpi.Tables[2];
             }
 
-            TxKPIPorcentaje.Text = vPorcentaje.ToString() + "%";
+            TxKPIPorcentaje.Text = vPorcentaje.ToString();
             TxKPITotal.Text = Convert.ToString(vSuma);
             TxKPICumplimiento.Text = vCumplidas.ToString();
             TxKPICumplimientoNo.Text = vIncumplidas.ToString();
@@ -355,54 +365,8 @@ namespace Infatlan_STEI.paginas.reportes
 
         protected void BtnEnviar_Click(object sender, EventArgs e){
             try{
-                Object[] vDatosReporte = new object[17];
-                vDatosReporte[0] = TxCallAtendidas.Text;
-                vDatosReporte[1] = TxCallAtendidasNo.Text;
-                vDatosReporte[2] = TxCallObs.Text;
-                vDatosReporte[3] = TxATMCumplimiento.Text;
-                vDatosReporte[4] = TxATMCumplimientoNo.Text;
-                vDatosReporte[5] = TxATMObs.Text;
-                vDatosReporte[6] = TxABACumplimiento.Text;
-                vDatosReporte[7] = TxABACumplimientoNo.Text;
-                vDatosReporte[8] = TxABAObs.Text;
-                vDatosReporte[9] = TxCajaCumplidas.Text;
-                vDatosReporte[10] = TxCajaCumplidasNo.Text;
-                vDatosReporte[11] = TxCajaObs.Text;
-                vDatosReporte[12] = TxKPICumplimiento.Text;
-                vDatosReporte[13] = TxKPICumplimientoNo.Text;
-                vDatosReporte[14] = TxKPIObs.Text;
-                vDatosReporte[15] = 1;
-                vDatosReporte[16] = Session["USUARIO"].ToString();
-                String vXML = vMaestro.ObtenerCumplimiento(vDatosReporte);
-                vXML = vXML.Replace("<?xml version=\"1.0\" encoding=\"utf-16\"?>", "");
-                String vQuery = "[STEISP_CUMPLIMIENTO_Reportes] 1, 0, 0" +
-                    ",'" + vXML + "'";
-                int vInfo = vConexion.obtenerId(vQuery);
-
-                if (vInfo > 0){
-                    DataTable vDatos = (DataTable)Session["CUMPL_KPI"];
-                    if (vDatos.Rows.Count > 0){
-                        insertarKPI(vDatos, vInfo);
-                    }
-                    
-                    vDatos = (DataTable)Session["CUMPL_RUPTURA"];
-                    if (vDatos.Rows.Count > 0){
-                        insertarRupturas(vDatos, vInfo);
-                    }
-
-                    vDatos = (DataTable)Session["CUMPL_OSER"];
-                    if (vDatos.Rows.Count > 0){
-                        insertarOSER(vDatos, vInfo);
-                    }
-
-                    vDatos = (DataTable)Session["CUMPL_RENDIMIENTO"];
-                    if (vDatos.Rows.Count > 0){
-                        insertarRendimiento(vDatos, vInfo);
-                    }
-
-                    limpiarForm();
-                    Response.Redirect("metasCumplimiento.aspx?ex=2");
-                }
+                validaciones();
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal();", true);
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);   
             }
@@ -504,18 +468,22 @@ namespace Infatlan_STEI.paginas.reportes
                 }
 
                 for (int i = 0; i < vDatos.Rows.Count; i++){
-                    Object[] vDatosReporte = new object[11];
+                    Object[] vDatosReporte = new object[15];
                     vDatosReporte[0] = vId.ToString();
                     vDatosReporte[1] = vDatos.Rows[i]["idUsuario"].ToString();
                     vDatosReporte[2] = vDatos.Rows[i]["conocimientoProm"].ToString();
                     vDatosReporte[3] = vDatos.Rows[i]["tareas"].ToString();
                     vDatosReporte[4] = vDatos.Rows[i]["rupturas"].ToString();
-                    vDatosReporte[5] = vDatos.Rows[i]["sinRupturaProm"].ToString();
+                    vDatosReporte[5] = vDatos.Rows[i]["sinRupturaProm"].ToString().Replace("%","");
                     vDatosReporte[6] = vDatos.Rows[i]["satisfaccionProm"].ToString();
-                    vDatosReporte[7] = vDatos.Rows[i]["produccion"].ToString();
-                    vDatosReporte[8] = vDatos.Rows[i]["eficiencia"].ToString();
-                    vDatosReporte[9] = vDatos.Rows[i]["total"].ToString();
-                    vDatosReporte[10] = vDatos.Rows[i]["comentario"].ToString();
+                    vDatosReporte[7] = vDatos.Rows[i]["produccion"].ToString().Replace("%","");
+                    vDatosReporte[8] = vDatos.Rows[i]["eficiencia"].ToString().Replace("%","");
+                    vDatosReporte[9] = vDatos.Rows[i]["total"].ToString().Replace("%","");
+                    vDatosReporte[10] = vDatos.Rows[i]["eficienciaRup"].ToString().Replace("%","");
+                    vDatosReporte[11] = vDatos.Rows[i]["eficienciaNoRup"].ToString().Replace("%","");
+                    vDatosReporte[12] = vDatos.Rows[i]["tiempoReal"].ToString().Replace("%","");
+                    vDatosReporte[13] = vDatos.Rows[i]["tiempoTransporte"].ToString().Replace("%","");
+                    vDatosReporte[14] = vDatos.Rows[i]["comentario"].ToString();
 
                     String vXML = vMaestro.ObtenerCumplimientoUsuarios(vDatosReporte);
                     vXML = vXML.Replace("<?xml version=\"1.0\" encoding=\"utf-16\"?>", "");
@@ -1586,7 +1554,7 @@ namespace Infatlan_STEI.paginas.reportes
             }
         }
 
-        private void graficos(DataTable vData) { 
+        public void graficos(DataTable vData) { 
             try{
                 int vTotTR = 0, vTotTT = 0, vTotRup = 0, vTotNoRup = 0, vSolTareas = 0, vSolRupturas = 0;
                 int vHorasEmpleados = vData.Rows.Count * 360;
@@ -1608,7 +1576,7 @@ namespace Infatlan_STEI.paginas.reportes
                     float vSolPromCR = float.Parse(vSolRupturas.ToString()) / float.Parse(vSolTareas.ToString()) * 100;
                     Decimal SolPromCR = Convert.ToDecimal(Math.Round(vSolPromCR, 2));
                     Decimal vSolPromSR = 100 - SolPromCR;
-                    TxGraf1.Value = SolPromCR.ToString().Replace(",",".");
+                    TxGraf1.Value = SolPromCR.ToString().Replace(",", ".");
                     TxGraf2.Value = vSolPromSR.ToString().Replace(",",".");
                 }
 
@@ -1634,6 +1602,9 @@ namespace Infatlan_STEI.paginas.reportes
                 float vTNP = 100 - (vTR + vTT);
                 Decimal vTotalTNP = Convert.ToDecimal(Math.Round(vTNP, 2));
                 TxGraf7.Value = vTotalTNP.ToString().Replace(",", ".");
+
+                DivGraficos.Visible = true;
+                UPanelRendimientoGrafic.Update();
             }catch (Exception ex){
                 throw new Exception(ex.Message);
             }
@@ -1679,11 +1650,84 @@ namespace Infatlan_STEI.paginas.reportes
                 TxKPIPorcentaje.Text = string.Empty;
                 TxKPITotal.Text = string.Empty;
 
-
+                UPCalls.Update();
             }catch (Exception ex){
                 throw new Exception(ex.Message);
             }
         
+        }
+
+        private void validaciones() {
+            if (TxCallTotal.Text == string.Empty || TxCallTotal.Text == "")
+                throw new Exception("Favor ingrese el total de llamadas.");
+            if (TxCallAtendidas.Text == string.Empty || TxCallAtendidas.Text == "")
+                throw new Exception("Favor ingrese las llamadas atendidas.");
+            if (Convert.ToInt32(TxCallPorcentajeSi.Text) < 90 && TxCajaObs.Text == "")
+                throw new Exception("Favor ingrese las observaciones de las llamadas.");
+            if (Convert.ToInt32(TxATMPorcentaje.Text) < 90)
+                throw new Exception("Favor ingrese las observaciones de ATM en Medios de pago.");
+            if (Convert.ToInt32(TxABAPorcentaje.Text) < 90)
+                throw new Exception("Favor ingrese las observaciones de ABA en Medios de pago.");
+            if (Convert.ToInt32(TxCajaPorcentaje.Text) < 90)
+                throw new Exception("Favor ingrese las observaciones de Caja en Medios de pago.");
+            if (Convert.ToDecimal(TxKPIPorcentaje.Text) < 90)
+                throw new Exception("Favor ingrese las observaciones de KPI.");
+
+        }
+
+        protected void BtnConfirmar_Click(object sender, EventArgs e) {
+            try{
+                Object[] vDatosReporte = new object[17];
+                vDatosReporte[0] = TxCallAtendidas.Text;
+                vDatosReporte[1] = TxCallAtendidasNo.Text;
+                vDatosReporte[2] = TxCallObs.Text;
+                vDatosReporte[3] = TxATMCumplimiento.Text;
+                vDatosReporte[4] = TxATMCumplimientoNo.Text;
+                vDatosReporte[5] = TxATMObs.Text;
+                vDatosReporte[6] = TxABACumplimiento.Text;
+                vDatosReporte[7] = TxABACumplimientoNo.Text;
+                vDatosReporte[8] = TxABAObs.Text;
+                vDatosReporte[9] = TxCajaCumplidas.Text;
+                vDatosReporte[10] = TxCajaCumplidasNo.Text;
+                vDatosReporte[11] = TxCajaObs.Text;
+                vDatosReporte[12] = TxKPICumplimiento.Text;
+                vDatosReporte[13] = TxKPICumplimientoNo.Text;
+                vDatosReporte[14] = TxKPIObs.Text;
+                vDatosReporte[15] = 1;
+                vDatosReporte[16] = Session["USUARIO"].ToString();
+                String vXML = vMaestro.ObtenerCumplimiento(vDatosReporte);
+                vXML = vXML.Replace("<?xml version=\"1.0\" encoding=\"utf-16\"?>", "");
+                String vQuery = "[STEISP_CUMPLIMIENTO_Reportes] 1, 0, 0" +
+                    ",'" + vXML + "'";
+                int vInfo = vConexion.obtenerId(vQuery);
+
+                if (vInfo > 0){
+                    DataTable vDatos = (DataTable)Session["CUMPL_KPI"];
+                    if (vDatos.Rows.Count > 0)
+                        insertarKPI(vDatos, vInfo);
+
+                    vDatos = (DataTable)Session["CUMPL_RUPTURA"];
+                    if (vDatos.Rows.Count > 0)
+                        insertarRupturas(vDatos, vInfo);
+
+                    vDatos = (DataTable)Session["CUMPL_OSER"];
+                    if (vDatos.Rows.Count > 0)
+                        insertarOSER(vDatos, vInfo);
+
+                    vDatos = (DataTable)Session["CUMPL_RENDIMIENTO"];
+                    if (vDatos.Rows.Count > 0)
+                        insertarRendimiento(vDatos, vInfo);
+
+                    limpiarForm();
+                    Mensaje("Reporte enviado con éxito", WarningType.Success);
+
+                }else 
+                    Mensaje("Reporte no se pudo enviar. Comuníquese con sistemas.", WarningType.Danger);
+                
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
+            }catch (Exception ex){
+                Mensaje(ex.Message, WarningType.Danger);
+            }
         }
     }
 }
