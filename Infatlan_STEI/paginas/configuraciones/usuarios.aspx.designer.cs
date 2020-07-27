@@ -177,6 +177,24 @@ namespace Infatlan_STEI.paginas.configuraciones
         protected global::System.Web.UI.WebControls.DropDownList DDLGroups;
 
         /// <summary>
+        /// Control CBxForaneo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton CBxForaneo;
+
+        /// <summary>
+        /// Control CBxNoForaneo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton CBxNoForaneo;
+
+        /// <summary>
         /// Control DivEstado.
         /// </summary>
         /// <remarks>

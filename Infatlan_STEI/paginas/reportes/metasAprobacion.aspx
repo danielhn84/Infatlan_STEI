@@ -1,5 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="metasCumplimiento.aspx.cs" Inherits="Infatlan_STEI.paginas.reportes.metasCumplimiento" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="metasAprobacion.aspx.cs" Inherits="Infatlan_STEI.paginas.reportes.metasAprobacion" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
     <link href="/dist/css/pages/easy-pie-chart.css" rel="stylesheet">
     <style>
@@ -8,7 +7,6 @@
             margin: 0% 1% 2% 0%;
         }
     </style>
-    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
     <div class="row page-titles">
@@ -41,11 +39,11 @@
                             <div class="row col-12">
                                 <div class="columnas">
                                     <label>Total</label>
-                                    <asp:TextBox runat="server" ID="TxCallTotal" CssClass="form-control" />
+                                    <asp:TextBox runat="server" ID="TxCallTotal" CssClass="form-control" ReadOnly="true"/>
                                 </div>
                                 <div class="columnas">
                                     <label>Atendidas</label>
-                                    <asp:TextBox runat="server" ID="TxCallAtendidas" CssClass="form-control" AutoPostBack="true" OnTextChanged="TxCallAtendidas_TextChanged" />
+                                    <asp:TextBox runat="server" ID="TxCallAtendidas" CssClass="form-control" ReadOnly="true" />
                                 </div>
                                 <div class="columnas">
                                     <label>No Atendidas</label>
@@ -61,7 +59,7 @@
                                 </div>
                                 <div style="width: 60%">
                                     <label>Observaciones</label>
-                                    <asp:TextBox runat="server" ID="TxCallObs" TextMode="MultiLine" Rows="2" CssClass="form-control" />
+                                    <asp:TextBox runat="server" ID="TxCallObs" TextMode="MultiLine" Rows="2" CssClass="form-control" ReadOnly="true"/>
                                 </div>
                                 <div style="width: 40%">
                                     <div class="text-center" runat="server" visible="true" id="DivCallGrafic">
@@ -79,9 +77,6 @@
                                 </div>
                             </div>
                         </ContentTemplate>
-                        <Triggers>
-                            <asp:PostBackTrigger ControlID="TxCallAtendidas" />
-                        </Triggers>
                     </asp:UpdatePanel>
                 </div>
             </div>
@@ -123,7 +118,7 @@
                         </div>
                         <div style="width: 60%">
                             <label>Observaciones</label>
-                            <asp:TextBox runat="server" ID="TxATMObs" TextMode="MultiLine" Rows="2" CssClass="form-control" />
+                            <asp:TextBox runat="server" ID="TxATMObs" TextMode="MultiLine" Rows="2" ReadOnly="true" CssClass="form-control" />
                         </div>
                         <div style="width: 40%;">
                             <div class="text-center">
@@ -156,7 +151,7 @@
                         </div>
                         <div style="width: 60%">
                             <label>Observaciones</label>
-                            <asp:TextBox runat="server" ID="TxABAObs" TextMode="MultiLine" Rows="2" CssClass="form-control" />
+                            <asp:TextBox runat="server" ID="TxABAObs" TextMode="MultiLine" Rows="2" ReadOnly="true" CssClass="form-control" />
                         </div>
                         <div style="width: 40%;">
                             <div class="text-center">
@@ -189,7 +184,7 @@
                         </div>
                         <div style="width: 60%">
                             <label>Observaciones</label>
-                            <asp:TextBox runat="server" ID="TxCajaObs" TextMode="MultiLine" Rows="2" CssClass="form-control" />
+                            <asp:TextBox runat="server" ID="TxCajaObs" TextMode="MultiLine" Rows="2" ReadOnly="true" CssClass="form-control" />
                         </div>
                         <div style="width: 40%;">
                             <div class="text-center">
@@ -235,7 +230,7 @@
                         </div>
                         <div style="width: 100%">
                             <label>Observaciones</label>
-                            <asp:TextBox runat="server" ID="TxKPIObs" TextMode="MultiLine" Rows="2" CssClass="form-control" />
+                            <asp:TextBox runat="server" ID="TxKPIObs" TextMode="MultiLine" Rows="2" ReadOnly="true" CssClass="form-control" />
                         </div>
 
                         <asp:UpdatePanel runat="server" ID="UPanelKPI">
@@ -295,7 +290,7 @@
                                             RowStyle-CssClass="rows"
                                             AutoGenerateColumns="false"
                                             AllowPaging="true" OnPageIndexChanging="GvRuptura_PageIndexChanging"
-                                            GridLines="None" OnRowDataBound="GvRuptura_RowDataBound"
+                                            GridLines="None"
                                             PageSize="10">
                                             <Columns>
                                                 <asp:BoundField DataField="id" HeaderText="Orden" ItemStyle-Width="50"/>
@@ -303,18 +298,8 @@
                                                 <asp:BoundField DataField="tiempoAtencion" HeaderText="Atención" ItemStyle-Width="50"/>
                                                 <asp:BoundField DataField="responsibility" HeaderText="Responsable" ItemStyle-Width="50"/>
                                                 <asp:BoundField DataField="Satisfaccion" HeaderText="Nota" ItemStyle-Width="50"/>
-                                                <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="200">
-                                                    <HeaderTemplate>Razón</HeaderTemplate>
-                                                    <ItemTemplate>
-                                                        <asp:DropDownList runat="server" ID="DDLRazonRuptura" CssClass="form-control"></asp:DropDownList>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField>
-                                                <HeaderTemplate>Observaciones</HeaderTemplate>
-                                                <ItemTemplate>
-                                                    <asp:TextBox runat="server" CssClass="form-control" ID="TxRupturaObs"></asp:TextBox>
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
+                                                <asp:BoundField DataField="idRazon" HeaderText="Razon"/>
+                                                <asp:BoundField DataField="comentario" HeaderText="Observaciones"/>
                                             </Columns>
                                         </asp:GridView>
                                     </ContentTemplate>
@@ -349,24 +334,14 @@
                                         RowStyle-CssClass="rows"
                                         AutoGenerateColumns="false"
                                         AllowPaging="true"
-                                        GridLines="None" OnRowDataBound="GvOSER_RowDataBound"
+                                        GridLines="None"
                                         PageSize="10" OnPageIndexChanging="GvOSER_PageIndexChanging">
                                         <Columns>
                                             <asp:BoundField DataField="id" HeaderText="Orden" ItemStyle-Width="50" />
                                             <asp:BoundField DataField="tiempoRespuesta" HeaderText="Tiempo" ItemStyle-Width="10" />
                                             <asp:BoundField DataField="responsibility" HeaderText="Responsable" ItemStyle-Width="100" />
-                                            <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="240">
-                                                <HeaderTemplate>Razón</HeaderTemplate>
-                                                <ItemTemplate>
-                                                    <asp:DropDownList runat="server" ID="DDLRazonER" CssClass="form-control"></asp:DropDownList>
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField>
-                                                <HeaderTemplate>Observaciones</HeaderTemplate>
-                                                <ItemTemplate>
-                                                    <asp:TextBox runat="server" CssClass="form-control" ID="TxOSERObs"></asp:TextBox>
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
+                                            <asp:BoundField DataField="idRazon" HeaderText="Razon"/>
+                                            <asp:BoundField DataField="comentario" HeaderText="Obs"/>
                                         </Columns>
                                     </asp:GridView>
                                 </ContentTemplate>
@@ -486,7 +461,7 @@
             </div>
             <div class="card-footer">
                 <div class="row m-t-10">
-                    <asp:Button Text="Enviar" runat="server" ID="BtnEnviar" CssClass="btn btn-primary" OnClick="BtnEnviar_Click"/>
+                    <asp:Button Text="Aprobar" runat="server" ID="BtnAprobar" CssClass="btn btn-success" OnClick="BtnAprobar_Click"/>
                 </div>
             </div>
         </div>

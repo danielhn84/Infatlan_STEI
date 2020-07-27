@@ -109,20 +109,10 @@
                                 <div class="col-12">
                                     <div class="form-group row">
                                         <div class="col-2" style="margin-left:2%">
-                                            <label class="col-form-label">Nombre</label>
+                                            <label class="col-form-label">Nombre:</label>
                                         </div>
                                         <div class="col-9">
-                                            <asp:TextBox ID="TxNombre" class="form-control text-uppercase" TextMode="MultiLine" Rows="3" runat="server"></asp:TextBox>                                            
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group row">
-                                        <div class="col-2" style="margin-left:2%">
-                                            <label class="col-form-label">Sección</label>
-                                        </div>
-                                        <div class="col-9">
-                                            <asp:DropDownList runat="server" ID="DDLSecciones" CssClass="form-control"></asp:DropDownList>
+                                            <asp:TextBox ID="TxNombre" class="form-control text-uppercase" Rows="3" runat="server"></asp:TextBox>                                            
                                         </div>
                                     </div>
                                 </div>
@@ -134,7 +124,7 @@
                                         <div class="col-9">
                                             <asp:DropDownList runat="server" ID="DDLEstado" CssClass="form-control">
                                                 <asp:ListItem Selected="True" Value="1" Text="Activo"></asp:ListItem>
-                                                <asp:ListItem Value="0" Text="Inactivo"></asp:ListItem>
+                                                <asp:ListItem Value="0" Text="Cerrado"></asp:ListItem>
                                             </asp:DropDownList>
                                         </div>
                                     </div>

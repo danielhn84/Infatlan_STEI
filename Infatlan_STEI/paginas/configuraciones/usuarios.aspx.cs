@@ -132,6 +132,9 @@ namespace Infatlan_STEI.paginas.configuraciones
             DDLGroups.SelectedValue = "0";
             DDLJefe.SelectedValue = "0";
             DDLEstado.SelectedValue = "1";
+
+            CBxNoForaneo.Checked = false;
+            CBxForaneo.Checked = false;
             DivMensaje.Visible = false;
         }
 
@@ -141,6 +144,7 @@ namespace Infatlan_STEI.paginas.configuraciones
                 String vQuery = "", vMensaje = "";
                 int vInfo;
 
+                Boolean vForaneo = CBxForaneo.Checked ? true : false;
                 DataTable vDatos = new DataTable();
                 vQuery = "STEISP_Usuarios {0}" +
                         ",'" + TxUsuario.Text + "'" +
@@ -154,7 +158,8 @@ namespace Infatlan_STEI.paginas.configuraciones
                         "," + DDLDepartamento.SelectedValue + 
                         ",'" + TxSysAid.Text + "'" +
                         ",'" + DDLJefe.SelectedValue + "'" +
-                        ",'" + DDLGroups.SelectedValue + "'";
+                        ",'" + DDLGroups.SelectedValue + "'" +
+                        ",'" + vForaneo + "'";
 
                 if (HttpContext.Current.Session["STEI_USUARIO_ID"] == null){
                     vQuery = string.Format(vQuery, "3");
@@ -192,6 +197,8 @@ namespace Infatlan_STEI.paginas.configuraciones
                 throw new Exception("Favor ingrese el teléfono.");
             if (DDLDepartamento.SelectedValue == "0")
                 throw new Exception("Favor seleccione el departamento.");
+            if (!CBxNoForaneo.Checked && !CBxForaneo.Checked)
+                throw new Exception("Favor seleccione si es foráneo.");
         }
 
         protected void GVBusqueda_RowCommand(object sender, GridViewCommandEventArgs e){
@@ -210,6 +217,8 @@ namespace Infatlan_STEI.paginas.configuraciones
                     vDatos = vConexion.obtenerDataTable(vQuery);
 
                     for (int i = 0; i < vDatos.Rows.Count; i++) {
+
+                        Boolean vForaneo = Convert.ToBoolean(vDatos.Rows[i]["flagForaneo"]);
                         TxUsuario.Text = vDatos.Rows[i]["idUsuario"].ToString();
                         TxSysAid.Text = vDatos.Rows[i]["sysAid"].ToString();
                         TxNombres.Text = vDatos.Rows[i]["nombre"].ToString();
@@ -221,6 +230,10 @@ namespace Infatlan_STEI.paginas.configuraciones
                         DDLJefe.SelectedValue = vDatos.Rows[i]["idJefe"].ToString();
                         DDLGroups.SelectedValue = vDatos.Rows[i]["assignedGroup"].ToString();
                         DDLEstado.SelectedValue = vDatos.Rows[i]["estado"].ToString();
+                        if (vForaneo)
+                            CBxForaneo.Checked = true;
+                        else
+                            CBxNoForaneo.Checked = true;
                     }
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
                 }

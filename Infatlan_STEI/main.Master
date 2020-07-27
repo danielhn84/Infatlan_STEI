@@ -113,7 +113,7 @@
             <div class="scroll-sidebar">
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Modulos <span class="badge badge-pill badge-cyan ml-auto">4</span></span></a>
+                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Modulos</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li runat="server" id="LIAgencias" visible="false">
                                     <a href="#" onclick="window.location.href = '/sites/agencias/default.aspx?u=' + document.getElementById('<%= TxUser.ClientID %>').value">Agencias</a>
@@ -134,6 +134,7 @@
                                 <li><a class="has-arrow waves-effect waves-dark" aria-expanded="false" href="javascript:void(0)"><span class="hide-menu">Cumplimiento<span class="badge badge-pill badge-cyan ml-auto"></span></span></a>
                                     <ul aria-expanded="false" class="collapse">
                                         <li><a href="/paginas/reportes/metasCumplimiento.aspx">Formulario</a></li>
+                                        <li><a href="/paginas/reportes/metasPendientes.aspx">Pendientes</a></li>
                                         <li><a href="/paginas/reportes/cursosEmpleados.aspx">Evaluaciones</a></li>
                                     </ul>
                                 </li>
@@ -194,13 +195,13 @@
     <script src="/assets/node_modules/skycons/skycons.js"></script>
     <script src="/dist/js/dashboard1.js"></script>
 
-    <script src="/js/off-canvas.js"></script>
+<%--    <script src="/js/off-canvas.js"></script>
     <script src="/js/hoverable-collapse.js"></script>
     <script src="/js/template.js"></script>
     <script src="/js/dashboard.js"></script>
     <script src="/js/data-table.js"></script>
     <script src="/js/jquery.dataTables.js"></script>
-    <script src="/js/dataTables.bootstrap4.js"></script>
+    <script src="/js/dataTables.bootstrap4.js"></script>--%>
     <asp:ContentPlaceHolder ID="Script" runat="server">
     </asp:ContentPlaceHolder>
 </body>

@@ -193,8 +193,26 @@
                                         </asp:DropDownList>
                                     </div>
                                 </div>
-                                <div class="form-group row col-6" runat="server" visible="false" id="DivEstado">
+
+                                <div class="form-group row col-6">
                                     <div class="col-3" style="margin-left:2%">
+                                        <label class="col-form-label">Foráneo</label>
+                                    </div>
+                                    <div class="col-8">
+                                        <label class="custom-control custom-radio">
+                                            <input type="radio" runat="server" id="CBxForaneo" class="custom-control-input">
+                                            <span class="custom-control-label" for="CBxForaneo">SI</span>
+                                        </label>
+
+                                        <label class="custom-control custom-radio">
+                                            <input type="radio" runat="server" id="CBxNoForaneo" class="custom-control-input">
+                                            <span class="custom-control-label" for="CBxNoForaneo">NO</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row col-6" runat="server" visible="false" id="DivEstado">
+                                    <div class="col-4">
                                         <label class="col-form-label">Estado</label>
                                     </div>
                                     <div class="col-8">
@@ -205,7 +223,6 @@
                                     </div>
                                 </div>
                             </div>
-                            
 
                             <div class="col-12" runat="server" id="DivMensaje" visible="false" style="display: flex; background-color:tomato; justify-content:center">
                                 <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbAdvertencia"></asp:Label>

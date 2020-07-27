@@ -20,26 +20,20 @@ namespace Infatlan_STEI.classes
             vConexion = new SqlConnection(ConfigurationManager.AppSettings["SQLServer"]);
         }
 
-        public DataTable obtenerDataTable(String vQuery)
-        {
+        public DataTable obtenerDataTable(String vQuery){
             DataTable vDatos = new DataTable();
-            try
-            {
+            try{
                 SqlDataAdapter vDataAdapter = new SqlDataAdapter(vQuery, vConexion);
                 vDataAdapter.Fill(vDatos);
-            }
-            catch
-            {
+            }catch{
                 throw;
             }
             return vDatos;
         }
 
-        public int ejecutarSql(String vQuery)
-        {
+        public int ejecutarSql(String vQuery){
             int vResultado = 0;
-            try
-            {
+            try{
                 SqlCommand vSqlCommand = new SqlCommand(vQuery, vConexion);
                 vSqlCommand.CommandType = CommandType.Text;
 
@@ -47,9 +41,7 @@ namespace Infatlan_STEI.classes
                 vResultado = vSqlCommand.ExecuteNonQuery();
                 vConexion.Close();
 
-            }
-            catch (Exception Ex)
-            {
+            }catch (Exception Ex){
                 String vError = Ex.Message;
                 vConexion.Close();
                 throw;
@@ -57,8 +49,20 @@ namespace Infatlan_STEI.classes
             return vResultado;
         }
 
-        public DataSet obtenerDataSet(String vQuery)
-        {
+        public int obtenerId(String vQuery){
+            DataTable vDatos = new DataTable();
+            int vId;
+            try{
+                SqlDataAdapter vDataAdapter = new SqlDataAdapter(vQuery, vConexion);
+                vDataAdapter.Fill(vDatos);
+                vId = Convert.ToInt32(vDatos.Rows[0][0].ToString());
+            }catch{
+                throw;
+            }
+            return vId;
+        }
+
+        public DataSet obtenerDataSet(String vQuery){
             DataSet vDatos = new DataSet();
             try{
                 SqlDataAdapter vDataAdapter = new SqlDataAdapter(vQuery, vConexion);
