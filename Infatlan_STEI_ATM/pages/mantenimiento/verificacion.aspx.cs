@@ -558,63 +558,117 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
         void EnviarCorreo()
         {
-            string id = Request.QueryString["id"];
             string tipo = Request.QueryString["tipo"];
-            string vCorreo = "acedillo@bancatlan.hn";
-            string vNombre = "Adán Cedillo";
-            string vUsu = "acedillo";
             SmtpService vService = new SmtpService();
-
-            if (tipo == "4")//APROBACIONES
+            if (tipo == "4")
             {
-                //SOLICITANTE                
-                string vMotivo = "Se informa que su solicitud fué debidamente aprobado.";
-                string vMsg = "Puede continuar con el proceso.";
-                vService.EnviarMensaje(Session["ATM_USUCORREO_VERIF_CREAR"].ToString(),
-                   typeBody.Aprobado,
-                   Session["ATM_USUARIO_VERIF_CREAR"].ToString(),
-                   Session["ATM_TECNICO_VERIF_CREAR"].ToString(),
-                   vMotivo,
-                   vMsg
-                   );
-                //SUPERVISOR                 
-                string vMotivo2 = "El empleado " + txtTecnicoResponsable.Text + " fué notificado de la aprobación de su respectiva solicitud.";
-                string vMsg2 = "Solicitud fue aprobado exitosamente.";
-                vService.EnviarMensaje(vCorreo,
-                   typeBody.Supervisor,
-                   Session["USUARIO"].ToString(),
-                   txtTecnicoResponsable.Text,
-                   vMotivo2,
-                   vMsg2
-                   );
+                
+                DataTable vDatos = (DataTable)Session["AUTHCLASS"];
                
+                if (vDatos.Rows.Count > 0)
+                {
+                    foreach (DataRow item in vDatos.Rows)
+                    {
+                        //ENVIAR A JEFE
+                        if (!item["emailEmpresa"].ToString().Trim().Equals(""))
+                        {
+                            vService.EnviarMensaje(item["emailEmpresa"].ToString(),
+                                typeBody.AprobarVerifJefe,
+                                item["nombre"].ToString(),
+                                Session["ATM_TECNICO_VERIF_CREAR"].ToString()
+                                //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                                );
+                            //ENVIAR A SOLICITANTE
+                            //vService.EnviarMensaje(item["emailEmpresa"].ToString(),
+                            //    typeBody.Supervisor,
+                            //    item["nombre"].ToString(),
+                            //    item["nombre"].ToString()
+                            //    //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                            //    );
+                            //vFlagEnvioSupervisor = true;
+                        }
+                        //ENVIAR A EDWIN
+                        string vNombre = "EDWIN ALBERTO URREA PENA";
+                        vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIMail"],
+                                typeBody.AprobarVerifJefe,
+                                vNombre,
+                                 Session["ATM_TECNICO_VERIF_CREAR"].ToString()
+                                //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                                );
+                        //ENVIAR A ELVIS
+                        string vNombreJefe = "ELVIS ALEXANDER MONTOYA PEREIRA";
+                        vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIJefeMail"],
+                                typeBody.AprobarVerifJefe,
+                                vNombreJefe,
+                                 Session["ATM_TECNICO_VERIF_CREAR"].ToString()
+                                //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                                );
+                    }
+                }
+                //if (vDatosTecnicoResponsable.Rows.Count > 0)
+                //{
+                foreach (DataRow item in vDatos.Rows)
+                {
+                    //ENVIAR A TECNICO RESPONSABLE
+                    if (!Session["ATM_USUCORREO_VERIF_CREAR"].ToString().Trim().Equals(""))
+                    {
+                        vService.EnviarMensaje(Session["ATM_USUCORREO_VERIF_CREAR"].ToString(),
+                            typeBody.AprobarVerifSolicitante,
+                            Session["ATM_TECNICO_VERIF_CREAR"].ToString(),
+                            vDatos.Rows[0]["nombre"].ToString()
+                            //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                            );
+                    }
+                }
+                //}               
             }
             else
             {
-                //SOLICITANTE                
-                string vMotivo = "Se informa que su solicitud fué enviada.";
-                string vMsg = "Su solicitud debe ser aprobado por su jefe inmediato.";
-                vService.EnviarMensaje(vCorreo,
-                   typeBody.Solicitante,
-                   Session["USUARIO"].ToString(),
-                   Session["ATM_TECNICO_VERIF_CREAR"].ToString(),
-                   vMotivo,
-                   vMsg
-                   );
-                //SUPERVISOR                
-                string vMotivo2 = "El empleado " + txtTecnicoResponsable.Text + " le envía lista de verificación para su respectiva aprobación.";
-                string vMsg2 = "Para continuar con el proceso de notificación debe aprobar dicha solicitud.";
-                vService.EnviarMensaje(vCorreo,
-                   typeBody.Supervisor,
-                   vUsu,
-                   vNombre,
-                   vMotivo2,
-                   vMsg2
-                   );
+                DataTable vDatos = (DataTable)Session["AUTHCLASS"];
+
+                if (vDatos.Rows.Count > 0)
+                {
+                    foreach (DataRow item in vDatos.Rows)
+                    {
+                        //ENVIAR A JEFE
+                        if (!item["emailEmpresa"].ToString().Trim().Equals(""))
+                        {
+                            vService.EnviarMensaje(item["emailEmpresa"].ToString(),
+                                typeBody.EnviarVerificacionSolicitante,
+                                item["nombre"].ToString(),
+                                item["nombre"].ToString()
+                                //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                                );
+                            //ENVIAR A SOLICITANTE
+                            //vService.EnviarMensaje(item["emailEmpresa"].ToString(),
+                            //    typeBody.Supervisor,
+                            //    item["nombre"].ToString(),
+                            //    item["nombre"].ToString()
+                            //    //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                            //    );
+                            //vFlagEnvioSupervisor = true;
+                        }
+                        //ENVIAR A EDWIN
+                        string vNombre = "EDWIN ALBERTO URREA PENA";
+                        vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIMail"],
+                                typeBody.EnviarVerificacionJefe,
+                                vNombre,
+                                item["nombre"].ToString()
+                                //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                                );
+                        //ENVIAR A ELVIS
+                        string vNombreJefe = "ELVIS ALEXANDER MONTOYA PEREIRA";
+                        vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIJefeMail"],
+                                typeBody.EnviarVerificacionJefe,
+                                vNombreJefe,
+                                item["nombre"].ToString()
+                                //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                                );
+                    }
+                }
                 
             }
         }
-
         void ActualizarATM()
             {
 
@@ -650,7 +704,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                 if (vInfo == 1)
                 {
-                    //Mensaje("antiskimming creada con éxito", WarningType.Success);
+                    //EnviarCorreo();
                 }
 
             }
@@ -1276,9 +1330,9 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                         Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                         if (vInfo == 1)
                         {
+                            //EnviarCorreo();
                             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
                             Mensaje("Lista de verificación aprobada con éxito", WarningType.Success);
-                            //EnviarCorreo();
                             vaciarValorImg();
                             Response.Redirect("buscarAprobarVerificacion.aspx");
                         }
@@ -1337,7 +1391,66 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal2();", true);
         }
 
-            protected void btnRechazarModal_Click(object sender, EventArgs e)
+        void DevolverCorreo()
+        {
+            string tipo = Request.QueryString["tipo"];
+            SmtpService vService = new SmtpService();
+           
+
+                DataTable vDatos = (DataTable)Session["AUTHCLASS"];
+
+                if (vDatos.Rows.Count > 0)
+                {
+                    foreach (DataRow item in vDatos.Rows)
+                    {
+                        //ENVIAR A JEFE
+                        if (!item["emailEmpresa"].ToString().Trim().Equals(""))
+                        {
+                            vService.EnviarMensaje(item["emailEmpresa"].ToString(),
+                                typeBody.DevolverJefe,
+                                item["nombre"].ToString(),
+                                Session["ATM_TECNICO_VERIF_CREAR"].ToString()
+                                //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                                );                           
+                        }
+                        //ENVIAR A EDWIN
+                        string vNombre = "EDWIN ALBERTO URREA PENA";
+                        vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIMail"],
+                                typeBody.DevolverJefe,
+                                vNombre,
+                                 Session["ATM_TECNICO_VERIF_CREAR"].ToString()
+                                //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                                );
+                        //ENVIAR A ELVIS
+                        string vNombreJefe = "ELVIS ALEXANDER MONTOYA PEREIRA";
+                        vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIJefeMail"],
+                                typeBody.DevolverJefe,
+                                vNombreJefe,
+                                 Session["ATM_TECNICO_VERIF_CREAR"].ToString()
+                                //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                                );
+                    }
+                }
+                //if (vDatosTecnicoResponsable.Rows.Count > 0)
+                //{
+                foreach (DataRow item in vDatos.Rows)
+                {
+                    //ENVIAR A TECNICO RESPONSABLE
+                    if (!Session["ATM_USUCORREO_VERIF_CREAR"].ToString().Trim().Equals(""))
+                    {
+                        vService.EnviarMensaje(Session["ATM_USUCORREO_VERIF_CREAR"].ToString(),
+                            typeBody.DevolverSolicitante,
+                            Session["ATM_TECNICO_VERIF_CREAR"].ToString(),
+                            vDatos.Rows[0]["nombre"].ToString()
+                            //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                            );
+                    }
+                }
+                //}               
+       
+        }
+
+        protected void btnRechazarModal_Click(object sender, EventArgs e)
             {
             if (txtmotivoRechazo.Text == "" || txtmotivoRechazo.Text == string.Empty)
             {
@@ -1354,6 +1467,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                     if (vInfo == 1)
                     {
+                        //DevolverCorreo();
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
                         Mensaje("Lista de verificación fue rechazada con éxito", WarningType.Success);
                         Response.Redirect("buscarAprobarVerificacion.aspx");

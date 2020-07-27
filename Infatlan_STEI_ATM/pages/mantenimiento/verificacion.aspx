@@ -721,7 +721,7 @@
                         <ContentTemplate>
                             <div class="col-12">
                                 <asp:Button runat="server" OnClick="btnEnviarVerif_Click" ID="btnEnviarVerif" CssClass="btn btn-success" Text="Guardar verificación" />
-                                <asp:Button runat="server" ID="btnRechazarVerif" OnClick="btnRechazarVerif_Click" CssClass="btn btn-danger" Text="Devolver" />
+                                <asp:Button runat="server" ID="btnRechazarVerif" Visible="false" OnClick="btnRechazarVerif_Click" CssClass="btn btn-danger" Text="Devolver" />
                             </div>
                         </ContentTemplate>
                     </asp:UpdatePanel>

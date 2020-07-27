@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.Sql;
 using System.Data.SqlClient;
+using System.Configuration;
 using Infatlan_STEI_ATM.clases;
 
 namespace Infatlan_STEI_ATM.pages.mantenimiento
@@ -182,160 +183,107 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             }
         }
 
-        
 
-        void enviarCorreo()
+
+        void CorreoCancelar()
         {
-            if (DDLModalMotivo.SelectedValue == "5")
+            SmtpService vService = new SmtpService();
+           
+            //string vQueryD = "STEISP_ATM_Generales 33,'" + DLLtecResponsable.SelectedValue + "'";
+            //DataTable vDatosTecnicoResponsable = vConexion.ObtenerTabla(vQueryD);
+            string vQueryD = "STEISP_ATM_Generales 16,'" + Session["ATM_ID_CANCELAR_VERIF_MODAL"] + "'";
+            DataTable vDatosTecnicos = vConexion.ObtenerTabla(vQueryD);
+            string vQueryD2 = "STEISP_ATM_Generales 17,'" + Session["ATM_ID_CANCELAR_VERIF_MODAL"] + "'";
+            DataTable vDatosJefeAgencias = vConexion.ObtenerTabla(vQueryD2);
+            DataTable vDatos = (DataTable)Session["AUTHCLASS"];
+            //DataTable vDatosTecnicos = (DataTable)Session["ATM_EMPLEADOS"];
+            //DataTable vDatosJefeAgencias = (DataTable)Session["ATM_JEFES_CARGAR"];
+            if (vDatos.Rows.Count > 0)
             {
-                string vCorreo = "acedillo@bancatlan.hn";
-                string vNombre = "Adán Cedillo";
-                string vUsu = "acedillo";
-                SmtpService vService = new SmtpService();
-                //SOLICITANTE                
-                string vMotivo = "Se informa que mantenimiento fué asignado a "+ DDLModalNewTecnico.SelectedItem.Text;
-                string vMsg = "Mantenimiento asignado correctamente.";
-                vService.EnviarMensaje(vCorreo,
-                   typeBody.Solicitante,
-                   Session["USUARIO"].ToString(),
-                   vNombre,
-                   vMotivo,
-                   vMsg
-                   );
-                //SUPERVISOR                 
-                string vMotivo2 = "El empleado " + vNombre + " asignó mantenimiento ATM a " + DDLModalNewTecnico.SelectedItem.Text;
-                string vMsg2 = "Mantenimiento asignado correctamente.";
-                vService.EnviarMensaje(vCorreo,
-                   typeBody.Supervisor,
-                   vUsu,
-                   vNombre,
-                   vMotivo2,
-                   vMsg2
-                   );
-                //NUEVO TECNICO RESPONSABLE                 
-                string vMotivo3 = "El empleado " + vNombre + " le asignó mantenimiento ATM.";
-                string vMsg3 = "Mantenimiento asignado correctamente.";
-                vService.EnviarMensaje(Session["ATM_Notif_emailTecnicoResponsable"].ToString(),
-                   typeBody.Tecnicos,
-                   vUsu,
-                   DDLModalNewTecnico.SelectedItem.Text,
-                   vMotivo3,
-                   vMsg3
-                   );
+                foreach (DataRow item in vDatos.Rows)
+                {
+                    //ENVIAR A JEFE
+                    if (!item["emailEmpresa"].ToString().Trim().Equals(""))
+                    {
+                        vService.EnviarMensaje(item["emailEmpresa"].ToString(),
+                            typeBody.ReprogramacionJefes,
+                            item["nombre"].ToString(),
+                            item["nombre"].ToString()
+                            //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                            );
+                        //ENVIAR A SOLICITANTE
+                        //vService.EnviarMensaje(item["emailEmpresa"].ToString(),
+                        //    typeBody.Supervisor,
+                        //    item["nombre"].ToString(),
+                        //    item["nombre"].ToString()
+                        //    //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                        //    );
+                        //vFlagEnvioSupervisor = true;
+                    }
+                    //ENVIAR A EDWIN
+                    string vNombre = "EDWIN ALBERTO URREA PENA";
+                    vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIMail"],
+                            typeBody.ReprogramacionJefes,
+                            vNombre,
+                            item["nombre"].ToString()
+                            //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                            );
+                    //ENVIAR A ELVIS
+                    string vNombreJefe = "ELVIS ALEXANDER MONTOYA PEREIRA";
+                    vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIJefeMail"],
+                            typeBody.ReprogramacionJefes,
+                            vNombreJefe,
+                            item["nombre"].ToString()
+                            //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                            );
+                }
             }
-            else
+            //if (vDatosTecnicoResponsable.Rows.Count > 0)
+            //{
+                foreach (DataRow item in vDatos.Rows)
+                {
+                    //ENVIAR A TECNICO RESPONSABLE
+                    if (!Session["ATM_USURESPONSABLE_REPROGRAMAR"].ToString().Trim().Equals(""))
+                    {
+                        vService.EnviarMensaje(Session["ATM_USURESPONSABLE_REPROGRAMAR"].ToString(),
+                            typeBody.Reprogramacion,
+                            Session["ATM_RESPONSABLE"].ToString(),
+                            vDatos.Rows[0]["nombre"].ToString()
+                            //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                            );
+                    }
+                }
+            //}
+            if (vDatosTecnicos.Rows.Count > 0)
             {
-
-                if (Session["ATM_IDZONA_REPROGRAMAR"].ToString() == "1")
+                foreach (DataRow item in vDatos.Rows)
                 {
-                    string vCorreo = "acedillo@bancatlan.hn";
-                    string vNombre = "Adán Cedillo";
-                    string vUsu = "acedillo";
-                    SmtpService vService = new SmtpService();
-                    //SOLICITANTE                
-                    string vMotivo = "Se informa que mantenimiento fué debidamente reprogramado.";
-                    string vMsg = "Puede continuar con el proceso.";
-                    vService.EnviarMensaje(vCorreo,
-                       typeBody.Solicitante,
-                       Session["USUARIO"].ToString(),
-                       vNombre,
-                       vMotivo,
-                       vMsg
-                       );
-                    //SUPERVISOR                 
-                    string vMotivo2 = "El empleado " + vNombre + " solicita reprogramación de mantenimiento ATM.";
-                    string vMsg2 = "Favor realizar reprogramación solicitada.";
-                    vService.EnviarMensaje(vCorreo,
-                       typeBody.Supervisor,
-                       vUsu,
-                       vNombre,
-                       vMotivo2,
-                       vMsg2
-                       );
-                    //SUPERVISOR2                 
-                    string vMotivo3 = "El empleado " + vNombre + " solicita reprogramación de mantenimiento ATM.";
-                    string vMsg3 = "Favor realizar reprogramación solicitada.";
-                    vService.EnviarMensaje(vCorreo,
-                       typeBody.Supervisor,
-                       vUsu,
-                       vNombre,
-                       vMotivo3,
-                       vMsg3
-                       );
+                    //ENVIAR A TECNICOS
+                    if (!item["correo"].ToString().Trim().Equals(""))
+                    {
+                        vService.EnviarMensaje(item["correo"].ToString(),
+                            typeBody.Reprogramacion,
+                            item["nombre"].ToString(),
+                            vDatos.Rows[0]["nombre"].ToString()
+                            //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                            );
+                    }
                 }
-                if (Session["ATM_IDZONA_REPROGRAMAR"].ToString() == "2")
+            }
+            if (vDatosJefeAgencias.Rows.Count > 0)
+            {
+                foreach (DataRow item in vDatos.Rows)
                 {
-                    string vCorreo = "acedillo@bancatlan.hn";
-                    string vNombre = "Adán Cedillo";
-                    string vUsu = "acedillo";
-                    SmtpService vService = new SmtpService();
-                    //SOLICITANTE                
-                    string vMotivo = "Se informa que mantenimiento fué debidamente reprogramado.";
-                    string vMsg = "Puede continuar con el proceso.";
-                    vService.EnviarMensaje(vCorreo,
-                       typeBody.Solicitante,
-                       Session["USUARIO"].ToString(),
-                       vNombre,
-                       vMotivo,
-                       vMsg
-                       );
-                    //SUPERVISOR                 
-                    string vMotivo2 = "El empleado " + vNombre + " solicita reprogramación de mantenimiento ATM.";
-                    string vMsg2 = "Favor realizar reprogramación solicitada.";
-                    vService.EnviarMensaje(vCorreo,
-                       typeBody.Supervisor,
-                       vUsu,
-                       vNombre,
-                       vMotivo2,
-                       vMsg2
-                       );
-                    //SUPERVISOR2                 
-                    string vMotivo3 = "El empleado " + vNombre + " solicita reprogramación de mantenimiento ATM.";
-                    string vMsg3 = "Favor realizar reprogramación solicitada.";
-                    vService.EnviarMensaje(vCorreo,
-                       typeBody.Supervisor,
-                       vUsu,
-                       vNombre,
-                       vMotivo3,
-                       vMsg3
-                       );
-                }
-                if (Session["ATM_IDZONA_REPROGRAMAR"].ToString() == "3")
-                {
-                    string vCorreo = "acedillo@bancatlan.hn";
-                    string vNombre = "Adán Cedillo";
-                    string vUsu = "acedillo";
-                    SmtpService vService = new SmtpService();
-                    //SOLICITANTE                
-                    string vMotivo = "Se informa que mantenimiento fué debidamente reprogramado.";
-                    string vMsg = "Puede continuar con el proceso.";
-                    vService.EnviarMensaje(vCorreo,
-                       typeBody.Solicitante,
-                       Session["USUARIO"].ToString(),
-                       vNombre,
-                       vMotivo,
-                       vMsg
-                       );
-                    //SUPERVISOR                 
-                    string vMotivo2 = "El empleado " + vNombre + " solicita reprogramación de mantenimiento ATM.";
-                    string vMsg2 = "Favor realizar reprogramación solicitada.";
-                    vService.EnviarMensaje(vCorreo,
-                       typeBody.Supervisor,
-                       vUsu,
-                       vNombre,
-                       vMotivo2,
-                       vMsg2
-                       );
-                    //SUPERVISOR2                 
-                    string vMotivo3 = "El empleado " + vNombre + " solicita reprogramación de mantenimiento ATM.";
-                    string vMsg3 = "Favor realizar reprogramación solicitada.";
-                    vService.EnviarMensaje(vCorreo,
-                       typeBody.Supervisor,
-                       vUsu,
-                       vNombre,
-                       vMotivo3,
-                       vMsg3
-                       );
+                    //ENVIAR A JEFES DE AGENCIA
+                    if (!item["correo"].ToString().Trim().Equals(""))
+                    {
+                        vService.EnviarMensaje(item["correo"].ToString(),
+                            typeBody.Reprogramacion,
+                            " Jefe de Agencia, se le informa que se canceló mantenimiento",
+                            vDatos.Rows[0]["nombre"].ToString()
+                            //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                            );
+                    }
                 }
             }
         }
@@ -360,11 +308,11 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                             Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                             if (vInfo == 1)
                             {
+                                //CorreoCancelar();
                                 H5Alerta.Visible = false;
                                 txtAlerta2.Visible = false;
                                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
                                 Mensaje("Verificación cancelada con éxito", WarningType.Success);
-                                //enviarCorreo();
                                 UpdateGridView.Update();
                                 limpiarModalVerificacion();
                                 cargarData();
@@ -391,7 +339,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                                 H5Alerta.Visible = false;
                                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
                                 Mensaje("Verificación cancelada con éxito", WarningType.Success);
-                                //enviarCorreo();
+                               // CorreoCancelar();
                                 UpdateGridView.Update();
                                 limpiarModalVerificacion();
                                 cargarData();
@@ -539,7 +487,9 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                         {
                             txtModalATM.Text = item["NomATM"].ToString();
                             Session["ATM_ID_CANCELAR_VERIF_MODAL"] = item["IDMant"].ToString();
-                            Session["ATM_USURESPONSABLE_REPROGRAMAR"] = item["CorreoTecnico"].ToString();
+                            Session["ATM_USURESPONSABLE_REPROGRAMAR"] = item["CorreoTecnico"].ToString(); 
+                            Session["ATM_RESPONSABLE"] = item["Tecnico"].ToString(); 
+                            Session["ATM_USURESPONSABLE"] = item["Usuario"].ToString();
                             Session["ATM_IDZONA_REPROGRAMAR"] = item["IDZona"].ToString();
                         }
                         TxBuscarTecnicoATM.Text = string.Empty;

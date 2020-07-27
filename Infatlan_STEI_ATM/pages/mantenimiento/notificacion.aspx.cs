@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using System.Configuration;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using Infatlan_STEI_ATM.clases;
@@ -280,126 +281,199 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         {
             string id = Request.QueryString["id"];
             string tipo = Request.QueryString["tipo"];
-            string vCorreo = "acedillo@bancatlan.hn";
-            string vNombre = "Adán Cedillo";
+            Boolean vFlagEnvio = false;
+            String vDestino = "";
             SmtpService vService = new SmtpService();
-
-            if (tipo=="3")
-            {                
-                //SOLICITANTE                
-                string vMotivo = "Se informa que su solicitud fué debidamente aprobado.";
-                string vMsg = "Puede continuar con el proceso.";
-                vService.EnviarMensaje(Session["ATM_CORREOCREADOR"].ToString(),
-                   typeBody.Aprobado,
-                   Session["USUCREADORATM"].ToString(),
-                   Session["ATM_NOMBRECREADOR"].ToString() + Session["ATM_APELLIDOCREADOR"].ToString(),
-                   vMotivo,
-                   vMsg
-                   );
-                //SUPERVISOR                 
-                string vMotivo2 = " fué notificado de la aprobación de su respectiva solicitud.";
-                string vMsg2 = "Solicitud fue aprobado exitosamente.";
-                vService.EnviarMensaje(vCorreo,
-                   typeBody.Supervisor,
-                   Session["USUARIO"].ToString(),
-                   vNombre,
-                   vMotivo2,
-                   vMsg2
-                   );
-                //TECNICORESPONSABLE
-                string vMotivo3 = " se aprobó mantenimiento asignado.";
-                string vMsg3 = "Solicitud fue aprobado exitosamente.";
-                vService.EnviarMensaje(Session["ATM_Notif_emailTecnicoResponsable"].ToString(),
-                   typeBody.Tecnicos,
-                   "",
-                   DLLtecResponsable.SelectedItem.Text,
-                   vMotivo3,
-                   vMsg3
-                   );
-                //TECNICOPARTICIPANTE
-                string vMotivo4 = " se aprobó mantenimiento asignado.";
-                string vMsg4 = "Solicitud fue aprobado exitosamente.";
-                foreach (DataRow item in GVBusqueda.Rows)
-                {                   
-                        vService.EnviarMensaje(item["correo"].ToString(),
-                            typeBody.Tecnicos,
-                            item["idUsuario"].ToString(),
-                            item["nombre"].ToString(),
-                            vMotivo4,
-                            vMsg4
-                            );
-                }
-                //JEFES DE AGENCIA
-                string vMotivo5 = " aprobó mantenimiento programado a su agencia.";
-                string vMsg5 = "Solicitud fue aprobado exitosamente.";
-                foreach (DataRow item in GVLlenaJefeApruebaNotif.Rows)
+            if (tipo == "3")
+            {
+                string vQueryD = "STEISP_ATM_Generales 33,'" + DLLtecResponsable.SelectedValue + "'";
+                DataTable vDatosTecnicoResponsable = vConexion.ObtenerTabla(vQueryD);
+                DataTable vDatos = (DataTable)Session["AUTHCLASS"];
+                DataTable vDatosTecnicos = (DataTable)Session["ATM_EMPLEADOS"];
+                DataTable vDatosJefeAgencias = (DataTable)Session["ATM_JEFES_CARGAR"];
+                if (vDatos.Rows.Count > 0)
                 {
-                    vService.EnviarMensaje(item["Correo"].ToString(),
-                        typeBody.JefeAgencia,
-                        "",
-                        "",
-                        vMotivo5,
-                        vMsg5
-                        );
+                    foreach (DataRow item in vDatos.Rows)
+                    {
+                        //ENVIAR A JEFE
+                        if (!item["emailEmpresa"].ToString().Trim().Equals(""))
+                        {
+                            vService.EnviarMensaje(item["emailEmpresa"].ToString(),
+                                typeBody.Supervisor,
+                                item["nombre"].ToString(),
+                                item["nombre"].ToString()
+                                //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                                );
+                            //ENVIAR A SOLICITANTE
+                            vService.EnviarMensaje(item["emailEmpresa"].ToString(),
+                                typeBody.Supervisor,
+                                item["nombre"].ToString(),
+                                item["nombre"].ToString()
+                                //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                                );
+                            //vFlagEnvioSupervisor = true;
+                        }
+                        //ENVIAR A EDWIN
+                        string vNombre = "EDWIN ALBERTO URREA PENA";
+                        vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIMail"],
+                                typeBody.Supervisor,
+                                vNombre,
+                                item["nombre"].ToString()
+                                //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                                );
+                        //ENVIAR A ELVIS
+                        string vNombreJefe = "ELVIS ALEXANDER MONTOYA PEREIRA";
+                        vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIJefeMail"],
+                                typeBody.Supervisor,
+                                vNombreJefe,
+                                item["nombre"].ToString()
+                                //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                                );
+                    }
+                }
+                if (vDatosTecnicoResponsable.Rows.Count > 0)
+                {
+                    foreach (DataRow item in vDatos.Rows)
+                    {
+                        //ENVIAR A TECNICO RESPONSABLE
+                        if (!item["correo"].ToString().Trim().Equals(""))
+                        {
+                            vService.EnviarMensaje(item["correo"].ToString(),
+                                typeBody.Encargado,
+                                item["nombre"].ToString() + " " + item["apellidos"].ToString() + " se le informa que se hara mantenimiento la fecha " + txtFechaInicio.Text,
+                                vDatos.Rows[0]["nombre"].ToString()
+                                //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                                );
+                        }
+                    }
+                }
+                if (vDatosTecnicos.Rows.Count > 0)
+                {
+                    foreach (DataRow item in vDatos.Rows)
+                    {
+                        //ENVIAR A TECNICOS
+                        if (!item["correo"].ToString().Trim().Equals(""))
+                        {
+                            vService.EnviarMensaje(item["correo"].ToString(),
+                                typeBody.Tecnicos,
+                                item["nombre"].ToString()+" se le informa que se hara mantenimiento la fecha "+txtFechaInicio.Text,
+                                vDatos.Rows[0]["nombre"].ToString()
+                                //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                                );
+                        }
+                    }
+                }
+                if (vDatosJefeAgencias.Rows.Count > 0)
+                {
+                    foreach (DataRow item in vDatos.Rows)
+                    {
+                        //ENVIAR A JEFES DE AGENCIA
+                        if (!item["correo"].ToString().Trim().Equals(""))
+                        {
+                            vService.EnviarMensaje(item["correo"].ToString(),
+                                typeBody.Encargado,
+                                " Jefe de Agencia, se le informa que se hara mantenimiento la fecha "+txtFechaInicio.Text,
+                                vDatos.Rows[0]["nombre"].ToString()
+                                //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                                );
+                        }
+                    }
                 }
             }
             else
             {
-                //SOLICITANTE                
-                string vMotivo = "Se informa que su solicitud fué enviada.";
-                string vMsg = "Su solicitud debe ser aprobado por su jefe inmediato.";
-                vService.EnviarMensaje(vCorreo,
-                   typeBody.Solicitante,
-                   Session["USUARIO"].ToString(),
-                   vNombre,
-                   vMotivo,
-                   vMsg
-                   );
-                //SUPERVISOR                
-                string vMotivo2 = " le envía solicitud de mantenimiento para su respectiva aprobación.";
-                string vMsg2 = "Para continuar con el proceso de notificación debe aprobar dicha solicitud.";
-                vService.EnviarMensaje(vCorreo,
-                   typeBody.Supervisor,
-                   Session["USUARIO"].ToString(),
-                   vNombre,
-                   vMotivo2,
-                   vMsg2
-                   );
-                //TECNICORESPONSABLE
-                string vMotivo3 = " se le informa que se le asignó un mantenimiento de ATM.";
-                string vMsg3 = "Dicha solicitud debe ser aprobado por su jefe inmediato.";
-                vService.EnviarMensaje(Session["ATM_Notif_emailTecnicoResponsable"].ToString(),
-                   typeBody.Tecnicos,
-                   "",
-                   DLLtecResponsable.SelectedItem.Text,
-                   vMotivo3,
-                   vMsg3
-                   );
-                //TECNICOPARTICIPANTE
-                string vMotivo4 = " se le informa que formará parte de equipo de mantenimiento de ATM";
-                string vMsg4 = "Dicha solicitud debe ser aprobado por su jefe inmediato.";
-                foreach (DataRow item in GVBusqueda.Rows)
+                string vQueryD = "STEISP_ATM_Generales 33,'" + DLLtecResponsable.SelectedValue + "'";
+                DataTable vDatosTecnicoResponsable = vConexion.ObtenerTabla(vQueryD);
+                DataTable vDatos = (DataTable)Session["AUTHCLASS"];
+                DataTable vDatosTecnicos = (DataTable)Session["ATM_EMPLEADOS"];
+                DataTable vDatosJefeAgencias = (DataTable)Session["NotifJefeAgenciaATM"];
+                if (vDatos.Rows.Count > 0)
                 {
-                    vService.EnviarMensaje(item["correo"].ToString(),
-                        typeBody.Tecnicos,
-                        item["idUsuario"].ToString(),
-                        item["nombre"].ToString(),
-                        vMotivo4,
-                        vMsg4
-                        );
+                    foreach (DataRow item in vDatos.Rows)
+                    {
+                        //ENVIAR A JEFE
+                        if (!item["emailEmpresa"].ToString().Trim().Equals(""))
+                        {
+                            vService.EnviarMensaje(item["emailEmpresa"].ToString(),
+                                typeBody.Supervisor,
+                                item["nombre"].ToString(),
+                                item["nombre"].ToString()
+                                //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                                );
+                            //ENVIAR A SOLICITANTE
+                            vService.EnviarMensaje(item["emailEmpresa"].ToString(),
+                                typeBody.Supervisor,
+                                item["nombre"].ToString(),
+                                item["nombre"].ToString()
+                                //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                                );
+                            //vFlagEnvioSupervisor = true;
+                        }
+                        //ENVIAR A EDWIN
+                        string vNombre = "EDWIN ALBERTO URREA PENA";
+                        vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIMail"],
+                                typeBody.Supervisor,
+                                vNombre,
+                                item["nombre"].ToString()
+                                //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                                );
+                        //ENVIAR A ELVIS
+                        string vNombreJefe = "ELVIS ALEXANDER MONTOYA PEREIRA";
+                        vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIJefeMail"],
+                                typeBody.Supervisor,
+                                vNombreJefe,
+                                item["nombre"].ToString()
+                                //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                                );
+                    }
                 }
-                //JEFES DE AGENCIA
-                string vMotivo5 = " solicita permiso para realizar mantenimiento programado a su agencia.";
-                string vMsg5 = "Solicitud debe ser aprobado por su persona.";
-                foreach (DataRow item in GVjefesAgencias.Rows)
+                if (vDatosTecnicoResponsable.Rows.Count > 0)
                 {
-                    vService.EnviarMensaje(item["mail"].ToString(),
-                        typeBody.JefeAgencia,
-                        "",
-                        "",
-                        vMotivo5,
-                        vMsg5
-                        );
+                    foreach (DataRow item in vDatos.Rows)
+                    {
+                        //ENVIAR A TECNICO RESPONSABLE
+                        if (!item["correo"].ToString().Trim().Equals(""))
+                        {
+                            vService.EnviarMensaje(item["correo"].ToString(),
+                                typeBody.Encargado,
+                                item["nombre"].ToString()+" "+ item["apellidos"].ToString() + " se le informa que se hara mantenimiento la fecha " + txtFechaInicio.Text,
+                                vDatos.Rows[0]["nombre"].ToString()
+                                //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                                );
+                        }
+                    }
+                }
+                if (vDatosTecnicos.Rows.Count > 0)
+                {
+                    foreach (DataRow item in vDatos.Rows)
+                    {
+                        //ENVIAR A TECNICOS
+                        if (!item["correo"].ToString().Trim().Equals(""))
+                        {
+                            vService.EnviarMensaje(item["correo"].ToString(),
+                                typeBody.Tecnicos,
+                                item["nombre"].ToString() + " se le informa que se hara mantenimiento la fecha " + txtFechaInicio.Text,
+                                vDatos.Rows[0]["nombre"].ToString()
+                                //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                                );
+                        }
+                    }
+                }
+                if (vDatosJefeAgencias.Rows.Count > 0)
+                {
+                    foreach (DataRow item in vDatos.Rows)
+                    {
+                        //ENVIAR A TECNICOS
+                        if (!item["correo"].ToString().Trim().Equals(""))
+                        {
+                            vService.EnviarMensaje(item["correo"].ToString(),
+                                typeBody.Encargado,
+                                " Jefe de Agencia, se le informa que se hara mantenimiento la fecha "+txtFechaInicio.Text,
+                                vDatos.Rows[0]["nombre"].ToString()
+                                //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                                );
+                        }
+                    }
                 }
             }
         }
@@ -424,8 +498,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                         //Enviar Correo
                         LimpiarNotificacion();
                         UpNotif.Update();
-                        //Session.Clear();
-                        //Session["USUARIO"] = "acedillo";
+
                         Response.Redirect("buscarAprobarNotificacion.aspx");
                     }
                     else
@@ -506,6 +579,104 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             }
         }
 
+        void CorreoCancelar()
+        {
+            SmtpService vService = new SmtpService();
+            string vQueryD = "STEISP_ATM_Generales 33,'" + DLLtecResponsable.SelectedValue + "'";
+            DataTable vDatosTecnicoResponsable = vConexion.ObtenerTabla(vQueryD);
+            DataTable vDatos = (DataTable)Session["AUTHCLASS"];
+            DataTable vDatosTecnicos = (DataTable)Session["ATM_EMPLEADOS"];
+            DataTable vDatosJefeAgencias = (DataTable)Session["ATM_JEFES_CARGAR"];
+            if (vDatos.Rows.Count > 0)
+            {
+                foreach (DataRow item in vDatos.Rows)
+                {
+                    //ENVIAR A JEFE
+                    if (!item["emailEmpresa"].ToString().Trim().Equals(""))
+                    {
+                        vService.EnviarMensaje(item["emailEmpresa"].ToString(),
+                            typeBody.ReprogramacionJefes,
+                            item["nombre"].ToString(),
+                            item["nombre"].ToString()
+                            //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                            );
+                        //ENVIAR A SOLICITANTE
+                        //vService.EnviarMensaje(item["emailEmpresa"].ToString(),
+                        //    typeBody.Supervisor,
+                        //    item["nombre"].ToString(),
+                        //    item["nombre"].ToString()
+                        //    //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                        //    );
+                        //vFlagEnvioSupervisor = true;
+                    }
+                    //ENVIAR A EDWIN
+                    string vNombre = "EDWIN ALBERTO URREA PENA";
+                    vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIMail"],
+                            typeBody.ReprogramacionJefes,
+                            vNombre,
+                            item["nombre"].ToString()
+                            //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                            );
+                    //ENVIAR A ELVIS
+                    string vNombreJefe = "ELVIS ALEXANDER MONTOYA PEREIRA";
+                    vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIJefeMail"],
+                            typeBody.ReprogramacionJefes,
+                            vNombreJefe,
+                            item["nombre"].ToString()
+                            //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                            );
+                }
+            }
+            if (vDatosTecnicoResponsable.Rows.Count > 0)
+            {
+                foreach (DataRow item in vDatos.Rows)
+                {
+                    //ENVIAR A TECNICO RESPONSABLE
+                    if (!item["correo"].ToString().Trim().Equals(""))
+                    {
+                        vService.EnviarMensaje(item["correo"].ToString(),
+                            typeBody.Reprogramacion,
+                            item["nombre"].ToString() + " " + item["apellidos"].ToString(),
+                            vDatos.Rows[0]["nombre"].ToString()
+                            //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                            );
+                    }
+                }
+            }
+            if (vDatosTecnicos.Rows.Count > 0)
+            {
+                foreach (DataRow item in vDatos.Rows)
+                {
+                    //ENVIAR A TECNICOS
+                    if (!item["correo"].ToString().Trim().Equals(""))
+                    {
+                        vService.EnviarMensaje(item["correo"].ToString(),
+                            typeBody.Reprogramacion,
+                            item["nombre"].ToString(),
+                            vDatos.Rows[0]["nombre"].ToString()
+                            //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                            );
+                    }
+                }
+            }
+            if (vDatosJefeAgencias.Rows.Count > 0)
+            {
+                foreach (DataRow item in vDatos.Rows)
+                {
+                    //ENVIAR A JEFES DE AGENCIA
+                    if (!item["correo"].ToString().Trim().Equals(""))
+                    {
+                        vService.EnviarMensaje(item["correo"].ToString(),
+                            typeBody.Reprogramacion,
+                            " Jefe de Agencia, se le informa que se canceló mantenimiento",
+                            vDatos.Rows[0]["nombre"].ToString()
+                            //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                            );
+                    }
+                }
+            }
+        }
+
         void CancelarNotificacion()
         {
            
@@ -518,6 +689,12 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                 if (vInfo == 1)
                 {
+                    //ENVIAR CORREO
+
+                    //CorreoCancelar();
+
+                    //ENVIAR CORREO
+
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
                     Mensaje("Mantenimiento cancelado con éxito, ahora está en lista de reprogramación", WarningType.Success);
                    
@@ -652,6 +829,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 vDatos = vConexion.ObtenerTabla("STEISP_ATM_Generales 16, '" + Session["codNotificacion"] + "'");
                 GVBusqueda.DataSource = vDatos;
                 GVBusqueda.DataBind();
+                Session["ATM_EMPLEADOS"] = vDatos;
             }
             catch (Exception Ex)
             {
@@ -664,7 +842,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 vDatos2 = vConexion.ObtenerTabla("STEISP_ATM_Generales 17, '" + Session["codNotificacion"] + "'");
                 GVLlenaJefeApruebaNotif.DataSource = vDatos2;
                 GVLlenaJefeApruebaNotif.DataBind();
-               
+                Session["ATM_JEFES_CARGAR"] = vDatos2;
             }
             catch (Exception Ex)
             {
@@ -984,6 +1162,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     string CorreoJefe = correoJefe;
 
                     vData.Columns.Add("Correo");
+                    //vData.Columns.Add("Nombre");
                     if (vDatos == null)
                         vDatos = vData.Clone();
                     if (vDatos != null)
@@ -1070,65 +1249,9 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal2();", true);
                         Mensaje("Notificación enviada a reprogramación exitoso", WarningType.Success);
                         ////CORREO
-                        //string vCorreo = "acedillo@bancatlan.hn";
-                        //string vNombre = "Adán Cedillo";
-                        //SmtpService vService = new SmtpService();
-                        ////SOLICITANTE                
-                        //string vMotivo = "Se informa que su solicitud fué debidamente aprobado.";
-                        //string vMsg = "Puede continuar con el proceso.";
-                        //vService.EnviarMensaje(Session["ATM_CORREOCREADOR"].ToString(),
-                        //   typeBody.Aprobado,
-                        //   Session["USUCREADORATM"].ToString(),
-                        //   Session["ATM_NOMBRECREADOR"].ToString() + Session["ATM_APELLIDOCREADOR"].ToString(),
-                        //   vMotivo,
-                        //   vMsg
-                        //   );
-                        ////SUPERVISOR                 
-                        //string vMotivo2 = " fué notificado de la aprobación de su respectiva solicitud.";
-                        //string vMsg2 = "Solicitud fue aprobado exitosamente.";
-                        //vService.EnviarMensaje(vCorreo,
-                        //   typeBody.Supervisor,
-                        //   Session["USUARIO"].ToString(),
-                        //   vNombre,
-                        //   vMotivo2,
-                        //   vMsg2
-                        //   );
-                        ////TECNICORESPONSABLE
-                        //string vMotivo3 = " se aprobó mantenimiento asignado.";
-                        //string vMsg3 = "Solicitud fue aprobado exitosamente.";
-                        //vService.EnviarMensaje(Session["ATM_Notif_emailTecnicoResponsable"].ToString(),
-                        //   typeBody.Tecnicos,
-                        //   "",
-                        //   DLLtecResponsable.SelectedItem.Text,
-                        //   vMotivo3,
-                        //   vMsg3
-                        //   );
-                        ////TECNICOPARTICIPANTE
-                        //string vMotivo4 = " se aprobó mantenimiento asignado.";
-                        //string vMsg4 = "Solicitud fue aprobado exitosamente.";
-                        //foreach (DataRow item in GVBusqueda.Rows)
-                        //{
-                        //    vService.EnviarMensaje(item["correo"].ToString(),
-                        //        typeBody.Tecnicos,
-                        //        item["idUsuario"].ToString(),
-                        //        item["nombre"].ToString(),
-                        //        vMotivo4,
-                        //        vMsg4
-                        //        );
-                        //}
-                        ////JEFES DE AGENCIA
-                        //string vMotivo5 = " aprobó mantenimiento programado a su agencia.";
-                        //string vMsg5 = "Solicitud fue aprobado exitosamente.";
-                        //foreach (DataRow item in GVLlenaJefeApruebaNotif.Rows)
-                        //{
-                        //    vService.EnviarMensaje(item["Correo"].ToString(),
-                        //        typeBody.JefeAgencia,
-                        //        "",
-                        //        "",
-                        //        vMotivo5,
-                        //        vMsg5
-                        //        );
-                        //}
+
+                       //CorreoCancelar();
+
                         ////CORREO
                         LimpiarNotificacion();
                         UpNotif.Update();
