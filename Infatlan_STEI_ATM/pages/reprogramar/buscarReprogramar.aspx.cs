@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.Sql;
 using System.Data.SqlClient;
+using System.Configuration;
 using Infatlan_STEI_ATM.clases;
 
 namespace Infatlan_STEI_ATM.pages.reprogramar
@@ -115,36 +116,7 @@ namespace Infatlan_STEI_ATM.pages.reprogramar
             }
         }
 
-        void EnviarCorreo()
-        {
-            string id = Request.QueryString["id"];
-            string tipo = Request.QueryString["tipo"];
-            string vCorreo = "acedillo@bancatlan.hn";
-            string vNombre = "Adán Cedillo";
-            string vUsu = "acedillo";
-            SmtpService vService = new SmtpService();
-          
-                //SOLICITANTE                
-                string vMotivo = "Se informa que mantenimiento fué reprogramado.";
-                string vMsg = "Puede continuar con el proceso.";
-                vService.EnviarMensaje(vCorreo,
-                   typeBody.Aprobado,
-                   Session["USUARIO"].ToString(),
-                   vNombre,
-                   vMotivo,
-                   vMsg
-                   );
-                //SUPERVISOR                 
-                string vMotivo2 = "El empleado fué notificado de la reprogramación de mantenimiento.";
-                string vMsg2 = "Solicitud fue aprobado exitosamente.";
-                vService.EnviarMensaje(vCorreo,
-                   typeBody.Supervisor,
-                   vUsu,
-                   vNombre,
-                   vMotivo2,
-                   vMsg2
-                   );          
-        }
+        
         protected void GVBusqueda_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             H5Alerta.Visible = false;
@@ -191,7 +163,56 @@ namespace Infatlan_STEI_ATM.pages.reprogramar
                 Mensaje(Ex.Message, WarningType.Danger);
             }
         }
-
+        void CorreoReprogramar()
+        {
+            SmtpService vService = new SmtpService();
+            //string vQueryD = "STEISP_ATM_Generales 33,'" + DLLtecResponsable.SelectedValue + "'";
+            //DataTable vDatosTecnicoResponsable = vConexion.ObtenerTabla(vQueryD);
+            DataTable vDatos = (DataTable)Session["AUTHCLASS"];
+            //DataTable vDatosTecnicos = (DataTable)Session["ATM_EMPLEADOS"];
+            //DataTable vDatosJefeAgencias = (DataTable)Session["ATM_JEFES_CARGAR"];
+            if (vDatos.Rows.Count > 0)
+            {
+                foreach (DataRow item in vDatos.Rows)
+                {
+                    //ENVIAR A JEFE
+                    if (!item["emailEmpresa"].ToString().Trim().Equals(""))
+                    {
+                        vService.EnviarMensaje(item["emailEmpresa"].ToString(),
+                            typeBody.ReprogramacionSolicitante,
+                            item["nombre"].ToString()+" se he reprogramado mantenimiento para la fecha: "+txtNewFechaInicio.Text,
+                            item["nombre"].ToString()
+                            //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                            );
+                        //ENVIAR A SOLICITANTE
+                        vService.EnviarMensaje(item["emailEmpresa"].ToString(),
+                            typeBody.ReprogramacionLista,
+                            item["nombre"].ToString() + " se he reprogramado mantenimiento para la fecha: " + txtNewFechaInicio.Text,
+                            item["nombre"].ToString()
+                            //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                            );
+                        vFlagEnvioSupervisor = true;
+                    }
+                    //ENVIAR A EDWIN
+                    string vNombre = "EDWIN ALBERTO URREA PENA";
+                    vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIMail"],
+                            typeBody.ReprogramacionLista,
+                            vNombre + " se he reprogramado mantenimiento para la fecha: " + txtNewFechaInicio.Text,
+                            item["nombre"].ToString()
+                            //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                            );
+                    //ENVIAR A ELVIS
+                    string vNombreJefe = "ELVIS ALEXANDER MONTOYA PEREIRA";
+                    vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIJefeMail"],
+                            typeBody.ReprogramacionLista,
+                            vNombreJefe + " se he reprogramado mantenimiento para la fecha: " + txtNewFechaInicio.Text,
+                            item["nombre"].ToString()
+                            //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                            );
+                }
+            }
+            
+        }
         protected void btnReprogramarNotif_Click(object sender, EventArgs e)
         {
             
@@ -212,6 +233,7 @@ namespace Infatlan_STEI_ATM.pages.reprogramar
                     Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                     if (vInfo == 1)
                     {
+                        CorreoReprogramar();
                         H5Alerta.Visible = false;
                         txtAlerta1.Visible = false;
                         //ELIMINAR JEFES DE AGENCIA
