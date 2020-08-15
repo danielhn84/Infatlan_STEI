@@ -358,6 +358,47 @@
         </div>
     </div>
 
+    <%--Insatisfacciones--%>
+    <div class="card">
+        <div class="card-header" role="tab" id="heading7">
+            <a class="link" data-toggle="collapse" data-parent="#accordion2" href="#collapse7" aria-expanded="true" aria-controls="collapse7">
+                <h4 class="card-title">Insatisfacciones</h4>
+            </a>
+        </div>
+        <div id="collapse7" class="collapse" role="tabpanel" aria-labelledby="headingOne11">
+            <div class="card-body">
+                <div class="card-body">
+                    <asp:Label Text="No hay ordenes de servicio con calificacion menor a 3" runat="server" ID="LbInsatisfaccion" />
+                    <div class="row col-12">
+                        <div class="table-responsive">
+                            <asp:UpdatePanel runat="server" ID="UpdatePanel1">
+                                <ContentTemplate>
+                                    <asp:GridView ID="GvInsatisfacciones" runat="server"
+                                        CssClass="table table-bordered"
+                                        PagerStyle-CssClass="pgr"
+                                        HeaderStyle-CssClass="table-success"
+                                        RowStyle-CssClass="rows"
+                                        AutoGenerateColumns="false"
+                                        AllowPaging="true"
+                                        GridLines="None" 
+                                        PageSize="10" OnPageIndexChanging="GvInsatisfacciones_PageIndexChanging">
+                                        <Columns>
+                                            <asp:BoundField DataField="orden" HeaderText="Orden" ItemStyle-Width="50" />
+                                            <asp:BoundField DataField="calificacion" HeaderText="Calificacion" ItemStyle-Width="10" />
+                                            <asp:BoundField DataField="responsable" HeaderText="Responsable" ItemStyle-Width="100" />
+                                            <asp:BoundField DataField="comentario" HeaderText="Comentario" />
+                                            <asp:BoundField DataField="observaciones" HeaderText="Observaciones"/>
+                                        </Columns>
+                                    </asp:GridView>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <%--RENDIMIENTO--%>
     <div class="card">
         <div class="card-header" role="tab" id="heading6">

@@ -16,9 +16,13 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
     public partial class contratos : System.Web.UI.Page
     {
         db vConexion = new db();
+        Security vSecurity = new Security();
         protected void Page_Load(object sender, EventArgs e){
             if (!Page.IsPostBack){
                 if (Convert.ToBoolean(Session["AUTH"])){
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 1).Creacion)
+                        BtnNuevo.Visible = true;
+
                     cargarDatos();
                 }else {
                     Response.Redirect("/login.aspx");
@@ -34,6 +38,12 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                 if (vDatos.Rows.Count > 0){
                     GVBusqueda.DataSource = vDatos;
                     GVBusqueda.DataBind();
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 1).Edicion){
+                        foreach (GridViewRow item in GVBusqueda.Rows){
+                            LinkButton LbEdit = item.FindControl("BtnMover") as LinkButton;
+                            LbEdit.Visible = true;
+                        }
+                    }
                     Session["INV_CONTRATOS"] = vDatos;
                 }
 

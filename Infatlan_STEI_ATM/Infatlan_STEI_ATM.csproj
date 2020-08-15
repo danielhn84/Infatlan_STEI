@@ -3447,6 +3447,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clases\generarxml.cs" />
+    <Compile Include="clases\Security.cs" />
     <Compile Include="clases\SmtpService.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

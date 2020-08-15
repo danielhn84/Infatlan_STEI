@@ -3353,6 +3353,7 @@
     <Content Include="js\sidebarmenu.js" />
     <Content Include="js\waves.js" />
     <Content Include="pages\adjuntosENL\Imagen1.png" />
+    <Content Include="pages\Configuracion\articuloDetalle.aspx" />
     <Content Include="pages\Configuracion\cargaRegistros.aspx" />
     <Content Include="pages\Configuracion\contratos.aspx" />
     <Content Include="pages\Configuracion\marcas.aspx" />
@@ -3371,6 +3372,7 @@
     <Compile Include="clases\generales.cs" />
     <Compile Include="clases\generarxml.cs" />
     <Compile Include="clases\LdapService.cs" />
+    <Compile Include="clases\Security.cs" />
     <Compile Include="clases\SmtpService.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -3387,6 +3389,13 @@
     </Compile>
     <Compile Include="main.Master.designer.cs">
       <DependentUpon>main.Master</DependentUpon>
+    </Compile>
+    <Compile Include="pages\Configuracion\articuloDetalle.aspx.cs">
+      <DependentUpon>articuloDetalle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\Configuracion\articuloDetalle.aspx.designer.cs">
+      <DependentUpon>articuloDetalle.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\Configuracion\cargaRegistros.aspx.cs">
       <DependentUpon>cargaRegistros.aspx</DependentUpon>

@@ -3390,6 +3390,7 @@
     <Compile Include="clases\db.cs" />
     <Compile Include="clases\generarxml.cs" />
     <Compile Include="clases\plantillaBanco.cs" />
+    <Compile Include="clases\Security.cs" />
     <Compile Include="clases\SmtpService.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

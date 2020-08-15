@@ -237,6 +237,50 @@ namespace Infatlan_STEI.classes
             return vResultado;
         }
 
+        public String ObtenerCumplimientoSatisfaccion(Object[] vDatos){
+            String vResultado = "";
+            try{
+                using (StringWriter sw = new StringWriter()){
+                    XmlTextWriter vXmlTW = new XmlTextWriter(sw);
+                    vXmlTW.Formatting = Formatting.None;
+
+                    vXmlTW.WriteStartDocument();
+                    vXmlTW.WriteStartElement("DATOS");
+
+                    vXmlTW.WriteStartElement("idReporte");
+                    vXmlTW.WriteString(Convert.ToString(vDatos[0]));
+                    vXmlTW.WriteEndElement();
+
+                    vXmlTW.WriteStartElement("orden");
+                    vXmlTW.WriteString(Convert.ToString(vDatos[1]));
+                    vXmlTW.WriteEndElement();
+
+                    vXmlTW.WriteStartElement("respuesta");
+                    vXmlTW.WriteString(Convert.ToString(vDatos[2]));
+                    vXmlTW.WriteEndElement();
+
+                    vXmlTW.WriteStartElement("responsable");
+                    vXmlTW.WriteString(Convert.ToString(vDatos[3]));
+                    vXmlTW.WriteEndElement();
+
+                    vXmlTW.WriteStartElement("comentario");
+                    vXmlTW.WriteString(Convert.ToString(vDatos[4]));
+                    vXmlTW.WriteEndElement(); 
+                    
+                    vXmlTW.WriteStartElement("observaciones");
+                    vXmlTW.WriteString(Convert.ToString(vDatos[5]));
+                    vXmlTW.WriteEndElement();
+
+                    vXmlTW.WriteEndElement();
+                    vXmlTW.WriteEndDocument();
+                    vResultado = sw.ToString();
+                }
+            }catch{
+                throw;
+            }
+            return vResultado;
+        }
+
         public String ObtenerCumplimientoUsuarios(Object[] vDatos){
             String vResultado = "";
             try{

@@ -16,9 +16,13 @@ namespace Infatlan_STEI.paginas.reportes.ajustes
     public partial class cursos : System.Web.UI.Page
     {
         db vConexion = new db();
+        Security vSecurity = new Security();
         protected void Page_Load(object sender, EventArgs e){
             if (!Page.IsPostBack){
                 if (Convert.ToBoolean(Session["AUTH"])){
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 5).Creacion)
+                        BtnNuevo.Visible = true;
+
                     cargarDatos();
                 }else {
                     Response.Redirect("/login.aspx");
@@ -33,6 +37,12 @@ namespace Infatlan_STEI.paginas.reportes.ajustes
                 if (vDatos.Rows.Count > 0){
                     GVBusqueda.DataSource = vDatos;
                     GVBusqueda.DataBind();
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 5).Edicion){
+                        foreach (GridViewRow item in GVBusqueda.Rows){
+                            LinkButton LbEdit = item.FindControl("BtnEditar") as LinkButton;
+                            LbEdit.Visible = true;
+                        }
+                    }
                     Session["CUMPL_CURSOS"] = vDatos;
                 }
             }catch (Exception ex){

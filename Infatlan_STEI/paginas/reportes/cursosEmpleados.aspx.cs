@@ -17,9 +17,14 @@ namespace Infatlan_STEI.paginas.reportes
     public partial class cursosEmpleados : System.Web.UI.Page
     {
         db vConexion = new db();
+        Security vSecurity = new Security();
         protected void Page_Load(object sender, EventArgs e){
             if (!Page.IsPostBack){
                 if (Convert.ToBoolean(Session["AUTH"])){
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 5).Creacion)
+                        DivCrear.Visible = true;
+
+
                     //CURSOS
                     String vQuery = "[STEISP_CUMPLIMIENTO_Cursos] 1";
                     DataTable vDatos = vConexion.obtenerDataTable(vQuery);
@@ -53,6 +58,18 @@ namespace Infatlan_STEI.paginas.reportes
                 if (vDatos.Rows.Count > 0){
                     GVBusqueda.DataSource = vDatos;
                     GVBusqueda.DataBind();
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 5).Edicion){
+                        foreach (GridViewRow item in GVBusqueda.Rows){
+                            LinkButton LbEdit = item.FindControl("BtnEditar") as LinkButton;
+                            LbEdit.Visible = true;
+                        }
+                    }
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 5).Borrado){
+                        foreach (GridViewRow item in GVBusqueda.Rows){
+                            LinkButton LbDelete = item.FindControl("BtnBorrar") as LinkButton;
+                            LbDelete.Visible = true;
+                        }
+                    }
                     Session["CUMPL_EVALUACIONES"] = vDatos;
                 }
 
@@ -189,14 +206,20 @@ namespace Infatlan_STEI.paginas.reportes
                 }
                 GvAsignar.DataSource = vDatos;
                 GvAsignar.DataBind();
-                Session["ATM_MATERIALES_VERIF"] = vDatos;
+                Session["CUMPL_EVALUACION_ASIGNAR"] = vDatos;
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
 
         protected void GvAsignar_PageIndexChanging(object sender, GridViewPageEventArgs e){
-
+            try{
+                GvAsignar.PageIndex = e.NewPageIndex;
+                GvAsignar.DataSource = (DataTable)Session["CUMPL_EVALUACION_ASIGNAR"];
+                GvAsignar.DataBind();
+            }catch (Exception ex){
+                Mensaje(ex.Message, WarningType.Danger);
+            }
         }
 
         protected void BtnAsignar_Click(object sender, EventArgs e){

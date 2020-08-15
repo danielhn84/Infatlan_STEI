@@ -15,12 +15,20 @@ namespace Infatlan_STEI_Inventario.pages
 {
     public partial class articulos : System.Web.UI.Page
     {
+        Security vSecurity = new Security();
         db vConexion = new db();
         protected void Page_Load(object sender, EventArgs e){
             DDLContratos.CssClass = "select2 form-control custom-select";
 
             if (!Page.IsPostBack){
                 if (Convert.ToBoolean(Session["AUTH"])){
+
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 1).Creacion) { 
+                        BtnNuevoEDC.Visible = true;
+                        BtnNuevo.Visible = true;
+                        BtnNuevoEnlace.Visible = true;
+                    }
+
                     limpiarSessiones();
                     cargarDatos();
                     cargarDatosEDC();
@@ -42,6 +50,13 @@ namespace Infatlan_STEI_Inventario.pages
 
                 if (vDatos.Rows.Count > 0){
                     GVBusqueda.DataSource = vDatos;
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 1).Edicion){
+                        LinkButton LbEdit = GVBusqueda.FindControl("BtnEditar") as LinkButton;
+                        LinkButton LbAdd = GVBusqueda.FindControl("BtnInfo") as LinkButton;
+                        LbEdit.Visible = true;
+                        LbAdd.Visible = true;
+                    }
+
                     GVBusqueda.DataBind();
                     Session["INV_STOCK"] = vDatos;
                 }
@@ -120,6 +135,11 @@ namespace Infatlan_STEI_Inventario.pages
 
                 if (vDatos.Rows.Count > 0){
                     GvBusquedaEDC.DataSource = vDatos;
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 1).Edicion){
+                        LinkButton LbEdit = GvBusquedaEDC.FindControl("BtnEditar") as LinkButton;
+                        LbEdit.Visible = true;
+                    }
+
                     GvBusquedaEDC.DataBind();
                     Session["INV_STOCKEDC"] = vDatos;
                 }
@@ -185,6 +205,14 @@ namespace Infatlan_STEI_Inventario.pages
                 if (vDatos.Rows.Count > 0){
                     GvEnlaces.DataSource = vDatos;
                     GvEnlaces.DataBind();
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 1).Edicion){
+                        foreach (GridViewRow item in GvEnlaces.Rows){
+                            LinkButton LbEdit = item.FindControl("BtnEditar") as LinkButton;
+                            LinkButton LbAdjunto = item.FindControl("BtnAdjunto") as LinkButton;
+                            LbEdit.Visible = true;
+                            LbAdjunto.Visible = true;
+                        }
+                    }
                     Session["INV_ENLACES"] = vDatos;
                 }
 

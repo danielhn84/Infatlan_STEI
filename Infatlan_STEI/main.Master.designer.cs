@@ -105,6 +105,24 @@ namespace Infatlan_STEI
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl LIInventario;
 
         /// <summary>
+        /// Control LiCumplimiento.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LiCumplimiento;
+
+        /// <summary>
+        /// Control LIFormulario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LIFormulario;
+
+        /// <summary>
         /// Control FormaPrincipal.
         /// </summary>
         /// <remarks>

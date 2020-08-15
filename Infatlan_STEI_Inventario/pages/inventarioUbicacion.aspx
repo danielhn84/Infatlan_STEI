@@ -73,7 +73,7 @@
                                 <asp:BoundField DataField="precio" HeaderText="Total" />
                                 <asp:TemplateField HeaderText="Seleccione" HeaderStyle-Width="13%">
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="BtnMover" runat="server" class="btn btn-info mr-2" Title="Mover" CommandArgument='<%# Eval("idInventario") %>' CommandName="MoverArticulo">
+                                        <asp:LinkButton ID="BtnMover" Visible="false" runat="server" class="btn btn-info mr-2" Title="Mover" CommandArgument='<%# Eval("idInventario") %>' CommandName="MoverArticulo">
                                             <i class="icon-refresh" ></i>
                                         </asp:LinkButton>
                                     </ItemTemplate>

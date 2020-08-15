@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data;
 
-namespace Infatlan_STEI.classes
+namespace Infatlan_STEI_Inventario.clases
 {
     public class Security{
         db vConexion = new db();
@@ -17,13 +17,13 @@ namespace Infatlan_STEI.classes
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
 
                 foreach (DataRow item in vDatos.Rows){
-                    if (Convert.ToBoolean(item["consulta"]))
+                    if (Convert.ToBoolean(item["consulta"].ToString()))
                         vPermiso.Consulta = true;
-                    if (Convert.ToBoolean(item["escritura"]))
+                    if (Convert.ToBoolean(item["escritura"].ToString()))
                         vPermiso.Creacion = true;
-                    if (Convert.ToBoolean(item["edicion"]))
+                    if (Convert.ToBoolean(item["edicion"].ToString()))
                         vPermiso.Edicion = true;
-                    if (Convert.ToBoolean(item["borrar"]))
+                    if (Convert.ToBoolean(item["borrar"].ToString()))
                         vPermiso.Borrado = true;
                 }
             }catch{

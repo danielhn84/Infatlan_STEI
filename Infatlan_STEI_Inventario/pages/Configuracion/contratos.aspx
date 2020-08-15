@@ -53,7 +53,7 @@
                             <div class="col-8">
                                 <asp:TextBox runat="server" PlaceHolder="Ingrese texto y presione Enter" ID="TxBusqueda" AutoPostBack="true" OnTextChanged="TxBusqueda_TextChanged" CssClass="form-control form-control-line"></asp:TextBox>
                             </div>
-                            <asp:Button runat="server" ID="BtnNuevo" CssClass="btn btn-success" Text="Nuevo" OnClick="BtnNuevo_Click" />
+                            <asp:Button runat="server" Visible="false" ID="BtnNuevo" CssClass="btn btn-success" Text="Nuevo" OnClick="BtnNuevo_Click" />
                         </div>
 
                         <div class="table-responsive m-t-20">
@@ -75,7 +75,7 @@
                                     <asp:BoundField DataField="fechaFinal" HeaderText="Fin"/>
                                     <asp:TemplateField HeaderText="Seleccione">
                                         <ItemTemplate>
-                                            <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-info" Title="Editar" CommandArgument='<%# Eval("idContrato") %>' CommandName="EditarContrato">
+                                            <asp:LinkButton ID="BtnEditar" Visible="false" runat="server" class="btn btn-info" Title="Editar" CommandArgument='<%# Eval("idContrato") %>' CommandName="EditarContrato">
                                                 <i class="icon-pencil" ></i>
                                             </asp:LinkButton>
                                             <asp:LinkButton ID="BtnCondiciones" runat="server" class="btn btn-success" Title="Condiciones" CommandArgument='<%# Eval("idContrato") %>' CommandName="verCondiciones">

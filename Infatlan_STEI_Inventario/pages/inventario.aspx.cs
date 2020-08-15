@@ -15,12 +15,18 @@ namespace Infatlan_STEI_Inventario.pages
 {
     public partial class salidas : System.Web.UI.Page
     {
+        Security vSecurity = new Security();
         db vConexion = new db();
         protected void Page_Load(object sender, EventArgs e){
             if (!Page.IsPostBack){
                 if (Convert.ToBoolean(Session["AUTH"])){
                     limpiarSessiones();
                     cargarDatos();
+                    permisos vPermiso = vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 1);
+                    if (vPermiso.Creacion){
+                        navCrear.Visible = true;
+                    }
+
                 }else {
                     Response.Redirect("/login.aspx");
                 }
