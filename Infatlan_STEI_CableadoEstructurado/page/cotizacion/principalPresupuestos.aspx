@@ -20,19 +20,22 @@
 
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Cotización Estudios</h4>
-            <h6 class="card-subtitle">Contabilidad</h6>
+            
             <div class="card-body">
-                <div class="row col-8">
+                <h4 class="card-title">Cotización estudios</h4>
+                <br />
+                <h6 class="card-subtitle"><asp:Label runat="server" ID="Label2" Text="Busqueda de estudios pendientes de cotización."></asp:Label></h6>
+
+                <div class="row">
                     <label class="col-2 col-form-label">Búsqueda</label>
                     <div class="col-7">
                         <asp:TextBox ID="TxBuscarEstudio" runat="server" placeholder="Ej. Ag.Junior- Presione afuera para proceder" class="form-control" AutoPostBack="true" OnTextChanged="TxBuscarEstudio_TextChanged"></asp:TextBox>
                     </div>
                 </div>
-
+            <br />
                 <asp:UpdatePanel ID="udpContabilidad" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
-                        <p class="m-t-20"><asp:Label runat="server" ID="LbDescripcionAprobacion" Text="Estudios revisados pendientes de realizar cotización"></asp:Label></p>
+                        <p class="m-t-20"><asp:Label runat="server" ID="LbDescripcionAprobacion" Text="Estudios pendientes de realizar cotización"></asp:Label></p>
                         <div class="table-responsive">
                             <asp:GridView ID="GVPrincipal" runat="server"
                                 CssClass="table table-bordered"

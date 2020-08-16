@@ -12,6 +12,7 @@ namespace Infatlan_STEI_CableadoEstructurado.page.visitaTecnica
     public partial class aprobacion : System.Web.UI.Page
     {
         db vConexion = new db();
+        Security vSecurity = new Security();
 
         protected void Page_Load(object sender, EventArgs e){
             if (!Page.IsPostBack){
@@ -28,18 +29,22 @@ namespace Infatlan_STEI_CableadoEstructurado.page.visitaTecnica
             }
         }
 
-        void CargarProceso()
-        {
+        void CargarProceso(){
             try{
-                String vQuery = "STEISP_CABLESTRUCTURADO_Aprobacion 4";
+                String vQuery = "STEISP_CABLESTRUCTURADO_Aprobacion 4 ";
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
-
-                GVAprobacion.DataSource = vDatos;
-                GVAprobacion.DataBind();
-                Session["CE_DATOSAPROBACION"] = vDatos;
-                udpAprobacion.Update();
-
-                if (vDatos.Rows.Count == 0){
+                if (vDatos.Rows.Count > 0){
+                    GVAprobacion.DataSource = vDatos;
+                    GVAprobacion.DataBind();
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 4).Edicion){
+                        foreach (GridViewRow item in GVAprobacion.Rows){
+                            LinkButton LbEdit = item.FindControl("BtnEditar") as LinkButton;
+                            LbEdit.Visible = true;
+                        }
+                    }
+                    Session["CE_DATOSAPROBACION"] = vDatos;
+                    udpAprobacion.Update();
+                }else{
                     LbDescripcionGV.Text = "No hay estudios pendientes";
                 }
             }catch (Exception Ex) {

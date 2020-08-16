@@ -123,7 +123,112 @@
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="navAgencias" role="tabpanel" aria-labelledby="nav-cargar-tab">
+                <div class="tab-pane fade show active" id="navInventario" role="tabpanel" aria-labelledby="nav-cargar-tab">
+                    <div class="row m-t-10">
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card-body">
+                                <h5 class="card-title">TOTAL STOCK</h5>
+                                <div class="d-flex no-block align-items-center m-t-20 m-b-20">
+                                    <div id="sparklinedash"></div>
+                                    <div class="ml-auto">
+                                        <h2 class="text-success"><i class="ti-arrow-up"></i> <span class="counter"><asp:Label runat="server" ID="LbStock"></asp:Label></span></h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="sparkline9" class="sparkchart"></div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card-body">
+                                <h5 class="card-title">EQUIPOS COMUNICACION</h5>
+                                <div class="d-flex no-block align-items-center m-t-20 m-b-20">
+                                    <div id="sparklinedash2"></div>
+                                    <div class="ml-auto">
+                                        <h2 class="text-purple"><i class="ti-arrow-up"></i> <span class="counter"><asp:Label runat="server" ID="LbEDC"></asp:Label></span></h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="sparkline10" class="sparkchart"></div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card-body">
+                                <h5 class="card-title">ENLACES</h5>
+                                <div class="d-flex no-block align-items-center m-t-20 m-b-20">
+                                    <div id="sparklinedash3"></div>
+                                    <div class="ml-auto">
+                                        <h2 class="text-info"><i class="ti-arrow-up"></i> <span class="counter"><asp:Label runat="server" ID="LbEnlace"></asp:Label></span></h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="sparkline11" class="sparkchart"></div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card-body">
+                                <h5 class="card-title">TRANSACCIONES</h5>
+                                <div class="d-flex no-block align-items-center m-t-20 m-b-20">
+                                    <div id="sparklinedash4"></div>
+                                    <div class="ml-auto">
+                                        <h2 class="text-danger"><i class="ti-arrow-down"></i> <span class="counter"><asp:Label runat="server" ID="LbTran"></asp:Label></span></h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="sparkline12"  class="sparkchart"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-pane fade" id="navAgencias" role="tabpanel" aria-labelledby="nav-cargar-tab">
+                    <div class="row m-t-10">
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card-body">
+                                <h5 class="card-title">LISTAS A LLENAR</h5>
+                                <div class="d-flex no-block align-items-center m-t-20 m-b-20">
+                                    <div id="sparklinedash"></div>
+                                    <div class="ml-auto">
+                                        <h2 class="text-success"><i class="ti-arrow-up"></i> <span class="counter"><asp:Label runat="server" ID="Label1"></asp:Label></span></h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="sparkline9" class="sparkchart"></div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card-body">
+                                <h5 class="card-title">LISTAS A MODIFICAR</h5>
+                                <div class="d-flex no-block align-items-center m-t-20 m-b-20">
+                                    <div id="sparklinedash2"></div>
+                                    <div class="ml-auto">
+                                        <h2 class="text-purple"><i class="ti-arrow-up"></i> <span class="counter"><asp:Label runat="server" ID="Label2"></asp:Label></span></h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="sparkline10" class="sparkchart"></div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card-body">
+                                <h5 class="card-title">MANTENIMIENTOS REALIZADOS</h5>
+                                <div class="d-flex no-block align-items-center m-t-20 m-b-20">
+                                    <div id="sparklinedash3"></div>
+                                    <div class="ml-auto">
+                                        <h2 class="text-info"><i class="ti-arrow-up"></i> <span class="counter"><asp:Label runat="server" ID="Label3"></asp:Label></span></h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="sparkline11" class="sparkchart"></div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card-body">
+                                <h5 class="card-title">TRANSACCIONES</h5>
+                                <div class="d-flex no-block align-items-center m-t-20 m-b-20">
+                                    <div id="sparklinedash4"></div>
+                                    <div class="ml-auto">
+                                        <h2 class="text-danger"><i class="ti-arrow-down"></i> <span class="counter"><asp:Label runat="server" ID="Label4"></asp:Label></span></h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="sparkline12"  class="sparkchart"></div>
+                        </div>
+                    </div>
+
+                    <%--OLD--%>
                     <div class="card-group">
                         <div class="card-body">
                             <div class="row">
@@ -306,59 +411,6 @@
                         </div>
                     </div>
 
-                </div>
-
-                <div class="tab-pane fade" id="navInventario" role="tabpanel" aria-labelledby="nav-cargar-tab">
-                    <div class="row m-t-10">
-                        <div class="col-lg-3 col-md-6">
-                            <div class="card-body">
-                                <h5 class="card-title">TOTAL STOCK</h5>
-                                <div class="d-flex no-block align-items-center m-t-20 m-b-20">
-                                    <div id="sparklinedash"></div>
-                                    <div class="ml-auto">
-                                        <h2 class="text-success"><i class="ti-arrow-up"></i> <span class="counter"><asp:Label runat="server" ID="LbStock"></asp:Label></span></h2>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="sparkline9" class="sparkchart"></div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="card-body">
-                                <h5 class="card-title">EQUIPOS COMUNICACION</h5>
-                                <div class="d-flex no-block align-items-center m-t-20 m-b-20">
-                                    <div id="sparklinedash2"></div>
-                                    <div class="ml-auto">
-                                        <h2 class="text-purple"><i class="ti-arrow-up"></i> <span class="counter"><asp:Label runat="server" ID="LbEDC"></asp:Label></span></h2>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="sparkline10" class="sparkchart"></div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="card-body">
-                                <h5 class="card-title">ENLACES</h5>
-                                <div class="d-flex no-block align-items-center m-t-20 m-b-20">
-                                    <div id="sparklinedash3"></div>
-                                    <div class="ml-auto">
-                                        <h2 class="text-info"><i class="ti-arrow-up"></i> <span class="counter"><asp:Label runat="server" ID="LbEnlace"></asp:Label></span></h2>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="sparkline11" class="sparkchart"></div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="card-body">
-                                <h5 class="card-title">TRANSACCIONES</h5>
-                                <div class="d-flex no-block align-items-center m-t-20 m-b-20">
-                                    <div id="sparklinedash4"></div>
-                                    <div class="ml-auto">
-                                        <h2 class="text-danger"><i class="ti-arrow-down"></i> <span class="counter"><asp:Label runat="server" ID="LbTran"></asp:Label></span></h2>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="sparkline12"  class="sparkchart"></div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

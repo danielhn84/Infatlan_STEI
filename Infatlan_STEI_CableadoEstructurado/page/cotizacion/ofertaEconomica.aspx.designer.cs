@@ -15,6 +15,15 @@ namespace Infatlan_STEI_CableadoEstructurado.page.cotizacion
     {
 
         /// <summary>
+        /// Control LbDescripcion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LbDescripcion;
+
+        /// <summary>
         /// Control updBuscarAprobacion.
         /// </summary>
         /// <remarks>
@@ -40,15 +49,6 @@ namespace Infatlan_STEI_CableadoEstructurado.page.cotizacion
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel udpContabilidad;
-
-        /// <summary>
-        /// Control LbTituloferta.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LbTituloferta;
 
         /// <summary>
         /// Control LbDescripcionOferta.

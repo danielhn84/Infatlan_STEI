@@ -1,16 +1,26 @@
-﻿<%@ Page Title="" Language="C#"  MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="visitaTecnica.aspx.cs" Inherits="Infatlan_STEI_CableadoEstructurado.paginas.estudioEstructurado" Culture="es-ES" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="visitaTecnica.aspx.cs" Inherits="Infatlan_STEI_CableadoEstructurado.paginas.estudioEstructurado" Culture="es-ES" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
 
 
     <meta lang="es-es">
-    <style> 
-        .hidden{
-            display:none;
+    <style>
+        .hidden {
+            display: none;
         }
-    </style>
+    </style> 
     <script src="http://code.jquery.com/jquery-1.10.2.min.js" type="text/javascript"></script>
     <script src="js/execute.js"></script>
+    <script type="text/javascript">
+         var url = document.location.toString();
+         if (url.match('#')) {
+             $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
+         }
+
+         $('.nav-tabs a').on('shown.bs.tab', function (e) {
+             window.location.hash = e.target.hash;
+         })
+    </script>
 
     <script type="text/javascript">
         //Imagen 1
@@ -171,12 +181,11 @@
 
     </script>
 
-
-
     <script type="text/javascript">
         //Abrir modal Datos Generales
         function openModalDatosGenerales() {
             $('#MensajeAceptacionModal').modal('show');
+            //$("#btnGuardar").trigger("click");
         }
 
         // Cerrar modal
@@ -207,7 +216,8 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Módulos</a></li>
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Cableado</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:void(0)"><asp:Label ID="Label12" runat="server"></asp:Label></a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">
+                        <asp:Label ID="Label12" runat="server"></asp:Label></a></li>
                     <li class="breadcrumb-item active">
                         <asp:Label ID="Label11" runat="server"></asp:Label>
                     </li>
@@ -221,14 +231,17 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title"><asp:Label ID="lbTituloVisita" runat="server" Text="Creación Estudio"></asp:Label></h4>
-                    <h6 class="card-subtitle">Empresas que abastecen el stock de inventario.</h6>
+                    <h4 class="card-title">
+                        <asp:Label ID="lbTituloVisita" runat="server" Text="Visita técnica"></asp:Label></h4>
+                    <h6 class="card-subtitle">
+                        <asp:Label id="LbDescripcionVisita" runat="server" Text=" Ingreso de datos de la visita técnica."></asp:Label>
+                    </h6>
                     <ul class="nav nav-tabs" role="tablist">
-                        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#nav-Compensatorio" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span><span class="hidden-xs-down">  Datos Generales</span></a> </li>
-                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#nav_EstudioPrevio" role="tab"><span class="hidden-sm-up"><i class="ti-pencil-alt"></i></span><span class="hidden-xs-down">  Estudio Previo</span></a> </li>
-                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#nav_Materiales" role="tab"><span class="hidden-sm-up"><i class="ti-settings"></i></span><span class="hidden-xs-down">  Materiales</span></a> </li>
-                        <li class="nav-item"><a runat="server" id="nav" class="nav-link" data-toggle="tab" href="#nav_Estimacion" role="tab"><span class="hidden-sm-up"><i class="icon-calculator"></i></span><span class="hidden-xs-down">  Estimación de Recursos</span></a> </li>
-                        <li class="nav-item"><a runat="server" id="navAprobacion" class="nav-link" data-toggle="tab" href="#nav_Aprobacion" role="tab"><span class="hidden-sm-up"><i class="ti-check-box"></i></span><span class="hidden-xs-down">  Aprobación Jefe</span></a> </li>
+                        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#nav-Compensatorio" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span><span class="hidden-xs-down">&nbspDatos Generales</span></a> </li>
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#nav_EstudioPrevio" role="tab"><span class="hidden-sm-up"><i class="ti-pencil-alt"></i></span><span class="hidden-xs-down">&nbspEstudio Previo</span></a> </li>
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#nav_Materiales" role="tab"><span class="hidden-sm-up"><i class="ti-settings"></i></span><span class="hidden-xs-down">&nbspMateriales</span></a> </li>
+                        <li class="nav-item"><a runat="server" id="nav" class="nav-link" data-toggle="tab" href="#nav_Estimacion" role="tab"><span class="hidden-sm-up"><i class="icon-calculator"></i></span><span class="hidden-xs-down">&nbspEstimación de Recursos</span></a> </li>
+                        <li class="nav-item"><a runat="server" id="navAprobacion" class="nav-link" data-toggle="tab" href="#nav_Aprobacion" role="tab"><span class="hidden-sm-up"><i class="ti-check-box"></i></span><span class="hidden-xs-down">&nbspAprobación Jefe</span></a> </li>
                     </ul>
 
                     <div class="tab-content tabcontent-border">
@@ -239,8 +252,8 @@
                                     <div class="col-12 grid-margin stretch-card">
                                         <div class="card">
                                             <div class="card-body">
-                                                <h4 class="card-title">Registro de datos generales</h4>
-                                                <br />
+                                                <%--<h5 class="card-subtitle">Registro de datos generales</h5>--%>
+
                                                 <br />
 
                                                 <asp:UpdatePanel runat="server" ID="udpResposable" UpdateMode="Conditional">
@@ -277,7 +290,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group ">
                                                                     <label class="control-label">Agencia</label>
-                                                                        <asp:DropDownList ID="ddlAgencia" runat="server" class="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlAgencia_SelectedIndexChanged" CssClass="select2 form-control custom-select" Style="width: 100%" Enable="false"></asp:DropDownList>
+                                                                    <asp:DropDownList ID="ddlAgencia" runat="server" class="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlAgencia_SelectedIndexChanged" CssClass="select2 form-control custom-select" Style="width: 100%" Enable="false"></asp:DropDownList>
                                                                 </div>
                                                             </div>
 
@@ -353,11 +366,7 @@
                                 <div class="col-12 grid-margin stretch-card">
                                     <div class="card">
                                         <div class="card-body">
-
-
-
-                                            <h4 class="card-title">Estudio previo</h4>
-                                            <br />
+                                            <%--<h4 class="card-title">Estudio previo</h4>--%>
                                             <br />
                                             <%-- Pregunta Telecomunicaciones --%>
 
@@ -372,7 +381,7 @@
                                                         </div>
 
                                                         <div class="col-md-7">
-                                                            <asp:FileUpload ID="fuCuartoTelecomunicaciones" accept=".png,.jpg,.jpeg"  runat="server" AllowMultiple="false" ClientIDMode="AutoID" onchange="img1(this);" Autoposback="true" Enabled="true" />
+                                                            <asp:FileUpload ID="fuCuartoTelecomunicaciones" accept=".png,.jpg,.jpeg" runat="server" AllowMultiple="false" ClientIDMode="AutoID" onchange="img1(this);" Autoposback="true" Enabled="true" />
                                                         </div>
 
                                                         <div class="col-md-5">
@@ -430,7 +439,7 @@
 
                                                                 <div class="col-md-1">
                                                                     <asp:RadioButtonList ID="rblReubicar" runat="server" CssClass="custom-checkbox" BorderStyle="None" RepeatDirection="Horizontal" OnSelectedIndexChanged="rblReubicar_TextChanged" AutoPostBack="true" Enabled="true">
-                                                                          <%--<asp:ListItem Value="si" Text="&nbspSí"></asp:ListItem>--%>
+                                                                        <%--<asp:ListItem Value="si" Text="&nbspSí"></asp:ListItem>--%>
                                                                         <asp:ListItem Value="si" Text="Sí"></asp:ListItem>
                                                                         <asp:ListItem Value="no" Text="No"></asp:ListItem>
                                                                     </asp:RadioButtonList>
@@ -441,7 +450,7 @@
                                                                         <asp:FileUpload ID="fuReubicar" accept=".png,.jpg,.jpeg" runat="server" onchange="img2(this);" Visible="false" Enabled="true" />
                                                                     </div>
                                                                     <div class="form-group">
-                                                                        <img runat="server" id="imgReubicar"  height="400" width="400" src="../../assets/images/image_not_available.png" style="border-width: 0px;" visible="false" />
+                                                                        <img runat="server" id="imgReubicar" height="400" width="400" src="../../assets/images/image_not_available.png" style="border-width: 0px;" visible="false" />
                                                                     </div>
                                                                 </div>
 
@@ -560,8 +569,8 @@
                                                                     <div class="row p-t-20">
                                                                         <div class="col-md-6">
                                                                             <%--<div class="form-group">--%>
-                                                                                <label class="control-label text-danger" runat="server" id="Label7">*</label>
-                                                                                <label class="control-label">¿Cuenta con UPS?</label>
+                                                                            <label class="control-label text-danger" runat="server" id="Label7">*</label>
+                                                                            <label class="control-label">¿Cuenta con UPS?</label>
                                                                             <%--</div>--%>
                                                                         </div>
 
@@ -590,10 +599,10 @@
                                                                 <ContentTemplate>
                                                                     <div class="row p-t-20">
                                                                         <div class="col-md-6">
-                                                                           <%-- <div class="form-group">--%>
-                                                                                <label class="control-label text-danger" runat="server" id="Label8">*</label>
-                                                                                <label class="control-label">¿Cuenta con aire acondicionado?</label>
-                                                                           <%-- </div>--%>
+                                                                            <%-- <div class="form-group">--%>
+                                                                            <label class="control-label text-danger" runat="server" id="Label8">*</label>
+                                                                            <label class="control-label">¿Cuenta con aire acondicionado?</label>
+                                                                            <%-- </div>--%>
                                                                         </div>
 
                                                                         <div class="col-md-1">
@@ -701,7 +710,8 @@
                                                         <div class="col-md-12 align-content-center">
                                                             <div class="form-group">
                                                                 <asp:Label runat="server" ID="lbplano"><h5><b>Plano </b></h5> </asp:Label>
-                                                                <h6><asp:Label runat="server" ID="lbIngresarPlano" Text="Ingresar plano del área o agencia a trabajar"></asp:Label></h6>
+                                                                <h6>
+                                                                    <asp:Label runat="server" ID="lbIngresarPlano" Text="Ingresar plano del área o agencia a trabajar"></asp:Label></h6>
                                                             </div>
                                                         </div>
 
@@ -712,12 +722,12 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                         <iframe runat="server" id="IFramePDF" style="width: 100%; height: 500px; border: none;"></iframe>
-                                                        
-                                                        <br />
-                                                           
-                                                        
 
+                                                        <div class="col-md-12">
+                                                            <iframe runat="server" id="IFramePDF" style="width: 100%; height: 500px; border: none;"></iframe>
+                                                        </div>
+
+                                                        <br />
                                                         <%-- <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <asp:UpdatePanel runat="server" ID="udpLbPlano" UpdateMode="Conditional">
@@ -732,9 +742,6 @@
                                                                 </asp:UpdatePanel>
                                                             </div>
                                                         </div>--%>
-                                                      
-
-
                                                     </div>
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
@@ -751,8 +758,8 @@
                                 <div class="col-12 grid-margin stretch-card">
                                     <div class="card">
                                         <div class="card-body" runat="server" id="bodyMateriales">
-                                            <h4 class="card-title"><asp:Label runat="server" ID="LbTituloMaterialesSoli" Text="Materiales a solicitar según estudio"></asp:Label></h4>
-                                            <br />
+                                            <h5 class="card-subtitle">
+                                                <asp:Label runat="server" ID="LbTituloMaterialesSoli" Text="Materiales a solicitar según estudio"></asp:Label></h5>
                                             <br />
 
                                             <div class="row" id="DivMateriales" runat="server">
@@ -760,8 +767,8 @@
                                                     <asp:UpdatePanel runat="server" ID="udpMetariales" UpdateMode="Conditional">
                                                         <ContentTemplate>
                                                             <div class="form-group">
-                                                                  <asp:label class="control-label" runat="server" ID="LBddlMaterial">Materiales</asp:label>
-                                                                  <asp:DropDownList ID="ddlMateriales" runat="server" CssClass="select2 form-control custom-select" Style="width: 100%" OnSelectedIndexChanged="ddlMateriales_SelectedIndexChanged" AutoPostBack="true" ></asp:DropDownList>
+                                                                <asp:Label class="control-label" runat="server" ID="LBddlMaterial">Materiales</asp:Label>
+                                                                <asp:DropDownList ID="ddlMateriales" runat="server" CssClass="select2 form-control custom-select" Style="width: 100%" OnSelectedIndexChanged="ddlMateriales_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
 
                                                                 <%--<asp:Label class="control-label" Style="margin-bottom:10px" runat="server" ID="LBddlMaterial">Materiales</asp:Label>
                                                                 <asp:DropDownList ID="ddlMateriales" runat="server" AutoPostBack="true" class="form-control" Style="width: 100%" OnSelectedIndexChanged="ddlMateriales_SelectedIndexChanged" CssClass="select2 form-control custom-select"></asp:DropDownList>--%>
@@ -795,7 +802,7 @@
                                                     <asp:UpdatePanel runat="server" ID="udpUnidades" UpdateMode="Conditional">
                                                         <ContentTemplate>
                                                             <div class="form-group ">
-                                                                 <asp:label class="control-label" runat="server" ID="LbunidadMaterial">Medidas</asp:label>
+                                                                <asp:Label class="control-label" runat="server" ID="LbunidadMaterial">Medidas</asp:Label>
                                                                 <asp:DropDownList ID="ddlMedidas" runat="server" CssClass="select2 form-control custom-select" Style="width: 100%" OnSelectedIndexChanged="ddlMedidas_SelectedIndexChanged" AutoPostBack="true" Enabled="true"></asp:DropDownList>
                                                             </div>
                                                         </ContentTemplate>
@@ -814,23 +821,22 @@
 
                                         </div>
                                     </div>
-                                </div>
-                            </div>
 
-                            <asp:UpdatePanel ID="UpdateDivMateriales" runat="server" UpdateMode="Conditional">
-                                <ContentTemplate>
-                                    <div class="col-12 grid-margin stretch-card">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <asp:UpdatePanel ID="UpdatePanel10" runat="server" UpdateMode="Conditional">
-                                                    <ContentTemplate>
-                                                        <div class="row">
+
+                                    <asp:UpdatePanel ID="UpdateDivMateriales" runat="server" UpdateMode="Conditional">
+                                        <ContentTemplate>
+                                            <%--<div class="col-12 grid-margin stretch-card">--%>
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <asp:UpdatePanel ID="UpdatePanel10" runat="server" UpdateMode="Conditional">
+                                                        <ContentTemplate>
+                                                            <%--<div class="row">--%>
                                                             <div class="form-group">
-                                                                <h4 class="card-title" ><asp:Label runat="server" ID="LbTituloMaterial" Text=""></asp:Label></h4>
-                                                                <p><asp:Label runat="server" ID="LbDescrpcionMaterial" Text=""></asp:Label></p>
+                                                                <%--<h4 class="card-title" ><asp:Label runat="server" ID="LbTituloMaterial" Text=""></asp:Label></h4>--%>
+
+                                                                <h5 class="card-subtitle">
+                                                                    <asp:Label runat="server" ID="LbDescrpcionMaterial" Text="Materiales ingresados."></asp:Label></h5>
                                                             </div>
-                                                         </div>
-                                                        <div class="row">
                                                             <div class="table-responsive">
                                                                 <asp:GridView ID="GVMateriales" runat="server"
                                                                     CssClass="table table-bordered"
@@ -846,11 +852,11 @@
                                                                     OnRowCommand="GVMateriales_RowCommand">
                                                                     <Columns>
                                                                         <%--<asp:BoundField DataField="idEstudio" HeaderText="idEstudio" Visible="false" />--%>
-                                                                        <asp:BoundField DataField="numero" HeaderText="Numero" HeaderStyle-CssClass="hidden" ItemStyle-CssClass="hidden"/>
+                                                                        <asp:BoundField DataField="numero" HeaderText="Numero" HeaderStyle-CssClass="hidden" ItemStyle-CssClass="hidden" />
                                                                         <asp:BoundField DataField="nombre" HeaderText="Material" />
                                                                         <asp:BoundField DataField="cantidad" HeaderText="Cantidad" />
                                                                         <asp:BoundField DataField="medida" HeaderText="Medidas" />
-                                                                        <asp:TemplateField  HeaderStyle-Width="60px" Visible="true">
+                                                                        <asp:TemplateField HeaderStyle-Width="60px" Visible="true">
                                                                             <ItemTemplate>
                                                                                 <asp:LinkButton ID="BtnBorrar" runat="server" class="btn btn-primary mr-2" CommandArgument='<%# Eval("numero") %>' CommandName="Eliminar" Title="Borrar">
                                                                         <i class="icon-trash" ></i>
@@ -860,14 +866,16 @@
                                                                     </Columns>
                                                                 </asp:GridView>
                                                             </div>
-                                                        </div>
-                                                    </ContentTemplate>
-                                                </asp:UpdatePanel>
+                                                            <%--</div>--%>
+                                                        </ContentTemplate>
+                                                    </asp:UpdatePanel>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </ContentTemplate>
-                            </asp:UpdatePanel>
+                                            <%--</div>--%>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
                         </div>
 
                         <%-- Sección 4 --%>
@@ -876,8 +884,8 @@
                                 <div class="col-12 grid-margin stretch-card">
                                     <div class="card">
                                         <div class="card-body">
-                                            <h4 class="card-title">Estimación de recursos</h4>
-                                            <br />
+                                            <%--<h4 class="card-title">Estimación de recursos</h4>
+                                            <br />--%>
                                             <br />
                                             <div class="row">
 
@@ -922,7 +930,7 @@
                                                     <div class="form-group">
                                                         <asp:UpdatePanel runat="server" ID="updAlimentacion" UpdateMode="Conditional">
                                                             <ContentTemplate>
-                                                                <label class="control-label" style="align-content:center">Alimentación</label>
+                                                                <label class="control-label" style="align-content: center">Alimentación</label>
                                                                 <br />
                                                                 <asp:RadioButtonList ID="rblALimentación" runat="server" Enabled="true">
                                                                     <asp:ListItem Text="&nbspSí" Value="si"></asp:ListItem>
@@ -949,9 +957,12 @@
                                                         <asp:UpdatePanel runat="server" ID="udpGuardar" UpdateMode="Conditional">
                                                             <ContentTemplate>
                                                                 <div style="margin-left: auto; margin-right: auto; text-align: center; width: 40%;">
-                                                                    <asp:Button ID="btnGuardar" runat="server" Text="Guardar" type="button" class="btn btn-block btn-success" OnClick="btnGuardar_Click" Enabled="true" />
+                                                                    <asp:Button ID="btnGuardar" runat="server" Visible="false" Text="Guardar" type="button" class="btn btn-block btn-success" OnClick="btnGuardar_Click" Enabled="true" />
                                                                 </div>
                                                             </ContentTemplate>
+                                                            <%--<Triggers>
+                                                                <asp:PostBackTrigger ControlID="btnGuardar" />
+                                                            </Triggers>--%>
                                                         </asp:UpdatePanel>
                                                     </div>
                                                 </div>
@@ -970,8 +981,8 @@
                                 <div class="col-12 grid-margin stretch-card">
                                     <div class="card">
                                         <div class="card-body">
-                                            <h4 class="card-title">Autorización</h4>
-                                            <br />
+                                            <%--<h4 class="card-title">Autorización</h4>
+                                            <br />--%>
                                             <br />
 
                                             <div class="row">

@@ -19,17 +19,20 @@
     </div>
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Estudios</h4>
-            <h6 class="card-subtitle"><asp:Label runat="server" ID="Label2" Text="Busqueda de estudios pendientes por modificar."></asp:Label></h6>
+            
             <div class="card-body">
-                <div class="row col-8">
-                    <label class="col-2 col-form-label">Búsqueda</label>
+                <h4 class="card-title">Visita técnica</h4>
+                <br />
+                <h6 class="card-subtitle"><asp:Label runat="server" ID="Label2" Text="Busqueda de estudios pendientes por modificar."></asp:Label></h6>
+
+                <div class="row">
+                    <label class="col-md-2 col-form-label">Búsqueda</label>
                     <div class="col-7">
                         <asp:TextBox ID="TxBuscarVisita" runat="server" placeholder="Ej. Agencia - Presione afuera para proceder" class="form-control" AutoPostBack="true" OnTextChanged="TxBuscarVisita_TextChanged"></asp:TextBox>
                     </div>
-                    <asp:Button ID="btnNuevo" runat="server" Text="Nuevo Estudio" class="btn btn-primary" OnClick="btnNuevo_Click" />
+                    <asp:Button ID="btnNuevo" Visible="false" runat="server" Text="Nuevo Estudio" class="btn btn-primary" OnClick="btnNuevo_Click" />
                 </div>
-
+                <br />
                 <asp:UpdatePanel ID="udpPrincipalVisita" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
                         <p class="m-t-20"><asp:Label runat="server" ID="LbDescripcionEdicion" Text="Estudios pendientes por realizar modificación"></asp:Label></p>

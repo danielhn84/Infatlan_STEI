@@ -20,19 +20,22 @@
 
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Estudios Ingresados por el Técnico</h4>
-            <h6 class="card-subtitle">Busqueda de estudios pendientes.</h6>
+            
             <div class="card-body">
-                <div class="row col-8">
+                <h4 class="card-title">Aprobación visita técnica</h4>
+                <br />
+                <h6 class="card-subtitle">Busqueda de estudios pendientes.</h6>
+
+                <div class="row">
                     <label class="col-2 col-form-label">Búsqueda</label>
                     <div class="col-7">
                         <asp:TextBox ID="TxBuscarEstudio" runat="server" placeholder="Ej. Agencia- Presione afuera para proceder" class="form-control" AutoPostBack="true" OnTextChanged="TxBuscarEstudio_TextChanged"></asp:TextBox>
                     </div>
                 </div>
-
+            <br />
                 <asp:UpdatePanel ID="udpAprobacion" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
-                        <p class="m-t-20"><asp:Label runat="server" ID="LbDescripcionGV" Text=" Estudios ingresados por el técnico pendientes de realizar revisión"></asp:Label></p>
+                        <p class="m-t-20"><asp:Label runat="server" ID="LbDescripcionGV" Text="Estudios ingresados por el técnico pendientes de realizar revisión"></asp:Label></p>
 
                         <div class="table-responsive">
                             <asp:GridView ID="GVAprobacion" runat="server"
@@ -54,9 +57,9 @@
                                     <asp:BoundField DataField="agencia" HeaderText="Agencia" />
                                     <asp:BoundField DataField="responsable" HeaderText="Técnico Responsable" />
                                     <asp:BoundField DataField="fechaCreacion" HeaderText="Creación" />
-                                    <asp:TemplateField HeaderText="Seleccione" HeaderStyle-Width="10%" Visible="true">
+                                    <asp:TemplateField HeaderText="" HeaderStyle-Width="10%" Visible="true">
                                         <ItemTemplate>
-                                            <asp:LinkButton ID="BtnDescargar" runat="server" Title="Aprobar" class="btn btn-primary mr-2" CommandArgument='<%#Eval("idEstudio") %>' CommandName="Aprobar"><i class="ti-check-box" style="align-content:center"></i></asp:LinkButton>
+                                            <asp:LinkButton ID="BtnEditar" Visible="false" runat="server" Title="Aprobar" class="btn btn-primary mr-2" CommandArgument='<%#Eval("idEstudio") %>' CommandName="Aprobar"><i class="ti-check-box" style="align-content:center"></i></asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>

@@ -16,14 +16,16 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
     public partial class estudioEstructurado : System.Web.UI.Page
     {
         db vConexion = new db();
-        
+        Security vSecurity = new Security();
         protected void Page_Load(object sender, EventArgs e){
             Page.Form.Attributes.Add("enctype", "multipart/form-data");
-
             navAprobacion.Visible = false;
 
             if (!Page.IsPostBack){
                 if (Convert.ToBoolean(Session["AUTH"])){
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 4).Edicion)
+                        btnGuardar.Visible = true;
+
                     HFCuartoTelecomunicaciones.Value = string.Empty;
                     HFReubicar.Value = string.Empty;
                     HFDesordenado.Value = string.Empty;
@@ -40,15 +42,16 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
                     string vEdicion = Request.QueryString["c"];
                     Label11.Text = vEdicion == null ? "Nuevo" : "Editar";
                     Label12.Text = "Visita Técnica";
+
                     if (Convert.ToInt32(vPestaña) == 2){
                         Label12.Text = "Revisión";
                         Label11.Text = "Estudio";
-                        lbTituloVisita.Text = "Revisión de Visita Técnica";
+                        LbDescripcionVisita.Text = "Revisión de la visita técnica.";
                         lbIngresarPlano.Text = "";
                         navAprobacion.Visible = true;
                         bodyMateriales.Visible = false;
-                        LbTituloMaterial.Text = "Materiales Agregados";
-                        LbDescrpcionMaterial.Text = "Ingreso de materiales para realizar estudio.";
+                        //LbTituloMaterial.Text = "Materiales Agregados";
+                        LbDescrpcionMaterial.Text = "Materiales agregados para realizar estudio.";
                         OcultarCampos();
                         ObtenerDatos();
 
@@ -56,9 +59,8 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
                     }
 
                     if (Convert.ToInt32(vEdicion) == 3){
-                        LbTituloMaterial.Text = "Materiales Agregados";
-                        LbDescrpcionMaterial.Text = "Ingreso de materiales para realizar estudio.";
-                        lbTituloVisita.Text = "Edición de Visita Ténica";
+                        //LbTituloMaterial.Text = "Materiales Agregados";
+                        LbDescripcionVisita.Text = "Modificación de la visita técnica.";
                         navAprobacion.Visible = true;
                         ObtenerDatos();
                     }
@@ -970,7 +972,7 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
                 else if (rblNuevoRemodelacion.SelectedValue == "remodelacion")
                 {
                     lbEtiquetadoAs.Visible = true;
-                    lbReubicarAs.Visible = false;
+                    lbReubicarAs.Visible = true;
                     udpOcultarEstudioPrevio.Update();
                     lbEtiquetado.Visible = true;
                     lbReubicar.Visible = true;
@@ -984,6 +986,42 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
                     udpDesordenado.Visible = true;
                     udpVisible.Update();
                     udpNuevoRemodelacion.Update();
+
+                    //lbEtiquetadoAs.Visible = true;
+                    //lbReubicarAs.Visible = true;
+                    //lbEtiquetado.Visible = true;
+                    //lbReubicar.Visible = true;
+                    //rblReubicar.Visible = true;
+                    //rblEtiquetado.Visible = true;
+                    //fuReubicar.Visible = true;
+                    //imgReubicar.Visible = true;
+                    //udpVisible.Visible = true;
+                    //udpEtiquetado.Visible = true;
+                    //udpCategoria.Visible = true;
+                    //udpDesordenado.Visible = true;
+
+                    //udpVisible.Update();
+                    //udpNuevoRemodelacion.Update();
+
+                    //fuCuartoTelecomunicaciones.Enabled = true;
+                    //rblEtiquetado.Enabled = true;
+                    //rblReubicar.Enabled = true;
+                    //fuReubicar.Enabled = true;
+                    //rblDesordenado.Enabled = true;
+                    //fuDesordenado.Enabled = true;
+                    //rblExpuestoHumedo.Enabled = true;
+                    //fuExpuestoHumedo.Enabled = true;
+                    //rblExpuestoRobo.Enabled = true;
+                    //fuExpuestoRobo.Enabled = true;
+                    //rblElementoAjenos.Enabled = true;
+                    //fuElemetoAjenos.Enabled = true;
+                    //rblUps.Enabled = true;
+                    //fuUPS.Enabled = true;
+                    //rblAire.Enabled = true;
+                    //fuAire.Enabled = true;
+                    //txtCategoria.ReadOnly = false;
+                    //rblNuevoRemodelacion.Enabled = true;
+                    //fuPlano.Enabled = true;
                 }
             }
             catch (Exception Ex)
@@ -1001,30 +1039,37 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
 
                 if (ddlResponsable.SelectedIndex == 0)
                 {
-                    throw new Exception("Por favor seleccione el Responsable");
-
+                    throw new Exception("Favor seleccionar responsable");
                 }
 
                 if (ddlAgencia.SelectedIndex == 0)
                 {
-                    throw new Exception("Por favor seleccione la Agencia");
+                    throw new Exception("Favor seleccionar agencia");
                 }
 
-                if (txtFechaEstudio.Text == "" || txtFechaEnvio.Text == string.Empty)
+                if (ddlArea.SelectedIndex == 0)
                 {
-                    throw new Exception("Por favor ingrese la Fecha de Envío");
+                    throw new Exception("Favor seleccionar área");
                 }
 
                 if (txtFechaEstudio.Text == "" || txtFechaEstudio.Text == string.Empty)
                 {
-                    throw new Exception("Por favor ingrese la Fecha de Estudio");
+                    throw new Exception("Favor ingresar fecha de estudio");
                 }
+
+                if (txtFechaEnvio.Text == "" || txtFechaEnvio.Text == string.Empty)
+                {
+                    throw new Exception("Favor ingresar fecha de envío");
+                }
+                
                 if (rblNuevoRemodelacion.SelectedValue == "")
                 {
-                    throw new Exception("Por favor seleccione el tipo de estudio");
+                    throw new Exception("Favor seleccionar tipo de estudio");
                 }
             }
-            catch (Exception Ex) { Mensaje(Ex.Message, WarningType.Danger);
+            catch (Exception Ex){
+                //ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "Pop", "window.alert('" + Ex.Message + "')", true);
+                Mensaje(Ex.Message, WarningType.Danger);
                 Session["CE_ERRORGENERALES"] = 1;
             }
         }
@@ -1033,7 +1078,7 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         {
             try
             {
-               
+
                 Session["CE_ERRORESTUDIOPREVIO"] = 0;
 
                 string vEdicion = Request.QueryString["c"];
@@ -1043,13 +1088,13 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
                     //cuarto telecomunicaciones
                     if (!fuCuartoTelecomunicaciones.HasFile)
                     {
-                        throw new Exception("Por favor ingrese imagen del estado del cuarto de telecomunicaciones");
+                        throw new Exception("Favor ingresar imagen del estado del cuarto de telecomunicaciones");
                     }
                     //Plano
 
                     if (!fuPlano.HasFile)
                     {
-                        throw new Exception("Por favor ingresar plano del área o agencia a trabajar");
+                        throw new Exception("Favor ingresar plano del área o agencia a trabajar");
                     }
 
                     if (rblNuevoRemodelacion.SelectedValue == "remodelacion")
@@ -1058,40 +1103,40 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
                         //Desrodenado
                         if (rblDesordenado.SelectedValue.Equals(""))
                         {
-                            throw new Exception("Por favor llene los datos de la pregunta: ¿El cableado se encuentra  desordenado?");
+                            throw new Exception("Favor llenar los datos de la pregunta: ¿El cableado se encuentra desordenado?");
 
                         }
                         if (rblDesordenado.SelectedValue == "si" | rblDesordenado.SelectedValue == "no")
                         {
                             if (!fuDesordenado.HasFile)
                             {
-                                throw new Exception("Por favor ingresar imagen del cable desordenado");
+                                throw new Exception("Favor ingresar imagen del cable desordenado");
                             }
                         }
 
                         //Re-Ubicar
                         if (rblReubicar.SelectedValue == "")
                         {
-                            throw new Exception("Por favor llene los datos de la pregunta: ¿Es necesario re-ubicar el equipo de telecomunicaciones?");
+                            throw new Exception("Favor llenar los datos de la pregunta: ¿Es necesario re-ubicar el equipo de telecomunicaciones?");
                         }
                         if (rblReubicar.SelectedValue == "si")
                         {
                             if (!fuReubicar.HasFile)
                             {
-                                throw new Exception("Por favor ingresar imagen de re-ubicar equipo de telecomunicaciones ");
+                                throw new Exception("Favor ingresar imagen de re-ubicar equipo de telecomunicaciones ");
                             }
                         }
 
                         //Expuesto Humedad
                         if (rblExpuestoHumedo.SelectedValue == "")
                         {
-                            throw new Exception("Por favor llene los datos de la pregunta: ¿El equipo se encuentra expuesto  a humedad o polvo?");
+                            throw new Exception("Favor llenar los datos de la pregunta: ¿El equipo se encuentra expuesto a humedad o polvo?");
                         }
                         if (rblExpuestoHumedo.SelectedValue == "si")
                         {
                             if (!fuExpuestoHumedo.HasFile)
                             {
-                                throw new Exception("Por favor ingresar imagen si el equipo se encuentra expuesto a humedad o polvo");
+                                throw new Exception("Favor ingresar imagen si el equipo se encuentra expuesto a humedad o polvo");
                             }
 
                         }
@@ -1099,26 +1144,26 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
                         //Expuesto Robo
                         if (rblExpuestoRobo.SelectedValue == "")
                         {
-                            throw new Exception("Por favor llene los datos de la pregunta: ¿El equipo se encuentra expuesto a robo o daño?");
+                            throw new Exception("Favor llenar los datos de la pregunta: ¿El equipo se encuentra expuesto a robo o daño?");
                         }
                         if (rblExpuestoRobo.SelectedValue == "si")
                         {
                             if (!fuExpuestoRobo.HasFile)
                             {
-                                throw new Exception("Por favor ingresar imagen si el equipo se encuentra expuesto a robo o daño");
+                                throw new Exception("Favor ingresar imagen si el equipo se encuentra expuesto a robo o daño");
                             }
                         }
 
                         //Equipos Ajenos 
                         if (rblElementoAjenos.SelectedValue == "")
                         {
-                            throw new Exception("Por favor llene los datos de la pregunta: ¿Se encuentra elementos ajenos al equipo de comunicaciones?");
+                            throw new Exception("Favor llenar los datos de la pregunta: ¿Se encuentra elementos ajenos al equipo de comunicaciones?");
                         }
                         if (rblElementoAjenos.SelectedValue == "si")
                         {
                             if (!fuElemetoAjenos.HasFile)
                             {
-                                throw new Exception("Por favor ingresar imagen si se encuentran elementos ajenos al equipo de comunicaciones");
+                                throw new Exception("Favor ingresar imagen si se encuentran elementos ajenos al equipo de comunicaciones");
                             }
 
                         }
@@ -1126,13 +1171,13 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
                         // UPS
                         if (rblUps.SelectedValue == "")
                         {
-                            throw new Exception("Por favor llene los datos de la pregunta: ¿Cuenta con UPS ?");
+                            throw new Exception("Favor llenar los datos de la pregunta: ¿Cuenta con UPS ?");
                         }
                         if (rblUps.SelectedValue == "si")
                         {
                             if (!fuUPS.HasFile)
                             {
-                                throw new Exception("Por favor ingresar imagen si cuenta con UPS");
+                                throw new Exception("Favor ingresar imagen si cuenta con UPS");
                             }
 
                         }
@@ -1140,13 +1185,13 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
                         //Aire Acondicionado
                         if (rblAire.SelectedValue == "")
                         {
-                            throw new Exception("Por favor llene los datos de la pregunta: ¿Cuenta con aire acondicionado?");
+                            throw new Exception("Favor llenar los datos de la pregunta: ¿Cuenta con aire acondicionado?");
                         }
                         if (rblAire.SelectedValue == "si")
                         {
                             if (!fuAire.HasFile)
                             {
-                                throw new Exception("Por favor ingresar imagen si cuenta con aire acondicionado");
+                                throw new Exception("Favor ingresar imagen si cuenta con aire acondicionado");
                             }
 
                         }
@@ -1154,13 +1199,13 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
                         //Etiquetado
                         if (rblEtiquetado.SelectedValue == "")
                         {
-                            throw new Exception("Por favor llene los datos de la pregunta: ¿La red instalada se encuentra etiquetada?");
+                            throw new Exception("Favor llenar los datos de la pregunta: ¿La red instalada se encuentra etiquetada?");
                         }
 
                         //Categoria
                         if (txtCategoria.Text == "")
                         {
-                            throw new Exception("Por favor llene los datos de la pregunta: ¿Categorías de cables instalados en Agencia?");
+                            throw new Exception("Favor llenar los datos de la pregunta: ¿Categorías de cables instalados en agencia?");
                         }
 
                     }
@@ -1168,9 +1213,10 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
             }
             catch (Exception Ex)
             {
-                Mensaje(Ex.Message, WarningType.Danger);
-                DivAlerta.Visible = true;
-                LbAlertaGenerales.Text = Ex.Message;
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "Pop", "window.alert('" + Ex.Message + "')", true);
+               // Mensaje(Ex.Message, WarningType.Danger);
+                //DivAlerta.Visible = true;
+                //LbAlertaGenerales.Text = Ex.Message;
                 Session["CE_ERRORESTUDIOPREVIO"] = 1;
             }
         }
@@ -1183,19 +1229,19 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
 
                 if (ddlMateriales.SelectedIndex == 0)
                 {
-                    throw new Exception("Por favor seleccione un Material");
+                    throw new Exception("Favor seleccionar los material");
                 }
                 if (txtCantidad.Text == "" || txtCantidad.Text == string.Empty)
                 {
-                    throw new Exception("Por favor ingrese una cantidad");
+                    throw new Exception("Favor ingresar cantidad");
                 }
                 if (ddlMedidas.SelectedIndex == 0)
                 {
-                    throw new Exception("Por favor seleccione las Unidades");
+                    throw new Exception("Favor seleccionar unidades");
                 }
             }
-            catch (Exception Ex)
-            {
+            catch (Exception Ex){
+                //ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "Pop", "window.alert('" + Ex.Message + "')", true);
                 Mensaje(Ex.Message, WarningType.Danger);
                 Session["CE_ERRORMATERIALES"] = 1;
             }
@@ -1205,17 +1251,21 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         {
             try
             {
+                Session["CE_ERRORAPROBACION"] = 0;
+                if (rblAprobada.SelectedValue == ""){
+                    throw new Exception("Favor seleccionar una ópción de aprobación.");
+                }
 
-                if (rblAprobada.SelectedValue == "")
-                {
-                    throw new Exception("Por favor seleccione si es aprobado el estudio");
+                if (rblAprobada.SelectedValue == "no"){
+                    if (txtObservacionesAprobacion.Text == "" || txtObservacionesAprobacion.Text == string.Empty){
+                        throw new Exception("Favor ingresar observación.");
+                    }
                 }
-                if (txtObservacionesAprobacion.Text == "" || txtObservacionesAprobacion.Text == string.Empty)
-                {
-                    throw new Exception("Por favor ingrese una Observación sobre la Aprobación ");
-                }
+                
             }
-            catch (Exception Ex) { Mensaje(Ex.Message, WarningType.Danger);
+            catch (Exception Ex)
+            {
+                Mensaje(Ex.Message, WarningType.Danger);
                 Session["CE_ERRORAPROBACION"] = 1;
             }
         }
@@ -1226,24 +1276,31 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
             {
                 Session["CE_ERRORRECURSOS"] = 0;
 
+                if (Session["CE_MATERIALES"] == null)
+                {
+                    throw new Exception("Favor ingresar materiales");
+                }
+
                 if (txtHorasTrabajo.Text == "" || txtHorasTrabajo.Text == string.Empty)
                 {
-                    throw new Exception("Por favor ingrese las Horas Trabajadas");
+                    throw new Exception("Favor ingresar horas trabajadas");
                 }
                 if (txtParticipantes.Text == "" || txtParticipantes.Text == string.Empty)
                 {
-                    throw new Exception("Por favor ingrese los Participantes");
+                    throw new Exception("Favor ingresar los participantes");
                 }
                 if (rblTransporte.SelectedValue == "")
                 {
-                    throw new Exception("Por favor seleccione si utilizó transporte");
+                    throw new Exception("Favor seleccionar si utilizó transporte");
                 }
                 if (rblALimentación.SelectedValue == "")
                 {
-                    throw new Exception("Por favor seleccione si utilizó Alimentación");
+                    throw new Exception("Favor seleccionar si necesito alimentación");
                 }
             }
-            catch (Exception Ex) { Mensaje(Ex.Message, WarningType.Danger);
+            catch (Exception Ex){
+                //ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "Pop", "window.alert('" + Ex.Message + "')", true);
+                Mensaje(Ex.Message, WarningType.Danger);
                 Session["CE_ERRORRECURSOS"] = 1;
             }
         }
@@ -1263,7 +1320,7 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
                 }
                 else
                 {
-                    LbTituloMaterial.Text = "Materiales Agregados";
+                    //LbTituloMaterial.Text = "Materiales Agregados";
                     LbDescrpcionMaterial.Text = "Ingreso de materiales para realizar estudio.";
                     string vEdicion = Request.QueryString["c"];
 
@@ -1349,12 +1406,17 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
 
         protected void btnEnviar_Click(object sender, EventArgs e)
         {
-
             //Guardar los datos que ingresa el Tecnico
             try
             {
                 ValidarFormAprobacion();
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalAprobacion();", true);
+                if (Session["CE_ERRORAPROBACION"].ToString() == Convert.ToString(0))
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalAprobacion();", true);
+                }
+                else{
+                    throw new Exception("Ingrese todos los campos solicitados. ");
+                }
             }
             catch (Exception Ex) { Mensaje(Ex.Message, WarningType.Danger); }
         }
@@ -1365,15 +1427,16 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
             try
             {
                 ValidarFormDatosGenerales();
-                //ValidarFormMateriales();
-                
+                //ValidarFormEstudioPrevio();
                 ValidarFormEstimacionRecursos();
-                if ((Session["CE_ERRORGENERALES"].ToString() == Convert.ToString(0)) && (Session["CE_ERRORRECURSOS"].ToString() == Convert.ToString(0)) )
+                if ((Session["CE_ERRORGENERALES"].ToString() == Convert.ToString(0)) && (Session["CE_ERRORRECURSOS"].ToString() == Convert.ToString(0)))
                 {
+                   // ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "Pop", "openModalDatosGenerales();", true);
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalDatosGenerales();", true);
                 }
                 else
                 {
+                    //ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "Pop", "window.alert('" + "Ingrese todos los campos solicitados." + "')", true);
                     throw new Exception("Ingrese todos los campos solicitados. ");
                 }
 
@@ -1387,179 +1450,247 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         {
             try
             {
+                string vArchivo = String.Empty; string vArchivo1 = String.Empty;string vArchivo2 = String.Empty;
+                string vArchivo3 = String.Empty; string vArchivo4 = String.Empty; string vArchivo5 = String.Empty;
+                string vArchivo6 = String.Empty; string vArchivo7 = String.Empty; string vArchivo8 = String.Empty; 
 
-                //IMAGENES1
-              
-                String vNombreDepot = String.Empty;
-                HttpPostedFile bufferDepositoT = fuCuartoTelecomunicaciones.PostedFile;
-                byte[] vFileDeposito = null;
-                string vExtension = string.Empty;
+                if (fuCuartoTelecomunicaciones.HasFile){
+                    string vNombreDepot = String.Empty;
+                    HttpPostedFile bufferDepositoT = fuCuartoTelecomunicaciones.PostedFile;
+                    byte[] vFileDeposito = null;
+                    string vExtension = string.Empty;
 
-                if (bufferDepositoT != null)
-                {
-                    vNombreDepot = fuCuartoTelecomunicaciones.FileName;
-                    Stream vStream = bufferDepositoT.InputStream;
-                    BinaryReader vReader = new BinaryReader(vStream);
-                    vFileDeposito = vReader.ReadBytes((int)vStream.Length);
-                    vExtension = System.IO.Path.GetExtension(fuCuartoTelecomunicaciones.FileName);
+                    if (bufferDepositoT != null){
+                        vNombreDepot = fuCuartoTelecomunicaciones.FileName;
+                        Stream vStream = bufferDepositoT.InputStream;
+                        BinaryReader vReader = new BinaryReader(vStream);
+                        vFileDeposito = vReader.ReadBytes((int)vStream.Length);
+                        vExtension = System.IO.Path.GetExtension(fuCuartoTelecomunicaciones.FileName);
+                    }
+
+                    if (vFileDeposito != null)
+                        vArchivo = Convert.ToBase64String(vFileDeposito);
                 }
-                String vArchivo = String.Empty;
-                if (vFileDeposito != null)
-                    vArchivo = Convert.ToBase64String(vFileDeposito);
-
-                //IMAGENES2
-                String vNombreDepot1 = String.Empty;
-                HttpPostedFile bufferDepositoT1 = fuReubicar.PostedFile;
-                byte[] vFileDeposito1 = null;
-                string vExtension1 = string.Empty;
-
-                if (bufferDepositoT1 != null)
-                {
-                    vNombreDepot1 = fuReubicar.FileName;
-                    Stream vStream1 = bufferDepositoT1.InputStream;
-                    BinaryReader vReader1 = new BinaryReader(vStream1);
-                    vFileDeposito1 = vReader1.ReadBytes((int)vStream1.Length);
-                    vExtension1 = System.IO.Path.GetExtension(fuReubicar.FileName);
+                else{
+                    string[] vImg = new string[2];
+                    vImg = imgCuartoTelecomunicaciones.Src.Split(',');
+                    vArchivo = vImg[1];
                 }
-                String vArchivo1 = String.Empty;
-                if (vFileDeposito1 != null)
-                    vArchivo1 = Convert.ToBase64String(vFileDeposito1);
 
-                //IMAGENES3
-                String vNombreDepot2 = String.Empty;
-                HttpPostedFile bufferDepositoT2 = fuDesordenado.PostedFile;
-                byte[] vFileDeposito2 = null;
-                string vExtension2 = string.Empty;
-
-                if (bufferDepositoT2 != null)
+                if (rblNuevoRemodelacion.SelectedValue == "remodelacion")
                 {
-                    vNombreDepot2 = fuDesordenado.FileName;
-                    Stream vStream2 = bufferDepositoT2.InputStream;
-                    BinaryReader vReader2 = new BinaryReader(vStream2);
-                    vFileDeposito2 = vReader2.ReadBytes((int)vStream2.Length);
-                    vExtension2 = System.IO.Path.GetExtension(fuDesordenado.FileName);
+                    if (fuDesordenado.HasFile)
+                    {
+                        string vNombreDepot2 = String.Empty;
+                        HttpPostedFile bufferDepositoT2 = fuDesordenado.PostedFile;
+                        byte[] vFileDeposito2 = null;
+                        string vExtension2 = string.Empty;
+
+                        if (bufferDepositoT2 != null)
+                        {
+                            vNombreDepot2 = fuDesordenado.FileName;
+                            Stream vStream2 = bufferDepositoT2.InputStream;
+                            BinaryReader vReader2 = new BinaryReader(vStream2);
+                            vFileDeposito2 = vReader2.ReadBytes((int)vStream2.Length);
+                            vExtension2 = System.IO.Path.GetExtension(fuDesordenado.FileName);
+                        }
+                        if (vFileDeposito2 != null)
+                            vArchivo2 = Convert.ToBase64String(vFileDeposito2);
+                    }
+                    else
+                    {
+                        string[] vImg1 = new string[2];
+                        vImg1 = imgDesordenado.Src.Split(',');
+                        vArchivo2 = vImg1[1];
+                    }
+
+                    if (rblReubicar.SelectedValue == "si")
+                    {
+                        if (fuReubicar.HasFile){
+                            string vNombreDepot1 = String.Empty;
+                            HttpPostedFile bufferDepositoT1 = fuReubicar.PostedFile;
+                            byte[] vFileDeposito1 = null;
+                            string vExtension1 = string.Empty;
+
+                            if (bufferDepositoT1 != null){
+                                vNombreDepot1 = fuReubicar.FileName;
+                                Stream vStream1 = bufferDepositoT1.InputStream;
+                                BinaryReader vReader1 = new BinaryReader(vStream1);
+                                vFileDeposito1 = vReader1.ReadBytes((int)vStream1.Length);
+                                vExtension1 = System.IO.Path.GetExtension(fuReubicar.FileName);
+                            }
+
+                            if (vFileDeposito1 != null)
+                                vArchivo1 = Convert.ToBase64String(vFileDeposito1);
+                        }
+                        else{
+                            string[] vImg2 = new string[2];
+                            vImg2 = imgReubicar.Src.Split(',');
+                            vArchivo1 = vImg2[1];
+                        }
+                    }
+
+                    //IMAGENES4
+                    if (rblExpuestoHumedo.SelectedValue == "si")
+                    {
+                        if (fuExpuestoHumedo.HasFile){
+                            string vNombreDepot3 = String.Empty;
+                            HttpPostedFile bufferDepositoT3 = fuExpuestoHumedo.PostedFile;
+                            byte[] vFileDeposito3 = null;
+                            string vExtension3 = string.Empty;
+
+                            if (bufferDepositoT3 != null)
+                            {
+                                vNombreDepot3 = fuExpuestoHumedo.FileName;
+                                Stream vStream3 = bufferDepositoT3.InputStream;
+                                BinaryReader vReader3 = new BinaryReader(vStream3);
+                                vFileDeposito3 = vReader3.ReadBytes((int)vStream3.Length);
+                                vExtension3 = System.IO.Path.GetExtension(fuExpuestoHumedo.FileName);
+                            }
+                        if (vFileDeposito3 != null)
+                            vArchivo3 = Convert.ToBase64String(vFileDeposito3);
+                        }
+                        else{
+                            string[] vImg3 = new string[2];
+                            vImg3 = imgExpuestoHumedo.Src.Split(',');
+                            vArchivo3 = vImg3[1];
+                        }
+                    }
+
+                    if (rblExpuestoRobo.SelectedValue == "si"){
+                        if (fuExpuestoRobo.HasFile){
+                            string vNombreDepot4 = String.Empty;
+                            HttpPostedFile bufferDepositoT4 = fuExpuestoRobo.PostedFile;
+                            byte[] vFileDeposito4 = null;
+                            string vExtension4 = string.Empty;
+
+                            if (bufferDepositoT4 != null){
+                                vNombreDepot4 = fuExpuestoRobo.FileName;
+                                Stream vStream4 = bufferDepositoT4.InputStream;
+                                BinaryReader vReader4 = new BinaryReader(vStream4);
+                                vFileDeposito4 = vReader4.ReadBytes((int)vStream4.Length);
+                                vExtension4 = System.IO.Path.GetExtension(fuExpuestoRobo.FileName);
+                            }
+
+                            if (vFileDeposito4 != null)
+                                vArchivo4 = Convert.ToBase64String(vFileDeposito4);
+                        }
+                        else{
+                            string[] vImg4 = new string[2];
+                            vImg4 = imgExpuestoRobo.Src.Split(',');
+                            vArchivo4 = vImg4[1];
+                        }
+                    }
+
+                    if (rblElementoAjenos.SelectedValue == "si")
+                    {
+                        if (fuElemetoAjenos.HasFile){
+                            string vNombreDepot5 = String.Empty;
+                            HttpPostedFile bufferDepositoT5 = fuElemetoAjenos.PostedFile;
+                            byte[] vFileDeposito5 = null;
+                            string vExtension5 = string.Empty;
+
+                            if (bufferDepositoT5 != null){
+                                vNombreDepot5 = fuElemetoAjenos.FileName;
+                                Stream vStream5 = bufferDepositoT5.InputStream;
+                                BinaryReader vReader5 = new BinaryReader(vStream5);
+                                vFileDeposito5 = vReader5.ReadBytes((int)vStream5.Length);
+                                vExtension5 = System.IO.Path.GetExtension(fuElemetoAjenos.FileName);
+                            }
+
+                            if (vFileDeposito5 != null)
+                                vArchivo5 = Convert.ToBase64String(vFileDeposito5);
+                        }
+                        else{
+                            string[] vImg5 = new string[2];
+                            vImg5 = imgElementoAjeno.Src.Split(',');
+                            vArchivo5 = vImg5[1];
+                        }
+                    }
+
+                    if (rblUps.SelectedValue == "si")
+                    {
+                        if (fuUPS.HasFile){
+                            string vNombreDepot7 = String.Empty;
+                            HttpPostedFile bufferDepositoT7 = fuUPS.PostedFile;
+                            byte[] vFileDeposito7 = null;
+                            string vExtension7 = string.Empty;
+
+                            if (bufferDepositoT7 != null){
+                                vNombreDepot7 = fuUPS.FileName;
+                                Stream vStream7 = bufferDepositoT7.InputStream;
+                                BinaryReader vReader7 = new BinaryReader(vStream7);
+                                vFileDeposito7 = vReader7.ReadBytes((int)vStream7.Length);
+                                vExtension7 = System.IO.Path.GetExtension(fuUPS.FileName);
+                            }
+               
+                            if (vFileDeposito7 != null)
+                                vArchivo7 = Convert.ToBase64String(vFileDeposito7);
+                        }
+                        else{
+                            string[] vImg6 = new string[2];
+                            vImg6 = imgUPS.Src.Split(',');
+                            vArchivo7 = vImg6[1];
+                        }
+                    }
+
+                    if (rblAire.SelectedValue == "si")
+                    {
+                        if (fuAire.HasFile){
+                            string vNombreDepot8 = String.Empty;
+                            HttpPostedFile bufferDepositoT8 = fuAire.PostedFile;
+                            byte[] vFileDeposito8 = null;
+                            string vExtension8 = string.Empty;
+
+                            if (bufferDepositoT8 != null){
+                                vNombreDepot8 = fuAire.FileName;
+                                Stream vStream8 = bufferDepositoT8.InputStream;
+                                BinaryReader vReader8 = new BinaryReader(vStream8);
+                                vFileDeposito8 = vReader8.ReadBytes((int)vStream8.Length);
+                                vExtension8 = System.IO.Path.GetExtension(fuAire.FileName);
+                            }
+                
+                            if (vFileDeposito8 != null)
+                                vArchivo8 = Convert.ToBase64String(vFileDeposito8);
+                        }
+                        else{
+                            string[] vImg7 = new string[2];
+                            vImg7 = imgAire.Src.Split(',');
+                            vArchivo8 = vImg7[1];
+                        }
+                    }
                 }
-                String vArchivo2 = String.Empty;
-                if (vFileDeposito2 != null)
-                    vArchivo2 = Convert.ToBase64String(vFileDeposito2);
-
-                //IMAGENES4
-                String vNombreDepot3 = String.Empty;
-                HttpPostedFile bufferDepositoT3 = fuExpuestoHumedo.PostedFile;
-                byte[] vFileDeposito3 = null;
-                string vExtension3 = string.Empty;
-
-                if (bufferDepositoT3 != null)
+                
+                if (fuPlano.HasFile)
                 {
-                    vNombreDepot3 = fuExpuestoHumedo.FileName;
-                    Stream vStream3 = bufferDepositoT3.InputStream;
-                    BinaryReader vReader3 = new BinaryReader(vStream3);
-                    vFileDeposito3 = vReader3.ReadBytes((int)vStream3.Length);
-                    vExtension3 = System.IO.Path.GetExtension(fuExpuestoHumedo.FileName);
+                    string vNombreDepot6 = String.Empty;
+                    HttpPostedFile bufferDepositoT6 = fuPlano.PostedFile;
+                    byte[] vFileDeposito6 = null;
+                    string vExtension6 = string.Empty;
+
+                    if (bufferDepositoT6 != null){
+                        vNombreDepot6 = fuPlano.FileName;
+                        Stream vStream6 = bufferDepositoT6.InputStream;
+                        BinaryReader vReader6 = new BinaryReader(vStream6);
+                        vFileDeposito6 = vReader6.ReadBytes((int)vStream6.Length);
+                        vExtension6 = System.IO.Path.GetExtension(fuPlano.FileName);
+                    }
+
+                    if (vFileDeposito6 != null)
+                        vArchivo6 = Convert.ToBase64String(vFileDeposito6);
                 }
-                String vArchivo3 = String.Empty;
-                if (vFileDeposito3 != null)
-                    vArchivo3 = Convert.ToBase64String(vFileDeposito3);
-
-                //IMAGENES5
-                String vNombreDepot4 = String.Empty;
-                HttpPostedFile bufferDepositoT4 = fuExpuestoRobo.PostedFile;
-                byte[] vFileDeposito4 = null;
-                string vExtension4 = string.Empty;
-
-                if (bufferDepositoT4 != null)
-                {
-                    vNombreDepot4 = fuExpuestoRobo.FileName;
-                    Stream vStream4 = bufferDepositoT4.InputStream;
-                    BinaryReader vReader4 = new BinaryReader(vStream4);
-                    vFileDeposito4 = vReader4.ReadBytes((int)vStream4.Length);
-                    vExtension4 = System.IO.Path.GetExtension(fuExpuestoRobo.FileName);
+                else{
+                    string[] vImg8 = new string[2];
+                    vImg8 = IFramePDF.Src.Split(',');
+                    vArchivo6 = vImg8[1];
                 }
-                String vArchivo4 = String.Empty;
-                if (vFileDeposito4 != null)
-                    vArchivo4 = Convert.ToBase64String(vFileDeposito4);
 
-                //IMAGENES6
-                String vNombreDepot5 = String.Empty;
-                HttpPostedFile bufferDepositoT5 = fuElemetoAjenos.PostedFile;
-                byte[] vFileDeposito5 = null;
-                string vExtension5 = string.Empty;
-
-                if (bufferDepositoT5 != null)
-                {
-                    vNombreDepot5 = fuElemetoAjenos.FileName;
-                    Stream vStream5 = bufferDepositoT5.InputStream;
-                    BinaryReader vReader5 = new BinaryReader(vStream5);
-                    vFileDeposito5 = vReader5.ReadBytes((int)vStream5.Length);
-                    vExtension5 = System.IO.Path.GetExtension(fuElemetoAjenos.FileName);
-                }
-                String vArchivo5 = String.Empty;
-                if (vFileDeposito5 != null)
-                    vArchivo5 = Convert.ToBase64String(vFileDeposito5);
-
-                ////IMAGENES7
-                String vNombreDepot6 = String.Empty;
-                HttpPostedFile bufferDepositoT6 = fuPlano.PostedFile;
-                byte[] vFileDeposito6 = null;
-                string vExtension6 = string.Empty;
-
-                if (bufferDepositoT6 != null)
-                {
-                    vNombreDepot6 = fuPlano.FileName;
-                    Stream vStream6 = bufferDepositoT6.InputStream;
-                    BinaryReader vReader6 = new BinaryReader(vStream6);
-                    vFileDeposito6 = vReader6.ReadBytes((int)vStream6.Length);
-                    vExtension6 = System.IO.Path.GetExtension(fuPlano.FileName);
-                }
-                String vArchivo6 = String.Empty;
-                if (vFileDeposito6 != null)
-                    vArchivo6 = Convert.ToBase64String(vFileDeposito6);
-
-                //IMAGENES8
-                String vNombreDepot7 = String.Empty;
-                HttpPostedFile bufferDepositoT7 = fuUPS.PostedFile;
-                byte[] vFileDeposito7 = null;
-                string vExtension7 = string.Empty;
-
-                if (bufferDepositoT7 != null)
-                {
-                    vNombreDepot7 = fuUPS.FileName;
-                    Stream vStream7 = bufferDepositoT7.InputStream;
-                    BinaryReader vReader7 = new BinaryReader(vStream7);
-                    vFileDeposito7 = vReader7.ReadBytes((int)vStream7.Length);
-                    vExtension7 = System.IO.Path.GetExtension(fuUPS.FileName);
-                }
-                String vArchivo7 = String.Empty;
-                if (vFileDeposito7 != null)
-                    vArchivo7 = Convert.ToBase64String(vFileDeposito7);
-
-                //IMAGENES9
-                String vNombreDepot8 = String.Empty;
-                HttpPostedFile bufferDepositoT8 = fuAire.PostedFile;
-                byte[] vFileDeposito8 = null;
-                string vExtension8 = string.Empty;
-
-                if (bufferDepositoT8 != null)
-                {
-                    vNombreDepot8 = fuAire.FileName;
-                    Stream vStream8 = bufferDepositoT8.InputStream;
-                    BinaryReader vReader8 = new BinaryReader(vStream8);
-                    vFileDeposito8 = vReader8.ReadBytes((int)vStream8.Length);
-                    vExtension8 = System.IO.Path.GetExtension(fuAire.FileName);
-                }
-                String vArchivo8 = String.Empty;
-                if (vFileDeposito8 != null)
-                    vArchivo8 = Convert.ToBase64String(vFileDeposito8);
-
-                //FIN
                 ValidarFormEstudioPrevio();
-
-                if (LbAlertaGenerales.Text != "")
+                if (Session["CE_ERRORESTUDIOPREVIO"].ToString() == Convert.ToString(1))
                 {
                     throw new Exception(LbAlertaGenerales.Text);
                 }
-                else
-                {
+                else{
                     string vIdEstudioEdicion = Request.QueryString["e"];
                     string vEdicion = Request.QueryString["c"];
 
@@ -1606,20 +1737,20 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
                     //Ingresa los datos generales
 
                     String vQuery = "STEISP_CABLESTRUCTURADO_IngresarDatosEstudio 1," + Session["CE_IDEPARTAMENTO"] + "," +
-                                                                                   "'" + Session["CE_IDUBICACION"] + "'," +
-                                                                                   "'" + Session["CE_IDRESPONSABLE"] + "'," +
-                                                                                   "'" + Session["CE_NOMBREESTUDIO"] + "'," +
-                                                                                   "'" + Convert.ToDateTime(txtFechaEstudio.Text) + "'," +
-                                                                                   "'" + Convert.ToDateTime(txtFechaEnvio.Text) + "'," +
-                                                                                   "'" + txtHorasTrabajo.Text + "'," +
-                                                                                   "'" + txtParticipantes.Text + "'," +
-                                                                                   "'" + rblALimentación.SelectedValue + "'," +
-                                                                                   "'" + rblTransporte.SelectedValue + "'," +
-                                                                                   "'" + txtObservaciones.Text + "'," +
-                                                                                   "'" + rblNuevoRemodelacion.SelectedValue + "'," +
-                                                                                   "'IngresoTecnico'" + "," +
-                                                                                   "'" + vEdicion + "'," +
-                                                                                   "" + vIdEstudioEdicion;
+                                                                                    "'" + Session["CE_IDUBICACION"] + "'," +
+                                                                                    "'" + Session["CE_IDRESPONSABLE"] + "'," +
+                                                                                    "'" + Session["CE_NOMBREESTUDIO"] + "'," +
+                                                                                    "'" + Convert.ToDateTime(txtFechaEstudio.Text) + "'," +
+                                                                                    "'" + Convert.ToDateTime(txtFechaEnvio.Text) + "'," +
+                                                                                    "'" + txtHorasTrabajo.Text + "'," +
+                                                                                    "'" + txtParticipantes.Text + "'," +
+                                                                                    "'" + rblALimentación.SelectedValue + "'," +
+                                                                                    "'" + rblTransporte.SelectedValue + "'," +
+                                                                                    "'" + txtObservaciones.Text + "'," +
+                                                                                    "'" + rblNuevoRemodelacion.SelectedValue + "'," +
+                                                                                    "'IngresoTecnico'" + "," +
+                                                                                    "'" + vEdicion + "'," +
+                                                                                    "" + vIdEstudioEdicion;
 
                         DataTable vDatos = vConexion.obtenerDataTable(vQuery);
            
@@ -1643,8 +1774,6 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
                         string vCantidad;
                         string vIdMaterial;
 
-
-
                         vIdMaterial = (row.Cells[0].Text);
 
                         vMaterial = (row.Cells[1].Text);
@@ -1655,21 +1784,19 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
 
                         String[] result = vMaterial.Split('-');
 
-               
-
                         String vQuery2 = "STEISP_CABLESTRUCTURADO_IngresarDatosEstudio 5," + vIdEstudioEdicion + "," +
-                                                                                         "'" + vIdMaterial + "'," +
-                                                                                         "'" + result[0] + "'," +
-                                                                                         "'" + vMedidas + "'," +
-                                                                                         "'" + vCantidad + "'," +
-                                                                                         "" + vEdicion;
+                                                                                            "'" + vIdMaterial + "'," +
+                                                                                            "'" + result[0] + "'," +
+                                                                                            "'" + vMedidas + "'," +
+                                                                                            "'" + vCantidad + "'," +
+                                                                                            "" + vEdicion;
 
                         DataTable vDatos2 = vConexion.obtenerDataTable(vQuery2);
                     }
 
                     //Ingreso de Preguntaas
                     String vQuery3 = "STEISP_CABLESTRUCTURADO_IngresarDatosEstudio 4," + Session["CE_IDESTUDIO"] + "," +
-                                                                                     "'" + vArchivo + "'," +
+                                                                                        "'" + vArchivo + "'," +
                                                                                     "'" + rblEtiquetado.SelectedValue + "'," +
                                                                                     "'" + rblReubicar.SelectedValue + "'," +
                                                                                     "'" + vArchivo1 + "'," +
@@ -1688,7 +1815,8 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
                                                                                     "'" + txtCategoria.Text.ToUpper() + "'," +
                                                                                     "'" + vArchivo6 + "'," +
                                                                                     "'Disponible'" + "," +
-                                                                                    "'" + vEdicion + "'"; 
+                                                                                    "'" + vEdicion + "'";
+                    
                     DataTable vDatos3 = vConexion.obtenerDataTable(vQuery3);
 
                     if (vEdicion != Convert.ToString(3))
@@ -1698,10 +1826,6 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
 
                         DataTable vDatos4 = vConexion.obtenerDataTable(vQuery4);
                     }  
-            
-           
-
-
 
                     Limpiar();
                     Mensaje("Actualizado con Exito!", WarningType.Success);
@@ -1711,33 +1835,32 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
             
                     SmtpService vService = new SmtpService();
 
-
-                        //String vQueryMail = "RSP_ObtenerPermisos 2,"
-                        //        + Session["USUARIO"] + ","
-                        //        + LbNumeroPermiso.Text + ","
-                        //        + DDLOpciones.SelectedValue + ",'" + TxMotivoJefe.Text + "'";
-                        //int vDatosMail = vConexion.ejecutarSql(vQueryMail);
-
-                        //if (vDatos.Equals(1))
-                        //{
-                        //    if (DDLOpciones.SelectedValue.Equals("1"))
-                        //    {
-                        //        vQuery = "RSP_ObtenerPermisos 3," + Session["USUARIO"] + "," + LbNumeroPermiso.Text;
-                        //        DataTable vDatosBusqueda = vConexion.obtenerDataTable(vQuery);
-
-                        //        foreach (DataRow item in vDatosBusqueda.Rows)
-                        //        {
-                        //            vService.EnviarMensaje(ConfigurationManager.AppSettings["RHMail"],
-                        //                    typeBody.RecursosHumanos,
-                        //                    "Recursos Humanos",
-                        //                    item["Empleado"].ToString()
-                        //                    );
-
-
-                        //        }
-                        //    }
-                        //}
                 }
+
+                //String vQueryMail = "RSP_ObtenerPermisos 2,"
+                //        + Session["USUARIO"] + ","
+                //        + LbNumeroPermiso.Text + ","
+                //        + DDLOpciones.SelectedValue + ",'" + TxMotivoJefe.Text + "'";
+                //int vDatosMail = vConexion.ejecutarSql(vQueryMail);
+
+                //if (vDatos.Equals(1))
+                //{
+                //    if (DDLOpciones.SelectedValue.Equals("1"))
+                //    {
+                //        vQuery = "RSP_ObtenerPermisos 3," + Session["USUARIO"] + "," + LbNumeroPermiso.Text;
+                //        DataTable vDatosBusqueda = vConexion.obtenerDataTable(vQuery);
+
+                //        foreach (DataRow item in vDatosBusqueda.Rows)
+                //        {
+                //            vService.EnviarMensaje(ConfigurationManager.AppSettings["RHMail"],
+                //                    typeBody.RecursosHumanos,
+                //                    "Recursos Humanos",
+                //                    item["Empleado"].ToString()
+                //                    );
+                //        }
+                //    }
+                //}
+             
             } catch (Exception Ex) { Mensaje(Ex.Message, WarningType.Danger); }
         }
 
@@ -1912,6 +2035,7 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
             Session["CE_IDUBICACION"] = null;
             Session["CE_IDEPARTAMENTO"] = null;
             Session["CE_IDMATERIAL"] = null;
+            Session["CE_MATERIALES"] = null;
         }
 
         public void Mensaje(string vMensaje, WarningType type)
@@ -1924,20 +2048,20 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "Pop", "$('#" + vModal + "').modal('hide');", true);
         }
 
-        protected void LbtnPlano_Click(object sender, EventArgs e)
-        {
+        //protected void LbtnPlano_Click(object sender, EventArgs e)
+        //{
 
-            //vidPreview.Visible = true;
-            //IFramePDF.Src = fuPlano.HasAttributes;
-            //udpLbPlano.Update();
+        //    //vidPreview.Visible = true;
+        //    //IFramePDF.Src = fuPlano.HasAttributes;
+        //    //udpLbPlano.Update();
 
-            if (fuPlano.HasFile)
-            {
-                IFramePDF.Src = Path.GetFileName(fuPlano.PostedFile.FileName);
+        //    if (fuPlano.HasFile)
+        //    {
+        //        IFramePDF.Src = Path.GetFileName(fuPlano.PostedFile.FileName);
 
-            }
+        //    }
 
-        }
+        //}
 
     }
     

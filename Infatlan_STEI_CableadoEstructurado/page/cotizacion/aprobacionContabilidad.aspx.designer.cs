@@ -78,6 +78,15 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         protected global::System.Web.UI.WebControls.Label LbResponsable;
 
         /// <summary>
+        /// Control DivEditar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivEditar;
+
+        /// <summary>
         /// Control btnEnviarTecnico.
         /// </summary>
         /// <remarks>
@@ -94,15 +103,6 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAgregarMaterial;
-
-        /// <summary>
-        /// Control LbTitulo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LbTitulo;
 
         /// <summary>
         /// Control LbDescripcion.
@@ -166,6 +166,15 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlIframe IframePlano;
+
+        /// <summary>
+        /// Control Label14.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label14;
 
         /// <summary>
         /// Control udpHorasExtras.
@@ -904,15 +913,6 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtModObservaciones;
-
-        /// <summary>
-        /// Control UpdatePanel7.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel7;
 
         /// <summary>
         /// Control DivAlertaDescriptor.

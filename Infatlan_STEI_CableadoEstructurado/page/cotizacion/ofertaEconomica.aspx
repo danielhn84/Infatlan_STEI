@@ -34,12 +34,17 @@
 
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Oferta Económica</h4>
-            <h6 class="card-subtitle">Busqueda de ofertas económica existentes.</h6>
+            
             <div class="card-body">
+
+                <h4 class="card-title">Oferta Económica</h4>
+                <br />
+                <h6 class="card-subtitle" >
+                    <asp:Label runat="server" ID="LbDescripcion" Text="Busqueda de ofertas económica existentes." Visible="false"></asp:Label></h6>
+
                 <asp:UpdatePanel ID="updBuscarAprobacion" runat="server" Visible="false">
                     <ContentTemplate>
-                        <div class="row col-8">
+                        <div class="row">
                             <label class="col-2 col-form-label">Búsqueda</label>
                             <div class="col-7">
                                 <asp:TextBox ID="TxBuscarOferta" runat="server" placeholder="Ej. Ag Junior- Presione afuera para proceder" class="form-control" AutoPostBack="true" OnTextChanged="TxBuscarOferta_TextChanged"></asp:TextBox>
@@ -48,12 +53,12 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
 
+               
                 <asp:UpdatePanel ID="udpContabilidad" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
-                        <h5 class="card-title m-t-20">
-                            <asp:Label runat="server" ID="LbTituloferta" Text="Lista de ofertas económicas"></asp:Label>
-                        </h5>
-                        <p><asp:Label runat="server" ID="LbDescripcionOferta" Text="Detalle de las ofertas."></asp:Label></p>
+                        <br />
+                          <br />
+                        <p><asp:Label runat="server" ID="LbDescripcionOferta" Text="Detalle de las ofertas económicas."></asp:Label></p>
                         <div class="table-responsive">
                             <asp:GridView ID="GVOfertaEconomica" runat="server"
                                 CssClass="table table-bordered"
@@ -74,15 +79,15 @@
                                     <asp:BoundField DataField="agencia" HeaderText="Nombre" />
                                     <asp:BoundField DataField="responsable" HeaderText="Técnico Responsable" />
                                     <asp:BoundField DataField="fechaCreacion" HeaderText="Creación" />
-                                    <asp:TemplateField HeaderText="" HeaderStyle-Width="18%">
+                                    <asp:TemplateField HeaderText="Seleccione" HeaderStyle-Width="18%">
                                         <ItemTemplate>
                                             <asp:LinkButton ID="BtnDescargar" Title="Descargar" runat="server" class="btn btn-primary" CommandArgument='<%#Eval("idEstudio")%>' CommandName="Descargar"><i class="ti-import" ></i>
                                             </asp:LinkButton>
 
-                                            <asp:LinkButton ID="BtnModificar" name="Modificar" Title="Modificar" runat="server" class="btn btn-info" CommandArgument='<%#Eval("idEstudio")%>' CommandName="Modificar"><i class="ti-pencil" ></i>
+                                            <asp:LinkButton ID="BtnModificar" Visible="false" name="Modificar" Title="Modificar" runat="server" class="btn btn-info" CommandArgument='<%#Eval("idEstudio")%>' CommandName="Modificar"><i class="ti-pencil" ></i>
                                             </asp:LinkButton>
 
-                                            <asp:LinkButton ID="BtnAprobar" name="Aprobar" Title="Aprobar" runat="server" class="btn btn-success" CommandArgument='<%#Eval("idEstudio")%>' CommandName="Aprobar"><i class="ti-check" ></i>
+                                            <asp:LinkButton ID="BtnAprobar" Visible="false" name="Aprobar" Title="Aprobar" runat="server" class="btn btn-success" CommandArgument='<%#Eval("idEstudio")%>' CommandName="Aprobar"><i class="ti-check" ></i>
                                             </asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>

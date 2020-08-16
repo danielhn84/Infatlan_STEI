@@ -4551,7 +4551,6 @@
     <Content Include="assets\node_modules\typeahead.js-master\test\ci" />
     <Content Include="assets\node_modules\typeahead.js-master\typeahead.js.jquery.json" />
     <None Include="packages.config" />
-    <Content Include="page\plantillas\PlantillaAprobacionBanco.docx" />
     <Content Include="scss\colors\blue-dark.scss" />
     <Content Include="scss\colors\blue.scss" />
     <Content Include="scss\colors\default-dark.scss" />
@@ -4632,6 +4631,7 @@
     <Content Include="scss\widgets\topbar-mail.scss" />
     <Content Include="scss\widgets\weather-widget.scss" />
     <Content Include="scss\widgets\widgets.scss" />
+    <Content Include="page\plantillas\PlantillaAprobacionBanco.docx" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

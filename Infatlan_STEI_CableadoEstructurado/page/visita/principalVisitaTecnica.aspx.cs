@@ -22,15 +22,15 @@ namespace Infatlan_STEI_CableadoEstructurado.page.visita
     public partial class principalVisitaTecnica : System.Web.UI.Page
     {
         db vConexion = new db();
+        Security vSecurity = new Security();
         protected void Page_Load(object sender, EventArgs e){
             if (!Page.IsPostBack){
+
                 if (Convert.ToBoolean(Session["AUTH"])){
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 4).Creacion)
+                        btnNuevo.Visible = true;
+
                     CargarProceso();
-                    //String vQuery = "STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 28 ,'" + Session["USUARIO"] + "'";
-                    //DataTable vDatos = vConexion.obtenerDataTable(vQuery);
-                    
-                    //lbEstudiosCreados.Text = vDatos.Rows[0]["creados"].ToString();
-                    //lbEstudiosEdicion.Text = vDatos.Rows[0]["edicion"].ToString();
                 }else {
                     Response.Redirect("/login.aspx");
                 }
@@ -45,7 +45,7 @@ namespace Infatlan_STEI_CableadoEstructurado.page.visita
         void CargarProceso(){
             try{
                 //DataTable vDatos = new DataTable();
-                String vQueryId = "STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 25";
+                String vQueryId = "STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 25" /*,'" + Session["USUARIO"] + "'"*/; 
                 DataTable vDatos = vConexion.obtenerDataTable(vQueryId);
 
                 GVPrincipalVisita.DataSource = vDatos;
