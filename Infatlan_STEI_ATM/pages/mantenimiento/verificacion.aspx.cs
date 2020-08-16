@@ -324,6 +324,14 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             txtcomentarioATMLinea.Text = Session["ATM_ATMACTIVO_VERIF_CREAR"].ToString();
             //txtcodATM.Text = Session["codATM"].ToString();
             // DDLsucursalATM.SelectedIndex = CargarInformacionDDL(DDLsucursalATM, Session["sucursalATM"].ToString());
+
+            //MATERAILES
+            DataTable vDatos2 = new DataTable();
+            vDatos2 = vConexion.ObtenerTabla("STEISP_ATM_Generales 34, '" + Session["ATM_IDMANT_VERIF_CREAR"].ToString() + "'");
+            GVDevolverMateriales.DataSource = vDatos2;
+            GVDevolverMateriales.DataBind();
+            Session["ATM_MATERIALES_DEVOLVER_VERIF"] = vDatos2;
+
         }
 
         void validar()

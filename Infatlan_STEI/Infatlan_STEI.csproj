@@ -45,13 +45,13 @@
   <ItemGroup>
     <Reference Include="Excel.4.5, Version=2.1.2.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Infatlan_Biometrico-master\Infatlan_Biometrico-master\BiometricoWeb\bin\Excel.4.5.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\C#\Proyectos Arquitectura TI\Infatlan_STEI-master (1)\Infatlan_STEI-master\Infatlan_STEI_ATM\bin\Excel.4.5.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.4.369, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>..\packages\ICSharpCode.SharpZipLib.dll.0.85.4.369\lib\net20\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="Interop.zkemkeeper">
-      <HintPath>..\..\Infatlan_STEI\Infatlan_STEI_Inventario\bin\Interop.zkemkeeper.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\C#\Practicas\Infatlan_Biometrico3\Infatlan_Biometrico\Biometrico\bin\Debug\Interop.zkemkeeper.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Microsoft.CSharp" />

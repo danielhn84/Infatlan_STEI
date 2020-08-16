@@ -569,6 +569,69 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
 
+                    <%--MATERIALES--%>
+                    <br />
+                     <asp:UpdatePanel runat="server" ID="UPMateriales" style="border:0px;" visible="false">
+                                <ContentTemplate>
+                                    <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto" >
+                                        <table class="tablesaw table-bordered table-hover table no-wrap" data-tablesaw-mode="swipe"
+                                            data-tablesaw-sortable data-tablesaw-sortable-switch data-tablesaw-minimap
+                                            data-tablesaw-mode-switch>
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" style="background-color: #5D6D7E; color: #D5DBDB;" data-tablesaw-sortable-col data-tablesaw-priority="persist" class="border">Artículo</th>
+                                                    <th scope="col" style="background-color: #5D6D7E; color: #D5DBDB;" data-tablesaw-sortable-col data-tablesaw-priority="2" class="border">Cantidad</th>
+                                                    <th scope="col" style="background-color: #5D6D7E; color: #D5DBDB;" data-tablesaw-sortable-col data-tablesaw-priority="2" class="border">Aceptar</th>
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr>
+                                                    <td><asp:DropDownList ID="DDLStock" runat="server" AutoPostBack="true" CssClass="form-control"></asp:DropDownList></td>                                                 
+                                                    <td><asp:TextBox ID="txtcantidad" runat="server" CssClass="form-control" TextMode="Number" AutoPostBack="true"></asp:TextBox></td>
+                                                    <td><asp:LinkButton runat="server" ID="btnVerifATM"  Text="" CssClass="btn btn-success  ti-check-box mr-2"></asp:LinkButton></td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                                        <div class="table-responsive">
+                                            <!--<table id="bootstrap-data-table" class="table table-striped table-bordered"> -->
+                                            <asp:GridView ID="GVDevolverMateriales" runat="server"
+                                                CssClass="table table-bordered"
+                                                PagerStyle-CssClass="pgr"
+                                                HeaderStyle-CssClass="table"
+                                                RowStyle-CssClass="rows"
+                                                AutoGenerateColumns="false"
+                                                AllowPaging="true"
+                                                GridLines="None"
+                                                HeaderStyle-HorizontalAlign="center"
+                                                PageSize="10" 
+                                                Style="margin: 30px 0px 20px 0px">
+                                                <Columns>
+                                                    <asp:BoundField DataField="IDStock" HeaderText="Stock" Visible="false" ItemStyle-HorizontalAlign="center" />
+                                                    <asp:BoundField DataField="Mantenimiento" HeaderText="Material" ItemStyle-HorizontalAlign="center" />
+                                                    <asp:BoundField DataField="Cantidad" HeaderText="Marca" ItemStyle-HorizontalAlign="center" />
+                                                    <asp:BoundField DataField="Devolver" HeaderText="Cantidad" ItemStyle-HorizontalAlign="center" />
+                                                    <%-- <asp:BoundField DataField="IDUbi" HeaderText="Ubi" Visible="true" ItemStyle-HorizontalAlign="center" />--%>
+                                                    <asp:TemplateField HeaderStyle-Width="60px" ItemStyle-HorizontalAlign="center">
+                                                        <ItemTemplate>
+                                                            <asp:LinkButton ID="Btnseleccionar" Enabled="true" runat="server" Text="" class="btn btn-danger mr-2" CommandArgument='<%# Eval("IDStock") %>' CommandName="Ver"><i class="fa-sign-in"></i></asp:LinkButton>
+                                                        </ItemTemplate>
+
+                                                    </asp:TemplateField>
+                                                </Columns>
+                                            </asp:GridView>
+                                        </div>
+                                    </div>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                    <%--MATERIALES--%>
+
                     <h5 class="card-subtitle m-t-30"><i class="fa fa-image"></i><b> COMPROBACION</b></h5>
 
                     <div class="card-body">

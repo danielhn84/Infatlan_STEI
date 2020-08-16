@@ -166,6 +166,7 @@ namespace Infatlan_STEI_ATM.pages.reprogramar
         void CorreoReprogramar()
         {
             SmtpService vService = new SmtpService();
+            Boolean vFlagEnvioSupervisor = false;
             //string vQueryD = "STEISP_ATM_Generales 33,'" + DLLtecResponsable.SelectedValue + "'";
             //DataTable vDatosTecnicoResponsable = vConexion.ObtenerTabla(vQueryD);
             DataTable vDatos = (DataTable)Session["AUTHCLASS"];
