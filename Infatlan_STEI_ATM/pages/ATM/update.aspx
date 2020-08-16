@@ -55,7 +55,7 @@
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Módulos</a></li>
                     <li class="breadcrumb-item"><a href="javascript:void(0)">ATM</a></li>
                     <li class="breadcrumb-item"><a href="javascript:void(0)">ATM</a></li>
-                    <li class="breadcrumb-item active">Modificar</li>
+                    <li class="breadcrumb-item active">Generales</li>
                 </ol>
             </div>
         </div>
@@ -63,8 +63,8 @@
 
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Actualizar ATM</h4>
-            <h6 class="card-subtitle">Seleccione ATM a modificar</h6>
+            <h4 class="card-title">ATM</h4>
+            <h6 class="card-subtitle">Lista de ATMs creados</h6>
             <div class="row col-12">
                 <div class="col-12 grid-margin stretch-card">
                     <asp:UpdatePanel ID="UpdateDivBusquedas" runat="server" UpdateMode="Conditional">
@@ -95,18 +95,15 @@
                                             GridLines="None" OnPageIndexChanging="GVBusqueda_PageIndexChanging"
                                             PageSize="10" OnRowCommand="GVBusqueda_RowCommand">
                                             <Columns>
-
                                                 <asp:BoundField DataField="Codigo" HeaderText="Código de ATM" ItemStyle-HorizontalAlign="center" />
                                                 <asp:BoundField DataField="Nombre" HeaderText="Nombre" ItemStyle-HorizontalAlign="center" />
                                                 <asp:BoundField DataField="Inventario" HeaderText="Inventario de ATM" ItemStyle-HorizontalAlign="center" />
                                                 <asp:BoundField DataField="Estado" HeaderText="Estado de ATM" ItemStyle-HorizontalAlign="center" />
                                                 <asp:BoundField DataField="Ubicacion" HeaderText="Ubicación" ItemStyle-HorizontalAlign="center" />
-                                                <asp:TemplateField HeaderText="Selección" ItemStyle-HorizontalAlign="center">
+                                                <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="center">
                                                     <ItemTemplate>
-                                                        <asp:LinkButton ID="btnbajaATM" runat="server" CssClass="btn btn-danger mr-2" Text="De Baja" CommandArgument='<%# Eval("Codigo") %>' CommandName="Baja"></asp:LinkButton>
-
-                                                        <asp:LinkButton runat="server" ID="btnmodificarATM" Text="" CssClass="btn btn-info ti-pencil-alt mr-2" CommandArgument='<%# Eval("Codigo") %>' CommandName="Modificar"></asp:LinkButton>
-                                                        <%-- <asp:Button ID="BtnUsuarioModificar" runat="server" Text="Modificar" CssClass="btn btn-rounded btn-block btn-success" CommandArgument='<%# Eval("codATM") %>' CommandName="Modificar" />--%>
+                                                        <asp:LinkButton ID="btnbajaATM" Visible="false" runat="server" CssClass="btn btn-danger mr-2" Text="De Baja" CommandArgument='<%# Eval("Codigo") %>' CommandName="Baja"></asp:LinkButton>
+                                                        <asp:LinkButton runat="server" Visible="false" ID="btnmodificarATM" Text="" CssClass="btn btn-info ti-pencil-alt mr-2" CommandArgument='<%# Eval("Codigo") %>' CommandName="Modificar"></asp:LinkButton>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                             </Columns>

@@ -12,9 +12,14 @@ namespace Infatlan_STEI.paginas.configuraciones
     public partial class permisos : System.Web.UI.Page
     {
         db vConexion = new db();
+        Security vSecurity = new Security();
         protected void Page_Load(object sender, EventArgs e){
             if (!Page.IsPostBack){
                 if (Convert.ToBoolean(Session["AUTH"])){
+                    if (!vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 6).Consulta)
+                        Response.Redirect("/default.aspx");
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 6).Edicion)
+                        BtnAceptar.Visible = true;
                     cargarDatos();
                 }
             }
@@ -22,16 +27,6 @@ namespace Infatlan_STEI.paginas.configuraciones
 
         private void cargarDatos() {
             try{
-                //String vQuery = "[STEISP_INVENTARIO_Generales] 14";
-                //DataTable vDatos = vConexion.obtenerDataTable(vQuery);
-
-                //if (vDatos.Rows.Count > 0){
-                //    Session["STEI_PERMISOS_GRID"] = null;
-                //    GVBusqueda.DataSource = vDatos;
-                //    GVBusqueda.DataBind();
-                //    Session["STEI_PERMISOS"] = vDatos;
-                //}
-
                 String vQuery = "[STEISP_INVENTARIO_Generales] 13";
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
 
@@ -123,6 +118,9 @@ namespace Infatlan_STEI.paginas.configuraciones
 
                     if (vCuenta == vData.Rows.Count){
                         cargarDatos();
+                        GVBusqueda.DataSource = null;
+                        GVBusqueda.DataBind();
+
                         Mensaje("Permisos actualizados con éxito.", WarningType.Success);
                     }
                 }

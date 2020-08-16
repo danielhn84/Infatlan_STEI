@@ -12,12 +12,16 @@ namespace Infatlan_STEI
     public partial class main : System.Web.UI.MasterPage
     {
         db vConexion = new db();
+        Security vSecurity = new Security();
         protected void Page_Load(object sender, EventArgs e){
             try{
                 if (!Convert.ToBoolean(Session["AUTH"]))
                     Response.Redirect("/login.aspx");
                 
                 if (!Page.IsPostBack){
+                    if (!vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 4).Consulta)
+                        Response.Redirect("/default.aspx");
+
                     DataTable vDatos = (DataTable)Session["AUTHCLASS"];
                     LitUsuario.Text = vDatos.Rows[0]["nombre"].ToString().ToUpper() + " " + vDatos.Rows[0]["apellidos"].ToString().ToUpper();
 

@@ -50,7 +50,7 @@
                             <div class="col-8">
                                 <asp:TextBox runat="server" PlaceHolder="Ingrese texto y presione Enter" ID="TxBusqueda" AutoPostBack="true" OnTextChanged="TxBusqueda_TextChanged" CssClass="form-control form-control-line"></asp:TextBox>
                             </div>
-                            <asp:Button runat="server" ID="BtnNuevo" CssClass="btn btn-success" Text="Nuevo" OnClick="BtnNuevo_Click" />
+                            <asp:Button runat="server" Visible="false" ID="BtnNuevo" CssClass="btn btn-success" Text="Nuevo" OnClick="BtnNuevo_Click" />
                         </div>
 
                         <div class="table-responsive m-t-40">
@@ -73,7 +73,7 @@
                                     <asp:BoundField DataField="EsadoDesc" HeaderText="Estado"/>
                                     <asp:TemplateField>
                                         <ItemTemplate>
-                                            <asp:LinkButton ID="BtnEditar" runat="server" Title="Editar" class="btn btn-info" CommandArgument='<%# Eval("idUsuario") %>' CommandName="EditarUser">
+                                            <asp:LinkButton ID="BtnEditar" Visible="false" runat="server" Title="Editar" class="btn btn-info" CommandArgument='<%# Eval("idUsuario") %>' CommandName="EditarUser">
                                                 <i class="icon-pencil"></i>
                                             </asp:LinkButton>
                                         </ItemTemplate>

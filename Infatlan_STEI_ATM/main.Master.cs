@@ -12,12 +12,30 @@ namespace Infatlan_STEI
     public partial class main : System.Web.UI.MasterPage
     {
         bd vConexion = new bd();
+        Security vSecurity = new Security();
         protected void Page_Load(object sender, EventArgs e){
             try{
                 if (!Convert.ToBoolean(Session["AUTH"]))
                     Response.Redirect("/login.aspx");
                 
                 if (!Page.IsPostBack){
+                    if (!vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Consulta)
+                        Response.Redirect("/default.aspx");
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Creacion){
+                        LIAgregar.Visible = true;
+                        LIModCrear.Visible = true;
+                        LIVerCrear.Visible = true;
+                        LIMatSolicitar.Visible = true;
+                        LIDevoluciones.Visible = true;
+                    }
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Edicion){
+                        LIModAprobar.Visible = true;
+                        LIVerAprobar.Visible = true;
+                        LIMatAprobar.Visible = true;
+                        LIReprogramar.Visible = true;
+                        LICalendario.Visible = true;
+                    }
+
                     DataTable vDatos = (DataTable)Session["AUTHCLASS"];
                     LitUsuario.Text = vDatos.Rows[0]["nombre"].ToString().ToUpper() + " " + vDatos.Rows[0]["apellidos"].ToString().ToUpper();
 
@@ -54,7 +72,6 @@ namespace Infatlan_STEI
                     }
                     LitNotificaciones.Text = vString;
                     LitPointer.Text = vPointer;
-
                 }
             }catch (Exception ex){
                 String vError = ex.Message;

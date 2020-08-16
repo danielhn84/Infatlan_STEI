@@ -20,6 +20,8 @@ namespace Infatlan_STEI.paginas.reportes.ajustes
         protected void Page_Load(object sender, EventArgs e){
             if (!Page.IsPostBack){
                 if (Convert.ToBoolean(Session["AUTH"])){
+                    if (!vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 5).Consulta)
+                        Response.Redirect("/default.aspx");
                     if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 5).Creacion)
                         BtnNuevo.Visible = true;
 

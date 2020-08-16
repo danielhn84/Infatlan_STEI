@@ -17,10 +17,14 @@ namespace Infatlan_STEI.paginas.reportes
     public partial class metasAprobacion : System.Web.UI.Page
     {
         db vConexion = new db();
+        Security vSecurity = new Security();
         protected void Page_Load(object sender, EventArgs e){
             try{
                 if (!Page.IsPostBack){
                     if (Convert.ToBoolean(Session["AUTH"])){
+                        if (!vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 5).Consulta)
+                            Response.Redirect("/default.aspx");
+
                         String vId = Session["CUMPL_ID_REPORTE"].ToString();
                         cargarDatos(vId);
                     }else {

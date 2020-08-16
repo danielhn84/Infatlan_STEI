@@ -12,10 +12,15 @@ namespace Infatlan_STEI.paginas.reportes
     public partial class metasCumplimiento : System.Web.UI.Page
     {
         db vConexion = new db();
+        Security vSecurity = new Security();
         GenerarXML vMaestro = new GenerarXML();
+
         protected void Page_Load(object sender, EventArgs e){
             if (!Page.IsPostBack){
                 if (Convert.ToBoolean(Session["AUTH"])){
+                    if (!vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 5).Consulta)
+                        Response.Redirect("/default.aspx");
+
                     String vEx = Request.QueryString["ex"];
                     if (vEx == "1")
                         ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "alert('Las llamadas atendidas son mayores que las totales')", true);
