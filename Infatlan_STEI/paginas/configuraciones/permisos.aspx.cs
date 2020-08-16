@@ -22,18 +22,18 @@ namespace Infatlan_STEI.paginas.configuraciones
 
         private void cargarDatos() {
             try{
-                String vQuery = "[STEISP_INVENTARIO_Generales] 14";
+                //String vQuery = "[STEISP_INVENTARIO_Generales] 14";
+                //DataTable vDatos = vConexion.obtenerDataTable(vQuery);
+
+                //if (vDatos.Rows.Count > 0){
+                //    Session["STEI_PERMISOS_GRID"] = null;
+                //    GVBusqueda.DataSource = vDatos;
+                //    GVBusqueda.DataBind();
+                //    Session["STEI_PERMISOS"] = vDatos;
+                //}
+
+                String vQuery = "[STEISP_INVENTARIO_Generales] 13";
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
-
-                if (vDatos.Rows.Count > 0){
-                    Session["STEI_PERMISOS_GRID"] = null;
-                    GVBusqueda.DataSource = vDatos;
-                    GVBusqueda.DataBind();
-                    Session["STEI_PERMISOS"] = vDatos;
-                }
-
-                vQuery = "[STEISP_INVENTARIO_Generales] 13";
-                vDatos = vConexion.obtenerDataTable(vQuery);
 
                 if (vDatos.Rows.Count > 0){
                     DDLUsuarios.Items.Clear();
@@ -59,11 +59,11 @@ namespace Infatlan_STEI.paginas.configuraciones
             try{
                 validarDatos();
                 DataTable vDatos = (DataTable)Session["STEI_PERMISOS"];
-                String vQuery = "[STEISP_Permisos] 3,'" + DDLUsuarios.SelectedValue + "'";
+                String vQuery = "[STEISP_Permisos] 5";
                 DataTable vData = vConexion.obtenerDataTable(vQuery);
                 int vInfo = 0;
 
-                if (vData.Rows.Count < 1){
+                if (vDatos.Rows.Count < 1){
                     int vCuenta = 0;
 
                     foreach (GridViewRow row in GVBusqueda.Rows){
@@ -88,7 +88,6 @@ namespace Infatlan_STEI.paginas.configuraciones
                     }
                 }else{ 
                     int vCuenta = 0;
-
                     foreach (GridViewRow row in GVBusqueda.Rows){
                         CheckBox CBConsulta = row.Cells[2].FindControl("CBxConsulta") as CheckBox;
                         CheckBox CBCrear = row.Cells[2].FindControl("CBxCrear") as CheckBox;
@@ -105,7 +104,24 @@ namespace Infatlan_STEI.paginas.configuraciones
                         vInfo = vConexion.ejecutarSql(vQuery);
                         vCuenta++;
                     }
-                    if (vCuenta == vDatos.Rows.Count){
+
+                    if (vData.Rows.Count != vDatos.Rows.Count){
+                        for (int i = 0; i < vData.Rows.Count; i++){
+                            if (vDatos.Rows.Count < i + 1){
+                                vQuery = "[STEISP_Permisos] 1,'" + DDLUsuarios.SelectedValue + "'" +
+                                    "," + vData.Rows[i]["idAplicacion"].ToString() +
+                                    ",'" + Session["USUARIO"].ToString() + "'" +
+                                    ",'false'" +
+                                    ",'false'" +
+                                    ",'false'" +
+                                    ",'false'";
+                                vInfo = vConexion.ejecutarSql(vQuery);
+                                vCuenta++;
+                            }
+                        }
+                    }
+
+                    if (vCuenta == vData.Rows.Count){
                         cargarDatos();
                         Mensaje("Permisos actualizados con éxito.", WarningType.Success);
                     }
@@ -122,7 +138,7 @@ namespace Infatlan_STEI.paginas.configuraciones
 
         protected void DDLUsuarios_SelectedIndexChanged(object sender, EventArgs e){
             try{
-                String vQuery = DDLUsuarios.SelectedValue == "0" ? "[STEISP_INVENTARIO_Generales] 14" : "[STEISP_Permisos] 3,'" + DDLUsuarios.SelectedValue + "'";
+                String vQuery = DDLUsuarios.SelectedValue == "0" ? "[STEISP_Permisos] 5" : "[STEISP_Permisos] 3,'" + DDLUsuarios.SelectedValue + "'";
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
 
                 if (vDatos.Rows.Count > 0){
@@ -130,7 +146,7 @@ namespace Infatlan_STEI.paginas.configuraciones
                     GVBusqueda.DataBind();
                     Session["STEI_PERMISOS"] = vDatos;
                 }else {
-                    vQuery = "[STEISP_INVENTARIO_Generales] 14";
+                    vQuery = "[STEISP_Permisos] 5";
                     vDatos = vConexion.obtenerDataTable(vQuery);
 
                     GVBusqueda.DataSource = vDatos;

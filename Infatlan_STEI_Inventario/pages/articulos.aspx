@@ -86,7 +86,7 @@
                                     <div class="col-8">
                                         <asp:TextBox runat="server" PlaceHolder="Ingrese Id o Tipo y presione Enter" ID="TxBusqueda" AutoPostBack="true" OnTextChanged="TxBusqueda_TextChanged" CssClass="form-control form-control-line"></asp:TextBox>
                                     </div>
-                                    <asp:Button runat="server" ID="BtnNuevo" CssClass="btn btn-success" Text="Nuevo" OnClick="BtnNuevo_Click" />
+                                    <asp:Button runat="server" Visible="false" ID="BtnNuevo" CssClass="btn btn-success" Text="Nuevo" OnClick="BtnNuevo_Click" />
                                 </div>
 
                                 <div class="table-responsive m-t-20">
@@ -111,11 +111,11 @@
                                             <asp:BoundField DataField="series" HeaderText="Serie" />
                                             <asp:TemplateField HeaderText="" HeaderStyle-Width="120">
                                                 <ItemTemplate>
-                                                    <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-info" Title="Editar" CommandArgument='<%# Eval("idStock") %>' CommandName="EditarArticulo">
+                                                    <asp:LinkButton ID="BtnEditar" Visible="false" runat="server" class="btn btn-info" Title="Editar" CommandArgument='<%# Eval("idStock") %>' CommandName="EditarArticulo">
                                                         <i class="icon-pencil"></i>
                                                     </asp:LinkButton>
 
-                                                    <asp:LinkButton ID="BtnEditar2" runat="server" class="btn btn-success" Title="Aregar" CommandArgument='<%# Eval("idStock") %>' CommandName="EliminarArticulo">
+                                                    <asp:LinkButton ID="BtnEditar2" Visible="false" runat="server" class="btn btn-success" Title="Aregar" CommandArgument='<%# Eval("idStock") %>' CommandName="EliminarArticulo">
                                                         <i class="icon-plus" ></i>
                                                     </asp:LinkButton>
                                                 </ItemTemplate>
@@ -138,7 +138,7 @@
                                         <div class="col-8">
                                             <asp:TextBox runat="server" PlaceHolder="Ingrese Id o Nombre y presione Enter" ID="TxBusquedaEDC" AutoPostBack="true" OnTextChanged="TxBusquedaEDC_TextChanged" CssClass="form-control form-control-line"></asp:TextBox>
                                         </div>
-                                        <asp:Button runat="server" ID="BtnNuevoEDC" CssClass="btn btn-success" Text="Nuevo" OnClick="BtnNuevoEDC_Click" />
+                                        <asp:Button runat="server" Visible="false" ID="BtnNuevoEDC" CssClass="btn btn-success" Text="Nuevo" OnClick="BtnNuevoEDC_Click" />
                                     </div>
                                 </div>
                             
@@ -164,7 +164,7 @@
                                             <asp:BoundField DataField="fechaMantenimiento" HeaderText="Mantenimiento" />
                                             <asp:TemplateField HeaderText="">
                                                 <ItemTemplate>
-                                                    <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-info" Title="Editar" CommandArgument='<%# Eval("idStockEDC") %>' CommandName="EditarArticuloEDC">
+                                                    <asp:LinkButton ID="BtnEditar" Visible="false" runat="server" class="btn btn-info" Title="Editar" CommandArgument='<%# Eval("idStockEDC") %>' CommandName="EditarArticuloEDC">
                                                         <i class="icon-pencil"></i>
                                                     </asp:LinkButton>
                                                     <asp:LinkButton ID="BtnInfo" runat="server" class="btn btn-secondary" Title="Ver" CommandArgument='<%# Eval("idStockEDC") %>' CommandName="VerInfoEDC">
@@ -189,7 +189,7 @@
                                     <div class="col-8">
                                         <asp:TextBox runat="server" PlaceHolder="Ingrese texto y presione Enter" ID="TxBusquedaEnlace" AutoPostBack="true" OnTextChanged="TxBusquedaEnlace_TextChanged" CssClass="form-control form-control-line"></asp:TextBox>
                                     </div>
-                                    <asp:Button runat="server" ID="BtnNuevoEnlace" CssClass="btn btn-success" Text="Nuevo" OnClick="BtnNuevoEnlace_Click" />
+                                    <asp:Button runat="server" Visible="false" ID="BtnNuevoEnlace" CssClass="btn btn-success" Text="Nuevo" OnClick="BtnNuevoEnlace_Click" />
                                 </div>
 
                                 <div class="table-responsive m-t-20">
@@ -213,11 +213,11 @@
                                             <asp:BoundField DataField="contacto" HeaderText="Contacto" />
                                             <asp:TemplateField>
                                                 <ItemTemplate>
-                                                    <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-info" Title="Editar" CommandArgument='<%# Eval("idEnlace") %>' CommandName="EditarEnlace">
+                                                    <asp:LinkButton ID="BtnEditar" Visible="false" runat="server" class="btn btn-info" Title="Editar" CommandArgument='<%# Eval("idEnlace") %>' CommandName="EditarEnlace">
                                                         <i class="icon-pencil"></i>
                                                     </asp:LinkButton>
 
-                                                    <asp:LinkButton ID="BtnAdjunto" runat="server" class="btn btn-primary" Title="Adjunto" CommandArgument='<%# Eval("idEnlace") %>' CommandName="SubirAdjunto">
+                                                    <asp:LinkButton ID="BtnAdjunto" Visible="false" runat="server" class="btn btn-primary" Title="Adjunto" CommandArgument='<%# Eval("idEnlace") %>' CommandName="SubirAdjunto">
                                                         <i class="icon-arrow-up-circle"></i>
                                                     </asp:LinkButton>
 
@@ -259,10 +259,10 @@
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-group row">
-                                        <div class="col-2" style="margin-left:2%">
+                                        <div class="col-3" style="margin-left:2%">
                                             <label>Tipo de Artículo</label>
                                         </div>
-                                        <div class="col-7">
+                                        <div class="col-6">
                                             <asp:DropDownList ID="DDLTipo" runat="server" class="form-control"></asp:DropDownList>
                                         </div>
                                         <div class="col-1">
@@ -286,20 +286,20 @@
 
                                 <div class="col-6">
                                     <div class="form-group row">
-                                        <div class="col-2" style="margin-left:2%">
+                                        <div class="col-3" style="margin-left:2%">
                                             <label class="col-form-label">Modelo</label>
                                         </div>
-                                        <div class="col-sm-9">
+                                        <div class="col-8">
                                             <asp:TextBox ID="TxModelo" placeholder="" class="form-control" runat="server"></asp:TextBox>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group row">
-                                        <div class="col-2" >
+                                        <div class="col-3" >
                                             <label class="col-form-label">Marca</label>
                                         </div>
-                                        <div class="col-8">
+                                        <div class="col-7">
                                             <asp:DropDownList runat="server" ID="DDLMarca" CssClass="form-control"></asp:DropDownList>
                                         </div>
                                         <div class="col-1">
@@ -307,6 +307,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="col-6">
                                     <div class="form-group row">
                                         <div class="col-3" style="margin-left:2%">
@@ -319,30 +320,31 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group row">
-                                        <div class="col-2">
+                                        <div class="col-3">
                                             <label class="col-form-label">Detalle</label>
                                         </div>
-                                        <div class="col-10">
+                                        <div class="col-9">
                                             <asp:TextBox ID="TxDetalle" placeholder="" class="form-control" runat="server"></asp:TextBox>                                            
                                         </div>
                                     </div>
                                 </div>
+                                
                                 <div class="col-6">
                                     <div class="form-group row">
-                                        <div class="col-2" style="margin-left:2%">
+                                        <div class="col-3" style="margin-left:2%">
                                             <label class="col-form-label">Serie</label>
                                         </div>
-                                        <div class="col-9">
+                                        <div class="col-8">
                                             <asp:TextBox ID="TxSerie" placeholder="" class="form-control" runat="server"></asp:TextBox>                                            
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group row">
-                                        <div class="col-2">
+                                        <div class="col-3">
                                             <label class="col-form-label">Estado</label>
                                         </div>
-                                        <div class="col-10">
+                                        <div class="col-9">
                                             <asp:DropDownList runat="server" ID="DDLEstado" CssClass="form-control">
                                                 <asp:ListItem Value="1" Text="Activo"></asp:ListItem>
                                                 <asp:ListItem Value="0" Text="Inactivo"></asp:ListItem>

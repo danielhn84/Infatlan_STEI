@@ -53,6 +53,7 @@ namespace Infatlan_STEI.paginas.reportes
 
                 if (vDSet.Tables[3].Rows.Count > 0){
                     GvOSER.DataSource = vDSet.Tables[3];
+                    Session["CUMPLIMIENTO_APR_OSER"] = vDSet.Tables[3];
                     GvOSER.DataBind();
                     LbResOSER.Visible = false;
                 }
@@ -63,7 +64,12 @@ namespace Infatlan_STEI.paginas.reportes
                     graficos(vDSet.Tables[4]);
                 }
 
-                //cargarSatisfaccion(vDSet.Tables[5]);
+                if (vDSet.Tables[5].Rows.Count > 0){
+                    LbInsatisfaccion.Visible = false;
+                    GvInsatisfacciones.DataSource = vDSet.Tables[5];
+                    Session["CUMPL_APR_SATISCACCION"] = vDSet.Tables[5];
+                    GvInsatisfacciones.DataBind();
+                }
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);
             }
@@ -83,7 +89,9 @@ namespace Infatlan_STEI.paginas.reportes
 
         protected void GvOSER_PageIndexChanging(object sender, GridViewPageEventArgs e){
             try{
-
+                GvOSER.PageIndex = e.NewPageIndex;
+                GvOSER.DataSource = (DataTable)Session["CUMPLIMIENTO_OSER"];
+                GvOSER.DataBind();
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);
             }
@@ -99,6 +107,7 @@ namespace Infatlan_STEI.paginas.reportes
 
         protected void BtnAprobar_Click(object sender, EventArgs e){
             try{
+                DivMensaje.Visible = false;
                 DDLAccion.SelectedValue = "0";
                 TxComentario.Text = string.Empty;
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal();", true);
@@ -175,14 +184,6 @@ namespace Infatlan_STEI.paginas.reportes
         
         }
 
-        private void cargarSatisfaccion(DataTable vData) {
-            try{
-
-            }catch (Exception ex){
-                throw new Exception(ex.Message);
-            }
-        }
-
         public void graficos(DataTable vData) { 
             try{
                 int vTotTR = 0, vTotTT = 0, vTotRup = 0, vTotNoRup = 0, vSolTareas = 0, vSolRupturas = 0;
@@ -257,6 +258,16 @@ namespace Infatlan_STEI.paginas.reportes
             }catch (Exception ex){
                 LbMensaje.Text = ex.Message;
                 DivMensaje.Visible = true;
+            }
+        }
+
+        protected void GvInsatisfacciones_PageIndexChanging(object sender, GridViewPageEventArgs e){
+            try{
+                GvInsatisfacciones.PageIndex = e.NewPageIndex;
+                GvInsatisfacciones.DataSource = (DataTable)Session["CUMPL_APR_SATISCACCION"];
+                GvInsatisfacciones.DataBind();
+            }catch (Exception ex){
+                Mensaje(ex.Message, WarningType.Danger);
             }
         }
     }

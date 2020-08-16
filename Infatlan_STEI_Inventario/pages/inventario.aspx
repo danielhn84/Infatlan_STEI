@@ -49,13 +49,13 @@
             <h4 class="card-title">Inventario</h4>
             <nav>
                 <div class="nav nav-pills " id="nav-tab" role="tablist">
-                    <a class="nav-item nav-link active" id="nav_cargar_tab" data-toggle="tab" href="#navNuevo" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="icon-plus"> </i>Nuevo</a>
-                    <a runat="server" visible="true" class="nav-item nav-link" id="Registros" data-toggle="tab" href="#navInventarios" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="icon-list" > </i>Inventario</a>
+                    <a runat="server" visible="true" class="nav-item nav-link active" id="Registros" data-toggle="tab" href="#navInventarios" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="icon-list" > </i>Ubicaciones</a>
+                    <a class="nav-item nav-link" runat="server" visible="false" id="navCrear" data-toggle="tab" href="#navNuevo" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="icon-plus"> </i>Nuevo</a>
                 </div>
             </nav>
             <hr />
             <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="navNuevo" role="tabpanel" aria-labelledby="nav-cargar-tab">
+                <div class="tab-pane fade" id="navNuevo" role="tabpanel" aria-labelledby="nav-cargar-tab">
                     <asp:UpdatePanel runat="server" ID="UpdatePanel">
                         <ContentTemplate>
                             <div class="card-body">
@@ -131,7 +131,7 @@
                     </asp:UpdatePanel>
                 </div>
 
-                <div class="tab-pane fade" id="navInventarios" role="tabpanel" aria-labelledby="nav-tecnicos-tab">
+                <div class="tab-pane fade show active" id="navInventarios" role="tabpanel" aria-labelledby="nav-tecnicos-tab">
                     <asp:UpdatePanel runat="server" ID="UpdatePanel1">
                         <ContentTemplate>
                             <div class="card-body">

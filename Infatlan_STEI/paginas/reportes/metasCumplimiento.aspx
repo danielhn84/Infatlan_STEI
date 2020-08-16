@@ -285,7 +285,7 @@
                 <h4 class="card-title">Ordenes de Servicio con Rupturas</h4>
             </a>
         </div>
-        <div id="collapse4" class="collapse" role="tabpanel" aria-labelledby="headingOne11">
+        <div id="collapse4" class="collapse show" role="tabpanel" aria-labelledby="headingOne11">
             <div class="card-body">
                 <div class="card-body">
                     <asp:Label Text="No hay ordenes de servicio con ruptura" runat="server" ID="LbResRuptura"/>
@@ -383,6 +383,53 @@
             </div>
         </div>
     </div>
+
+    <%--Insatisfacciones--%>
+    <div class="card">
+        <div class="card-header" role="tab" id="heading7">
+            <a class="link" data-toggle="collapse" data-parent="#accordion2" href="#collapse7" aria-expanded="true" aria-controls="collapse7">
+                <h4 class="card-title">Insatisfacciones</h4>
+            </a>
+        </div>
+        <div id="collapse7" class="collapse" role="tabpanel" aria-labelledby="headingOne11">
+            <div class="card-body">
+                <div class="card-body">
+                    <asp:Label Text="No hay ordenes de servicio con calificacion menor a 3" runat="server" ID="LbInsatisfaccion" />
+                    <div class="row col-12">
+                        <div class="table-responsive">
+                            <asp:UpdatePanel runat="server" ID="UpdatePanel1">
+                                <ContentTemplate>
+                                    <asp:GridView ID="GvInsatisfacciones" runat="server"
+                                        CssClass="table table-bordered"
+                                        PagerStyle-CssClass="pgr"
+                                        HeaderStyle-CssClass="table-success"
+                                        RowStyle-CssClass="rows"
+                                        AutoGenerateColumns="false"
+                                        AllowPaging="true"
+                                        GridLines="None" 
+                                        PageSize="10" OnPageIndexChanging="GvInsatisfacciones_PageIndexChanging">
+                                        <Columns>
+                                            <asp:BoundField DataField="id" HeaderText="Orden" ItemStyle-Width="50" />
+                                            <asp:BoundField DataField="respuesta" HeaderText="Calificacion" ItemStyle-Width="10" />
+                                            <asp:BoundField DataField="responsibility" HeaderText="Responsable" ItemStyle-Width="100" />
+                                            <asp:BoundField DataField="comments" HeaderText="Comentario" ItemStyle-Width="100" />
+                                            <asp:TemplateField>
+                                                <HeaderTemplate>Observaciones</HeaderTemplate>
+                                                <ItemTemplate>
+                                                    <asp:TextBox runat="server" CssClass="form-control" ID="TxSatisfaccionObs"></asp:TextBox>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                        </Columns>
+                                    </asp:GridView>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <%--RENDIMIENTO--%>
     <div class="card">

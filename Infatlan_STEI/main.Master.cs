@@ -8,6 +8,7 @@ namespace Infatlan_STEI
     public partial class main : System.Web.UI.MasterPage
     {
         db vConexion = new db();
+        Security vSecurity = new Security();
         protected void Page_Load(object sender, EventArgs e){
             if (!Convert.ToBoolean(Session["AUTH"])){
                 Response.Redirect("/login.aspx");
@@ -55,19 +56,19 @@ namespace Infatlan_STEI
                     LitNotificaciones.Text = vString;
                     LitPointer.Text = vPointer;
 
-                    vQuery = "[STEISP_Permisos] 3,'" + Session["USUARIO"].ToString() + "'";
-                    vDatos = vConexion.obtenerDataTable(vQuery);
-
-                    if (vDatos.Rows.Count > 0){
-                        if (vDatos.Rows[0]["consulta"].ToString() == "True")
-                            LIInventario.Visible = true;
-                        if (vDatos.Rows[1]["consulta"].ToString() == "True")
-                            LIAgencias.Visible = true;
-                        if (vDatos.Rows[2]["consulta"].ToString() == "True")
-                            LIATM.Visible = true;
-                        if (vDatos.Rows[3]["consulta"].ToString() == "True")
-                            LICableado.Visible = true;
-                    }
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 1).Consulta)
+                        LIInventario.Visible = true;
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 2).Consulta)
+                        LIAgencias.Visible = true;
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Consulta)
+                        LIATM.Visible = true;
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 4).Consulta)
+                        LICableado.Visible = true;
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 5).Consulta)
+                        LiCumplimiento.Visible = true;
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 5).Creacion)
+                        LIFormulario.Visible = true;
+                    
                 }catch (Exception ex){
                     vError = ex.Message;
                 }

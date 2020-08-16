@@ -102,11 +102,12 @@
                         <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-wrench"></i><span class="hide-menu">Configuración</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="/sites/inventario/pages/Configuracion/tipoArticulo.aspx">Articulos</a></li>
+                                <li><a href="/sites/inventario/pages/Configuracion/articuloDetalle.aspx">Detalle articulo</a></li>
                                 <li><a href="/sites/inventario/pages/Configuracion/contratos.aspx">Contratos</a></li>
                                 <li><a href="/sites/inventario/pages/Configuracion/marcas.aspx">Marcas</a></li>
                                 <li><a href="/sites/inventario/pages/perfiles.aspx">Perfiles</a></li>
                                 <li><a href="/sites/inventario/pages/Configuracion/ubicaciones.aspx">Ubicaciones</a></li>
-                                <li><a href="/sites/inventario/pages/Configuracion/cargaRegistros.aspx">Cargar Datos</a></li>
+                                <li runat="server" id="LiCargar" visible="false"><a href="/sites/inventario/pages/Configuracion/cargaRegistros.aspx">Cargar Datos</a></li>
                             </ul>
                         </li>
                     </ul>

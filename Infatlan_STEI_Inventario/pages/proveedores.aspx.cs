@@ -15,10 +15,14 @@ namespace Infatlan_STEI_Inventario.pages
 {
     public partial class proveedores : System.Web.UI.Page
     {
+        Security vSecurity = new Security();
         db vConexion = new db();
         protected void Page_Load(object sender, EventArgs e){
             if (!Page.IsPostBack){
                 if (Convert.ToBoolean(Session["AUTH"])){
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 1).Creacion)
+                        BtnNuevo.Visible = true;
+                    
                     cargarDatos();
                 }else {
                     Response.Redirect("/login.aspx");
@@ -34,6 +38,18 @@ namespace Infatlan_STEI_Inventario.pages
                 if (vDatos.Rows.Count > 0){
                     GVBusqueda.DataSource = vDatos;
                     GVBusqueda.DataBind();
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 1).Edicion){
+                        foreach (GridViewRow item in GVBusqueda.Rows){
+                            LinkButton LbEdit = item.FindControl("BtnEditar") as LinkButton;
+                            LbEdit.Visible = true;
+                        }
+                    }
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 1).Borrado){
+                        foreach (GridViewRow item in GVBusqueda.Rows){
+                            LinkButton LbDelete = item.FindControl("BtnBorrar") as LinkButton;
+                            LbDelete.Visible = true;
+                        }
+                    }
                     Session["INV_PROVEEDORES"] = vDatos;
                 }
             }catch (Exception ex){

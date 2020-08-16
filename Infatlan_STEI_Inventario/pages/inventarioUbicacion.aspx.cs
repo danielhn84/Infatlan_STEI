@@ -14,6 +14,7 @@ namespace Infatlan_STEI_Inventario.pages
     public partial class inventarios : System.Web.UI.Page
     {
         db vConexion = new db();
+        Security vSecurity = new Security();
         protected void Page_Load(object sender, EventArgs e){
             String vIdUbicacion = " " + Request.QueryString["i"];
             LbUbicacion.Text = " " + Request.QueryString["c"];
@@ -22,6 +23,13 @@ namespace Infatlan_STEI_Inventario.pages
             if (!Page.IsPostBack){
                 if (Convert.ToBoolean(Session["AUTH"])){
                     limpiarSessiones();
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 1).Edicion){
+                        foreach (GridViewRow item in GVBusqueda.Rows){
+                            LinkButton LbEdit = item.FindControl("BtnEditar") as LinkButton;
+                            LbEdit.Visible = true;
+                        }
+                    }
+
                     cargarDatos(vIdUbicacion);
                 }else {
                     Response.Redirect("/login.aspx");

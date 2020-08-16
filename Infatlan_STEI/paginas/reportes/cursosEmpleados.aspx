@@ -62,11 +62,12 @@
                             <div class="col-5">
                                 <asp:TextBox runat="server" PlaceHolder="Ingrese texto y presione Enter" ID="TxBusqueda" AutoPostBack="true" OnTextChanged="TxBusqueda_TextChanged" CssClass="form-control form-control-line"></asp:TextBox>
                             </div>
-                            <asp:Button runat="server" ID="BtnNuevo" CssClass="btn btn-success mr-2" Text="Nuevo" OnClick="BtnNuevo_Click" />
-                            <button type="button" class="btn btn-primary" onclick="openModalCarga();">
-                                <span class="icon-arrow-up-circle"></span> Carga
-                            </button>
-                            <%--<input type="button" value="Carga" runat="server" class="btn btn-primary" onclick="openModalCarga();" />--%>
+                            <div runat="server" id="DivCrear" visible="false">
+                                <asp:Button runat="server" ID="BtnNuevo" CssClass="btn btn-success mr-2" Text="Nuevo" OnClick="BtnNuevo_Click" />
+                                <button type="button" class="btn btn-primary" onclick="openModalCarga();">
+                                    <span class="icon-arrow-up-circle"></span> Carga
+                                </button>
+                            </div>
                         </div>
 
                         <div class="table-responsive m-t-20">
@@ -87,10 +88,10 @@
                                     <asp:BoundField DataField="nota" HeaderText="Nota"/>
                                     <asp:TemplateField>
                                         <ItemTemplate>
-                                            <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-info" CommandArgument='<%# Eval("id") %>' CommandName="EditarEvaluacion">
+                                            <asp:LinkButton ID="BtnEditar" Visible="false" runat="server" class="btn btn-info" CommandArgument='<%# Eval("id") %>' CommandName="EditarEvaluacion">
                                                 <i class="icon-note" ></i>
                                             </asp:LinkButton>
-                                            <asp:LinkButton ID="BtnBorrar" runat="server" class="btn btn-primary" CommandArgument='<%# Eval("id") %>' CommandName="borrarAsignacion">
+                                            <asp:LinkButton ID="BtnBorrar" Visible="false" runat="server" class="btn btn-primary" CommandArgument='<%# Eval("id") %>' CommandName="borrarAsignacion">
                                                 <i class="icon-trash" ></i>
                                             </asp:LinkButton>
                                         </ItemTemplate>

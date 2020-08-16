@@ -12,6 +12,7 @@ namespace Infatlan_STEI_Inventario
     public partial class main : System.Web.UI.MasterPage
     {
         db vConexion = new db();
+        Security vSecurity = new Security();
         protected void Page_Load(object sender, EventArgs e){
             try{
                 if (!Convert.ToBoolean(Session["AUTH"])){
@@ -19,6 +20,9 @@ namespace Infatlan_STEI_Inventario
                 }
 
                 if (!Page.IsPostBack){
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 1).Creacion)
+                        LiCargar.Visible = true;
+
                     DataTable vDatos = (DataTable)Session["AUTHCLASS"];
                     LitUsuario.Text = vDatos.Rows[0]["nombre"].ToString().ToUpper() + " " + vDatos.Rows[0]["apellidos"].ToString().ToUpper();
 
