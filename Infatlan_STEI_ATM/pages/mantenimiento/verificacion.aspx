@@ -571,7 +571,7 @@
 
                     <%--MATERIALES--%>
                     <br />
-                     <asp:UpdatePanel runat="server" ID="UPMateriales" visible="false">
+                     <asp:UpdatePanel runat="server" ID="UPMateriales" style="border:0px;" visible="false">
                                 <ContentTemplate>
                                     <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto" >
                                         <table class="tablesaw table-bordered table-hover table no-wrap" data-tablesaw-mode="swipe"
