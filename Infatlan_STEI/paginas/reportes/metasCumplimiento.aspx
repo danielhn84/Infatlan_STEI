@@ -98,10 +98,10 @@
                 <h4 class="card-title">Medios de Pago</h4>
             </a>
         </div>
-        <div id="collapse2" class="collapse" role="tabpanel" aria-labelledby="headingOne11">
+        <div id="collapse2" class="collapse show" role="tabpanel" aria-labelledby="headingOne11">
             <div class="card-body">
                 <div class="card-body">
-                    <asp:UpdatePanel runat="server" ID="UPanelMedios">
+                    <asp:UpdatePanel runat="server" ID="UPanelMedios" UpdateMode="Conditional">
                         <ContentTemplate>
                             <h4 class="card-subtitle"><b> ATM</b></h4>
                             <hr />
@@ -132,7 +132,8 @@
                                 </div>
                                 <div style="width: 40%;">
                                     <div class="text-center">
-                                        <asp:Literal Text="" ID="LitATM" runat="server" />
+                                        <div runat="server" id="CATM" class="chart easy-pie-chart-4" data-percent="0"><span class="percent"></span></div>
+                                        <%--<asp:Literal Text="" ID="LitATM" runat="server" />--%>
                                     </div>
                                 </div>
                             </div>
@@ -216,7 +217,7 @@
                 <h4 class="card-title">KPIs Globales</h4>
             </a>
         </div>
-        <div id="collapse3" class="collapse" role="tabpanel" aria-labelledby="headingOne11">
+        <div id="collapse3" class="collapse show" role="tabpanel" aria-labelledby="headingOne11">
             <div class="card-body">
                 <div class="card-body">
                     <asp:UpdatePanel runat="server" ID="UPanelKPI">
@@ -340,7 +341,7 @@
                 <h4 class="card-title">Ordenes de Servicio Esperando Respuesta</h4>
             </a>
         </div>
-        <div id="collapse5" class="collapse" role="tabpanel" aria-labelledby="headingOne11">
+        <div id="collapse5" class="collapse show" role="tabpanel" aria-labelledby="headingOne11">
             <div class="card-body">
                 <div class="card-body">
                     <asp:Label Text="No hay ordenes de servicio esperando respuesta" runat="server" ID="LbResOSER" />
@@ -391,7 +392,7 @@
                 <h4 class="card-title">Insatisfacciones</h4>
             </a>
         </div>
-        <div id="collapse7" class="collapse" role="tabpanel" aria-labelledby="headingOne11">
+        <div id="collapse7" class="collapse show" role="tabpanel" aria-labelledby="headingOne11">
             <div class="card-body">
                 <div class="card-body">
                     <asp:Label Text="No hay ordenes de servicio con calificacion menor a 3" runat="server" ID="LbInsatisfaccion" />

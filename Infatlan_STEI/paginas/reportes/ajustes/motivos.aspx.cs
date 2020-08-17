@@ -178,6 +178,12 @@ namespace Infatlan_STEI.paginas.reportes.ajustes
                 GVBusqueda.PageIndex = e.NewPageIndex;
                 GVBusqueda.DataSource = (DataTable)Session["CUMPL_MOTIVOS"];
                 GVBusqueda.DataBind();
+                if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 5).Edicion){
+                    foreach (GridViewRow item in GVBusqueda.Rows){
+                        LinkButton LbEdit = item.FindControl("BtnEditar") as LinkButton;
+                        LbEdit.Visible = true;
+                    }
+                }
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);
             }
@@ -190,16 +196,17 @@ namespace Infatlan_STEI.paginas.reportes.ajustes
                 int vInfo;
                 DataTable vDatos = new DataTable();
                 vQuery = "[STEISP_CUMPLIMIENTO_Ajustes] {0}" +
+                        "," + DDLSecciones.SelectedValue +
                         ",'" + TxNombre.Text.ToString().ToUpper() + "'" +
                         "," + DDLEstado.SelectedValue +
                         ",'" + Session["USUARIO"].ToString() + "'";
 
                 if (HttpContext.Current.Session["CUMPL_MOTIVO_ID"] == null){
-                    vQuery = string.Format(vQuery, "9");
+                    vQuery = string.Format(vQuery, "4");
                     vInfo = vConexion.ejecutarSql(vQuery);
                     vMensaje = "Curso registrado con éxito.";
                 }else{
-                    vQuery = string.Format(vQuery, "10," + Session["CUMPL_MOTIVO_ID"].ToString());
+                    vQuery = string.Format(vQuery, "5," + Session["CUMPL_MOTIVO_ID"].ToString());
                     vInfo = vConexion.ejecutarSql(vQuery);
                     vMensaje = "Curso actualizado con éxito.";
                 }

@@ -6,6 +6,7 @@ using System.Data;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Infatlan_STEI.classes;
+using System.Configuration;
 
 namespace Infatlan_STEI.paginas.reportes
 {
@@ -92,7 +93,8 @@ namespace Infatlan_STEI.paginas.reportes
             TxATMTotal.Text = Convert.ToString(vCumplidas + vIncumplidas);
             TxATMPorcentaje.Text = vPorcentaje.ToString();
             TxATMObs.Text = vPorcentaje > 90 ? "Meta Alcanzada" : "";
-            LitATM.Text = "<div class='chart easy-pie-chart-4' data-percent='" + vPorcentaje.ToString() + "'><span class='percent'></span></div>";
+            CATM.Attributes.Add("data-percent", vPorcentaje.ToString());
+            //LitATM.Text = "<div class='chart easy-pie-chart-4' data-percent='" + vPorcentaje.ToString() + "'><span class='percent'></span></div>";
 
             vQuery = "[STEISP_CUMPLIMIENTO_Generales] 5,'" + vAssignedGroup + "','" + vFecha + "'";
             vDSMedios = vConexion.obtenerDataSetSA(vQuery);
@@ -267,7 +269,7 @@ namespace Infatlan_STEI.paginas.reportes
                 var vDropDown = e.Row.Cells[2].FindControl("DDLRazonER") as DropDownList;
                 var vComment = e.Row.Cells[3].FindControl("TxOSERObs") as TextBox;
                 if (vDropDown != null){
-                    String vQuery = "[STEISP_CUMPLIMIENTO_Ajustes] 6, 5";
+                    String vQuery = "[STEISP_CUMPLIMIENTO_Ajustes] 11, 5";
                     DataTable vDatos = vConexion.obtenerDataTable(vQuery);
                     vDropDown.Items.Add(new ListItem { Value = "0", Text = "Seleccione una opción" });
                     foreach (DataRow item in vDatos.Rows){
@@ -338,7 +340,7 @@ namespace Infatlan_STEI.paginas.reportes
                 var vDropDown = e.Row.Cells[3].FindControl("DDLRazonRuptura") as DropDownList;
                 var vComment = e.Row.Cells[3].FindControl("TxRupturaObs") as TextBox;
                 if (vDropDown != null){
-                    String vQuery = "[STEISP_CUMPLIMIENTO_Ajustes] 6, 4";
+                    String vQuery = "[STEISP_CUMPLIMIENTO_Ajustes] 11, 4";
                     DataTable vDatos = vConexion.obtenerDataTable(vQuery);
                     
                     if (e.Row.Cells[1].Text != ""){
@@ -1733,15 +1735,15 @@ namespace Infatlan_STEI.paginas.reportes
                 throw new Exception("Favor ingrese el total de llamadas.");
             if (TxCallAtendidas.Text == string.Empty || TxCallAtendidas.Text == "")
                 throw new Exception("Favor ingrese las llamadas atendidas.");
-            if (Convert.ToInt32(TxCallPorcentajeSi.Text) <= 90 && TxCajaObs.Text == "")
+            if (float.Parse(TxCallPorcentajeSi.Text) <= 90 && TxCallObs.Text == "")
                 throw new Exception("Favor ingrese las observaciones de las llamadas.");
-            if (Convert.ToInt32(TxATMPorcentaje.Text) <= 90 && TxATMObs.Text == "")
+            if (float.Parse(TxATMPorcentaje.Text) <= 90 && TxATMObs.Text == "")
                 throw new Exception("Favor ingrese las observaciones de ATM en Medios de pago.");
-            if (Convert.ToInt32(TxABAPorcentaje.Text) <= 90 && TxABAObs.Text == "")
+            if (float.Parse(TxABAPorcentaje.Text) <= 90 && TxABAObs.Text == "")
                 throw new Exception("Favor ingrese las observaciones de ABA en Medios de pago.");
-            if (Convert.ToInt32(TxCajaPorcentaje.Text) <= 90 && TxCajaObs.Text == "")
+            if (float.Parse(TxCajaPorcentaje.Text) <= 90 && TxCajaObs.Text == "")
                 throw new Exception("Favor ingrese las observaciones de Caja en Medios de pago.");
-            if (Convert.ToDecimal(TxKPIPorcentaje.Text) <= 90 && TxKPIObs.Text == "")
+            if (float.Parse(TxKPIPorcentaje.Text) <= 90 && TxKPIObs.Text == "")
                 throw new Exception("Favor ingrese las observaciones de KPI.");
         }
 
@@ -1777,24 +1779,39 @@ namespace Infatlan_STEI.paginas.reportes
                         insertarKPI(vDatos, vInfo);
 
                     vDatos = (DataTable)Session["CUMPL_RUPTURA"];
-                    if (vDatos.Rows.Count > 0)
+                    if (vDatos != null && vDatos.Rows.Count > 0)
                         insertarRupturas(vDatos, vInfo);
 
                     vDatos = (DataTable)Session["CUMPL_OSER"];
-                    if (vDatos.Rows.Count > 0)
+                    if (vDatos != null && vDatos.Rows.Count > 0)
                         insertarOSER(vDatos, vInfo);
 
                     vDatos = (DataTable)Session["CUMPL_RENDIMIENTO"];
-                    if (vDatos.Rows.Count > 0)
+                    if (vDatos != null &&  vDatos.Rows.Count > 0)
                         insertarRendimiento(vDatos, vInfo);
 
                     vDatos = (DataTable)Session["CUMPL_INSATISCACCION"];
-                    if (vDatos.Rows.Count > 0)
+                    if (vDatos != null && vDatos.Rows.Count > 0)
                         insertarInsatisfacciones(vDatos, vInfo);
 
-                    limpiarForm();
-                    Mensaje("Reporte enviado con éxito", WarningType.Success);
+                    SmtpService vService = new SmtpService();
+                    Boolean vFlag = false;
+                    vQuery = "[STEISP_Login] 3,'" + Session["USUARIO"].ToString() + "'";
+                    vDatos = vConexion.obtenerDataTable(vQuery);
 
+                    vService.EnviarMensaje(
+                        ConfigurationManager.AppSettings["MAIL_CUMPLIMIENTO"].ToString(),
+                        typeBody.Cumplimiento,
+                        "Reporte de Metas de cumplimiento",
+                        vDatos.Rows[0]["idJefe"].ToString(),
+                        "El usuario <b>" + vDatos.Rows[0]["nombreEmpleado"].ToString() + "</b> ha registrado un nuevo reporte de metas de cumplimiento.<br>Favor revisar en la sección de pendientes."
+                    );
+
+                    vFlag = true;
+                    if (vFlag)
+                        Mensaje("Reporte enviado con éxito", WarningType.Success);
+
+                    limpiarForm();
                 }else 
                     Mensaje("Reporte no se pudo enviar. Comuníquese con sistemas.", WarningType.Danger);
                 

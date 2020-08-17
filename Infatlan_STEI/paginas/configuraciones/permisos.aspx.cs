@@ -54,11 +54,11 @@ namespace Infatlan_STEI.paginas.configuraciones
             try{
                 validarDatos();
                 DataTable vDatos = (DataTable)Session["STEI_PERMISOS"];
-                String vQuery = "[STEISP_Permisos] 5";
+                String vQuery = "[STEISP_Permisos] 6,'" + DDLUsuarios.SelectedValue + "'";
                 DataTable vData = vConexion.obtenerDataTable(vQuery);
                 int vInfo = 0;
 
-                if (vDatos.Rows.Count < 1){
+                if (vData.Rows[0][0].ToString() == "0"){
                     int vCuenta = 0;
 
                     foreach (GridViewRow row in GVBusqueda.Rows){
@@ -79,6 +79,8 @@ namespace Infatlan_STEI.paginas.configuraciones
                     }
                     if (vCuenta == vDatos.Rows.Count){
                         cargarDatos();
+                        GVBusqueda.DataSource = null;
+                        GVBusqueda.DataBind();
                         Mensaje("Permisos ingresados con éxito.", WarningType.Success);
                     }
                 }else{ 
@@ -100,6 +102,8 @@ namespace Infatlan_STEI.paginas.configuraciones
                         vCuenta++;
                     }
 
+                    vQuery = "[STEISP_Permisos] 5";
+                    vData = vConexion.obtenerDataTable(vQuery);
                     if (vData.Rows.Count != vDatos.Rows.Count){
                         for (int i = 0; i < vData.Rows.Count; i++){
                             if (vDatos.Rows.Count < i + 1){
@@ -120,7 +124,6 @@ namespace Infatlan_STEI.paginas.configuraciones
                         cargarDatos();
                         GVBusqueda.DataSource = null;
                         GVBusqueda.DataBind();
-
                         Mensaje("Permisos actualizados con éxito.", WarningType.Success);
                     }
                 }

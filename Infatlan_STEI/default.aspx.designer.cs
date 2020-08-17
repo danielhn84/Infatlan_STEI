@@ -51,40 +51,40 @@ namespace Infatlan_STEI
         protected global::System.Web.UI.WebControls.Label LbTran;
 
         /// <summary>
-        /// Control Label1.
+        /// Control LbAGLlenar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label LbAGLlenar;
 
         /// <summary>
-        /// Control Label2.
+        /// Control LbAGModificar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
+        protected global::System.Web.UI.WebControls.Label LbAGModificar;
 
         /// <summary>
-        /// Control Label3.
+        /// Control LbAGMantenimientos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
+        protected global::System.Web.UI.WebControls.Label LbAGMantenimientos;
 
         /// <summary>
-        /// Control Label4.
+        /// Control LbAGTransacciones.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label4;
+        protected global::System.Web.UI.WebControls.Label LbAGTransacciones;
 
         /// <summary>
         /// Control LbFechaDashboard.

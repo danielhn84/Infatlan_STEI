@@ -12,14 +12,15 @@ using System.Web.UI;
 namespace Infatlan_STEI.classes
 {
     public enum typeBody{
-        Bugs
+        Bugs,
+        Cumplimiento
     }
 
     public class SmtpService : Page{
 
         public SmtpService() { }
 
-        public Boolean EnviarMensaje(String To, typeBody Body, String Usuario, String Nombre, String vCopia = null){
+        public Boolean EnviarMensaje(String To, typeBody Body, String Titulo, String Nombre, String Descripcion, String vCopia = null){
             Boolean vRespuesta = false;
             try{
                 MailMessage mail = new MailMessage("Recursos Humanos<" + ConfigurationManager.AppSettings["SmtpFrom"] + ">", To);
@@ -39,9 +40,16 @@ namespace Infatlan_STEI.classes
                 switch (Body){
                     case typeBody.Bugs:
                         mail.AlternateViews.Add(CreateHtmlMessage(PopulateBody(
-                            Usuario,
-                            "El empleado " + Usuario + " ha notificado una incidencia.",
-                            Nombre
+                            Titulo,
+                            Nombre,
+                            Descripcion
+                            ), Server.MapPath("/images/logo.png")));
+                        break;
+                    case typeBody.Cumplimiento:
+                        mail.AlternateViews.Add(CreateHtmlMessage(PopulateBody(
+                            Titulo,
+                            Nombre,
+                            Descripcion
                             ), Server.MapPath("/images/logo.png")));
                         break;
                 }
@@ -69,15 +77,15 @@ namespace Infatlan_STEI.classes
             return alternateView;
         }
 
-        public string PopulateBody(string vNombre, string vTitulo, string vDescripcion){
+        public string PopulateBody(string vTitulo, string vNombre, string vDescripcion){
             string body = string.Empty;
             using (StreamReader reader = new StreamReader(Server.MapPath("/paginas/mail/TemplateMail.html"))){
                 body = reader.ReadToEnd();
             }
 
             body = body.Replace("{Host}", ConfigurationManager.AppSettings["Host"]);
-            body = body.Replace("{Nombre}", vNombre);
             body = body.Replace("{Titulo}", vTitulo);
+            body = body.Replace("{Nombre}", vNombre);
             body = body.Replace("{Descripcion}", vDescripcion);
             return body;
         }
