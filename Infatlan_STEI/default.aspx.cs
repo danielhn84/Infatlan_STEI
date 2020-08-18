@@ -96,25 +96,25 @@ namespace Infatlan_STEI
                         vDestino = ConfigurationManager.AppSettings["SmtpINVENTARIO"].ToString();
 
                     foreach (DataRow item in vDatos.Rows){
-                        if (!item["emailEmpresa"].ToString().Trim().Equals("")){
-                            vService.EnviarMensaje(
-                                vDestino,
-                                typeBody.Bugs,
-                                "Notificación de incidencia.",
-                                "Desarrollador",
-                                "El usuario <b>" + item["idUsuario"].ToString() + "</b> ha escrito: <br>" + TxMensaje.Text
-                                );
-                            vFlagEnvio = true;
-                        }
+                        vService.EnviarMensaje(
+                            vDestino,
+                            typeBody.Bugs,
+                            "Notificación de incidencia.",
+                            "Desarrollador",
+                            "El usuario <b>" + item["idUsuario"].ToString() + "</b> ha escrito: <br>" + TxMensaje.Text
+                            );
+                        vFlagEnvio = true;
                     }
 
                     if (vFlagEnvio)
-                        Mensaje("Insidencia enviada con éxito.", WarningType.Success);
+                        Mensaje("Incidencia enviada con éxito.", WarningType.Success);
                     else
                         Mensaje("El Mensaje no se pudo enviar. Favor intente de nuevo.", WarningType.Success);
+                    
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
                 }
             }catch (Exception ex){
-
+                Mensaje(ex.Message, WarningType.Danger);
             }
         }
 

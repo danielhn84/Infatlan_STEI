@@ -438,15 +438,6 @@ namespace Infatlan_STEI.paginas.reportes
 
         private void insertarRupturas(DataTable vDatos, int vId) {
             try{
-                int vCont = GvRuptura.PageIndex != 0 ? GvRuptura.PageIndex * 10 : 0;
-                foreach (GridViewRow row in GvRuptura.Rows){
-                    DropDownList DDLRazonRuptura = (DropDownList)row.Cells[2].FindControl("DDLRazonRuptura");
-                    TextBox TxComment = (TextBox)row.Cells[3].FindControl("TxRupturaObs");
-                    vDatos.Rows[vCont]["idRazon"] = DDLRazonRuptura.SelectedValue;
-                    vDatos.Rows[vCont]["comentario"] = TxComment.Text;
-                    vCont++;
-                }
-
                 for (int i = 0; i < vDatos.Rows.Count; i++){
                     Object[] vDatosReporte = new object[8];
                     vDatosReporte[0] = vId.ToString();
@@ -471,15 +462,6 @@ namespace Infatlan_STEI.paginas.reportes
 
         private void insertarOSER(DataTable vDatos, int vId) {
             try{
-                int vCont = GvOSER.PageIndex != 0 ? GvOSER.PageIndex * 10 : 0;
-                foreach (GridViewRow row in GvOSER.Rows){
-                    DropDownList DDLRazonOSER = (DropDownList)row.Cells[2].FindControl("DDLRazonER");
-                    TextBox TxComment = (TextBox)row.Cells[3].FindControl("TxOSERObs");
-                    vDatos.Rows[vCont]["idRazon"] = DDLRazonOSER.SelectedValue;
-                    vDatos.Rows[vCont]["comentario"] = TxComment.Text;
-                    vCont++;
-                }
-
                 for (int i = 0; i < vDatos.Rows.Count; i++){
                     Object[] vDatosReporte = new object[6];
                     vDatosReporte[0] = vId.ToString();
@@ -502,13 +484,6 @@ namespace Infatlan_STEI.paginas.reportes
 
         private void insertarInsatisfacciones(DataTable vDatos, int vId) {
             try{
-                int vCont = GvInsatisfacciones.PageIndex != 0 ? GvInsatisfacciones.PageIndex * 10 : 0;
-                foreach (GridViewRow row in GvInsatisfacciones.Rows){
-                    TextBox TxComment = (TextBox)row.Cells[3].FindControl("TxSatisfaccionObs");
-                    vDatos.Rows[vCont]["observaciones"] = TxComment.Text;
-                    vCont++;
-                }
-
                 for (int i = 0; i < vDatos.Rows.Count; i++){
                     Object[] vDatosReporte = new object[6];
                     vDatosReporte[0] = vId.ToString();
@@ -531,13 +506,6 @@ namespace Infatlan_STEI.paginas.reportes
 
         private void insertarRendimiento(DataTable vDatos, int vId) {
             try{
-                int vCont = GvRendimiento.PageIndex != 0 ? GvRendimiento.PageIndex * 10 : 0;
-                foreach (GridViewRow row in GvRendimiento.Rows){
-                    TextBox TxComment = (TextBox)row.Cells[2].FindControl("TxRGObs");
-                    vDatos.Rows[vCont]["comentario"] = TxComment.Text;
-                    vCont++;
-                }
-
                 for (int i = 0; i < vDatos.Rows.Count; i++){
                     Object[] vDatosReporte = new object[15];
                     vDatosReporte[0] = vId.ToString();
@@ -1745,6 +1713,65 @@ namespace Infatlan_STEI.paginas.reportes
                 throw new Exception("Favor ingrese las observaciones de Caja en Medios de pago.");
             if (float.Parse(TxKPIPorcentaje.Text) <= 90 && TxKPIObs.Text == "")
                 throw new Exception("Favor ingrese las observaciones de KPI.");
+            DataTable vDatos = (DataTable)Session["CUMPL_RUPTURA"];
+            if (vDatos != null && vDatos.Rows.Count > 0){
+                int vCont = GvRuptura.PageIndex != 0 ? GvRuptura.PageIndex * 10 : 0;
+                foreach (GridViewRow row in GvRuptura.Rows){
+                    DropDownList DDLRazonRuptura = (DropDownList)row.Cells[2].FindControl("DDLRazonRuptura");
+                    TextBox TxComment = (TextBox)row.Cells[3].FindControl("TxRupturaObs");
+                    vDatos.Rows[vCont]["idRazon"] = DDLRazonRuptura.SelectedValue;
+                    vDatos.Rows[vCont]["comentario"] = TxComment.Text;
+                    vCont++;
+                }
+
+                for (int i = 0; i < vDatos.Rows.Count; i++){
+                    if (vDatos.Rows[i]["idRazon"].ToString() == "" || vDatos.Rows[i]["idRazon"].ToString() == "0" || vDatos.Rows[i]["comentario"].ToString() == "")
+                        throw new Exception("Favor complete la información de Rupturas.");
+                }
+            }
+            vDatos = (DataTable)Session["CUMPL_OSER"];
+            if (vDatos != null && vDatos.Rows.Count > 0){
+                int vCont = GvOSER.PageIndex != 0 ? GvOSER.PageIndex * 10 : 0;
+                foreach (GridViewRow row in GvOSER.Rows){
+                    DropDownList DDLRazonOSER = (DropDownList)row.Cells[2].FindControl("DDLRazonER");
+                    TextBox TxComment = (TextBox)row.Cells[3].FindControl("TxOSERObs");
+                    vDatos.Rows[vCont]["idRazon"] = DDLRazonOSER.SelectedValue;
+                    vDatos.Rows[vCont]["comentario"] = TxComment.Text;
+                    vCont++;
+                }
+
+                for (int i = 0; i < vDatos.Rows.Count; i++){
+                    if (vDatos.Rows[i]["idRazon"].ToString() == "" || vDatos.Rows[i]["idRazon"].ToString() == "0" || vDatos.Rows[i]["comentario"].ToString() == "")
+                        throw new Exception("Favor complete la información de las Ordenes de Servicio Esperando Respuesta.");
+                }
+            }
+            vDatos = (DataTable)Session["CUMPL_INSATISCACCION"];
+            if (vDatos != null && vDatos.Rows.Count > 0){
+                int vCont = GvInsatisfacciones.PageIndex != 0 ? GvInsatisfacciones.PageIndex * 10 : 0;
+                foreach (GridViewRow row in GvInsatisfacciones.Rows){
+                    TextBox TxComment = (TextBox)row.Cells[3].FindControl("TxSatisfaccionObs");
+                    vDatos.Rows[vCont]["observaciones"] = TxComment.Text;
+                    vCont++;
+                }
+                for (int i = 0; i < vDatos.Rows.Count; i++){
+                    if (vDatos.Rows[i]["observaciones"].ToString() == "")
+                        throw new Exception("Favor ingrese las observaciones de las ordenes de servicio con baja calificacion.");
+                }
+            }
+            vDatos = (DataTable)Session["CUMPL_RENDIMIENTO"];
+            if (vDatos != null && vDatos.Rows.Count > 0){
+                int vCont = GvRendimiento.PageIndex != 0 ? GvRendimiento.PageIndex * 10 : 0;
+                foreach (GridViewRow row in GvRendimiento.Rows){
+                    TextBox TxComment = (TextBox)row.Cells[2].FindControl("TxRGObs");
+                    vDatos.Rows[vCont]["comentario"] = TxComment.Text;
+                    vCont++;
+                }
+                for (int i = 0; i < vDatos.Rows.Count; i++){
+                    if (vDatos.Rows[i]["comentario"].ToString() == "")
+                        throw new Exception("Favor ingrese las observaciones del Rendimiento General.");
+                }
+            }
+
         }
 
         protected void BtnConfirmar_Click(object sender, EventArgs e) {
@@ -1794,6 +1821,7 @@ namespace Infatlan_STEI.paginas.reportes
                     if (vDatos != null && vDatos.Rows.Count > 0)
                         insertarInsatisfacciones(vDatos, vInfo);
 
+                    String vMensaje = "Reporte creado con éxito, ";
                     SmtpService vService = new SmtpService();
                     Boolean vFlag = false;
                     vQuery = "[STEISP_Login] 3,'" + Session["USUARIO"].ToString() + "'";
@@ -1809,7 +1837,9 @@ namespace Infatlan_STEI.paginas.reportes
 
                     vFlag = true;
                     if (vFlag)
-                        Mensaje("Reporte enviado con éxito", WarningType.Success);
+                        Mensaje(vMensaje + "se envió la notificación", WarningType.Success);
+                    else
+                        Mensaje(vMensaje + "no se envió notificación. comuníquese con sistemas.", WarningType.Danger);
 
                     limpiarForm();
                 }else 

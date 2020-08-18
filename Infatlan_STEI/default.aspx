@@ -1,6 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="default.aspx.cs" Inherits="Infatlan_STEI._default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
+    <script type="text/javascript">
+        function closeModal() { $('#ModalBugs').modal('hide'); }
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
     <div class="row page-titles">

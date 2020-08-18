@@ -23,10 +23,9 @@ namespace Infatlan_STEI.classes
         public Boolean EnviarMensaje(String To, typeBody Body, String Titulo, String Nombre, String Descripcion, String vCopia = null){
             Boolean vRespuesta = false;
             try{
-                MailMessage mail = new MailMessage("Recursos Humanos<" + ConfigurationManager.AppSettings["SmtpFrom"] + ">", To);
+                MailMessage mail = new MailMessage("STEI<" + ConfigurationManager.AppSettings["SmtpFrom"] + ">", To);
                 SmtpClient client = new SmtpClient();
                 client.Port = Convert.ToInt32(ConfigurationManager.AppSettings["SmtpPort"]);
-                //client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 
                 if (!String.IsNullOrEmpty(vCopia)){
                     mail.CC.Add(vCopia);
@@ -43,14 +42,14 @@ namespace Infatlan_STEI.classes
                             Titulo,
                             Nombre,
                             Descripcion
-                            ), Server.MapPath("/images/logo.png")));
+                            ), Server.MapPath("/assets/images/logo.png")));
                         break;
                     case typeBody.Cumplimiento:
                         mail.AlternateViews.Add(CreateHtmlMessage(PopulateBody(
                             Titulo,
                             Nombre,
                             Descripcion
-                            ), Server.MapPath("/images/logo.png")));
+                            ), Server.MapPath("/assets/images/logo.png")));
                         break;
                 }
                 client.Send(mail);

@@ -385,11 +385,11 @@
         </div>
     </div>
 
-    <%--Insatisfacciones--%>
+    <%--ordenes de servicio con baja calificacion--%>
     <div class="card">
         <div class="card-header" role="tab" id="heading7">
             <a class="link" data-toggle="collapse" data-parent="#accordion2" href="#collapse7" aria-expanded="true" aria-controls="collapse7">
-                <h4 class="card-title">Insatisfacciones</h4>
+                <h4 class="card-title">Ordenes de Servicio con Baja Calificación</h4>
             </a>
         </div>
         <div id="collapse7" class="collapse show" role="tabpanel" aria-labelledby="headingOne11">

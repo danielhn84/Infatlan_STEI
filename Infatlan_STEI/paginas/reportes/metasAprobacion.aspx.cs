@@ -241,7 +241,7 @@ namespace Infatlan_STEI.paginas.reportes
 
         protected void BtnConfirmar_Click(object sender, EventArgs e){
             try{
-                if (TxComentario.Text == string.Empty || TxComentario.Text == "")
+                if (TxComentario.Text == string.Empty || TxComentario.Text == "" && DDLAccion.SelectedValue == "1")
                     throw new Exception("Favor ingrese el comentario de aprobacion.");
 
                 String vAccion = DDLAccion.SelectedValue == "0" ? "2" : "3";
@@ -253,12 +253,29 @@ namespace Infatlan_STEI.paginas.reportes
                     ",'" + TxComentario.Text + "'" +
                     ",'" + Session["USUARIO"].ToString() + "'";
                 int vInfo = vConexion.ejecutarSql(vQuery);
-                if (vInfo == 1) 
-                    Mensaje("Reporte " + vMensaje + " con éxito.", WarningType.Success);
-                else 
-                    Mensaje("El reporte no se pudo aprobar. Comuníquese con sistemas", WarningType.Danger);
-                
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
+                if (vInfo == 1){
+                    SmtpService vService = new SmtpService();
+                    Boolean vFlag = false;
+
+                    vQuery = "[STEISP_CUMPLIMIENTO_Reportes] 11," + Session["CUMPL_ID_REPORTE"].ToString();
+                    DataTable vDatos = vConexion.obtenerDataTable(vQuery);
+
+                    vService.EnviarMensaje(
+                        vDatos.Rows[0]["correo"].ToString(),
+                        typeBody.Cumplimiento,
+                        "Evaluación de Reporte de Metas de cumplimiento",
+                        vDatos.Rows[0]["nombre"].ToString(),
+                        "El reporte <b>" + Session["CUMPL_ID_REPORTE"].ToString() + " ha sido " + vMensaje + "</b>"
+                    );
+
+                    vFlag = true;
+                    if (vFlag)
+                        Mensaje("El reporte ha sido " + vMensaje, WarningType.Success);
+
+                }else 
+                    Mensaje("Ha ocurrido un error. Comuníquese con sistemas", WarningType.Danger);
+
+                Response.Redirect("metasPendientes.aspx");
             }catch (Exception ex){
                 LbMensaje.Text = ex.Message;
                 DivMensaje.Visible = true;
