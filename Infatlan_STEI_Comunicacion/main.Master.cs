@@ -19,6 +19,20 @@ namespace Infatlan_STEI_Comunicacion
                     Response.Redirect("/login.aspx");
                 
                 if (!Page.IsPostBack){
+                    if (!vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 7).Consulta)
+                        Response.Redirect("/default.aspx");
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 7).Creacion) { 
+                        LiCrear.Visible = true;
+                        LiCompletar.Visible = true;
+                        LiModificar.Visible = true;
+                    }
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 7).Edicion) { 
+                        LiConfig.Visible = true;
+                        LiAsignar.Visible = true;
+                        LiAprobar.Visible = true;
+                        LiReprogramar.Visible = true;
+                    }
+
                     DataTable vDatos = (DataTable)Session["AUTHCLASS"];
                     LitUsuario.Text = vDatos.Rows[0]["nombre"].ToString().ToUpper() + " " + vDatos.Rows[0]["apellidos"].ToString().ToUpper();
 
