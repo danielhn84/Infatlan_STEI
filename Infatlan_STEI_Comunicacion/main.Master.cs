@@ -12,6 +12,7 @@ namespace Infatlan_STEI_Comunicacion
     public partial class main : System.Web.UI.MasterPage
     {
         db vConexion = new db();
+        Security vSecurity = new Security();
         protected void Page_Load(object sender, EventArgs e){
             try{
                 if (!Convert.ToBoolean(Session["AUTH"]))

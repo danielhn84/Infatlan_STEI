@@ -3422,6 +3422,7 @@
   <ItemGroup>
     <Compile Include="classes\db.cs" />
     <Compile Include="classes\LdapService.cs" />
+    <Compile Include="classes\Security.cs" />
     <Compile Include="classes\SmtpService.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
