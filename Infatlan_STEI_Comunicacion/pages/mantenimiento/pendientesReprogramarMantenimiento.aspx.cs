@@ -13,15 +13,20 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
     public partial class pendientesReprogramarMantenimiento : System.Web.UI.Page
     {
         db vConexion = new db();
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!Page.IsPostBack){
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
+                cargarDatos();
+                }
+            }
+        }
+
         public void Mensaje(string vMensaje, WarningType type)
         {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            cargarDatos();
-        }
-
 
         private void cargarDatos()
         {

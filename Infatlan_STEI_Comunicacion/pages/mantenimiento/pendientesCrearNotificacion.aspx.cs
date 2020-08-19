@@ -16,9 +16,9 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
         {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
+        
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["USUARIO"] = "atercero";
             String vEx = Request.QueryString["ex"];
 
             if (!Page.IsPostBack)
@@ -72,6 +72,7 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
             }
 
         }
+        
         private void cargarDatos()
         {
             try
@@ -90,6 +91,7 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
+        
         protected void GvPendientesCrearNotificacion_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             try
@@ -104,6 +106,7 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
             }
 
         }
+        
         protected void GvPendientesCrearNotificacion_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             string vIdMantenimiento= e.CommandArgument.ToString();
@@ -175,6 +178,7 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
+        
         private void validacionesCancelarNotificacion()
         {
             if (DdlMotivo.SelectedValue.Equals(""))

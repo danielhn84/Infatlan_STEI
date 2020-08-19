@@ -62,10 +62,9 @@ namespace Infatlan_STEI.paginas.reportes
                 else
                     vFecha = DateTime.Now.ToString("dd/MM/yyyy");
                 
-                vFecha = "08/06/2020";
+                //vFecha = "08/06/2020";
 
                 String vAssignedGroup = vDatos.Rows[0]["assignedGroup"].ToString();
-                //cargarCalls();
                 cargarMediosPago(vFecha, vAssignedGroup);
                 cargarKPI(vFecha, vAssignedGroup);
                 cargarRuptura(vFecha, vAssignedGroup);
@@ -201,7 +200,7 @@ namespace Infatlan_STEI.paginas.reportes
         protected void TxCallAtendidas_TextChanged(object sender, EventArgs e){
             try{
                 if (Convert.ToInt32(TxCallAtendidas.Text) > Convert.ToInt32(TxCallTotal.Text))
-                    throw new Exception("Las llamadas atendidas son mayores que las totales");
+                    Response.Redirect("metasCumplimiento.aspx?ex=1");
 
                 int vNoAtendidas = Convert.ToInt32(TxCallTotal.Text) - Convert.ToInt32(TxCallAtendidas.Text);
                 TxCallAtendidasNo.Text = vNoAtendidas.ToString();
@@ -224,7 +223,6 @@ namespace Infatlan_STEI.paginas.reportes
                 else
                     vFecha = DateTime.Now.ToString("dd/MM/yyyy");
                 
-                vFecha = "08/06/2020";
                 DataTable vData = cargarRendimiento(vFecha);
                 if (vData.Rows.Count > 0){
                     graficos(vData);
@@ -232,8 +230,8 @@ namespace Infatlan_STEI.paginas.reportes
                 UPCalls.Update();
                 UPanelRendimiento.Update();
             }catch (Exception ex){
-                Mensaje(ex.Message, WarningType.Danger);
-                //ScriptManager.RegisterClientScriptBlock(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + ex.Message + "','" + WarningType.Danger.ToString().ToLower() + "')", true);
+                //Mensaje(ex.Message, WarningType.Danger);
+                ScriptManager.RegisterClientScriptBlock(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + ex.Message + "','" + WarningType.Danger.ToString().ToLower() + "')", true);
             }
         }
 

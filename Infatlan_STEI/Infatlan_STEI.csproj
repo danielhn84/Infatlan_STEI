@@ -45,7 +45,7 @@
   <ItemGroup>
     <Reference Include="Excel.4.5, Version=2.1.2.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Desktop\C#\Proyectos Arquitectura TI\Infatlan_STEI-master (1)\Infatlan_STEI-master\Infatlan_STEI_ATM\bin\Excel.4.5.dll</HintPath>
+      <HintPath>..\..\Infatlan_Biometrico\BiometricoWeb\bin\Excel.4.5.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.4.369, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>..\packages\ICSharpCode.SharpZipLib.dll.0.85.4.369\lib\net20\ICSharpCode.SharpZipLib.dll</HintPath>
@@ -3240,6 +3240,8 @@
     <Content Include="assets\node_modules\x-editable\dist\jqueryui-editable\img\loading.gif" />
     <Content Include="assets\node_modules\x-editable\dist\jqueryui-editable\js\jqueryui-editable.js" />
     <Content Include="assets\node_modules\x-editable\dist\jqueryui-editable\js\jqueryui-editable.min.js" />
+    <Content Include="bin\Excel.4.5.dll" />
+    <Content Include="bin\ICSharpCode.SharpZipLib.dll" />
     <Content Include="bin\Infatlan_STEI.dll" />
     <Content Include="bin\Infatlan_STEI.pdb" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
@@ -3687,16 +3689,6 @@
     <Content Include="assets\package.json" />
     <Content Include="assets\README.md" />
     <Content Include="main.Master" />
-    <Content Include="bin\roslyn\csc.exe.config" />
-    <Content Include="bin\roslyn\csc.rsp" />
-    <Content Include="bin\roslyn\csi.exe.config" />
-    <Content Include="bin\roslyn\csi.rsp" />
-    <Content Include="bin\roslyn\Microsoft.CSharp.Core.targets" />
-    <Content Include="bin\roslyn\Microsoft.Managed.Core.targets" />
-    <Content Include="bin\roslyn\Microsoft.VisualBasic.Core.targets" />
-    <Content Include="bin\roslyn\vbc.exe.config" />
-    <Content Include="bin\roslyn\vbc.rsp" />
-    <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
     <Content Include="dist\css\fonts\fontawesome-webfont.ttf" />
     <Content Include="dist\css\fonts\icomoon.ttf" />
     <Content Include="dist\css\fonts\Material-Design-Iconic-Font.ttf" />
@@ -4625,6 +4617,17 @@
     <Content Include="assets\node_modules\typeahead.js-master\README.md" />
     <Content Include="assets\node_modules\typeahead.js-master\test\ci" />
     <Content Include="assets\node_modules\typeahead.js-master\typeahead.js.jquery.json" />
+    <Content Include="bin\Infatlan_STEI.dll.config" />
+    <Content Include="bin\roslyn\csc.exe.config" />
+    <Content Include="bin\roslyn\csc.rsp" />
+    <Content Include="bin\roslyn\csi.exe.config" />
+    <Content Include="bin\roslyn\csi.rsp" />
+    <Content Include="bin\roslyn\Microsoft.CSharp.Core.targets" />
+    <Content Include="bin\roslyn\Microsoft.Managed.Core.targets" />
+    <Content Include="bin\roslyn\Microsoft.VisualBasic.Core.targets" />
+    <Content Include="bin\roslyn\vbc.exe.config" />
+    <Content Include="bin\roslyn\vbc.rsp" />
+    <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
     <None Include="packages.config" />
     <Content Include="scss\colors\blue-dark.scss" />
     <Content Include="scss\colors\blue.scss" />
