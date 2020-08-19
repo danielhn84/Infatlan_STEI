@@ -17,23 +17,19 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
         {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            Session["USUARIO"] = "acamador";
             if (!Page.IsPostBack)
             {
-                //if (Convert.ToBoolean(Session["AUTH"]))
-                //{
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
                     cargarDatos();
-                UpdatePanel.Update();
-                //}
-                //else
-                //{
-                //    Response.Redirect("/login.aspx");
-                //}
+                    UpdatePanel.Update();
+                }
             }
         }
+        
         private void cargarDatos()
         {
             try
@@ -49,6 +45,7 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
+        
         protected void GVAsignacion_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -81,6 +78,7 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                 }
             }
         }
+        
         protected void GVAsignacion_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             try

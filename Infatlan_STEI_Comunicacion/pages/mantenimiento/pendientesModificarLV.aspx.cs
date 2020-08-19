@@ -12,34 +12,23 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
     public partial class pendientesModificarLV : System.Web.UI.Page
     {
         db vConexion = new db();
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            String vEx = Request.QueryString["ex"];
+
+            if (!Page.IsPostBack){
+                if (Convert.ToBoolean(Session["AUTH"])){
+                    if (vEx == null){
+                        cargarDatos();
+                        UpPendientesModificarLV.Update();
+                    }
+                }
+            }
+        }
+
         public void Mensaje(string vMensaje, WarningType type)
         {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
-        }
-
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            Session["USUARIO"] = "atercero";
-            String vEx = Request.QueryString["ex"];
-
-            if (!Page.IsPostBack)
-            {
-                //if (Convert.ToBoolean(Session["AUTH"]))
-                //{
-
-                if (vEx == null)
-                {
-                    cargarDatos();
-                    UpPendientesModificarLV.Update();
-                }
-               
-            }
-
-            //}
-            //else
-            //{
-            //    Response.Redirect("/login.aspx");
-            //}
         }
 
         private void cargarDatos()

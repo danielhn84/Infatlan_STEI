@@ -16,9 +16,9 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
         {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["USUARIO"] = "atercero";
             String vEx = Request.QueryString["ex"];
 
             if (!Page.IsPostBack)
