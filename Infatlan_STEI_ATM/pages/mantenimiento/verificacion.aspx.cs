@@ -1004,7 +1004,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
     }
 
 
-            void ImgVerificacion()
+        void ImgVerificacion()
             {
             string id = Request.QueryString["id"];
             string tipo = Request.QueryString["tipo"];
@@ -1292,7 +1292,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             }
         }
 
-            protected void dropantiskimming_TextChanged(object sender, EventArgs e)
+        protected void dropantiskimming_TextChanged(object sender, EventArgs e)
             {
 
             try
@@ -1314,15 +1314,38 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         }      
 
 
-            protected void btnmodal_Click(object sender, EventArgs e)
+        protected void btnmodal_Click(object sender, EventArgs e)
             {
 
                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal();", true);
 
             }
 
+        void CorreoSuscripcion()
+        {
+            string vEstado = "";
+            DataTable vDatos = new DataTable();
+            String vQuery = "STEISP_ATM_Generales 36,'" + Session["ATM_CODATM_VERIF_CREAR"] + "'";
+            vDatos = vConexion.ObtenerTabla(vQuery);
+            foreach (DataRow item in vDatos.Rows)
+            {
+                vEstado = item["estadoMantenimiento"].ToString();
+            }
 
-            protected void btnModalVerif_Click(object sender, EventArgs e)
+            if (vEstado == "7")
+            {
+                string vReporteViaticos = "Verificacion";
+                string vCorreoAdmin = "acedillo@bancatlan.hn";
+                string vCorreoCopia = "acamador@bancatlan.hn";
+                string vAsuntoRV = "Lista de Verificación";
+                string vBody = "Lista de Verificación";
+                int vEstadoSuscripcion = 0;
+                string vQueryRep = "STEISP_ATM_Generales 35, '" + vReporteViaticos + "','" + vCorreoAdmin + "','" + vCorreoCopia + "','" + vAsuntoRV + "','" + vBody + "','" + vEstadoSuscripcion + "','" + Session["ATM_CODATM_VERIF_CREAR"] + "'";
+                vConexion.ejecutarSQL(vQueryRep);
+            }
+        }
+
+        protected void btnModalVerif_Click(object sender, EventArgs e)
             {
             try
             {
@@ -1341,6 +1364,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                             //EnviarCorreo();
                             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
                             Mensaje("Lista de verificación aprobada con éxito", WarningType.Success);
+                            CorreoSuscripcion();
                             vaciarValorImg();
                             Response.Redirect("buscarAprobarVerificacion.aspx");
                         }
@@ -1385,7 +1409,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
             }
 
-            protected void btnRechazarVerif_Click(object sender, EventArgs e)
+        protected void btnRechazarVerif_Click(object sender, EventArgs e)
             {
             txtAlerta2.Visible = false;
             H5Alerta.Visible = false;
@@ -1492,14 +1516,14 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             }
         }
 
-            protected void btnCerrarRechazoModal_Click(object sender, EventArgs e)
+        protected void btnCerrarRechazoModal_Click(object sender, EventArgs e)
             {
             txtAlerta2.Visible = false;
             H5Alerta.Visible = false;
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal2();", true);
             }
 
-            protected void btnborrar_Click(object sender, EventArgs e)
+        protected void btnborrar_Click(object sender, EventArgs e)
             {
                 string vImagen11 = Session["ATM_VERIF_IMG21"].ToString();
                 string srcImgen11 = "data:image;base64," + vImagen11;
@@ -1507,7 +1531,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
             }       
 
-            protected void btnBorrar1_Click(object sender, EventArgs e)
+        protected void btnBorrar1_Click(object sender, EventArgs e)
             {           
                 imgEnergia.Src = string.Empty;
             }

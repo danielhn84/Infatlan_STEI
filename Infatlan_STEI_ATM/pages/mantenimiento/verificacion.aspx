@@ -456,7 +456,7 @@
                                 <asp:ListItem Value="19" Text="19. Dejar en servicio el ATM"></asp:ListItem>
                             </asp:CheckBoxList>
                             <asp:CheckBoxList ID="ckpasos20" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
-                                <asp:ListItem Value="20" Text="20. Contractarse con personal de ATM y verificar que camaras están en linea"></asp:ListItem>
+                                <asp:ListItem Value="20" Text="20. Contactar personal de ATM y verificar camaras en linea"></asp:ListItem>
                             </asp:CheckBoxList>
                         </div>
                     </div>
@@ -725,7 +725,7 @@
                                         <img id="imgTeclado" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                                 </tr>
                                 <tr>
-                                    <td class="title"><a class="link" href="javascript:void(0)">¿Cuenta con Climatización adecuada?<br />
+                                    <td class="title"><a class="link" href="javascript:void(0)">*¿Cuenta con Climatización adecuada?<br />
                                     </a>
                                         <asp:UpdatePanel runat="server">
                                             <ContentTemplate>
@@ -742,7 +742,7 @@
                                         <img id="imgClimatizacion" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                                 </tr>
                                 <tr>
-                                    <td class="title"><a class="link" href="javascript:void(0)">¿Cuenta con protección de energía eléctrica?<br />
+                                    <td class="title"><a class="link" href="javascript:void(0)">*¿Cuenta con protección de energía eléctrica?<br />
                                     </a>
                                         <asp:UpdatePanel runat="server">
                                             <ContentTemplate>

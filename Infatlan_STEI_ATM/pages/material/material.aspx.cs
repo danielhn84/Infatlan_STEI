@@ -196,6 +196,30 @@ namespace Infatlan_STEI_ATM.pages.material
             }
         }
 
+        void CorreoSuscripcion()
+        {
+            string vEstado = "";
+            DataTable vDatos = new DataTable();
+            String vQuery = "STEISP_ATM_Generales 36,'" + Session["ATM_CODATM_MATERIAL"] + "'";
+            vDatos = vConexion.ObtenerTabla(vQuery);
+            foreach (DataRow item in vDatos.Rows)
+            {
+                vEstado = item["estadoMantenimiento"].ToString();
+            }
+
+            if (vEstado == "3")
+            {
+                string vReporteViaticos = "Notificacion";
+                string vCorreoAdmin = "acedillo@bancatlan.hn";
+                string vCorreoCopia = "acamador@bancatlan.hn";
+                string vAsuntoRV = "Formato de notificación";
+                string vBody = "Formato de notificación";
+                int vEstadoSuscripcion = 0;
+                string vQueryRep = "STEISP_ATM_Generales 35, '" + vReporteViaticos + "','" + vCorreoAdmin + "','" + vCorreoCopia + "','" + vAsuntoRV + "','" + vBody + "','" + vEstadoSuscripcion + "','" + Session["ATM_CODATM_MATERIAL"] + "'";
+                vConexion.ejecutarSQL(vQueryRep);
+            }
+        }
+
         protected void btnModalEnviar_Click(object sender, EventArgs e)
         {
             try
@@ -207,6 +231,7 @@ namespace Infatlan_STEI_ATM.pages.material
                     TransaccionInventario();
                     string vQuery2 = "STEISP_ATM_VerificacionTotal 7, '" + Session["ATM_IDMANT_MATERIAL"].ToString() + "','" + Session["USUARIO"].ToString() + "','" + txtmotivo.Text + "'";
                     vConexion.ejecutarSQL(vQuery2);
+                    CorreoSuscripcion();
                     //string vQuery3 = "STEISP_ATM_VerificacionTotal 6, '" + Session["ATM_IDMANT_MATERIAL"].ToString() + "'";
                     //vConexion.ejecutarSQL(vQuery3);
                 }

@@ -478,6 +478,30 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             }
         }
 
+        void CorreoSuscripcion()
+        {
+            string vEstado = "";
+            DataTable vDatos = new DataTable();
+            String vQuery = "STEISP_ATM_Generales 36,'" + Session["codNotificacion"] + "'";
+            vDatos = vConexion.ObtenerTabla(vQuery);
+            foreach (DataRow item in vDatos.Rows)
+            {
+                vEstado = item["estadoMantenimiento"].ToString();
+            }
+
+            if (vEstado == "3")
+            {
+                string vReporteViaticos = "Notificacion";
+                string vCorreoAdmin = "acedillo@bancatlan.hn";
+                string vCorreoCopia = "acamador@bancatlan.hn";
+                string vAsuntoRV = "Formato de notificación";
+                string vBody = "Formato de notificación";
+                int vEstadoSuscripcion = 0;
+                string vQueryRep = "STEISP_ATM_Generales 35, '" + vReporteViaticos + "','" + vCorreoAdmin + "','" + vCorreoCopia + "','" + vAsuntoRV + "','" + vBody + "','" + vEstadoSuscripcion + "','" + Session["codNotificacion"] + "'";
+                vConexion.ejecutarSQL(vQueryRep);
+            }
+        }
+
         protected void btnModalEnviarNotificacion_Click(object sender, EventArgs e)
         {
             string id = Request.QueryString["id"];
@@ -487,15 +511,19 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 
                 try
                 {
-                    string vQuery = "STEISP_ATM_Aprobaciones 1, '" + Session["codNotificacion"] + "','" + txtcomentarioReprogramaNotif.Text + "', '" + Session["USUARIO"].ToString() + "'";
+                    //string vEstado = "9";
+                    string vEstado = "3";
+                    string vQuery = "STEISP_ATM_Aprobaciones 1, '" + Session["codNotificacion"] + "','" + vEstado + "', '" + Session["USUARIO"].ToString() + "'";
                     Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                     if (vInfo == 1)
                     {
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
                         Mensaje("Notificación aprobada con éxito", WarningType.Success);
                         //Enviar Correo
+                        CorreoSuscripcion();
                         //EnviarCorreo();
                         //Enviar Correo
+                        
                         LimpiarNotificacion();
                         UpNotif.Update();
 
@@ -747,7 +775,9 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 for (int i = 0; i < vDatos.Rows.Count; i++)
                 {
                     string correos = vDatos.Rows[i]["Correo"].ToString();
-                    string vQuery = "STEISP_ATM_UsuariosMantenimiento 2, '" + Session["ID"].ToString() + "','" + correos + "'";
+                    string vNombre = vDatos.Rows[i]["Nombre"].ToString();
+                    string vApellido = vDatos.Rows[i]["Apellido"].ToString();
+                    string vQuery = "STEISP_ATM_UsuariosMantenimiento 2, '" + Session["ID"].ToString() + "','" + correos + "','"+vNombre+"','"+vApellido+"'";
                     vConexion.ejecutarSQL(vQuery);
                 }
             }
@@ -1159,15 +1189,36 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
                     DataTable vData = new DataTable();
                     DataTable vDatos = (DataTable)Session["NotifJefeAgenciaATM"];
+                    DataTable vDatosJefes = (DataTable)Session["ATM_BUSCAR_JEFE"];
                     string CorreoJefe = correoJefe;
+                    String vNombre = "";
+                    String vApellido = "";
 
+                    DataRow[] result = vDatosJefes.Select("mail = '" + CorreoJefe + "'");
+                    foreach (DataRow row in result)
+                    {
+                        if (row["mail"].ToString().Contains(CorreoJefe))
+                        {
+                            vNombre = row["givenName"].ToString();
+                            vApellido = row["sn"].ToString();
+                        }
+                    }
+
+                    //for (int i = 0; i < vDatosJefes.Rows; i++)
+                    //{
+                    //    vNombre = vDatosJefes.Rows[0]["givenName"].ToString();
+                    //    vApellido = vDatosJefes.Rows[0]["sn"].ToString();
+                    //}
+                    
                     vData.Columns.Add("Correo");
+                    vData.Columns.Add("Nombre");
+                    vData.Columns.Add("Apellido");
                     //vData.Columns.Add("Nombre");
                     if (vDatos == null)
                         vDatos = vData.Clone();
                     if (vDatos != null)
                     {
-                        vDatos.Rows.Add(CorreoJefe);
+                        vDatos.Rows.Add(CorreoJefe, vNombre,vApellido);
 
                     }
                     GVjefesAgencias.DataSource = vDatos;

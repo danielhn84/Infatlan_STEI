@@ -42,13 +42,13 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         protected global::System.Web.UI.WebControls.TextBox txtFechaInicio;
 
         /// <summary>
-        /// Control DDLrealizarMant.
+        /// Control DDLmantemientoPendiente.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DDLrealizarMant;
+        protected global::System.Web.UI.WebControls.DropDownList DDLmantemientoPendiente;
 
         /// <summary>
         /// Control DivCancelaNotif.
@@ -96,13 +96,13 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         protected global::System.Web.UI.WebControls.TextBox txtsysaid;
 
         /// <summary>
-        /// Control DDLmantemientoPendiente.
+        /// Control DDLrealizarMant.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DDLmantemientoPendiente;
+        protected global::System.Web.UI.WebControls.DropDownList DDLrealizarMant;
 
         /// <summary>
         /// Control txtcodATMNotif.
