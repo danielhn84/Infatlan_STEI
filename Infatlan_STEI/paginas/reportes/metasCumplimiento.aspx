@@ -48,7 +48,7 @@
                                 </div>
                                 <div class="columnas">
                                     <label>Atendidas</label>
-                                    <asp:TextBox runat="server" ID="TxCallAtendidas" CssClass="form-control" AutoPostBack="true" OnTextChanged="TxCallAtendidas_TextChanged" />
+                                    <asp:TextBox runat="server" ID="TxCallAtendidas" CssClass="form-control" ClientIDMode="AutoID" AutoPostBack="true" OnTextChanged="TxCallAtendidas_TextChanged" />
                                 </div>
                                 <div class="columnas">
                                     <label>No Atendidas</label>

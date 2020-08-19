@@ -50,14 +50,15 @@ namespace Infatlan_STEI_Inventario.pages
 
                 if (vDatos.Rows.Count > 0){
                     GVBusqueda.DataSource = vDatos;
-                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 1).Edicion){
-                        LinkButton LbEdit = GVBusqueda.FindControl("BtnEditar") as LinkButton;
-                        LinkButton LbAdd = GVBusqueda.FindControl("BtnInfo") as LinkButton;
-                        LbEdit.Visible = true;
-                        LbAdd.Visible = true;
-                    }
-
                     GVBusqueda.DataBind();
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 1).Edicion){
+                        foreach (GridViewRow item in GVBusqueda.Rows){
+                            LinkButton LbEdit = item.FindControl("BtnEdit") as LinkButton;
+                            LinkButton LbAdd = item.FindControl("BtnEditar2") as LinkButton;
+                            LbEdit.Visible = true;
+                            LbAdd.Visible = true;
+                        }
+                    }
                     Session["INV_STOCK"] = vDatos;
                 }
 
@@ -135,12 +136,14 @@ namespace Infatlan_STEI_Inventario.pages
 
                 if (vDatos.Rows.Count > 0){
                     GvBusquedaEDC.DataSource = vDatos;
+                    GvBusquedaEDC.DataBind();
                     if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 1).Edicion){
-                        LinkButton LbEdit = GvBusquedaEDC.FindControl("BtnEditar") as LinkButton;
-                        LbEdit.Visible = true;
+                        foreach (GridViewRow item in GvBusquedaEDC.Rows){
+                            LinkButton LbEdit = item.FindControl("BtnEditar") as LinkButton;
+                            LbEdit.Visible = true;
+                        }
                     }
 
-                    GvBusquedaEDC.DataBind();
                     Session["INV_STOCKEDC"] = vDatos;
                 }
 

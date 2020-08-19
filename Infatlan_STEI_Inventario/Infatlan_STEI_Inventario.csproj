@@ -4671,7 +4671,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="pages\Cargas\" />
-    <Folder Include="paginas\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

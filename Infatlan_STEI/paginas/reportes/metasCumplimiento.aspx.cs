@@ -201,8 +201,7 @@ namespace Infatlan_STEI.paginas.reportes
         protected void TxCallAtendidas_TextChanged(object sender, EventArgs e){
             try{
                 if (Convert.ToInt32(TxCallAtendidas.Text) > Convert.ToInt32(TxCallTotal.Text))
-                    Response.Redirect("metasCumplimiento.aspx?ex=1");
-                    
+                    throw new Exception("Las llamadas atendidas son mayores que las totales");
 
                 int vNoAtendidas = Convert.ToInt32(TxCallTotal.Text) - Convert.ToInt32(TxCallAtendidas.Text);
                 TxCallAtendidasNo.Text = vNoAtendidas.ToString();
@@ -233,7 +232,8 @@ namespace Infatlan_STEI.paginas.reportes
                 UPCalls.Update();
                 UPanelRendimiento.Update();
             }catch (Exception ex){
-                ScriptManager.RegisterClientScriptBlock(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + ex.Message + "','" + WarningType.Danger.ToString().ToLower() + "')", true);
+                Mensaje(ex.Message, WarningType.Danger);
+                //ScriptManager.RegisterClientScriptBlock(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + ex.Message + "','" + WarningType.Danger.ToString().ToLower() + "')", true);
             }
         }
 
@@ -1824,14 +1824,14 @@ namespace Infatlan_STEI.paginas.reportes
                     String vMensaje = "Reporte creado con éxito, ";
                     SmtpService vService = new SmtpService();
                     Boolean vFlag = false;
-                    vQuery = "[STEISP_Login] 3,'" + Session["USUARIO"].ToString() + "'";
+                    vQuery = "[STEISP_CUMPLIMIENTO_Reportes] 12,'" + Session["USUARIO"].ToString() + "'";
                     vDatos = vConexion.obtenerDataTable(vQuery);
 
                     vService.EnviarMensaje(
                         ConfigurationManager.AppSettings["MAIL_CUMPLIMIENTO"].ToString(),
                         typeBody.Cumplimiento,
                         "Reporte de Metas de cumplimiento",
-                        vDatos.Rows[0]["idJefe"].ToString(),
+                        vDatos.Rows[0]["nombre"].ToString(),
                         "El usuario <b>" + vDatos.Rows[0]["nombreEmpleado"].ToString() + "</b> ha registrado un nuevo reporte de metas de cumplimiento.<br>Favor revisar en la sección de pendientes."
                     );
 
