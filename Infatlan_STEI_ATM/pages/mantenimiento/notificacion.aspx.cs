@@ -1204,11 +1204,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                         }
                     }
 
-                    //for (int i = 0; i < vDatosJefes.Rows; i++)
-                    //{
-                    //    vNombre = vDatosJefes.Rows[0]["givenName"].ToString();
-                    //    vApellido = vDatosJefes.Rows[0]["sn"].ToString();
-                    //}
+                    
                     
                     vData.Columns.Add("Correo");
                     vData.Columns.Add("Nombre");
@@ -1293,7 +1289,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 {
                     string vQuery = "STEISP_ATM_Aprobaciones 2, '" + Session["codNotificacion"] + "','" + txtcomentarioReprogramaNotif.Text + "', '" + Session["USUARIO"].ToString() + "'";
                     Int32 vInfo = vConexion.ejecutarSQL(vQuery);
-                    if (vInfo == 1)
+                    if (vInfo == 13)
                     {
                         lbRep1.Visible = false;
                         txtAlerta1.Visible = false;
