@@ -105,6 +105,15 @@ namespace Infatlan_STEI
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl LIInventario;
 
         /// <summary>
+        /// Control LIComunicaciones.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LIComunicaciones;
+
+        /// <summary>
         /// Control LiCumplimiento.
         /// </summary>
         /// <remarks>

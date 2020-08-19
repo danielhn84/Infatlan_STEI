@@ -26,6 +26,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infatlan_STEI_CableadoEstru
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infatlan_STEI_Comunicacion", "Infatlan_STEI_Comunicacion\Infatlan_STEI_Comunicacion.csproj", "{B866F35A-DDED-4463-83A5-A3A362BCA9B3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EEA3C292-C647-4F46-9F29-35A0C6B437EF} = {EEA3C292-C647-4F46-9F29-35A0C6B437EF}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
