@@ -1325,7 +1325,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         {
             string vEstado = "";
             DataTable vDatos = new DataTable();
-            String vQuery = "STEISP_ATM_Generales 36,'" + Session["ATM_CODATM_VERIF_CREAR"] + "'";
+            String vQuery = "STEISP_ATM_Generales 36,'" + Session["ATM_COD_VERIF"] + "'";
             vDatos = vConexion.ObtenerTabla(vQuery);
             foreach (DataRow item in vDatos.Rows)
             {
@@ -1340,7 +1340,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 string vAsuntoRV = "Lista de Verificación";
                 string vBody = "Lista de Verificación";
                 int vEstadoSuscripcion = 0;
-                string vQueryRep = "STEISP_ATM_Generales 35, '" + vReporteViaticos + "','" + vCorreoAdmin + "','" + vCorreoCopia + "','" + vAsuntoRV + "','" + vBody + "','" + vEstadoSuscripcion + "','" + Session["ATM_CODATM_VERIF_CREAR"] + "'";
+                string vQueryRep = "STEISP_ATM_Generales 35, '" + vReporteViaticos + "','" + vCorreoAdmin + "','" + vCorreoCopia + "','" + vAsuntoRV + "','" + vBody + "','" + vEstadoSuscripcion + "','" + Session["ATM_COD_VERIF"] + "'";
                 vConexion.ejecutarSQL(vQueryRep);
             }
         }

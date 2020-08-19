@@ -334,7 +334,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                         {
                             string vQuery = "STEISP_ATM_CancelarVerificacion 1, '" + Session["ATM_ID_CANCELAR_VERIF_MODAL"] + "','" + DDLModalMotivo.SelectedValue + "','" + DDLModalcambioPor.SelectedValue + "','" + Session["USUARIO"].ToString() + "', '" + DDLModalNewTecnico.SelectedValue + "','" + txtdetalleCancela.Text + "'";
                             Int32 vInfo = vConexion.ejecutarSQL(vQuery);
-                            if (vInfo == 1)
+                            if (vInfo == 19)
                             {
                                 H5Alerta.Visible = false;
                                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
