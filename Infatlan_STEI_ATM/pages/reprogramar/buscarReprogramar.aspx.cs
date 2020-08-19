@@ -234,15 +234,15 @@ namespace Infatlan_STEI_ATM.pages.reprogramar
                     Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                     if (vInfo == 1)
                     {
-                        CorreoReprogramar();
+                        //CorreoReprogramar();
                         H5Alerta.Visible = false;
                         txtAlerta1.Visible = false;
                         //ELIMINAR JEFES DE AGENCIA
-                        string vQuery2 = "STEISP_ATM_Reprogramacion 2, '" + Session["codNotificacionRE"] + "','" + NewFecha + "', '" + Session["USUARIO"].ToString() + "'";
-                        Int32 vInfo2 = vConexion.ejecutarSQL(vQuery2);
+                        //string vQuery2 = "STEISP_ATM_Reprogramacion 2, '" + Session["codNotificacionRE"] + "','" + NewFecha + "', '" + Session["USUARIO"].ToString() + "'";
+                        //Int32 vInfo2 = vConexion.ejecutarSQL(vQuery2);
                         //ELIMINAR TECNICOS PARTICIPANTES
-                        string vQuery3 = "STEISP_ATM_Reprogramacion 3, '" + Session["codNotificacionRE"] + "','" + NewFecha + "', '" + Session["USUARIO"].ToString() + "'";
-                        Int32 vInfo3 = vConexion.ejecutarSQL(vQuery3);
+                        //string vQuery3 = "STEISP_ATM_Reprogramacion 3, '" + Session["codNotificacionRE"] + "','" + NewFecha + "', '" + Session["USUARIO"].ToString() + "'";
+                        //Int32 vInfo3 = vConexion.ejecutarSQL(vQuery3);
                         H5Alerta.Visible = false;
 
                         txtNewFechaInicio.Text = string.Empty;
