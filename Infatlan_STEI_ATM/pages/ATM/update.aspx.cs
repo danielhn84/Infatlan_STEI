@@ -14,6 +14,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
     public partial class update : System.Web.UI.Page
     {
         bd vConexion = new bd();
+        Security vSecurity = new Security();
         protected void Page_Load(object sender, EventArgs e){
             Session["UPDATEATM"] = null;
             if (!Page.IsPostBack){
@@ -49,14 +50,20 @@ namespace Infatlan_STEI_ATM.pages.ATM
             return vIndex;
         }
         
-        void cargarData()
-        {
-            try
-            {
+        void cargarData(){
+            try{
                 DataTable vDatos = new DataTable();
                 vDatos = vConexion.ObtenerTabla("STEISP_ATM_Generales 13, 1");
                 GVBusqueda.DataSource = vDatos;
                 GVBusqueda.DataBind();
+                if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Edicion){
+                    foreach (GridViewRow item in GVBusqueda.Rows){
+                        LinkButton LbEdit = item.FindControl("btnbajaATM") as LinkButton;
+                        LinkButton LbEdit2 = item.FindControl("btnmodificarATM") as LinkButton;
+                        LbEdit.Visible = true;
+                        LbEdit2.Visible = true;
+                    }
+                }
                 Session["ATM"] = vDatos;
                 Session["UPDATEATM"] = 1;
 

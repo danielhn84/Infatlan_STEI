@@ -106,8 +106,8 @@
                         <li><a  href="/default.aspx" aria-expanded="false"><i class="icon-action-undo"></i><span class="hide-menu">Volver</span></a></li>
                             <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-desktop"></i><span class="hide-menu">ATM<span class="badge badge-pill badge-cyan ml-auto">12</span></span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="/sites/ATM/pages/ATM/add.aspx">Agregar</a></li>
-                                <li><a href="/sites/ATM/pages/ATM/update.aspx">Modificar</a></li>    
+                                <li><a href="/sites/ATM/pages/ATM/update.aspx">Generales</a></li>    
+                                <li runat="server" id="LIAgregar" visible="false"><a href="/sites/ATM/pages/ATM/add.aspx">Agregar</a></li>
                                 <li><a href="/sites/ATM/pages/ATM/tipo.aspx">Tipo ATM</a></li>
                                 <li><a href="/sites/ATM/pages/ATM/modelo.aspx">Modelo</a></li>
                                 <li><a href="/sites/ATM/pages/ATM/detalleModelo.aspx">Detalle Modelo</a></li>
@@ -124,27 +124,27 @@
                             <ul aria-expanded="false" class="collapse">
                                     <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><span class="hide-menu">Notificación<span class="badge badge-pill badge-cyan ml-auto"></span></span></a>
                                         <ul aria-expanded="false" class="collapse">
-                                        <li><a href="/sites/ATM/pages/mantenimiento/notificacion.aspx">Crear</a></li>
-                                        <li><a href="/sites/ATM/pages/mantenimiento/buscarAprobarNotificacion.aspx">Aprobar</a></li>                                        
+                                        <li Visible="false" runat="server" id="LIModCrear"><a href="/sites/ATM/pages/mantenimiento/notificacion.aspx">Crear</a></li>
+                                        <li Visible="false" runat="server" id="LIModAprobar"><a href="/sites/ATM/pages/mantenimiento/buscarAprobarNotificacion.aspx">Aprobar</a></li>                                        
                                         </ul>
                                     </li>
                                     <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><span class="hide-menu">Verificación<span class="badge badge-pill badge-cyan ml-auto"></span></span></a>
                                         <ul aria-expanded="false" class="collapse">
-                                            <li><a href="/sites/ATM/pages/mantenimiento/buscarVerificacion.aspx">Crear</a></li>   
-                                        <li><a href="/sites/ATM/pages/mantenimiento/buscarAprobarVerificacion.aspx">Aprobar</a></li>
+                                            <li Visible="false" runat="server" id="LIVerCrear"><a href="/sites/ATM/pages/mantenimiento/buscarVerificacion.aspx">Crear</a></li>
+                                            <li Visible="false" runat="server" id="LIVerAprobar"><a href="/sites/ATM/pages/mantenimiento/buscarAprobarVerificacion.aspx">Aprobar</a></li>
                                         </ul>
                                     </li>
-                                <li><a  href="/sites/ATM/pages/devolver/rechazados.aspx" aria-expanded="false"><span class="hide-menu">Devoluciones</span></a></li>
+                                <li Visible="false" runat="server" id="LIDevoluciones"><a href="/sites/ATM/pages/devolver/rechazados.aspx" aria-expanded="false"><span class="hide-menu">Devoluciones</span></a></li>
                             </ul>
                         </li>
                         <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-write"></i><span class="hide-menu">Materiales<span class="badge badge-pill badge-cyan ml-auto">2</span></span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="/sites/ATM/pages/material/buscarMaterial.aspx">Solicitar</a></li>
-                                <li><a href="/sites/ATM/pages/material/buscarAprobar.aspx">Aprobar</a></li>
+                                <li Visible="false" runat="server" id="LIMatSolicitar"><a href="/sites/ATM/pages/material/buscarMaterial.aspx">Solicitar</a></li>
+                                <li Visible="false" runat="server" id="LIMatAprobar"><a href="/sites/ATM/pages/material/buscarAprobar.aspx">Aprobar</a></li>
                             </ul>
                         </li>
-                        <li><a  href="/sites/ATM/pages/reprogramar/buscarReprogramar.aspx" aria-expanded="false"><i class="ti-timer"></i><span class="hide-menu">Reprogramación</span></a></li>
-                        <li><a  href="/sites/ATM/pages/calendario/mantenimientos.aspx" aria-expanded="false"><i class=" ti-calendar"></i><span class="hide-menu">Calendario</span></a></li>
+                        <li Visible="false" runat="server" id="LIReprogramar"><a href="/sites/ATM/pages/reprogramar/buscarReprogramar.aspx" aria-expanded="false"><i class="ti-timer"></i><span class="hide-menu">Reprogramación</span></a></li>
+                        <li Visible="false" runat="server" id="LICalendario"><a href="/sites/ATM/pages/calendario/mantenimientos.aspx" aria-expanded="false"><i class=" ti-calendar"></i><span class="hide-menu">Calendario</span></a></li>
                     </ul>
                 </nav>
             </div>

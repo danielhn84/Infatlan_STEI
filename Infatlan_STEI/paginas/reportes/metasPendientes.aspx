@@ -67,8 +67,8 @@
                                     <asp:BoundField DataField="fechaRegistro" HeaderText="Fecha"/>
                                     <asp:TemplateField>
                                         <ItemTemplate>
-                                            <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-primary" CommandArgument='<%# Eval("idReporte") %>' CommandName="verReporte">
-                                                <i class="icon-pencil" ></i>
+                                            <asp:LinkButton ID="BtnEditar" runat="server" class="btn btn-info" title="Aprobar" CommandArgument='<%# Eval("idReporte") %>' CommandName="verReporte">
+                                                <i class="icon-check"></i>
                                             </asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>

@@ -88,7 +88,7 @@
                     </div>
 
                     <div class="row col-12">
-                        <asp:Button runat="server" ID="BtnAceptar" CssClass="btn btn-success" Text="Guardar" OnClick="BtnAceptar_Click" />
+                        <asp:Button runat="server" Visible="false" ID="BtnAceptar" CssClass="btn btn-success" Text="Guardar" OnClick="BtnAceptar_Click" />
                     </div>
 
                 </div>

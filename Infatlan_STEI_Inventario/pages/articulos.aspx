@@ -111,7 +111,7 @@
                                             <asp:BoundField DataField="series" HeaderText="Serie" />
                                             <asp:TemplateField HeaderText="" HeaderStyle-Width="120">
                                                 <ItemTemplate>
-                                                    <asp:LinkButton ID="BtnEditar" Visible="false" runat="server" class="btn btn-info" Title="Editar" CommandArgument='<%# Eval("idStock") %>' CommandName="EditarArticulo">
+                                                    <asp:LinkButton ID="BtnEdit" Visible="false" runat="server" class="btn btn-info" Title="Editar" CommandArgument='<%# Eval("idStock") %>' CommandName="EditarArticulo">
                                                         <i class="icon-pencil"></i>
                                                     </asp:LinkButton>
 
@@ -443,11 +443,7 @@
                                     <label class="col-form-label">Contratos</label>
                                 </div>
                                 <div class="col-8">
-                                    <asp:UpdatePanel ID="UpdatePanel16" runat="server" >
-                                        <ContentTemplate>
-                                            <asp:DropDownList ID="DDLContratos" runat="server" class="select2 form-control custom-select" style="width: 100%"></asp:DropDownList>
-                                        </ContentTemplate>
-                                    </asp:UpdatePanel>
+                                    <asp:DropDownList ID="DDLContratos" runat="server" class="select2 form-control custom-select" style="width: 100%"></asp:DropDownList>
                                 </div>
                             </div>
                         </div>

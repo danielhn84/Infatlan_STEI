@@ -54,7 +54,7 @@
                                 <label class="col-3 col-form-label">Teclados de ATM creados</label>
                                 <asp:UpdatePanel runat="server" ID="UpdatePanel2">
                                     <ContentTemplate>
-                                        <asp:LinkButton runat="server" ID="btnnewtecladoATM" OnClick="btnnewtecladoATM_Click" CssClass="btn btn-info icon-plus mr-2" Text=""></asp:LinkButton>
+                                        <asp:LinkButton runat="server" Visible="false" ID="btnnewtecladoATM" OnClick="btnnewtecladoATM_Click" CssClass="btn btn-info icon-plus mr-2" Text=""></asp:LinkButton>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>
@@ -74,9 +74,9 @@
 
                                                 <asp:BoundField DataField="idTecladoATM" HeaderText="Código de Teclado ATM" ItemStyle-HorizontalAlign="center" />
                                                 <asp:BoundField DataField="nombreTecladoATM" HeaderText="Teclado de ATM" ItemStyle-HorizontalAlign="center" />
-                                                <asp:TemplateField HeaderText="Selección" ItemStyle-HorizontalAlign="center">
+                                                <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="center">
                                                     <ItemTemplate>
-                                                        <asp:LinkButton ID="btnteclado" runat="server" CssClass="btn btn-info ti-pencil-alt mr-2" Text="" CommandArgument='<%# Eval("idTecladoATM") %>' CommandName="Codigo"></asp:LinkButton>
+                                                        <asp:LinkButton ID="BtnEditar" Visible="false" runat="server" CssClass="btn btn-info ti-pencil-alt mr-2" Text="" CommandArgument='<%# Eval("idTecladoATM") %>' CommandName="Codigo"></asp:LinkButton>
                                                         <%--<asp:Button ID="BtnUsuarioPassword" runat="server" Text="De baja" CssClass="btn btn-block btn-outline-danger" CommandArgument='<%# Eval("codATM") %>' CommandName="Baja" />--%>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>

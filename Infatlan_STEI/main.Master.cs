@@ -68,6 +68,10 @@ namespace Infatlan_STEI
                         LiCumplimiento.Visible = true;
                     if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 5).Creacion)
                         LIFormulario.Visible = true;
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 6).Consulta)
+                        LIConfiguracion.Visible = true;
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 7).Consulta)
+                        LIComunicaciones.Visible = true;
                     
                 }catch (Exception ex){
                     vError = ex.Message;

@@ -53,7 +53,7 @@
                                 <label class="col-3 col-form-label">Motivos de cancelación creados</label>
                                 <asp:UpdatePanel runat="server" ID="UpdatePanel2">
                                     <ContentTemplate>
-                                        <asp:LinkButton runat="server" ID="btnCancelarVerif" OnClick="btnCancelarVerif_Click" CssClass="btn btn-info icon-plus mr-2" Text=""></asp:LinkButton>
+                                        <asp:LinkButton runat="server" Visible="false" ID="btnCancelarVerif" OnClick="btnCancelarVerif_Click" CssClass="btn btn-info icon-plus mr-2" Text=""></asp:LinkButton>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>
@@ -73,10 +73,9 @@
                                             <Columns>
                                                 <asp:BoundField DataField="idCancelMant" HeaderText="Código motivo cancelar" ItemStyle-HorizontalAlign="center" />
                                                 <asp:BoundField DataField="nombreCancelar" HeaderText="Motivo cancelar" ItemStyle-HorizontalAlign="center" />
-                                                <asp:TemplateField HeaderText="Selección" ItemStyle-HorizontalAlign="center">
+                                                <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="center">
                                                     <ItemTemplate>
-                                                        <asp:LinkButton ID="btnmarca" runat="server" CssClass="btn btn-info ti-pencil-alt mr-2" Text="" CommandArgument='<%# Eval("idCancelMant") %>' CommandName="Codigo"></asp:LinkButton>
-                                                        <%--<asp:Button ID="BtnUsuarioPassword" runat="server" Text="De baja" CssClass="btn btn-block btn-outline-danger" CommandArgument='<%# Eval("codATM") %>' CommandName="Baja" />--%>
+                                                        <asp:LinkButton ID="BtnEditar" Visible="false" runat="server" CssClass="btn btn-info ti-pencil-alt mr-2" Text="" CommandArgument='<%# Eval("idCancelMant") %>' CommandName="Codigo"></asp:LinkButton>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                             </Columns>

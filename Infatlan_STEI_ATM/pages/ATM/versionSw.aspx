@@ -53,7 +53,7 @@
                                 <label class="col-3 col-form-label">Versiones de software creados</label>
                                 <asp:UpdatePanel runat="server" ID="UpdatePanel2">
                                     <ContentTemplate>
-                                        <asp:LinkButton runat="server" ID="btnnewversionATM" OnClick="btnnewversionATM_Click" CssClass="btn btn-info icon-plus mr-2" Text=""></asp:LinkButton>
+                                        <asp:LinkButton runat="server" Visible="false" ID="btnnewversionATM" OnClick="btnnewversionATM_Click" CssClass="btn btn-info icon-plus mr-2" Text=""></asp:LinkButton>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>
@@ -71,22 +71,18 @@
                                             GridLines="None"
                                             PageSize="10" OnRowCommand="GVBusqueda_RowCommand">
                                             <Columns>
-
                                                 <asp:BoundField DataField="idVersion" HeaderText="Código de versión de software" ItemStyle-HorizontalAlign="center" />
                                                 <asp:BoundField DataField="nombreVersion" HeaderText="Versión de software" ItemStyle-HorizontalAlign="center" />
-                                                <asp:TemplateField HeaderText="Selección" ItemStyle-HorizontalAlign="center">
+                                                <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="center">
                                                     <ItemTemplate>
-                                                        <asp:LinkButton ID="btnversion" runat="server" CssClass="btn btn-info ti-pencil-alt mr-2" Text="" CommandArgument='<%# Eval("idVersion") %>' CommandName="Codigo"></asp:LinkButton>
-                                                        <%--<asp:Button ID="BtnUsuarioPassword" runat="server" Text="De baja" CssClass="btn btn-block btn-outline-danger" CommandArgument='<%# Eval("codATM") %>' CommandName="Baja" />--%>
+                                                        <asp:LinkButton ID="BtnEditar" Visible="false" runat="server" CssClass="btn btn-info ti-pencil-alt mr-2" Text="" CommandArgument='<%# Eval("idVersion") %>' CommandName="Codigo"></asp:LinkButton>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-
                                             </Columns>
                                         </asp:GridView>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>
-                                            
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>

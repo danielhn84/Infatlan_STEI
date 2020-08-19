@@ -15,10 +15,14 @@ namespace Infatlan_STEI_ATM.pages.ATM
     public partial class detalleModelo : System.Web.UI.Page
     {
         bd vConexion = new bd();
+        Security vSecurity = new Security();
         protected void Page_Load(object sender, EventArgs e){
             Session["DETALLE_MODELO_ATM"] = null;
             if (!Page.IsPostBack){
                 if (Convert.ToBoolean(Session["AUTH"])){
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Creacion)
+                        btnnewdetModeloATM.Visible = true;
+
                     cargarData();
                 }else {
                     Response.Redirect("/login.aspx");
@@ -65,6 +69,12 @@ namespace Infatlan_STEI_ATM.pages.ATM
                 vDatos = vConexion.ObtenerTabla("STEISP_ATM_DetalleModelo 4,1,1,'"+det+"','"+ Session["USUARIO"].ToString() + "'");
                 GVBusqueda.DataSource = vDatos;
                 GVBusqueda.DataBind();
+                if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Edicion){
+                    foreach (GridViewRow item in GVBusqueda.Rows){
+                        LinkButton LbEdit = item.FindControl("BtnEditar") as LinkButton;
+                        LbEdit.Visible = true;
+                    }
+                }
                 Session["detMATM"] = vDatos;
                 Session["UPDATEATM"] = 1;
 

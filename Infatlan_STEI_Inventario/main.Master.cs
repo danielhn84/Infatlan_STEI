@@ -20,6 +20,8 @@ namespace Infatlan_STEI_Inventario
                 }
 
                 if (!Page.IsPostBack){
+                    if (!vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 1).Consulta)
+                        Response.Redirect("/default.aspx");
                     if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 1).Creacion)
                         LiCargar.Visible = true;
 

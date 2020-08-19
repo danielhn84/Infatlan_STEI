@@ -46,10 +46,11 @@ namespace Infatlan_STEI
                 Session["ROL"] = vRol;
                 getRol();
 
-                cargarCableado();
                 cargarInventario();
+                cargarAgencias();
+                cargarCableado();
             }catch (Exception ex){
-
+                Mensaje(ex.Message, WarningType.Danger);
             }
         }
         
@@ -95,24 +96,25 @@ namespace Infatlan_STEI
                         vDestino = ConfigurationManager.AppSettings["SmtpINVENTARIO"].ToString();
 
                     foreach (DataRow item in vDatos.Rows){
-                        if (!item["emailEmpresa"].ToString().Trim().Equals("")){
-                            vService.EnviarMensaje(
-                                vDestino,
-                                typeBody.Bugs,
-                                item["idEmpleado"].ToString(),
-                                TxMensaje.Text
-                                );
-                            vFlagEnvio = true;
-                        }
+                        vService.EnviarMensaje(
+                            vDestino,
+                            typeBody.Bugs,
+                            "Notificación de incidencia.",
+                            "Desarrollador",
+                            "El usuario <b>" + item["idUsuario"].ToString() + "</b> ha escrito: <br>" + TxMensaje.Text
+                            );
+                        vFlagEnvio = true;
                     }
 
                     if (vFlagEnvio)
-                        Mensaje("Insidencia enviada con éxito.", WarningType.Success);
+                        Mensaje("Incidencia enviada con éxito.", WarningType.Success);
                     else
                         Mensaje("El Mensaje no se pudo enviar. Favor intente de nuevo.", WarningType.Success);
+                    
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
                 }
             }catch (Exception ex){
-
+                Mensaje(ex.Message, WarningType.Danger);
             }
         }
 
@@ -158,6 +160,15 @@ namespace Infatlan_STEI
         }
 
         private void cargarInventario() {
+            String vQuery = "[STEISP_INVENTARIO_Generales] 15";
+            DataTable vDatos = vConexion.obtenerDataTable(vQuery);
+            LbStock.Text = vDatos.Rows[0]["Stock"].ToString();
+            LbEDC.Text = vDatos.Rows[0]["EDC"].ToString();
+            LbEnlace.Text = vDatos.Rows[0]["Enl"].ToString();
+            LbTran.Text = vDatos.Rows[0]["Trans"].ToString();
+        }
+
+        private void cargarAgencias() {
             String vQuery = "[STEISP_INVENTARIO_Generales] 15";
             DataTable vDatos = vConexion.obtenerDataTable(vQuery);
             LbStock.Text = vDatos.Rows[0]["Stock"].ToString();

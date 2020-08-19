@@ -51,7 +51,7 @@
       <HintPath>..\packages\ICSharpCode.SharpZipLib.dll.0.85.4.369\lib\net20\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="Interop.zkemkeeper">
-      <HintPath>..\..\..\..\Desktop\C#\Practicas\Infatlan_Biometrico3\Infatlan_Biometrico\Biometrico\bin\Debug\Interop.zkemkeeper.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Infatlan_STEI\Infatlan_STEI_Inventario\bin\Interop.zkemkeeper.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
@@ -469,6 +469,7 @@
     <Content Include="assets\images\users\d3.jpg" />
     <Content Include="assets\images\users\d4.jpg" />
     <Content Include="assets\images\users\d5.jpg" />
+    <Content Include="assets\images\users\face5.jpg" />
     <Content Include="assets\images\users\profile.png" />
     <Content Include="assets\images\waves.jpg" />
     <Content Include="assets\node_modules\blockUI\jquery.blockUI.js" />

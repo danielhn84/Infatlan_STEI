@@ -1,6 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="default.aspx.cs" Inherits="Infatlan_STEI._default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
+    <script type="text/javascript">
+        function closeModal() { $('#ModalBugs').modal('hide'); }
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
     <div class="row page-titles">
@@ -116,10 +119,10 @@
         <div class="card-body">
             <nav>
                 <div class="nav nav-pills" id="nav-tab" role="tablist">
-                    <a class="nav-item nav-link active" id="agencias" data-toggle="tab" href="#navAgencias" role="tab" aria-controls="nav-profile" aria-selected="false"><i style="margin-right: 5px" class="icon icon-home"></i>Agencias</a>
+                    <a class="nav-item nav-link active" id="inventario" data-toggle="tab" href=" #navInventario" role="tab" aria-controls="nav-profile" aria-selected="false"><i style="margin-right: 5px" class="ti-package"></i>Inventarios</a>
+                    <a class="nav-item nav-link" id="agencias" data-toggle="tab" href="#navAgencias" role="tab" aria-controls="nav-profile" aria-selected="false"><i style="margin-right: 5px" class="icon icon-home"></i>Agencias</a>
                     <a class="nav-item nav-link" id="atm" data-toggle="tab" href="#navATM" role="tab" aria-controls="nav-profile" aria-selected="false"><i style="margin-right: 5px" class="icon-screen-desktop"></i>ATM</a>
                     <a class="nav-item nav-link" id="cableado" data-toggle="tab" href="#navCableado" role="tab" aria-controls="nav-profile" aria-selected="false"><i style="margin-right: 5px" class="ti-plug"></i>Cableado</a>
-                    <a class="nav-item nav-link" id="invenrario" data-toggle="tab" href="#navInventario" role="tab" aria-controls="nav-profile" aria-selected="false"><i style="margin-right: 5px" class="ti-package"></i>Inventarios</a>
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
@@ -184,7 +187,7 @@
                                 <div class="d-flex no-block align-items-center m-t-20 m-b-20">
                                     <div id="sparklinedash"></div>
                                     <div class="ml-auto">
-                                        <h2 class="text-success"><i class="ti-arrow-up"></i> <span class="counter"><asp:Label runat="server" ID="Label1"></asp:Label></span></h2>
+                                        <h2 class="text-success"><i class="ti-arrow-up"></i> <span class="counter"><asp:Label runat="server" ID="LbAGLlenar"></asp:Label></span></h2>
                                     </div>
                                 </div>
                             </div>
@@ -196,7 +199,7 @@
                                 <div class="d-flex no-block align-items-center m-t-20 m-b-20">
                                     <div id="sparklinedash2"></div>
                                     <div class="ml-auto">
-                                        <h2 class="text-purple"><i class="ti-arrow-up"></i> <span class="counter"><asp:Label runat="server" ID="Label2"></asp:Label></span></h2>
+                                        <h2 class="text-purple"><i class="ti-arrow-up"></i> <span class="counter"><asp:Label runat="server" ID="LbAGModificar"></asp:Label></span></h2>
                                     </div>
                                 </div>
                             </div>
@@ -208,7 +211,7 @@
                                 <div class="d-flex no-block align-items-center m-t-20 m-b-20">
                                     <div id="sparklinedash3"></div>
                                     <div class="ml-auto">
-                                        <h2 class="text-info"><i class="ti-arrow-up"></i> <span class="counter"><asp:Label runat="server" ID="Label3"></asp:Label></span></h2>
+                                        <h2 class="text-info"><i class="ti-arrow-up"></i> <span class="counter"><asp:Label runat="server" ID="LbAGMantenimientos"></asp:Label></span></h2>
                                     </div>
                                 </div>
                             </div>
@@ -220,7 +223,7 @@
                                 <div class="d-flex no-block align-items-center m-t-20 m-b-20">
                                     <div id="sparklinedash4"></div>
                                     <div class="ml-auto">
-                                        <h2 class="text-danger"><i class="ti-arrow-down"></i> <span class="counter"><asp:Label runat="server" ID="Label4"></asp:Label></span></h2>
+                                        <h2 class="text-danger"><i class="ti-arrow-down"></i> <span class="counter"><asp:Label runat="server" ID="LbAGTransacciones"></asp:Label></span></h2>
                                     </div>
                                 </div>
                             </div>
@@ -229,7 +232,7 @@
                     </div>
 
                     <%--OLD--%>
-                    <div class="card-group">
+                    <%--<div class="card-group">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
@@ -310,7 +313,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>--%>
                 </div>
 
                 <div class="tab-pane fade" id="navATM" role="tabpanel" aria-labelledby="nav-cargar-tab">

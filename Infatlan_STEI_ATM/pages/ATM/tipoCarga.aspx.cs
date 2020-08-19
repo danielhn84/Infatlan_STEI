@@ -14,10 +14,14 @@ namespace Infatlan_STEI_ATM.pages.ATM
     public partial class tipoCarga : System.Web.UI.Page
     {
         bd vConexion = new bd();
+        Security vSecurity = new Security();
         protected void Page_Load(object sender, EventArgs e){
             Session["TIPO_CARGA_ATM"] = null;
             if (!Page.IsPostBack){
                 if (Convert.ToBoolean(Session["AUTH"])){
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Creacion)
+                        btnguardartipocargaATM.Visible = true;
+
                     cargarData();
                 }else {
                     Response.Redirect("/login.aspx");
@@ -38,6 +42,12 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     vDatos = vConexion.ObtenerTabla("STEISP_ATM_Generales 4, 1");
                     GVBusqueda.DataSource = vDatos;
                     GVBusqueda.DataBind();
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Edicion){
+                        foreach (GridViewRow item in GVBusqueda.Rows){
+                            LinkButton LbEdit = item.FindControl("BtnEditar") as LinkButton;
+                            LbEdit.Visible = true;
+                        }
+                    }
                     Session["tipoCargaATM"] = vDatos;
 
 

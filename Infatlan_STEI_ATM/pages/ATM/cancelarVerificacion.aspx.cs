@@ -14,10 +14,14 @@ namespace Infatlan_STEI_ATM.pages.ATM
     public partial class cancelarVerificacion : System.Web.UI.Page
     {
         bd vConexion = new bd();
+        Security vSecurity = new Security();
         protected void Page_Load(object sender, EventArgs e){
             Session["CANCELARVERIF_ATM"] = null;
             if (!Page.IsPostBack){
                 if (Convert.ToBoolean(Session["AUTH"])){
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Creacion)
+                        btnCancelarVerif.Visible = true;
+
                     cargarData();
                 }else {
                     Response.Redirect("/login.aspx");
@@ -25,27 +29,25 @@ namespace Infatlan_STEI_ATM.pages.ATM
             }
         }
         
-        public void Mensaje(string vMensaje, WarningType type)
-        {
+        public void Mensaje(string vMensaje, WarningType type){
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
         
-        void cargarData()
-        {
-            if (HttpContext.Current.Session["CANCELARVERIF_ATM"] == null)
-            {
-                try
-                {
+        void cargarData(){
+            if (HttpContext.Current.Session["CANCELARVERIF_ATM"] == null){
+                try{
                     DataTable vDatos = new DataTable();
                     vDatos = vConexion.ObtenerTabla("STEISP_ATM_Generales 20, 1");
                     GVBusqueda.DataSource = vDatos;
                     GVBusqueda.DataBind();
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Edicion){
+                        foreach (GridViewRow item in GVBusqueda.Rows){
+                            LinkButton LbEdit = item.FindControl("BtnEditar") as LinkButton;
+                            LbEdit.Visible = true;
+                        }
+                    }
                     Session["MotivoCancelarATM"] = vDatos;
-
-
-                }
-                catch (Exception Ex)
-                {
+                }catch (Exception Ex){
 
                 }
                 Session["CANCELARVERIF_ATM"] = 1;
@@ -65,26 +67,17 @@ namespace Infatlan_STEI_ATM.pages.ATM
         {
             DataTable vDataa = (DataTable)Session["MotivoCancelarATM"];
             string codmotivo = e.CommandArgument.ToString();
-           
-            
 
-            if (e.CommandName == "Codigo")
-            {
-               
-                try
-                {
+            if (e.CommandName == "Codigo"){
+                try{
                     DataTable vDatos = new DataTable();
                     String vQuery = "STEISP_ATMAdminComponentesATM 25,'" + codmotivo + "'";
                     vDatos = vConexion.ObtenerTabla(vQuery);
-                    foreach (DataRow item in vDatos.Rows)
-                    {
+                    foreach (DataRow item in vDatos.Rows){
                         Session["ATMCODMOTIVO"] = codmotivo;
                         lbNombremotivoATM.Text = item["nombreCancelar"].ToString();
                     }
-                }
-                catch (Exception)
-                {
-
+                }catch (Exception){
                     throw;
                 }
 

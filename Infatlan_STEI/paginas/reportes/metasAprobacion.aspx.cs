@@ -17,10 +17,14 @@ namespace Infatlan_STEI.paginas.reportes
     public partial class metasAprobacion : System.Web.UI.Page
     {
         db vConexion = new db();
+        Security vSecurity = new Security();
         protected void Page_Load(object sender, EventArgs e){
             try{
                 if (!Page.IsPostBack){
                     if (Convert.ToBoolean(Session["AUTH"])){
+                        if (!vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 5).Consulta)
+                            Response.Redirect("/default.aspx");
+
                         String vId = Session["CUMPL_ID_REPORTE"].ToString();
                         cargarDatos(vId);
                     }else {
@@ -41,19 +45,21 @@ namespace Infatlan_STEI.paginas.reportes
                 if (vDSet.Tables[1].Rows.Count > 0){
                     GvKPISolicitudes.DataSource = vDSet.Tables[1];
                     GvKPISolicitudes.DataBind();
+                    Session["CUMPL_APR_KPI"] = vDSet.Tables[1];
                     DivKPI.Visible = true;
                 }
 
                 if (vDSet.Tables[2].Rows.Count > 0){
                     GvRuptura.DataSource = vDSet.Tables[2];
                     GvRuptura.DataBind();
+                    Session["CUMPL_APR_RUPTURA"] = vDSet.Tables[2];
                     LbResRuptura.Visible = false;
                     DivRuptura.Visible = true;
                 }
 
                 if (vDSet.Tables[3].Rows.Count > 0){
                     GvOSER.DataSource = vDSet.Tables[3];
-                    Session["CUMPLIMIENTO_APR_OSER"] = vDSet.Tables[3];
+                    Session["CUMPL_APR_OSER"] = vDSet.Tables[3];
                     GvOSER.DataBind();
                     LbResOSER.Visible = false;
                 }
@@ -61,6 +67,7 @@ namespace Infatlan_STEI.paginas.reportes
                 if (vDSet.Tables[4].Rows.Count > 0){
                     GvRendimiento.DataSource = vDSet.Tables[4];
                     GvRendimiento.DataBind();
+                    Session["CUMPL_APR_RENDIMIENTO"] = vDSet.Tables[4];
                     graficos(vDSet.Tables[4]);
                 }
 
@@ -90,7 +97,7 @@ namespace Infatlan_STEI.paginas.reportes
         protected void GvOSER_PageIndexChanging(object sender, GridViewPageEventArgs e){
             try{
                 GvOSER.PageIndex = e.NewPageIndex;
-                GvOSER.DataSource = (DataTable)Session["CUMPLIMIENTO_OSER"];
+                GvOSER.DataSource = (DataTable)Session["CUMPL_APR_OSER"];
                 GvOSER.DataBind();
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);
@@ -99,25 +106,32 @@ namespace Infatlan_STEI.paginas.reportes
 
         protected void GvRuptura_PageIndexChanging(object sender, GridViewPageEventArgs e){
             try{
-
+                GvRuptura.PageIndex = e.NewPageIndex;
+                GvRuptura.DataSource = (DataTable)Session["CUMPL_APR_RUPTURA"];
+                GvRuptura.DataBind();
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
 
-        protected void BtnAprobar_Click(object sender, EventArgs e){
+        protected void GvInsatisfacciones_PageIndexChanging(object sender, GridViewPageEventArgs e){
             try{
-                DivMensaje.Visible = false;
-                DDLAccion.SelectedValue = "0";
-                TxComentario.Text = string.Empty;
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal();", true);
+                GvInsatisfacciones.PageIndex = e.NewPageIndex;
+                GvInsatisfacciones.DataSource = (DataTable)Session["CUMPL_APR_SATISCACCION"];
+                GvInsatisfacciones.DataBind();
             }catch (Exception ex){
-                Mensaje(ex.Message, WarningType.Danger);   
+                Mensaje(ex.Message, WarningType.Danger);
             }
         }
 
         protected void GvRendimiento_PageIndexChanging(object sender, GridViewPageEventArgs e){
-
+            try{
+                GvRuptura.PageIndex = e.NewPageIndex;
+                GvRuptura.DataSource = (DataTable)Session["CUMPL_APR_RENDIMIENTO"];
+                GvRuptura.DataBind();
+            }catch (Exception ex){
+                Mensaje(ex.Message, WarningType.Danger);
+            }
         }
 
         private void cargarTextos(DataTable vData) {
@@ -237,7 +251,7 @@ namespace Infatlan_STEI.paginas.reportes
 
         protected void BtnConfirmar_Click(object sender, EventArgs e){
             try{
-                if (TxComentario.Text == string.Empty || TxComentario.Text == "")
+                if (TxComentario.Text == string.Empty || TxComentario.Text == "" && DDLAccion.SelectedValue == "1")
                     throw new Exception("Favor ingrese el comentario de aprobacion.");
 
                 String vAccion = DDLAccion.SelectedValue == "0" ? "2" : "3";
@@ -249,25 +263,41 @@ namespace Infatlan_STEI.paginas.reportes
                     ",'" + TxComentario.Text + "'" +
                     ",'" + Session["USUARIO"].ToString() + "'";
                 int vInfo = vConexion.ejecutarSql(vQuery);
-                if (vInfo == 1) 
-                    Mensaje("Reporte " + vMensaje + " con éxito.", WarningType.Success);
-                else 
-                    Mensaje("El reporte no se pudo aprobar. Comuníquese con sistemas", WarningType.Danger);
-                
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
+                if (vInfo == 1){
+                    SmtpService vService = new SmtpService();
+                    Boolean vFlag = false;
+
+                    vQuery = "[STEISP_CUMPLIMIENTO_Reportes] 11," + Session["CUMPL_ID_REPORTE"].ToString();
+                    DataTable vDatos = vConexion.obtenerDataTable(vQuery);
+                    String vMensajeCorreo = DDLAccion.SelectedValue == "0" ? "El reporte enviado el " + vDatos.Rows[0]["fechaRegistro"].ToString() + " ha sido <b>APROBADO</b>" : "El reporte enviado el " + vDatos.Rows[0]["fechaRegistro"].ToString() + " ha sido <b>RECHAZADO</b><br>Favor llenarlo nuevamente.";
+
+                    vService.EnviarMensaje(
+                        vDatos.Rows[0]["correo"].ToString(),
+                        typeBody.Cumplimiento,
+                        "Evaluación de Reporte de Metas de cumplimiento",
+                        vDatos.Rows[0]["nombre"].ToString(),
+                        vMensajeCorreo
+                    );
+                    vFlag = true;
+                    if (vFlag)
+                        Response.Redirect("metasPendientes.aspx", false);
+                }else 
+                    Mensaje("Ha ocurrido un error. Comuníquese con sistemas", WarningType.Danger);
+
             }catch (Exception ex){
                 LbMensaje.Text = ex.Message;
                 DivMensaje.Visible = true;
             }
         }
 
-        protected void GvInsatisfacciones_PageIndexChanging(object sender, GridViewPageEventArgs e){
+        protected void BtnAprobar_Click(object sender, EventArgs e){
             try{
-                GvInsatisfacciones.PageIndex = e.NewPageIndex;
-                GvInsatisfacciones.DataSource = (DataTable)Session["CUMPL_APR_SATISCACCION"];
-                GvInsatisfacciones.DataBind();
+                DivMensaje.Visible = false;
+                DDLAccion.SelectedValue = "0";
+                TxComentario.Text = string.Empty;
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal();", true);
             }catch (Exception ex){
-                Mensaje(ex.Message, WarningType.Danger);
+                Mensaje(ex.Message, WarningType.Danger);   
             }
         }
     }

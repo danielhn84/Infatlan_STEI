@@ -384,15 +384,6 @@ namespace Infatlan_STEI_Inventario.pages
         protected global::System.Web.UI.WebControls.DropDownList DDLTipoEquipoEDC;
 
         /// <summary>
-        /// Control UpdatePanel16.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel16;
-
-        /// <summary>
         /// Control DDLContratos.
         /// </summary>
         /// <remarks>

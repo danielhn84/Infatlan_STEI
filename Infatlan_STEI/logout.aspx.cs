@@ -12,8 +12,8 @@ namespace Infatlan_STEI
                 String vUser = Session["USUARIO"].ToString();
                 String vQuery = "[STEISP_Login] 2,'" + vUser + "'";
                 int vInfo = vConexion.ejecutarSql(vQuery);
+                Session.RemoveAll();
                 if (vInfo == 1){
-                    Session.RemoveAll();
                     Response.Redirect("/login.aspx");
                 }
             }catch (Exception ex){

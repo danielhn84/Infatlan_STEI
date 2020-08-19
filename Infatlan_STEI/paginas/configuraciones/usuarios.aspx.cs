@@ -16,9 +16,15 @@ namespace Infatlan_STEI.paginas.configuraciones
     public partial class usuarios : System.Web.UI.Page
     {
         db vConexion = new db();
+        Security vSecurity = new Security();
         protected void Page_Load(object sender, EventArgs e){
             if (!Page.IsPostBack){
                 if (Convert.ToBoolean(Session["AUTH"])){
+                    if (!vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 6).Consulta)
+                        Response.Redirect("/default.aspx");
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 6).Creacion)
+                        BtnNuevo.Visible = true;
+
                     cargarDatos();
                 }
             }
@@ -32,6 +38,13 @@ namespace Infatlan_STEI.paginas.configuraciones
                 if (vDatos.Rows.Count > 0){
                     GVBusqueda.DataSource = vDatos;
                     GVBusqueda.DataBind();
+
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 6).Edicion){
+                        foreach (GridViewRow item in GVBusqueda.Rows){
+                            LinkButton LbEdit = item.FindControl("BtnEditar") as LinkButton;
+                            LbEdit.Visible = true;
+                        }
+                    }
                     Session["STEI_USUARIOS"] = vDatos;
                 }
 
