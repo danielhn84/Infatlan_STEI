@@ -60,12 +60,10 @@
                                     <asp:TextBox ID="txtFechaInicio" OnTextChanged="txtFechaInicio_TextChanged" AutoPostBack="true" placeholder="1900-12-31" CssClass="form-control col-12" runat="server" TextMode="Date"></asp:TextBox>
                                 </div>
                                 <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
-                                    <label class="col-form-label">Realizar mantenimiento</label>
-                                    <asp:DropDownList runat="server" ID="DDLrealizarMant" Enabled="false" OnSelectedIndexChanged="DDLrealizarMant_SelectedIndexChanged" AutoPostBack="true" CssClass="form-control col-12">
-                                        <asp:ListItem Value="1" Text="Si"></asp:ListItem>
-                                        <asp:ListItem Value="2" Text="No"></asp:ListItem>
-                                    </asp:DropDownList>
+                                    <label class="col-form-label">ATM</label>
+                                    <asp:DropDownList runat="server" ID="DDLmantemientoPendiente" AutoPostBack="true" OnSelectedIndexChanged="DDLmantemientoPendiente_SelectedIndexChanged" CssClass="form-control"></asp:DropDownList>
                                 </div>
+                                
                             </div>
                             <!--/PRIMERA FILA-->
                             <!--SEGUNDA FILA-->
@@ -92,9 +90,12 @@
                                     <label class="col-form-label">SysAid</label>
                                     <asp:TextBox CssClass="form-control" ID="txtsysaid" runat="server"></asp:TextBox>
                                 </div>
-                                <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
-                                    <label class="col-form-label">ATM</label>
-                                    <asp:DropDownList runat="server" ID="DDLmantemientoPendiente" AutoPostBack="true" OnSelectedIndexChanged="DDLmantemientoPendiente_SelectedIndexChanged" CssClass="form-control"></asp:DropDownList>
+                               <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
+                                    <label class="col-form-label">Realizar mantenimiento</label>
+                                    <asp:DropDownList runat="server" ID="DDLrealizarMant" Enabled="false" OnSelectedIndexChanged="DDLrealizarMant_SelectedIndexChanged" AutoPostBack="true" CssClass="form-control col-12">
+                                        <asp:ListItem Value="1" Text="Si"></asp:ListItem>
+                                        <asp:ListItem Value="2" Text="No"></asp:ListItem>
+                                    </asp:DropDownList>
                                 </div>
                             </div>
                             <!--/CUARTA FILA-->
@@ -275,7 +276,9 @@
                                                                     PageSize="10"
                                                                     Style="margin: 30px 0px 20px 0px">
                                                                     <Columns>
-                                                                        <asp:BoundField DataField="Correo" HeaderText="Correo Jefes de agencia" ItemStyle-Width="30%" />
+                                                                        <asp:BoundField DataField="Correo" HeaderText="Correo" ItemStyle-Width="30%" />
+                                                                        <asp:BoundField DataField="Nombre" HeaderText="Nombre" ItemStyle-Width="30%" />
+                                                                        <asp:BoundField DataField="Apellido" HeaderText="Apellido" ItemStyle-Width="30%" />
                                                                     </Columns>
                                                                 </asp:GridView>
                                                             </ContentTemplate>
