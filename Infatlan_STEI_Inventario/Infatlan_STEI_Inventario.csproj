@@ -47,6 +47,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Desktop\C#\Proyectos Arquitectura TI\Infatlan_STEI-master (1)\Infatlan_STEI-master\Infatlan_STEI_ATM\bin\Excel.4.5.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.5.452, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="Interop.zkemkeeper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>False</EmbedInteropTypes>
@@ -3394,6 +3398,7 @@
     <Content Include="js\perfect-scrollbar.jquery.min.js" />
     <Content Include="js\sidebarmenu.js" />
     <Content Include="js\waves.js" />
+    <Content Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
     <Content Include="pages\adjuntosENL\Imagen1.png" />
     <Content Include="pages\Configuracion\articuloDetalle.aspx" />
     <Content Include="pages\Configuracion\cargaRegistros.aspx" />

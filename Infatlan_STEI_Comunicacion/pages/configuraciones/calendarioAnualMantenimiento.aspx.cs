@@ -20,9 +20,10 @@ namespace Infatlan_STEI_Comunicacion.pages.configuraciones
         {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["USUARIO"] = "acamador";
+            //Session["USUARIO"] = "acamador";
             if (!Page.IsPostBack)
             {
                 if (Convert.ToBoolean(Session["AUTH"]))
@@ -168,7 +169,6 @@ namespace Infatlan_STEI_Comunicacion.pages.configuraciones
             }
         }
 
-
         public Boolean cargarArchivo(String DireccionCarga, ref int vSuccess, ref int vError, String vUsuario, String TipoProceso)
         {
 
@@ -178,8 +178,7 @@ namespace Infatlan_STEI_Comunicacion.pages.configuraciones
             UpdateModal.Update();
 
             Boolean vResultado = false;
-            try
-            {
+            try{
                 FileStream stream = File.Open(DireccionCarga, FileMode.Open, FileAccess.Read);
                 IExcelDataReader excelReader;
                 if (DireccionCarga.Contains("xlsx"))
@@ -192,8 +191,7 @@ namespace Infatlan_STEI_Comunicacion.pages.configuraciones
                 excelReader.Close();
 
                 DataSet vDatosVerificacion = vDatosExcel.Copy();
-                for (int i = 0; i < vDatosVerificacion.Tables[0].Rows.Count; i++)
-                {
+                for (int i = 0; i < vDatosVerificacion.Tables[0].Rows.Count; i++){
                     if (verificarRow(vDatosVerificacion.Tables[0].Rows[i]))
                         vDatosExcel.Tables[0].Rows[i].Delete();
                 }
@@ -203,14 +201,11 @@ namespace Infatlan_STEI_Comunicacion.pages.configuraciones
 
                 vResultado = true;
 
-            }
-            catch (Exception Ex)
-            {
+            }catch (Exception Ex){
                 throw new Exception(Ex.ToString());
             }
             return vResultado;
         }
-
 
         private bool verificarRow(DataRow dr)
         {
@@ -319,19 +314,16 @@ namespace Infatlan_STEI_Comunicacion.pages.configuraciones
             }
         }
 
-        protected void BtnEnviar_Click(object sender, EventArgs e)
-        {
+        protected void BtnEnviar_Click1(object sender, EventArgs e){
             String archivoLog = string.Format("{0}_{1}", Convert.ToString(Session["USUARIO"]), DateTime.Now.ToString("yyyyMMdd"));
-            try
-            {
+            try{
                 Div1.Visible = false;
                 UpdatePanel1.Update();
                 DivAlerta.Visible = false;
                 UpdateModal.Update();
 
                 String vDireccionCarga = ConfigurationManager.AppSettings["RUTA_SERVER"].ToString();
-                if (FUMantenimientosComunicacion.HasFile)
-                {
+                if (FUMantenimientosComunicacion.HasFile){
                     String vNombreArchivo = FUMantenimientosComunicacion.FileName;
                     vDireccionCarga += "/" + archivoLog + "_" + vNombreArchivo;
                     FUMantenimientosComunicacion.SaveAs(vDireccionCarga);
@@ -370,7 +362,6 @@ namespace Infatlan_STEI_Comunicacion.pages.configuraciones
             catch (Exception ex)
             {
                 LbMensaje.Text = ex.Message;
-
             }
         }
     }

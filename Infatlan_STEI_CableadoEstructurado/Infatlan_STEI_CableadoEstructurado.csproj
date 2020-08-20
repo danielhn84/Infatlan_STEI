@@ -3437,6 +3437,7 @@
     <Content Include="js\perfect-scrollbar.jquery.min.js" />
     <Content Include="js\sidebarmenu.js" />
     <Content Include="js\waves.js" />
+    <Content Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
     <Content Include="page\cotizacion\aprobacionContabilidad.aspx" />
     <Content Include="page\cotizacion\ofertaEconomica.aspx" />
     <Content Include="page\cotizacion\principalPresupuestos.aspx" />

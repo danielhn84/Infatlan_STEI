@@ -85,7 +85,7 @@
             <br>
 <%--            <asp:UpdatePanel runat="server" ID="UpdatePanel7" UpdateMode="Conditional">
                 <ContentTemplate>--%>
-                    <asp:Button Text="Enviar" class="btn btn-success" ID="BtnEnviar" OnClick="BtnEnviar_Click" runat="server" />
+                    <asp:Button Text="Enviar" class="btn btn-success" ID="BtnEnviar" OnClick="BtnEnviar_Click1" runat="server" />
                     <button type="button" class="btn btn-primary">Cancelar</button>
 <%--                </ContentTemplate>
             </asp:UpdatePanel>--%>

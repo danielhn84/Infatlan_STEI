@@ -46,7 +46,7 @@
     <Reference Include="Excel.4.5">
       <HintPath>..\Infatlan_STEI\bin\Excel.4.5.dll</HintPath>
     </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.4.369, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.5.452, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
@@ -3396,6 +3396,7 @@
     <Content Include="dist\js\perfect-scrollbar.jquery.min.js" />
     <Content Include="dist\js\sidebarmenu.js" />
     <Content Include="dist\js\waves.js" />
+    <Content Include="Interop.zkemkeeper.dll" />
     <Content Include="js\bootstrap-notify.js" />
     <Content Include="js\custom.js" />
     <Content Include="js\custom.min.js" />
