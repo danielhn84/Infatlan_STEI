@@ -96,7 +96,9 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
                 Session["COMUNICACION_PALV_COMPLETAR_LV_INDIVIDUAL"] = vDatos;
 
-                Response.Redirect("/pages/mantenimiento/lvIndividual.aspx?ex=2");
+
+
+                Response.Redirect("/sites/comunicaciones/pages/mantenimiento/lvIndividual.aspx?ex=2");
             }
         }
     }
