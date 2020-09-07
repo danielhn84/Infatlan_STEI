@@ -21,6 +21,8 @@ namespace Infatlan_STEI
         }
         protected void Application_PreSendRequestHeaders(object sender, EventArgs e)
         {
+
+            HttpContext.Current.Response.Headers.Remove("X-AspNet-Version");
             HttpContext.Current.Response.Headers.Remove("X-Powered-By");
         }
         protected void Application_BeginRequest(object sender, EventArgs e)
