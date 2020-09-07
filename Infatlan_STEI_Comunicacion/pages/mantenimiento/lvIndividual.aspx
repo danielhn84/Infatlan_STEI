@@ -362,7 +362,7 @@
                                         </div>
                                         <div class="col-md-10" style="text-align: center">
                                             <asp:FileUpload ID="FuVersionRecomendada" runat="server" Visible="true" onchange="showpreview1(this);" class="form-control" /><br>
-                                            <img id="ImgPreviewVersionRecomendada" height="300" width="530" src="../../assets/images/ImagenNoDisponible.JPG" style="border-width: 0px;" runat="server" visible="true" />
+                                            <img id="ImgPreviewVersionRecomendada" height="300" width="530" src="../../assets/images/vistaPrevia1.jpg"  style="border-width: 0px;" runat="server" visible="true" />
                                         </div>
                                         <div class="col-md-1" style="text-align: center">
                                         </div>
@@ -381,7 +381,7 @@
                                         </div>
                                         <div class="col-md-10" style="text-align: center">
                                             <asp:FileUpload ID="FuEDC_ACS" runat="server" Visible="true" onchange="showpreview2(this);" class="form-control" /><br>
-                                            <img id="ImgPreviewEDC_ACS" height="300" width="530" src="../../assets/images/ImagenNoDisponible.JPG" style="border-width: 0px;" runat="server" visible="true" />
+                                            <img id="ImgPreviewEDC_ACS" height="300" width="530" src="../../assets/images/vistaPrevia1.jpg"  style="border-width: 0px;" runat="server" visible="true" />
                                         </div>
                                         <div class="col-md-1" style="text-align: center">
                                         </div>
@@ -401,7 +401,7 @@
                                         </div>
                                         <div class="col-md-10" style="text-align: center">
                                             <asp:FileUpload ID="FuTablaARP" runat="server" Visible="true" onchange="showpreview3(this);" class="form-control" /><br>
-                                            <img id="ImgPreviewTablaARP" height="300" width="530" src="../../assets/images/ImagenNoDisponible.JPG" style="border-width: 0px;" runat="server" visible="true" />
+                                            <img id="ImgPreviewTablaARP" height="300" width="530" src="../../assets/images/vistaPrevia1.jpg"  style="border-width: 0px;" runat="server" visible="true" />
                                         </div>
                                         <div class="col-md-1" style="text-align: center">
                                         </div>
@@ -421,7 +421,7 @@
                                         </div>
                                         <div class="col-md-10" style="text-align: center">
                                             <asp:FileUpload ID="FuTablaMAC" runat="server" Visible="true" onchange="showpreview4(this);" class="form-control" /><br>
-                                            <img id="ImgPreviewTablaMAC" height="300" width="530" src="../../assets/images/ImagenNoDisponible.JPG" style="border-width: 0px;" runat="server" visible="true" />
+                                            <img id="ImgPreviewTablaMAC" height="300" width="530" src="../../assets/images/vistaPrevia1.jpg"  style="border-width: 0px;" runat="server" visible="true" />
                                         </div>
                                         <div class="col-md-1" style="text-align: center">
                                         </div>
@@ -439,7 +439,7 @@
                                         </div>
                                         <div class="col-md-10" style="text-align: center">
                                             <asp:FileUpload ID="FuVersionEquipo" runat="server" Visible="true" onchange="showpreview5(this);" class="form-control" /><br>
-                                            <img id="ImgPreviewVersionEquipo" height="300" width="530" src="../../assets/images/ImagenNoDisponible.JPG" style="border-width: 0px;" runat="server" visible="true" />
+                                            <img id="ImgPreviewVersionEquipo" height="300" width="530" src="../../assets/images/vistaPrevia1.jpg"  style="border-width: 0px;" runat="server" visible="true" />
                                         </div>
                                         <div class="col-md-1" style="text-align: center">
                                         </div>
@@ -457,7 +457,7 @@
                                         </div>
                                         <div class="col-md-10" style="text-align: center">
                                             <asp:FileUpload ID="FuInterfaces" runat="server" Visible="true" onchange="showpreview6(this);" class="form-control" /><br>
-                                            <img id="ImgPreviewInterfaces" height="300" width="530" src="../../assets/images/ImagenNoDisponible.JPG" style="border-width: 0px;" runat="server" visible="true" />
+                                            <img id="ImgPreviewInterfaces" height="300" width="530" src="../../assets/images/vistaPrevia1.jpg"  style="border-width: 0px;" runat="server" visible="true" />
                                         </div>
                                         <div class="col-md-1" style="text-align: center">
                                         </div>
@@ -477,7 +477,7 @@
                                         </div>
                                         <div class="col-md-10" style="text-align: center">
                                             <asp:FileUpload ID="FuDMVPN_Activos" runat="server" Visible="true" onchange="showpreview7(this);" class="form-control" /><br>
-                                            <img id="ImgPreviewDMVPN_Activos" height="300" width="530" src="../../assets/images/ImagenNoDisponible.JPG" style="border-width: 0px;" runat="server" visible="true" />
+                                            <img id="ImgPreviewDMVPN_Activos" height="300" width="530" src="../../assets/images/vistaPrevia1.jpg"  style="border-width: 0px;" runat="server" visible="true" />
                                         </div>
                                         <div class="col-md-1" style="text-align: center">
                                         </div>
@@ -499,7 +499,7 @@
                                         </div>
                                         <div class="col-md-10" style="text-align: center">
                                             <asp:FileUpload ID="FuVerify" runat="server" Visible="true" onchange="showpreview8(this);" class="form-control" /><br>
-                                            <img id="ImgPreviewVerify" height="300" width="530" src="../../assets/images/ImagenNoDisponible.JPG" style="border-width: 0px;" runat="server" visible="true" />
+                                            <img id="ImgPreviewVerify" height="300" width="530" src="../../assets/images/vistaPrevia1.jpg"  style="border-width: 0px;" runat="server" visible="true" />
                                         </div>
                                         <div class="col-md-1" style="text-align: center">
                                         </div>
@@ -533,7 +533,7 @@
                                         </div>
                                         <div class="col-md-10" style="text-align: center">
                                             <asp:FileUpload ID="FuVersionEquipoActualizacion" runat="server" Visible="true" onchange="showpreview9(this);" class="form-control" /><br>
-                                            <img id="ImgPreviewVersionEquipoActualizacion" height="300" width="530" src="../../assets/images/ImagenNoDisponible.JPG" style="border-width: 0px;" runat="server" visible="true" />
+                                            <img id="ImgPreviewVersionEquipoActualizacion" height="300" width="530" src="../../assets/images/vistaPrevia1.jpg"  style="border-width: 0px;" runat="server" visible="true" />
                                         </div>
                                         <div class="col-md-1" style="text-align: center">
                                         </div>
@@ -553,7 +553,7 @@
                                         </div>
                                         <div class="col-md-10" style="text-align: center">
                                             <asp:FileUpload ID="FuShowAuthentication" runat="server" Visible="true" onchange="showpreview10(this);" class="form-control" /><br>
-                                            <img id="ImgPreviewShowAuthentication" height="300" width="530" src="../../assets/images/ImagenNoDisponible.JPG" style="border-width: 0px;" runat="server" visible="true" />
+                                            <img id="ImgPreviewShowAuthentication" height="300" width="530" src="../../assets/images/vistaPrevia1.jpg"  style="border-width: 0px;" runat="server" visible="true" />
                                         </div>
                                         <div class="col-md-1" style="text-align: center">
                                         </div>
@@ -572,7 +572,7 @@
                                         </div>
                                         <div class="col-md-10" style="text-align: center">
                                             <asp:FileUpload ID="FuEquipoAgregadoSolarwinds" runat="server" Visible="true" onchange="showpreview11(this);" class="form-control" /><br>
-                                            <img id="ImgPreviewEquipoAgregadoSolarwinds" height="300" width="530" src="../../assets/images/ImagenNoDisponible.JPG" style="border-width: 0px;" runat="server" visible="true" />
+                                            <img id="ImgPreviewEquipoAgregadoSolarwinds" height="300" width="530" src="../../assets/images/vistaPrevia1.jpg"  style="border-width: 0px;" runat="server" visible="true" />
                                         </div>
                                         <div class="col-md-1" style="text-align: center">
                                         </div>
@@ -593,7 +593,7 @@
                                         </div>
                                         <div class="col-md-10" style="text-align: center">
                                             <asp:FileUpload ID="FuConfiGuardadaSolarwinds" runat="server" Visible="true" onchange="showpreview12(this);" class="form-control" /><br>
-                                            <img id="ImgPreviewConfiGuardadaSolarwinds" height="300" width="530" src="../../assets/images/ImagenNoDisponible.JPG" style="border-width: 0px;" runat="server" visible="true" />
+                                            <img id="ImgPreviewConfiGuardadaSolarwinds" height="300" width="530" src="../../assets/images/vistaPrevia1.jpg"  style="border-width: 0px;" runat="server" visible="true" />
                                         </div>
                                         <div class="col-md-1" style="text-align: center">
                                         </div>
@@ -615,7 +615,7 @@
                                             <asp:FileUpload ID="FuAltaDisponibilidad" runat="server" Visible="true" onchange="showpreview13(this);" class="form-control" /><br>
                                             <asp:UpdatePanel runat="server" ID="UpdatePanel2" UpdateMode="Always">
                                                 <ContentTemplate>
-                                                    <img id="ImgPreviewAltaDisponibilidad" height="300" width="530" src="../../assets/images/ImagenNoDisponible.JPG" style="border-width: 0px;" runat="server" />
+                                                    <img id="ImgPreviewAltaDisponibilidad" height="300" width="530" src="../../assets/images/vistaPrevia1.jpg"  style="border-width: 0px;" runat="server" />
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
                                         </div>

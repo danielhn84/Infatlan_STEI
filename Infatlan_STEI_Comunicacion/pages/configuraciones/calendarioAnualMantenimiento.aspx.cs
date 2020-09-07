@@ -268,8 +268,14 @@ namespace Infatlan_STEI_Comunicacion.pages.configuraciones
                         }
                     }
 
-                    if (Session["COMUNICACION_CAM_COD_EQUIPO_SUBIDO"].ToString() != "Completo" || Session["COMUNICACION_CAM_FECHA_SUBIDO"].ToString() != "Completo" )
+
+
+
+
+                    if (Session["COMUNICACION_CAM_COD_SUBIDO"].ToString() != "Completo" || Session["COMUNICACION_CAM_FECHA_SUBIDO"].ToString() != "Completo")
+                    {
                         throw new Exception("Los mantenimientos preventivos no se guardaron, se detectaron los siguientes inconvenientes: ");
+                    }               
                     else
                     {
                         if (TipoProceso == "LISTADO_MANTENIMIENTOS")
@@ -347,7 +353,7 @@ namespace Infatlan_STEI_Comunicacion.pages.configuraciones
                     }
                     else
                     {
-                        LbMensajeSuccsess.Text = "Archivo de mantenimientos preventivos cargados con exito." + "<br>" + "<b style='color:green;'>Success:</b> " + vSuccess.ToString() + "&emsp;";
+                        LbMensajeSuccsess.Text = "Archivo mantenimiento preventivo cargado con exito." + "<br>" + "<b style='color:white;'>Registros exitosamente: </b> " + vSuccess.ToString() + "&emsp;";
                         Div1.Visible = true;
                         UpdatePanel1.Update();
                     }
@@ -362,6 +368,8 @@ namespace Infatlan_STEI_Comunicacion.pages.configuraciones
             catch (Exception ex)
             {
                 LbMensaje.Text = ex.Message;
+                DivAlerta.Visible = true;
+                UpdateModal.Update();
             }
         }
     }

@@ -3373,6 +3373,7 @@
     <Content Include="dist\js\perfect-scrollbar.jquery.min.js" />
     <Content Include="dist\js\sidebarmenu.js" />
     <Content Include="dist\js\waves.js" />
+    <Content Include="Global.asax" />
     <Content Include="js\custom.js" />
     <Content Include="js\custom.min.js" />
     <Content Include="js\dashboard1.js" />
@@ -3426,6 +3427,9 @@
     </Compile>
     <Compile Include="default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>

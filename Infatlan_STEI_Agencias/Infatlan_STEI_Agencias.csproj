@@ -6172,6 +6172,7 @@
     <Content Include="dist\js\sidebarmenu.js" />
     <Content Include="dist\js\waves.js" />
     <Content Include="Excel.4.5.dll" />
+    <Content Include="Global.asax" />
     <Content Include="Interop.zkemkeeper.dll" />
     <Content Include="js\bootstrap-notify.js" />
     <Content Include="js\custom.js" />
@@ -6227,6 +6228,9 @@
     </Compile>
     <Compile Include="default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="main.Master.cs">
       <DependentUpon>main.Master</DependentUpon>

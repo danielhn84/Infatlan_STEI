@@ -3360,6 +3360,7 @@
     <Content Include="dist\js\waves.js" />
     <Content Include="email\TemplateMail.html" />
     <Content Include="Excel.4.5.dll" />
+    <Content Include="Global.asax" />
     <Content Include="img\logo.png" />
     <Content Include="pages\devolver\rechazados.aspx" />
     <Content Include="pages\mantenimiento\buscarAprobarVerificacion.aspx" />
@@ -3454,6 +3455,9 @@
     <Compile Include="clases\Security.cs" />
     <Compile Include="clases\SmtpService.cs">
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="pages\devolver\rechazados.aspx.cs">
       <DependentUpon>rechazados.aspx</DependentUpon>

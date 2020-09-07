@@ -77,8 +77,8 @@
 
             <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
-                    <div class="col-md-12" runat="server" id="Div1" visible="false" style="display: flex; background-color: darkgreen; justify-content: center">
-                        <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbMensajeSuccsess"></asp:Label>
+                    <div class="col-md-12" runat="server" id="Div1" visible="false" style="display: flex; background-color: darkgreen; justify-content: center; text-align:center">
+                        <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbMensajeSuccsess" ></asp:Label>
                     </div>
                 </ContentTemplate>
             </asp:UpdatePanel>
