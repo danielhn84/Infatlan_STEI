@@ -20,6 +20,11 @@ namespace Infatlan_STEI_Inventario
 
         }
 
+        protected void Application_PreSendRequestHeaders(object sender, EventArgs e)
+        {
+            HttpContext.Current.Response.Headers.Remove("X-Powered-By");
+        }
+
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
             HttpContext.Current.Response.AddHeader("X-Frame-Options", "SAMEORIGIN");
