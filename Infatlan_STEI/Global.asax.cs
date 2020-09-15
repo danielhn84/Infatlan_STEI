@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Security;
 using System.Web.SessionState;
 
@@ -21,13 +22,15 @@ namespace Infatlan_STEI
         }
         protected void Application_PreSendRequestHeaders(object sender, EventArgs e)
         {
-
+            HttpContext.Current.Request.Headers.Add("X-Content-Type-Options", "nosniff");
             HttpContext.Current.Response.Headers.Remove("X-AspNet-Version");
             HttpContext.Current.Response.Headers.Remove("X-Powered-By");
         }
         protected void Application_BeginRequest(object sender, EventArgs e)
+        
         {
             HttpContext.Current.Response.AddHeader("X-Frame-Options", "SAMEORIGIN");
+            //AntiForgeryConfig.RequireSsl = HttpContext.Current.Request.IsSecureConnection;
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)

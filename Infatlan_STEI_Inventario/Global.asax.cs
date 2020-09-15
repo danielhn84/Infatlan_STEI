@@ -22,6 +22,7 @@ namespace Infatlan_STEI_Inventario
 
         protected void Application_PreSendRequestHeaders(object sender, EventArgs e)
         {
+            HttpContext.Current.Request.Headers.Add("X-Content-Type-Options", "nosniff");
             HttpContext.Current.Response.Headers.Remove("X-AspNet-Version");
             HttpContext.Current.Response.Headers.Remove("X-Powered-By");
         }

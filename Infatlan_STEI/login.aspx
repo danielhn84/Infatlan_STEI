@@ -1,10 +1,9 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="login.aspx.cs" Inherits="Infatlan_STEI.login" %>
-
 <!DOCTYPE html>
-
+       
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Inflatlan | Login</title>
@@ -16,6 +15,8 @@
     <link href="/css/style.min.css" rel="stylesheet">
 </head>
 <body>
+
+
 
     <%--<div class="container-scroller">
         <div class="container-fluid page-body-wrapper full-page-wrapper">
@@ -92,9 +93,13 @@
                         </div>
 
                         <br />
+
+                    
                         <div class="form-group text-center">
                                 <asp:Button ID="BtnLogin" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" runat="server" Text="Entrar" OnClick="BtnLogin_Click" />                              
                         </div>
+
+                    <asp:HiddenField ID="HiddenField1" runat="server" />
 
                         <div class="my-2 d-flex justify-content-center align-center" style="color:indianred;">
                             <asp:Label ID="LbMensaje" runat="server" Text=""></asp:Label>
