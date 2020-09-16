@@ -415,6 +415,7 @@
                             <asp:FileUpload ID="FuImageNoMantEquipoComu" runat="server" Visible="false" onchange="showpreview(this); " class="form-control"   />
                             <img id="ImgPreviewNoMantEquipoComu" height="250" width="382" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="false" />                           
                         </div>
+               
                     </div>
                     <asp:TextBox ID="TxMotivoNoMantEquipoComu" class="form-control" runat="server" TextMode="MultiLine" Rows="5" placeholder="Ingrese motivo por el cual no realizo el mantenimiento al equipo de comunicación..." Visible="false"></asp:TextBox>
                 </ContentTemplate>
@@ -447,7 +448,7 @@
         </div>
     </div>
     <%--(FIN) Targeta Datos Tecnicos --%>
-
+             <img src="../../assets/images/vistaPrevia1.JPG" />
     <%--(INICIO) Targeta Equipo de Comunicacion --%>
     <div class="card">
         <div class="card-body">

@@ -43,6 +43,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AntiCSRF, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AntiCSRF.2.0.0\lib\net46\AntiCSRF.dll</HintPath>
+    </Reference>
     <Reference Include="Excel.4.5">
       <HintPath>..\Infatlan_STEI\bin\Excel.4.5.dll</HintPath>
     </Reference>
@@ -56,8 +59,12 @@
       <HintPath>bin\Interop.zkemkeeper.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.Net.Http, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -67,6 +74,21 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -334,7 +356,6 @@
     <Content Include="assets\icons\font-awesome\css\font-awesome.css" />
     <Content Include="assets\icons\font-awesome\css\font-awesome.min.css" />
     <Content Include="assets\icons\font-awesome\fonts\fontawesome-webfont.svg" />
-    <Content Include="assets\icons\font-awesome\old\.gitignore" />
     <Content Include="assets\icons\font-awesome\old\css\font-awesome.css" />
     <Content Include="assets\icons\font-awesome\old\css\font-awesome.min.css" />
     <Content Include="assets\icons\font-awesome\old\fonts\fontawesome-webfont.svg" />
@@ -470,6 +491,7 @@
     <Content Include="assets\images\users\d4.jpg" />
     <Content Include="assets\images\users\d5.jpg" />
     <Content Include="assets\images\users\profile.png" />
+    <Content Include="assets\images\vistaPrevia1.jpg" />
     <Content Include="assets\node_modules\blockUI\jquery.blockUI.js" />
     <Content Include="assets\node_modules\bootstrap-datepicker\bootstrap-datepicker.min.css" />
     <Content Include="assets\node_modules\bootstrap-datepicker\bootstrap-datepicker.min.js" />
@@ -3396,6 +3418,7 @@
     <Content Include="dist\js\perfect-scrollbar.jquery.min.js" />
     <Content Include="dist\js\sidebarmenu.js" />
     <Content Include="dist\js\waves.js" />
+    <Content Include="Global.asax" />
     <Content Include="Interop.zkemkeeper.dll" />
     <Content Include="js\bootstrap-notify.js" />
     <Content Include="js\custom.js" />
@@ -3445,6 +3468,9 @@
     </Compile>
     <Compile Include="default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="main.Master.cs">
       <DependentUpon>main.Master</DependentUpon>
@@ -3517,166 +3543,9 @@
       <DependentUpon>pendientesReprogramarMantenimiento.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System\Web\Helpers.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="assets\icons\font-awesome\fonts\fontawesome-webfont.eot" />
-    <Content Include="assets\icons\font-awesome\fonts\fontawesome-webfont.ttf" />
-    <Content Include="assets\icons\font-awesome\fonts\fontawesome-webfont.woff" />
-    <Content Include="assets\icons\font-awesome\fonts\fontawesome-webfont.woff2" />
-    <Content Include="assets\icons\font-awesome\fonts\FontAwesome.otf" />
-    <Content Include="assets\icons\font-awesome\less\animated.less" />
-    <Content Include="assets\icons\font-awesome\less\bordered-pulled.less" />
-    <Content Include="assets\icons\font-awesome\less\core.less" />
-    <Content Include="assets\icons\font-awesome\less\fixed-width.less" />
-    <Content Include="assets\icons\font-awesome\less\font-awesome.less" />
-    <Content Include="assets\icons\font-awesome\less\icons.less" />
-    <Content Include="assets\icons\font-awesome\less\larger.less" />
-    <Content Include="assets\icons\font-awesome\less\list.less" />
-    <Content Include="assets\icons\font-awesome\less\mixins.less" />
-    <Content Include="assets\icons\font-awesome\less\path.less" />
-    <Content Include="assets\icons\font-awesome\less\rotated-flipped.less" />
-    <Content Include="assets\icons\font-awesome\less\screen-reader.less" />
-    <Content Include="assets\icons\font-awesome\less\stacked.less" />
-    <Content Include="assets\icons\font-awesome\less\variables.less" />
-    <Content Include="assets\icons\font-awesome\old\.bower.json" />
-    <Content Include="assets\icons\font-awesome\old\.npmignore" />
-    <Content Include="assets\icons\font-awesome\old\bower.json" />
-    <Content Include="assets\icons\font-awesome\old\fonts\fontawesome-webfont-old.ttf" />
-    <Content Include="assets\icons\font-awesome\old\fonts\fontawesome-webfont.eot" />
-    <Content Include="assets\icons\font-awesome\old\fonts\fontawesome-webfont.ttf" />
-    <Content Include="assets\icons\font-awesome\old\fonts\fontawesome-webfont.woff" />
-    <Content Include="assets\icons\font-awesome\old\fonts\fontawesome-webfont.woff2" />
-    <Content Include="assets\icons\font-awesome\old\fonts\FontAwesome.otf" />
-    <Content Include="assets\icons\font-awesome\old\less\animated.less" />
-    <Content Include="assets\icons\font-awesome\old\less\bordered-pulled.less" />
-    <Content Include="assets\icons\font-awesome\old\less\core.less" />
-    <Content Include="assets\icons\font-awesome\old\less\extras.less" />
-    <Content Include="assets\icons\font-awesome\old\less\fixed-width.less" />
-    <Content Include="assets\icons\font-awesome\old\less\font-awesome.less" />
-    <Content Include="assets\icons\font-awesome\old\less\icons.less" />
-    <Content Include="assets\icons\font-awesome\old\less\larger.less" />
-    <Content Include="assets\icons\font-awesome\old\less\list.less" />
-    <Content Include="assets\icons\font-awesome\old\less\mixins.less" />
-    <Content Include="assets\icons\font-awesome\old\less\path.less" />
-    <Content Include="assets\icons\font-awesome\old\less\rotated-flipped.less" />
-    <Content Include="assets\icons\font-awesome\old\less\spinning.less" />
-    <Content Include="assets\icons\font-awesome\old\less\stacked.less" />
-    <Content Include="assets\icons\font-awesome\old\less\variables.less" />
-    <Content Include="assets\icons\font-awesome\old\scss\font-awesome.scss" />
-    <Content Include="assets\icons\font-awesome\old\scss\_animated.scss" />
-    <Content Include="assets\icons\font-awesome\old\scss\_bordered-pulled.scss" />
-    <Content Include="assets\icons\font-awesome\old\scss\_core.scss" />
-    <Content Include="assets\icons\font-awesome\old\scss\_extras.scss" />
-    <Content Include="assets\icons\font-awesome\old\scss\_fixed-width.scss" />
-    <Content Include="assets\icons\font-awesome\old\scss\_icons.scss" />
-    <Content Include="assets\icons\font-awesome\old\scss\_larger.scss" />
-    <Content Include="assets\icons\font-awesome\old\scss\_list.scss" />
-    <Content Include="assets\icons\font-awesome\old\scss\_mixins.scss" />
-    <Content Include="assets\icons\font-awesome\old\scss\_path.scss" />
-    <Content Include="assets\icons\font-awesome\old\scss\_rotated-flipped.scss" />
-    <Content Include="assets\icons\font-awesome\old\scss\_spinning.scss" />
-    <Content Include="assets\icons\font-awesome\old\scss\_stacked.scss" />
-    <Content Include="assets\icons\font-awesome\old\scss\_variables.scss" />
-    <Content Include="assets\icons\font-awesome\scss\font-awesome.scss" />
-    <Content Include="assets\icons\font-awesome\scss\_animated.scss" />
-    <Content Include="assets\icons\font-awesome\scss\_bordered-pulled.scss" />
-    <Content Include="assets\icons\font-awesome\scss\_core.scss" />
-    <Content Include="assets\icons\font-awesome\scss\_fixed-width.scss" />
-    <Content Include="assets\icons\font-awesome\scss\_icons.scss" />
-    <Content Include="assets\icons\font-awesome\scss\_larger.scss" />
-    <Content Include="assets\icons\font-awesome\scss\_list.scss" />
-    <Content Include="assets\icons\font-awesome\scss\_mixins.scss" />
-    <Content Include="assets\icons\font-awesome\scss\_path.scss" />
-    <Content Include="assets\icons\font-awesome\scss\_rotated-flipped.scss" />
-    <Content Include="assets\icons\font-awesome\scss\_screen-reader.scss" />
-    <Content Include="assets\icons\font-awesome\scss\_stacked.scss" />
-    <Content Include="assets\icons\font-awesome\scss\_variables.scss" />
-    <Content Include="assets\icons\material-design-iconic-font\fonts\Material-Design-Iconic-Font.eot" />
-    <Content Include="assets\icons\material-design-iconic-font\fonts\Material-Design-Iconic-Font.ttf" />
-    <Content Include="assets\icons\material-design-iconic-font\fonts\Material-Design-Iconic-Font.woff" />
-    <Content Include="assets\icons\material-design-iconic-font\fonts\Material-Design-Iconic-Font.woff2" />
-    <Content Include="assets\icons\material-design-iconic-font\fonts\materialdesignicons-webfont.eot" />
-    <Content Include="assets\icons\material-design-iconic-font\fonts\materialdesignicons-webfont.ttf" />
-    <Content Include="assets\icons\material-design-iconic-font\fonts\materialdesignicons-webfont.woff" />
-    <Content Include="assets\icons\material-design-iconic-font\fonts\materialdesignicons-webfont.woff2" />
-    <Content Include="assets\icons\simple-line-icons\fonts\Simple-Line-Icons.eot" />
-    <Content Include="assets\icons\simple-line-icons\fonts\Simple-Line-Icons.ttf" />
-    <Content Include="assets\icons\simple-line-icons\fonts\Simple-Line-Icons.woff" />
-    <Content Include="assets\icons\simple-line-icons\fonts\Simple-Line-Icons.woff2" />
-    <Content Include="assets\icons\simple-line-icons\less\simple-line-icons.less" />
-    <Content Include="assets\icons\simple-line-icons\scss\simple-line-icons.scss" />
-    <Content Include="assets\icons\themify-icons\fonts\themify.eot" />
-    <Content Include="assets\icons\themify-icons\fonts\themify.ttf" />
-    <Content Include="assets\icons\themify-icons\fonts\themify.woff" />
-    <Content Include="assets\icons\themify-icons\themify-icons.less" />
-    <Content Include="assets\icons\weather-icons\fonts\weathericons-regular-webfont.eot" />
-    <Content Include="assets\icons\weather-icons\fonts\weathericons-regular-webfont.ttf" />
-    <Content Include="assets\icons\weather-icons\fonts\weathericons-regular-webfont.woff" />
-    <Content Include="assets\icons\weather-icons\fonts\weathericons-regular-webfont.woff2" />
-    <Content Include="assets\icons\weather-icons\less\icon-classes\classes-beaufort.less" />
-    <Content Include="assets\icons\weather-icons\less\icon-classes\classes-day.less" />
-    <Content Include="assets\icons\weather-icons\less\icon-classes\classes-direction.less" />
-    <Content Include="assets\icons\weather-icons\less\icon-classes\classes-misc.less" />
-    <Content Include="assets\icons\weather-icons\less\icon-classes\classes-moon-aliases.less" />
-    <Content Include="assets\icons\weather-icons\less\icon-classes\classes-moon.less" />
-    <Content Include="assets\icons\weather-icons\less\icon-classes\classes-neutral.less" />
-    <Content Include="assets\icons\weather-icons\less\icon-classes\classes-night.less" />
-    <Content Include="assets\icons\weather-icons\less\icon-classes\classes-time.less" />
-    <Content Include="assets\icons\weather-icons\less\icon-classes\classes-wind-aliases.less" />
-    <Content Include="assets\icons\weather-icons\less\icon-classes\classes-wind-degrees.less" />
-    <Content Include="assets\icons\weather-icons\less\icon-classes\classes-wind.less" />
-    <Content Include="assets\icons\weather-icons\less\icon-variables\variables-beaufort.less" />
-    <Content Include="assets\icons\weather-icons\less\icon-variables\variables-day.less" />
-    <Content Include="assets\icons\weather-icons\less\icon-variables\variables-direction.less" />
-    <Content Include="assets\icons\weather-icons\less\icon-variables\variables-misc.less" />
-    <Content Include="assets\icons\weather-icons\less\icon-variables\variables-moon.less" />
-    <Content Include="assets\icons\weather-icons\less\icon-variables\variables-neutral.less" />
-    <Content Include="assets\icons\weather-icons\less\icon-variables\variables-night.less" />
-    <Content Include="assets\icons\weather-icons\less\icon-variables\variables-time.less" />
-    <Content Include="assets\icons\weather-icons\less\icon-variables\variables-wind-names.less" />
-    <Content Include="assets\icons\weather-icons\less\mappings\wi-forecast-io.less" />
-    <Content Include="assets\icons\weather-icons\less\mappings\wi-owm.less" />
-    <Content Include="assets\icons\weather-icons\less\mappings\wi-wmo4680.less" />
-    <Content Include="assets\icons\weather-icons\less\mappings\wi-yahoo.less" />
-    <Content Include="assets\icons\weather-icons\less\weather-icons-classes.less" />
-    <Content Include="assets\icons\weather-icons\less\weather-icons-core.less" />
-    <Content Include="assets\icons\weather-icons\less\weather-icons-variables.less" />
-    <Content Include="assets\icons\weather-icons\less\weather-icons-wind.less" />
-    <Content Include="assets\icons\weather-icons\less\weather-icons-wind.min.less" />
-    <Content Include="assets\icons\weather-icons\less\weather-icons.less" />
-    <Content Include="assets\icons\weather-icons\less\weather-icons.min.less" />
-    <Content Include="assets\icons\weather-icons\sass\icon-classes\classes-beaufort.scss" />
-    <Content Include="assets\icons\weather-icons\sass\icon-classes\classes-day.scss" />
-    <Content Include="assets\icons\weather-icons\sass\icon-classes\classes-direction.scss" />
-    <Content Include="assets\icons\weather-icons\sass\icon-classes\classes-misc.scss" />
-    <Content Include="assets\icons\weather-icons\sass\icon-classes\classes-moon-aliases.scss" />
-    <Content Include="assets\icons\weather-icons\sass\icon-classes\classes-moon.scss" />
-    <Content Include="assets\icons\weather-icons\sass\icon-classes\classes-neutral.scss" />
-    <Content Include="assets\icons\weather-icons\sass\icon-classes\classes-night.scss" />
-    <Content Include="assets\icons\weather-icons\sass\icon-classes\classes-time.scss" />
-    <Content Include="assets\icons\weather-icons\sass\icon-classes\classes-wind-aliases.scss" />
-    <Content Include="assets\icons\weather-icons\sass\icon-classes\classes-wind-degrees.scss" />
-    <Content Include="assets\icons\weather-icons\sass\icon-classes\classes-wind.scss" />
-    <Content Include="assets\icons\weather-icons\sass\icon-variables\variables-beaufort.scss" />
-    <Content Include="assets\icons\weather-icons\sass\icon-variables\variables-day.scss" />
-    <Content Include="assets\icons\weather-icons\sass\icon-variables\variables-direction.scss" />
-    <Content Include="assets\icons\weather-icons\sass\icon-variables\variables-misc.scss" />
-    <Content Include="assets\icons\weather-icons\sass\icon-variables\variables-moon.scss" />
-    <Content Include="assets\icons\weather-icons\sass\icon-variables\variables-neutral.scss" />
-    <Content Include="assets\icons\weather-icons\sass\icon-variables\variables-night.scss" />
-    <Content Include="assets\icons\weather-icons\sass\icon-variables\variables-time.scss" />
-    <Content Include="assets\icons\weather-icons\sass\icon-variables\variables-wind-names.scss" />
-    <Content Include="assets\icons\weather-icons\sass\mappings\wi-forecast-io.scss" />
-    <Content Include="assets\icons\weather-icons\sass\mappings\wi-owm.scss" />
-    <Content Include="assets\icons\weather-icons\sass\mappings\wi-wmo4680.scss" />
-    <Content Include="assets\icons\weather-icons\sass\mappings\wi-yahoo.scss" />
-    <Content Include="assets\icons\weather-icons\sass\weather-icons-classes.scss" />
-    <Content Include="assets\icons\weather-icons\sass\weather-icons-core.scss" />
-    <Content Include="assets\icons\weather-icons\sass\weather-icons-variables.scss" />
-    <Content Include="assets\icons\weather-icons\sass\weather-icons-wind.min.scss" />
-    <Content Include="assets\icons\weather-icons\sass\weather-icons-wind.scss" />
-    <Content Include="assets\icons\weather-icons\sass\weather-icons.min.scss" />
-    <Content Include="assets\icons\weather-icons\sass\weather-icons.scss" />
     <Content Include="assets\images\background\Thumbs.db" />
     <Content Include="assets\images\big\Thumbs.db" />
     <Content Include="assets\node_modules\bootstrap-material-datetimepicker\bower.json" />
@@ -4602,6 +4471,165 @@
     <Content Include="bin\roslyn\vbc.exe.config" />
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
+    <Content Include="assets\icons\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="assets\icons\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="assets\icons\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="assets\icons\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="assets\icons\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="assets\icons\font-awesome\less\animated.less" />
+    <Content Include="assets\icons\font-awesome\less\bordered-pulled.less" />
+    <Content Include="assets\icons\font-awesome\less\core.less" />
+    <Content Include="assets\icons\font-awesome\less\fixed-width.less" />
+    <Content Include="assets\icons\font-awesome\less\font-awesome.less" />
+    <Content Include="assets\icons\font-awesome\less\icons.less" />
+    <Content Include="assets\icons\font-awesome\less\larger.less" />
+    <Content Include="assets\icons\font-awesome\less\list.less" />
+    <Content Include="assets\icons\font-awesome\less\mixins.less" />
+    <Content Include="assets\icons\font-awesome\less\path.less" />
+    <Content Include="assets\icons\font-awesome\less\rotated-flipped.less" />
+    <Content Include="assets\icons\font-awesome\less\screen-reader.less" />
+    <Content Include="assets\icons\font-awesome\less\stacked.less" />
+    <Content Include="assets\icons\font-awesome\less\variables.less" />
+    <Content Include="assets\icons\font-awesome\old\.bower.json" />
+    <Content Include="assets\icons\font-awesome\old\.gitignore" />
+    <Content Include="assets\icons\font-awesome\old\.npmignore" />
+    <Content Include="assets\icons\font-awesome\old\bower.json" />
+    <Content Include="assets\icons\font-awesome\old\fonts\fontawesome-webfont-old.ttf" />
+    <Content Include="assets\icons\font-awesome\old\fonts\fontawesome-webfont.eot" />
+    <Content Include="assets\icons\font-awesome\old\fonts\fontawesome-webfont.ttf" />
+    <Content Include="assets\icons\font-awesome\old\fonts\fontawesome-webfont.woff" />
+    <Content Include="assets\icons\font-awesome\old\fonts\fontawesome-webfont.woff2" />
+    <Content Include="assets\icons\font-awesome\old\fonts\FontAwesome.otf" />
+    <Content Include="assets\icons\font-awesome\old\less\animated.less" />
+    <Content Include="assets\icons\font-awesome\old\less\bordered-pulled.less" />
+    <Content Include="assets\icons\font-awesome\old\less\core.less" />
+    <Content Include="assets\icons\font-awesome\old\less\extras.less" />
+    <Content Include="assets\icons\font-awesome\old\less\fixed-width.less" />
+    <Content Include="assets\icons\font-awesome\old\less\font-awesome.less" />
+    <Content Include="assets\icons\font-awesome\old\less\icons.less" />
+    <Content Include="assets\icons\font-awesome\old\less\larger.less" />
+    <Content Include="assets\icons\font-awesome\old\less\list.less" />
+    <Content Include="assets\icons\font-awesome\old\less\mixins.less" />
+    <Content Include="assets\icons\font-awesome\old\less\path.less" />
+    <Content Include="assets\icons\font-awesome\old\less\rotated-flipped.less" />
+    <Content Include="assets\icons\font-awesome\old\less\spinning.less" />
+    <Content Include="assets\icons\font-awesome\old\less\stacked.less" />
+    <Content Include="assets\icons\font-awesome\old\less\variables.less" />
+    <Content Include="assets\icons\font-awesome\old\scss\font-awesome.scss" />
+    <Content Include="assets\icons\font-awesome\old\scss\_animated.scss" />
+    <Content Include="assets\icons\font-awesome\old\scss\_bordered-pulled.scss" />
+    <Content Include="assets\icons\font-awesome\old\scss\_core.scss" />
+    <Content Include="assets\icons\font-awesome\old\scss\_extras.scss" />
+    <Content Include="assets\icons\font-awesome\old\scss\_fixed-width.scss" />
+    <Content Include="assets\icons\font-awesome\old\scss\_icons.scss" />
+    <Content Include="assets\icons\font-awesome\old\scss\_larger.scss" />
+    <Content Include="assets\icons\font-awesome\old\scss\_list.scss" />
+    <Content Include="assets\icons\font-awesome\old\scss\_mixins.scss" />
+    <Content Include="assets\icons\font-awesome\old\scss\_path.scss" />
+    <Content Include="assets\icons\font-awesome\old\scss\_rotated-flipped.scss" />
+    <Content Include="assets\icons\font-awesome\old\scss\_spinning.scss" />
+    <Content Include="assets\icons\font-awesome\old\scss\_stacked.scss" />
+    <Content Include="assets\icons\font-awesome\old\scss\_variables.scss" />
+    <Content Include="assets\icons\font-awesome\scss\font-awesome.scss" />
+    <Content Include="assets\icons\font-awesome\scss\_animated.scss" />
+    <Content Include="assets\icons\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="assets\icons\font-awesome\scss\_core.scss" />
+    <Content Include="assets\icons\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="assets\icons\font-awesome\scss\_icons.scss" />
+    <Content Include="assets\icons\font-awesome\scss\_larger.scss" />
+    <Content Include="assets\icons\font-awesome\scss\_list.scss" />
+    <Content Include="assets\icons\font-awesome\scss\_mixins.scss" />
+    <Content Include="assets\icons\font-awesome\scss\_path.scss" />
+    <Content Include="assets\icons\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="assets\icons\font-awesome\scss\_screen-reader.scss" />
+    <Content Include="assets\icons\font-awesome\scss\_stacked.scss" />
+    <Content Include="assets\icons\font-awesome\scss\_variables.scss" />
+    <Content Include="assets\icons\material-design-iconic-font\fonts\Material-Design-Iconic-Font.eot" />
+    <Content Include="assets\icons\material-design-iconic-font\fonts\Material-Design-Iconic-Font.ttf" />
+    <Content Include="assets\icons\material-design-iconic-font\fonts\Material-Design-Iconic-Font.woff" />
+    <Content Include="assets\icons\material-design-iconic-font\fonts\Material-Design-Iconic-Font.woff2" />
+    <Content Include="assets\icons\material-design-iconic-font\fonts\materialdesignicons-webfont.eot" />
+    <Content Include="assets\icons\material-design-iconic-font\fonts\materialdesignicons-webfont.ttf" />
+    <Content Include="assets\icons\material-design-iconic-font\fonts\materialdesignicons-webfont.woff" />
+    <Content Include="assets\icons\material-design-iconic-font\fonts\materialdesignicons-webfont.woff2" />
+    <Content Include="assets\icons\simple-line-icons\fonts\Simple-Line-Icons.eot" />
+    <Content Include="assets\icons\simple-line-icons\fonts\Simple-Line-Icons.ttf" />
+    <Content Include="assets\icons\simple-line-icons\fonts\Simple-Line-Icons.woff" />
+    <Content Include="assets\icons\simple-line-icons\fonts\Simple-Line-Icons.woff2" />
+    <Content Include="assets\icons\simple-line-icons\less\simple-line-icons.less" />
+    <Content Include="assets\icons\simple-line-icons\scss\simple-line-icons.scss" />
+    <Content Include="assets\icons\themify-icons\fonts\themify.eot" />
+    <Content Include="assets\icons\themify-icons\fonts\themify.ttf" />
+    <Content Include="assets\icons\themify-icons\fonts\themify.woff" />
+    <Content Include="assets\icons\themify-icons\themify-icons.less" />
+    <Content Include="assets\icons\weather-icons\fonts\weathericons-regular-webfont.eot" />
+    <Content Include="assets\icons\weather-icons\fonts\weathericons-regular-webfont.ttf" />
+    <Content Include="assets\icons\weather-icons\fonts\weathericons-regular-webfont.woff" />
+    <Content Include="assets\icons\weather-icons\fonts\weathericons-regular-webfont.woff2" />
+    <Content Include="assets\icons\weather-icons\less\icon-classes\classes-beaufort.less" />
+    <Content Include="assets\icons\weather-icons\less\icon-classes\classes-day.less" />
+    <Content Include="assets\icons\weather-icons\less\icon-classes\classes-direction.less" />
+    <Content Include="assets\icons\weather-icons\less\icon-classes\classes-misc.less" />
+    <Content Include="assets\icons\weather-icons\less\icon-classes\classes-moon-aliases.less" />
+    <Content Include="assets\icons\weather-icons\less\icon-classes\classes-moon.less" />
+    <Content Include="assets\icons\weather-icons\less\icon-classes\classes-neutral.less" />
+    <Content Include="assets\icons\weather-icons\less\icon-classes\classes-night.less" />
+    <Content Include="assets\icons\weather-icons\less\icon-classes\classes-time.less" />
+    <Content Include="assets\icons\weather-icons\less\icon-classes\classes-wind-aliases.less" />
+    <Content Include="assets\icons\weather-icons\less\icon-classes\classes-wind-degrees.less" />
+    <Content Include="assets\icons\weather-icons\less\icon-classes\classes-wind.less" />
+    <Content Include="assets\icons\weather-icons\less\icon-variables\variables-beaufort.less" />
+    <Content Include="assets\icons\weather-icons\less\icon-variables\variables-day.less" />
+    <Content Include="assets\icons\weather-icons\less\icon-variables\variables-direction.less" />
+    <Content Include="assets\icons\weather-icons\less\icon-variables\variables-misc.less" />
+    <Content Include="assets\icons\weather-icons\less\icon-variables\variables-moon.less" />
+    <Content Include="assets\icons\weather-icons\less\icon-variables\variables-neutral.less" />
+    <Content Include="assets\icons\weather-icons\less\icon-variables\variables-night.less" />
+    <Content Include="assets\icons\weather-icons\less\icon-variables\variables-time.less" />
+    <Content Include="assets\icons\weather-icons\less\icon-variables\variables-wind-names.less" />
+    <Content Include="assets\icons\weather-icons\less\mappings\wi-forecast-io.less" />
+    <Content Include="assets\icons\weather-icons\less\mappings\wi-owm.less" />
+    <Content Include="assets\icons\weather-icons\less\mappings\wi-wmo4680.less" />
+    <Content Include="assets\icons\weather-icons\less\mappings\wi-yahoo.less" />
+    <Content Include="assets\icons\weather-icons\less\weather-icons-classes.less" />
+    <Content Include="assets\icons\weather-icons\less\weather-icons-core.less" />
+    <Content Include="assets\icons\weather-icons\less\weather-icons-variables.less" />
+    <Content Include="assets\icons\weather-icons\less\weather-icons-wind.less" />
+    <Content Include="assets\icons\weather-icons\less\weather-icons-wind.min.less" />
+    <Content Include="assets\icons\weather-icons\less\weather-icons.less" />
+    <Content Include="assets\icons\weather-icons\less\weather-icons.min.less" />
+    <Content Include="assets\icons\weather-icons\sass\icon-classes\classes-beaufort.scss" />
+    <Content Include="assets\icons\weather-icons\sass\icon-classes\classes-day.scss" />
+    <Content Include="assets\icons\weather-icons\sass\icon-classes\classes-direction.scss" />
+    <Content Include="assets\icons\weather-icons\sass\icon-classes\classes-misc.scss" />
+    <Content Include="assets\icons\weather-icons\sass\icon-classes\classes-moon-aliases.scss" />
+    <Content Include="assets\icons\weather-icons\sass\icon-classes\classes-moon.scss" />
+    <Content Include="assets\icons\weather-icons\sass\icon-classes\classes-neutral.scss" />
+    <Content Include="assets\icons\weather-icons\sass\icon-classes\classes-night.scss" />
+    <Content Include="assets\icons\weather-icons\sass\icon-classes\classes-time.scss" />
+    <Content Include="assets\icons\weather-icons\sass\icon-classes\classes-wind-aliases.scss" />
+    <Content Include="assets\icons\weather-icons\sass\icon-classes\classes-wind-degrees.scss" />
+    <Content Include="assets\icons\weather-icons\sass\icon-classes\classes-wind.scss" />
+    <Content Include="assets\icons\weather-icons\sass\icon-variables\variables-beaufort.scss" />
+    <Content Include="assets\icons\weather-icons\sass\icon-variables\variables-day.scss" />
+    <Content Include="assets\icons\weather-icons\sass\icon-variables\variables-direction.scss" />
+    <Content Include="assets\icons\weather-icons\sass\icon-variables\variables-misc.scss" />
+    <Content Include="assets\icons\weather-icons\sass\icon-variables\variables-moon.scss" />
+    <Content Include="assets\icons\weather-icons\sass\icon-variables\variables-neutral.scss" />
+    <Content Include="assets\icons\weather-icons\sass\icon-variables\variables-night.scss" />
+    <Content Include="assets\icons\weather-icons\sass\icon-variables\variables-time.scss" />
+    <Content Include="assets\icons\weather-icons\sass\icon-variables\variables-wind-names.scss" />
+    <Content Include="assets\icons\weather-icons\sass\mappings\wi-forecast-io.scss" />
+    <Content Include="assets\icons\weather-icons\sass\mappings\wi-owm.scss" />
+    <Content Include="assets\icons\weather-icons\sass\mappings\wi-wmo4680.scss" />
+    <Content Include="assets\icons\weather-icons\sass\mappings\wi-yahoo.scss" />
+    <Content Include="assets\icons\weather-icons\sass\weather-icons-classes.scss" />
+    <Content Include="assets\icons\weather-icons\sass\weather-icons-core.scss" />
+    <Content Include="assets\icons\weather-icons\sass\weather-icons-variables.scss" />
+    <Content Include="assets\icons\weather-icons\sass\weather-icons-wind.min.scss" />
+    <Content Include="assets\icons\weather-icons\sass\weather-icons-wind.scss" />
+    <Content Include="assets\icons\weather-icons\sass\weather-icons.min.scss" />
+    <Content Include="assets\icons\weather-icons\sass\weather-icons.scss" />
     <None Include="packages.config" />
     <Content Include="pages\plantilla\PlantillaComunicacion.xlsx" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />

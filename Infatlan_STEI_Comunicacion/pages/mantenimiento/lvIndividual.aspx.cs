@@ -640,13 +640,18 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                     {
                         limpiarEnvioLV();
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "cerrarModal();", true);
-                        Response.Redirect("/pages/mantenimiento/pendientesCompletarLV.aspx?ex=1");
+                     
+
+                        Response.Redirect("/sites/comunicaciones/pages/pendientesCompletarLV.aspx?ex=1");
+
                     }
                     else
                     {
                         limpiarEnvioLV();
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "cerrarModal();", true);
-                        Response.Redirect("/pages/mantenimiento/pendientesCompletarLV.aspx?ex=2");
+                        Response.Redirect("/sites/comunicaciones/pages/pendientesCompletarLV.aspx?ex=2");
+
+                        
                     }
                 }else if(Session["COMUNICACION_ESTADO_BTN_ENVIAR_MODAL"].ToString() == "Aprobar LV")
                 {
@@ -708,13 +713,20 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                     {
                         limpiarAprobarLV();
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "cerrarModal();", true);
-                        Response.Redirect("/pages/mantenimiento/pendientesAprobarLV.aspx?ex=1");
+
+                        Response.Redirect("/sites/comunicaciones/pages/pendientesAprobarLV.aspx?ex=1");
+
+                
                     }
                     else
                     {
                         limpiarAprobarLV();
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "cerrarModal();", true);
-                        Response.Redirect("/pages/mantenimiento/pendientesAprobarLV.aspx?ex=2");
+
+                        Response.Redirect("/sites/comunicaciones/pages/pendientesAprobarLV.aspx?ex=2");
+
+
+                       
                     }
                 }
 
