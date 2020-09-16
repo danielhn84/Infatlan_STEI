@@ -3406,6 +3406,7 @@
     <Content Include="paginas\reportes\cursosEmpleados.aspx" />
     <Content Include="paginas\reportes\metasAprobacion.aspx" />
     <Content Include="paginas\reportes\metasCumplimiento.aspx" />
+    <Content Include="paginas\reportes\metasModificar.aspx" />
     <Content Include="paginas\reportes\metasPendientes.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -3510,6 +3511,13 @@
     </Compile>
     <Compile Include="paginas\reportes\metasCumplimiento.aspx.designer.cs">
       <DependentUpon>metasCumplimiento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="paginas\reportes\metasModificar.aspx.cs">
+      <DependentUpon>metasModificar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paginas\reportes\metasModificar.aspx.designer.cs">
+      <DependentUpon>metasModificar.aspx</DependentUpon>
     </Compile>
     <Compile Include="paginas\reportes\metasPendientes.aspx.cs">
       <DependentUpon>metasPendientes.aspx</DependentUpon>

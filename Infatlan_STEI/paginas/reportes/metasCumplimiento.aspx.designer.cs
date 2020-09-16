@@ -501,13 +501,31 @@ namespace Infatlan_STEI.paginas.reportes
         protected global::System.Web.UI.UpdatePanel UPanelRendimientoGrafic;
 
         /// <summary>
-        /// Control DivGraficos.
+        /// Control DivCerradas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivGraficos;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivCerradas;
+
+        /// <summary>
+        /// Control DivEficiencia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivEficiencia;
+
+        /// <summary>
+        /// Control DivProductividad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivProductividad;
 
         /// <summary>
         /// Control UPanelRendimiento.
@@ -535,6 +553,15 @@ namespace Infatlan_STEI.paginas.reportes
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UPanelEnviar;
+
+        /// <summary>
+        /// Control BtnEActualizar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnEActualizar;
 
         /// <summary>
         /// Control BtnEnviar.
