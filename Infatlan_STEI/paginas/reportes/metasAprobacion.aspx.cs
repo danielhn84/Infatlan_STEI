@@ -18,6 +18,8 @@ namespace Infatlan_STEI.paginas.reportes
     {
         db vConexion = new db();
         Security vSecurity = new Security();
+        GenerarXML vMaestro = new GenerarXML();
+
         protected void Page_Load(object sender, EventArgs e){
             try{
                 if (!Page.IsPostBack){
@@ -36,7 +38,7 @@ namespace Infatlan_STEI.paginas.reportes
             }
         }
 
-        private void cargarDatos(String vId) {
+        public void cargarDatos(String vId) {
             try{
                 String vQuery = "[STEISP_CUMPLIMIENTO_Reportes] 4," + vId;
                 DataSet vDSet = vConexion.obtenerDataSet(vQuery);
