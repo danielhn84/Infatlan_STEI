@@ -30,15 +30,13 @@ namespace Infatlan_STEI
         
         {
             HttpContext.Current.Response.AddHeader("X-Frame-Options", "SAMEORIGIN");
-            //AntiForgeryConfig.RequireSsl = HttpContext.Current.Request.IsSecureConnection;
+            AntiForgeryConfig.RequireSsl = HttpContext.Current.Request.IsSecureConnection;
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
         {
 
         }
-
-
 
         protected void Application_Error(object sender, EventArgs e)
         {
