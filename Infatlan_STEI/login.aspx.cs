@@ -68,13 +68,7 @@ namespace Infatlan_STEI
                         Session["AUTH"] = false;
                         throw new Exception("Usuario o contraseña incorrecta.");
                     }
-
                 }
-               
-
-
-
-
  
             }catch (Exception Ex){
                 LbMensaje.Text = "Usuario o contraseña incorrecta.";
