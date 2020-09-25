@@ -3,6 +3,8 @@ using System.Data;
 using Infatlan_STEI.classes;
 using System.Web.UI;
 using System.Configuration;
+using System.Web.Helpers;
+
 
 
 namespace Infatlan_STEI
@@ -10,6 +12,9 @@ namespace Infatlan_STEI
     public partial class _default : System.Web.UI.Page
     {
         db vConexion = new db();
+
+
+
         protected void Page_Load(object sender, EventArgs e){
             try{
                 string usu = Convert.ToString(Session["USUARIO"]);
