@@ -407,7 +407,7 @@
                                         RowStyle-CssClass="rows"
                                         AutoGenerateColumns="false"
                                         AllowPaging="true"
-                                        GridLines="None" 
+                                        GridLines="None" OnRowDataBound="GvInsatisfacciones_RowDataBound"
                                         PageSize="10" OnPageIndexChanging="GvInsatisfacciones_PageIndexChanging">
                                         <Columns>
                                             <asp:BoundField DataField="orden" HeaderText="Orden" ItemStyle-Width="50" />
@@ -507,7 +507,7 @@
                                         RowStyle-CssClass="rows"
                                         AutoGenerateColumns="false"
                                         AllowPaging="true"
-                                        GridLines="None"
+                                        GridLines="None" OnRowDataBound="GvRendimiento_RowDataBound"
                                         PageSize="10" OnPageIndexChanging="GvRendimiento_PageIndexChanging">
                                         <Columns>
                                             <asp:BoundField DataField="idUsuario" Visible="false" />
@@ -553,7 +553,12 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="ModalLabelConfirmar">
-                        <b><asp:Label runat="server" ID="LbTitulo" Text="Seguro que desea enviar el formulario?" CssClass="col-form-label"></asp:Label></b>
+                        <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                            <ContentTemplate>
+                                <b><asp:Label runat="server" ID="LbTitulo" Text="Seguro que desea enviar el formulario?" CssClass="col-form-label"></asp:Label></b>
+                                <asp:Label Visible="true" runat="server" ID="LbIDReporte" Text="" CssClass="col-form-label"></asp:Label>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
                     </h4>
                 </div>
                 <div class="modal-footer">
