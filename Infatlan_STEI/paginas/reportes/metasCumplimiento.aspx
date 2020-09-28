@@ -498,7 +498,7 @@
                     
                     <div class="row col-12 m-t-20">
                         <div class="table-responsive">
-                            <asp:UpdatePanel runat="server" ID="UPanelRendimiento">
+                            <asp:UpdatePanel runat="server" ID="UPanelRendimiento" UpdateMode="Conditional">
                                 <ContentTemplate>
                                     <asp:GridView ID="GvRendimiento" runat="server"
                                         CssClass="table table-bordered"

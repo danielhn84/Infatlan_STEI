@@ -346,7 +346,7 @@ namespace Infatlan_STEI.paginas.reportes
                     graficos(vData);
                 }
                 UPCalls.Update();
-                //UPanelRendimiento.Update();
+                UPanelRendimiento.Update();
             }catch (Exception ex){
                 //Mensaje(ex.Message, WarningType.Danger);
                 ScriptManager.RegisterClientScriptBlock(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + ex.Message + "','" + WarningType.Danger.ToString().ToLower() + "')", true);
@@ -781,6 +781,9 @@ namespace Infatlan_STEI.paginas.reportes
                 int vCantRup = 0, vNoRup = 0, vTotalRup = 0;
                 if (vRes.Rows.Count > 0){
                     for (int j = 0; j < vRes.Rows.Count; j++){
+                        vRes.Rows[j]["Atencion"] = vRes.Rows[j]["Atencion"].ToString() == "" ? 0 : vRes.Rows[j]["Atencion"];
+                        vRes.Rows[j]["Asignacion"] = vRes.Rows[j]["Asignacion"].ToString() == "" ? 0 : vRes.Rows[j]["Asignacion"];
+
                         Decimal vAtencion = Convert.ToDecimal(vRes.Rows[j]["Atencion"].ToString());
                         Decimal vAsignacion = Convert.ToDecimal(vRes.Rows[j]["Asignacion"].ToString());
                         Decimal vNuevoAtencion = 0;
@@ -799,6 +802,8 @@ namespace Infatlan_STEI.paginas.reportes
                 vRes = vConexion.obtenerDataTableSA(vQuery2);
                 if (vRes.Rows.Count > 0){
                     for (int j = 0; j < vRes.Rows.Count; j++){
+                        vRes.Rows[j]["Atencion"] = vRes.Rows[j]["Atencion"].ToString() == "" ? 0 : vRes.Rows[j]["Atencion"];
+                        vRes.Rows[j]["Asignacion"] = vRes.Rows[j]["Asignacion"].ToString() == "" ? 0 : vRes.Rows[j]["Asignacion"];
                         Decimal vAtencion = Convert.ToDecimal(vRes.Rows[j]["Atencion"].ToString());
                         Decimal vAsignacion = Convert.ToDecimal(vRes.Rows[j]["Asignacion"].ToString());
                         Decimal vNuevoAtencion = 0;
@@ -817,6 +822,8 @@ namespace Infatlan_STEI.paginas.reportes
                 vRes = vConexion.obtenerDataTableSA(vQuery2);
                 if (vRes.Rows.Count > 0){
                     for (int j = 0; j < vRes.Rows.Count; j++){
+                        vRes.Rows[j]["Atencion"] = vRes.Rows[j]["Atencion"].ToString() == "" ? 0 : vRes.Rows[j]["Atencion"];
+                        vRes.Rows[j]["Asignacion"] = vRes.Rows[j]["Asignacion"].ToString() == "" ? 0 : vRes.Rows[j]["Asignacion"];
                         Decimal vAtencion = Convert.ToDecimal(vRes.Rows[j]["Atencion"].ToString());
                         Decimal vAsignacion = Convert.ToDecimal(vRes.Rows[j]["Asignacion"].ToString());
                         Decimal vNuevoAtencion = 0;
@@ -835,6 +842,8 @@ namespace Infatlan_STEI.paginas.reportes
                 vRes = vConexion.obtenerDataTableSA(vQuery2);
                 if (vRes.Rows.Count > 0){
                     for (int j = 0; j < vRes.Rows.Count; j++){
+                        vRes.Rows[j]["Atencion"] = vRes.Rows[j]["Atencion"].ToString() == "" ? 0 : vRes.Rows[j]["Atencion"];
+                        vRes.Rows[j]["Asignacion"] = vRes.Rows[j]["Asignacion"].ToString() == "" ? 0 : vRes.Rows[j]["Asignacion"];
                         Decimal vAtencion = Convert.ToDecimal(vRes.Rows[j]["Atencion"].ToString());
                         Decimal vAsignacion = Convert.ToDecimal(vRes.Rows[j]["Asignacion"].ToString());
                         Decimal vNuevoAtencion = 0;
@@ -1810,15 +1819,23 @@ namespace Infatlan_STEI.paginas.reportes
                 int vTotTR = 0, vTotTT = 0, vTotRup = 0, vTotNoRup = 0, vSolTareas = 0, vSolRupturas = 0;
                 int vHorasEmpleados = vData.Rows.Count * 360;
                 for (int i = 0; i < vData.Rows.Count; i++){
+                    vData.Rows[i]["conocimientoProm"] = vData.Rows[i]["conocimientoProm"].ToString() == "" ? 0 : vData.Rows[i]["conocimientoProm"];
+                    
                     //SOLICITUDES
+                    vData.Rows[i]["rupturas"] = vData.Rows[i]["rupturas"].ToString() == "" ? 0 : vData.Rows[i]["rupturas"];
+                    vData.Rows[i]["tareas"] = vData.Rows[i]["tareas"].ToString() == "" ? 0 : vData.Rows[i]["tareas"];
                     vSolTareas += Convert.ToInt32(vData.Rows[i]["tareas"].ToString());
                     vSolRupturas += Convert.ToInt32(vData.Rows[i]["rupturas"].ToString());
 
                     // EFICIENCIA
+                    vData.Rows[i]["eficienciaRup"] = vData.Rows[i]["eficienciaRup"].ToString() == "" ? 0 : vData.Rows[i]["eficienciaRup"];
+                    vData.Rows[i]["eficienciaNoRup"] = vData.Rows[i]["eficienciaNoRup"].ToString() == "" ? 0 : vData.Rows[i]["eficienciaNoRup"];
                     vTotRup += Convert.ToInt32(vData.Rows[i]["eficienciaRup"].ToString());
                     vTotNoRup += Convert.ToInt32(vData.Rows[i]["eficienciaNoRup"].ToString());
                         
                     // PRODUCTIVIDAD
+                    vData.Rows[i]["tiempoReal"] = vData.Rows[i]["tiempoReal"].ToString() == "" ? 0 : vData.Rows[i]["tiempoReal"];
+                    vData.Rows[i]["tiempoTransporte"] = vData.Rows[i]["tiempoTransporte"].ToString() == "" ? 0 : vData.Rows[i]["tiempoTransporte"];
                     vTotTR += Convert.ToInt32(vData.Rows[i]["tiempoReal"].ToString());
                     vTotTT += Convert.ToInt32(vData.Rows[i]["tiempoTransporte"].ToString());
                 }
