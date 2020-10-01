@@ -98,8 +98,8 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             if (TxDireccion.Text == "" || TxDireccion.Text == string.Empty)
                 throw new Exception("Falta ingresar la dirección de la agencia.");
 
-            if (TxTelefono.Text == "" || TxTelefono.Text == string.Empty)
-                throw new Exception("Falta ingresar telefonos de la agencia.");
+            //if (TxTelefono.Text == "" || TxTelefono.Text == string.Empty)
+            //    throw new Exception("Falta ingresar telefonos de la agencia.");
 
             if (TxLatitud.Text == "" || TxLatitud.Text == string.Empty)
                 throw new Exception("Falta ingresar latitud de la agencia.");
@@ -354,8 +354,8 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             if (TxDireccionModificar.Text == "" || TxDireccionModificar.Text == string.Empty)
                 throw new Exception("Falta ingresar la dirección de la agencia.");
 
-            if (TxTelefonoModificar.Text == "" || TxTelefonoModificar.Text == string.Empty)
-                throw new Exception("Falta ingresar telefonos de la agencia.");
+            //if (TxTelefonoModificar.Text == "" || TxTelefonoModificar.Text == string.Empty)
+            //    throw new Exception("Falta ingresar telefonos de la agencia.");
 
             if (TxLatitudModificar.Text == "" || TxLatitudModificar.Text == string.Empty)
                 throw new Exception("Falta ingresar latitud de la agencia.");

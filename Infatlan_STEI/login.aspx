@@ -5,6 +5,8 @@
 <head runat="server">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
     <title>Inflatlan | Login</title>
     <link rel="stylesheet" href="/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="/vendors/base/vendor.bundle.base.css">
@@ -14,7 +16,10 @@
     <link href="/css/style.min.css" rel="stylesheet">
 </head>
 <body>
-
+    <div id="MyDiv" runat="server" ></div>
+<%--    <%= System.Web.Helpers.AntiForgery.GetHtml() %>
+    @ Html.AntiForgeryToken ()--%>
+ 
     <%--<div class="container-scroller">
         <div class="container-fluid page-body-wrapper full-page-wrapper">
             <div class="content-wrapper d-flex align-items-stretch auth auth-img-bg">
@@ -91,7 +96,6 @@
 
                         <br />
 
-                    
                         <div class="form-group text-center">
                                 <asp:Button ID="BtnLogin" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" runat="server" Text="Entrar" OnClick="BtnLogin_Click" />                              
                         </div>

@@ -18,7 +18,11 @@ namespace Infatlan_STEI
 
         protected void Session_Start(object sender, EventArgs e)
         {
-
+            // Secure Session cookie
+            if (Request.IsSecureConnection)
+            {
+                Response.Cookies["ASP.NET_SessionId"].Secure = true;
+            }
         }
         protected void Application_PreSendRequestHeaders(object sender, EventArgs e)
         {
@@ -30,7 +34,7 @@ namespace Infatlan_STEI
         
         {
             HttpContext.Current.Response.AddHeader("X-Frame-Options", "SAMEORIGIN");
-            AntiForgeryConfig.RequireSsl = HttpContext.Current.Request.IsSecureConnection;
+          
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
@@ -52,5 +56,7 @@ namespace Infatlan_STEI
         {
 
         }
+
+       
     }
 }

@@ -13,8 +13,6 @@ namespace Infatlan_STEI
     {
         db vConexion = new db();
 
-
-
         protected void Page_Load(object sender, EventArgs e){
             try{
                 string usu = Convert.ToString(Session["USUARIO"]);
