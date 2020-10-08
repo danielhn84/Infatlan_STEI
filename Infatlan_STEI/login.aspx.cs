@@ -10,17 +10,37 @@ namespace Infatlan_STEI
     public partial class login : System.Web.UI.Page
     {
         db vConexion = new db();
-       
-        protected void Page_Load(object sender, EventArgs e){
-            try{
 
-            }catch (Exception ex){
+        protected void Page_Init(object sender, EventArgs e)
+        {
+            try
+            {
+                MyDiv.InnerHtml = AntiForgery.GetHtml().ToString();
+            }
+            catch (Exception ex)
+            {
                 throw new Exception(ex.Message);
             }
         }
 
+        protected void Page_Load(object sender, EventArgs e){
+            try{
+               
+                //if (IsPostBack)
+
+
+                //   AntiForgery.Validate();
+
+            }
+            catch (Exception ex){
+                throw new Exception(ex.Message);
+            }
+        }
         protected void BtnLogin_Click(object sender, EventArgs e){
             try{
+                //System.Web.Helpers.AntiForgery.Validate();
+    
+
                 generales vGenerales = new generales();
                 LdapService vLdap = new LdapService();
                 //Boolean vLogin = vLdap.ValidateCredentials("ADBancat.hn", TxUsername.Text, TxPassword.Text);
