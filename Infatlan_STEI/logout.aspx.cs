@@ -9,13 +9,9 @@ namespace Infatlan_STEI
         db vConexion = new db();
         protected void Page_Load(object sender, EventArgs e){
             try{
-                String vUser = Session["USUARIO"].ToString();
-                String vQuery = "[STEISP_Login] 2,'" + vUser + "'";
-                int vInfo = vConexion.ejecutarSql(vQuery);
+                //vConexion.ejecutarSql("[STEISP_Login] 2,'" + Session["USUARIO"].ToString() + "'");
                 Session.RemoveAll();
-                if (vInfo == 1){
-                    Response.Redirect("/login.aspx");
-                }
+                Response.Redirect("/login.aspx");
             }catch (Exception ex){
 
             }

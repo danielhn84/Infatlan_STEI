@@ -413,7 +413,7 @@
                                             <asp:BoundField DataField="orden" HeaderText="Orden" ItemStyle-Width="50" />
                                             <asp:BoundField DataField="calificacion" HeaderText="Calificacion" ItemStyle-Width="10" />
                                             <asp:BoundField DataField="responsable" HeaderText="Responsable" ItemStyle-Width="100" />
-                                            <asp:BoundField DataField="comentario" HeaderText="Comentario" ItemStyle-Width="100" />
+                                            <asp:BoundField DataField="comentario" HeaderText="Comentario" ItemStyle-Width="300" />
                                             <asp:TemplateField>
                                                 <HeaderTemplate>Observaciones</HeaderTemplate>
                                                 <ItemTemplate>
@@ -485,7 +485,7 @@
                                             <label style="font-size:smaller">Transporte</label>
                                             <br />
                                             <span class="label label-danger"></span>
-                                            <label style="font-size:smaller">No Procesadas</label>
+                                            <label style="font-size:smaller">No Productivo</label>
                                         </div>
                                         <div class="col-6">
                                             <div id="sparkline3" class="text-center"></div>
