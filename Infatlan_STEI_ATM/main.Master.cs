@@ -22,7 +22,7 @@ namespace Infatlan_STEI
                     if (!vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Consulta)
                         Response.Redirect("/default.aspx");
                     if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Creacion){
-                        LIAgregar.Visible = true;
+                        //LIAgregar.Visible = true;
                         LIModCrear.Visible = true;
                         LIVerCrear.Visible = true;
                         LIMatSolicitar.Visible = true;
@@ -77,5 +77,7 @@ namespace Infatlan_STEI
                 String vError = ex.Message;
             }
         }
+
+      
     }
 }

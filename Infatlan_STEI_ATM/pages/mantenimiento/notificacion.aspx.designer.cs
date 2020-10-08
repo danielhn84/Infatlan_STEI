@@ -339,6 +339,24 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         protected global::System.Web.UI.WebControls.Button btnCancelarAprobNotif;
 
         /// <summary>
+        /// Control btnPrueba.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPrueba;
+
+        /// <summary>
+        /// Control LBPrueba.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LBPrueba;
+
+        /// <summary>
         /// Control UpdatePanel1.
         /// </summary>
         /// <remarks>
@@ -420,15 +438,6 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         protected global::System.Web.UI.UpdatePanel UpdatePanel4;
 
         /// <summary>
-        /// Control btnModalEnviarNotificacion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnModalEnviarNotificacion;
-
-        /// <summary>
         /// Control btnModalCerrarNotificacion.
         /// </summary>
         /// <remarks>
@@ -436,6 +445,15 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnModalCerrarNotificacion;
+
+        /// <summary>
+        /// Control btnModalEnviarNotificacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnModalEnviarNotificacion;
 
         /// <summary>
         /// Control UpdatePanel3.
@@ -537,15 +555,6 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         protected global::System.Web.UI.UpdatePanel UpdatePanel5;
 
         /// <summary>
-        /// Control btnReprogramarNotif.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnReprogramarNotif;
-
-        /// <summary>
         /// Control btnCerrarReprogramarNotif.
         /// </summary>
         /// <remarks>
@@ -553,5 +562,14 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCerrarReprogramarNotif;
+
+        /// <summary>
+        /// Control btnReprogramarNotif.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnReprogramarNotif;
     }
 }

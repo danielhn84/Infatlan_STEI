@@ -14,6 +14,8 @@
         function openModal2() { $('#modalRechazar').modal('show'); }
         function closeModal() { $('#modalVerifATM').modal('hide'); }
         function closeModal2() { $('#modalRechazar').modal('hide'); }
+        function openModal3() { $('#modalMaterial').modal('show'); }
+        function closeModal3() { $('#modalMaterial').modal('hide'); }
     </script>
 
     <script src="http://code.jquery.com/jquery-1.10.2.min.js" type="text/javascript"></script>
@@ -253,6 +255,24 @@
             }
         }
         //IMAGEN13
+        //IMAGEN14
+        function img14(input) {
+
+            if (input.files && input.files[0]) {
+                //PRIMERA IMAGEN
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    //$('#imgTeclado').css('visibility', 'visible');
+                    //$('#imgTeclado').attr('src', e.target.result);
+                    var ruta14 = e.target.result;
+                    document.getElementById('<%=imgMapaATM.ClientID%>').src = ruta14;
+                    document.getElementById('<%=HFMapa.ClientID%>').value = 'si';
+                }
+                reader.readAsDataURL(input.files[0]);
+                //PRIMERA IMAGEN              
+            }
+        }
+        //IMAGEN14
 
     </script>
 </asp:Content>
@@ -291,7 +311,7 @@
             <div class="row col-12">
                 <div class="col-12 grid-margin stretch-card">
                     <h5 class="card-subtitle m-t-10"><i class="fa fa-book"></i><b> DATOS GENERALES</b></h5>
-
+                    <hr />
                     <!--SEGUNDA FILA-->
                     <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
                         <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
@@ -377,7 +397,7 @@
                     </div>
 
                     <h5 class="card-subtitle m-t-30"><i class="fa fa-user"></i><b> TECNICO RESPONSABLE</b></h5>
-
+                    <hr />
                     <!--PRIMERA FILA-->
                     <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
                         <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
@@ -392,7 +412,7 @@
                     </div>
 
                     <h5 class="card-subtitle m-t-30"><i class="fa fa-wrench"></i><b> PROCESO DE MANTENIMIENTO</b></h5>
-
+                    <hr />
                     <div class="row col-12" runat="server" id="DIVPreguntas">
                         <div class="row col-6 align-self-center" style="margin-left: auto; margin-right: auto">
                             <asp:CheckBoxList ID="ckpasos1" runat="server" CssClass="check green col-12" data-checkbox="icheckbox_flat-green">
@@ -462,7 +482,7 @@
                     </div>
 
                     <h5 class="card-subtitle m-t-20"><i class="fa fa-check-square"></i><b> DATOS DE ATM</b></h5>
-
+                    <hr />
                     <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
                             <!--PRIMERA FILA DESHABILITADA-->
@@ -540,11 +560,11 @@
                             <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
                                 <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                                     <label class="col-form-label">Latitud ATM</label>
-                                    <asp:TextBox runat="server" ID="txtlatitudATM" Enabled="false" CssClass="form-control"></asp:TextBox>
+                                    <asp:TextBox runat="server" ID="txtlatitudATM" CssClass="form-control"></asp:TextBox>
                                 </div>
                                 <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                                     <label class="col-form-label">Longitud ATM</label>
-                                    <asp:TextBox runat="server" ID="txtlongitudATM" Enabled="false" CssClass="form-control"></asp:TextBox>
+                                    <asp:TextBox runat="server" ID="txtlongitudATM" CssClass="form-control"></asp:TextBox>
                                 </div>
                                 <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                                 </div>
@@ -571,69 +591,47 @@
 
                     <%--MATERIALES--%>
                     <br />
-                     <asp:UpdatePanel runat="server" ID="UPMateriales" visible="false">
-                                <ContentTemplate>
-                                    <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto" >
-                                        <table class="tablesaw table-bordered table-hover table no-wrap" data-tablesaw-mode="swipe"
-                                            data-tablesaw-sortable data-tablesaw-sortable-switch data-tablesaw-minimap
-                                            data-tablesaw-mode-switch>
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col" style="background-color: #5D6D7E; color: #D5DBDB;" data-tablesaw-sortable-col data-tablesaw-priority="persist" class="border">Artículo</th>
-                                                    <th scope="col" style="background-color: #5D6D7E; color: #D5DBDB;" data-tablesaw-sortable-col data-tablesaw-priority="2" class="border">Cantidad</th>
-                                                    <th scope="col" style="background-color: #5D6D7E; color: #D5DBDB;" data-tablesaw-sortable-col data-tablesaw-priority="2" class="border">Aceptar</th>
+                     <h5 runat="server" visible="false" class="card-subtitle m-t-30"><i class="fa fa-tasks"></i><b> MATERIALES</b></h5>
+                    <hr />
+                    <asp:UpdatePanel runat="server" Visible="false">
+                        <ContentTemplate>
+                            <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                                <div class="table-responsive">
+                                    <!--<table id="bootstrap-data-table" class="table table-striped table-bordered"> -->
+                                    <asp:GridView ID="GVNewMateriales" runat="server"
+                                        CssClass="table table-bordered"
+                                        PagerStyle-CssClass="pgr"
+                                        HeaderStyle-CssClass="table"
+                                        RowStyle-CssClass="rows"
+                                        AutoGenerateColumns="false"
+                                        AllowPaging="true"
+                                        GridLines="None"
+                                        HeaderStyle-HorizontalAlign="center"
+                                        PageSize="10" OnRowCommand="GVNewMateriales_RowCommand"
+                                        Style="margin: 30px 0px 20px 0px">
+                                        <Columns>
+                                            <asp:BoundField DataField="idMantenimiento" HeaderText="Código" Visible="false" ItemStyle-HorizontalAlign="center" />
+                                            <asp:BoundField DataField="idStock" HeaderText="Stock" Visible="false" ItemStyle-HorizontalAlign="center" />
+                                            <asp:BoundField DataField="nombre" HeaderText="Material" ItemStyle-HorizontalAlign="center" />
+                                            <asp:BoundField DataField="cantidad" HeaderText="Solicitado" ItemStyle-HorizontalAlign="center" />
+                                            <asp:BoundField DataField="devolver" HeaderText="Utilizado" ItemStyle-HorizontalAlign="center" />
+                                            <%-- <asp:BoundField DataField="IDUbi" HeaderText="Ubi" Visible="true" ItemStyle-HorizontalAlign="center" />--%>
+                                            <asp:TemplateField HeaderStyle-Width="60px" ItemStyle-HorizontalAlign="center">
+                                                <ItemTemplate>
+                                                    <asp:LinkButton ID="Btnseleccionar" Enabled="true" runat="server" Text="" class="btn btn-info mr-2" CommandArgument='<%# Eval("idStock") %>' CommandName="ver"><i class="ti-check-box"></i></asp:LinkButton>
+                                                </ItemTemplate>
 
-
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                                <tr>
-                                                    <td><asp:DropDownList ID="DDLStock" runat="server" AutoPostBack="true" CssClass="form-control"></asp:DropDownList></td>                                                 
-                                                    <td><asp:TextBox ID="txtcantidad" runat="server" CssClass="form-control" TextMode="Number" AutoPostBack="true"></asp:TextBox></td>
-                                                    <td><asp:LinkButton runat="server" ID="btnVerifATM"  Text="" CssClass="btn btn-success  ti-check-box mr-2"></asp:LinkButton></td>
-                                                </tr>
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                    <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
-                                        <div class="table-responsive">
-                                            <!--<table id="bootstrap-data-table" class="table table-striped table-bordered"> -->
-                                            <asp:GridView ID="GVDevolverMateriales" runat="server"
-                                                CssClass="table table-bordered"
-                                                PagerStyle-CssClass="pgr"
-                                                HeaderStyle-CssClass="table"
-                                                RowStyle-CssClass="rows"
-                                                AutoGenerateColumns="false"
-                                                AllowPaging="true"
-                                                GridLines="None"
-                                                HeaderStyle-HorizontalAlign="center"
-                                                PageSize="10" 
-                                                Style="margin: 30px 0px 20px 0px">
-                                                <Columns>
-                                                    <asp:BoundField DataField="IDStock" HeaderText="Stock" Visible="false" ItemStyle-HorizontalAlign="center" />
-                                                    <asp:BoundField DataField="Mantenimiento" HeaderText="Material" ItemStyle-HorizontalAlign="center" />
-                                                    <asp:BoundField DataField="Cantidad" HeaderText="Marca" ItemStyle-HorizontalAlign="center" />
-                                                    <asp:BoundField DataField="Devolver" HeaderText="Cantidad" ItemStyle-HorizontalAlign="center" />
-                                                    <%-- <asp:BoundField DataField="IDUbi" HeaderText="Ubi" Visible="true" ItemStyle-HorizontalAlign="center" />--%>
-                                                    <asp:TemplateField HeaderStyle-Width="60px" ItemStyle-HorizontalAlign="center">
-                                                        <ItemTemplate>
-                                                            <asp:LinkButton ID="Btnseleccionar" Enabled="true" runat="server" Text="" class="btn btn-danger mr-2" CommandArgument='<%# Eval("IDStock") %>' CommandName="Ver"><i class="fa-sign-in"></i></asp:LinkButton>
-                                                        </ItemTemplate>
-
-                                                    </asp:TemplateField>
-                                                </Columns>
-                                            </asp:GridView>
-                                        </div>
-                                    </div>
-                                </ContentTemplate>
-                            </asp:UpdatePanel>
+                                            </asp:TemplateField>
+                                        </Columns>
+                                    </asp:GridView>
+                                </div>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                     <%--MATERIALES--%>
 
                     <h5 class="card-subtitle m-t-30"><i class="fa fa-image"></i><b> COMPROBACION</b></h5>
-
+                    <hr />
                     <div class="card-body">
                         <h5 class="card-subtitle">Subir imagenes de lo solicitado de mantenimiento</h5>
                         <h6 class="card-subtitle" style="color: red;">Campos con * son obligatorios</h6>
@@ -654,7 +652,7 @@
                             <tbody>
 
                                 <tr>
-                                    <td class="title"><a class="link" href="javascript:void(0)">*Disco duro</a></td>
+                                    <td class="title"><a class="link" href="javascript:void(0)">*Serie del Disco duro</a></td>
                                     <td>
                                         <asp:FileUpload ID="FUDiscoDuro" runat="server" onchange="img1(this);" /></td>
                                     <%--<td runat="server" id="td1img1" style="display:none"><img id="imgDiscoDuro" runat="server" height="150" width="150" src="" style="border-width: 0px;" /></td>--%>
@@ -718,7 +716,7 @@
                                         <img id="imgDispDesarmado" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                                 </tr>
                                 <tr>
-                                    <td class="title"><a class="link" href="javascript:void(0)">*Teclado</a></td>
+                                    <td class="title"><a class="link" href="javascript:void(0)">*Foto de Teclado EPP</a></td>
                                     <td>
                                         <asp:FileUpload ID="FUTeclado" runat="server" onchange="img10(this);" /></td>
                                     <td>
@@ -767,6 +765,13 @@
                                     <td>
                                         <img id="imgATMLinea" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                                 </tr>
+                                 <tr>
+                                    <td class="title" colspan="3"><a class="link" href="javascript:void(0)">Ubicación del ATM(Mapa)</a><%--</td>--%>
+                                   <%-- <td>--%>
+                                        <asp:FileUpload ID="FUmapaATM" runat="server" onchange="img14(this);" /><br /><br /><%--</td>--%>
+                                   <%-- <td>--%>
+                                        <img id="imgMapaATM" runat="server" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px; height: auto; width: 100%" /></td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -808,6 +813,7 @@
             <asp:HiddenField ID="HFATMLinea" runat="server" />
             <asp:HiddenField ID="HFEnergia" runat="server" />
             <asp:HiddenField ID="HFClima" runat="server" />
+            <asp:HiddenField ID="HFMapa" runat="server" />
         </ContentTemplate>
     </asp:UpdatePanel>
 
@@ -815,7 +821,7 @@
     <div class="modal fade bs-example-modal-lg" id="modalVerifATM" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <div class="modal-header" style="background-color: darkslategrey; color: white;">
+                <div class="modal-header">
                     <h4 class="modal-title" id="myLargeModalLabel">¿Seguro que guardará lista de verificación?</h4>
                 </div>
                 <asp:UpdatePanel ID="UpdatePanel3" runat="server">
@@ -846,12 +852,9 @@
                 <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                     <ContentTemplate>
                         <div class="modal-footer col-12">
-                            <div class="row col-3">
-                                <asp:Button runat="server" ID="btnModalVerif" UseSubmitBehavior="false" OnClick="btnModalVerif_Click" CssClass="btn btn-dark mr-3" Text="Enviar" />
-                            </div>
-                            <div class="row col-3">
-                                <asp:Button runat="server" ID="btnModalCerrarVerif" OnClick="btnModalCerrarVerif_Click" CssClass="btn btn-secundary mr-3" Text="Cancelar" />
-                            </div>
+                            <asp:Button runat="server" ID="btnModalCerrarVerif" OnClick="btnModalCerrarVerif_Click" CssClass="btn btn-secundary mr-3" Text="Cancelar" />
+                                <asp:Button runat="server" ID="btnModalVerif" UseSubmitBehavior="false" OnClick="btnModalVerif_Click" CssClass="btn btn-success mr-3" Text="Enviar" />
+                 
                         </div>
                     </ContentTemplate>
                     <Triggers>
@@ -869,7 +872,7 @@
     <div class="modal fade bs-example-modal-lg" id="modalRechazar" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <div class="modal-header" style="background-color: darkslategrey; color: white;">
+                <div class="modal-header">
                     <h4 class="modal-title" id="myLargeModalLabel1">¿Seguro que devolverá lista de verificación?</h4>
                 </div>
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -911,17 +914,50 @@
                 <asp:UpdatePanel ID="UpdatePanel5" runat="server">
                     <ContentTemplate>
                         <div class="modal-footer col-12">
-                            <div class="row col-3">
-                                <asp:Button runat="server" ID="btnRechazarModal" OnClick="btnRechazarModal_Click" CssClass="btn btn-dark mr-3" Text="Devolver" />
-                            </div>
-                            <div class="row col-3">
-                                <asp:Button runat="server" ID="btnCerrarRechazoModal" OnClick="btnCerrarRechazoModal_Click" CssClass="btn btn-secundary mr-3" Text="Cancelar" />
-                            </div>
+                            <asp:Button runat="server" ID="btnCerrarRechazoModal" OnClick="btnCerrarRechazoModal_Click" CssClass="btn btn-secundary mr-3" Text="Cancelar" />
+                                <asp:Button runat="server" ID="btnRechazarModal" OnClick="btnRechazarModal_Click" CssClass="btn btn-success mr-3" Text="Devolver" />
+                            
                         </div>
                     </ContentTemplate>
                     <Triggers>
                         <asp:PostBackTrigger ControlID="btnModalVerif" />
                     </Triggers>
+                </asp:UpdatePanel>
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!--/.modal-dialog -->
+    </div>
+
+    <!--MODAL MATERIALES -->
+    <div class="modal fade bs-example-modal-lg" id="modalMaterial" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <asp:UpdatePanel runat="server">
+                    <ContentTemplate>
+                        <div class="modal-header">
+                            <h4 class="modal-title" runat="server" id="titulo"></h4>
+                        </div>
+                        <br />
+                        <div class="row col-12">
+                            <asp:Label runat="server" ID="LBMensajeCantidad" BorderStyle="None" class="col form-control col-6"><strong>Cantidad de material utilizado</strong></asp:Label>
+                            <asp:TextBox runat="server" ID="txtUsadoModal" CssClass="form-control col-6" TextMode="Number"></asp:TextBox>
+                        </div>
+                        <br />
+                        <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                            <asp:TextBox runat="server" Enabled="false" Text="Ingrese una cantidad válida." Visible="false" ID="txtAlerta3" CssClass="form-control" Style="background-color: red; color: white; text-align: center;" />
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+                <asp:UpdatePanel ID="UpdatePanel6" runat="server">
+                    <ContentTemplate>
+                        <div class="modal-footer col-12">
+                           <asp:Button runat="server" ID="btnModalCerrarMaterial" OnClick="btnModalCerrarMaterial_Click" CssClass="btn btn-secundary mr-2" Text="Cancelar" />
+                                <asp:Button runat="server" ID="btnModarDevolverMaterial" OnClick="btnModarDevolverMaterial_Click" CssClass="btn btn-success mr-2" Text="Enviar" />
+                           
+                        </div>
+                    </ContentTemplate>
                 </asp:UpdatePanel>
 
             </div>

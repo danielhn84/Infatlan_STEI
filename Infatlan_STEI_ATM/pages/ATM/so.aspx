@@ -97,7 +97,7 @@
     <div class="modal fade bs-example-modal-lg" id="modalsoATM" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <div class="modal-header" style="background-color: darkslategrey; color: white;">
+                <div class="modal-header">
                     <h4 class="modal-title" id="myLargeModalLabel">¿Seguro que modificará sistema operativo?</h4>
                 </div>
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -113,11 +113,11 @@
                         <div class="row col-12">
                             <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>*Nuevo Sistema Operativo: </strong></asp:Label>
                             <asp:TextBox runat="server" ID="txtModalNewSOATM" CssClass="form-control col-6"></asp:TextBox>
-                        </div>
-                        <div class="col-md-8 align-self-center" style="margin-left: auto; margin-right: auto">
+                        </div><br />
+                       <%-- <div class="col-md-8 align-self-center" style="margin-left: auto; margin-right: auto">
                             <br />
                             <h6 runat="server" visible="false" id="H5Alerta1" class="text-danger col-12" style="text-align: center;">Los campos con(*) son obligatorios.</h6>
-                        </div>
+                        </div>--%>
                         <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
                             <asp:TextBox runat="server" Enabled="false" Text="Ingrese nuevo sistema operativo." Visible="false" ID="txtAlerta1" CssClass="form-control" Style="background-color: red; color: white; text-align: center;" />
                         </div>
@@ -126,12 +126,9 @@
                 <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                     <ContentTemplate>
                         <div class="modal-footer col-12">
-                            <div class="row col-3">
-                                <asp:Button runat="server" ID="btnModalEnviarSOATM" OnClick="btnModalEnviarSOATM_Click" CssClass="btn btn-dark mr-2" Text="Modificar" />
-                            </div>
-                            <div class="row col-3">
-                                <asp:Button runat="server" ID="btnModalCerrarSOATM" OnClick="btnModalCerrarSOATM_Click" CssClass="btn btn-secundary mr-2" Text="Cancelar" />
-                            </div>
+                            <asp:Button runat="server" ID="btnModalCerrarSOATM" OnClick="btnModalCerrarSOATM_Click" CssClass="btn btn-secundary mr-2" Text="Cancelar" />
+                                <asp:Button runat="server" ID="btnModalEnviarSOATM" OnClick="btnModalEnviarSOATM_Click" CssClass="btn btn-success mr-2" Text="Modificar" />
+                           
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
@@ -146,7 +143,7 @@
     <div class="modal fade bs-example-modal-lg" id="modalso2ATM" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <div class="modal-header" style="background-color: darkslategrey; color: white;">
+                <div class="modal-header">
                     <h4 class="modal-title" id="myLargeModalLabel1">Nuevo sistema operativo</h4>
                 </div>
                 <asp:UpdatePanel ID="UpdatePanel3" runat="server">
@@ -155,11 +152,11 @@
                         <div class="row col-12">
                             <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>*Sistema Operativo: </strong></asp:Label>
                             <asp:TextBox runat="server" ID="txtNewSOATM" CssClass="form-control col-6"></asp:TextBox>
-                        </div>
-                        <div class="col-md-8 align-self-center" style="margin-left: auto; margin-right: auto">
+                        </div><br />
+                       <%-- <div class="col-md-8 align-self-center" style="margin-left: auto; margin-right: auto">
                             <br />
                             <h6 runat="server" visible="false" id="H5Alerta2" class="text-danger col-12" style="text-align: center;">Los campos con(*) son obligatorios.</h6>
-                        </div>
+                        </div>--%>
                         <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
                             <asp:TextBox runat="server" Enabled="false" Text="Ingrese nuevo sistema operativo." Visible="false" ID="txtAlerta2" CssClass="form-control" Style="background-color: red; color: white; text-align: center;" />
                         </div>
@@ -168,12 +165,9 @@
                 <asp:UpdatePanel ID="UpdatePanel5" runat="server">
                     <ContentTemplate>
                         <div class="modal-footer col-12">
-                            <div class="row col-3">
-                                <asp:Button runat="server" ID="btnModalNueviSOATM" OnClick="btnModalNueviSOATM_Click" CssClass="btn btn-dark mr-2" Text="Agregar" />
-                            </div>
-                            <div class="row col-3">
-                                <asp:Button runat="server" ID="btnModalCerrarNueviSOATM" OnClick="btnModalCerrarNueviSOATM_Click" CssClass="btn btn-secundary mr-2" Text="Cancelar" />
-                            </div>
+                            <asp:Button runat="server" ID="btnModalCerrarNueviSOATM" OnClick="btnModalCerrarNueviSOATM_Click" CssClass="btn btn-secundary mr-2" Text="Cancelar" />
+                                <asp:Button runat="server" ID="btnModalNueviSOATM" OnClick="btnModalNueviSOATM_Click" CssClass="btn btn-success mr-2" Text="Agregar" />
+                           
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>

@@ -128,9 +128,9 @@
     <div class="modal fade bs-example-modal-lg" id="modalverificacion" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <div class="modal-header" style="background-color: darkslategrey; color: white;">
+                <div class="modal-header">
                     <h4 class="modal-title" id="myLargeModalLabel">Motivo por el que se canceló el mantenimiento</h4>
-                    <button type="button" id="btnexitModal" style="color: white;" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                    <button type="button" id="btnexitModal" style="color: black;" class="close" data-dismiss="modal" aria-hidden="true">X</button>
                 </div>
 
                 <asp:UpdatePanel runat="server" ID="UPModal">
@@ -187,7 +187,7 @@
                 <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                     <ContentTemplate>
                         <div class="modal-footer">
-                            <asp:Button runat="server" ID="btnMantSinRealizar" OnClick="btnMantSinRealizar_Click" CssClass="btn btn-dark col-12" Text="Enviar" />
+                            <asp:Button runat="server" ID="btnMantSinRealizar" OnClick="btnMantSinRealizar_Click" CssClass="btn btn-success col-3" Text="Enviar" />
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>

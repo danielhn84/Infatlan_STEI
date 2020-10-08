@@ -510,49 +510,13 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         protected global::System.Web.UI.WebControls.TextBox txtantiSkimming;
 
         /// <summary>
-        /// Control UPMateriales.
+        /// Control GVNewMateriales.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UPMateriales;
-
-        /// <summary>
-        /// Control DDLStock.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DDLStock;
-
-        /// <summary>
-        /// Control txtcantidad.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtcantidad;
-
-        /// <summary>
-        /// Control btnVerifATM.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnVerifATM;
-
-        /// <summary>
-        /// Control GVDevolverMateriales.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GVDevolverMateriales;
+        protected global::System.Web.UI.WebControls.GridView GVNewMateriales;
 
         /// <summary>
         /// Control FUDiscoDuro.
@@ -816,6 +780,24 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         protected global::System.Web.UI.HtmlControls.HtmlImage imgATMLinea;
 
         /// <summary>
+        /// Control FUmapaATM.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload FUmapaATM;
+
+        /// <summary>
+        /// Control imgMapaATM.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlImage imgMapaATM;
+
+        /// <summary>
         /// Control txtobseracionesVerif.
         /// </summary>
         /// <remarks>
@@ -978,6 +960,15 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         protected global::System.Web.UI.WebControls.HiddenField HFClima;
 
         /// <summary>
+        /// Control HFMapa.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HFMapa;
+
+        /// <summary>
         /// Control UpdatePanel3.
         /// </summary>
         /// <remarks>
@@ -1041,15 +1032,6 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         protected global::System.Web.UI.UpdatePanel UpdatePanel4;
 
         /// <summary>
-        /// Control btnModalVerif.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnModalVerif;
-
-        /// <summary>
         /// Control btnModalCerrarVerif.
         /// </summary>
         /// <remarks>
@@ -1057,6 +1039,15 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnModalCerrarVerif;
+
+        /// <summary>
+        /// Control btnModalVerif.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnModalVerif;
 
         /// <summary>
         /// Control UpdatePanel1.
@@ -1149,6 +1140,15 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         protected global::System.Web.UI.UpdatePanel UpdatePanel5;
 
         /// <summary>
+        /// Control btnCerrarRechazoModal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCerrarRechazoModal;
+
+        /// <summary>
         /// Control btnRechazarModal.
         /// </summary>
         /// <remarks>
@@ -1158,12 +1158,66 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         protected global::System.Web.UI.WebControls.Button btnRechazarModal;
 
         /// <summary>
-        /// Control btnCerrarRechazoModal.
+        /// Control titulo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCerrarRechazoModal;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl titulo;
+
+        /// <summary>
+        /// Control LBMensajeCantidad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LBMensajeCantidad;
+
+        /// <summary>
+        /// Control txtUsadoModal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtUsadoModal;
+
+        /// <summary>
+        /// Control txtAlerta3.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtAlerta3;
+
+        /// <summary>
+        /// Control UpdatePanel6.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel6;
+
+        /// <summary>
+        /// Control btnModalCerrarMaterial.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnModalCerrarMaterial;
+
+        /// <summary>
+        /// Control btnModarDevolverMaterial.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnModarDevolverMaterial;
     }
 }

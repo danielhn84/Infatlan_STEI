@@ -102,6 +102,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                             Session["ubicacionATM"] = item["Ubicacion"].ToString();
                             Session["SucursalATM"] = item["Sucursal"].ToString();
                             Session["zonaATM"] = item["Zona"].ToString();
+                            Session["IDZona"]= item["IDZona"].ToString();
                             Session["fechaMantATM"] = item["FechaMantenimiento"].ToString();
                             Session["hrInicioATM"] = item["HrInicio"].ToString();
                             Session["hrfinATM"] = item["HrFin"].ToString();

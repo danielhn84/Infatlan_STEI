@@ -14,6 +14,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
     public partial class procesador : System.Web.UI.Page
     {
         bd vConexion = new bd();
+        bd vConexionATM = new bd();
         Security vSecurity = new Security();
         protected void Page_Load(object sender, EventArgs e){
             Session["PROCESADOR_ATM"] = null;
@@ -39,7 +40,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
                 try
                 {
                     DataTable vDatos = new DataTable();
-                    vDatos = vConexion.ObtenerTabla("STEISP_ATM_Generales 5, 1");
+                    vDatos = vConexionATM.ObtenerTablaATM("SPSTEI_ATM 6");
                     GVBusqueda.DataSource = vDatos;
                     GVBusqueda.DataBind();
                     if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Edicion){
@@ -61,8 +62,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
         }
         protected void GVBusqueda_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            H5Alerta1.Visible = false;
-            H5Alerta2.Visible = false;
+           
             txtAlerta1.Visible = false;
             txtAlerta2.Visible = false;
             DataTable vDataa = (DataTable)Session["procesadorATM"];
@@ -76,12 +76,12 @@ namespace Infatlan_STEI_ATM.pages.ATM
                 try
                 {
                     DataTable vDatos = new DataTable();
-                    String vQuery = "STEISP_ATMAdminComponentesATM 10,'" + codProcesadorATMs + "'";
-                    vDatos = vConexion.ObtenerTabla(vQuery);
+                    String vQuery = "SPSTEI_ATM 21,'" + codProcesadorATMs + "'";
+                    vDatos = vConexionATM.ObtenerTablaATM(vQuery);
                     foreach (DataRow item in vDatos.Rows)
                     {
                         Session["codprocesadorATM"] = codProcesadorATMs;
-                        Session["nombreprocesadorATM"] = item["nombreProcesadorATM"].ToString();
+                        Session["nombreprocesadorATM"] = item["Descripcion"].ToString();
                     }
                 }
                 catch (Exception)
@@ -98,8 +98,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
 
         protected void btnguardarProcesadorATM_Click(object sender, EventArgs e)
         {
-            H5Alerta1.Visible = false;
-            H5Alerta2.Visible = false;
+           
             txtAlerta1.Visible = false;
             txtAlerta2.Visible = false;
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal2();", true);
@@ -108,8 +107,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
 
         protected void btnModalCerrarprocesadorATM_Click(object sender, EventArgs e)
         {
-            H5Alerta1.Visible = false;
-            H5Alerta2.Visible = false;
+           
             txtAlerta1.Visible = false;
             txtAlerta2.Visible = false;
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
@@ -119,8 +117,6 @@ namespace Infatlan_STEI_ATM.pages.ATM
         {
             if (txtModalNewprocesadorATM.Text == "" || txtModalNewprocesadorATM.Text == string.Empty)
             {
-              
-                H5Alerta1.Visible = true;
                 txtAlerta1.Visible = true;
             }
             else
@@ -128,11 +124,11 @@ namespace Infatlan_STEI_ATM.pages.ATM
                 
                 try
                 {
-                    string vQuery = "STEISP_ATMAdminComponentesATM 12, '" + Session["codprocesadorATM"] + "','" + txtModalNewprocesadorATM.Text + "', '" + Session["USUARIO"].ToString() + "'";
-                    Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                    string vQuery = "SPSTEI_ATM 22, '" + Session["codprocesadorATM"] + "','" + txtModalNewprocesadorATM.Text + "'";
+                    Int32 vInfo = vConexionATM.ejecutarSQLATM(vQuery);
                     if (vInfo == 1)
                     {
-                        H5Alerta1.Visible = false;
+                        txtAlerta1.Visible = false;
                         txtModalNewprocesadorATM.Text = string.Empty;
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
                         Mensaje("Tipo de carga ATM modificado con éxito", WarningType.Success);
@@ -141,8 +137,8 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     }
                     else
                     {
-                       H5Alerta1.InnerText="No se pudo modificar el procesador ATM";
-                        H5Alerta1.Visible = true;
+                       txtAlerta1.Text="No se pudo modificar el procesador ATM";
+                        txtAlerta1.Visible = true;
                     }
                 }
                 catch (Exception Ex)
@@ -157,19 +153,17 @@ namespace Infatlan_STEI_ATM.pages.ATM
             
             if (txtNewProcesadorATM.Text == "" || txtNewProcesadorATM.Text == string.Empty)
             {
-              
-                H5Alerta2.Visible = true;
                 txtAlerta2.Visible = true;
             }
             else
             {
                 try
                 {
-                    string vQuery = "STEISP_ATMAdminComponentesATM 11, '" + Session["codprocesadorATM"] + "','" + txtNewProcesadorATM.Text + "','" + Session["USUARIO"].ToString() + "'";
-                    Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                    string vQuery = "SPSTEI_ATM 23,'" + txtNewProcesadorATM.Text + "'";
+                    Int32 vInfo = vConexionATM.ejecutarSQLATM(vQuery);
                     if (vInfo == 1)
                     {
-                        H5Alerta2.Visible = false;
+                        txtAlerta2.Visible = false;
                         txtNewProcesadorATM.Text = string.Empty;
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal2();", true);
                         Mensaje("Procesador ATM creada con éxito", WarningType.Success);
@@ -179,8 +173,8 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     }
                     else
                     {
-                       H5Alerta2.InnerText="No se pudo crear elprocesador ATM";
-                        H5Alerta2.Visible = true;
+                       txtAlerta2.Text="No se pudo crear elprocesador ATM";
+                        txtAlerta2.Visible = true;
                     }
                 }
                 catch (Exception Ex)

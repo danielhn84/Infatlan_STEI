@@ -105,15 +105,6 @@ namespace Infatlan_STEI_ATM.pages.ATM
         protected global::System.Web.UI.WebControls.TextBox txtModalNewModeloATM;
 
         /// <summary>
-        /// Control H5Alerta1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl H5Alerta1;
-
-        /// <summary>
         /// Control txtAlerta1.
         /// </summary>
         /// <remarks>
@@ -132,15 +123,6 @@ namespace Infatlan_STEI_ATM.pages.ATM
         protected global::System.Web.UI.UpdatePanel UpdatePanel4;
 
         /// <summary>
-        /// Control btnModalEnviarModeloATM.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnModalEnviarModeloATM;
-
-        /// <summary>
         /// Control btnModalCerrarModeloATM.
         /// </summary>
         /// <remarks>
@@ -148,6 +130,15 @@ namespace Infatlan_STEI_ATM.pages.ATM
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnModalCerrarModeloATM;
+
+        /// <summary>
+        /// Control btnModalEnviarModeloATM.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnModalEnviarModeloATM;
 
         /// <summary>
         /// Control UpdatePanel3.
@@ -168,15 +159,6 @@ namespace Infatlan_STEI_ATM.pages.ATM
         protected global::System.Web.UI.WebControls.TextBox txtNewModeloATM;
 
         /// <summary>
-        /// Control H5Alerta2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl H5Alerta2;
-
-        /// <summary>
         /// Control txtAlerta2.
         /// </summary>
         /// <remarks>
@@ -195,15 +177,6 @@ namespace Infatlan_STEI_ATM.pages.ATM
         protected global::System.Web.UI.UpdatePanel UpdatePanel5;
 
         /// <summary>
-        /// Control btnModalNueviModeloATM.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnModalNueviModeloATM;
-
-        /// <summary>
         /// Control btnModalCerrarNueviModeloATM.
         /// </summary>
         /// <remarks>
@@ -211,5 +184,14 @@ namespace Infatlan_STEI_ATM.pages.ATM
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnModalCerrarNueviModeloATM;
+
+        /// <summary>
+        /// Control btnModalNueviModeloATM.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnModalNueviModeloATM;
     }
 }

@@ -3357,6 +3357,7 @@
     <Content Include="email\TemplateMail.html" />
     <Content Include="Excel.4.5.dll" />
     <Content Include="img\logo.png" />
+    <Content Include="pages\calendario\avances.aspx" />
     <Content Include="pages\devolver\rechazados.aspx" />
     <Content Include="pages\mantenimiento\buscarAprobarVerificacion.aspx" />
     <Content Include="pages\mantenimiento\buscarVerificacion.aspx" />
@@ -3450,6 +3451,13 @@
     <Compile Include="clases\Security.cs" />
     <Compile Include="clases\SmtpService.cs">
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\calendario\avances.aspx.cs">
+      <DependentUpon>avances.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\calendario\avances.aspx.designer.cs">
+      <DependentUpon>avances.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\devolver\rechazados.aspx.cs">
       <DependentUpon>rechazados.aspx</DependentUpon>

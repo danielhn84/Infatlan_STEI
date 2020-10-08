@@ -15,6 +15,7 @@ namespace Infatlan_STEI_ATM.pages.calendario
     public partial class mantenimientos : System.Web.UI.Page
     {
         bd vConexion = new bd();
+        bd vConexionATM = new bd();
         protected void Page_Load(object sender, EventArgs e){
             if (!Page.IsPostBack){
                 if (Convert.ToBoolean(Session["AUTH"])){
@@ -89,11 +90,13 @@ namespace Infatlan_STEI_ATM.pages.calendario
                         //String vFormato = "yyyy/MM/dd"; //"dd/MM/yyyy HH:mm:ss"
                         string vFechaMant = Convert.ToDateTime(Fecha).Year.ToString();
 
-                        String vQuery2 = "STEISP_ATM_VERIFICACION 7, '" + CodATM + "',1";
-                        DataTable vDatos2 = vConexion.ObtenerTabla(vQuery2);
+                        string vCodATM = "";
+                        String vQuery2 = "SPSTEI_ATM 3, '" + CodATM + "'";
+                        DataTable vDatos2 = vConexionATM.ObtenerTablaATM(vQuery2);
                         foreach (DataRow item in vDatos2.Rows)
                         {
                             Session["CODATM_MANT"] = item["codATM"].ToString();
+                            vCodATM= item["codATM"].ToString();
                         }
 
                         if (Session["CODATM_MANT"].ToString() != CodATM)
@@ -147,17 +150,36 @@ namespace Infatlan_STEI_ATM.pages.calendario
                                     String vFormato = "yyyy/MM/dd"; //"dd/MM/yyyy HH:mm:ss"
                                     String vFechaMant = Convert.ToDateTime(Fecha).ToString(vFormato);
 
-                                    vQuery = "STEISP_ATM_Mantenimientos '" + vFechaMant + "'" +
-                                        ",'" + CodATM + "'" +
-                                        ",'" + Session["USUARIO"].ToString() + "'";
+                                    String ATM = "";
+                                    String FECHA = "";
+                                    DataTable vDatosP = new DataTable();
+                                    String vQueryP = "STEISP_ATM_Generales 40,'" + CodATM + "'";
+                                    vDatosP = vConexion.ObtenerTabla(vQueryP);
+                                    foreach (DataRow item in vDatosP.Rows)
+                                    {
+                                        ATM = item["codATM"].ToString();
+                                        FECHA = Convert.ToDateTime(item["fechaMantenimiento"].ToString()).ToString(vFormato);
+                                    }
 
-                                    
-                                    int vRespuesta = vConexion.ejecutarSQL(vQuery);
-                                    //VALIDA QUE ATM ESTE ACTIVO
-                                    String vQuery2 = "STEISP_ATM_VERIFICACION 8, '" + CodATM + "',1";
-                                    DataTable vDatos2 = vConexion.ObtenerTabla(vQuery2);
-                                    if (vRespuesta == 1)
-                                        vSuccess++;
+                                    if (ATM == CodATM && FECHA == vFechaMant)
+                                    {
+                                        Session["FechaRepetida"] = Session["FechaRepetida"] + ", " + CodATM+"-"+ vFechaMant;
+                                    }
+                                    else {
+                                        vQuery = "STEISP_ATM_Mantenimientos '" + vFechaMant + "'" +
+                                            ",'" + CodATM + "'" +
+                                            ",'" + Session["USUARIO"].ToString() + "'";
+
+                                        //Session["FechaRepetida"] = null;
+                                        int vRespuesta = vConexion.ejecutarSQL(vQuery);
+                                        //VALIDA QUE ATM ESTE ACTIVO
+                                        //String vQuery2 = "STEISP_ATM_VERIFICACION 8, '" + CodATM + "',1";
+                                        //DataTable vDatos2 = vConexion.ObtenerTabla(vQuery2);
+                                        if (vRespuesta == 1)
+                                        {
+                                            vSuccess++;
+                                        }
+                                    }   
 
                                 }
                             }
@@ -190,7 +212,7 @@ namespace Infatlan_STEI_ATM.pages.calendario
                         vCargado = cargarArchivo(vDireccionCarga, ref vSuccess, ref vError, Convert.ToString(Session["USUARIO"]), vTipoPermiso);
 
                     if (vCargado)  
-                        LbMensaje.Text = "Archivo cargado con exito." + "<br>" + "<b style='color:green;'>Success:</b> " + vSuccess.ToString() + "&emsp;";
+                        LbMensaje.Text = "Archivo cargado con exito." + "<br>" + "<b style='color:green;'>Success:</b> " + vSuccess.ToString() + "&emsp;<br>ATM con fecha repetida: "+Session["FechaRepetida"];
                     if(Session["CODATM_SUBIDO"].ToString()!= "Completo" && Session["FECHA_SUBIDO"].ToString() == "Completo")
                         LbMensaje.Text = "Código " + Session["CODATM_SUBIDO"].ToString() + " no existe." + "<br>" + "<b style='color:green;'>Success:</b> " + vSuccess.ToString() + "&emsp;";
                     if (Session["CODATM_SUBIDO"].ToString() == "Completo" && Session["FECHA_SUBIDO"].ToString() != "Completo")

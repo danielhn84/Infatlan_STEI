@@ -56,8 +56,8 @@ namespace Infatlan_STEI_ATM.pages.ATM
 
         protected void btnCancelarVerif_Click(object sender, EventArgs e)
         {
-            H5Alerta1.Visible = false;
-            H5Alerta2.Visible = false;
+            txtAlerta1.Visible = false;
+            txtAlerta2.Visible = false;
             txtModalNewmotivoATM.Text = string.Empty;
             txtNewMotivoCancelATM.Text = string.Empty;
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal2();", true);
@@ -91,7 +91,6 @@ namespace Infatlan_STEI_ATM.pages.ATM
         {
             if(txtModalNewmotivoATM.Text=="" || txtModalNewmotivoATM.Text == string.Empty)
             {
-                H5Alerta1.Visible = true;
                 txtAlerta1.Visible = true;
             }
             else
@@ -103,7 +102,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                     if (vInfo == 1)
                     {
-                        H5Alerta1.Visible = false;
+                        txtAlerta1.Visible = false;
                         txtModalNewmotivoATM.Text = string.Empty;
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
                         Mensaje("motivo de cancelación modificado con éxito", WarningType.Success);
@@ -112,8 +111,8 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     }
                     else
                     {
-                        H5Alerta1.InnerText = "No se pudo modificar la marca";
-                        H5Alerta1.Visible = true;
+                       txtAlerta1.Text = "No se pudo modificar la marca";
+                        txtAlerta1.Visible = true;
                     }
                 }
                 catch (Exception Ex)
@@ -134,7 +133,6 @@ namespace Infatlan_STEI_ATM.pages.ATM
             if (txtNewMotivoCancelATM.Text == "" || txtNewMotivoCancelATM.Text == string.Empty)
             {
                 txtAlerta2.Visible = true;
-                H5Alerta2.Visible = true;
             }
             else
             {
@@ -144,7 +142,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                     if (vInfo == 1)
                     {
-                        H5Alerta2.Visible = false;
+                        txtAlerta2.Visible = false;
                         txtNewMotivoCancelATM.Text = string.Empty;
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal2();", true);
                         Mensaje("Motivo de cancelación creada con éxito", WarningType.Success);
@@ -154,8 +152,8 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     }
                     else
                     {
-                        H5Alerta2.InnerText = "No se pudo crear el motivo";
-                        H5Alerta2.Visible = true;
+                       txtAlerta2.Text = "No se pudo crear el motivo";
+                        txtAlerta2.Visible = true;
                     }
                 }
                 catch (Exception Ex)

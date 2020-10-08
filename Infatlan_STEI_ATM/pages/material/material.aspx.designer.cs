@@ -87,6 +87,15 @@ namespace Infatlan_STEI_ATM.pages.material
         protected global::System.Web.UI.WebControls.DropDownList DDLConductor;
 
         /// <summary>
+        /// Control DIVTablaMateriales.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DIVTablaMateriales;
+
+        /// <summary>
         /// Control DDLStock.
         /// </summary>
         /// <remarks>
@@ -139,6 +148,15 @@ namespace Infatlan_STEI_ATM.pages.material
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GVNewMateriales;
+
+        /// <summary>
+        /// Control GVEliminar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GVEliminar;
 
         /// <summary>
         /// Control LBComentario.
@@ -213,15 +231,6 @@ namespace Infatlan_STEI_ATM.pages.material
         protected global::System.Web.UI.UpdatePanel UpdatePanel3;
 
         /// <summary>
-        /// Control btnModalEnviar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnModalEnviar;
-
-        /// <summary>
         /// Control btnModalCerrar.
         /// </summary>
         /// <remarks>
@@ -229,6 +238,15 @@ namespace Infatlan_STEI_ATM.pages.material
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnModalCerrar;
+
+        /// <summary>
+        /// Control btnModalEnviar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnModalEnviar;
 
         /// <summary>
         /// Control UpdatePanel1.
@@ -240,15 +258,6 @@ namespace Infatlan_STEI_ATM.pages.material
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
 
         /// <summary>
-        /// Control btnModarDevolver.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnModarDevolver;
-
-        /// <summary>
         /// Control btnModalCerrarRechazo.
         /// </summary>
         /// <remarks>
@@ -256,5 +265,14 @@ namespace Infatlan_STEI_ATM.pages.material
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnModalCerrarRechazo;
+
+        /// <summary>
+        /// Control btnModarDevolver.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnModarDevolver;
     }
 }

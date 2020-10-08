@@ -72,11 +72,11 @@
                                             PageSize="10" OnRowCommand="GVBusqueda_RowCommand">
                                             <Columns>
 
-                                                <asp:BoundField DataField="idTecladoATM" HeaderText="Código de Teclado ATM" ItemStyle-HorizontalAlign="center" />
-                                                <asp:BoundField DataField="nombreTecladoATM" HeaderText="Teclado de ATM" ItemStyle-HorizontalAlign="center" />
+                                                <asp:BoundField DataField="Id_Teclado_ATM" HeaderText="Código de Teclado ATM" ItemStyle-HorizontalAlign="center" />
+                                                <asp:BoundField DataField="Descripcion" HeaderText="Teclado de ATM" ItemStyle-HorizontalAlign="center" />
                                                 <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="center">
                                                     <ItemTemplate>
-                                                        <asp:LinkButton ID="BtnEditar" Visible="false" runat="server" CssClass="btn btn-info ti-pencil-alt mr-2" Text="" CommandArgument='<%# Eval("idTecladoATM") %>' CommandName="Codigo"></asp:LinkButton>
+                                                        <asp:LinkButton ID="BtnEditar" Visible="false" runat="server" CssClass="btn btn-info ti-pencil-alt mr-2" Text="" CommandArgument='<%# Eval("Id_Teclado_ATM") %>' CommandName="Codigo"></asp:LinkButton>
                                                         <%--<asp:Button ID="BtnUsuarioPassword" runat="server" Text="De baja" CssClass="btn btn-block btn-outline-danger" CommandArgument='<%# Eval("codATM") %>' CommandName="Baja" />--%>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
@@ -98,7 +98,7 @@
     <div class="modal fade bs-example-modal-lg" id="modaltecladosATM" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <div class="modal-header" style="background-color: darkslategrey; color: white;">
+                <div class="modal-header">
                     <h4 class="modal-title" id="myLargeModalLabel">¿Seguro que modificará teclado de ATM?</h4>
                 </div>
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -114,11 +114,11 @@
                         <div class="row col-12">
                             <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>*Nuevo nombre teclado: </strong></asp:Label>
                             <asp:TextBox runat="server" ID="txtModalNewTecladoATM" CssClass="form-control col-6"></asp:TextBox>
-                        </div>
-                        <div class="col-md-8 align-self-center" style="margin-left: auto; margin-right: auto">
+                        </div><br />
+                        <%--<div class="col-md-8 align-self-center" style="margin-left: auto; margin-right: auto">
                             <br />
                             <h6 runat="server" visible="false" id="H5Alerta1" class="text-danger col-12" style="text-align: center;">Los campos con(*) son obligatorios.</h6>
-                        </div>
+                        </div>--%>
                         <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
                             <asp:TextBox runat="server" Enabled="false" Text="Ingrese nuevo teclado." Visible="false" ID="txtAlerta1" CssClass="form-control" Style="background-color: red; color: white; text-align: center;" />
                         </div>
@@ -127,12 +127,9 @@
                 <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                     <ContentTemplate>
                         <div class="modal-footer col-12">
-                            <div class="row col-3">
-                                <asp:Button runat="server" ID="btnModalEnviarTecladoATM" OnClick="btnModalEnviarTecladoATM_Click" CssClass="btn btn-dark mr-2" Text="Modificar" />
-                            </div>
-                            <div class="row col-3">
-                                <asp:Button runat="server" ID="btnModalCerrarTecladoATM" OnClick="btnModalCerrarTecladoATM_Click" CssClass="btn btn-secundary mr-2" Text="Cancelar" />
-                            </div>
+                             <asp:Button runat="server" ID="btnModalCerrarTecladoATM" OnClick="btnModalCerrarTecladoATM_Click" CssClass="btn btn-secundary mr-2" Text="Cancelar" />
+                                <asp:Button runat="server" ID="btnModalEnviarTecladoATM" OnClick="btnModalEnviarTecladoATM_Click" CssClass="btn btn-success mr-2" Text="Modificar" />
+                            
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
@@ -147,7 +144,7 @@
     <div class="modal fade bs-example-modal-lg" id="modalteclados2ATM" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <div class="modal-header" style="background-color: darkslategrey; color: white;">
+                <div class="modal-header">
                     <h4 class="modal-title" id="myLargeModalLabel1">Nuevo teclado de ATM</h4>
                 </div>
                 <asp:UpdatePanel ID="UpdatePanel3" runat="server">
@@ -156,11 +153,11 @@
                         <div class="row col-12">
                             <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>*Nombre de teclado ATM: </strong></asp:Label>
                             <asp:TextBox runat="server" ID="txtNewTecladoATM" CssClass="form-control col-6"></asp:TextBox>
-                        </div>
-                        <div class="col-md-8 align-self-center" style="margin-left: auto; margin-right: auto">
+                        </div><br />
+                      <%--  <div class="col-md-8 align-self-center" style="margin-left: auto; margin-right: auto">
                             <br />
                             <h6 runat="server" visible="false" id="H5Alerta2" class="text-danger col-12" style="text-align: center;">Los campos con(*) son obligatorios.</h6>
-                        </div>
+                        </div>--%>
                         <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
                             <asp:TextBox runat="server" Enabled="false" Text="Ingrese nuevo teclado." Visible="false" ID="txtAlerta2" CssClass="form-control" Style="background-color: red; color: white; text-align: center;" />
                         </div>
@@ -169,12 +166,9 @@
                 <asp:UpdatePanel ID="UpdatePanel5" runat="server">
                     <ContentTemplate>
                         <div class="modal-footer col-12">
-                            <div class="row col-3">
-                                <asp:Button runat="server" ID="btnModalNueviTecladoATM" OnClick="btnModalNueviTecladoATM_Click" CssClass="btn btn-dark mr-2" Text="Agregar" />
-                            </div>
-                            <div class="row col-3">
-                                <asp:Button runat="server" ID="btnModalCerrarNueviTecladoATM" OnClick="btnModalCerrarNueviTecladoATM_Click" CssClass="btn btn-secundary mr-2" Text="Cancelar" />
-                            </div>
+                             <asp:Button runat="server" ID="btnModalCerrarNueviTecladoATM" OnClick="btnModalCerrarNueviTecladoATM_Click" CssClass="btn btn-secundary mr-2" Text="Cancelar" />
+                                <asp:Button runat="server" ID="btnModalNueviTecladoATM" OnClick="btnModalNueviTecladoATM_Click" CssClass="btn btn-success mr-2" Text="Agregar" />
+                           
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>

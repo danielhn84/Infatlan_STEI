@@ -188,101 +188,158 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         void CorreoCancelar()
         {
             SmtpService vService = new SmtpService();
-           
-            //string vQueryD = "STEISP_ATM_Generales 33,'" + DLLtecResponsable.SelectedValue + "'";
-            //DataTable vDatosTecnicoResponsable = vConexion.ObtenerTabla(vQueryD);
-            string vQueryD = "STEISP_ATM_Generales 16,'" + Session["ATM_ID_CANCELAR_VERIF_MODAL"] + "'";
-            DataTable vDatosTecnicos = vConexion.ObtenerTabla(vQueryD);
-            string vQueryD2 = "STEISP_ATM_Generales 17,'" + Session["ATM_ID_CANCELAR_VERIF_MODAL"] + "'";
-            DataTable vDatosJefeAgencias = vConexion.ObtenerTabla(vQueryD2);
+
+            string vCorreoEncargadoZona = "";
+            if (Convert.ToString(Session["IDZona"]) == "1")
+                vCorreoEncargadoZona = "emontoya@bancatlan.hn";
+            if (Convert.ToString(Session["IDZona"]) == "2")
+                vCorreoEncargadoZona = "jdgarcia@bancatlan.hn";
+            if (Convert.ToString(Session["IDZona"]) == "3")
+                vCorreoEncargadoZona = "acalderon@bancatlan.hn";
+
+            string vQueryD = "STEISP_ATM_Generales 33,'" + Session["ATM_USURESPONSABLE"] + "'";
+            DataTable vDatosTecnicoResponsable = vConexion.ObtenerTabla(vQueryD);
             DataTable vDatos = (DataTable)Session["AUTHCLASS"];
-            //DataTable vDatosTecnicos = (DataTable)Session["ATM_EMPLEADOS"];
-            //DataTable vDatosJefeAgencias = (DataTable)Session["ATM_JEFES_CARGAR"];
-            if (vDatos.Rows.Count > 0)
+            string vQueryTecnicos = "STEISP_ATM_Generales 39,'" + Session["ATM_ID_CANCELAR_VERIF_MODAL"] + "'";
+            DataTable vDatosTecnicos = vConexion.ObtenerTabla(vQueryTecnicos);
+            string vQueryJefes = "STEISP_ATM_Generales 38,'" + Session["ATM_ID_CANCELAR_VERIF_MODAL"] + "'";
+            DataTable vDatosJefeAgencias = vConexion.ObtenerTabla(vQueryJefes);
+
+            if (DDLModalMotivo.SelectedValue == "5")
             {
-                foreach (DataRow item in vDatos.Rows)
+                if (vDatos.Rows.Count > 0)
                 {
-                    //ENVIAR A JEFE
-                    if (!item["emailEmpresa"].ToString().Trim().Equals(""))
+                    foreach (DataRow item in vDatos.Rows)
                     {
-                        vService.EnviarMensaje(item["emailEmpresa"].ToString(),
-                            typeBody.ReprogramacionJefes,
-                            item["nombre"].ToString(),
-                            item["nombre"].ToString()
-                            //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                        //ENVIAR A JEFE
+                        if (!item["correo"].ToString().Trim().Equals(""))
+                        {
+                            vService.EnviarMensaje(
+                            item["correo"].ToString(),
+                            typeBody.ATM,
+                            "Notificación de Mantenimiento ATM",
+                            "Buen día, se le notifica que se ha sustituido encargado de mantenimiento, el encargado ahora es " + DDLModalNewTecnico.SelectedItem.Text + ", mantenimiento al ATM " + txtModalATM.Text,
+                            "El usuario <b>" + item["Nombre"].ToString() + "</b> sustituyó técnico responsable de mantenimiento ATM",
+                             "",
+                             "/login.aspx"
                             );
-                        //ENVIAR A SOLICITANTE
-                        //vService.EnviarMensaje(item["emailEmpresa"].ToString(),
-                        //    typeBody.Supervisor,
-                        //    item["nombre"].ToString(),
-                        //    item["nombre"].ToString()
-                        //    //vDatosEmpleado.Rows[0]["Nombre"].ToString()
-                        //    );
-                        //vFlagEnvioSupervisor = true;
+
+                            //vFlagEnvioSupervisor = true;
+                        }
+                        //ENVIAR A EDWIN
+                        //string vNombre = "EDWIN ALBERTO URREA PENA";
+                        vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIMail"],
+                                typeBody.ATM,
+                                "Notificación de Mantenimiento ATM",
+                                "Buen día, se le notifica que se ha sustituido encargado de mantenimiento, el encargado ahora es " + DDLModalNewTecnico.SelectedItem.Text + ", mantenimiento al ATM " + txtModalATM.Text,
+                                  "El usuario <b>" + item["Nombre"].ToString() + "</b> sustituyó técnico responsable de mantenimiento ATM",
+                                  vCorreoEncargadoZona,
+                                  "/sites/ATM/pages/reprogramar/buscarReprogramar.aspx"
+                                );
+                        //ENVIAR A TECNICOS ASIGNADOS
+                        //string vNombreJefe = "ELVIS ALEXANDER MONTOYA PEREIRA";
+
                     }
-                    //ENVIAR A EDWIN
-                    string vNombre = "EDWIN ALBERTO URREA PENA";
-                    vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIMail"],
-                            typeBody.ReprogramacionJefes,
-                            vNombre,
-                            item["nombre"].ToString()
-                            //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                }
+                if (vDatosTecnicos.Rows.Count > 0)
+                {
+                    foreach (DataRow itemT in vDatosTecnicos.Rows)
+                    {
+                        vService.EnviarMensaje(itemT["correo"].ToString(),
+                            typeBody.ATM,
+                            "Notificación de Mantenimiento ATM",
+                            "Buen día, se le notifica que se ha sustituído el encargado de mantenimiento, ahora es " + DDLModalNewTecnico.SelectedItem.Text + ", mantenimiento al ATM " + txtModalATM.Text,
+                              "El usuario <b>" + vDatos.Rows[0]["Nombre"].ToString() + "</b> sustituyó técnico responsable de mantenimiento ATM al que ha sido asignado como parte del equipo de trabajo.",
+                              "",
+                             "/login.aspx"
                             );
-                    //ENVIAR A ELVIS
-                    string vNombreJefe = "ELVIS ALEXANDER MONTOYA PEREIRA";
-                    vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIJefeMail"],
-                            typeBody.ReprogramacionJefes,
-                            vNombreJefe,
-                            item["nombre"].ToString()
-                            //vDatosEmpleado.Rows[0]["Nombre"].ToString()
-                            );
+                    }
+                }
+                if (vDatosJefeAgencias.Rows.Count > 0)
+                {
+                    foreach (DataRow item in vDatosJefeAgencias.Rows)
+                    {
+                        //ENVIAR A JEFES DE AGENCIA
+                        if (!item["correoJefe"].ToString().Trim().Equals(""))
+                        {
+                            vService.EnviarMensaje(item["correoJefe"].ToString(),
+                                typeBody.ATM,
+                                "Notificación de Mantenimiento ATM",
+                                "Buen día, se le notifica que se ha sustituído el encargado de mantenimiento, ahora es " + DDLModalNewTecnico.SelectedItem.Text + ", mantenimiento al ATM " + txtModalATM.Text,
+                                "Se le informa que dicho mantenimiento se haría en la agencia al que usted se encuentra asignado.",
+                                "",
+                                ""
+                                );
+                        }
+                    }
                 }
             }
-            //if (vDatosTecnicoResponsable.Rows.Count > 0)
-            //{
-                foreach (DataRow item in vDatos.Rows)
+            else
+            {              
+                if (vDatos.Rows.Count > 0)
                 {
-                    //ENVIAR A TECNICO RESPONSABLE
-                    if (!Session["ATM_USURESPONSABLE_REPROGRAMAR"].ToString().Trim().Equals(""))
+                    foreach (DataRow item in vDatos.Rows)
                     {
-                        vService.EnviarMensaje(Session["ATM_USURESPONSABLE_REPROGRAMAR"].ToString(),
-                            typeBody.Reprogramacion,
-                            Session["ATM_RESPONSABLE"].ToString(),
-                            vDatos.Rows[0]["nombre"].ToString()
-                            //vDatosEmpleado.Rows[0]["Nombre"].ToString()
+                        //ENVIAR A JEFE
+                        if (!item["correo"].ToString().Trim().Equals(""))
+                        {
+                            vService.EnviarMensaje(
+                            item["correo"].ToString(),
+                            typeBody.ATM,
+                            "Notificación de Mantenimiento ATM",
+                            "Buen día, se le notifica que se ha cancelado solicitud de mantenimiento, el encargado es " + Session["ATM_RESPONSABLE"].ToString() + ", mantenimiento al ATM " + txtModalATM.Text,
+                            "El usuario <b>" + item["Nombre"].ToString() + "</b> canceló: <br> Notificación de Mantenimiento",
+                             "",
+                             "/login.aspx"
+                            );
+
+                            //vFlagEnvioSupervisor = true;
+                        }
+                        //ENVIAR A EDWIN
+                        //string vNombre = "EDWIN ALBERTO URREA PENA";
+                        vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIMail"],
+                                typeBody.ATM,
+                                "Notificación de Mantenimiento ATM",
+                                "Buen día, se le notifica que se ha cancelado solicitud de mantenimiento, el encargado es " + Session["ATM_RESPONSABLE"].ToString() + ", mantenimiento al ATM " + txtModalATM.Text,
+                                  "El usuario <b>" + item["Nombre"].ToString() + "</b> canceló: <br> Notificación de Mantenimiento",
+                                  vCorreoEncargadoZona,
+                                  "/sites/ATM/pages/reprogramar/buscarReprogramar.aspx"
+                                );
+                        //ENVIAR A TECNICOS ASIGNADOS
+                        //string vNombreJefe = "ELVIS ALEXANDER MONTOYA PEREIRA";
+
+                    }
+                }
+                if (vDatosTecnicos.Rows.Count > 0)
+                {
+                    foreach (DataRow itemT in vDatosTecnicos.Rows)
+                    {
+                        vService.EnviarMensaje(itemT["correo"].ToString(),
+                            typeBody.ATM,
+                            "Notificación de Mantenimiento ATM",
+                            "Buen día, se le notifica que se ha cancelado solicitud de mantenimiento, el encargado es " + Session["ATM_RESPONSABLE"].ToString() + ", mantenimiento al ATM " + txtModalATM.Text,
+                              "El usuario <b>" + vDatos.Rows[0]["Nombre"].ToString() + "</b> canceló: <br> Notificación de Mantenimiento de ATM al que ha sido asignado como parte del equipo de trabajo.",
+                              "",
+                             "/login.aspx"
                             );
                     }
                 }
-            //}
-            if (vDatosTecnicos.Rows.Count > 0)
-            {
-                foreach (DataRow item in vDatos.Rows)
+                if (vDatosJefeAgencias.Rows.Count > 0)
                 {
-                    //ENVIAR A TECNICOS
-                    if (!item["correo"].ToString().Trim().Equals(""))
+                    foreach (DataRow item in vDatosJefeAgencias.Rows)
                     {
-                        vService.EnviarMensaje(item["correo"].ToString(),
-                            typeBody.Reprogramacion,
-                            item["nombre"].ToString(),
-                            vDatos.Rows[0]["nombre"].ToString()
-                            //vDatosEmpleado.Rows[0]["Nombre"].ToString()
-                            );
-                    }
-                }
-            }
-            if (vDatosJefeAgencias.Rows.Count > 0)
-            {
-                foreach (DataRow item in vDatos.Rows)
-                {
-                    //ENVIAR A JEFES DE AGENCIA
-                    if (!item["correo"].ToString().Trim().Equals(""))
-                    {
-                        vService.EnviarMensaje(item["correo"].ToString(),
-                            typeBody.Reprogramacion,
-                            " Jefe de Agencia, se le informa que se canceló mantenimiento",
-                            vDatos.Rows[0]["nombre"].ToString()
-                            //vDatosEmpleado.Rows[0]["Nombre"].ToString()
-                            );
+                        //ENVIAR A JEFES DE AGENCIA
+                        if (!item["correoJefe"].ToString().Trim().Equals(""))
+                        {
+                            vService.EnviarMensaje(item["correoJefe"].ToString(),
+                                typeBody.ATM,
+                                "Notificación de Mantenimiento ATM",
+                                "Buen día, se le notifica que se ha cancelado solicitud de mantenimiento, el encargado es " + Session["ATM_RESPONSABLE"].ToString() + ", mantenimiento al ATM " + txtModalATM.Text,
+                                "Se le informa que dicho mantenimiento se haría en la agencia al que usted se encuentra asignado.",
+                                "",
+                                ""
+                                );
+                        }
                     }
                 }
             }
@@ -308,7 +365,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                             Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                             if (vInfo == 1)
                             {
-                                //CorreoCancelar();
+                                CorreoCancelar();
                                 H5Alerta.Visible = false;
                                 txtAlerta2.Visible = false;
                                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
@@ -334,7 +391,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                         {
                             string vQuery = "STEISP_ATM_CancelarVerificacion 1, '" + Session["ATM_ID_CANCELAR_VERIF_MODAL"] + "','" + DDLModalMotivo.SelectedValue + "','" + DDLModalcambioPor.SelectedValue + "','" + Session["USUARIO"].ToString() + "', '" + DDLModalNewTecnico.SelectedValue + "','" + txtdetalleCancela.Text + "'";
                             Int32 vInfo = vConexion.ejecutarSQL(vQuery);
-                            if (vInfo == 19)
+                            if (vInfo != 0)
                             {
                                 H5Alerta.Visible = false;
                                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
@@ -438,6 +495,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                             Session["ATM_SUCURSAL_VERIF_CREAR"] = item["Sucursal"].ToString();
                             Session["ATM_DEPTO_VERIF_CREAR"] = item["Departamento"].ToString();
                             Session["ATM_ZONA_VERIF_CREAR"] = item["Zona"].ToString();
+                            Session["ATM_IDZONA_VERIF_CREAR"] = item["IDZona"].ToString();
                             Session["ATM_IDMANT_VERIF_CREAR"] = codVerif;
                             Session["ATM_ESTADO_VERIF_CREAR"] = item["Estado"].ToString();
                             Session["ATM_FECHAMANT_VERIF_CREAR"] = Convert.ToDateTime(item["FechaMantenimiento"]).ToString("yyyy/MM/dd");

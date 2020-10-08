@@ -198,7 +198,7 @@
                                 </div>
                             </div>
 
-                            <h5 class="card-subtitle m-t-20" runat="server" id="H3JefeAgencia"><i class="fa fa-user"></i><b> JEFES DE AGENCIA</b></h5>
+                            <h5 class="card-subtitle m-t-20" runat="server" id="H3JefeAgencia"><i class="fa fa-user"></i><b> ENCARGADO DE AGENCIA</b></h5>
                             <!--TERCERA FILA-->
                             <asp:UpdatePanel ID="UpdateTest" UpdateMode="Always" runat="server">
                                 <ContentTemplate>
@@ -331,6 +331,8 @@
                                     <div class="col-6">
                                         <asp:Button runat="server" ID="btnEnviarNotificacion" OnClick="btnEnviarNotificacion_Click" CssClass="btn btn-success" Text="Crear notificación" />
                                         <asp:Button runat="server" ID="btnCancelarAprobNotif" Visible="false" OnClick="btnCancelarAprobNotif_Click" CssClass="btn btn-danger" Text="Reprogramar" />
+                                         <asp:Button runat="server" ID="btnPrueba" Visible="true" OnClick="btnPrueba_Click" CssClass="btn btn-danger" Text="PRUEBA" />
+                                        <asp:Label Text="" runat="server" ID="LBPrueba"/>
                                     </div>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
@@ -345,7 +347,7 @@
     <div class="modal fade bs-example-modal-lg" id="modalNoti" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <div class="modal-header" style="background-color: darkslategrey; color: white;">
+                <div class="modal-header">
                     <h4 class="modal-title" id="myLargeModalLabel">¿Seguro que creará notificación?</h4>
                 </div>
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -383,12 +385,9 @@
                 <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                     <ContentTemplate>
                         <div class="modal-footer col-12">
-                            <div class="row col-3">
-                                <asp:Button runat="server" ID="btnModalEnviarNotificacion" OnClick="btnModalEnviarNotificacion_Click" CssClass="btn btn-dark  mr-3" Text="Enviar" />
-                            </div>
-                            <div class="row col-3">
-                                <asp:Button runat="server" ID="btnModalCerrarNotificacion" OnClick="btnModalCerrarNotificacion_Click" CssClass="btn btn-secundary  mr-3" Text="Cancelar" />
-                            </div>
+                           <asp:Button runat="server" ID="btnModalCerrarNotificacion" OnClick="btnModalCerrarNotificacion_Click" CssClass="btn btn-secundary  mr-3" Text="Cancelar" />
+                                <asp:Button runat="server" ID="btnModalEnviarNotificacion" OnClick="btnModalEnviarNotificacion_Click" CssClass="btn btn-success  mr-3" Text="Enviar" />
+                            
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
@@ -404,7 +403,7 @@
     <div class="modal fade bs-example-modal-lg" id="modalReprogramarNoti" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <div class="modal-header" style="background-color: darkslategrey; color: white;">
+                <div class="modal-header">
                     <h4 class="modal-title" id="myLargeModalLabel2">¿Seguro que reprogramará notificación?</h4>
                 </div>
                 <asp:UpdatePanel ID="UpdatePanel3" runat="server">
@@ -448,12 +447,9 @@
                 <asp:UpdatePanel ID="UpdatePanel5" runat="server">
                     <ContentTemplate>
                         <div class="modal-footer col-12">
-                            <div class="row col-3">
-                                <asp:Button runat="server" ID="btnReprogramarNotif" OnClick="btnReprogramarNotif_Click" CssClass="btn btn-dark  mr-3" Text="Enviar" />
-                            </div>
-                            <div class="row col-3">
-                                <asp:Button runat="server" ID="btnCerrarReprogramarNotif" OnClick="btnCerrarReprogramarNotif_Click" CssClass="btn btn-secundary  mr-3" Text="Cancelar" />
-                            </div>
+                             <asp:Button runat="server" ID="btnCerrarReprogramarNotif" OnClick="btnCerrarReprogramarNotif_Click" CssClass="btn btn-secundary  mr-3" Text="Cancelar" />
+                                <asp:Button runat="server" ID="btnReprogramarNotif" OnClick="btnReprogramarNotif_Click" CssClass="btn btn-success  mr-3" Text="Enviar" />
+                            
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>

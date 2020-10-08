@@ -70,11 +70,11 @@
                                             PageSize="10" OnRowCommand="GVBusqueda_RowCommand">
                                             <Columns>
 
-                                                <asp:BoundField DataField="idTipoCargaATM" HeaderText="Código tipo de carga ATM" ItemStyle-HorizontalAlign="center" />
-                                                <asp:BoundField DataField="nombreTipoCargaATM" HeaderText="Tipo de carga ATM" ItemStyle-HorizontalAlign="center" />
+                                                <asp:BoundField DataField="Id_Carga_ATM" HeaderText="Código tipo de carga ATM" ItemStyle-HorizontalAlign="center" />
+                                                <asp:BoundField DataField="Descripcion" HeaderText="Tipo de carga ATM" ItemStyle-HorizontalAlign="center" />
                                                 <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="center">
                                                     <ItemTemplate>
-                                                        <asp:LinkButton ID="BtnEditar" Visible="false" runat="server" CssClass="btn btn-info ti-pencil-alt mr-2" Text="" CommandArgument='<%# Eval("idTipoCargaATM") %>' CommandName="Codigo"></asp:LinkButton>
+                                                        <asp:LinkButton ID="BtnEditar" Visible="false" runat="server" CssClass="btn btn-info ti-pencil-alt mr-2" Text="" CommandArgument='<%# Eval("Id_Carga_ATM") %>' CommandName="Codigo"></asp:LinkButton>
                                                         <%--<asp:Button ID="BtnUsuarioPassword" runat="server" Text="De baja" CssClass="btn btn-block btn-outline-danger" CommandArgument='<%# Eval("codATM") %>' CommandName="Baja" />--%>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
@@ -96,7 +96,7 @@
     <div class="modal fade bs-example-modal-lg" id="modalTipoCargaATM" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <div class="modal-header" style="background-color: darkslategrey; color: white;">
+                <div class="modal-header">
                     <h4 class="modal-title" id="myLargeModalLabel">¿Seguro que modificará tipo de carga ATM?</h4>
                 </div>
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -112,11 +112,11 @@
                         <div class="row col-12">
                             <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>*Nuevo nombre tipo de carga: </strong></asp:Label>
                             <asp:TextBox runat="server" ID="txtModalNewTipoCargaATM" CssClass="form-control col-6"></asp:TextBox>
-                        </div>
-                        <div class="col-md-8 align-self-center" style="margin-left: auto; margin-right: auto">
+                        </div><br />
+                        <%--<div class="col-md-8 align-self-center" style="margin-left: auto; margin-right: auto">
                             <br />
                             <h6 runat="server" visible="false" id="H5Alerta1" class="text-danger col-12" style="text-align: center;">Los campos con(*) son obligatorios.</h6>
-                        </div>
+                        </div>--%>
                         <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
                             <asp:TextBox runat="server" Enabled="false" Text="Ingrese nuevo tipo de carga." Visible="false" ID="txtAlerta1" CssClass="form-control" Style="background-color: red; color: white; text-align: center;" />
                         </div>
@@ -125,12 +125,9 @@
                 <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                     <ContentTemplate>
                         <div class="modal-footer col-12">
-                            <div class="row col-3">
-                                <asp:Button runat="server" ID="btnModalEnviarTipoCargaATM" OnClick="btnModalEnviarTipoCargaATM_Click" CssClass="btn btn-dark mr-2" Text="Modificar" />
-                            </div>
-                            <div class="row col-3">
-                                <asp:Button runat="server" ID="btnModalCerrarTipoCargaATM" OnClick="btnModalCerrarTipoCargaATM_Click" CssClass="btn btn-secundary mr-2" Text="Cancelar" />
-                            </div>
+                             <asp:Button runat="server" ID="btnModalCerrarTipoCargaATM" OnClick="btnModalCerrarTipoCargaATM_Click" CssClass="btn btn-secundary mr-2" Text="Cancelar" />
+                                <asp:Button runat="server" ID="btnModalEnviarTipoCargaATM" OnClick="btnModalEnviarTipoCargaATM_Click" CssClass="btn btn-success mr-2" Text="Modificar" />
+                            
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
@@ -145,7 +142,7 @@
     <div class="modal fade bs-example-modal-lg" id="modalTipoCargaATM2" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
-                    <div class="modal-header" style="background-color: darkslategrey; color: white;">
+                    <div class="modal-header">
                         <h4 class="modal-title" id="myLargeModalLabel1">Nuevo tipo de carga ATM</h4>
                     </div>
                     <asp:UpdatePanel ID="UpdatePanel3" runat="server">
@@ -154,12 +151,12 @@
                             <div class="row col-12">
                                 <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>*Nombre tipo carga ATM: </strong></asp:Label>
                                 <asp:TextBox runat="server" ID="txtNewtipocargaATM" CssClass="form-control col-6"></asp:TextBox>
-                            </div>
+                            </div><br />
 
-                            <div class="col-md-8 align-self-center" style="margin-left: auto; margin-right: auto">
+                           <%-- <div class="col-md-8 align-self-center" style="margin-left: auto; margin-right: auto">
                                 <br />
                                 <h6 runat="server" visible="false" id="H5Alerta2" class="text-danger col-12" style="text-align: center;">Los campos con(*) son obligatorios.</h6>
-                            </div>
+                            </div>--%>
                             <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
                                 <asp:TextBox runat="server" Enabled="false" Text="Ingrese nuevo tipo de carga." Visible="false" ID="txtAlerta2" CssClass="form-control" Style="background-color: red; color: white; text-align: center;" />
                             </div>
@@ -168,13 +165,9 @@
                     <asp:UpdatePanel ID="UpdatePanel5" runat="server">
                         <ContentTemplate>
                             <div class="modal-footer col-12">
-                                <div class="row col-3">
-                                    <asp:Button runat="server" ID="btnModalNueviTipoCargaATM" OnClick="btnModalNueviTipoCargaATM_Click" CssClass="btn btn-dark mr-2" Text="Agregar" />
-                                </div>
-                                <div class="row col-3">
-                                    <asp:Button runat="server" ID="btnModalCerrarNueviTipoCargaATM" OnClick="btnModalCerrarNueviTipoCargaATM_Click" CssClass="btn btn-secundary mr-2" Text="Cancelar" />
-                                </div>
-                            </div>
+                                <asp:Button runat="server" ID="btnModalCerrarNueviTipoCargaATM" OnClick="btnModalCerrarNueviTipoCargaATM_Click" CssClass="btn btn-secundary mr-2" Text="Cancelar" />
+                                    <asp:Button runat="server" ID="btnModalNueviTipoCargaATM" OnClick="btnModalNueviTipoCargaATM_Click" CssClass="btn btn-success mr-2" Text="Agregar" />
+                                
                         </ContentTemplate>
                     </asp:UpdatePanel>
 

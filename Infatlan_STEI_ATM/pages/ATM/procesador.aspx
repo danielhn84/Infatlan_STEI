@@ -72,11 +72,11 @@
                                             PageSize="10" OnRowCommand="GVBusqueda_RowCommand">
                                             <Columns>
 
-                                                <asp:BoundField DataField="idProcesadorATM" HeaderText="Código procesador ATM" ItemStyle-HorizontalAlign="center" />
-                                                <asp:BoundField DataField="nombreProcesadorATM" HeaderText="Procesador ATM" ItemStyle-HorizontalAlign="center" />
+                                                <asp:BoundField DataField="Id_Procesador_ATM" HeaderText="Código procesador ATM" ItemStyle-HorizontalAlign="center" />
+                                                <asp:BoundField DataField="Descripcion" HeaderText="Procesador ATM" ItemStyle-HorizontalAlign="center" />
                                                 <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="center">
                                                     <ItemTemplate>
-                                                        <asp:LinkButton ID="BtnEditar" Visible="false" runat="server" CssClass="btn btn-info ti-pencil-alt mr-2" Text="" CommandArgument='<%# Eval("idProcesadorATM") %>' CommandName="Codigo"></asp:LinkButton>
+                                                        <asp:LinkButton ID="BtnEditar" Visible="false" runat="server" CssClass="btn btn-info ti-pencil-alt mr-2" Text="" CommandArgument='<%# Eval("Id_Procesador_ATM") %>' CommandName="Codigo"></asp:LinkButton>
                                                         <%--<asp:Button ID="BtnUsuarioPassword" runat="server" Text="De baja" CssClass="btn btn-block btn-outline-danger" CommandArgument='<%# Eval("codATM") %>' CommandName="Baja" />--%>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
@@ -97,7 +97,7 @@
     <div class="modal fade bs-example-modal-lg" id="modalprocesadorATM" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <div class="modal-header" style="background-color: darkslategrey; color: white;">
+                <div class="modal-header">
                     <h4 class="modal-title" id="myLargeModalLabel">¿Modificará procesador de ATM?</h4>
                 </div>
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -114,11 +114,11 @@
                         <div class="row col-12">
                             <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>*Nuevo procesador ATM: </strong></asp:Label>
                             <asp:TextBox runat="server" ID="txtModalNewprocesadorATM" CssClass="form-control col-6"></asp:TextBox>
-                        </div>
-                        <div class="col-md-8 align-self-center" style="margin-left: auto; margin-right: auto">
+                        </div><br />
+                       <%-- <div class="col-md-8 align-self-center" style="margin-left: auto; margin-right: auto">
                             <br />
                             <h6 runat="server" visible="false" id="H5Alerta1" class="text-danger col-12" style="text-align: center;">Los campos con(*) son obligatorios.</h6>
-                        </div>
+                        </div>--%>
                         <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
                             <asp:TextBox runat="server" Enabled="false" Text="Ingrese nuevo procesador." Visible="false" ID="txtAlerta1" CssClass="form-control" Style="background-color: red; color: white; text-align: center;" />
                         </div>
@@ -127,12 +127,9 @@
                 <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                     <ContentTemplate>
                         <div class="modal-footer col-12">
-                            <div class="row col-3">
-                                <asp:Button runat="server" ID="btnModalEnviarprocesadorATM" OnClick="btnModalEnviarprocesadorATM_Click" CssClass="btn btn-dark mr-2" Text="Modificar" />
-                            </div>
-                            <div class="row col-3">
-                                <asp:Button runat="server" ID="btnModalCerrarprocesadorATM" OnClick="btnModalCerrarprocesadorATM_Click" CssClass="btn btn-secundary mr-2" Text="Cancelar" />
-                            </div>
+                            <asp:Button runat="server" ID="btnModalCerrarprocesadorATM" OnClick="btnModalCerrarprocesadorATM_Click" CssClass="btn btn-secundary mr-2" Text="Cancelar" />
+                                <asp:Button runat="server" ID="btnModalEnviarprocesadorATM" OnClick="btnModalEnviarprocesadorATM_Click" CssClass="btn btn-success mr-2" Text="Modificar" />
+                           
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
@@ -147,7 +144,7 @@
     <div class="modal fade bs-example-modal-lg" id="modalProcesadorATM" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <div class="modal-header" style="background-color: darkslategrey; color: white;">
+                <div class="modal-header">
                     <h4 class="modal-title" id="myLargeModalLabel1">Nuevo procesador de ATM</h4>
                 </div>
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
@@ -156,11 +153,11 @@
                         <div class="row col-12">
                             <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>Nombre de procesador ATM: </strong></asp:Label>
                             <asp:TextBox runat="server" ID="txtNewProcesadorATM" CssClass="form-control col-6"></asp:TextBox>
-                        </div>
-                        <div class="col-md-8 align-self-center" style="margin-left: auto; margin-right: auto">
+                        </div><br />
+                       <%-- <div class="col-md-8 align-self-center" style="margin-left: auto; margin-right: auto">
                             <br />
                             <h6 runat="server" visible="false" id="H5Alerta2" class="text-danger col-12" style="text-align: center;">Los campos con(*) son obligatorios.</h6>
-                        </div>
+                        </div>--%>
                         <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
                             <asp:TextBox runat="server" Enabled="false" Text="Ingrese nuevo procesador." Visible="false" ID="txtAlerta2" CssClass="form-control" Style="background-color: red; color: white; text-align: center;" />
                         </div>
@@ -169,12 +166,9 @@
                 <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                     <ContentTemplate>
                         <div class="modal-footer col-12">
-                            <div class="row col-3">
-                                <asp:Button runat="server" ID="btnModalNueviProcesadorATM" OnClick="btnModalNueviProcesadorATM_Click" CssClass="btn btn-dark mr-2" Text="Agregar" />
-                            </div>
-                            <div class="row col-3">
-                                <asp:Button runat="server" ID="btnModalCerrarNueviProcesadorATM" OnClick="btnModalCerrarNueviProcesadorATM_Click" CssClass="btn btn-secundary mr-2" Text="Cancelar" />
-                            </div>
+                           <asp:Button runat="server" ID="btnModalCerrarNueviProcesadorATM" OnClick="btnModalCerrarNueviProcesadorATM_Click" CssClass="btn btn-secundary mr-2" Text="Cancelar" />
+                                <asp:Button runat="server" ID="btnModalNueviProcesadorATM" OnClick="btnModalNueviProcesadorATM_Click" CssClass="btn btn-success mr-2" Text="Agregar" />
+                            
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
