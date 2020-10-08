@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Web.Security;
 using System.Web.UI;
 using Infatlan_STEI.classes;
 
@@ -66,8 +67,12 @@ namespace Infatlan_STEI
                         LICableado.Visible = true;
                     if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 5).Consulta)
                         LiCumplimiento.Visible = true;
-                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 5).Creacion)
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 5).Creacion) { 
                         LIFormulario.Visible = true;
+                        LIModificar.Visible = true;
+                    }
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 5).Edicion)
+                        LIPendientes.Visible = true;
                     if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 6).Consulta)
                         LIConfiguracion.Visible = true;
                     if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 7).Consulta)

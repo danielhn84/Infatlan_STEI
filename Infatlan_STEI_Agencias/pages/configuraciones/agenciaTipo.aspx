@@ -1,5 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="agenciaTipo.aspx.cs" Inherits="Infatlan_STEI_Agencias.pages.configuraciones.agenciaTipo" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" EnableViewState = "false"  CodeBehind="agenciaTipo.aspx.cs" Inherits="Infatlan_STEI_Agencias.pages.configuraciones.agenciaTipo" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server"> 
     <script type="text/javascript">
 
         var updateProgress = null;

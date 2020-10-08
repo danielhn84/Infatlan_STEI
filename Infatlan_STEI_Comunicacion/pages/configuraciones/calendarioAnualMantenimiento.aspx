@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="calendarioAnualMantenimiento.aspx.cs" Inherits="Infatlan_STEI_Comunicacion.pages.configuraciones.calendarioAnualMantenimiento" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
+
+
+
     <script type="text/javascript">
         var updateProgress = null;
         function postbackButtonClick() {
@@ -15,6 +18,9 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
+
+
+
     <asp:UpdateProgress ID="UpdateProgress1" runat="server">
         <ProgressTemplate>
             <div style="position: fixed; text-align: center; height: 100%; width: 100%; top: 0; right: 0; left: 0; z-index: 9999999; background-color: #ffffff; opacity: 0.7; margin: 0;">
@@ -77,18 +83,20 @@
 
             <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
-                    <div class="col-md-12" runat="server" id="Div1" visible="false" style="display: flex; background-color: darkgreen; justify-content: center">
-                        <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbMensajeSuccsess"></asp:Label>
+                    <div class="col-md-12" runat="server" id="Div1" visible="false" style="display: flex; background-color: darkgreen; justify-content: center; text-align:center">
+                        <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbMensajeSuccsess" ></asp:Label>
                     </div>
                 </ContentTemplate>
             </asp:UpdatePanel>
             <br>
-            <asp:UpdatePanel runat="server" ID="UpdatePanel7" UpdateMode="Conditional">
-                <ContentTemplate>
-                    <asp:Button Text="Enviar" class="btn btn-success" ID="BtnEnviar" runat="server" />
+<%--            <asp:UpdatePanel runat="server" ID="UpdatePanel7" UpdateMode="Conditional">
+                <ContentTemplate>--%>
+                    <asp:Button Text="Enviar" class="btn btn-success" ID="BtnEnviar" OnClick="BtnEnviar_Click1" runat="server" />
                     <button type="button" class="btn btn-primary">Cancelar</button>
-                </ContentTemplate>
-            </asp:UpdatePanel>
+<%--                </ContentTemplate>
+            </asp:UpdatePanel>--%>
+
+
 
             <br>
             <br>

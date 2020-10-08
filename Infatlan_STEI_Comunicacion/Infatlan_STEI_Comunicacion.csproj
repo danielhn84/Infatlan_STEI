@@ -43,9 +43,28 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AntiCSRF, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AntiCSRF.2.0.0\lib\net46\AntiCSRF.dll</HintPath>
+    </Reference>
+    <Reference Include="Excel.4.5">
+      <HintPath>..\Infatlan_STEI\bin\Excel.4.5.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.5.452, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.zkemkeeper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>bin\Interop.zkemkeeper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.Net.Http, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -55,6 +74,21 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -322,7 +356,6 @@
     <Content Include="assets\icons\font-awesome\css\font-awesome.css" />
     <Content Include="assets\icons\font-awesome\css\font-awesome.min.css" />
     <Content Include="assets\icons\font-awesome\fonts\fontawesome-webfont.svg" />
-    <Content Include="assets\icons\font-awesome\old\.gitignore" />
     <Content Include="assets\icons\font-awesome\old\css\font-awesome.css" />
     <Content Include="assets\icons\font-awesome\old\css\font-awesome.min.css" />
     <Content Include="assets\icons\font-awesome\old\fonts\fontawesome-webfont.svg" />
@@ -458,13 +491,13 @@
     <Content Include="assets\images\users\d4.jpg" />
     <Content Include="assets\images\users\d5.jpg" />
     <Content Include="assets\images\users\profile.png" />
+    <Content Include="assets\images\vistaPrevia1.jpg" />
     <Content Include="assets\node_modules\blockUI\jquery.blockUI.js" />
     <Content Include="assets\node_modules\bootstrap-datepicker\bootstrap-datepicker.min.css" />
     <Content Include="assets\node_modules\bootstrap-datepicker\bootstrap-datepicker.min.js" />
     <Content Include="assets\node_modules\bootstrap-daterangepicker\daterangepicker.css" />
     <Content Include="assets\node_modules\bootstrap-daterangepicker\daterangepicker.js" />
     <Content Include="assets\node_modules\bootstrap-daterangepicker\drp.png" />
-    <Content Include="assets\node_modules\bootstrap-material-datetimepicker\.gitignore" />
     <Content Include="assets\node_modules\bootstrap-material-datetimepicker\css\bootstrap-material-datetimepicker.css" />
     <Content Include="assets\node_modules\bootstrap-material-datetimepicker\font\Material-Design-Icons.svg" />
     <Content Include="assets\node_modules\bootstrap-material-datetimepicker\index.html" />
@@ -480,7 +513,6 @@
     <Content Include="assets\node_modules\bootstrap-old\js\tether.min.js" />
     <Content Include="assets\node_modules\bootstrap-select\bootstrap-select.min.css" />
     <Content Include="assets\node_modules\bootstrap-select\bootstrap-select.min.js" />
-    <Content Include="assets\node_modules\bootstrap-social\.gitignore" />
     <Content Include="assets\node_modules\bootstrap-social\bootstrap-social.css" />
     <Content Include="assets\node_modules\bootstrap-switch\bootstrap-switch.css" />
     <Content Include="assets\node_modules\bootstrap-switch\bootstrap-switch.js" />
@@ -719,8 +751,6 @@
     <Content Include="assets\node_modules\bootstrap-touchspin\dist\jquery.bootstrap-touchspin.min.js" />
     <Content Include="assets\node_modules\bootstrap-touchspin\src\jquery.bootstrap-touchspin.css" />
     <Content Include="assets\node_modules\bootstrap-touchspin\src\jquery.bootstrap-touchspin.js" />
-    <Content Include="assets\node_modules\bootstrap-treeview-master\.gitattributes" />
-    <Content Include="assets\node_modules\bootstrap-treeview-master\.gitignore" />
     <Content Include="assets\node_modules\bootstrap-treeview-master\app.js" />
     <Content Include="assets\node_modules\bootstrap-treeview-master\dist\bootstrap-treeview-init.js" />
     <Content Include="assets\node_modules\bootstrap-treeview-master\dist\bootstrap-treeview.min.css" />
@@ -775,7 +805,6 @@
     <Content Include="assets\node_modules\bootstrap\js\src\tab.js" />
     <Content Include="assets\node_modules\bootstrap\js\src\tooltip.js" />
     <Content Include="assets\node_modules\bootstrap\js\src\util.js" />
-    <Content Include="assets\node_modules\c3-master\.gitignore" />
     <Content Include="assets\node_modules\c3-master\c3.css" />
     <Content Include="assets\node_modules\c3-master\c3.js" />
     <Content Include="assets\node_modules\c3-master\c3.min.css" />
@@ -1132,7 +1161,6 @@
     <Content Include="assets\node_modules\chartist-js\dist\chartist.js" />
     <Content Include="assets\node_modules\chartist-js\dist\chartist.min.css" />
     <Content Include="assets\node_modules\chartist-js\dist\chartist.min.js" />
-    <Content Include="assets\node_modules\chartist-plugin-tooltip-master\.gitignore" />
     <Content Include="assets\node_modules\chartist-plugin-tooltip-master\dist\chartist-plugin-tooltip.css" />
     <Content Include="assets\node_modules\chartist-plugin-tooltip-master\dist\chartist-plugin-tooltip.js" />
     <Content Include="assets\node_modules\chartist-plugin-tooltip-master\dist\chartist-plugin-tooltip.min.js" />
@@ -1305,7 +1333,6 @@
     <Content Include="assets\node_modules\datatables-plugins\type-detection\ip-address.js" />
     <Content Include="assets\node_modules\datatables-plugins\type-detection\num-html.js" />
     <Content Include="assets\node_modules\datatables-plugins\type-detection\numeric-comma.js" />
-    <Content Include="assets\node_modules\datatables-responsive\.gitignore" />
     <Content Include="assets\node_modules\datatables-responsive\docs\api\responsive.index%28%29.xml" />
     <Content Include="assets\node_modules\datatables-responsive\docs\api\responsive.rebuild%28%29.xml" />
     <Content Include="assets\node_modules\datatables-responsive\docs\api\responsive.recalc%28%29.xml" />
@@ -1378,7 +1405,6 @@
     <Content Include="assets\node_modules\date-paginator\bootstrap-datepaginator.min.css" />
     <Content Include="assets\node_modules\date-paginator\bootstrap-datepaginator.min.js" />
     <Content Include="assets\node_modules\date-paginator\moment.min.js" />
-    <Content Include="assets\node_modules\dropify\.gitignore" />
     <Content Include="assets\node_modules\dropify\dist\css\demo.css" />
     <Content Include="assets\node_modules\dropify\dist\css\dropify.css" />
     <Content Include="assets\node_modules\dropify\dist\css\dropify.min.css" />
@@ -1392,7 +1418,6 @@
     <Content Include="assets\node_modules\dropify\src\images\test-image-1.jpg" />
     <Content Include="assets\node_modules\dropify\src\images\test-image-2.jpg" />
     <Content Include="assets\node_modules\dropify\src\js\dropify.js" />
-    <Content Include="assets\node_modules\dropzone-master\.gitignore" />
     <Content Include="assets\node_modules\dropzone-master\dist\basic.css" />
     <Content Include="assets\node_modules\dropzone-master\dist\dropzone-amd-module.js" />
     <Content Include="assets\node_modules\dropzone-master\dist\dropzone.css" />
@@ -1482,7 +1507,6 @@
     <Content Include="assets\node_modules\flot.tooltip\js\jquery.flot.tooltip.js" />
     <Content Include="assets\node_modules\flot.tooltip\js\jquery.flot.tooltip.min.js" />
     <Content Include="assets\node_modules\flot.tooltip\js\jquery.flot.tooltip.source.js" />
-    <Content Include="assets\node_modules\flot\.gitignore" />
     <Content Include="assets\node_modules\flot\examples\ajax\index.html" />
     <Content Include="assets\node_modules\flot\examples\annotating\index.html" />
     <Content Include="assets\node_modules\flot\examples\axes-interacting\index.html" />
@@ -1644,15 +1668,12 @@
     <Content Include="assets\node_modules\gridstack\gridstack.min.css" />
     <Content Include="assets\node_modules\gridstack\gridstack.min.js" />
     <Content Include="assets\node_modules\gridstack\lodash.js" />
-    <Content Include="assets\node_modules\holderjs\.gitattributes" />
-    <Content Include="assets\node_modules\holderjs\.gitignore" />
     <Content Include="assets\node_modules\holderjs\gulpfile.js" />
     <Content Include="assets\node_modules\holderjs\holder.js" />
     <Content Include="assets\node_modules\holderjs\src\augment.js" />
     <Content Include="assets\node_modules\holderjs\src\holder.js" />
     <Content Include="assets\node_modules\holderjs\src\ondomready.js" />
     <Content Include="assets\node_modules\holderjs\src\polyfills.js" />
-    <Content Include="assets\node_modules\holderjs\test\.gitignore" />
     <Content Include="assets\node_modules\holderjs\test\image.jpg" />
     <Content Include="assets\node_modules\holderjs\test\index.html" />
     <Content Include="assets\node_modules\horizontal-timeline\css\horizontal-timeline.css" />
@@ -1796,8 +1817,6 @@
     <Content Include="assets\node_modules\ion-rangeslider\js\ion-rangeSlider\ion.rangeSlider.js" />
     <Content Include="assets\node_modules\ion-rangeslider\js\ion-rangeSlider\ion.rangeSlider.min.js" />
     <Content Include="assets\node_modules\ion-rangeslider\js\vendor\jquery-1.12.3.min.js" />
-    <Content Include="assets\node_modules\jquery-asColorPicker-master\.gitattributes" />
-    <Content Include="assets\node_modules\jquery-asColorPicker-master\.gitignore" />
     <Content Include="assets\node_modules\jquery-asColorPicker-master\css\asColorPicker.css" />
     <Content Include="assets\node_modules\jquery-asColorPicker-master\demo\css\main.css" />
     <Content Include="assets\node_modules\jquery-asColorPicker-master\demo\css\prism.css" />
@@ -1845,8 +1864,6 @@
     <Content Include="assets\node_modules\jquery-datatables-editable\jquery.dataTables.js" />
     <Content Include="assets\node_modules\jquery-sparkline\jquery.charts-sparkline.js" />
     <Content Include="assets\node_modules\jquery-sparkline\jquery.sparkline.min.js" />
-    <Content Include="assets\node_modules\jquery-steps-master\.gitattributes" />
-    <Content Include="assets\node_modules\jquery-steps-master\.gitignore" />
     <Content Include="assets\node_modules\jquery-steps-master\build\jquery.steps.js" />
     <Content Include="assets\node_modules\jquery-steps-master\build\jquery.steps.min.js" />
     <Content Include="assets\node_modules\jquery-steps-master\demo\css\jquery.steps.css" />
@@ -1874,8 +1891,6 @@
     <Content Include="assets\node_modules\jquery-steps-master\test\qunit\qunit-1.11.0.css" />
     <Content Include="assets\node_modules\jquery-steps-master\test\qunit\qunit-1.11.0.js" />
     <Content Include="assets\node_modules\jquery-steps-master\test\tests.js" />
-    <Content Include="assets\node_modules\jquery-wizard-master\.gitattributes" />
-    <Content Include="assets\node_modules\jquery-wizard-master\.gitignore" />
     <Content Include="assets\node_modules\jquery-wizard-master\config.js" />
     <Content Include="assets\node_modules\jquery-wizard-master\css\wizard.css" />
     <Content Include="assets\node_modules\jquery-wizard-master\demo\ajax\1.html" />
@@ -2106,7 +2121,6 @@
     <Content Include="assets\node_modules\knob\jquery.knob-old.js" />
     <Content Include="assets\node_modules\knob\jquery.knob.js" />
     <Content Include="assets\node_modules\knob\jquery.knob.min.js" />
-    <Content Include="assets\node_modules\Magnific-Popup-master\.gitignore" />
     <Content Include="assets\node_modules\Magnific-Popup-master\dist\jquery.magnific-popup-init.js" />
     <Content Include="assets\node_modules\Magnific-Popup-master\dist\jquery.magnific-popup.js" />
     <Content Include="assets\node_modules\Magnific-Popup-master\dist\jquery.magnific-popup.min.js" />
@@ -2344,7 +2358,6 @@
     <Content Include="assets\node_modules\moment\src\locale\zh-cn.js" />
     <Content Include="assets\node_modules\moment\src\locale\zh-tw.js" />
     <Content Include="assets\node_modules\moment\src\moment.js" />
-    <Content Include="assets\node_modules\morrisjs\.gitignore" />
     <Content Include="assets\node_modules\morrisjs\examples\area-as-line.html" />
     <Content Include="assets\node_modules\morrisjs\examples\area.html" />
     <Content Include="assets\node_modules\morrisjs\examples\bar-colors.html" />
@@ -2421,7 +2434,6 @@
     <Content Include="assets\node_modules\register-steps\jquery.easing.min.js" />
     <Content Include="assets\node_modules\register-steps\register-init.js" />
     <Content Include="assets\node_modules\register-steps\steps.css" />
-    <Content Include="assets\node_modules\select2\.gitignore" />
     <Content Include="assets\node_modules\select2\dist\css\select2.css" />
     <Content Include="assets\node_modules\select2\dist\css\select2.min.css" />
     <Content Include="assets\node_modules\select2\dist\js\i18n\ar.js" />
@@ -2476,7 +2488,6 @@
     <Content Include="assets\node_modules\select2\dist\js\select2.full.min.js" />
     <Content Include="assets\node_modules\select2\dist\js\select2.js" />
     <Content Include="assets\node_modules\select2\dist\js\select2.min.js" />
-    <Content Include="assets\node_modules\select2\docs\.gitignore" />
     <Content Include="assets\node_modules\select2\docs\announcements-4.0.html" />
     <Content Include="assets\node_modules\select2\docs\browserconfig.xml" />
     <Content Include="assets\node_modules\select2\docs\community.html" />
@@ -2956,7 +2967,6 @@
     <Content Include="assets\node_modules\switchery\meteor\tests.js" />
     <Content Include="assets\node_modules\switchery\switchery.css" />
     <Content Include="assets\node_modules\switchery\switchery.js" />
-    <Content Include="assets\node_modules\tablesaw-master\.gitignore" />
     <Content Include="assets\node_modules\tablesaw-master\demo\ajax-init-stack.html" />
     <Content Include="assets\node_modules\tablesaw-master\demo\ajax-init.html" />
     <Content Include="assets\node_modules\tablesaw-master\demo\bare.html" />
@@ -3109,7 +3119,6 @@
     <Content Include="assets\node_modules\tinymce\tinymce.min.js" />
     <Content Include="assets\node_modules\toast-master\css\jquery.toast.css" />
     <Content Include="assets\node_modules\toast-master\js\jquery.toast.js" />
-    <Content Include="assets\node_modules\typeahead.js-master\.gitignore" />
     <Content Include="assets\node_modules\typeahead.js-master\dist\bloodhound.js" />
     <Content Include="assets\node_modules\typeahead.js-master\dist\bloodhound.min.js" />
     <Content Include="assets\node_modules\typeahead.js-master\dist\typeahead-init.js" />
@@ -3263,6 +3272,7 @@
     <Content Include="bin\roslyn\Microsoft.CodeAnalysis.dll" />
     <Content Include="bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll" />
     <Content Include="bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
     <Content Include="bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll" />
     <Content Include="bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll" />
     <Content Include="bin\roslyn\Microsoft.Win32.Primitives.dll" />
@@ -3384,6 +3394,8 @@
     <Content Include="dist\js\perfect-scrollbar.jquery.min.js" />
     <Content Include="dist\js\sidebarmenu.js" />
     <Content Include="dist\js\waves.js" />
+    <Content Include="Global.asax" />
+    <Content Include="Interop.zkemkeeper.dll" />
     <Content Include="js\bootstrap-notify.js" />
     <Content Include="js\custom.js" />
     <Content Include="js\custom.min.js" />
@@ -3432,6 +3444,9 @@
     </Compile>
     <Compile Include="default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="main.Master.cs">
       <DependentUpon>main.Master</DependentUpon>
@@ -3504,8 +3519,117 @@
       <DependentUpon>pendientesReprogramarMantenimiento.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System\Web\Helpers.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\images\background\Thumbs.db" />
+    <Content Include="assets\images\big\Thumbs.db" />
+    <Content Include="assets\package.json" />
+    <Content Include="assets\README.md" />
+    <Content Include="dist\css\fonts\fontawesome-webfont.ttf" />
+    <Content Include="dist\css\fonts\icomoon.ttf" />
+    <Content Include="dist\css\fonts\Material-Design-Iconic-Font.ttf" />
+    <Content Include="dist\css\fonts\materialdesignicons-webfont.ttf" />
+    <Content Include="dist\css\fonts\Simple-Line-Icons.ttf" />
+    <Content Include="dist\css\fonts\themify.ttf" />
+    <Content Include="dist\scss\colors\blue-dark.scss" />
+    <Content Include="dist\scss\colors\blue.scss" />
+    <Content Include="dist\scss\colors\default-dark.scss" />
+    <Content Include="dist\scss\colors\default.scss" />
+    <Content Include="dist\scss\colors\green-dark.scss" />
+    <Content Include="dist\scss\colors\green.scss" />
+    <Content Include="dist\scss\colors\megna-dark.scss" />
+    <Content Include="dist\scss\colors\megna.scss" />
+    <Content Include="dist\scss\colors\purple-dark.scss" />
+    <Content Include="dist\scss\colors\purple.scss" />
+    <Content Include="dist\scss\colors\red-dark.scss" />
+    <Content Include="dist\scss\colors\red.scss" />
+    <Content Include="dist\scss\core\animation.scss" />
+    <Content Include="dist\scss\core\app.scss" />
+    <Content Include="dist\scss\core\buttons.scss" />
+    <Content Include="dist\scss\core\core.scss" />
+    <Content Include="dist\scss\core\form-pages.scss" />
+    <Content Include="dist\scss\core\header.scss" />
+    <Content Include="dist\scss\core\other-common.scss" />
+    <Content Include="dist\scss\core\pagination.scss" />
+    <Content Include="dist\scss\core\perfect-scrollbar.scss" />
+    <Content Include="dist\scss\core\right-sidebar.scss" />
+    <Content Include="dist\scss\core\scafholding.scss" />
+    <Content Include="dist\scss\core\sidebar.scss" />
+    <Content Include="dist\scss\core\spinner.scss" />
+    <Content Include="dist\scss\core\table-pages.scss" />
+    <Content Include="dist\scss\core\theme-settings.scss" />
+    <Content Include="dist\scss\custom.scss" />
+    <Content Include="dist\scss\pages\bootstrap-switch.scss" />
+    <Content Include="dist\scss\pages\breadcrumb-page.scss" />
+    <Content Include="dist\scss\pages\chat-app-page.scss" />
+    <Content Include="dist\scss\pages\contact-app-page.scss" />
+    <Content Include="dist\scss\pages\dashboard1.scss" />
+    <Content Include="dist\scss\pages\dashboard2.scss" />
+    <Content Include="dist\scss\pages\dashboard3.scss" />
+    <Content Include="dist\scss\pages\dashboard4.scss" />
+    <Content Include="dist\scss\pages\easy-pie-chart.scss" />
+    <Content Include="dist\scss\pages\error-pages.scss" />
+    <Content Include="dist\scss\pages\file-upload.scss" />
+    <Content Include="dist\scss\pages\float-chart.scss" />
+    <Content Include="dist\scss\pages\floating-label.scss" />
+    <Content Include="dist\scss\pages\footable-page.scss" />
+    <Content Include="dist\scss\pages\form-icheck.scss" />
+    <Content Include="dist\scss\pages\google-vector-map.scss" />
+    <Content Include="dist\scss\pages\icon-page.scss" />
+    <Content Include="dist\scss\pages\inbox.scss" />
+    <Content Include="dist\scss\pages\login-register-lock.scss" />
+    <Content Include="dist\scss\pages\other-pages.scss" />
+    <Content Include="dist\scss\pages\pricing-page.scss" />
+    <Content Include="dist\scss\pages\progressbar-page.scss" />
+    <Content Include="dist\scss\pages\register3.scss" />
+    <Content Include="dist\scss\pages\ribbon-page.scss" />
+    <Content Include="dist\scss\pages\stylish-tooltip.scss" />
+    <Content Include="dist\scss\pages\tab-page.scss" />
+    <Content Include="dist\scss\pages\timeline-vertical-horizontal.scss" />
+    <Content Include="dist\scss\pages\ui-bootstrap-page.scss" />
+    <Content Include="dist\scss\pages\user-card.scss" />
+    <Content Include="dist\scss\pages\widget-page.scss" />
+    <Content Include="dist\scss\responsive.scss" />
+    <Content Include="dist\scss\style.scss" />
+    <Content Include="dist\scss\variable.scss" />
+    <Content Include="dist\scss\widgets\activity.scss" />
+    <Content Include="dist\scss\widgets\blog.scss" />
+    <Content Include="dist\scss\widgets\calendar.scss" />
+    <Content Include="dist\scss\widgets\carousel.scss" />
+    <Content Include="dist\scss\widgets\chat-widget.scss" />
+    <Content Include="dist\scss\widgets\comment.scss" />
+    <Content Include="dist\scss\widgets\common-widget.scss" />
+    <Content Include="dist\scss\widgets\contact.scss" />
+    <Content Include="dist\scss\widgets\feed.scss" />
+    <Content Include="dist\scss\widgets\msg-box.scss" />
+    <Content Include="dist\scss\widgets\news-slide.scss" />
+    <Content Include="dist\scss\widgets\product-review.scss" />
+    <Content Include="dist\scss\widgets\profile.scss" />
+    <Content Include="dist\scss\widgets\social.scss" />
+    <Content Include="dist\scss\widgets\steamline.scss" />
+    <Content Include="dist\scss\widgets\to-do.scss" />
+    <Content Include="dist\scss\widgets\topbar-mail.scss" />
+    <Content Include="dist\scss\widgets\weather-widget.scss" />
+    <Content Include="dist\scss\widgets\widgets.scss" />
+    <Content Include="css\fonts\fontawesome-webfont.ttf" />
+    <Content Include="css\fonts\icomoon.ttf" />
+    <Content Include="css\fonts\Material-Design-Iconic-Font.ttf" />
+    <Content Include="css\fonts\materialdesignicons-webfont.ttf" />
+    <Content Include="css\fonts\Simple-Line-Icons.ttf" />
+    <Content Include="css\fonts\themify.ttf" />
+    <Content Include="main.Master" />
+    <Content Include="bin\Infatlan_STEI_Comunicacion.dll.config" />
+    <Content Include="bin\roslyn\csc.exe.config" />
+    <Content Include="bin\roslyn\csc.rsp" />
+    <Content Include="bin\roslyn\csi.exe.config" />
+    <Content Include="bin\roslyn\csi.rsp" />
+    <Content Include="bin\roslyn\Microsoft.CSharp.Core.targets" />
+    <Content Include="bin\roslyn\Microsoft.Managed.Core.targets" />
+    <Content Include="bin\roslyn\Microsoft.VisualBasic.Core.targets" />
+    <Content Include="bin\roslyn\vbc.exe.config" />
+    <Content Include="bin\roslyn\vbc.rsp" />
+    <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
     <Content Include="assets\icons\font-awesome\fonts\fontawesome-webfont.eot" />
     <Content Include="assets\icons\font-awesome\fonts\fontawesome-webfont.ttf" />
     <Content Include="assets\icons\font-awesome\fonts\fontawesome-webfont.woff" />
@@ -3526,6 +3650,7 @@
     <Content Include="assets\icons\font-awesome\less\stacked.less" />
     <Content Include="assets\icons\font-awesome\less\variables.less" />
     <Content Include="assets\icons\font-awesome\old\.bower.json" />
+    <Content Include="assets\icons\font-awesome\old\.gitignore" />
     <Content Include="assets\icons\font-awesome\old\.npmignore" />
     <Content Include="assets\icons\font-awesome\old\bower.json" />
     <Content Include="assets\icons\font-awesome\old\fonts\fontawesome-webfont-old.ttf" />
@@ -3664,8 +3789,7 @@
     <Content Include="assets\icons\weather-icons\sass\weather-icons-wind.scss" />
     <Content Include="assets\icons\weather-icons\sass\weather-icons.min.scss" />
     <Content Include="assets\icons\weather-icons\sass\weather-icons.scss" />
-    <Content Include="assets\images\background\Thumbs.db" />
-    <Content Include="assets\images\big\Thumbs.db" />
+    <Content Include="assets\node_modules\bootstrap-material-datetimepicker\.gitignore" />
     <Content Include="assets\node_modules\bootstrap-material-datetimepicker\bower.json" />
     <Content Include="assets\node_modules\bootstrap-material-datetimepicker\font\Material-Design-Icons.eot" />
     <Content Include="assets\node_modules\bootstrap-material-datetimepicker\font\Material-Design-Icons.ttf" />
@@ -3767,6 +3891,7 @@
     <Content Include="assets\node_modules\bootstrap-rtl-master\scss\_variables.scss" />
     <Content Include="assets\node_modules\bootstrap-social\.bower.json" />
     <Content Include="assets\node_modules\bootstrap-social\.editorconfig" />
+    <Content Include="assets\node_modules\bootstrap-social\.gitignore" />
     <Content Include="assets\node_modules\bootstrap-social\bootstrap-social.less" />
     <Content Include="assets\node_modules\bootstrap-social\bootstrap-social.scss" />
     <Content Include="assets\node_modules\bootstrap-social\bower.json" />
@@ -3793,6 +3918,8 @@
     <Content Include="assets\node_modules\bootstrap-tagsinput\dist\bootstrap-tagsinput.min.js.map" />
     <Content Include="assets\node_modules\bootstrap-tagsinput\dist\bootstrap-tagsinput.zip" />
     <Content Include="assets\node_modules\bootstrap-treeview-master\.bowerrc" />
+    <Content Include="assets\node_modules\bootstrap-treeview-master\.gitattributes" />
+    <Content Include="assets\node_modules\bootstrap-treeview-master\.gitignore" />
     <Content Include="assets\node_modules\bootstrap-treeview-master\.jshintrc" />
     <Content Include="assets\node_modules\bootstrap-treeview-master\.travis.yml" />
     <Content Include="assets\node_modules\bootstrap-treeview-master\bower.json" />
@@ -3913,6 +4040,7 @@
     <Content Include="assets\node_modules\c3-master\.circleci\config.yml" />
     <Content Include="assets\node_modules\c3-master\.editorconfig" />
     <Content Include="assets\node_modules\c3-master\.github\ISSUE_TEMPLATE.md" />
+    <Content Include="assets\node_modules\c3-master\.gitignore" />
     <Content Include="assets\node_modules\c3-master\.jshintrc" />
     <Content Include="assets\node_modules\c3-master\.travis.yml" />
     <Content Include="assets\node_modules\c3-master\bower.json" />
@@ -3955,6 +4083,7 @@
     <Content Include="assets\node_modules\chartist-js\dist\chartist.min.js.map" />
     <Content Include="assets\node_modules\chartist-js\dist\scss\chartist.scss" />
     <Content Include="assets\node_modules\chartist-js\dist\scss\settings\_chartist-settings.scss" />
+    <Content Include="assets\node_modules\chartist-plugin-tooltip-master\.gitignore" />
     <Content Include="assets\node_modules\chartist-plugin-tooltip-master\bower.json" />
     <Content Include="assets\node_modules\chartist-plugin-tooltip-master\CHANGELOG.md" />
     <Content Include="assets\node_modules\chartist-plugin-tooltip-master\dist\chartist-plugin-tooltip.css.map" />
@@ -4035,6 +4164,7 @@
     <Content Include="assets\node_modules\datatables-plugins\README.md" />
     <Content Include="assets\node_modules\datatables-plugins\sorting\.DS_Store" />
     <Content Include="assets\node_modules\datatables-responsive\.bower.json" />
+    <Content Include="assets\node_modules\datatables-responsive\.gitignore" />
     <Content Include="assets\node_modules\datatables-responsive\bower.json" />
     <Content Include="assets\node_modules\datatables-responsive\css\responsive.bootstrap.scss" />
     <Content Include="assets\node_modules\datatables-responsive\css\responsive.dataTables.scss" />
@@ -4049,6 +4179,7 @@
     <Content Include="assets\node_modules\datatables\Contributing.md" />
     <Content Include="assets\node_modules\datatables\media\images\Sorting icons.psd" />
     <Content Include="assets\node_modules\datatables\Readme.md" />
+    <Content Include="assets\node_modules\dropify\.gitignore" />
     <Content Include="assets\node_modules\dropify\dist\fonts\dropify.eot" />
     <Content Include="assets\node_modules\dropify\dist\fonts\dropify.ttf" />
     <Content Include="assets\node_modules\dropify\dist\fonts\dropify.woff" />
@@ -4068,6 +4199,7 @@
     <Content Include="assets\node_modules\dropify\src\sass\demo\_variables.scss" />
     <Content Include="assets\node_modules\dropify\src\sass\dropify.scss" />
     <Content Include="assets\node_modules\dropify\src\sass\_dropify-font.scss" />
+    <Content Include="assets\node_modules\dropzone-master\.gitignore" />
     <Content Include="assets\node_modules\dropzone-master\.tagconfig" />
     <Content Include="assets\node_modules\dropzone-master\.travis.yml" />
     <Content Include="assets\node_modules\dropzone-master\AMD_footer" />
@@ -4126,6 +4258,7 @@
     <Content Include="assets\node_modules\flot.tooltip\.bower.json" />
     <Content Include="assets\node_modules\flot.tooltip\bower.json" />
     <Content Include="assets\node_modules\flot\.bower.json" />
+    <Content Include="assets\node_modules\flot\.gitignore" />
     <Content Include="assets\node_modules\flot\.travis.yml" />
     <Content Include="assets\node_modules\flot\API.md" />
     <Content Include="assets\node_modules\flot\component.json" />
@@ -4174,15 +4307,20 @@
     <Content Include="assets\node_modules\gmaps\gmaps.min.js.map" />
     <Content Include="assets\node_modules\gridstack\gridstack.min.map" />
     <Content Include="assets\node_modules\holderjs\.bower.json" />
+    <Content Include="assets\node_modules\holderjs\.gitattributes" />
+    <Content Include="assets\node_modules\holderjs\.gitignore" />
     <Content Include="assets\node_modules\holderjs\.jshintrc" />
     <Content Include="assets\node_modules\holderjs\bower.json" />
     <Content Include="assets\node_modules\holderjs\composer.json" />
     <Content Include="assets\node_modules\holderjs\package.json" />
     <Content Include="assets\node_modules\holderjs\README.md" />
+    <Content Include="assets\node_modules\holderjs\test\.gitignore" />
     <Content Include="assets\node_modules\horizontal-timeline\js\.DS_Store" />
     <Content Include="assets\node_modules\ion-rangeslider\.DS_Store" />
     <Content Include="assets\node_modules\ion-rangeslider\js\.DS_Store" />
     <Content Include="assets\node_modules\jquery-asColorPicker-master\.editorconfig" />
+    <Content Include="assets\node_modules\jquery-asColorPicker-master\.gitattributes" />
+    <Content Include="assets\node_modules\jquery-asColorPicker-master\.gitignore" />
     <Content Include="assets\node_modules\jquery-asColorPicker-master\.jscsrc" />
     <Content Include="assets\node_modules\jquery-asColorPicker-master\.jshintrc" />
     <Content Include="assets\node_modules\jquery-asColorPicker-master\bower.json" />
@@ -4191,6 +4329,8 @@
     <Content Include="assets\node_modules\jquery-asColorPicker-master\package.json" />
     <Content Include="assets\node_modules\jquery-asColorPicker-master\README.md" />
     <Content Include="assets\node_modules\jquery-asColorPicker-master\src\.jshintrc" />
+    <Content Include="assets\node_modules\jquery-steps-master\.gitattributes" />
+    <Content Include="assets\node_modules\jquery-steps-master\.gitignore" />
     <Content Include="assets\node_modules\jquery-steps-master\.travis.yml" />
     <Content Include="assets\node_modules\jquery-steps-master\bower.json" />
     <Content Include="assets\node_modules\jquery-steps-master\build\jquery.steps-1.1.0.zip" />
@@ -4206,8 +4346,10 @@
     <Content Include="assets\node_modules\jquery-wizard-master\.csscomb.json" />
     <Content Include="assets\node_modules\jquery-wizard-master\.editorconfig" />
     <Content Include="assets\node_modules\jquery-wizard-master\.eslintrc.yml" />
+    <Content Include="assets\node_modules\jquery-wizard-master\.gitattributes" />
     <Content Include="assets\node_modules\jquery-wizard-master\.github\ISSUE_TEMPLATE.md" />
     <Content Include="assets\node_modules\jquery-wizard-master\.github\PULL_REQUEST_TEMPLATE.md" />
+    <Content Include="assets\node_modules\jquery-wizard-master\.gitignore" />
     <Content Include="assets\node_modules\jquery-wizard-master\.jscsrc" />
     <Content Include="assets\node_modules\jquery-wizard-master\.jshintrc" />
     <Content Include="assets\node_modules\jquery-wizard-master\.npmignore" />
@@ -4246,6 +4388,7 @@
     <Content Include="assets\node_modules\jtable\themes\metro\pink\jtable.less" />
     <Content Include="assets\node_modules\jtable\themes\metro\purple\jtable.less" />
     <Content Include="assets\node_modules\jtable\themes\metro\red\jtable.less" />
+    <Content Include="assets\node_modules\Magnific-Popup-master\.gitignore" />
     <Content Include="assets\node_modules\Magnific-Popup-master\.jshintrc" />
     <Content Include="assets\node_modules\Magnific-Popup-master\.travis.yml" />
     <Content Include="assets\node_modules\Magnific-Popup-master\bower.json" />
@@ -4265,6 +4408,7 @@
     <Content Include="assets\node_modules\mocha\LICENSE" />
     <Content Include="assets\node_modules\mocha\Readme.md" />
     <Content Include="assets\node_modules\morrisjs\.bower.json" />
+    <Content Include="assets\node_modules\morrisjs\.gitignore" />
     <Content Include="assets\node_modules\morrisjs\.travis.yml" />
     <Content Include="assets\node_modules\morrisjs\bower.json" />
     <Content Include="assets\node_modules\morrisjs\bower.travis.json" />
@@ -4297,6 +4441,7 @@
     <Content Include="assets\node_modules\raphael\.bower.json" />
     <Content Include="assets\node_modules\raphael\bower.json" />
     <Content Include="assets\node_modules\select2\.editorconfig" />
+    <Content Include="assets\node_modules\select2\.gitignore" />
     <Content Include="assets\node_modules\select2\.jshintignore" />
     <Content Include="assets\node_modules\select2\.jshintrc" />
     <Content Include="assets\node_modules\select2\.travis.yml" />
@@ -4304,6 +4449,7 @@
     <Content Include="assets\node_modules\select2\component.json" />
     <Content Include="assets\node_modules\select2\composer.json" />
     <Content Include="assets\node_modules\select2\CONTRIBUTING.md" />
+    <Content Include="assets\node_modules\select2\docs\.gitignore" />
     <Content Include="assets\node_modules\select2\docs\css\bootstrap.scss" />
     <Content Include="assets\node_modules\select2\docs\css\font-awesome.scss" />
     <Content Include="assets\node_modules\select2\docs\css\s2-docs.scss" />
@@ -4447,6 +4593,7 @@
     <Content Include="assets\node_modules\summernote\src\less\elements.less" />
     <Content Include="assets\node_modules\summernote\src\less\summernote.less" />
     <Content Include="assets\node_modules\summernote\src\sass\summernote.scss" />
+    <Content Include="assets\node_modules\tablesaw-master\.gitignore" />
     <Content Include="assets\node_modules\tablesaw-master\.jshintrc" />
     <Content Include="assets\node_modules\tablesaw-master\.travis.yml" />
     <Content Include="assets\node_modules\tablesaw-master\bower.json" />
@@ -4465,6 +4612,7 @@
     <Content Include="assets\node_modules\tinymce\skins\lightgray\fonts\tinymce.eot" />
     <Content Include="assets\node_modules\tinymce\skins\lightgray\fonts\tinymce.ttf" />
     <Content Include="assets\node_modules\tinymce\skins\lightgray\fonts\tinymce.woff" />
+    <Content Include="assets\node_modules\typeahead.js-master\.gitignore" />
     <Content Include="assets\node_modules\typeahead.js-master\.jshintrc" />
     <Content Include="assets\node_modules\typeahead.js-master\.travis.yml" />
     <Content Include="assets\node_modules\typeahead.js-master\bower.json" />
@@ -4483,112 +4631,6 @@
     <Content Include="assets\node_modules\typeahead.js-master\README.md" />
     <Content Include="assets\node_modules\typeahead.js-master\test\ci" />
     <Content Include="assets\node_modules\typeahead.js-master\typeahead.js.jquery.json" />
-    <Content Include="assets\package.json" />
-    <Content Include="assets\README.md" />
-    <Content Include="dist\css\fonts\fontawesome-webfont.ttf" />
-    <Content Include="dist\css\fonts\icomoon.ttf" />
-    <Content Include="dist\css\fonts\Material-Design-Iconic-Font.ttf" />
-    <Content Include="dist\css\fonts\materialdesignicons-webfont.ttf" />
-    <Content Include="dist\css\fonts\Simple-Line-Icons.ttf" />
-    <Content Include="dist\css\fonts\themify.ttf" />
-    <Content Include="dist\scss\colors\blue-dark.scss" />
-    <Content Include="dist\scss\colors\blue.scss" />
-    <Content Include="dist\scss\colors\default-dark.scss" />
-    <Content Include="dist\scss\colors\default.scss" />
-    <Content Include="dist\scss\colors\green-dark.scss" />
-    <Content Include="dist\scss\colors\green.scss" />
-    <Content Include="dist\scss\colors\megna-dark.scss" />
-    <Content Include="dist\scss\colors\megna.scss" />
-    <Content Include="dist\scss\colors\purple-dark.scss" />
-    <Content Include="dist\scss\colors\purple.scss" />
-    <Content Include="dist\scss\colors\red-dark.scss" />
-    <Content Include="dist\scss\colors\red.scss" />
-    <Content Include="dist\scss\core\animation.scss" />
-    <Content Include="dist\scss\core\app.scss" />
-    <Content Include="dist\scss\core\buttons.scss" />
-    <Content Include="dist\scss\core\core.scss" />
-    <Content Include="dist\scss\core\form-pages.scss" />
-    <Content Include="dist\scss\core\header.scss" />
-    <Content Include="dist\scss\core\other-common.scss" />
-    <Content Include="dist\scss\core\pagination.scss" />
-    <Content Include="dist\scss\core\perfect-scrollbar.scss" />
-    <Content Include="dist\scss\core\right-sidebar.scss" />
-    <Content Include="dist\scss\core\scafholding.scss" />
-    <Content Include="dist\scss\core\sidebar.scss" />
-    <Content Include="dist\scss\core\spinner.scss" />
-    <Content Include="dist\scss\core\table-pages.scss" />
-    <Content Include="dist\scss\core\theme-settings.scss" />
-    <Content Include="dist\scss\custom.scss" />
-    <Content Include="dist\scss\pages\bootstrap-switch.scss" />
-    <Content Include="dist\scss\pages\breadcrumb-page.scss" />
-    <Content Include="dist\scss\pages\chat-app-page.scss" />
-    <Content Include="dist\scss\pages\contact-app-page.scss" />
-    <Content Include="dist\scss\pages\dashboard1.scss" />
-    <Content Include="dist\scss\pages\dashboard2.scss" />
-    <Content Include="dist\scss\pages\dashboard3.scss" />
-    <Content Include="dist\scss\pages\dashboard4.scss" />
-    <Content Include="dist\scss\pages\easy-pie-chart.scss" />
-    <Content Include="dist\scss\pages\error-pages.scss" />
-    <Content Include="dist\scss\pages\file-upload.scss" />
-    <Content Include="dist\scss\pages\float-chart.scss" />
-    <Content Include="dist\scss\pages\floating-label.scss" />
-    <Content Include="dist\scss\pages\footable-page.scss" />
-    <Content Include="dist\scss\pages\form-icheck.scss" />
-    <Content Include="dist\scss\pages\google-vector-map.scss" />
-    <Content Include="dist\scss\pages\icon-page.scss" />
-    <Content Include="dist\scss\pages\inbox.scss" />
-    <Content Include="dist\scss\pages\login-register-lock.scss" />
-    <Content Include="dist\scss\pages\other-pages.scss" />
-    <Content Include="dist\scss\pages\pricing-page.scss" />
-    <Content Include="dist\scss\pages\progressbar-page.scss" />
-    <Content Include="dist\scss\pages\register3.scss" />
-    <Content Include="dist\scss\pages\ribbon-page.scss" />
-    <Content Include="dist\scss\pages\stylish-tooltip.scss" />
-    <Content Include="dist\scss\pages\tab-page.scss" />
-    <Content Include="dist\scss\pages\timeline-vertical-horizontal.scss" />
-    <Content Include="dist\scss\pages\ui-bootstrap-page.scss" />
-    <Content Include="dist\scss\pages\user-card.scss" />
-    <Content Include="dist\scss\pages\widget-page.scss" />
-    <Content Include="dist\scss\responsive.scss" />
-    <Content Include="dist\scss\style.scss" />
-    <Content Include="dist\scss\variable.scss" />
-    <Content Include="dist\scss\widgets\activity.scss" />
-    <Content Include="dist\scss\widgets\blog.scss" />
-    <Content Include="dist\scss\widgets\calendar.scss" />
-    <Content Include="dist\scss\widgets\carousel.scss" />
-    <Content Include="dist\scss\widgets\chat-widget.scss" />
-    <Content Include="dist\scss\widgets\comment.scss" />
-    <Content Include="dist\scss\widgets\common-widget.scss" />
-    <Content Include="dist\scss\widgets\contact.scss" />
-    <Content Include="dist\scss\widgets\feed.scss" />
-    <Content Include="dist\scss\widgets\msg-box.scss" />
-    <Content Include="dist\scss\widgets\news-slide.scss" />
-    <Content Include="dist\scss\widgets\product-review.scss" />
-    <Content Include="dist\scss\widgets\profile.scss" />
-    <Content Include="dist\scss\widgets\social.scss" />
-    <Content Include="dist\scss\widgets\steamline.scss" />
-    <Content Include="dist\scss\widgets\to-do.scss" />
-    <Content Include="dist\scss\widgets\topbar-mail.scss" />
-    <Content Include="dist\scss\widgets\weather-widget.scss" />
-    <Content Include="dist\scss\widgets\widgets.scss" />
-    <Content Include="css\fonts\fontawesome-webfont.ttf" />
-    <Content Include="css\fonts\icomoon.ttf" />
-    <Content Include="css\fonts\Material-Design-Iconic-Font.ttf" />
-    <Content Include="css\fonts\materialdesignicons-webfont.ttf" />
-    <Content Include="css\fonts\Simple-Line-Icons.ttf" />
-    <Content Include="css\fonts\themify.ttf" />
-    <Content Include="main.Master" />
-    <Content Include="bin\Infatlan_STEI_Comunicacion.dll.config" />
-    <Content Include="bin\roslyn\csc.exe.config" />
-    <Content Include="bin\roslyn\csc.rsp" />
-    <Content Include="bin\roslyn\csi.exe.config" />
-    <Content Include="bin\roslyn\csi.rsp" />
-    <Content Include="bin\roslyn\Microsoft.CSharp.Core.targets" />
-    <Content Include="bin\roslyn\Microsoft.Managed.Core.targets" />
-    <Content Include="bin\roslyn\Microsoft.VisualBasic.Core.targets" />
-    <Content Include="bin\roslyn\vbc.exe.config" />
-    <Content Include="bin\roslyn\vbc.rsp" />
-    <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
     <None Include="packages.config" />
     <Content Include="pages\plantilla\PlantillaComunicacion.xlsx" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />

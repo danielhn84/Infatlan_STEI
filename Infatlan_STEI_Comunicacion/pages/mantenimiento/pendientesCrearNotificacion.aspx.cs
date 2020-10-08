@@ -118,7 +118,9 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);               
                 Session["COMUNICACION_PCN_CREAR_NOTIFICACION_INDIVIDUAL"] = vDatos;
 
-                Response.Redirect("/pages/mantenimiento/crearNotificacion.aspx?ex=1");
+
+
+                Response.Redirect("/sites/comunicaciones/pages/mantenimiento/crearNotificacion.aspx?ex=1");
             }
             else if (e.CommandName == "Cancelar")
             {
@@ -207,7 +209,9 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                 {
                     limpiarModal();
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "cerrarModal();", true);
-                    Response.Redirect("/pages/mantenimiento/pendientesCrearNotificacion.aspx?ex=3");
+            
+
+                    Response.Redirect("/sites/comunicaciones/pages/mantenimiento/pendientesCrearNotificacion.aspx?ex=3");
                 }
                 else
                 {

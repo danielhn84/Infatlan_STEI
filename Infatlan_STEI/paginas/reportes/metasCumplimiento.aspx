@@ -262,11 +262,11 @@
                                             GridLines="None" OnPageIndexChanging="GvKPISolicitudes_PageIndexChanging"
                                             PageSize="10" >
                                             <Columns>
-                                                <asp:BoundField DataField="id" HeaderText="Orden" ItemStyle-Width="50"/>
+                                                <asp:BoundField DataField="orden" HeaderText="Orden" ItemStyle-Width="50"/>
                                                 <asp:BoundField DataField="tiempo" HeaderText="Tiempo" ItemStyle-Width="150"/>
-                                                <asp:BoundField DataField="problem_type" HeaderText="Categoría 1" ItemStyle-Width="250"/>
-                                                <asp:BoundField DataField="problem_sub_type" HeaderText="Categoría 2" ItemStyle-Width="250"/>
-                                                <asp:BoundField DataField="third_level_category" HeaderText="Categoría 3" ItemStyle-Width="250"/>
+                                                <asp:BoundField DataField="cat1" HeaderText="Categoría 1" ItemStyle-Width="250"/>
+                                                <asp:BoundField DataField="cat2" HeaderText="Categoría 2" ItemStyle-Width="250"/>
+                                                <asp:BoundField DataField="cat3" HeaderText="Categoría 3" ItemStyle-Width="250"/>
                                             </Columns>
                                         </asp:GridView>
                                     </div>
@@ -305,11 +305,11 @@
                                             GridLines="None" OnRowDataBound="GvRuptura_RowDataBound"
                                             PageSize="10">
                                             <Columns>
-                                                <asp:BoundField DataField="id" HeaderText="Orden" ItemStyle-Width="50"/>
+                                                <asp:BoundField DataField="orden" HeaderText="Orden" ItemStyle-Width="50"/>
                                                 <asp:BoundField DataField="tiempoRespuesta" HeaderText="Respuesta" ItemStyle-Width="50"/>
                                                 <asp:BoundField DataField="tiempoAtencion" HeaderText="Atención" ItemStyle-Width="50"/>
-                                                <asp:BoundField DataField="responsibility" HeaderText="Responsable" ItemStyle-Width="50"/>
-                                                <asp:BoundField DataField="Satisfaccion" HeaderText="Nota" ItemStyle-Width="50"/>
+                                                <asp:BoundField DataField="responsable" HeaderText="Responsable" ItemStyle-Width="50"/>
+                                                <asp:BoundField DataField="satisfaccionCliente" HeaderText="Nota" ItemStyle-Width="50"/>
                                                 <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="200">
                                                     <HeaderTemplate>Razón</HeaderTemplate>
                                                     <ItemTemplate>
@@ -359,9 +359,9 @@
                                         GridLines="None" OnRowDataBound="GvOSER_RowDataBound"
                                         PageSize="10" OnPageIndexChanging="GvOSER_PageIndexChanging">
                                         <Columns>
-                                            <asp:BoundField DataField="id" HeaderText="Orden" ItemStyle-Width="50" />
-                                            <asp:BoundField DataField="tiempoRespuesta" HeaderText="Tiempo" ItemStyle-Width="10" />
-                                            <asp:BoundField DataField="responsibility" HeaderText="Responsable" ItemStyle-Width="100" />
+                                            <asp:BoundField DataField="orden" HeaderText="Orden" ItemStyle-Width="50" />
+                                            <asp:BoundField DataField="tiempo" HeaderText="Tiempo" ItemStyle-Width="10" />
+                                            <asp:BoundField DataField="responsable" HeaderText="Responsable" ItemStyle-Width="100" />
                                             <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="240">
                                                 <HeaderTemplate>Razón</HeaderTemplate>
                                                 <ItemTemplate>
@@ -407,13 +407,13 @@
                                         RowStyle-CssClass="rows"
                                         AutoGenerateColumns="false"
                                         AllowPaging="true"
-                                        GridLines="None" 
+                                        GridLines="None" OnRowDataBound="GvInsatisfacciones_RowDataBound"
                                         PageSize="10" OnPageIndexChanging="GvInsatisfacciones_PageIndexChanging">
                                         <Columns>
-                                            <asp:BoundField DataField="id" HeaderText="Orden" ItemStyle-Width="50" />
-                                            <asp:BoundField DataField="respuesta" HeaderText="Calificacion" ItemStyle-Width="10" />
-                                            <asp:BoundField DataField="responsibility" HeaderText="Responsable" ItemStyle-Width="100" />
-                                            <asp:BoundField DataField="comments" HeaderText="Comentario" ItemStyle-Width="100" />
+                                            <asp:BoundField DataField="orden" HeaderText="Orden" ItemStyle-Width="50" />
+                                            <asp:BoundField DataField="calificacion" HeaderText="Calificacion" ItemStyle-Width="10" />
+                                            <asp:BoundField DataField="responsable" HeaderText="Responsable" ItemStyle-Width="100" />
+                                            <asp:BoundField DataField="comentario" HeaderText="Comentario" ItemStyle-Width="300" />
                                             <asp:TemplateField>
                                                 <HeaderTemplate>Observaciones</HeaderTemplate>
                                                 <ItemTemplate>
@@ -431,7 +431,6 @@
         </div>
     </div>
 
-
     <%--RENDIMIENTO--%>
     <div class="card">
         <div class="card-header" role="tab" id="heading6">
@@ -444,8 +443,8 @@
                 <div class="card-body">
                     <asp:UpdatePanel runat="server" ID="UPanelRendimientoGrafic" UpdateMode="Conditional">
                         <ContentTemplate>
-                            <div class="row col-12" runat="server" id="DivGraficos" visible="false">
-                                <div class="card-body col-4">
+                            <div class="row col-12">
+                                <div runat="server" id="DivCerradas" visible="false" class="card-body col-4">
                                     <h6 class="card-title">Solicitudes Cerradas</h6>
                                     <div class="row form-group">
                                         <div class="col-6">
@@ -460,7 +459,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card-body col-4">
+                                <div runat="server" id="DivEficiencia" visible="false" class="card-body col-4">
                                     <h6 class="card-title">Eficiencia</h6>
                                     <div class="row form-group">
                                         <div class="col-6">
@@ -475,7 +474,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card-body col-4">
+                                <div runat="server" id="DivProductividad" visible="false" class="card-body col-4">
                                     <h6 class="card-title">Productividad</h6>
                                     <div class="row form-group">
                                         <div class="col-6">
@@ -486,7 +485,7 @@
                                             <label style="font-size:smaller">Transporte</label>
                                             <br />
                                             <span class="label label-danger"></span>
-                                            <label style="font-size:smaller">No Procesadas</label>
+                                            <label style="font-size:smaller">No Productivo</label>
                                         </div>
                                         <div class="col-6">
                                             <div id="sparkline3" class="text-center"></div>
@@ -499,7 +498,7 @@
                     
                     <div class="row col-12 m-t-20">
                         <div class="table-responsive">
-                            <asp:UpdatePanel runat="server" ID="UPanelRendimiento">
+                            <asp:UpdatePanel runat="server" ID="UPanelRendimiento" UpdateMode="Conditional">
                                 <ContentTemplate>
                                     <asp:GridView ID="GvRendimiento" runat="server"
                                         CssClass="table table-bordered"
@@ -508,7 +507,7 @@
                                         RowStyle-CssClass="rows"
                                         AutoGenerateColumns="false"
                                         AllowPaging="true"
-                                        GridLines="None"
+                                        GridLines="None" OnRowDataBound="GvRendimiento_RowDataBound"
                                         PageSize="10" OnPageIndexChanging="GvRendimiento_PageIndexChanging">
                                         <Columns>
                                             <asp:BoundField DataField="idUsuario" Visible="false" />
@@ -539,7 +538,8 @@
                 <div class="row m-t-10">
                     <asp:UpdatePanel runat="server" ID="UPanelEnviar">
                         <ContentTemplate>
-                            <asp:Button Text="Enviar" runat="server" ID="BtnEnviar" CssClass="btn btn-primary" OnClick="BtnEnviar_Click"/>
+                            <asp:Button Text="Actualizar" Visible="false" runat="server" ID="BtnEActualizar" CssClass="btn btn-info" OnClick="BtnEActualizar_Click"/>
+                            <asp:Button Text="Enviar" Visible="false" runat="server" ID="BtnEnviar" CssClass="btn btn-primary" OnClick="BtnEnviar_Click"/>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
@@ -553,7 +553,12 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="ModalLabelConfirmar">
-                        <b><asp:Label runat="server" ID="LbTitulo" Text="Seguro que desea enviar el formulario?" CssClass="col-form-label"></asp:Label></b>
+                        <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                            <ContentTemplate>
+                                <b><asp:Label runat="server" ID="LbTitulo" Text="Seguro que desea enviar el formulario?" CssClass="col-form-label"></asp:Label></b>
+                                <asp:Label Visible="true" runat="server" ID="LbIDReporte" Text="" CssClass="col-form-label"></asp:Label>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
                     </h4>
                 </div>
                 <div class="modal-footer">

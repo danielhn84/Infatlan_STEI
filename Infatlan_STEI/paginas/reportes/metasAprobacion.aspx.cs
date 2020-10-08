@@ -18,6 +18,8 @@ namespace Infatlan_STEI.paginas.reportes
     {
         db vConexion = new db();
         Security vSecurity = new Security();
+        GenerarXML vMaestro = new GenerarXML();
+
         protected void Page_Load(object sender, EventArgs e){
             try{
                 if (!Page.IsPostBack){
@@ -36,7 +38,7 @@ namespace Infatlan_STEI.paginas.reportes
             }
         }
 
-        private void cargarDatos(String vId) {
+        public void cargarDatos(String vId) {
             try{
                 String vQuery = "[STEISP_CUMPLIMIENTO_Reportes] 4," + vId;
                 DataSet vDSet = vConexion.obtenerDataSet(vQuery);
@@ -74,7 +76,7 @@ namespace Infatlan_STEI.paginas.reportes
                 if (vDSet.Tables[5].Rows.Count > 0){
                     LbInsatisfaccion.Visible = false;
                     GvInsatisfacciones.DataSource = vDSet.Tables[5];
-                    Session["CUMPL_APR_SATISCACCION"] = vDSet.Tables[5];
+                    Session["CUMPL_APR_SATISFACCION"] = vDSet.Tables[5];
                     GvInsatisfacciones.DataBind();
                 }
             }catch (Exception ex){
@@ -88,7 +90,9 @@ namespace Infatlan_STEI.paginas.reportes
 
         protected void GvKPISolicitudes_PageIndexChanging(object sender, GridViewPageEventArgs e){
             try{
-
+                GvKPISolicitudes.PageIndex = e.NewPageIndex;
+                GvKPISolicitudes.DataSource = (DataTable)Session["CUMPL_APR_KPI"];
+                GvKPISolicitudes.DataBind();
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);
             }
@@ -117,7 +121,7 @@ namespace Infatlan_STEI.paginas.reportes
         protected void GvInsatisfacciones_PageIndexChanging(object sender, GridViewPageEventArgs e){
             try{
                 GvInsatisfacciones.PageIndex = e.NewPageIndex;
-                GvInsatisfacciones.DataSource = (DataTable)Session["CUMPL_APR_SATISCACCION"];
+                GvInsatisfacciones.DataSource = (DataTable)Session["CUMPL_APR_SATISFACCION"];
                 GvInsatisfacciones.DataBind();
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);
@@ -126,9 +130,9 @@ namespace Infatlan_STEI.paginas.reportes
 
         protected void GvRendimiento_PageIndexChanging(object sender, GridViewPageEventArgs e){
             try{
-                GvRuptura.PageIndex = e.NewPageIndex;
-                GvRuptura.DataSource = (DataTable)Session["CUMPL_APR_RENDIMIENTO"];
-                GvRuptura.DataBind();
+                GvRendimiento.PageIndex = e.NewPageIndex;
+                GvRendimiento.DataSource = (DataTable)Session["CUMPL_APR_RENDIMIENTO"];
+                GvRendimiento.DataBind();
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);
             }

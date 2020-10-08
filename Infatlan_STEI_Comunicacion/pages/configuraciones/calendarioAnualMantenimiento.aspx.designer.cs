@@ -105,15 +105,6 @@ namespace Infatlan_STEI_Comunicacion.pages.configuraciones
         protected global::System.Web.UI.WebControls.Label LbMensajeSuccsess;
 
         /// <summary>
-        /// Control UpdatePanel7.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel7;
-
-        /// <summary>
         /// Control BtnEnviar.
         /// </summary>
         /// <remarks>

@@ -11,6 +11,8 @@
     <script type="text/javascript">
         function openModal() { $('#ModalConfirmar').modal('show'); }
         function closeModal() { $('#ModalConfirmar').modal('hide'); }
+        function openModalUpdate() { $('#ModalConfirmarUpdate').modal('show'); }
+        function closeModalUpdate() { $('#ModalConfirmarUpdate').modal('hide'); }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
@@ -553,7 +555,6 @@
             </div>
         </div>
     </div>
-
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Script" runat="server">
     <script src="/assets/node_modules/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>

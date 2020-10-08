@@ -77,7 +77,7 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label class="control-label   text-danger">*</label><label class="control-label">Telefono:</label></label>    
+                                        <label class="control-label">Telefono:</label></label>    
                                         <asp:TextBox ID="TxTelefono" AutoPostBack="true" runat="server" TextMode="MultiLine" Rows="3" class="form-control" MaxLength="20"></asp:TextBox>
                                 </div>
                             </div>

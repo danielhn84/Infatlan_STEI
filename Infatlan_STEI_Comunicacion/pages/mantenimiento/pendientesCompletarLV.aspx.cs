@@ -95,9 +95,9 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                 string vIdMantenimientoCompletarLV = e.CommandArgument.ToString();
                 String vQuery = "STEISP_COMUNICACION_CompletarLV 2,'" + vIdMantenimientoCompletarLV + "'";
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
-                Session["COMUNICACION_PCLV_COMPLETAR_LV_INDIVIDUAL"] = vDatos;
-
-                Response.Redirect("/pages/mantenimiento/lvIndividual.aspx?ex=1");
+                Session["COMUNICACION_PCLV_COMPLETAR_LV_INDIVIDUAL"] = vDatos;               
+            
+                Response.Redirect("/sites/comunicaciones/pages/mantenimiento/lvIndividual.aspx?ex=1");
             }
         }
 
