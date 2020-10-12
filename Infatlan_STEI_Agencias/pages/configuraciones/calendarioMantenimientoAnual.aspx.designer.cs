@@ -87,15 +87,6 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
         protected global::System.Web.UI.WebControls.Label LbMensajeSuccsess;
 
         /// <summary>
-        /// Control BtnEnviar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnEnviar;
-
-        /// <summary>
         /// Control BtnCancelar.
         /// </summary>
         /// <remarks>
@@ -103,5 +94,14 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnCancelar;
+
+        /// <summary>
+        /// Control BtnEnviar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnEnviar;
     }
 }

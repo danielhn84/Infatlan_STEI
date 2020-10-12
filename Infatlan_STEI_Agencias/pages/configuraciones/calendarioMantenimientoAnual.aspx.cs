@@ -248,7 +248,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                     }
                     else
                     {
-                        LbMensajeSuccsess.Text = "Archivo de mantenimientos preventivos cargados con exito." + "<br>" + "<b style='color:green;'>Success:</b> " + vSuccess.ToString() + "&emsp;";
+                        LbMensajeSuccsess.Text = "Archivo de mantenimientos preventivos cargados con exito." + "<br>" + "<b style='color:white;'>Success:</b> " + vSuccess.ToString() + "&emsp;";
                         Div1.Visible = true;
                         UpdatePanel1.Update();
                     }

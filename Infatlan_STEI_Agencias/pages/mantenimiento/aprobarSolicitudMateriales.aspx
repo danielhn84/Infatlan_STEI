@@ -43,7 +43,7 @@
     <div class="card">
         <div class="row" id="DivBusqueda" runat="server">
             <div class="col-12 grid-margin stretch-card">
-                <div class="card">
+             <%--   <div class="card">--%>
                     <div class="card-body">
                         <h4 class="card-title">Aprobación Solicitud de Material</h4>
                         <p>Materiales pendientes de aprobar.</p>
@@ -66,11 +66,11 @@
                             </div>
                         </div>
                     </div>
-                </div>
+               <%-- </div>--%>
             </div>
         </div>
 
-        <div class="card">
+        <%--<div class="card">--%>
             <div class="row col-12">
                 <div class="col-12 grid-margin stretch-card">
                     <div class="table-responsive">
@@ -119,23 +119,23 @@
                     </div>
                 </div>
             </div>
-        </div>
+      <%--  </div>--%>
     </div>
 
     <%--INICIO MODAL ENVIAR LV--%>
     <div class="modal bs-example-modal-lg" id="modalAprobarMaterial" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content" style="width: 1300px; top: 320px; left: 50%; transform: translate(-50%, -50%);">
-                <div class="modal-header bg-dark">
+                <div class="modal-header">
 
                     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
-                            <h3 class="modal-title" style="color: white">
+                            <h3 class="modal-title">
                                 <asp:Label ID="lbTitulo" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label></h3>
                         </ContentTemplate>
                     </asp:UpdatePanel>
 
-                    <button type="button" class="close" style="color: white" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close"  data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -221,7 +221,6 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
 
-
                     <div class="col-md-12" runat="server">
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">Aprueba solicitud:</label>
@@ -239,7 +238,6 @@
                             </div>                         
                         </div>
                     </div>
-
                 </div>
                 <asp:UpdatePanel ID="UpdateModal" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
@@ -257,7 +255,7 @@
                         <ContentTemplate>
                             <button type="button" class="btn btn-light" data-dismiss="modal">
                                 Close</button>
-                            <asp:Button ID="btnModalAprobar" runat="server" Text="Aprobar" class="btn btn-dark"  OnClick="btnModalAprobar_Click"/>
+                            <asp:Button ID="btnModalAprobar" runat="server" Text="Aprobar" class="btn btn-success"  OnClick="btnModalAprobar_Click"/>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>

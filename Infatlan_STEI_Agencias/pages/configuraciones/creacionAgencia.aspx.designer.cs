@@ -123,6 +123,24 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
         protected global::System.Web.UI.WebControls.DropDownList DDLMunicipio;
 
         /// <summary>
+        /// Control UpdateModificacionBotones.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdateModificacionBotones;
+
+        /// <summary>
+        /// Control Button1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button1;
+
+        /// <summary>
         /// Control BtnEnviar.
         /// </summary>
         /// <remarks>
@@ -130,15 +148,6 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnEnviar;
-
-        /// <summary>
-        /// Control BtnCancelar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnCancelar;
 
         /// <summary>
         /// Control UpdatePanel5.

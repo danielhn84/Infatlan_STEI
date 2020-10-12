@@ -17,8 +17,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
         public void Mensaje(string vMensaje, WarningType type)
         {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
-        }
-        
+        }       
         protected void Page_Load(object sender, EventArgs e){
             if (!Page.IsPostBack){
                 if (Convert.ToBoolean(Session["AUTH"])){
@@ -27,8 +26,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                     Response.Redirect("/login.aspx");
                 }
             }
-        }
-        
+        }       
         protected void BtnEnviar_Click(object sender, EventArgs e)
         {
             try
@@ -51,20 +49,17 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             {
                 Mensaje(ex.Message, WarningType.Danger);
             }
-        }
-        
+        }        
         private void validarGuardarTipoAgencia()
         {
             TxAgencia.Text = TxAgencia.Text.Replace("\n", "");
             if (TxAgencia.Text == "" || TxAgencia.Text == string.Empty)
                 throw new Exception("Falta ingresar el tipo de agencia que desea crear.");
-        }
-        
+        }        
         private void limpiarFormularioTipoAgencia()
         {
             TxAgencia.Text = string.Empty;
-        }
-        
+        }        
         protected void BtnCancelar_Click(object sender, EventArgs e)
         {
             try
@@ -76,8 +71,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             {
                 Mensaje(ex.Message, WarningType.Danger);
             }
-        }
-        
+        }        
         void cargar()
         {
             try
@@ -85,8 +79,8 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 String vQuery = "STEISP_AGENCIA_TiposAgencia 2";
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);              
                 TxTipoAgenciaModal.Text = vDatos.Rows[0]["nombre"].ToString();
-                GVTipoAgencias.DataSource = vDatos;
-                GVTipoAgencias.DataBind();
+                GVTipoAgenciasBASA.DataSource = vDatos;
+                GVTipoAgenciasBASA.DataBind();
                 Session["AG_TA_DATA_AGENCIA_TIPO"] = vDatos;
             }
             catch (Exception ex)
@@ -94,34 +88,33 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 Mensaje(ex.Message, WarningType.Danger);
             }
 
-        }
-        
-        protected void GVTipoAgencias_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            if (e.CommandName == "Modifcar")
-            {
-                DivAlerta.Visible = false;
-                UpdateModal.Update();
+        }       
+        //protected void GVTipoAgencias_RowCommand(object sender, GridViewCommandEventArgs e)
+        //{
+        //    if (e.CommandName == "Modifcar")
+        //    {
+        //        DivAlerta.Visible = false;
+        //        UpdateModal.Update();
 
-                string vIdTipoAgenciaModificar = e.CommandArgument.ToString();
-                Session["AG_TA_ID_AREA_MODIFICAR"] = vIdTipoAgenciaModificar;
+        //        string vIdTipoAgenciaModificar = e.CommandArgument.ToString();
+        //        Session["AG_TA_ID_AREA_MODIFICAR"] = vIdTipoAgenciaModificar;
 
-                try
-                {
-                    String vQuery2 = " STEISP_AGENCIA_TiposAgencia 3," + vIdTipoAgenciaModificar;
-                    DataTable vDatos = vConexion.obtenerDataTable(vQuery2);
-                    TxIdTipoAgenciaModal.Text = vDatos.Rows[0]["idTipoAgencia"].ToString();
-                    TxTipoAgenciaModal.Text = vDatos.Rows[0]["nombre"].ToString();
-                    DdlEstadoTipoAgencia.SelectedValue = vDatos.Rows[0]["estado"].ToString();
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModalModificarTipoAgencia();", true);
+        //        try
+        //        {
+        //            String vQuery2 = " STEISP_AGENCIA_TiposAgencia 3," + vIdTipoAgenciaModificar;
+        //            DataTable vDatos = vConexion.obtenerDataTable(vQuery2);
+        //            TxIdTipoAgenciaModal.Text = vDatos.Rows[0]["idTipoAgencia"].ToString();
+        //            TxTipoAgenciaModal.Text = vDatos.Rows[0]["nombre"].ToString();
+        //            DdlEstadoTipoAgencia.SelectedValue = vDatos.Rows[0]["estado"].ToString();
+        //            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModalModificarTipoAgencia();", true);
                     
-                }
-                catch (Exception ex)
-                {
-                    Mensaje(ex.Message, WarningType.Danger);
-                }
-            }
-        }        
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            Mensaje(ex.Message, WarningType.Danger);
+        //        }
+        //    }
+        //}        
         protected void btnModalModificarTipoAgencia_Click(object sender, EventArgs e)
         {
             try
@@ -159,9 +152,9 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
         {
             try
             {
-                GVTipoAgencias.PageIndex = e.NewPageIndex;
-                GVTipoAgencias.DataSource = (DataTable)Session["AG_TA_DATA_AGENCIA_TIPO"];
-                GVTipoAgencias.DataBind();
+                GVTipoAgenciasBASA.PageIndex = e.NewPageIndex;
+                GVTipoAgenciasBASA.DataSource = (DataTable)Session["AG_TA_DATA_AGENCIA_TIPO"];
+                GVTipoAgenciasBASA.DataBind();
             }
             catch (Exception ex)
             {
@@ -177,8 +170,8 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 DataTable vDatos = (DataTable)Session["AG_TA_DATA_AGENCIA_TIPO"];
                 if (vBusqueda.Equals(""))
                 {
-                    GVTipoAgencias.DataSource = vDatos;
-                    GVTipoAgencias.DataBind();
+                    GVTipoAgenciasBASA.DataSource = vDatos;
+                    GVTipoAgenciasBASA.DataBind();
                     UPTipoAgencias.Update();
                 }
                 else
@@ -213,8 +206,8 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                             );
                     }
 
-                    GVTipoAgencias.DataSource          = vDatosFiltrados;
-                    GVTipoAgencias.DataBind();
+                    GVTipoAgenciasBASA.DataSource          = vDatosFiltrados;
+                    GVTipoAgenciasBASA.DataBind();
                     Session["AG_TA_DATA_AGENCIA_TIPO"] = vDatosFiltrados;
                     UPTipoAgencias.Update();
                 }
@@ -242,5 +235,47 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 UpdateModal.Update();
                
         }
+
+        protected void GVTipoAgencias_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            string vIdTipoAgenciaModificar = e.CommandArgument.ToString();
+        }
+
+        protected void GVTipoAgenciasBASA_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+
+        }
+
+        protected void GVTipoAgenciasBASA_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            string vIdTipoAgenciaModificar = e.CommandArgument.ToString();
+        }
+
+        //protected void GVTipoAgencias_RowCommand(object sender, GridViewCommandEventArgs e)
+        //{
+        //    if (e.CommandName == "Modifcar")
+        //    {
+        //        DivAlerta.Visible = false;
+        //        UpdateModal.Update();
+
+        //        string vIdTipoAgenciaModificar = e.CommandArgument.ToString();
+        //        Session["AG_TA_ID_AREA_MODIFICAR"] = vIdTipoAgenciaModificar;
+
+        //        try
+        //        {
+        //            String vQuery2 = " STEISP_AGENCIA_TiposAgencia 3," + vIdTipoAgenciaModificar;
+        //            DataTable vDatos = vConexion.obtenerDataTable(vQuery2);
+        //            TxIdTipoAgenciaModal.Text = vDatos.Rows[0]["idTipoAgencia"].ToString();
+        //            TxTipoAgenciaModal.Text = vDatos.Rows[0]["nombre"].ToString();
+        //            DdlEstadoTipoAgencia.SelectedValue = vDatos.Rows[0]["estado"].ToString();
+        //            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModalModificarTipoAgencia();", true);
+
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            Mensaje(ex.Message, WarningType.Danger);
+        //        }
+        //    }
+        //}
     }
 }

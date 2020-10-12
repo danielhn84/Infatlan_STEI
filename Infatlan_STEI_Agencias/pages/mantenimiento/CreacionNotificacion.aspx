@@ -41,22 +41,22 @@
     </div>
 
     <!-- (INICIO)Tarjeta Datos Generales -->
-    <div class="row">
+    <div class="row p-t-20">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <div class="form-body">
+                    <div class="form-body col-md-12">
                         <h3 class="card-title">Datos Generales</h3>
                         <asp:UpdatePanel runat="server" ID="UPFormulario">
                             <ContentTemplate>
                                 <!--Inicio Fila 1-->                                
                                 <div class="row p-t-20">
-                                    <div class="col-md-6">
+                                    <div class="col-6">
                                         <label class="control-label   text-danger">*</label><label class="control-label">Fecha Mantenimiento:</label></label>
                                         <asp:TextBox ID="TextBox1" AutoPostBack="true" runat="server" TextMode="Date" OnTextChanged="TextBox1_TextChanged" class="form-control"></asp:TextBox>
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-6">
                                         <label class="control-label   text-danger">*</label><label class="control-label">Código/Lugar Agencia:</label></label>    
                                         <asp:DropDownList ID="DDLCodigoAgencia" runat="server" AutoPostBack="true" CssClass="form-control" OnSelectedIndexChanged="DDLCodigoAgencia_SelectedIndexChanged" Enabled="false"></asp:DropDownList>
                                     </div>
@@ -65,11 +65,11 @@
 
                                 <!--Inicio Fila 2-->
                                 <div class="row p-t-20">
-                                    <div class="col-md-6">
+                                    <div class="col-6">
                                         <label class="control-label   text-danger">*</label><label class="control-label">Número SysAid:</label></label>                                        
                                         <asp:TextBox ID="TxSysAid" class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-6">
                                         <label class="control-label">Area:</label>
                                         <asp:TextBox ID="TxArea" class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                                     </div>
@@ -78,12 +78,12 @@
 
                                 <!--Inicio Fila 3-->
                                 <div class="row p-t-20">
-                                    <div class="col-md-6">
+                                    <div class="col-6">
                                         <label class="control-label">Departamento:</label>
                                         <asp:TextBox ID="TxDepartamento" class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-6">
                                         <label class="control-label">Mant. Equipo Comunicacion:</label>
                                         <asp:TextBox ID="TxMantEquipoComu" class="form-control" runat="server" ReadOnly="true" Text=""></asp:TextBox>
                                     </div>
@@ -92,12 +92,12 @@
 
                                 <!--Inicio Fila 4-->
                                 <div class="row p-t-20">
-                                    <div class="col-md-6">
+                                    <div class="col-6">
                                         <label class="control-label">Direccion:</label>
                                         <asp:TextBox ID="TxDireccion" class="form-control" runat="server" TextMode="MultiLine" ReadOnly="true"></asp:TextBox>
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-6">
                                         <label class="control-label">Telefono:</label>
                                         <asp:TextBox ID="TxTelefono" class="form-control" runat="server" TextMode="MultiLine" ReadOnly="true"></asp:TextBox>
                                     </div>
@@ -106,12 +106,12 @@
 
                                 <!--Inicio Fila 5-->
                                 <div class="row p-t-20">
-                                    <div class="col-md-6">
+                                    <div class="col-6">
                                          <label class="control-label  text-danger">*</label><label class="control-label">Hora Inicio Mantenimiento:</label>
                                         <asp:TextBox ID="TxHoraInicio" class="form-control" runat="server" TextMode="Time" Text="" ReadOnly="true"></asp:TextBox>
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-6">
                                         <label class="control-label  text-danger">*</label> <label class="control-label">Hora Fin Mantenimiento:</label>
                                         <asp:TextBox ID="TxHoraFin" class="form-control" runat="server" TextMode="Time" Text="" ReadOnly="true"></asp:TextBox>
                                     </div>
@@ -120,7 +120,7 @@
 
                                 <!--Inicio Fila 6-->
                                 <div class="row p-t-20">
-                                    <div class="col-md-12">
+                                    <div class="col-12">
                                         <label class="control-label">Motivo:</label>
                                         <asp:TextBox ID="TxMotivo" class="form-control" runat="server" Text="Realizar acciones pro activas para prevenir la falla de equipos críticos." ReadOnly="true"></asp:TextBox>
                                     </div>
@@ -129,7 +129,7 @@
 
                                 <!--Inicio Fila 7-->
                                 <div class="row p-t-20">
-                                    <div class="col-md-12">
+                                    <div class="col-12">
                                         <label class="control-label">Impacto:</label>
                                         <asp:TextBox ID="TxImpacto" class="form-control" runat="server" Text="Durante la ventana de mantenimiento la agencia estará cerrada para el público en general." ReadOnly="true"></asp:TextBox>
                                     </div>
@@ -149,19 +149,21 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <div class="form-body">
+                    <div class="form-body col-12">
                         <asp:UpdatePanel runat="server" ID="UpdatePanel1" UpdateMode="Conditional">
                             <ContentTemplate>
                             <h3 class="card-title">Personal Encargado</h3>                             
                                 <br>
                                 <h5 class="card-title">Técnico Responsable</h5>
-                                <div class="row p-t-20">
-                                    <div class="col-md-6">
-                                         <label class="control-label  text-danger">*</label><label class="control-label">Nombre:</label>
+                                <div class="row 20">
+
+                                    <div class="col-6">
+                                       <%-- <label class="control-label  text-danger">*</label><label class="control-label">Nombre:</label>--%>
                                         <asp:DropDownList ID="DDLNombreResponsable" runat="server" AutoPostBack="true" CssClass="form-control" OnSelectedIndexChanged="DDLNombreResponsable_SelectedIndexChanged" Enabled="false"></asp:DropDownList>
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="control-label">Identidad:</label>
+                    
+                                    <div class="col-6">
+                                        <%--<label class="control-label">Identidad:</label>--%>
                                         <asp:TextBox ID="TxIdentidadResponsable" class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                                     </div>
                                 </div>
@@ -169,13 +171,13 @@
                                 <br>
 
                                 <h5 class="card-title">Técnicos Participantes </h5>
-                                <label class="control-label">Nombre:</label>
+                    <%--            <label class="control-label">Nombre:</label>--%>
                                 <asp:DropDownList ID="DDLNombreParticipantes" AutoPostBack="true" runat="server" CssClass="fstdropdown-select form-control" OnTextChanged="DDLNombreParticipantes_TextChanged" Enabled="false"></asp:DropDownList>
                                 <br>
-                                <br>
-                                <div class="row col-12">
-                                    <div class="col-12 grid-margin stretch-card">
-                                        <div class="table-responsive">
+                             
+                                <%--<div class="row col-12">--%>
+                                    <%--<div class="col-12 grid-margin stretch-card">--%>
+                                        <div class="table-responsive m-t-40">
                                             <asp:GridView ID="GVBusqueda" runat="server"
                                                 CssClass="table table-bordered"
                                                 PagerStyle-CssClass="pgr"
@@ -189,38 +191,38 @@
                                                 <Columns>
                                                     <asp:TemplateField HeaderText="Acción" ItemStyle-HorizontalAlign="center">
                                                         <ItemTemplate>
-                                                            <asp:LinkButton ID="LBEliminarTecnicoParticipantes"  class="btn btn-danger mr-2" runat="server"  CommandName="Eliminar" CommandArgument='<%# Eval("idUsuario") %>'>
+                                                            <asp:LinkButton ID="LBEliminarTecnicoParticipantes"  class="btn btn-danger mr-2" runat="server" Title="Eliminar" CommandName="Eliminar" CommandArgument='<%# Eval("idUsuario") %>'>
   
                                                                 <i class="icon-close"></i>
                                                             </asp:LinkButton>
                                                         </ItemTemplate>
                                                         <%--<ItemStyle Width="5%" />--%>
                                                     </asp:TemplateField>
-                                                    <asp:BoundField DataField="idUsuario" HeaderText="Usuario" ItemStyle-Width="25%" />
+                                                    <asp:BoundField DataField="idUsuario" HeaderText="Usuario" ItemStyle-Width="25%" ItemStyle-HorizontalAlign="center" />
                                                     <asp:BoundField DataField="nombre" HeaderText="Nombre" ItemStyle-Width="25%"/>
                                                     <asp:BoundField DataField="identidad" HeaderText="Identidad" ItemStyle-Width="25%" ItemStyle-HorizontalAlign="center" />
                                                 </Columns>
                                             </asp:GridView>
                                         </div>
-                                    </div>
-                                </div>
+                                    <%--</div>--%>
+                                <%--</div>--%>
                                 <br>
-                                <br>
+            
 
                                 <h5 class="card-title">Jefes de Agencia </h5>
-
-                                <div class="row col-12" runat="server" visible="true">
-                                    <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-6">
                                         <asp:TextBox runat="server" ID="txtbuscarJefeNotif" placeholder="Búsqueda por nombre, apellido o correo, luego dar clic en el boton" ReadOnly="true" CssClass="form-control"></asp:TextBox>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-6">
                                         <asp:LinkButton runat="server" ID="btnBuscarJefe" OnClick="btnBuscarJefe_Click" CssClass="btn btn-info mr-2"><i class="fa fa-search"></i></asp:LinkButton>
                                     </div>
                                 </div>
-                                <br><br>
-                                <div class="row col-12">
-                                    <div class="col-12 grid-margin stretch-card">
-                                        <div class="table-responsive">
+
+                          
+                         <%--       <div class="row col-12">
+                                    <div class="col-12 grid-margin stretch-card">--%>
+                                        <div class="table-responsive m-t-40">
                                             <asp:GridView ID="GVJefesAD" runat="server"
                                                 CssClass="table table-bordered"
                                                 PagerStyle-CssClass="pgr"
@@ -234,24 +236,24 @@
                                                 <Columns>
                                                     <asp:TemplateField HeaderText="Acción" ItemStyle-HorizontalAlign="center" >
                                                         <ItemTemplate>
-                                                            <asp:LinkButton runat="server" ID="btnCorreoJefe" CssClass="btn btn-cyan" CommandName="correos"  CommandArgument='<%# Eval("mail") %>'>
+                                                            <asp:LinkButton runat="server" ID="btnCorreoJefe" Title="Seleccionar" CssClass="btn btn-cyan" CommandName="correos"  CommandArgument='<%# Eval("mail") %>'>
                                                                 <i class="icon-plus"></i>
                                                             </asp:LinkButton>
                                                         
                                                         </ItemTemplate>                                                       
                                                     </asp:TemplateField>
                                                     <asp:BoundField DataField="givenName" HeaderText="Nombres" />
-                                                    <asp:BoundField DataField="sn" HeaderText="Apellidos" />
-                                                    <asp:BoundField DataField="mail" HeaderText="Correo" />
+                                                    <asp:BoundField DataField="sn" HeaderText="Apellidos"  />
+                                                    <asp:BoundField DataField="mail" HeaderText="Correo" ItemStyle-HorizontalAlign="center"/>
                                                 </Columns>
                                             </asp:GridView>
                                         </div>
-                                    </div>
-                                </div>
+                                <%--    </div>
+                                </div>--%>
 
-                                <div class="row col-12">
-                                    <div class="col-12 grid-margin stretch-card">
-                                        <div class="table-responsive">
+                      <%--          <div class="row col-12">
+                                    <div class="col-12 grid-margin stretch-card">--%>
+                                        <div class="table-responsive m-t-40">
                                             <asp:GridView ID="GVjefesAgencias" runat="server"
                                                 CssClass="table table-bordered"
                                                 PagerStyle-CssClass="pgr"
@@ -278,39 +280,13 @@
                                                 </Columns>
                                             </asp:GridView>
 
-                                        </div>
-                                    </div>
+                               <%--         </div>
+                                    </div>--%>
 
                                 </div>
 
 
-                                <%--                                <div class="row col-12">
-                                    <div class="col-12 grid-margin stretch-card">
-                                        <div class="table-responsive">
-                                            <asp:GridView ID="GVCorreoJefeAgencia" runat="server"
-                                                CssClass="table table-bordered"
-                                                PagerStyle-CssClass="pgr"
-                                                HeaderStyle-CssClass="table"
-                                                RowStyle-CssClass="rows"
-                                                AutoGenerateColumns="false"
-                                                AllowPaging="true"
-                                                GridLines="None"
-                                                PageSize="10" OnPageIndexChanging="GVCorreoJefeAgencia_PageIndexChanging" OnRowCommand="GVCorreoJefeAgencia_RowCommand">
-                                                <Columns>
-                                                    <asp:TemplateField>
-                                                        <ItemTemplate>
-                                                            <asp:LinkButton ID="LBEliminar" runat="server" CssClass="btn btn-danger" CommandArgument='<%# Eval("CorreoJefeAgencia") %>' CommandName="Eliminar">
-                                                                <i class="icon-trash"></i>
-                                                            </asp:LinkButton>
-                                                        </ItemTemplate>
-                                                        <ItemStyle Width="10%" />
-                                                    </asp:TemplateField>
-                                                    <asp:BoundField DataField="CorreoJefeAgencia" HeaderText="Correo" ItemStyle-Width="90%" />
-                                                </Columns>
-                                            </asp:GridView>
-                                        </div>
-                                    </div>
-                                </div>--%>
+                              
 
                          
                             </ContentTemplate>
@@ -322,23 +298,11 @@
                         <asp:UpdatePanel ID="UpdatePrincipalBotones" runat="server">
                             <ContentTemplate>
 
-   <%--                     
-                                <div class="row col-8 ">
-                                    <div class="col text-center col-lg-2 col-md-4">
-                                        <asp:Button ID="BtnEnviarNotificacion" class="btn btn-block btn-lg btn-success" runat="server" Text="Enviar " OnClick="BtnEnviarNotificacion_Click" />
-
-                                    </div>
-                                    <div class="col text-center col-lg-2 col-md-4">
-                                        <asp:Button ID="BtnCancelarNotificacion" class="btn btn-block btn-lg btn-danger " runat="server" Text="Cancelar" OnClick="BtnCancelarNotificacion_Click" />
-                                    </div>
-
-                                </div>
-                            </div>--%>
 
                                 <div class="col-md-12" style="text-align: center">
                                     <label class="control-label text-danger" style="text-align: center">Los campos con (*) son obligatorios</label>
                                 </div>
-                            <div class="row p-t-20 col-md-12">
+                     <%--       <div class="row p-t-20 col-md-12">
                                 <div class="col-md-4">
                                     <asp:Button ID="BtnEnviarNotificacion" class="btn btn-block btn-success" runat="server" Text="Enviar" OnClick="BtnEnviarNotificacion_Click" />
                                 </div>
@@ -349,9 +313,22 @@
 
                                 <div class="col-md-4">
                                       <a href="../../default.aspx"" class="btn  btn-block btn-primary">Volver</a>
-                                </div>
+                                </div>--%>
 
+                                  <br />
+                            <div class="modal-footer">
+                                <asp:UpdatePanel ID="UpdateModificacionBotones" runat="server">
+                                    <ContentTemplate>
+                                        <%--<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>--%>
+                                        <asp:Button ID="BtnCancelarNotificacion" runat="server" Text="Cancelar" class="btn  btn-dark" OnClick="BtnCancelarNotificacion_Click" />
+                                        <asp:Button ID="BtnEnviarNotificacion" runat="server" Text="Enviar" class="btn btn-success" OnClick="BtnEnviarNotificacion_Click" />
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
                             </div>
+                            <br />
+
+
+                           <%-- </div>--%>
                             <br />
 
 
@@ -362,15 +339,15 @@
     <div class="modal fade" id="modalnotoficacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="width: 600px; top: 320px; left: 50%; transform: translate(-50%, -50%);">
-                 <div class="modal-header bg-dark">
+                 <div class="modal-header">
                     <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
-                            <h3 class="modal-title" style="color: white" >
+                            <h3 class="modal-title" >
                                 <asp:Label ID="lbTitulo" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label></h3>
                         </ContentTemplate>
                     </asp:UpdatePanel>
 
-                    <button type="button" class="close" style="color: white"  data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
 
@@ -429,7 +406,7 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
 
-                    <div class="col-md-12" style="margin-left: auto; margin-right: auto" id="Div3" runat="server">
+  <%--                  <div class="col-md-12" style="margin-left: auto; margin-right: auto" id="Div3" runat="server">
                         <div class="alert alert-success  alert-dismissible align-content-md-center" style="align-self: auto">
                             <div class="row">
                                 <div class="col-3">
@@ -446,18 +423,18 @@
                                 <asp:Label ID="Label6" runat="server" Text="" Width="100%"></asp:Label>
                             </div>
                         </div>
-                    </div>
+                    </div>--%>
 
 
 
                 </div>
+                <br />
                 <div class="modal-footer">
                     <asp:UpdatePanel ID="UpdatePanel5" runat="server">
                         <ContentTemplate>
-                             <button type="button" class="btn btn-light"
-                    data-dismiss="modal">Close</button>
-                            <%--<asp:Button runat="server" ID="btnModalEnviarNotificacion" OnClick="btnModalEnviarNotificacion_Click" CssClass="btn btn-block btn-lg  btn-success" Text="Si" />--%>
-                            <asp:Button ID="btnModalEnviarNotificacion" runat="server" Text="Crear" class="btn btn-dark"  OnClick="btnModalEnviarNotificacion_Click" />
+                             <button type="button" class="btn btn-light"  data-dismiss="modal">Close</button>
+          
+                            <asp:Button ID="btnModalEnviarNotificacion" runat="server" Text="Crear" class="btn btn-success"  OnClick="btnModalEnviarNotificacion_Click" />
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
@@ -470,39 +447,6 @@
     </div>
                    
 
-                        <!-- Modal asegurar notificacion -->
-                      <%--  <div class="modal bs-example-modal-lg" id="modalnotoficacion" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header modal-colored-header  bg-success">
-                                        <h4 class="modal-title" id="myLargeModalLabel">¿Esta seguro que desea enviar la notificación?</h4>
-                                    </div>
-
-                                    <asp:UpdatePanel ID="UpdatePanel4" runat="server">
-                                        <ContentTemplate>
-                                            <div class="modal-footer col-12">
-
-                                                <div class="row col-6">
-                                                    <asp:Button runat="server" ID="btnModalEnviarNotificacion" OnClick="btnModalEnviarNotificacion_Click" CssClass="btn btn-block btn-lg  btn-success" Text="Si" />
-                                                </div>
-                                                <div class="row col-6">
-                                                    <asp:Button runat="server" ID="btnModalCerrarNotificacion" OnClick="btnModalCerrarNotificacion_Click" CssClass="btn btn-block btn-lg btn-danger" Text="No" />
-
-                                                </div>
-                                            </div>
-
-
-                                           
-                                        </ContentTemplate>
-                                    </asp:UpdatePanel>
-
-
-                                </div>
-                                <!-- /.modal-content -->
-                            </div>
-                            <!--/.modal-dialog -->
-                        </div>--%>
-                        <!-- /asegurar notificacion -->
 
                     </div>
                 </div>

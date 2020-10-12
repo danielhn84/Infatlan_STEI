@@ -1,6 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="creacionAgencia.aspx.cs" Inherits="Infatlan_STEI_Agencias.pages.configuraciones.creacionAgencia" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
-
     <script type="text/javascript">
         var updateProgress = null;
         function postbackButtonClick() {
@@ -8,11 +7,9 @@
             window.setTimeout("updateProgress.set_visible(true)", updateProgress.get_displayAfter());
             return true;
         }
-
         function openModalModificarAgencia() { $('#modalModificarAgencia').modal('show'); }
         function closeModalModificarAgencia() { $('#modalModificarAgencia').modal('hide'); }
     </script>
-
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
     <asp:UpdateProgress ID="UpdateProgress1" runat="server">
@@ -21,9 +18,9 @@
                 <span style="display: inline-block; height: 100%; vertical-align: middle;"></span>
                 <asp:Image ID="imgUpdateProgress" runat="server" ImageUrl="/assets/images/loading.gif" AlternateText="Loading ..." ToolTip="Loading ..." Style="display: inline-block; vertical-align: middle;" />
             </div>
-            
         </ProgressTemplate>
     </asp:UpdateProgress>
+   
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
             <h4 class="text-themecolor">STEI</h4>
@@ -36,7 +33,7 @@
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Configuraciones</a></li>
                     <li class="breadcrumb-item active">Crear Agencia</li>
                 </ol>
-            </div> 
+            </div>
         </div>
     </div>
 
@@ -50,7 +47,6 @@
                 <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="icon-pencil"></i></span><span class="hidden-xs-down"> Modificar</span></a> </li>
             </ul>
             <div class="tab-content tabcontent-border">
-
                 <!--PRIMER CONTENIDO-->
                 <div class="tab-pane active p-20" id="home" role="tabpanel">
                     <asp:UpdatePanel runat="server" ID="UPprimercontenido">
@@ -61,7 +57,6 @@
                                     <label class="control-label   text-danger">*</label><label class="control-label">Agencia:</label></label>
                                         <asp:TextBox ID="TxAgencia" AutoPostBack="true" runat="server" class="form-control" MaxLength="100"></asp:TextBox>
                                 </div>
-
                                 <div class="col-md-6">
                                     <label class="control-label   text-danger">*</label><label class="control-label">Código Agencia:</label></label>    
                                         <asp:TextBox ID="TxCodigo" AutoPostBack="true" runat="server" TextMode="Number" class="form-control" MaxLength="10"></asp:TextBox>
@@ -75,9 +70,8 @@
                                     <label class="control-label   text-danger">*</label><label class="control-label">Dirección:</label></label>
                                         <asp:TextBox ID="TxDireccion" AutoPostBack="true" runat="server" TextMode="MultiLine" Rows="3" class="form-control" MaxLength="500"></asp:TextBox>
                                 </div>
-
                                 <div class="col-md-6">
-                                        <label class="control-label">Telefono:</label></label>    
+                                    <label class="control-label">Telefono:</label></label>    
                                         <asp:TextBox ID="TxTelefono" AutoPostBack="true" runat="server" TextMode="MultiLine" Rows="3" class="form-control" MaxLength="20"></asp:TextBox>
                                 </div>
                             </div>
@@ -89,7 +83,6 @@
                                     <label class="control-label   text-danger">*</label><label class="control-label">Latitud:</label></label>
                                         <asp:TextBox ID="TxLatitud" AutoPostBack="true" runat="server" TextMode="MultiLine" Rows="3" class="form-control" MaxLength="20"></asp:TextBox>
                                 </div>
-
                                 <div class="col-md-6">
                                     <label class="control-label   text-danger">*</label><label class="control-label">Longitud:</label></label>    
                                         <asp:TextBox ID="TxLongitud" AutoPostBack="true" runat="server" TextMode="MultiLine" Rows="3" class="form-control" MaxLength="20"></asp:TextBox>
@@ -103,7 +96,6 @@
                                     <label class="control-label   text-danger">*</label><label class="control-label">Tipo Agencia:</label></label>
                                     <asp:DropDownList ID="DDLTipoAgencia" runat="server" AutoPostBack="true" CssClass="form-control"></asp:DropDownList>
                                 </div>
-
                                 <div class="col-md-6">
                                     <label class="control-label   text-danger">*</label><label class="control-label">Departamento:</label></label>    
                                     <asp:DropDownList ID="DDLDepartamento" runat="server" AutoPostBack="true" CssClass="form-control" OnSelectedIndexChanged="DDLDepartamento_SelectedIndexChanged"></asp:DropDownList>
@@ -114,16 +106,12 @@
                             <!--Fin Fila 5-->
                             <div class="row p-t-20">
                                 <div class="col-md-6">
-                                    <label class="control-label   text-danger">*</label><label class="control-label">Requiere Conductor asignado por Contabilidad:</label></label>                                    
-                            <%--    </div>
-
-                                <div class="col-md-2">--%>
+                                    <label class="control-label   text-danger">*</label><label class="control-label">Requiere Conductor asignado por Contabilidad:</label></label>                                           
                                     <asp:RadioButtonList ID="RblConductor" RepeatDirection="Horizontal" Width="90px" runat="server" AutoPostBack="True" Enabled="false">
                                         <asp:ListItem Value="1">Si</asp:ListItem>
                                         <asp:ListItem Value="0">No</asp:ListItem>
                                     </asp:RadioButtonList>
                                 </div>
-
                                 <div class="col-md-6">
                                     <label class="control-label   text-danger">*</label><label class="control-label">Municipio:</label></label>                                    
                                 <asp:DropDownList ID="DDLMunicipio" runat="server" class="form-control"></asp:DropDownList>
@@ -133,34 +121,26 @@
 
                             </div>
                             <!--Fin Fila 5-->
-
-                            <br />
                             <br />
                             <div class="col-md-12" style="text-align: center">
                                 <label class="control-label text-danger" style="text-align: center">Los campos con (*) son obligatorios</label>
                             </div>
-
-
-
-
-                            <div class="row p-t-20 col-md-12">
-                                <div class="col-md-4">
-                                    <asp:Button ID="BtnEnviar" class="btn  btn-block btn-success" runat="server" Text="Enviar" OnClick="BtnEnviar_Click" />
-                                </div>
-                                <div class=" col-md-4">
-                                    <asp:Button ID="BtnCancelar" class="btn  btn-block btn-danger" runat="server" Text="Cancelar" OnClick="BtnCancelar_Click" />
-                                </div>
-
-                                <div class="col-md-4">
-                                    <a href="../../default.aspx"" class="btn  btn-block btn-primary">Volver</a>
-                                </div>
-                            </div>
+                            <br />
                             <br />
 
+                            <div class="modal-footer">
+                                <asp:UpdatePanel ID="UpdateModificacionBotones" runat="server">
+                                    <ContentTemplate>
+                                        <%--<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>--%>
+                                        <asp:Button ID="Button1" runat="server" Text="Cancelar" class="btn  btn-dark" OnClick="BtnCancelar_Click" />
+                                        <asp:Button ID="BtnEnviar" runat="server" Text="Aceptar" class="btn btn-success" OnClick="BtnEnviar_Click" />
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                            <br />
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
-
                 <!--/PRIMER CONTENIDO-->
 
                 <!--SEGUNDO CONTENIDO-->
@@ -175,58 +155,54 @@
                                                 <label class="control-label">Buscar:</label></label>                                      
                                             </div>
                                             <div class="col-md-6">
-                                               <asp:TextBox ID="TxBuscarAgencia" runat="server" placeholder="Búsqueda por agencia o codigo, luego presione Enter..." class="form-control" AutoPostBack="true" OnTextChanged="TxBuscarAgencia_TextChanged"></asp:TextBox>
+                                                <asp:TextBox ID="TxBuscarAgencia" runat="server" placeholder="Búsqueda por agencia o codigo, luego presione Enter..." class="form-control" AutoPostBack="true" OnTextChanged="TxBuscarAgencia_TextChanged"></asp:TextBox>
+                                            </div>
+                                        </div>
+
+                                        <div class="row col-12">
+                                            <div class="col-12 grid-margin stretch-card">
+                                                <div class="table-table-responsive m-t-20">
+                                                    <asp:UpdatePanel runat="server" ID="UPAgencias" UpdateMode="Conditional">
+                                                        <ContentTemplate>
+                                                            <asp:GridView ID="GVAgencias" runat="server"
+                                                                CssClass="table table-bordered"
+                                                                PagerStyle-CssClass="pgr"
+                                                                HeaderStyle-CssClass="table" HeaderStyle-HorizontalAlign="center"
+                                                                RowStyle-CssClass="rows"
+                                                                AutoGenerateColumns="false"
+                                                                AllowPaging="true"
+                                                                GridLines="None"
+                                                                PageSize="10" OnPageIndexChanging="GVAgencias_PageIndexChanging" OnRowCommand="GVAgencias_RowCommand">
+                                                                <Columns>
+                                                                    <asp:TemplateField HeaderText="Acción" ItemStyle-HorizontalAlign="center">
+                                                                        <ItemTemplate>
+                                                                            <asp:LinkButton ID="LbModificar" class="btn btn-info mr-2" runat="server" Title="Modificar" CommandName="Modifcar" CommandArgument='<%# Eval("idAgencia") %>'>
+                                                       <i class="icon-pencil" ></i>
+                                                                            </asp:LinkButton>
+                                                                        </ItemTemplate>
+                                                                        <ItemStyle Width="10%" />
+                                                                    </asp:TemplateField>
+                                                                    <asp:BoundField DataField="idAgencia" HeaderText="Id" ControlStyle-Width="10%" />
+                                                                    <asp:BoundField DataField="nombre" HeaderText="Agencia" ControlStyle-Width="50%" />
+                                                                    <asp:BoundField DataField="codigoAgencia" HeaderText="Codigo" ControlStyle-Width="30%" />
+                                                                    <asp:BoundField DataField="direccion" HeaderText="Direccion" ControlStyle-Width="30%" />
+                                                                    <asp:BoundField DataField="telefono" HeaderText="Telefono" ControlStyle-Width="30%" />
+                                                                    <asp:BoundField DataField="TipoAgencia" HeaderText="Tipo" ControlStyle-Width="30%" />
+                                                                    <asp:BoundField DataField="departamento" HeaderText="Departamento" ControlStyle-Width="30%" />
+                                                                    <asp:BoundField DataField="estado" HeaderText="Estado" ControlStyle-Width="30%" />
+                                                                </Columns>
+                                                            </asp:GridView>
+                                                        </ContentTemplate>
+                                                    </asp:UpdatePanel>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="row col-12">
-                        <div class="col-12 grid-margin stretch-card">
-                            <div class="table-responsive">
-                                <asp:UpdatePanel runat="server" ID="UPAgencias" UpdateMode="Conditional">
-                                    <ContentTemplate>
-                                        <asp:GridView ID="GVAgencias" runat="server"
-                                            CssClass="table table-bordered"
-                                            PagerStyle-CssClass="pgr"
-                                            HeaderStyle-CssClass="table" HeaderStyle-HorizontalAlign="center"
-                                            RowStyle-CssClass="rows"
-                                            AutoGenerateColumns="false"
-                                            AllowPaging="true"
-                                            GridLines="None"
-                                            PageSize="10" OnPageIndexChanging="GVAgencias_PageIndexChanging" OnRowCommand="GVAgencias_RowCommand" >
-                                            <Columns>
-                                                <asp:TemplateField HeaderText="Acción" ItemStyle-HorizontalAlign="center">
-                                                    <ItemTemplate>
-                                                        <asp:LinkButton ID="LbModificar"  class="btn btn-info mr-2"  runat="server"  CommandName="Modifcar" CommandArgument='<%# Eval("idAgencia") %>'>
-                                                       <i class="icon-pencil" ></i>
-                                                        </asp:LinkButton>
-                                                    </ItemTemplate>
-                                                    <ItemStyle Width="10%" />
-                                                </asp:TemplateField>
-                                                <asp:BoundField DataField="idAgencia" HeaderText="Id" ControlStyle-Width="10%" />
-                                                <asp:BoundField DataField="nombre" HeaderText="Agencia" ControlStyle-Width="50%" />
-                                                <asp:BoundField DataField="codigoAgencia" HeaderText="Codigo" ControlStyle-Width="30%" />
-                                                <asp:BoundField DataField="direccion" HeaderText="Direccion" ControlStyle-Width="30%" />
-                                                <asp:BoundField DataField="telefono" HeaderText="Telefono" ControlStyle-Width="30%" />
-                                                <asp:BoundField DataField="TipoAgencia" HeaderText="Tipo" ControlStyle-Width="30%" />
-                                                <asp:BoundField DataField="departamento" HeaderText="Departamento" ControlStyle-Width="30%" />
-                                                <asp:BoundField DataField="estado" HeaderText="Estado" ControlStyle-Width="30%" />
-                                            </Columns>
-                                        </asp:GridView>
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
-                            </div>
-
-                            <div class="row p-t-20 col-md-12">
-                             <div class="col-md-4 " style="margin-left: auto; margin-right: auto">
-                                <a href="../../default.aspx"" class="btn  btn-block btn-primary">Volver</a>
-                             </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <!--/SEGUNDO CONTENIDO-->
@@ -238,10 +214,10 @@
     <div class="modal bs-example-modal-lg" id="modalModificarAgencia" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content" style="width: 930px; top: 320px; left: 50%; transform: translate(-50%, -50%);">
-                <div class="modal-header bg-dark">
+                <div class="modal-header">
                     <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
-                            <h3 class="modal-title" style="color: white">
+                            <h3 class="modal-title">
                                 <asp:Label ID="TituloModalCrearAgencia" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label></h3>
                         </ContentTemplate>
                     </asp:UpdatePanel>
@@ -373,9 +349,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
-
                         </ContentTemplate>
                     </asp:UpdatePanel>
 
@@ -383,17 +356,6 @@
                         <label class="control-label text-danger" style="text-align: center">Los campos con (*) son obligatorios</label>
                     </div>
 
-
-<%--                    <asp:UpdatePanel ID="UpdateModal" runat="server" UpdateMode="Conditional">
-                        <ContentTemplate>
-                            <div class="col-md-12" style="align-self: center" runat="server" id="DivAlerta" visible="false">
-                                <div class="alert alert-danger   align-content-md-center">
-                                    <h3 class="text-danger" style="text-align: center"><i class="fa fa-exclamation-triangle"></i>Warning</h3>
-                                    <asp:Label ID="LbMensajeModalError" runat="server" Text="" Width="100%"></asp:Label>
-                                </div>
-                            </div>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>--%>
 
                             <asp:UpdatePanel ID="UpdateModal" runat="server" UpdateMode="Conditional">
                                 <ContentTemplate>
@@ -403,22 +365,6 @@
                                 </ContentTemplate>
                             </asp:UpdatePanel>
 
-<%--                    <div class="col-md-12" style="margin-left: auto; margin-right: auto" id="Div3" runat="server">
-                        <div class="alert alert-success  alert-dismissible align-content-md-center" style="align-self: auto">
-                            <div class="row">
-                                <div class="col-3">
-                                    <p class="text-center">
-                                        <img src="https://img.icons8.com/color/70/000000/accept-database.png" /><span class="dashicons dashicons-admin-home"></span></p>
-                                </div>
-                                <div class="col-9" style="text-align: center">
-                                    <br>
-                                    <h4><strong>¿Está seguro que desea modificar la agencia?</strong></h4>
-                                    <p>Si esta seguro dar clic en el botón "Modificar"</p>
-                                </div>
-                                <br>
-                            </div>
-                        </div>
-                    </div>--%>
 
                 </div>
 
@@ -427,7 +373,7 @@
                         <ContentTemplate>
                             <button type="button" class="btn btn-light" data-dismiss="modal">
                                 Close</button>
-                            <asp:Button ID="btnModalModificar" runat="server" Text="Modificar" class="btn btn-dark" OnClick="btnModalModificar_Click" />
+                            <asp:Button ID="btnModalModificar" runat="server" Text="Modificar" class="btn btn-info mr-2" OnClick="btnModalModificar_Click" />
                         </ContentTemplate>
 
                     </asp:UpdatePanel>

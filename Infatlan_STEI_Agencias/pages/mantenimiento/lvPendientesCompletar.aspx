@@ -109,11 +109,11 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
-                <div class="row p-t-20 col-md-12">
+<%--                <div class="row p-t-20 col-md-12">
                                 <div class="col-md-4 " style="margin-left: auto; margin-right: auto">
                                     <a href="../../default.aspx"" class="btn  btn-block btn-primary">Volver</a>
                                 </div>
-                            </div>
+                            </div>--%>
                 <br>
             </div>
         </div>
@@ -126,14 +126,14 @@
     <div class="modal fade" id="ModalCancelacionLV" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="width: 600px; top: 320px; left: 50%; transform: translate(-50%, -50%);">
-                <div class="modal-header  bg-dark" >
+                <div class="modal-header" >
                     <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
-                            <h3 class="modal-title" style="color: white" id="exampleModalLabel" >Cancelar LV  
+                            <h3 class="modal-title"  id="exampleModalLabel" >Cancelar LV  
                                 <asp:Label ID="Titulo" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label></h3>
                         </ContentTemplate>
                     </asp:UpdatePanel>
-                    <button type="button" class="close" style="color: white" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -221,7 +221,7 @@
 
 
 
-                    <div class="col-md-12" style="margin-left: auto; margin-right: auto" id="Div1" runat="server">
+<%--                    <div class="col-md-12" style="margin-left: auto; margin-right: auto" id="Div1" runat="server">
                         <div class="alert alert-success  alert-dismissible align-content-md-center" style="align-self: auto">
                             <div class="row">
                                 <div class="col-3">          
@@ -237,12 +237,12 @@
                                 <asp:Label ID="Label1" runat="server" Text="" Width="100%"></asp:Label>
                             </div>
                         </div>
-                    </div>
+                    </div>--%>
 
 
 
                 </div>
-                <div class="modal-footer">
+             <%--   <div class="modal-footer">--%>
                     <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                         <ContentTemplate>
                             <button type="button" class="btn btn-light" data-dismiss="modal">Cerrar</button>
@@ -252,7 +252,7 @@
                 </div>
             </div>
         </div>
-    </div>
+<%--    </div>--%>
 
 
 </asp:Content>
