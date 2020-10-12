@@ -63,8 +63,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
 
         protected void btnnewsoATM_Click(object sender, EventArgs e)
         {
-            H5Alerta1.Visible = false;
-            H5Alerta2.Visible = false;
+           
             txtAlerta1.Visible = false;
             txtAlerta2.Visible = false;
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal2();", true);
@@ -75,7 +74,6 @@ namespace Infatlan_STEI_ATM.pages.ATM
             if (txtModalNewSOATM.Text == "" || txtModalNewSOATM.Text == string.Empty)
             {
                 txtAlerta1.Visible = true;
-                H5Alerta1.Visible = true;
             }
             else
             {
@@ -86,7 +84,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                     if (vInfo == 1)
                     {
-                        H5Alerta1.Visible = false;
+                        txtAlerta1.Visible = false;
                         txtModalNewSOATM.Text = string.Empty;
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
                         Mensaje("Sistema operativo modificado con éxito", WarningType.Success);
@@ -95,8 +93,8 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     }
                     else
                     {
-                       H5Alerta1.InnerText="No se pudo modificar el sistema operativo";
-                        H5Alerta1.Visible = true;
+                       txtAlerta1.Text="No se pudo modificar el sistema operativo";
+                        txtAlerta1.Visible = true;
                     }
                 }
                 catch (Exception Ex)
@@ -113,8 +111,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
 
         protected void GVBusqueda_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            H5Alerta1.Visible = false;
-            H5Alerta2.Visible = false;
+           
             txtAlerta1.Visible = false;
             txtAlerta2.Visible = false;
             DataTable vDataa = (DataTable)Session["soATM"];
@@ -154,7 +151,6 @@ namespace Infatlan_STEI_ATM.pages.ATM
             if (txtNewSOATM.Text == "" || txtNewSOATM.Text == string.Empty)
             {
                 txtAlerta2.Visible = true;
-                H5Alerta2.Visible = true;
             }
             else
             {
@@ -164,7 +160,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                     if (vInfo == 1)
                     {
-                        H5Alerta2.Visible = false;
+                        txtAlerta2.Visible = false;
                         txtNewSOATM.Text = string.Empty;
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal2();", true);
                         Mensaje("Sistema operativo creada con éxito", WarningType.Success);
@@ -174,8 +170,8 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     }
                     else
                     {
-                       H5Alerta2.InnerText="No se pudo crear el sistema operativo";
-                        H5Alerta2.Visible = true;
+                       txtAlerta2.Text="No se pudo crear el sistema operativo";
+                        txtAlerta2.Visible = true;
                     }
                 }
                 catch (Exception Ex)

@@ -14,6 +14,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
     public partial class versionSw : System.Web.UI.Page
     {
         bd vConexion = new bd();
+        bd vConexionATM = new bd();
         Security vSecurity = new Security();
         protected void Page_Load(object sender, EventArgs e){
             Session["VERSIONSW_ATM"] = null;
@@ -41,7 +42,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
                 try
                 {
                     DataTable vDatos = new DataTable();
-                    vDatos = vConexion.ObtenerTabla("STEISP_ATM_Generales 10, 1");
+                    vDatos = vConexionATM.ObtenerTablaATM("SPSTEI_ATM 8");
                     GVBusqueda.DataSource = vDatos;
                     GVBusqueda.DataBind();
                     if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Edicion){
@@ -63,8 +64,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
         }
         protected void btnnewversionATM_Click(object sender, EventArgs e)
         {
-            H5Alerta1.Visible = false;
-            H5Alerta2.Visible = false;
+           
             txtAlerta1.Visible = false;
             txtAlerta2.Visible = false;
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal2();", true);
@@ -72,8 +72,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
 
         protected void GVBusqueda_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            H5Alerta2.Visible = false;
-            H5Alerta1.Visible = false;
+           
             txtAlerta1.Visible = false;
             txtAlerta2.Visible = false;
 
@@ -88,12 +87,12 @@ namespace Infatlan_STEI_ATM.pages.ATM
                 try
                 {
                     DataTable vDatos = new DataTable();
-                    String vQuery = "STEISP_ATMAdminComponentesATM 19,'" + codversionATMs + "'";
-                    vDatos = vConexion.ObtenerTabla(vQuery);
+                    String vQuery = "SPSTEI_ATM 27,'" + codversionATMs + "'";
+                    vDatos = vConexionATM.ObtenerTablaATM(vQuery);
                     foreach (DataRow item in vDatos.Rows)
                     {
                         Session["codversionATM"] = codversionATMs;
-                        Session["nombreversionATM"] = item["nombreVersion"].ToString();
+                        Session["nombreversionATM"] = item["Descripcion"].ToString();
                     }
                 }
                 catch (Exception)
@@ -113,18 +112,17 @@ namespace Infatlan_STEI_ATM.pages.ATM
             if (txtModalNewVersionATM.Text == "" || txtModalNewVersionATM.Text == string.Empty)
             {
                 txtAlerta1.Visible = true;
-                H5Alerta1.Visible = true;
             }
             else
             {
                
                 try
                 {
-                    string vQuery = "STEISP_ATMAdminComponentesATM 21, '" + Session["codversionATM"] + "','" + txtModalNewVersionATM.Text + "', '" + Session["USUARIO"].ToString() + "'";
-                    Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                    string vQuery = "SPSTEI_ATM 28, '" + Session["codversionATM"] + "','" + txtModalNewVersionATM.Text + "'";
+                    Int32 vInfo = vConexionATM.ejecutarSQLATM(vQuery);
                     if (vInfo == 1)
                     {
-                        H5Alerta1.Visible = false;
+                        txtAlerta1.Visible = false;
                         txtModalNewVersionATM.Text = string.Empty;
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
                         Mensaje("Versión del software modificado con éxito", WarningType.Success);
@@ -133,8 +131,8 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     }
                     else
                     {
-                       H5Alerta1.InnerText="No se pudo modificar la versión del software";
-                        H5Alerta1.Visible = true;
+                      txtAlerta1.Text="No se pudo modificar la versión del software";
+                        txtAlerta1.Visible = true;
                     }
                 }
                 catch (Exception Ex)
@@ -155,17 +153,16 @@ namespace Infatlan_STEI_ATM.pages.ATM
             if (txtNewVersionATM.Text == "" || txtNewVersionATM.Text == string.Empty)
             {
                 txtAlerta2.Visible = true;
-                H5Alerta2.Visible = true;
             }
             else
             {
                 try
                 {
-                    string vQuery = "STEISP_ATMAdminComponentesATM 20, '" + Session["codsoATM"] + "','" + txtNewVersionATM.Text + "','" + Session["USUARIO"].ToString() + "'";
-                    Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                    string vQuery = "SPSTEI_ATM 29, '" + txtNewVersionATM.Text + "'";
+                    Int32 vInfo = vConexionATM.ejecutarSQLATM(vQuery);
                     if (vInfo == 1)
                     {
-                        H5Alerta2.Visible = false;
+                        txtAlerta2.Visible = false;
                         txtNewVersionATM.Text = string.Empty;
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal2();", true);
                         Mensaje("Versión del software creada con éxito", WarningType.Success);
@@ -175,8 +172,8 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     }
                     else
                     {
-                        H5Alerta2.InnerText = "No se pudo crear la versión del software";
-                        H5Alerta2.Visible = true;
+                        txtAlerta2.Text = "No se pudo crear la versión del software";
+                        txtAlerta2.Visible = true;
                     }
                 }
                 catch (Exception Ex)

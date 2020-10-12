@@ -129,7 +129,7 @@ namespace Infatlan_STEI_ATM.pages.material
                     vDatos = vConexion.ObtenerTabla(vQuery);
                     foreach (DataRow item in vDatos.Rows)
                         {
-
+                            Session["ATM_CODMANTENIMIENTO_MATERIAL"] = codVerif;
                             Session["ATM_CODATM_MATERIAL"] = item["Codigo"].ToString();
                             Session["ATM_NOMATM_MATERIAL"] = item["NomATM"].ToString();
                             Session["ATM_DIRECCION_MATERIAL"] = item["Direccion"].ToString();
@@ -149,6 +149,7 @@ namespace Infatlan_STEI_ATM.pages.material
                             Session["ATM_UBICACION_MATERIAL"] = item["Ubicacion"].ToString();
                             Session["ATM_IDUBI_MATERIAL"] = item["IdUbi"].ToString();
                             Session["ATM_SUCURSAL_MATERIAL"] = item["Sucursal"].ToString();
+                            Session["ATM_MINISTOCK_MATERIAL"] = item["MiniStock"].ToString();
                             Session["ATM_DEPTO_MATERIAL"] = item["Departamento"].ToString();
                             Session["ATM_ZONA_MATERIAL"] = item["Zona"].ToString();
                             Session["ATM_IDMANT_MATERIAL"] = codVerif;

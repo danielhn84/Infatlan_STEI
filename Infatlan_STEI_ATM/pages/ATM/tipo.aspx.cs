@@ -14,6 +14,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
     public partial class tipo : System.Web.UI.Page
     {
         bd vConexion = new bd();
+        bd vConexionATM = new bd();
         Security vSecurity = new Security();
         protected void Page_Load(object sender, EventArgs e){
             Session["TIPO_ATM"] = null;
@@ -38,7 +39,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
             if (HttpContext.Current.Session["TIPO_ATM"] == null){
                 try{
                     DataTable vDatos = new DataTable();
-                    vDatos = vConexion.ObtenerTabla("STEISP_ATM_Generales 1, 1");
+                    vDatos = vConexionATM.ObtenerTablaATM("SPSTEI_ATM 4");
                     GVBusqueda.DataSource = vDatos;
                     GVBusqueda.DataBind();
                     if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Edicion){
@@ -63,16 +64,16 @@ namespace Infatlan_STEI_ATM.pages.ATM
             DataTable vDataa = (DataTable)Session["tipoATM"];
             string codtipoATMs = e.CommandArgument.ToString();
 
-            H5Alerta2.Visible = false;
-            H5Alerta1.Visible = false;
+            txtAlerta1.Visible = false;
+            txtAlerta2.Visible = false;
             if (e.CommandName == "Codigo"){
                 try{
                     DataTable vDatos = new DataTable();
-                    String vQuery = "STEISP_ATMAdminComponentesATM 1,'" + codtipoATMs + "'";
-                    vDatos = vConexion.ObtenerTabla(vQuery);
+                    String vQuery = "SPSTEI_ATM 12,'" + codtipoATMs + "'";
+                    vDatos = vConexionATM.ObtenerTablaATM(vQuery);
                     foreach (DataRow item in vDatos.Rows){
                         Session["codtipoATM"] = codtipoATMs;
-                        Session["nombretipoATM"] = item["nombreTipoATM"].ToString();                        
+                        Session["nombretipoATM"] = item["Descripcion"].ToString();                        
                     }                  
                 }catch (Exception){
                     throw;
@@ -87,21 +88,21 @@ namespace Infatlan_STEI_ATM.pages.ATM
         protected void btnModalEnviartipoATM_Click(object sender, EventArgs e){
             if (txtModalNewTipoATM.Text == "" || txtModalNewTipoATM.Text == string.Empty){
                 txtAlerta1.Visible = true;
-                H5Alerta1.Visible = true;
+                //H5Alerta1.Visible = true;
             }else{
                 try{
-                    string vQuery = "STEISP_ATMAdminComponentesATM 3, '" + Session["codtipoATM"] + "','" + txtModalNewTipoATM.Text + "', '" + Session["USUARIO"].ToString() + "'";
-                    Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                    string vQuery = "SPSTEI_ATM 13, '" + Session["codtipoATM"] + "','" + txtModalNewTipoATM.Text + "'";
+                    Int32 vInfo = vConexionATM.ejecutarSQLATM(vQuery);
                     if (vInfo == 1){
-                        H5Alerta2.Visible = false;
+                        //H5Alerta2.Visible = false;
                         txtModalNewTipoATM.Text = string.Empty;
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
                         Mensaje("Tipo ATM modificado con éxito", WarningType.Success);
                         UpdateGridView.Update();
                         cargarData();
                     }else{
-                        H5Alerta1.InnerText = "No se pudo modificar el tipo de ATM";
-                        H5Alerta1.Visible = true;
+                        txtAlerta1.Text = "No se pudo modificar el tipo de ATM";
+                        txtAlerta1.Visible = true;
                     }
                 }catch (Exception Ex){
                     throw;
@@ -114,8 +115,8 @@ namespace Infatlan_STEI_ATM.pages.ATM
         }
 
         protected void btnguardartipoATM_Click(object sender, EventArgs e){
-            H5Alerta2.Visible = false;
-            H5Alerta1.Visible = false;
+            txtAlerta1.Visible = false;
+            txtAlerta2.Visible = false;
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal2();", true);
           
         }
@@ -123,21 +124,21 @@ namespace Infatlan_STEI_ATM.pages.ATM
         protected void btnModalNueviTipoATM_Click(object sender, EventArgs e){
             if (txtNewTipoATM.Text == "" || txtNewTipoATM.Text == string.Empty){
                 txtAlerta2.Visible = true;
-                H5Alerta2.Visible = true;
+                //H5Alerta2.Visible = true;
             }else{
                 try{
-                    string vQuery = "STEISP_ATMAdminComponentesATM 2, '" + Session["codtipoATM"] + "','" + txtNewTipoATM.Text + "','" + Session["USUARIO"].ToString() + "'";
-                    Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                    string vQuery = "SPSTEI_ATM 14, '" + txtNewTipoATM.Text + "'";
+                    Int32 vInfo = vConexionATM.ejecutarSQLATM(vQuery);
                     if (vInfo == 1){
-                        H5Alerta2.Visible=false;
+                        //H5Alerta2.Visible=false;
                         txtNewTipoATM.Text = string.Empty;
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal2();", true);
                         Mensaje("Tipo de ATM creada con éxito", WarningType.Success);
                         UpdateGridView.Update();
                         cargarData();
                     }else{
-                        H5Alerta2.InnerText = "No se pudo crear el tipo de ATM";
-                        H5Alerta2.Visible = true;
+                        txtAlerta2.Text = "No se pudo crear el tipo de ATM";
+                        txtAlerta2.Visible = true;
                     }
                 }catch (Exception Ex){
                     throw;

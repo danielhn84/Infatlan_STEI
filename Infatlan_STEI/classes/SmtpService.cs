@@ -51,6 +51,7 @@ namespace Infatlan_STEI.classes
                             Descripcion
                             ), Server.MapPath("/assets/images/logo.png")));
                         break;
+                    
                 }
                 client.Send(mail);
                 vRespuesta = true;

@@ -97,13 +97,13 @@
                                             <Columns>
                                                 <asp:BoundField DataField="Codigo" HeaderText="Código de ATM" ItemStyle-HorizontalAlign="center" />
                                                 <asp:BoundField DataField="Nombre" HeaderText="Nombre" ItemStyle-HorizontalAlign="center" />
-                                                <asp:BoundField DataField="Inventario" HeaderText="Inventario de ATM" ItemStyle-HorizontalAlign="center" />
+                                                <asp:BoundField DataField="TipoATM" HeaderText="Tipo de ATM" ItemStyle-HorizontalAlign="center" />
                                                 <asp:BoundField DataField="Estado" HeaderText="Estado de ATM" ItemStyle-HorizontalAlign="center" />
-                                                <asp:BoundField DataField="Ubicacion" HeaderText="Ubicación" ItemStyle-HorizontalAlign="center" />
+                                                <%--<asp:BoundField DataField="Ubicacion" HeaderText="Ubicación" ItemStyle-HorizontalAlign="center" />--%>
                                                 <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="center">
                                                     <ItemTemplate>
-                                                        <asp:LinkButton ID="btnbajaATM" Visible="false" runat="server" CssClass="btn btn-danger mr-2" Text="De Baja" CommandArgument='<%# Eval("Codigo") %>' CommandName="Baja"></asp:LinkButton>
-                                                        <asp:LinkButton runat="server" Visible="false" ID="btnmodificarATM" Text="" CssClass="btn btn-info ti-pencil-alt mr-2" CommandArgument='<%# Eval("Codigo") %>' CommandName="Modificar"></asp:LinkButton>
+                                                       <%-- <asp:LinkButton ID="btnbajaATM" Visible="false" runat="server" CssClass="btn btn-danger mr-2" Text="De Baja" CommandArgument='<%# Eval("Codigo") %>' CommandName="Baja"></asp:LinkButton>--%>
+                                                        <asp:LinkButton runat="server" Visible="true" ID="btnmodificarATM" Text="" CssClass="btn btn-info ti-pencil-alt mr-2" CommandArgument='<%# Eval("Codigo") %>' CommandName="Modificar"></asp:LinkButton>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                             </Columns>

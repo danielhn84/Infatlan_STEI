@@ -71,11 +71,11 @@
                                             PageSize="10" OnRowCommand="GVBusqueda_RowCommand">
                                             <Columns>
 
-                                                <asp:BoundField DataField="idTipoATM" HeaderText="Código de tipo ATM" ItemStyle-HorizontalAlign="center" />
-                                                <asp:BoundField DataField="nombreTipoATM" HeaderText="Tipo de ATM" ItemStyle-HorizontalAlign="center" />
+                                                <asp:BoundField DataField="Id_Tipo_ATM" HeaderText="Código de tipo ATM" ItemStyle-HorizontalAlign="center" />
+                                                <asp:BoundField DataField="Descripcion" HeaderText="Tipo de ATM" ItemStyle-HorizontalAlign="center" />
                                                 <asp:TemplateField HeaderText="" ItemStyle-HorizontalAlign="center">
                                                     <ItemTemplate>
-                                                        <asp:LinkButton ID="btnbajaATM" Visible="false" runat="server" class="btn btn-info ti-pencil-alt mr-2" Text="" CommandArgument='<%# Eval("idTipoATM") %>' CommandName="Codigo"></asp:LinkButton>
+                                                        <asp:LinkButton ID="btnbajaATM" Visible="false" runat="server" class="btn btn-info ti-pencil-alt mr-2" Text="" CommandArgument='<%# Eval("Id_Tipo_ATM") %>' CommandName="Codigo"></asp:LinkButton>
                                                         <%--<asp:Button ID="BtnUsuarioPassword" runat="server" Text="De baja" CssClass="btn btn-block btn-outline-danger" CommandArgument='<%# Eval("codATM") %>' CommandName="Baja" />--%>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
@@ -113,11 +113,11 @@
                         <div class="row col-12">
                             <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>*Nuevo nombre de tipo ATM: </strong></asp:Label>
                             <asp:TextBox runat="server" ID="txtModalNewTipoATM" CssClass="form-control col-6"></asp:TextBox>
-                        </div>
-                        <div class="col-md-8 align-self-center" style="margin-left: auto; margin-right: auto">
+                        </div><br />
+                      <%--  <div class="col-md-8 align-self-center" style="margin-left: auto; margin-right: auto">
                             <br />
                             <h6 runat="server" visible="false" id="H5Alerta1" class="text-danger col-12" style="text-align:center;">Los campos con(*) son obligatorios.</h6>
-                        </div>
+                        </div>--%>
                             <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
                             <asp:TextBox runat="server" Enabled="false" Text="Ingrese nuevo tipo ATM." Visible="false" ID="txtAlerta1" CssClass="form-control" style="background-color:red; color:white; text-align:center;"/>
                         </div>
@@ -155,11 +155,11 @@
                         <div class="row col-12">
                             <asp:Label runat="server" BorderStyle="None" class="col form-control col-6"><strong>*Nombre de tipo ATM: </strong></asp:Label>
                             <asp:TextBox runat="server" ID="txtNewTipoATM" CssClass="form-control col-6 "></asp:TextBox>
-                        </div>
-                        <div class="col-md-8 align-self-center" style="margin-left: auto; margin-right: auto">
+                        </div><br />
+                       <%-- <div class="col-md-8 align-self-center" style="margin-left: auto; margin-right: auto">
                             <br />
                             <h6 runat="server" visible="false" id="H5Alerta2" class="text-danger col-12" style="text-align:center;">Los campos con(*) son obligatorios.</h6>
-                        </div>
+                        </div>--%>
                             <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
                             <asp:TextBox runat="server" Enabled="false" Text="Ingrese nuevo tipo de ATM." Visible="false" ID="txtAlerta2" CssClass="form-control" style="background-color:red; color:white; text-align:center;"/>
                         </div>

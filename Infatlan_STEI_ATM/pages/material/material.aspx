@@ -80,6 +80,7 @@
                                             <asp:ListItem Value="1" Text="Si" />
                                             <asp:ListItem Value="0" Text="No" />
                                         </asp:RadioButtonList>
+                                        
                                     </div>
                                 </div>
                                 <div class="row col-4">
@@ -97,7 +98,7 @@
                             <!--/SEGUNDA FILA-->
                             <br />
                             <%--TERCERA FILA--%>
-                            <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                            <div class="col-md-12 align-self-center" runat="server" id="DIVTablaMateriales" style="margin-left: auto; margin-right: auto">
                                 <table class="tablesaw table-bordered table-hover table no-wrap" data-tablesaw-mode="swipe"
                                     data-tablesaw-sortable data-tablesaw-sortable-switch data-tablesaw-minimap
                                     data-tablesaw-mode-switch>
@@ -160,6 +161,24 @@
                                                     </asp:TemplateField>
                                                 </Columns>
                                             </asp:GridView>
+
+                                             <asp:GridView ID="GVEliminar" runat="server"
+                                                CssClass="table table-bordered"
+                                                PagerStyle-CssClass="pgr"
+                                                HeaderStyle-CssClass="table"
+                                                RowStyle-CssClass="rows"
+                                                AutoGenerateColumns="false"
+                                                AllowPaging="true"
+                                                GridLines="None"
+                                                HeaderStyle-HorizontalAlign="center"
+                                                PageSize="10"
+                                                Style="margin: 30px 0px 20px 0px">
+                                                <Columns>
+                                                    <asp:BoundField DataField="idMantenimiento" HeaderText="Código" Visible="false" ItemStyle-HorizontalAlign="center" />
+                                                    <asp:BoundField DataField="idStock" HeaderText="Stock" Visible="false" ItemStyle-HorizontalAlign="center" />
+                                                    <asp:BoundField DataField="estado" HeaderText="Material" ItemStyle-HorizontalAlign="center" />                                                                                                    
+                                                </Columns>
+                                            </asp:GridView>
                                         </div>
                                     </div>
                                 </ContentTemplate>
@@ -207,19 +226,16 @@
     <div class="modal fade bs-example-modal-lg" id="modalEquipo" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <div class="modal-header" style="background-color: darkslategrey; color: white;">
+                <div class="modal-header">
                     <h4 class="modal-title" id="myLargeModalLabel1">¿Desea enviar la solicitud?</h4>
                 </div>
 
                 <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                     <ContentTemplate>
                         <div class="modal-footer col-12">
-                            <div class="row col-3">
-                                <asp:Button runat="server" ID="btnModalEnviar" OnClick="btnModalEnviar_Click" CssClass="btn btn-dark mr-2" Text="Enviar" />
-                            </div>
-                            <div class="row col-3">
-                                <asp:Button runat="server" ID="btnModalCerrar" OnClick="btnModalCerrar_Click" CssClass="btn btn-secundary mr-2" Text="Cancelar" />
-                            </div>
+                            <asp:Button runat="server" ID="btnModalCerrar" OnClick="btnModalCerrar_Click" CssClass="btn btn-secundary mr-2" Text="Cancelar" />
+                                <asp:Button runat="server" ID="btnModalEnviar" OnClick="btnModalEnviar_Click" CssClass="btn btn-success mr-2" Text="Enviar" />
+                           
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
@@ -232,19 +248,16 @@
     <div class="modal fade bs-example-modal-lg" id="modalEquipoR" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <div class="modal-header" style="background-color: darkslategrey; color: white;">
+                <div class="modal-header">
                     <h4 class="modal-title" id="myLargeModalLabel2">¿Desea devolver la solicitud?</h4>
                 </div>
 
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
                         <div class="modal-footer col-12">
-                            <div class="row col-3">
-                                <asp:Button runat="server" ID="btnModarDevolver" OnClick="btnModarDevolver_Click" CssClass="btn btn-dark mr-2" Text="Enviar" />
-                            </div>
-                            <div class="row col-3">
-                                <asp:Button runat="server" ID="btnModalCerrarRechazo" OnClick="btnModalCerrarRechazo_Click" CssClass="btn btn-secundary mr-2" Text="Cancelar" />
-                            </div>
+                           <asp:Button runat="server" ID="btnModalCerrarRechazo" OnClick="btnModalCerrarRechazo_Click" CssClass="btn btn-secundary mr-2" Text="Cancelar" />
+                                <asp:Button runat="server" ID="btnModarDevolver" OnClick="btnModarDevolver_Click" CssClass="btn btn-success mr-2" Text="Enviar" />
+                           
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>

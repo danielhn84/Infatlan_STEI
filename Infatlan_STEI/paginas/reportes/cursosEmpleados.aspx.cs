@@ -60,7 +60,8 @@ namespace Infatlan_STEI.paginas.reportes
                 if (vDatos.Rows.Count > 0){
                     GVBusqueda.DataSource = vDatos;
                     GVBusqueda.DataBind();
-                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 5).Edicion){
+                    Session["CUMPL_EVALUACIONES"] = vDatos;
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 5).Creacion){
                         foreach (GridViewRow item in GVBusqueda.Rows){
                             LinkButton LbEdit = item.FindControl("BtnEditar") as LinkButton;
                             LbEdit.Visible = true;
@@ -72,7 +73,6 @@ namespace Infatlan_STEI.paginas.reportes
                             LbDelete.Visible = true;
                         }
                     }
-                    Session["CUMPL_EVALUACIONES"] = vDatos;
                 }
 
                 //CURSOS
@@ -190,7 +190,25 @@ namespace Infatlan_STEI.paginas.reportes
         }
 
         protected void GVBusqueda_PageIndexChanging(object sender, GridViewPageEventArgs e){
-
+            try{
+                GVBusqueda.PageIndex = e.NewPageIndex;
+                GVBusqueda.DataSource = (DataTable)Session["CUMPL_EVALUACIONES"];
+                GVBusqueda.DataBind();
+                if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 5).Creacion){
+                    foreach (GridViewRow item in GVBusqueda.Rows){
+                        LinkButton LbEdit = item.FindControl("BtnEditar") as LinkButton;
+                        LbEdit.Visible = true;
+                    }
+                }
+                if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 5).Borrado){
+                    foreach (GridViewRow item in GVBusqueda.Rows){
+                        LinkButton LbDelete = item.FindControl("BtnBorrar") as LinkButton;
+                        LbDelete.Visible = true;
+                    }
+                }
+            }catch (Exception ex){
+                Mensaje(ex.Message, WarningType.Danger);
+            }
         }
 
         protected void GvAsignar_RowCommand(object sender, GridViewCommandEventArgs e){

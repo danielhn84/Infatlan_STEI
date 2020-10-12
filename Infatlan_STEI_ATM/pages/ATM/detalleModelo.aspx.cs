@@ -107,8 +107,8 @@ namespace Infatlan_STEI_ATM.pages.ATM
 
         protected void btnnewdetModeloATM_Click(object sender, EventArgs e)
         {
-            H5Alerta2.Visible = false;
-            H5Alerta1.Visible = false;
+            //H5Alerta2.Visible = false;
+            //H5Alerta1.Visible = false;
             txtAlerta1.Visible = false;
             txtAlerta2.Visible = false;
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal2();", true);
@@ -116,8 +116,8 @@ namespace Infatlan_STEI_ATM.pages.ATM
 
         protected void GVBusqueda_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            H5Alerta2.Visible = false;
-            H5Alerta1.Visible = false;
+            //H5Alerta2.Visible = false;
+            //H5Alerta1.Visible = false;
             txtAlerta1.Visible = false;
             txtAlerta2.Visible = false;
             DataTable vDataa = (DataTable)Session["detMATM"];
@@ -158,7 +158,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
             if (txtModalNewdetMATM.Text == "" || txtModalNewdetMATM.Text == string.Empty || DDLModeloATM.SelectedValue == "0")
             {
               
-                H5Alerta1.Visible = true;
+                //H5Alerta1.Visible = true;
                 txtAlerta1.Visible = true;
             }
             else
@@ -170,7 +170,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                     if (vInfo == 1)
                     {
-                        H5Alerta1.Visible = false;
+                        txtAlerta1.Visible = false;
                         txtModalNewdetMATM.Text = string.Empty;
                         DDLModeloATM.SelectedValue = "0";
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
@@ -180,7 +180,8 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     }
                     else
                     {
-                        H5Alerta1.InnerText="No se pudo modificar el detalle de modelo";
+                        txtAlerta1.Text="No se pudo modificar el detalle de modelo";
+                        txtAlerta1.Visible = true;
                     }
                 }
                 catch (Exception Ex)
@@ -203,7 +204,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
             if (txtNewdetMATM.Text == "" || txtNewdetMATM.Text == string.Empty || DDLNewModelo.SelectedValue == "0")
             {
               
-                H5Alerta2.Visible = true;
+                //H5Alerta2.Visible = true;
                 txtAlerta2.Visible = true;
             }
             else
@@ -214,7 +215,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                     if (vInfo == 1)
                     {
-                        H5Alerta2.Visible = false;
+                        txtAlerta2.Visible = false;
                         txtNewdetMATM.Text = string.Empty;
                         DDLNewModelo.SelectedValue = "0";
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal2();", true);
@@ -225,8 +226,8 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     }
                     else
                     {
-                        H5Alerta2.InnerText = "No se pudo crear el detalle de modelo";
-                        H5Alerta2.Visible = true;
+                        txtAlerta2.Text = "No se pudo crear el detalle de modelo";
+                        txtAlerta2.Visible = true;
                     }
                 }
                 catch (Exception Ex)

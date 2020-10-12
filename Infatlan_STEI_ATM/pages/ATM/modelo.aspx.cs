@@ -13,6 +13,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
     public partial class modelo : System.Web.UI.Page
     { 
         bd vConexion = new bd();
+        bd vConexionATM = new bd();
         Security vSecurity = new Security();
         protected void Page_Load(object sender, EventArgs e){
             Session["MODELO_ATM"] = null;
@@ -39,7 +40,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
                 try
                 {
                     DataTable vDatos = new DataTable();
-                    vDatos = vConexion.ObtenerTabla("STEISP_ATM_Generales 2, 1");
+                    vDatos = vConexionATM.ObtenerTablaATM("SPSTEI_ATM 10");
                     GVBusqueda.DataSource = vDatos;
                     GVBusqueda.DataBind();
                     if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Edicion){
@@ -67,8 +68,8 @@ namespace Infatlan_STEI_ATM.pages.ATM
 
         protected void GVBusqueda_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            H5Alerta1.Visible = false;
-            H5Alerta2.Visible = false;
+            //H5Alerta1.Visible = false;
+            //H5Alerta2.Visible = false;
             txtAlerta1.Visible = false;
             txtAlerta2.Visible = false;
             DataTable vDataa = (DataTable)Session["modeloATM"];
@@ -82,12 +83,12 @@ namespace Infatlan_STEI_ATM.pages.ATM
                 try
                 {
                     DataTable vDatos = new DataTable();
-                    String vQuery = "STEISP_ATMAdminComponentesATM 4,'" + codmodeloATMs + "'";
-                    vDatos = vConexion.ObtenerTabla(vQuery);
+                    String vQuery = "SPSTEI_ATM 15,'" + codmodeloATMs + "'";
+                    vDatos = vConexionATM.ObtenerTablaATM(vQuery);
                     foreach (DataRow item in vDatos.Rows)
                     {
                         Session["codmodeloATM"] = codmodeloATMs;
-                        Session["nombremodeloATM"] = item["nombreModeloATM"].ToString();
+                        Session["nombremodeloATM"] = item["Descripcion"].ToString();
                     }
                 }
                 catch (Exception)
@@ -105,8 +106,8 @@ namespace Infatlan_STEI_ATM.pages.ATM
 
         protected void btnguardarmodeloATM_Click(object sender, EventArgs e)
         {
-            H5Alerta1.Visible = false;
-            H5Alerta2.Visible = false;
+            //H5Alerta1.Visible = false;
+            //H5Alerta2.Visible = false;
             txtAlerta1.Visible = false;
             txtAlerta2.Visible = false;
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal2();", true);
@@ -118,8 +119,8 @@ namespace Infatlan_STEI_ATM.pages.ATM
             if (txtModalNewModeloATM.Text == "" || txtModalNewModeloATM.Text == string.Empty)
             {
               
-                H5Alerta1.Visible = true;
-                H5Alerta2.Visible = true;
+                //H5Alerta1.Visible = true;
+                //H5Alerta2.Visible = true;
                 txtAlerta1.Visible = true;
             }
             else
@@ -127,8 +128,8 @@ namespace Infatlan_STEI_ATM.pages.ATM
                
                 try
                 {
-                    string vQuery = "STEISP_ATMAdminComponentesATM 6, '" + Session["codmodeloATM"] + "','" + txtModalNewModeloATM.Text + "', '" + Session["USUARIO"].ToString() + "'";
-                    Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                    string vQuery = "SPSTEI_ATM 16, '" + Session["codmodeloATM"] + "','" + txtModalNewModeloATM.Text + "'";
+                    Int32 vInfo = vConexionATM.ejecutarSQLATM(vQuery);
                     if (vInfo == 1)
                     {
 
@@ -137,14 +138,14 @@ namespace Infatlan_STEI_ATM.pages.ATM
                         Mensaje("Modelo de ATM modificado con éxito", WarningType.Success);
                         UpdateGridView.Update();
                         cargarData();
-                        H5Alerta1.Visible = false;
-                        H5Alerta2.Visible = false;
+                        txtAlerta1.Visible = false;
+                        txtAlerta2.Visible = false;
                     }
                     else
                     {
-                        H5Alerta1.InnerText = "No se pudo modificar el modelo";
-                        H5Alerta1.Visible = true;
-                        H5Alerta2.Visible = true;
+                        txtAlerta1.Text = "No se pudo modificar el modelo";
+                        txtAlerta1.Visible = true;
+                       
                     }
                 }
                 catch (Exception Ex)
@@ -166,18 +167,18 @@ namespace Infatlan_STEI_ATM.pages.ATM
             if (txtNewModeloATM.Text == "" || txtNewModeloATM.Text == string.Empty)
             {
               
-                H5Alerta2.Visible = true;
+               
                 txtAlerta2.Visible = true;
             }
             else
             {
                 try
                 {
-                    string vQuery = "STEISP_ATMAdminComponentesATM 5, '" + Session["codmodeloATM"] + "','" + txtNewModeloATM.Text + "','" + Session["USUARIO"].ToString() + "'";
-                    Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                    string vQuery = "SPSTEI_ATM 17, '" + txtNewModeloATM.Text + "'";
+                    Int32 vInfo = vConexionATM.ejecutarSQLATM(vQuery);
                     if (vInfo == 1)
                     {
-                        H5Alerta2.Visible = false;
+                        txtAlerta2.Visible = false;
                         txtNewModeloATM.Text = string.Empty;
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal2();", true);
                         Mensaje("Modelo de ATM creada con éxito", WarningType.Success);
@@ -187,7 +188,8 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     }
                     else
                     {
-                       H5Alerta2.InnerText="No se pudo crear el modelo";
+                      txtAlerta2.Text="No se pudo crear el modelo";
+                        txtAlerta2.Visible = true;
                     }
                 }
                 catch (Exception Ex)
@@ -200,7 +202,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
         protected void btnModalCerrarNueviModeloATM_Click(object sender, EventArgs e)
         {
             txtAlerta2.Visible = false;
-            H5Alerta2.Visible = false;
+            
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal2();", true);
         }
     }

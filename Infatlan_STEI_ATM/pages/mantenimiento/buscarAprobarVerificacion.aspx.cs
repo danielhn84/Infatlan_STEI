@@ -152,6 +152,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                         Session["ATM_HRSALIDAINFA_VERIF_CREAR"] = item["HoraSalidaInfa"].ToString();
                         Session["ATM_HRENTRADAINFA_VERIF_CREAR"] = item["HoraEntradaInfa"].ToString();
                         Session["ATM_ZONA_VERIF_CREAR"] = item["Zona"].ToString();
+                        Session["ATM_IDZONA_VERIF_CREAR"] = item["IDZona"].ToString();
                         Session["ATM_IDMANT_VERIF_CREAR"] = codVerificacion;
                         Session["ATM_ESTADO_VERIF_CREAR"] = item["Estado"].ToString();
                         Session["ATM_FECHAMANT_VERIF_CREAR"] = Convert.ToDateTime(item["FechaMantenimiento"]).ToString("yyyy/MM/dd");

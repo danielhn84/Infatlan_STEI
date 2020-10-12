@@ -14,6 +14,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
     public partial class update : System.Web.UI.Page
     {
         bd vConexion = new bd();
+        bd vConexionATM = new bd();
         Security vSecurity = new Security();
         protected void Page_Load(object sender, EventArgs e){
             Session["UPDATEATM"] = null;
@@ -53,24 +54,25 @@ namespace Infatlan_STEI_ATM.pages.ATM
         void cargarData(){
             try{
                 DataTable vDatos = new DataTable();
-                vDatos = vConexion.ObtenerTabla("STEISP_ATM_Generales 13, 1");
+                vDatos = vConexionATM.ObtenerTablaATM("SPSTEI_ATM 2");
                 GVBusqueda.DataSource = vDatos;
                 GVBusqueda.DataBind();
+               
                 if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Edicion){
                     foreach (GridViewRow item in GVBusqueda.Rows){
-                        LinkButton LbEdit = item.FindControl("btnbajaATM") as LinkButton;
+                        //LinkButton LbEdit = item.FindControl("btnbajaATM") as LinkButton;
                         LinkButton LbEdit2 = item.FindControl("btnmodificarATM") as LinkButton;
-                        LbEdit.Visible = true;
+                        //LbEdit.Visible = true;
                         LbEdit2.Visible = true;
                     }
                 }
-                Session["ATM"] = vDatos;
+                 Session["ATM"] = vDatos;
                 Session["UPDATEATM"] = 1;
 
             }
             catch (Exception Ex)
             {
-
+                Mensaje(Ex.Message, WarningType.Danger);
             }
             
         }
@@ -84,77 +86,39 @@ namespace Infatlan_STEI_ATM.pages.ATM
 
                 if (e.CommandName == "Baja")
                 {
-                    try
-                    {                      
-                        string vQuery = "STEISP_ATM_Estado 1,'" + codATMs +"'";
-                        Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                    //try
+                    //{                      
+                    //    string vQuery = "STEISP_ATM_Estado 1,'" + codATMs +"'";
+                    //    Int32 vInfo = vConexion.ejecutarSQL(vQuery);
 
-                        //VALIDA QUE ATM ESTE ACTIVO
-                        String vQuery2 = "STEISP_ATM_VERIFICACION 8, '" + codATMs + "',1";
-                        DataTable vDatos2 = vConexion.ObtenerTabla(vQuery2);
-                        if (vInfo == 1)
-                        {                          
-                            Mensaje("ATM fue dado de baja exitosamente", WarningType.Success);
-                            UpdateDivBusquedas.Update();
-                            Session["ATM"] = null;
-                            cargarData();
-                            TxBuscarATM.Text = string.Empty;
-                        }
-                        else
-                        {
-                            Mensaje("No se pudo dar de baja el ATM", WarningType.Warning);
-                        }
-                    }
-                    catch (Exception Ex)
-                    {
-                        throw;
-                    }
+                    //    //VALIDA QUE ATM ESTE ACTIVO
+                    //    String vQuery2 = "STEISP_ATM_VERIFICACION 8, '" + codATMs + "',1";
+                    //    DataTable vDatos2 = vConexion.ObtenerTabla(vQuery2);
+                    //    if (vInfo == 1)
+                    //    {                          
+                    //        Mensaje("ATM fue dado de baja exitosamente", WarningType.Success);
+                    //        UpdateDivBusquedas.Update();
+                    //        Session["ATM"] = null;
+                    //        cargarData();
+                    //        TxBuscarATM.Text = string.Empty;
+                    //    }
+                    //    else
+                    //    {
+                    //        Mensaje("No se pudo dar de baja el ATM", WarningType.Warning);
+                    //    }
+                    //}
+                    //catch (Exception Ex)
+                    //{
+                    //    throw;
+                    //}
                 }
 
                 if (e.CommandName == "Modificar")
                 {
-                    try
-                    {                
-                    DataTable vDatos = new DataTable();
-                    String vQuery = "STEISP_ATM_Estado 2,'" + codATMs + "'";
-                    vDatos = vConexion.ObtenerTabla(vQuery);
-                    foreach (DataRow item in vDatos.Rows)
-                    {
-                        Session["codATM"] = codATMs;
-                        Session["nombreATM"] = item["nombreATM"].ToString();
-                        Session["idEstado"] = item["idEstado"].ToString();
-                        Session["sucursalATM"] = item["sucursalATM"].ToString();
-                        Session["ubicacionATM"] = item["ubicacionATM"].ToString();
-                        Session["tipoATM"] = item["tipoATM"].ToString();
-                        Session["modeloATM"] = item["idModeloATM"].ToString();
-                        Session["tipoCarga"] = item["tipoCargaATM"].ToString();
-                        Session["procesador"] = item["procesadorATM"].ToString();
-                        Session["teclado"] = item["tecladoATM"].ToString();
-                        Session["serieATM"] = item["serieATM"].ToString();
-                        Session["ram"] = item["ramATM"].ToString();
-                        Session["so"] = item["idSO"].ToString();
-                        Session["serieDisco"] = item["serieDiscoATM"].ToString();
-                        Session["capacidadDisco"] = item["capacidadDiscoATM"].ToString();
-                        Session["marca"] = item["idMarca"].ToString();
-                        Session["ip"] = item["ipATM"].ToString();
-                        Session["puerto"] = item["puertoATM"].ToString();
-                        Session["latitud"] = item["latitudATM"].ToString();
-                        Session["longitud"] = item["longitudATM"].ToString();
-                        Session["direccion"] = item["direccionATM"].ToString();
-                        Session["inventario"] = item["inventarioATM"].ToString();
-                        Session["versionSw"] = item["idVersionSw"];
-                        Session["DetalleModelo"] = item["modeloATM"].ToString();
-                        Session["CodUbicacion"] = item["codUbicacion"].ToString();
-                        Session["InvUbicacion"] = item["idUbicacion"].ToString();
-                        }
+                    Session["codATM"] = codATMs;
                     TxBuscarATM.Text = string.Empty;
                     Response.Redirect("updateTotal.aspx");
-                    }
-                    catch (Exception)
-                    {
 
-                        throw;
-                    }
                 }
 
 
@@ -182,22 +146,20 @@ namespace Infatlan_STEI_ATM.pages.ATM
                 else
                 {
                     EnumerableRowCollection<DataRow> filtered = vDatos.AsEnumerable()
-                        .Where(r => r.Field<String>("Nombre").Contains(vBusqueda.ToUpper()));
-                    
+                        .Where(r => r.Field<String>("Nombre").Contains(vBusqueda));
+
                     DataTable vDatosFiltrados = new DataTable();
                     vDatosFiltrados.Columns.Add("Codigo");
                     vDatosFiltrados.Columns.Add("Nombre");
-                    vDatosFiltrados.Columns.Add("Inventario");
+                    vDatosFiltrados.Columns.Add("TipoATM");
                     vDatosFiltrados.Columns.Add("Estado");
-                    vDatosFiltrados.Columns.Add("Ubicacion");                  
                     foreach (DataRow item in filtered)
                     {
                         vDatosFiltrados.Rows.Add(
                             item["Codigo"].ToString(),
                             item["Nombre"].ToString(),
-                            item["Inventario"].ToString(),
-                            item["Estado"].ToString(),
-                            item["Ubicacion"].ToString()                           
+                            item["TipoATM"].ToString(),
+                            item["Estado"].ToString()
                             );
                     }
 

@@ -126,7 +126,7 @@
     <div class="modal fade bs-example-modal-lg" id="modalReprograma" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <div class="modal-header" style="background-color: darkslategrey; color: white;">
+                <div class="modal-header">
                     <h4 class="modal-title" id="myLargeModalLabel2">¿Seguro que reprogramará mantenimiento?</h4>
                 </div>
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
@@ -172,12 +172,8 @@
                 <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                     <ContentTemplate>
                         <div class="modal-footer col-12">
-                            <div class="row col-3">
-                                <asp:Button runat="server" ID="btnReprogramarNotif" OnClick="btnReprogramarNotif_Click" CssClass="btn btn-dark mr-3" Text="Reprogramar" />
-                            </div>
-                            <div class="row col-3">
-                                <asp:Button runat="server" ID="btnCerrarReprogramarNotif" OnClick="btnCerrarReprogramarNotif_Click" CssClass="btn btn-secundary mr-3" Text="Cancelar" />
-                            </div>
+                             <asp:Button runat="server" ID="btnCerrarReprogramarNotif" OnClick="btnCerrarReprogramarNotif_Click" CssClass="btn btn-secundary mr-3" Text="Cancelar" />
+                                <asp:Button runat="server" ID="btnReprogramarNotif" OnClick="btnReprogramarNotif_Click" CssClass="btn btn-success mr-3" Text="Reprogramar" />                        
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>

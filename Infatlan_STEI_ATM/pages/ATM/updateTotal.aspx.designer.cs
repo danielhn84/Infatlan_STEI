@@ -51,13 +51,40 @@ namespace Infatlan_STEI_ATM.pages.ATM
         protected global::System.Web.UI.WebControls.TextBox txtnombreATM;
 
         /// <summary>
-        /// Control DDLsucursalATM.
+        /// Control txtIP.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DDLsucursalATM;
+        protected global::System.Web.UI.WebControls.TextBox txtIP;
+
+        /// <summary>
+        /// Control txtpuerto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtpuerto;
+
+        /// <summary>
+        /// Control DDLestado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DDLestado;
+
+        /// <summary>
+        /// Control DDLTipoATM.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DDLTipoATM;
 
         /// <summary>
         /// Control UPSegFila.
@@ -168,13 +195,13 @@ namespace Infatlan_STEI_ATM.pages.ATM
         protected global::System.Web.UI.WebControls.DropDownList DDLversionSw;
 
         /// <summary>
-        /// Control DDLTipoATM.
+        /// Control DDLsucursalATM.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DDLTipoATM;
+        protected global::System.Web.UI.WebControls.DropDownList DDLsucursalATM;
 
         /// <summary>
         /// Control DDLmarca.
@@ -195,22 +222,22 @@ namespace Infatlan_STEI_ATM.pages.ATM
         protected global::System.Web.UI.WebControls.TextBox txtcapacidadDisco;
 
         /// <summary>
-        /// Control txtIP.
+        /// Control txtinventarioATM.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIP;
+        protected global::System.Web.UI.WebControls.TextBox txtinventarioATM;
 
         /// <summary>
-        /// Control txtpuerto.
+        /// Control txtcodUbicacion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtpuerto;
+        protected global::System.Web.UI.WebControls.TextBox txtcodUbicacion;
 
         /// <summary>
         /// Control txtlatitud.
@@ -231,33 +258,6 @@ namespace Infatlan_STEI_ATM.pages.ATM
         protected global::System.Web.UI.WebControls.TextBox txtlongitud;
 
         /// <summary>
-        /// Control DDLestado.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DDLestado;
-
-        /// <summary>
-        /// Control txtinventarioATM.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtinventarioATM;
-
-        /// <summary>
-        /// Control txtcodUbicacion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtcodUbicacion;
-
-        /// <summary>
         /// Control txtdireccion.
         /// </summary>
         /// <remarks>
@@ -265,6 +265,24 @@ namespace Infatlan_STEI_ATM.pages.ATM
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtdireccion;
+
+        /// <summary>
+        /// Control FUMapaATM.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload FUMapaATM;
+
+        /// <summary>
+        /// Control imgMapaATM.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlImage imgMapaATM;
 
         /// <summary>
         /// Control UPEnviarVerif.
@@ -348,6 +366,15 @@ namespace Infatlan_STEI_ATM.pages.ATM
         protected global::System.Web.UI.UpdatePanel UpdatePanel4;
 
         /// <summary>
+        /// Control btnModalCerrarModificarATM.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnModalCerrarModificarATM;
+
+        /// <summary>
         /// Control btnModalModificarATM.
         /// </summary>
         /// <remarks>
@@ -357,12 +384,21 @@ namespace Infatlan_STEI_ATM.pages.ATM
         protected global::System.Web.UI.WebControls.Button btnModalModificarATM;
 
         /// <summary>
-        /// Control btnModalCerrarModificarATM.
+        /// Control UpdatePanel8.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnModalCerrarModificarATM;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel8;
+
+        /// <summary>
+        /// Control HFMapa.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HFMapa;
     }
 }
