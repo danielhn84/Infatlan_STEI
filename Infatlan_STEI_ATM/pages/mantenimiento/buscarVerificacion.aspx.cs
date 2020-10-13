@@ -233,7 +233,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                                 "Notificación de Mantenimiento ATM",
                                 "Buen día, se le notifica que se ha sustituido encargado de mantenimiento, el encargado ahora es " + DDLModalNewTecnico.SelectedItem.Text + ", mantenimiento al ATM " + txtModalATM.Text,
                                   "El usuario <b>" + item["Nombre"].ToString() + "</b> sustituyó técnico responsable de mantenimiento ATM",
-                                  vCorreoEncargadoZona,
+                                  vCorreoEncargadoZona + ";unidadatmkiosco@bancatlan.hn",
                                   "/sites/ATM/pages/reprogramar/buscarReprogramar.aspx"
                                 );
                         //ENVIAR A TECNICOS ASIGNADOS
@@ -302,7 +302,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                                 "Notificación de Mantenimiento ATM",
                                 "Buen día, se le notifica que se ha cancelado solicitud de mantenimiento, el encargado es " + Session["ATM_RESPONSABLE"].ToString() + ", mantenimiento al ATM " + txtModalATM.Text,
                                   "El usuario <b>" + item["Nombre"].ToString() + "</b> canceló: <br> Notificación de Mantenimiento",
-                                  vCorreoEncargadoZona,
+                                  vCorreoEncargadoZona + ";unidadatmkiosco@bancatlan.hn",
                                   "/sites/ATM/pages/reprogramar/buscarReprogramar.aspx"
                                 );
                         //ENVIAR A TECNICOS ASIGNADOS

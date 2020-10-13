@@ -778,7 +778,7 @@
 
                     <div class="col-12">
                         <label class="col-form-label">Observaciones y Comentarios</label>
-                        <asp:TextBox runat="server" ID="txtobseracionesVerif" TextMode="MultiLine" Rows="3" PlaceHolder="Ingrese su comentario..." CssClass="form-control"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="txtobseracionesVerif" TextMode="MultiLine" Rows="5" PlaceHolder="Ingrese su comentario..." CssClass="form-control"></asp:TextBox>
                     </div>
                 </div>
             </div>

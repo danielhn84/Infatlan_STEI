@@ -133,7 +133,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
             {
                 cargarData();
 
-                String vBusqueda = TxBuscarATM.Text;
+                String vBusqueda = TxBuscarATM.Text.ToUpper().ToString();
                 DataTable vDatos = (DataTable)Session["ATM"];
 
                 if (vBusqueda.Equals(""))

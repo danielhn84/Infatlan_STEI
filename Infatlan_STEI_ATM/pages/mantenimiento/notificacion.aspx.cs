@@ -91,8 +91,8 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         {
             if (DLLtecResponsable.SelectedValue == "0")
                 throw new Exception("Favor seleccione técnico responsable.");
-            if (Session["ATM_EMPLEADOS"] == null)
-                throw new Exception("Favor seleccione técnicos participantes.");
+            //if (Session["ATM_EMPLEADOS"] == null)
+            //    throw new Exception("Favor seleccione técnicos participantes.");
             //if (DDLmantemientoPendiente.SelectedValue == "0")
             //    throw new Exception("Favor seleccione ATM.");          
             if (txtHrFinMant.Text == "" || txtHrFinMant.Text == string.Empty)
@@ -417,7 +417,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                                 "Notificación de Mantenimiento ATM",
                                 "Buen día, se le notifica que se ha creado una solicitud de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["nombre"].ToString() + ", mantenimiento al ATM " + DDLmantemientoPendiente.SelectedItem.Text + " para la fecha " + txtFechaInicio.Text,
                                   "El usuario <b>" + item["Nombre"].ToString() + "</b> creó: <br> Notificación de Mantenimiento",
-                                   vCorreoEncargadoZona,
+                                   vCorreoEncargadoZona + ";unidadatmkiosco@bancatlan.hn",
                                 "/sites/ATM/pages/mantenimiento/buscarAprobarNotificacion.aspx"
                                 );
                         //ENVIAR A ENCARGADO ZONA
@@ -533,7 +533,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 string vReporteViaticos = "Notificacion";
                 string vCorreoAdmin = "acedillo@bancatlan.hn";
                 //string vCorreoCopia = "acamador@bancatlan.hn"+";";
-                string vCorreoCopia = "eurrea@bancatlan.hn;"+ vCorreoEncargadoZona;
+                string vCorreoCopia = "eurrea@bancatlan.hn;unidadatmkiosco@bancatlan.hn;" + vCorreoEncargadoZona;
                 //vCorreosTodos = vCorreosTecnicos + vCorreosJefes + vCorreoAdmin;
                 vCorreosTodos = vCorreosTecnicos + vCorreosJefes + vCorreoResponsable;
                 string vAsuntoRV = "Formato de notificación";
@@ -1394,15 +1394,9 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         }
 
         protected void btnPrueba_Click(object sender, EventArgs e){
-            SmtpService vService = new SmtpService();
-            vService.EnviarMensaje("acedillo@bancatlan.hn",
-                            typeBody.ATM,
-                           "Notificación de Mantenimiento ATM",
-                            "Buen día, se le notifica que se ha creado una solicitud de mantenimiento, el encargado es ADAN, mantenimiento al ATM TIUPA para la fecha HOY",
-                              "El usuario <b>ADAN</b> creó: <br> Notificación de Mantenimiento de ATM al que ha sido asignado como responsable.",
-                                "",
-                            "/sites/ATM/pages/mantenimiento/notificacion.aspx"
-                            );
+            Response.Redirect("verificacion.aspx");
+
+          
         }
     }
 }

@@ -15,13 +15,14 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
     {
         bd vConexion = new bd();
         bd vConexionATM = new bd();
-        protected void Page_Load(object sender, EventArgs e){
+        protected void Page_Load(object sender, EventArgs e) {
             string id = Request.QueryString["id"];
             string tipo = Request.QueryString["tipo"];
             Session["VERIF"] = null;
 
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
+            if (!Page.IsPostBack) {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
                     RBEnergias.SelectedValue = "1";
                     RBClima.SelectedValue = "1";
                     vaciarValorImg();
@@ -59,11 +60,13 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                             break;
                     }
                 }
-                else {
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
-            }
         }
+    }
+
 
         void vaciarValorImg()
         {
@@ -718,7 +721,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                                 "Notificación de Mantenimiento ATM",
                                    "Buen día, se le notifica que ha creado una verificación de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["nombre"].ToString() + ", mantenimiento al ATM " + txtnomATM.Text,
                                 "El usuario <b>" + item["Nombre"].ToString() + "</b> creó: <br> Verificación de Mantenimiento",
-                                  vCorreoEncargadoZona,
+                                  vCorreoEncargadoZona + ";unidadatmkiosco@bancatlan.hn",
                                   "/sites/ATM/pages/mantenimiento/buscarVerificacion.aspx"
                                 );
                         //ENVIAR A TECNICOS ASIGNADOS
@@ -1483,7 +1486,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 //vCorreosTodos = vCorreosTecnicos + vCorreosJefes + vCorreoAdmin;
                 vCorreosTodos = vCorreosTecnicos + vCorreosJefes + vCorreoResponsable;
                 //string vCorreoCopia = "acamador@bancatlan.hn";
-                string vCorreoCopia = "eurrea@bancatlan.hn;"+vCorreoEncargadoZona;
+                string vCorreoCopia = "eurrea@bancatlan.hn;unidadatmkiosco@bancatlan.hn;" + vCorreoEncargadoZona;
                 string vAsuntoRV = "Lista de Verificación";
                 string vBody = "Lista de Verificación";
                 int vEstadoSuscripcion = 0;
@@ -1707,7 +1710,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         {
             try
             {
-                //validar();
+                validar();
                
                 lbcodATM.Text = txtcodATM.Text;
                 lbNombreATM.Text = txtnomATM.Text;
