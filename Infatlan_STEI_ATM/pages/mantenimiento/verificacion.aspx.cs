@@ -1484,7 +1484,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 string vReporteViaticos = "Verificacion";
                 string vCorreoAdmin = "acedillo@bancatlan.hn";
                 //vCorreosTodos = vCorreosTecnicos + vCorreosJefes + vCorreoAdmin;
-                vCorreosTodos = vCorreosTecnicos + vCorreosJefes + vCorreoResponsable;
+                vCorreosTodos = vCorreoResponsable + vCorreosTecnicos + vCorreosJefes;
                 //string vCorreoCopia = "acamador@bancatlan.hn";
                 string vCorreoCopia = "eurrea@bancatlan.hn;unidadatmkiosco@bancatlan.hn;" + vCorreoEncargadoZona;
                 string vAsuntoRV = "Lista de Verificación";

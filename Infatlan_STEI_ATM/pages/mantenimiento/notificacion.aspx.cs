@@ -131,7 +131,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     DLLTecnicoParticipante.Items.Add(new ListItem { Value = "0", Text = "Seleccione técnico participante..." });
                     foreach (DataRow item in vDatos.Rows)
                     {
-                        DLLTecnicoParticipante.Items.Add(new ListItem { Value = item["idUsuario"].ToString(), Text = item["nombre"].ToString() });
+                        DLLTecnicoParticipante.Items.Add(new ListItem { Value = item["idUsuario"].ToString(), Text = item["nombre"].ToString()+" "+ item["apellidos"].ToString() });
                     }
 
 
@@ -142,7 +142,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     DLLtecResponsable.Items.Add(new ListItem { Value = "0", Text = "Seleccione técnico responsable..." });
                     foreach (DataRow item in vDatos2.Rows)
                     {
-                        DLLtecResponsable.Items.Add(new ListItem { Value = item["idUsuario"].ToString(), Text = item["nombre"].ToString() });
+                        DLLtecResponsable.Items.Add(new ListItem { Value = item["idUsuario"].ToString(), Text = item["nombre"].ToString() + " " + item["apellidos"].ToString() });
                     }
 
                     Session["NOTI"] = "1";
@@ -535,7 +535,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 //string vCorreoCopia = "acamador@bancatlan.hn"+";";
                 string vCorreoCopia = "eurrea@bancatlan.hn;unidadatmkiosco@bancatlan.hn;" + vCorreoEncargadoZona;
                 //vCorreosTodos = vCorreosTecnicos + vCorreosJefes + vCorreoAdmin;
-                vCorreosTodos = vCorreosTecnicos + vCorreosJefes + vCorreoResponsable;
+                vCorreosTodos = vCorreoResponsable + vCorreosTecnicos + vCorreosJefes;
                 string vAsuntoRV = "Formato de notificación";
                 string vBody = "Formato de notificación";
                 int vEstadoSuscripcion = 0;

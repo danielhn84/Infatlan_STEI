@@ -51,6 +51,24 @@ namespace Infatlan_STEI
         protected global::System.Web.UI.WebControls.Literal LitUsuario;
 
         /// <summary>
+        /// Control LIMenuATM.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LIMenuATM;
+
+        /// <summary>
+        /// Control LINotifATM.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LINotifATM;
+
+        /// <summary>
         /// Control LIModCrear.
         /// </summary>
         /// <remarks>
@@ -67,6 +85,15 @@ namespace Infatlan_STEI
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl LIModAprobar;
+
+        /// <summary>
+        /// Control LIVerifATM.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LIVerifATM;
 
         /// <summary>
         /// Control LIVerCrear.

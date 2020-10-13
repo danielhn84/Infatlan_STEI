@@ -72,6 +72,22 @@ namespace Infatlan_STEI
                     }
                     LitNotificaciones.Text = vString;
                     LitPointer.Text = vPointer;
+                    string vUsuario = Session["USUARIO"].ToString();
+                    if (vUsuario != "eurrea" && vUsuario != "mgarcia" && vUsuario != "acedillo")
+                        LIMenuATM.Visible = false;
+                    if (vUsuario != "eurrea" && vUsuario != "mgarcia" && vUsuario != "acedillo" && vUsuario != "emontoya" && vUsuario != "jdgarcia" && vUsuario != "acalderon" && vUsuario != "mbriceno")
+                    {
+                        LINotifATM.Visible = false;
+                        LIReprogramar.Visible = false;
+                        LICalendario.Visible = false;
+                    }
+                    if (vUsuario == "mbriceno")
+                    {
+                        LIVerifATM.Visible = false;
+                        LIDevoluciones.Visible = false;
+                        LIReprogramar.Visible = false;
+                        LICalendario.Visible = false;
+                    }
                 }
             }catch (Exception ex){
                 String vError = ex.Message;
