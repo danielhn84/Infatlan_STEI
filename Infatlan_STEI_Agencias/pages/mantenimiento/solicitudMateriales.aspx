@@ -47,7 +47,7 @@
     <div class="card">
         <div class="row" id="DivBusqueda" runat="server">
             <div class="col-12 grid-margin stretch-card">
-                <div class="card">
+                <%--<div class="card">--%>
                     <div class="card-body">
                         <h4 class="card-title">Material que saldrá del almacén</h4>
                         <p>Materiales pendientes de solicitar.</p>
@@ -70,11 +70,11 @@
                             </div>
                         </div>
                     </div>
-                </div>
+              <%--  </div>--%>
             </div>
         </div>
 
-        <div class="card">
+       <%-- <div class="card">--%>
             <div class="row col-12">
                 <div class="col-12 grid-margin stretch-card">
                     <div class="table-responsive">
@@ -123,24 +123,24 @@
                     </div>
                 </div>
             </div>
-        </div>
+       <%-- </div>--%>
     </div>
 
     <%--INICIO MODAL ENVIAR LV--%>
     <div class="modal bs-example-modal-lg" id="modalModificarAgencia" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content" style="width: 1300px; top: 320px; left: 50%; transform: translate(-50%, -50%);">
-                <div class="modal-header bg-dark">
+                <div class="modal-header">
 
                     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
-                            <h3 class="modal-title" style="color: white">
+                            <h3 class="modal-title">
                                 <asp:Label ID="lbTitulo" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label></h3>
                         </ContentTemplate>
                     </asp:UpdatePanel>
 
 
-                    <button type="button" class="close" style="color: white" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -292,7 +292,7 @@
                         <ContentTemplate>
                             <button type="button" class="btn btn-light" data-dismiss="modal">
                                 Close</button>
-                            <asp:Button ID="btnModalEnviar" runat="server" Text="Enviar" class="btn btn-dark" OnClick="btnModalEnviar_Click" />
+                            <asp:Button ID="btnModalEnviar" runat="server" Text="Enviar" class="btn btn-success" OnClick="btnModalEnviar_Click" />
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
@@ -307,14 +307,14 @@
     <div class="modal fade" id="ModalCancelacionMateriales" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="width: 600px; top: 320px; left: 50%; transform: translate(-50%, -50%);">
-                <div class="modal-header  bg-dark" >
+                <div class="modal-header" >
                     <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
-                            <h3 class="modal-title" style="color: white" id="exampleModalLabel" >Cancelar Solicitud Materiales  
+                            <h3 class="modal-title"  id="exampleModalLabel" >Cancelar Solicitud Materiales  
                                 <asp:Label ID="Titulo" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label></h3>
                         </ContentTemplate>
                     </asp:UpdatePanel>
-                    <button type="button" class="close" style="color: white" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -399,7 +399,7 @@
                     <asp:UpdatePanel ID="UpdatePanel6" runat="server">
                         <ContentTemplate>
                             <button type="button" class="btn btn-light" data-dismiss="modal">Cerrar</button>
-                            <asp:Button ID="BtnCancelarMateriales" runat="server" Text="Cancelar Materiales" class="btn btn-dark"  OnClick="BtnCancelarMateriales_Click"/>
+                            <asp:Button ID="BtnCancelarMateriales" runat="server" Text="Cancelar Materiales" class="btn btn-danger"  OnClick="BtnCancelarMateriales_Click"/>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>

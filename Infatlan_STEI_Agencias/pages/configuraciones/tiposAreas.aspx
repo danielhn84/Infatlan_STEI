@@ -71,21 +71,17 @@
                                 <label class="control-label text-danger" style="text-align:center" >Los campos con (*) son obligatorios</label>
                             </div>
 
-                            <div class="row p-t-20 col-md-12">
-                                 <div class="col-md-4">
-                                    <asp:Button ID="BtnEnviar" class="btn btn-block btn-success" runat="server" Text="Enviar" OnClick="BtnEnviar_Click"/>
-                                </div>
-
-                                 <div class="col-md-4">
-                                    <asp:Button ID="BtnCancelar" class="btn btn-block  btn-danger " runat="server" Text="Cancelar"  OnClick="BtnCancelar_Click"/>
-                                </div>
-
-                                 <div class="col-md-4">
-                    
-                                  <a href="../../default.aspx"" class="btn  btn-block btn-primary">Volver</a>
-                                </div>
-
+                            <div class="modal-footer">
+                                <asp:UpdatePanel ID="UpdateModificacionBotones" runat="server">
+                                    <ContentTemplate>
+                                        <%--<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>--%>
+                                        <asp:Button ID="BtnCancelar" runat="server" Text="Cancelar" class="btn  btn-dark" OnClick="BtnCancelar_Click" />
+                                        <asp:Button ID="BtnEnviar" runat="server" Text="Enviar" class="btn btn-success" OnClick="BtnEnviar_Click" />
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
                             </div>
+                            <br />
+
                             <br />
                         </ContentTemplate>
                     </asp:UpdatePanel>
@@ -150,11 +146,6 @@
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>
-                            <div class="row p-t-20 col-md-12">
-                                <div class="col-md-4 " style="margin-left: auto; margin-right: auto">
-                                    <a href="../../default.aspx"" class="btn  btn-block btn-primary">Volver</a>
-                                </div>
-                            </div>
                         </div>
                     </div>                
                 </div>
@@ -170,13 +161,13 @@
     <div class="modal fade" id="modalModificarArea" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="width: 600px; top: 320px; left: 50%; transform: translate(-50%, -50%);">
-                <div class="modal-header bg-dark">
+                <div class="modal-header">
 
-                    <h3 class="modal-title" style="color: white" id="exampleModalLabel">
+                    <h3 class="modal-title" id="exampleModalLabel">
                         <asp:Label ID="Titulo" runat="server" Text="Modificar Area" Style="margin-left: auto; margin-right: auto"></asp:Label>
                     </h3>
 
-                    <button type="button" class="close" style="color: white" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -233,24 +224,6 @@
                                     </div>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
-<%--                           
-                            <div class="col-md-12" style="margin-left: auto; margin-right: auto" id="DivAprobarLV" runat="server" visible="true">
-                                <div class="alert alert-success  alert-dismissible align-content-md-center" style="align-self: auto">
-                                    <div class="row">
-                                        <div class="col-3">
-                                            <p class="text-center"><img src="https://img.icons8.com/color/70/000000/accept-database.png"/><span class="dashicons dashicons-admin-home"></span></i></p>
-                                        </div>
-                                        <div class="col-9" style="text-align: center">
-
-                                            <h4><strong>¿Está seguro que desea modificar el area?
-                                                <asp:Label ID="Label2" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label>
-                                            </strong></h4>
-                                            <p>Si esta seguro dar clic en el botón "Enviar"</p>
-                                        </div>                              
-                               
-                                    </div>
-                                </div>
-                            </div> --%>  
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
@@ -261,7 +234,7 @@
                             <button type="button" class="btn btn-light"
                                 data-dismiss="modal">
                                 Close</button>
-                            <asp:Button ID="btnModalModificarEstado" runat="server" Text="Enviar" class="btn btn-dark" OnClick="btnModalModificarEstado_Click" />
+                            <asp:Button ID="btnModalModificarEstado" runat="server" Text="Enviar" class="btn btn-info mr-2" OnClick="btnModalModificarEstado_Click" />
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>

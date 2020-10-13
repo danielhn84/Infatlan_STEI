@@ -448,7 +448,7 @@
         </div>
     </div>
     <%--(FIN) Targeta Datos Tecnicos --%>
-             <img src="../../assets/images/vistaPrevia1.JPG" />
+             
     <%--(INICIO) Targeta Equipo de Comunicacion --%>
     <div class="card">
         <div class="card-body">
@@ -471,7 +471,7 @@
 
                         <div class="col-md-4 ">
                             <asp:FileUpload ID="FuClimatizacion" runat="server" Visible="false" onchange="showpreview1(this);" class="form-control" />
-                            <img id="ImgPreviewClimatizacion" height="250" width="380" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="false" />                          
+                            <img id="ImgPreviewClimatizacion" height="250" width="460" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="false" />                          
                         </div>
 
                     </div>
@@ -495,7 +495,7 @@
 
                         <div class="col-md-4 ">
                             <asp:FileUpload ID="FuUPS" runat="server" Visible="false" onchange="showpreview2(this); " class="form-control" />
-                            <img id="ImgPreviewUPS" height="250" width="380" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="false" />                           
+                            <img id="ImgPreviewUPS" height="250" width="460" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="false" />                           
                         </div>
                     </div>
                 </ContentTemplate>
@@ -526,7 +526,7 @@
 
                         <div class="col-md-4 ">
                             <asp:FileUpload ID="FuPolvoSuciedad" runat="server" Visible="false" onchange="showpreview4(this);" class="form-control" />
-                            <img id="ImgPreviewPolvoSuciedad" height="250" width="380" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="false" />
+                            <img id="ImgPreviewPolvoSuciedad" height="250" width="460" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="false" />
                         </div>
                     </div>
                 </ContentTemplate>
@@ -547,7 +547,7 @@
                         </div>
                         <div class="col-md-4 ">
                             <asp:FileUpload ID="FuHumedadSustancias" runat="server" Visible="false" onchange="showpreview5(this);" class="form-control" />
-                            <img id="ImgPreviewHumedadSustancias" height="250" width="380" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="false" />                            
+                            <img id="ImgPreviewHumedadSustancias" height="250" width="460" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="false" />                            
                         </div>
                     </div>
                 </ContentTemplate>
@@ -568,7 +568,7 @@
                         </div>
                         <div class="col-md-4 ">
                             <asp:FileUpload ID="FuRoboDaño" runat="server" Visible="false" onchange="showpreview6(this);" class="form-control" />
-                            <img id="ImgPreviewRoboDaño" height="250" width="380" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="false" />                           
+                            <img id="ImgPreviewRoboDaño" height="250" width="460" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="false" />                           
                         </div>
                     </div>
                 </ContentTemplate>
@@ -590,7 +590,7 @@
                         </div>
                         <div class="col-md-4">
                             <asp:FileUpload ID="FuElementosAjenos" runat="server" Visible="false" onchange="showpreview7(this);" class="form-control" />
-                            <img id="ImgPreviewElementosAjenos" height="250" width="380" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="false" />                          
+                            <img id="ImgPreviewElementosAjenos" height="250" width="460" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="false" />                          
                         </div>
                     </div>
                 </ContentTemplate>
@@ -611,7 +611,7 @@
                 </div>
                 <div class="col-md-4" style="vertical-align: middle; text-align: right">
                     <asp:FileUpload ID="FuRack" runat="server" Visible="true" onchange="showpreview3(this);" class="form-control" />
-                    <img id="ImgPreviewRack" height="250" width="380" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="true" />
+                    <img id="ImgPreviewRack" height="250" width="460" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="true" />
                 </div>
             </div>
 
@@ -622,7 +622,7 @@
                 </div>
                 <div class="col-md-4" style="vertical-align: middle; text-align: right">
                     <asp:FileUpload ID="FuEspacioFisico" runat="server" Visible="true" onchange="showpreview8(this);" class="form-control" />
-                    <img id="ImgPreviewEspacioFisico" height="250" width="380" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="true" />
+                    <img id="ImgPreviewEspacioFisico" height="250" width="460" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="true" />
                 </div>
             </div>
         </div>
@@ -882,15 +882,15 @@
     <div class="modal fade" id="modalEnviarLv" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="width: 600px; top: 320px; left: 50%; transform: translate(-50%, -50%);">
-                <div class="modal-header bg-dark">
+                <div class="modal-header">
                     <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
-                            <h3 class="modal-title" style="color: white" >
+                            <h3 class="modal-title"  >
                                 <asp:Label ID="TituloModalEnviarLV" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label></h3>
                         </ContentTemplate>
                     </asp:UpdatePanel>
 
-                    <button type="button" class="close" style="color: white" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close"  data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -946,7 +946,7 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
 
-                    <div class="col-md-12" style="margin-left: auto; margin-right: auto" id="Div3" runat="server">
+<%--                    <div class="col-md-12" style="margin-left: auto; margin-right: auto" id="Div3" runat="server">
                         <div class="alert alert-success  alert-dismissible align-content-md-center" style="align-self: auto">
                             <div class="row">
                                 <div class="col-3">
@@ -962,7 +962,7 @@
                                 <asp:Label ID="Label6" runat="server" Text="" Width="100%"></asp:Label>
                             </div>
                         </div>
-                    </div>
+                    </div>--%>
 
                 </div>
 
@@ -971,7 +971,7 @@
                             <ContentTemplate>
                                 <button type="button" class="btn btn-light" data-dismiss="modal">
                                     Close</button>                            
-                                <asp:Button ID="btnModalEnviarLv" runat="server" Text="Enviar LV" class="btn btn-dark" OnClick="btnModalEnviarLv_Click" />
+                                <asp:Button ID="btnModalEnviarLv" runat="server" Text="Enviar LV" class="btn btn-da" OnClick="btnModalEnviarLv_Click" />
                             </ContentTemplate>
                             <Triggers>
                                 <asp:PostBackTrigger ControlID="btnModalEnviarLv" />

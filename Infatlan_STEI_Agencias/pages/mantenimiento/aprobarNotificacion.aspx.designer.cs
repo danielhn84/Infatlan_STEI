@@ -150,13 +150,13 @@ namespace Infatlan_STEI_Agencias.pages
         protected global::System.Web.UI.WebControls.TextBox TxParticipantes;
 
         /// <summary>
-        /// Control DivAlerta.
+        /// Control Div3.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivAlerta;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div3;
 
         /// <summary>
         /// Control UpdateUsuarioBotones.

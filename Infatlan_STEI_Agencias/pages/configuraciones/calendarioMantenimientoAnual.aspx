@@ -61,16 +61,7 @@
             <div class="col-md-12" style="text-align: center">
                 <label class="control-label text-danger" style="text-align: center">Los campos con (*) son obligatorios</label>
             </div>
-<%--            <asp:UpdatePanel ID="UpdateModal" runat="server" UpdateMode="Conditional">
-                <ContentTemplate>
-                    <div class="col-md-12" style="align-self: center" runat="server" id="DivAlerta" visible="false">
-                        <div class="alert alert-danger   align-content-md-center">
-                            <h3 class="text-danger" style="text-align: center"><i class="fa fa-exclamation-triangle"></i>Warning</h3>
-                            <asp:Label ID="LbMensaje" runat="server" Text="" Width="100%"></asp:Label>
-                        </div>
-                    </div>
-                </ContentTemplate>
-            </asp:UpdatePanel>--%>
+
 
 
             <asp:UpdatePanel ID="UpdateModal" runat="server" UpdateMode="Conditional">
@@ -82,16 +73,6 @@
             </asp:UpdatePanel>
 
 
-<%--            <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
-                <ContentTemplate>
-                    <div class="col-md-12" style="align-self: center" runat="server" id="Div1" visible="false">
-                        <div class="alert alert-success   align-content-md-center">
-                            <h3 class="text-success" style="text-align: center"><i class="fa fa-exclamation-triangle"></i>Success</h3>
-                            <asp:Label ID="LbMensajeSuccsess" runat="server" Text="" Width="100%"></asp:Label>
-                        </div>
-                    </div>
-                </ContentTemplate>
-            </asp:UpdatePanel>--%>
 
 
             <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
@@ -104,7 +85,7 @@
 
 
 
-            <div class="row p-t-20 col-md-12">
+<%--            <div class="row p-t-20 col-md-12">
                 <div class="col-md-4">
                     <asp:Button ID="BtnEnviar" class="btn btn-block btn-success" runat="server" Text="Enviar" OnClick="BtnEnviar_Click1" />
                 </div>
@@ -114,15 +95,29 @@
                 <div class="col-md-4">
                     <a href="../../default.aspx" class="btn  btn-block btn-primary">Volver</a>
                  </div>
-            </div>
-                           
-            <hr>
-               <div class="row p-t-20">
+            </div>--%>
+            <br />
+            <div class="row p-t-20">
                 <div class="col-md-12">
                     <asp:Label Text="Nota: Recuerda descargar la plantilla de Excel para poder subir los mantenimientos anuales." runat="server" />
-                        <a href="../plantilla/PlantillaAgencia.xlsx">DAR CLIC AQUI PARA DESCARGAR </a>
-                </div>           
+                    <a href="../plantilla/PlantillaAgencia.xlsx">DAR CLIC AQUI PARA DESCARGAR </a>
+                </div>
             </div>
+            <br />
+
+            <div class="modal-footer">
+            <%--    <asp:UpdatePanel ID="UpdateModificacionBotones" runat="server">
+                    <ContentTemplate>--%>
+                        <%--<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>--%>
+                        <asp:Button ID="BtnCancelar" runat="server" Text="Cancelar" class="btn  btn-dark" onclientclick="clearFileInputField(divFileUp3)" OnClick="BtnCancelar_Click1" />
+                        <asp:Button ID="BtnEnviar" runat="server" Text="Enviar" class="btn btn-success" OnClick="BtnEnviar_Click1" />
+             <%--       </ContentTemplate>
+                </asp:UpdatePanel>--%>
+            </div>
+            <br />
+
+                           
+
         </div>
     </div>
 

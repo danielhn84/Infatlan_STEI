@@ -49,7 +49,7 @@
             <ContentTemplate>
                 <div class="row" id="DivBusqueda" runat="server">
                     <div class="col-12 grid-margin stretch-card">
-                        <div class="card">
+                      <%--  <div class="card">--%>
                             <div class="card-body">
                                 <h4 class="card-title">Aprobaciones Pendientes</h4>
                                 <p>Notificaciones que no han sido aprobadas por jefe, suplentes o coordinadores de mantenimiento.</p>
@@ -73,13 +73,13 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                    <%--    </div>--%>
                     </div>
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>
 
-        <div class="card">
+        <%--<div class="card">--%>
             <div class="row col-12">
                 <div class="col-12 grid-margin stretch-card">
                     <div class="table-responsive">
@@ -123,14 +123,9 @@
                         </asp:UpdatePanel>
                     </div>
 
-                    <div class="row p-t-20 col-md-12">
-                        <div class="col-md-4 " style="margin-left: auto; margin-right: auto">
-                              <a href="../../default.aspx"" class="btn  btn-block btn-primary">Volver</a>
-                        </div>
-                    </div>
                 </div>
             </div>
-        </div>
+  <%--      </div>--%>
     </div>
 
 
@@ -138,16 +133,16 @@
     <div class="modal fade" id="ModalAprobacionNotificacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="width: 600px; top: 320px; left: 50%; transform: translate(-50%, -50%);">
-                <div class="modal-header bg-dark">
+                <div class="modal-header">
                    
                      <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
-                            <h3 class="modal-title" style="color: white" >
+                            <h3 class="modal-title"  >
                                 <asp:Label ID="lbTitulo" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label></h3>
                         </ContentTemplate>
                     </asp:UpdatePanel>
 
-                    <button type="button" class="close" style="color: white" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close"  data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -210,13 +205,24 @@
                     </asp:UpdatePanel>
 
 
-                    <div class="col-md-12" runat="server">
-                        <%--<div class="form-group row">--%>
-                            <div class="col-md-12" runat="server" id="DivAlerta" visible="true" style="display: flex; background-color: green; justify-content: center">
-                                <p style="color: white; text-align:justify">Una vez aprobada la notificación por el coordinador o jefe, el técnico responsable recibirá un correo para que complete la solicitud de materiales.</p>
+       
+
+                        <div class="col-md-12" style="margin-left: auto; margin-right: auto" id="Div3" runat="server">
+                            <div class="alert alert-success  alert-dismissible align-content-md-center" style="align-self: auto">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <br>
+                                        <p class="text-center">
+                                            Una vez aprobada la notificación por el coordinador o jefe, el técnico responsable recibirá un correo para que complete la solicitud de materiales.</span></p>
+                                    </div>
+
+                                    <br>
+
+                                   
+                                </div>
                             </div>
-                        <%--</div>--%>
-                    </div>
+                        </div>
+               
 
 
                 </div>
@@ -225,7 +231,7 @@
                         <ContentTemplate>
 
                              <button type="button" class="btn btn-light" data-dismiss="modal">Close</button> 
-                            <asp:Button ID="btnModalAprobarNotificacion" runat="server" Text="Aprobar"  class="btn btn-dark" OnClick="btnModalAprobarNotificacion_Click" />
+                            <asp:Button ID="btnModalAprobarNotificacion" runat="server" Text="Aprobar"  class="btn btn-success" OnClick="btnModalAprobarNotificacion_Click" />
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
@@ -237,17 +243,17 @@
     <div class="modal fade" id="ModalCancelacionNotificacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="width: 600px; top: 320px; left: 50%; transform: translate(-50%, -50%);">
-                 <div class="modal-header bg-dark">
+                 <div class="modal-header">
                  
 
                      <asp:UpdatePanel ID="UpdatePanel6" runat="server" UpdateMode="Conditional">
                          <ContentTemplate>
-                             <h3 class="modal-title" style="color: white">
+                             <h3 class="modal-title">
                                  <asp:Label ID="lbTituloCancelar" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label></h3>
                          </ContentTemplate>
                      </asp:UpdatePanel>
 
-                    <button type="button" class="close" style="color: white"  data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close"   data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -265,10 +271,7 @@
 
                                         
                                         <div class="col-sm-9">
-                                      <%--      <asp:DropDownList ID="DDLMotivo" runat="server" class="form-control"  AutoPostBack="true">
-                                                <asp:ListItem Value="0" Text="Seleccione motivo..."></asp:ListItem>
-                                                <asp:ListItem Value="1" Text="Personal de agencia canceló mantenimiento"></asp:ListItem>
-                                            </asp:DropDownList>--%>
+                             
 
                                             <asp:DropDownList ID="DDLMotivo" runat="server" AutoPostBack="true" CssClass="form-control" OnSelectedIndexChanged="DDLMotivo_SelectedIndexChanged"></asp:DropDownList>
 
@@ -343,7 +346,7 @@
                     <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                         <ContentTemplate>
                             <button type="button" class="btn btn-light"data-dismiss="modal">Cerrar</button>
-                            <asp:Button ID="BtnCancelarNoti" runat="server" Text="Cancelar Notificación" class="btn btn-dark"  OnClick="BtnCancelarNoti_Click" />
+                            <asp:Button ID="BtnCancelarNoti" runat="server" Text="Cancelar Notificación" class="btn btn-danger"  OnClick="BtnCancelarNoti_Click" />
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>

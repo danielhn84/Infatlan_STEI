@@ -9,8 +9,8 @@
             return true;
         }
 
-        function openModalModificarTipoAgencia() { $('#modalModificarTipoAgencia').modal('show'); }
-        function closeModalModificarTipoAgencia() { $('#modalModificarTipoAgencia').modal('hide'); }
+        function openModalModificarTipoAgencia() { $('#modalModificarTipoAgencia').modal('show');}
+        function closeModalModificarTipoAgencia() { $('#modalModificarTipoAgencia').modal('hide');}
     </script>
 </asp:Content>
 
@@ -67,19 +67,21 @@
                                 <label class="control-label text-danger" style="text-align:center" >Los campos con (*) son obligatorios</label>
                             </div>
 
-                            <div class="row p-t-20 col-md-12">
-                                <div class="col-md-4">
-                                    <asp:Button ID="BtnEnviar" class="btn  btn-block btn-success" runat="server" Text="Enviar" OnClick="BtnEnviar_Click" />
-                                </div>
-                                <div class="col-md-4">
-                                    <asp:Button ID="BtnCancelar" class="btn  btn-block btn-danger" runat="server" Text="Cancelar" OnClick="BtnCancelar_Click" />
-                                </div>
 
-                                <div class="col-md-4">
-                                    <a href="../../default.aspx"" class="btn  btn-block btn-primary">Volver</a>
-                                </div>
+                            <br />
+                            <br />
 
+                            <div class="modal-footer">
+                                <asp:UpdatePanel ID="UpdateModificacionBotones" runat="server">
+                                    <ContentTemplate>
+                                        <%--<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>--%>
+                                        <asp:Button ID="BtnCancelar" runat="server" Text="Cancelar" class="btn  btn-dark" OnClick="BtnCancelar_Click" />
+                                        <asp:Button ID="BtnEnviar" runat="server" Text="Aceptar" class="btn btn-success" OnClick="BtnEnviar_Click" />
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
                             </div>
+                            <br />
+
 
 
                         </ContentTemplate>
@@ -115,31 +117,36 @@
                             <div class="table-responsive">
                                 <asp:UpdatePanel runat="server" ID="UPTipoAgencias" UpdateMode="Conditional">
                                     <ContentTemplate>
-                                        <asp:GridView ID="GVTipoAgencias" runat="server"
+                             
+
+
+
+                                        <asp:GridView ID="GVTipoAgenciasBASA" runat="server"
                                             CssClass="table table-bordered"
                                             PagerStyle-CssClass="pgr"
                                             HeaderStyle-CssClass="table" HeaderStyle-HorizontalAlign="center"
                                             RowStyle-CssClass="rows"
                                             AutoGenerateColumns="false"
                                             AllowPaging="true"
-                                            GridLines="None" OnPageIndexChanging="GVTipoAgencias_PageIndexChanging"
-                                            PageSize="10" OnRowCommand="GVTipoAgencias_RowCommand">
-
+                                            GridLines="None"
+                                            PageSize="10" nPageIndexChanging="GVTipoAgenciasBASA_PageIndexChanging" OnRowCommand="GVTipoAgenciasBASA_RowCommand">
                                             <Columns>
                                                 <asp:TemplateField HeaderText="Acción" ItemStyle-HorizontalAlign="center">
                                                     <ItemTemplate>
-                                                        <asp:LinkButton ID="LbModificar" class="btn btn-info mr-2"  Title="Modificar" runat="server" CommandName="Modifcar" CommandArgument='<%# Eval("idTipoAgencia") %>'>
-                                                        <i class="icon-pencil" ></i>
+                                                        <asp:LinkButton ID="LbModificar" class="btn btn-info mr-2" runat="server" Title="Modificar" CommandName="Modifcar" CommandArgument='<%# Eval("idTipoAgencia") %>'>
+                                                       <i class="icon-pencil" ></i>
                                                         </asp:LinkButton>
-
                                                     </ItemTemplate>
                                                     <ItemStyle Width="10%" />
                                                 </asp:TemplateField>
                                                 <asp:BoundField DataField="idTipoAgencia" HeaderText="Id" ControlStyle-Width="10%" />
-                                                <asp:BoundField DataField="nombre" HeaderText="Tipo Agencia" ControlStyle-Width="50%" />
-                                                <asp:BoundField DataField="estado" HeaderText="Estado" ControlStyle-Width="30%" />
+                                                <asp:BoundField DataField="nombre" HeaderText="Agencia" ControlStyle-Width="50%" />
+                                                <asp:BoundField DataField="estado" HeaderText="Codigo" ControlStyle-Width="30%" />
+                 
                                             </Columns>
                                         </asp:GridView>
+
+
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>
@@ -159,7 +166,7 @@
 
     <%--MODALES--%>
     <%--INICIO MODAL --%>
-    <div class="modal fade" id="modalModificarTipoAgencia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal fade" id="modalModificarTipoAgencia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="width: 600px; top: 320px; left: 50%; transform: translate(-50%, -50%);">
                 <div class="modal-header bg-dark">
@@ -228,23 +235,6 @@
 
 
 
-                            <%--                            <div class="col-md-12" style="margin-left: auto; margin-right: auto" runat="server" visible="true">
-                                <div class="alert alert-success  alert-dismissible align-content-md-center" style="align-self: auto">
-                                    <div class="row">
-                                        <div class="col-3">                                           
-                                            <p class="text-center"><img src="https://img.icons8.com/color/70/000000/accept-database.png"/><span class="dashicons dashicons-admin-home"></span></i></p>
-                                        </div>
-                                        <div class="col-9" style="text-align: center">
-                                            <br>
-                                            <h4><strong>¿Desea modificar el tipo de agencia?
-                                                <asp:Label ID="Label2" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label>
-                                            </strong></h4>
-                                            <p>Si esta seguro dar clic en el botón "Enviar"</p>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>--%>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
