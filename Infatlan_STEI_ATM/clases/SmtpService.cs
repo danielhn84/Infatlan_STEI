@@ -12,7 +12,8 @@ using System.Web.UI;
 namespace Infatlan_STEI_ATM.clases
 {
     public enum typeBody{
-        ATM
+        ATM,
+        Alertas
     }
 
     public class SmtpService : Page{
@@ -47,6 +48,13 @@ namespace Infatlan_STEI_ATM.clases
                             Nombre,
                             Descripcion,
                             ConfigurationManager.AppSettings["Host"] + vLink
+                            ), Server.MapPath("/assets/images/logo.png")));
+                        break;
+                    case typeBody.Alertas:
+                        mail.AlternateViews.Add(CreateHtmlMessage(PopulateBodyAlerta(
+                            Nombre,
+                            Titulo,
+                            Descripcion
                             ), Server.MapPath("/assets/images/logo.png")));
                         break;
                 }
@@ -95,5 +103,22 @@ namespace Infatlan_STEI_ATM.clases
             body = body.Replace("{vLink}", vLink);
             return body;
         }
+
+        public string PopulateBodyAlerta(string vNombre, string vTitulo, string vDescripcion)
+        {
+            string body = string.Empty;
+            using (StreamReader reader = new StreamReader(Server.MapPath("../../email/TemplateMailAlertas.html")))
+            {
+                body = reader.ReadToEnd();
+            }
+
+            body = body.Replace("{Host}", ConfigurationManager.AppSettings["Host"]);
+            body = body.Replace("{Nombre}", vNombre);
+            body = body.Replace("{Titulo}", vTitulo);
+            body = body.Replace("{Descripcion}", vDescripcion);
+            return body;
+        }
+
+
     }
 }

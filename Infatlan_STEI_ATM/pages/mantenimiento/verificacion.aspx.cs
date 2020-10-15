@@ -606,6 +606,43 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             }
         }
 
+        void CorreosAlertas()
+        {
+            SmtpService vService = new SmtpService();
+            String vCorreoAlerta = "unidadatmkiosco@bancatlan.hn,aaguilarr@bancatlan.hn,drodriguez@bancatlan.hn,cfmelara@bancatlan.hn,eurrea@bancatlan.hn,jfigueroa@bancatlan.hn,megarcia@bancatlan.hn,gccoello@bancatlan.hn,dazuniga@bancatlan.hn,ojfunes@bancatlan.hn,emoyuela@bancatlan.hn,dzepeda@bancatlan.hn,acalderon@bancatlan.hn,diantunez@bancatlan.hn,rapena@bancatlan.hn";
+            if (RBClima.SelectedValue == "1" && RBEnergias.SelectedValue == "1")
+            {
+                
+                vService.EnviarMensaje(
+                      vCorreoAlerta,
+                      typeBody.Alertas,
+                       "<b>Buen día.<br> Se le notifica que ATM (" + txtcodATM.Text+") "+txtnomATM.Text+ " NO<b> cuenta con protección de energía eléctrica y tampoco cuenta con climatización decuada, datos proporcionados por el técnico responsable: "+txtTecnicoResponsable.Text + " al completar la lista de verificación del mantenimiento preventivo programado realizado el día: "+ Session["ATM_FECHAMANT_VERIF_CREAR"] + "<br> Favor tomar nota de la alerta para evitar inconvenientes futuros.<br>Saludos",
+                      "ATM NO CUENTA CON CLIMATIZACIÓN ADECUADA Y ATM NO CUENTA CON PROTECCIÓN DE ENERGIA ELECTRICA",
+                      "Observaciones realizadas por el técnico responsable:<br>"+txtobseracionesVerif.Text
+                      );
+            }
+            if (RBClima.SelectedValue == "2" && RBEnergias.SelectedValue == "1")
+            {
+                vService.EnviarMensaje(
+                     vCorreoAlerta,
+                     typeBody.Alertas,
+                      "<b>Buen día.<br> Se le notifica que ATM (" + txtcodATM.Text + ") " + txtnomATM.Text + " NO<b> cuenta con climatización decuada, datos proporcionados por el técnico responsable: " + txtTecnicoResponsable.Text + " al completar la lista de verificación del mantenimiento preventivo programado realizado el día: " + Session["ATM_FECHAMANT_VERIF_CREAR"] + "<br> Favor tomar nota de la alerta para evitar inconvenientes futuros.<br>Saludos",
+                      "ATM NO CUENTA CON CLIMATIZACIÓN ADECUADA",
+                     "Observaciones realizadas por el técnico responsable:<br>" + txtobseracionesVerif.Text
+                     );
+            }
+            if (RBClima.SelectedValue == "1" && RBEnergias.SelectedValue == "2")
+            {
+                vService.EnviarMensaje(
+                     vCorreoAlerta,
+                     typeBody.Alertas,
+                       "<b>Buen día.<br> Se le notifica que ATM (" + txtcodATM.Text + ") " + txtnomATM.Text + " NO<b> cuenta con protección de energía eléctrica, datos proporcionados por el técnico responsable: " + txtTecnicoResponsable.Text + " al completar la lista de verificación del mantenimiento preventivo programado realizado el día: " + Session["ATM_FECHAMANT_VERIF_CREAR"] + "<br> Favor tomar nota de la alerta para evitar inconvenientes futuros.<br>Saludos",
+                      "ATM NO CUENTA CON PROTECCIÓN DE ENERGIA ELECTRICA",
+                     "Observaciones realizadas por el técnico responsable:<br>" + txtobseracionesVerif.Text
+                     );
+            }
+        }
+
         void EnviarCorreo()
         {
             string vCorreoEncargadoZona = "";
@@ -633,34 +670,42 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 {
                     foreach (DataRow item in vDatos.Rows)
                     {
-                        //ENVIAR A JEFE
-                        if (!item["correo"].ToString().Trim().Equals(""))
+                        if (Session["USUARIO"].ToString() == "eurrea")
                         {
-                            vService.EnviarMensaje(
-                            item["correo"].ToString(),
-                            typeBody.ATM,
-                            "Notificación de Mantenimiento ATM",
-                            "Buen día, se le notifica que ha aprobado solicitud de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["nombre"].ToString() + ", mantenimiento al ATM " + txtnomATM.Text ,
-                            "El usuario <b>" + item["Nombre"].ToString() + "</b> aprobó: <br> Verificación de Mantenimiento",
-                             "",
-                             "/sites/ATM/pages/mantenimiento/buscarAprobarVerificacion.aspx"
-                            );
-
-                            //vFlagEnvioSupervisor = true;
-                        }
-                        //ENVIAR A EDWIN
-                        //string vNombre = "EDWIN ALBERTO URREA PENA";
-                        vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIMail"],
+                            //ENVIAR A JEFE
+                            if (!item["correo"].ToString().Trim().Equals(""))
+                            {
+                                vService.EnviarMensaje(
+                                item["correo"].ToString(),
                                 typeBody.ATM,
                                 "Notificación de Mantenimiento ATM",
-                                   "Buen día, se le notifica que ha aprobado solicitud de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["nombre"].ToString() + ", mantenimiento al ATM " + txtnomATM.Text,
+                                "Buen día, se le notifica que ha aprobado solicitud de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["nombre"].ToString() + ", mantenimiento al ATM " + txtnomATM.Text,
                                 "El usuario <b>" + item["Nombre"].ToString() + "</b> aprobó: <br> Verificación de Mantenimiento",
-                                  vCorreoEncargadoZona,
-                                  "/sites/ATM/pages/mantenimiento/buscarAprobarVerificacion.aspx"
+                                 vCorreoEncargadoZona,
+                                 "/sites/ATM/pages/mantenimiento/buscarAprobarVerificacion.aspx"
                                 );
-                        //ENVIAR A TECNICOS ASIGNADOS
-                        //string vNombreJefe = "ELVIS ALEXANDER MONTOYA PEREIRA";
 
+                                //vFlagEnvioSupervisor = true;
+                            }
+                        }
+                        else
+                        {
+                            if (!item["correo"].ToString().Trim().Equals(""))
+                            {
+                                vService.EnviarMensaje(
+                                item["correo"].ToString(),
+                                typeBody.ATM,
+                                "Notificación de Mantenimiento ATM",
+                                "Buen día, se le notifica que ha aprobado solicitud de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["nombre"].ToString() + ", mantenimiento al ATM " + txtnomATM.Text,
+                                "El usuario <b>" + item["Nombre"].ToString() + "</b> aprobó: <br> Verificación de Mantenimiento",
+                                 ConfigurationManager.AppSettings["STEIMail"],
+                                 "/sites/ATM/pages/mantenimiento/buscarAprobarVerificacion.aspx"
+                                );
+
+                                //vFlagEnvioSupervisor = true;
+                            }
+                          
+                        }
                     }
                 }
                 if (vDatosTecnicoResponsable.Rows.Count > 0)
@@ -678,20 +723,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                             );
                     }
                 }
-                if (vDatosTecnicos.Rows.Count > 0)
-                {
-                    foreach (DataRow itemT in vDatosTecnicos.Rows)
-                    {
-                        vService.EnviarMensaje(itemT["correo"].ToString(),
-                            typeBody.ATM,
-                            "Notificación de Mantenimiento ATM",
-                            "Buen día, se le notifica que se ha aprobado solicitud de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["nombre"].ToString() + ", mantenimiento al ATM " + txtnomATM.Text,
-                              "El usuario <b>" + vDatos.Rows[0]["Nombre"].ToString() + "</b> aprobó: <br> Verificación de Mantenimiento de ATM al que ha sido asignado como parte del equipo de trabajo.",
-                              "",
-                             "/login.aspx"
-                            );
-                    }
-                }              
+                          
             }
             else//CREAR
             {
@@ -721,7 +753,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                                 "Notificación de Mantenimiento ATM",
                                    "Buen día, se le notifica que ha creado una verificación de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["nombre"].ToString() + ", mantenimiento al ATM " + txtnomATM.Text,
                                 "El usuario <b>" + item["Nombre"].ToString() + "</b> creó: <br> Verificación de Mantenimiento",
-                                  vCorreoEncargadoZona + ";unidadatmkiosco@bancatlan.hn",
+                                  vCorreoEncargadoZona,
                                   "/sites/ATM/pages/mantenimiento/buscarVerificacion.aspx"
                                 );
                         //ENVIAR A TECNICOS ASIGNADOS
@@ -729,20 +761,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
                     }
                 }              
-                if (vDatosTecnicos.Rows.Count > 0)
-                {
-                    foreach (DataRow itemT in vDatosTecnicos.Rows)
-                    {
-                        vService.EnviarMensaje(itemT["correo"].ToString(),
-                            typeBody.ATM,
-                            "Notificación de Mantenimiento ATM",
-                            "Buen día, se le notifica que se ha creado una verificación de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["nombre"].ToString() + ", mantenimiento al ATM " + txtnomATM.Text,
-                              "El usuario <b>" + vDatos.Rows[0]["Nombre"].ToString() + "</b> creó: <br> Verificación de Mantenimiento de ATM al que ha sido asignado como parte del equipo de trabajo.",
-                              "",
-                             "/login.aspx"
-                            );
-                    }
-                }
+               
                 
 
             }
@@ -1092,21 +1111,28 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         }
         else
         {
-            try
-            {
-                string vQuery = "STEISP_ATM_ListaVerificacion 1, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + respuesta1 + "','" + respuesta2 + "'," +
-                "'" + respuesta3 + "','" + respuesta4 + "','" + respuesta5 + "','" + respuesta6 + "'," +
-                "'" + respuesta7 + "','" + respuesta8 + "','" + respuesta9 + "','" + respuesta10 + "'," +
-                "'" + respuesta11 + "','" + respuesta12 + "','" + respuesta13 + "','" + respuesta14 + "'," +
-                "'" + respuesta15 + "','" + respuesta16 + "','" + respuesta17 + "','" + respuesta18 + "'," +
-                "'" + respuesta19 + "','" + respuesta20 + "','" + climatizacion + "','" + vArchivo + "'," +
-                "'" + energia + "','" + vArchivo2 + "','" + dropantiskimming.SelectedItem.Text + "','" + txtantiSkimming.Text + "'";
-                Int32 vInfo = vConexion.ejecutarSQL(vQuery);
-            }
-            catch (Exception Ex)
-            {
-                throw;
-            }
+                string Vacio = "";
+                try
+                {
+                    string vQuery = "STEISP_ATM_ListaVerificacion 1, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + respuesta1 + "','" + respuesta2 + "'," +
+                    "'" + respuesta3 + "','" + respuesta4 + "','" + respuesta5 + "','" + respuesta6 + "'," +
+                    "'" + respuesta7 + "','" + respuesta8 + "','" + respuesta9 + "','" + respuesta10 + "'," +
+                    "'" + respuesta11 + "','" + respuesta12 + "','" + respuesta13 + "','" + respuesta14 + "'," +
+                    "'" + respuesta15 + "','" + respuesta16 + "','" + respuesta17 + "','" + respuesta18 + "'," +
+                    "'" + respuesta19 + "','" + respuesta20 + "','" + climatizacion + "','" + vArchivo + "'," +
+                    "'" + energia + "','" + vArchivo2 + "','" + dropantiskimming.SelectedItem.Text + "','" + txtantiSkimming.Text + "'";
+                    Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+
+                    //string vQuery2 = "STEI_ATM_Actualizar_Imagenes 11, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo + "'";
+                    //Int32 vInfo2 = vConexion.ejecutarSQL(vQuery2);
+
+                    //string vQuery3 = "STEI_ATM_Actualizar_Imagenes 12, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo2 + "'";
+                    //Int32 vInfo3 = vConexion.ejecutarSQL(vQuery3);
+                }
+                catch (Exception Ex)
+                {
+                    throw;
+                }
 
         }
     }
@@ -1384,13 +1410,44 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             {
                 try
                 {
-                    string vQuery = "STEISP_ATM_ImagenesVerif 1, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo1 + "','" + vArchivo2 + "','" + vArchivo3 + "'," +
-                        "'" + vArchivo4 + "','" + vArchivo5 + "','" + vArchivo6 + "','" + vArchivo7 + "','" + vArchivo8 + "','" + vArchivo9 + "', '" + vArchivo10 + "','" + vArchivo11 + "'";
-                    Int32 vInfo = vConexion.ejecutarSQL(vQuery);
-                    if (vInfo == 1)
-                    {
+                    //string vQuery = "STEISP_ATM_ImagenesVerif 1, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo1 + "','" + vArchivo2 + "','" + vArchivo3 + "'," +
+                    //    "'" + vArchivo4 + "','" + vArchivo5 + "','" + vArchivo6 + "','" + vArchivo7 + "','" + vArchivo8 + "','" + vArchivo9 + "', '" + vArchivo10 + "','" + vArchivo11 + "'";
+                    //Int32 vInfo = vConexion.ejecutarSQL(vQuery);
 
-                    }
+                   
+                        string vQuery = "STEI_ATM_Actualizar_Imagenes 14, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo1 + "'";
+                        Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                   
+                        string vQuery2 = "STEI_ATM_Actualizar_Imagenes 2, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo2 + "'";
+                        Int32 vInfo2 = vConexion.ejecutarSQL(vQuery2);
+                   
+                        string vQuery3 = "STEI_ATM_Actualizar_Imagenes 3, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo3 + "'";
+                        Int32 vInfo3 = vConexion.ejecutarSQL(vQuery3);
+                   
+                        string vQuery4 = "STEI_ATM_Actualizar_Imagenes 4, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo4 + "'";
+                        Int32 vInfo4 = vConexion.ejecutarSQL(vQuery4);
+                   
+                        string vQuery5 = "STEI_ATM_Actualizar_Imagenes 5, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo5 + "'";
+                        Int32 vInfo5 = vConexion.ejecutarSQL(vQuery5);
+                   
+                        string vQuery6 = "STEI_ATM_Actualizar_Imagenes 6, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo6 + "'";
+                        Int32 vInfo6 = vConexion.ejecutarSQL(vQuery6);
+                   
+                        string vQuery7 = "STEI_ATM_Actualizar_Imagenes 7, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo7 + "'";
+                        Int32 vInfo7 = vConexion.ejecutarSQL(vQuery7);
+                    
+                        string vQuery8 = "STEI_ATM_Actualizar_Imagenes 8, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo8 + "'";
+                        Int32 vInfo8 = vConexion.ejecutarSQL(vQuery8);
+                   
+                        string vQuery9 = "STEI_ATM_Actualizar_Imagenes 9, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo9 + "'";
+                        Int32 vInfo9 = vConexion.ejecutarSQL(vQuery9);
+                   
+                        string vQuery10 = "STEI_ATM_Actualizar_Imagenes 10, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo10 + "'";
+                        Int32 vInfo10 = vConexion.ejecutarSQL(vQuery10);
+                   
+                        string vQuery11 = "STEI_ATM_Actualizar_Imagenes 13, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo11 + "'";
+                        Int32 vInfo11 = vConexion.ejecutarSQL(vQuery11);
+                    
 
                 }
                 catch (Exception Ex)
@@ -1442,6 +1499,8 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
             if (vEstado == "7")
             {
+                CorreosAlertas();
+
                 string vCorreoEncargadoZona = "";
                 if (Convert.ToString(Session["ATM_IDZONA_VERIF_CREAR"]) == "1")
                     vCorreoEncargadoZona = "emontoya@bancatlan.hn";
@@ -1450,7 +1509,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 if (Convert.ToString(Session["ATM_IDZONA_VERIF_CREAR"]) == "3")
                     vCorreoEncargadoZona = "acalderon@bancatlan.hn";
 
-                string vQueryD = "STEISP_ATM_Generales 33,'" + Session["ATM_USUARIO_VERIF_CREAR"] + "'";
+                string vQueryD = "STEISP_ATM_Generales 33,'" + Session["ATM_USU_RESPONSABLE_MANT"] + "'";
                 DataTable vDatosTecnicoResponsable = vConexion.ObtenerTabla(vQueryD);
                 string vQueryTecnicos = "STEISP_ATM_Generales 39,'" + Session["ATM_COD_VERIF"] + "'";
                 DataTable vDatosTecnicos = vConexion.ObtenerTabla(vQueryTecnicos);
@@ -1464,7 +1523,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
                 for (int i = 0; i < vDatosTecnicoResponsable.Rows.Count; i++)
                 {
-                    vCorreoResponsable = vDatosTecnicoResponsable.Rows[i]["correo"].ToString();
+                    vCorreoResponsable = vDatosTecnicoResponsable.Rows[i]["correo"].ToString()+";";
                 }
                 for (int i = 0; i < vDatosTecnicos.Rows.Count; i++)
                 {
@@ -1535,14 +1594,15 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     }
                     else
                     {
-                        ActualizarATM();
-                        ActualizarMateriales();
                         ActualizarVerifATM();
+                        ActualizarATM();
+                        //ActualizarMateriales();                                                                     
                         ImgVerificacion();
                         PreguntasVerif();
                         EnviarCorreo();
                         vaciarValorImg();
                         Session["vConfirmar"] = "0";
+                        //Response.Redirect("/sites/ATM/default.aspx");
                         if (tipo == "2")
                         {
                             Response.Redirect("../../pages/devolver/rechazados.aspx");
@@ -1567,7 +1627,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             }
 
         protected void btnRechazarVerif_Click(object sender, EventArgs e)
-            {
+        {
             txtAlerta2.Visible = false;
             H5Alerta.Visible = false;
             txtmotivoRechazo.Text = string.Empty;
@@ -1593,7 +1653,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             if (Convert.ToString(Session["ATM_IDZONA_VERIF_CREAR"]) == "3")
                 vCorreoEncargadoZona = "acalderon@bancatlan.hn";
 
-            string vQueryD = "STEISP_ATM_Generales 33,'" + Session["ATM_USUARIO_VERIF_CREAR"] + "'";
+            string vQueryD = "STEISP_ATM_Generales 33,'" + Session["ATM_USU_RESPONSABLE_MANT"] + "'";
             DataTable vDatosTecnicoResponsable = vConexion.ObtenerTabla(vQueryD);
             DataTable vDatos = (DataTable)Session["AUTHCLASS"];
             string vQueryTecnicos = "STEISP_ATM_Generales 39,'" + Session["ATM_IDMANT_VERIF_CREAR"] + "'";
@@ -1601,10 +1661,13 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             string vQueryJefes = "STEISP_ATM_Generales 38,'" + Session["ATM_IDMANT_VERIF_CREAR"] + "'";
             DataTable vDatosJefeAgencias = vConexion.ObtenerTabla(vQueryJefes);
 
-                if (vDatos.Rows.Count > 0)
+            if (vDatos.Rows.Count > 0)
+            {
+                foreach (DataRow item in vDatos.Rows)
                 {
-                    foreach (DataRow item in vDatos.Rows)
+                    if (Session["USUARIO"].ToString() == "eurrea")
                     {
+
                         //ENVIAR A JEFE
                         if (!item["correo"].ToString().Trim().Equals(""))
                         {
@@ -1613,13 +1676,31 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                             typeBody.ATM,
                             "Notificación de Mantenimiento ATM",
                             "Buen día, se le notifica que ha devuelto solicitud de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["nombre"].ToString() + ", mantenimiento al ATM " + txtnomATM.Text,
-                            "El usuario <b>" + item["Nombre"].ToString() + "</b> devolvió: <br> Verificación de Mantenimiento<br><br> Motivo= "+txtmotivoRechazo.Text,
+                            "El usuario <b>" + item["Nombre"].ToString() + "</b> devolvió: <br> Verificación de Mantenimiento<br><br> Motivo= " + txtmotivoRechazo.Text,
+                             vCorreoEncargadoZona,
+                             "/pages/devolver/rechazados.aspx"
+                            );
+
+                            //vFlagEnvioSupervisor = true;
+                        }
+                    }
+                    else
+                    {
+                        if (!item["correo"].ToString().Trim().Equals(""))
+                        {
+                            vService.EnviarMensaje(
+                            item["correo"].ToString(),
+                            typeBody.ATM,
+                            "Notificación de Mantenimiento ATM",
+                            "Buen día, se le notifica que ha devuelto solicitud de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["nombre"].ToString() + ", mantenimiento al ATM " + txtnomATM.Text,
+                            "El usuario <b>" + item["Nombre"].ToString() + "</b> devolvió: <br> Verificación de Mantenimiento<br><br> Motivo= " + txtmotivoRechazo.Text,
                              "",
                              "/pages/devolver/rechazados.aspx"
                             );
 
                             //vFlagEnvioSupervisor = true;
                         }
+
                         //ENVIAR A EDWIN
                         //string vNombre = "EDWIN ALBERTO URREA PENA";
                         vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIMail"],
@@ -1630,12 +1711,12 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                                   vCorreoEncargadoZona,
                                   "/sites/ATM/pages/devolver/rechazados.aspx"
                                 );
-                        //ENVIAR A TECNICOS ASIGNADOS
-                        //string vNombreJefe = "ELVIS ALEXANDER MONTOYA PEREIRA";
+
 
                     }
                 }
-                if (vDatosTecnicoResponsable.Rows.Count > 0)
+            }
+            if (vDatosTecnicoResponsable.Rows.Count > 0)
                 {
                     foreach (DataRow item in vDatosTecnicoResponsable.Rows)
                     {
@@ -1653,7 +1734,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         }
 
         protected void btnRechazarModal_Click(object sender, EventArgs e)
-            {
+        {
             if (txtmotivoRechazo.Text == "" || txtmotivoRechazo.Text == string.Empty)
             {
                 txtAlerta2.Visible = true;
@@ -1854,5 +1935,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 }
            
         }
+
+       
     }
 }

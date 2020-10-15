@@ -115,7 +115,8 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                             Session["codATM"] = item["Codigo"].ToString();
                             Session["emailEmpleadoATM"] = item["Correo"].ToString();
                             Session["USUCREADORATM"] = item["UsuarioCreador"].ToString();
-                           
+                            Session["Usu_Responsable"] = item["Responsable"].ToString();
+
                         }
 
                        

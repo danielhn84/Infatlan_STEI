@@ -641,9 +641,9 @@
                             <thead>
                                 <tr>
                                     <th scope="col" style="background-color: #5D6D7E; color: #D5DBDB;" data-tablesaw-sortable-col data-tablesaw-priority="persist" class="border">Imagen a subir</th>
-                                    <th scope="col" style="background-color: #5D6D7E; color: #D5DBDB;" data-tablesaw-sortable-col data-tablesaw-priority="2" class="border">Seleccione imagen </th>
+                                    <%--<th scope="col" style="background-color: #5D6D7E; color: #D5DBDB;" data-tablesaw-sortable-col data-tablesaw-priority="2" class="border">Seleccione imagen </th>--%>
                                     <th scope="col" style="background-color: #5D6D7E; color: #D5DBDB;" data-tablesaw-sortable-col data-tablesaw-priority="1" class="border">
-                                        <abbr title="Haga click a la imagen para verla más grande">Mostrar imagen</abbr>
+                                        <abbr title="Imagenes del mantenimiento">Mostrar imagen</abbr>
                                     </th>
 
 
@@ -652,79 +652,77 @@
                             <tbody>
 
                                 <tr>
-                                    <td class="title"><a class="link" href="javascript:void(0)">*Serie del Disco duro</a></td>
-                                    <td>
-                                        <asp:FileUpload ID="FUDiscoDuro" runat="server" onchange="img1(this);" /></td>
+                                    <td class="title"><a class="link" href="javascript:void(0)">*Serie del Disco duro</a><br />
+                                        <asp:FileUpload ID="FUDiscoDuro" runat="server" onchange="img1(this);" />
+                                    </td>                                   
                                     <%--<td runat="server" id="td1img1" style="display:none"><img id="imgDiscoDuro" runat="server" height="150" width="150" src="" style="border-width: 0px;" /></td>--%>
                                     <td>
-                                        <img id="imgDiscoDuro" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                        <img id="imgDiscoDuro" runat="server" height="600" width="550" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                                 </tr>
                                 <tr>
-                                    <td class="title"><a class="link" href="javascript:void(0)">*ATM desarmado parte superior (limpiar)</a></td>
+                                    <td class="title"><a class="link" href="javascript:void(0)">*ATM desarmado parte superior (limpiar)</a><br />
+                                        <asp:FileUpload ID="FUATMDesarmadoPS" runat="server" onchange="img2(this);" />
+                                    </td>                                    
                                     <td>
-                                        <asp:FileUpload ID="FUATMDesarmadoPS" runat="server" onchange="img2(this);" /></td>
-                                    <td>
-                                        <img id="imgATMDesarmadoPS" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                        <img id="imgATMDesarmadoPS" runat="server" height="600" width="550" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                                 </tr>
                                 <tr>
-                                    <td class="title"><a class="link" href="javascript:void(0)">*ATM desarmado parte inferior (limpiar)</a> </td>
+                                    <td class="title"><a class="link" href="javascript:void(0)">*ATM desarmado parte inferior (limpiar)</a><br />
+                                        <asp:FileUpload ID="FUATMDesarmadoPI" runat="server" onchange="img3(this);" />
+                                    </td>                                    
                                     <td>
-                                        <asp:FileUpload ID="FUATMDesarmadoPI" runat="server" onchange="img3(this);" /></td>
-                                    <td>
-                                        <img id="imgATMDesarmadoPI" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                        <img id="imgATMDesarmadoPI" runat="server" height="600" width="550" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                                 </tr>
                                 <tr>
-                                    <td class="title"><a class="link" href="javascript:void(0)">*Dispositivo modo diagnostico de vendor en linea</a></td>
+                                    <td class="title"><a class="link" href="javascript:void(0)">*Dispositivo modo diagnostico de vendor en linea</a><br />
+                                       <asp:FileUpload ID="FUDispositivoVendor" runat="server" onchange="img4(this);" />
+                                    </td>                                   
                                     <td>
-                                        <asp:FileUpload ID="FUDispositivoVendor" runat="server" onchange="img4(this);" /></td>
-                                    <td>
-                                        <img id="imgDispositivoVendor" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                        <img id="imgDispositivoVendor" runat="server" height="600" width="550" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                                 </tr>
                                 <tr>
-                                    <td class="title"><a class="link" href="javascript:void(0)">*Tipo de procesador con el comando "SYSTEMINFO"</a></td>
+                                    <td class="title"><a class="link" href="javascript:void(0)">*Tipo de procesador con el comando "SYSTEMINFO"</a><br />
+                                         <asp:FileUpload ID="FUSYSTEMINFO" runat="server" onchange="img5(this);" />
+                                       </td>
                                     <td>
-                                        <asp:FileUpload ID="FUSYSTEMINFO" runat="server" onchange="img5(this);" /></td>
-                                    <td>
-                                        <img id="imgSYSTEMINFO" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                        <img id="imgSYSTEMINFO" runat="server" height="600" width="550" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                                 </tr>
                                 <tr>
-                                    <td class="title"><a class="link" href="javascript:void(0)">*Lectora con el antiskimming desarmado y limpio</a></td>
+                                    <td class="title"><a class="link" href="javascript:void(0)">*Lectora con el antiskimming desarmado y limpio</a><br />
+                                        <asp:FileUpload ID="FUAntiskimmin" runat="server" onchange="img6(this);" />
+                                    </td>                                  
                                     <td>
-                                        <asp:FileUpload ID="FUAntiskimmin" runat="server" onchange="img6(this);" /></td>
-                                    <td>
-                                        <img id="imgAntiskimmin" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                        <img id="imgAntiskimmin" runat="server" height="600" width="550" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                                 </tr>
                                 <tr>
-                                    <td class="title"><a class="link" href="javascript:void(0)">*Monitor con el filtro</a></td>
+                                    <td class="title"><a class="link" href="javascript:void(0)">*Monitor con el filtro</a><br />
+                                        <asp:FileUpload ID="FUMonitorFiltro" runat="server" onchange="img7(this);" />
+                                    </td>                                   
                                     <td>
-                                        <asp:FileUpload ID="FUMonitorFiltro" runat="server" onchange="img7(this);" /></td>
-                                    <td>
-                                        <img id="imgMonitorFiltro" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                        <img id="imgMonitorFiltro" runat="server" height="600" width="550" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                                 </tr>
                                 <tr>
-                                    <td class="title"><a class="link" href="javascript:void(0)">*PadleWheel(rueda de paletas)</a></td>
+                                    <td class="title"><a class="link" href="javascript:void(0)">*PadleWheel(rueda de paletas)</a><br />
+                                        <asp:FileUpload ID="FUPadlewheel" runat="server" onchange="img8(this);" />
+                                    </td>
                                     <td>
-                                        <asp:FileUpload ID="FUPadlewheel" runat="server" onchange="img8(this);" /></td>
-                                    <td>
-                                        <img id="imgPadlewheel" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                        <img id="imgPadlewheel" runat="server" height="600" width="550" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                                 </tr>
                                 <tr>
-                                    <td class="title"><a class="link" href="javascript:void(0)">*Dispositivos desarmado</a></td>
+                                    <td class="title"><a class="link" href="javascript:void(0)">*Dispositivos desarmado</a><br />
+                                   <asp:FileUpload ID="FUDispDesarmado" runat="server" onchange="img9(this);" /></td>
                                     <td>
-                                        <asp:FileUpload ID="FUDispDesarmado" runat="server" onchange="img9(this);" /></td>
-                                    <td>
-                                        <img id="imgDispDesarmado" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                        <img id="imgDispDesarmado" runat="server" height="600" width="550" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                                 </tr>
                                 <tr>
-                                    <td class="title"><a class="link" href="javascript:void(0)">*Foto de Teclado EPP</a></td>
+                                    <td class="title"><a class="link" href="javascript:void(0)">*Foto de Teclado EPP</a><br />
+                                   <asp:FileUpload ID="FUTeclado" runat="server" onchange="img10(this);" /></td>
                                     <td>
-                                        <asp:FileUpload ID="FUTeclado" runat="server" onchange="img10(this);" /></td>
-                                    <td>
-                                        <img id="imgTeclado" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                        <img id="imgTeclado" runat="server" height="600" width="550" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                                 </tr>
                                 <tr>
                                     <td class="title"><a class="link" href="javascript:void(0)">*¿Cuenta con Climatización adecuada?<br />
-                                    </a>
+                                    </a><asp:FileUpload ID="FUClimatizacion" runat="server" onchange="img11(this);" /><br /><br />
                                         <asp:UpdatePanel runat="server">
                                             <ContentTemplate>
                                                 <asp:RadioButtonList runat="server" style="border-color:transparent" ID="RBClima" AutoPostBack="true" RepeatDirection="Horizontal" CssClass="form-check">
@@ -734,14 +732,13 @@
                                             </ContentTemplate>
                                         </asp:UpdatePanel>
                                     </td>
+                                    
                                     <td>
-                                        <asp:FileUpload ID="FUClimatizacion" runat="server" onchange="img11(this);" /></td>
-                                    <td>
-                                        <img id="imgClimatizacion" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                        <img id="imgClimatizacion" runat="server" height="600" width="550" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                                 </tr>
                                 <tr>
                                     <td class="title"><a class="link" href="javascript:void(0)">*¿Cuenta con protección de energía eléctrica?<br />
-                                    </a>
+                                    </a><asp:FileUpload ID="FUEnergia" runat="server" onchange="img12(this);" /><br /><br />
                                         <asp:UpdatePanel runat="server">
                                             <ContentTemplate>
                                                 <asp:RadioButtonList runat="server" ID="RBEnergias" AutoPostBack="true" RepeatDirection="Horizontal" CssClass="form-check" Style="border-color: transparent">
@@ -751,19 +748,18 @@
                                             </ContentTemplate>
                                         </asp:UpdatePanel>
                                     </td>
+                                   
                                     <td>
-                                        <asp:FileUpload ID="FUEnergia" runat="server" onchange="img12(this);" /></td>
-                                    <td>
-                                        <img id="imgEnergia" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                        <img id="imgEnergia" runat="server" height="600" width="550" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                                 </tr>
                                 <tr>
                                     <td class="title"><a class="link" href="javascript:void(0)">*ATM en linea</a><br />
+                                        <asp:FileUpload ID="FUATMLinea" runat="server" onchange="img13(this);" /><br /><br />
                                         <asp:TextBox runat="server" ID="txtcomentarioATMLinea" placeholder="Comentario sobre ATM en línea..." TextMode="MultiLine" Rows="3" CssClass="form-control" />
                                     </td>
+                                  
                                     <td>
-                                        <asp:FileUpload ID="FUATMLinea" runat="server" onchange="img13(this);" /></td>
-                                    <td>
-                                        <img id="imgATMLinea" runat="server" height="150" width="150" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                        <img id="imgATMLinea" runat="server" height="600" width="550" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                                 </tr>
                                  <tr>
                                     <td class="title" colspan="3"><a class="link" href="javascript:void(0)">Ubicación del ATM(Mapa)</a><%--</td>--%>
@@ -789,7 +785,7 @@
                         <ContentTemplate>
                             <div class="col-12">
                                 <asp:Button runat="server" OnClick="btnEnviarVerif_Click" ID="btnEnviarVerif" CssClass="btn btn-success" Text="Guardar verificación" />
-                                <asp:Button runat="server" ID="btnRechazarVerif" Visible="false" OnClick="btnRechazarVerif_Click" CssClass="btn btn-danger" Text="Devolver" />
+                                <asp:Button runat="server" ID="btnRechazarVerif" Visible="false" OnClick="btnRechazarVerif_Click" CssClass="btn btn-danger" Text="Devolver" />                                
                             </div>
                         </ContentTemplate>
                     </asp:UpdatePanel>

@@ -168,6 +168,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                         Session["ATM_VERSIONSW_VERIF_CREAR"] = item["VersionSw"].ToString();
                         Session["ATM_USUCREADOR_VERIF_CREAR"] = item["UsuarioCreador"].ToString();
                         Session["ATM_ATMACTIVO_VERIF_CREAR"] = item["ATMActivo"].ToString();
+                        Session["ATM_USU_RESPONSABLE_MANT"] = item["UsuResponsable"].ToString();
                     }
                     
                     DataTable vDatos4 = new DataTable();

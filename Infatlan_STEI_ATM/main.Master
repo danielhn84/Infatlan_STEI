@@ -181,7 +181,7 @@
     <script src="/assets/node_modules/toast-master/js/jquery.toast.js"></script>
     <script src="/js/dashboard1.js"></script>
     <script src="/assets/node_modules/toast-master/js/jquery.toast.js"></script>
-    <script src="/js/bootstrap-notify.js"></script>
+    <script src="/sites/ATM/js/bootstrap-notify.js"></script>
     <asp:ContentPlaceHolder ID="Script" runat="server">
     </asp:ContentPlaceHolder>
 </body>

@@ -75,13 +75,13 @@ namespace Infatlan_STEI
                     string vUsuario = Session["USUARIO"].ToString();
                     if (vUsuario != "eurrea" && vUsuario != "mgarcia" && vUsuario != "acedillo")
                         LIMenuATM.Visible = false;
-                    if (vUsuario != "eurrea" && vUsuario != "mgarcia" && vUsuario != "acedillo" && vUsuario != "emontoya" && vUsuario != "jdgarcia" && vUsuario != "acalderon" && vUsuario != "mbriceno")
+                    if (vUsuario != "eurrea" && vUsuario != "mgarcia" && vUsuario != "acedillo" && vUsuario != "emontoya" && vUsuario != "jdgarcia" && vUsuario != "acalderon" && vUsuario != "mbriceno" && vUsuario != "dantunez" && vUsuario != "cmguzman")
                     {
                         LINotifATM.Visible = false;
                         LIReprogramar.Visible = false;
                         LICalendario.Visible = false;
                     }
-                    if (vUsuario == "mbriceno")
+                    if (vUsuario == "mbriceno" || vUsuario== "dantunez" || vUsuario== "cmguzman")
                     {
                         LIVerifATM.Visible = false;
                         LIDevoluciones.Visible = false;

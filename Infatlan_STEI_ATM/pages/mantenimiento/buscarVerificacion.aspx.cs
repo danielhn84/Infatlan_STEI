@@ -183,8 +183,6 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             }
         }
 
-
-
         void CorreoCancelar()
         {
             SmtpService vService = new SmtpService();
@@ -197,7 +195,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             if (Convert.ToString(Session["IDZona"]) == "3")
                 vCorreoEncargadoZona = "acalderon@bancatlan.hn";
 
-            string vQueryD = "STEISP_ATM_Generales 33,'" + Session["ATM_USURESPONSABLE"] + "'";
+            string vQueryD = "STEISP_ATM_Generales 33,'" + Session["ATM_USU_RESPONSABLE_MANT"] + "'";
             DataTable vDatosTecnicoResponsable = vConexion.ObtenerTabla(vQueryD);
             DataTable vDatos = (DataTable)Session["AUTHCLASS"];
             string vQueryTecnicos = "STEISP_ATM_Generales 39,'" + Session["ATM_ID_CANCELAR_VERIF_MODAL"] + "'";
@@ -233,7 +231,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                                 "Notificación de Mantenimiento ATM",
                                 "Buen día, se le notifica que se ha sustituido encargado de mantenimiento, el encargado ahora es " + DDLModalNewTecnico.SelectedItem.Text + ", mantenimiento al ATM " + txtModalATM.Text,
                                   "El usuario <b>" + item["Nombre"].ToString() + "</b> sustituyó técnico responsable de mantenimiento ATM",
-                                  vCorreoEncargadoZona + ";unidadatmkiosco@bancatlan.hn",
+                                  vCorreoEncargadoZona,
                                   "/sites/ATM/pages/reprogramar/buscarReprogramar.aspx"
                                 );
                         //ENVIAR A TECNICOS ASIGNADOS
@@ -302,7 +300,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                                 "Notificación de Mantenimiento ATM",
                                 "Buen día, se le notifica que se ha cancelado solicitud de mantenimiento, el encargado es " + Session["ATM_RESPONSABLE"].ToString() + ", mantenimiento al ATM " + txtModalATM.Text,
                                   "El usuario <b>" + item["Nombre"].ToString() + "</b> canceló: <br> Notificación de Mantenimiento",
-                                  vCorreoEncargadoZona + ";unidadatmkiosco@bancatlan.hn",
+                                  vCorreoEncargadoZona,
                                   "/sites/ATM/pages/reprogramar/buscarReprogramar.aspx"
                                 );
                         //ENVIAR A TECNICOS ASIGNADOS
@@ -511,7 +509,8 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                             Session["ATM_USUCORREO_VERIF_CREAR"] = item["CorreoTecnico"].ToString();
                             Session["ATM_USUCREADOR_VERIF_CREAR"] = item["UsuarioCreador"].ToString();
                             Session["ATM_ATMACTIVO_VERIF_CREAR"] = item["ATMActivo"].ToString();
-                            
+                            Session["ATM_USUARIO_VERIF_CREAR"] = item["UsuResponsable"].ToString();
+
                         }
 
                         DataTable vDatos4 = new DataTable();

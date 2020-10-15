@@ -3358,6 +3358,7 @@
     <Content Include="dist\js\sidebarmenu.js" />
     <Content Include="dist\js\waves.js" />
     <Content Include="email\TemplateMail.html" />
+    <Content Include="email\TemplateMailAlertas.html" />
     <Content Include="Excel.4.5.dll" />
     <Content Include="Global.asax" />
     <Content Include="img\logo.png" />
