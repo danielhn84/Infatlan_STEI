@@ -4,10 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.Sql;
-using System.Data.SqlClient;
 using Infatlan_STEI_ATM.clases;
+using System.Data;
+using System.Drawing.Imaging;
+using System.Drawing;
+using System.IO;
+using System.Configuration;
 
 namespace Infatlan_STEI_ATM.pages.ATM
 {
@@ -148,6 +150,64 @@ namespace Infatlan_STEI_ATM.pages.ATM
 
         protected void btnModalCerrarNueviTipoATM_Click1(object sender, EventArgs e){
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal2();", true);
+        }
+
+        private static ImageCodecInfo GetEncoder(ImageFormat format)
+        {
+            var codecs = ImageCodecInfo.GetImageDecoders();
+            foreach (ImageCodecInfo codec in codecs)
+            {
+                if (codec.FormatID == format.Guid)
+                {
+                    return codec;
+                }
+            }
+
+            return null;
+        }
+
+        //public static byte[] SaveImageToByteArray(Image images, int jpegQuality = 75)
+        //{
+            
+        //    using (var ms = new MemoryStream())
+        //    {
+        //        var jpegEncoder = GetEncoder(ImageFormat.Jpeg);
+        //        var encoderParameters = new EncoderParameters(1);
+        //        encoderParameters.Param[0] = new EncoderParameter(Encoder.Quality, (long)jpegQuality);
+        //        images.Save(ms, jpegEncoder, encoderParameters);
+               
+        //        return ms.ToArray();
+                
+        //    }
+
+        //}
+
+        protected void btnPrueba_Click(object sender, EventArgs e)
+        {
+                         
+          
+            //IMAGENES1
+            String vNombreDepot1 = String.Empty;
+            HttpPostedFile bufferDeposito1 = FUDiscoDuro.PostedFile;
+            byte[] vFileDeposito1 = null;
+            string vExtension1 = string.Empty;
+
+            if (bufferDeposito1 != null)
+            {
+                vNombreDepot1 = FUDiscoDuro.FileName;
+                Stream vStream1 = bufferDeposito1.InputStream;
+                BinaryReader vReader1 = new BinaryReader(vStream1);
+                vFileDeposito1 = vReader1.ReadBytes((int)vStream1.Length);
+                vExtension1 = System.IO.Path.GetExtension(FUDiscoDuro.FileName);
+            }
+            String vArchivo1 = String.Empty;
+            if (vFileDeposito1 != null)
+                vArchivo1 = Convert.ToBase64String(vFileDeposito1);
+           
+
+
+            string vQuery = "[STEISP_ATM_Generales] 42, '" + vArchivo1 + "'";
+            Int32 vInfo = vConexion.ejecutarSQL(vQuery);
         }
     }
     

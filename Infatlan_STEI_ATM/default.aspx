@@ -92,10 +92,11 @@
         <!-- Column -->
 
     </div>
-
+    
     <%--TERMINAN LAS TARGETAS--%>
     <div class="card">
         <br />
+
         <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
             <div class="table-responsive">
                 <asp:GridView ID="GVMantenimiento" runat="server"

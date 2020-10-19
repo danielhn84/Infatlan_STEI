@@ -32,6 +32,7 @@
             <h6 class="card-subtitle">Lista de mantenimientos y su progreso</h6><br />
             <asp:UpdatePanel runat="server">
                 <ContentTemplate>
+                    <asp:DropDownList AutoPostBack="true" ID="DDLFiltroEstado" OnTextChanged="DDLFiltroEstado_TextChanged" CssClass="form-control col-4" runat="server"> </asp:DropDownList>
                      <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
                                 <div class="table-responsive">
                                     <asp:GridView ID="GVAvances" runat="server"

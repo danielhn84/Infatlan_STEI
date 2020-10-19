@@ -108,7 +108,7 @@
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="/sites/ATM/pages/ATM/update.aspx">Generales</a></li>    
                                 <%--<li runat="server" id="LIAgregar" visible="false"><a href="/sites/ATM/pages/ATM/add.aspx">Agregar</a></li>--%>
-                                <%--<li><a href="/sites/ATM/pages/ATM/tipo.aspx">Tipo ATM</a></li>--%>
+                                <%--<li><a href="/sites/ATM/pages/ATM/tipo.aspx">PRUEBA</a></li>--%>
                                 <li><a href="/sites/ATM/pages/ATM/modelo.aspx">Modelo</a></li>
                                 <li><a href="/sites/ATM/pages/ATM/detalleModelo.aspx">Detalle Modelo</a></li>
                                 <li><a href="/sites/ATM/pages/ATM/tipoCarga.aspx">Tipo Carga</a></li>

@@ -608,38 +608,51 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
         void CorreosAlertas()
         {
-            SmtpService vService = new SmtpService();
-            String vCorreoAlerta = "unidadatmkiosco@bancatlan.hn,aaguilarr@bancatlan.hn,drodriguez@bancatlan.hn,cfmelara@bancatlan.hn,eurrea@bancatlan.hn,jfigueroa@bancatlan.hn,megarcia@bancatlan.hn,gccoello@bancatlan.hn,dazuniga@bancatlan.hn,ojfunes@bancatlan.hn,emoyuela@bancatlan.hn,dzepeda@bancatlan.hn,acalderon@bancatlan.hn,diantunez@bancatlan.hn,rapena@bancatlan.hn";
-            if (RBClima.SelectedValue == "1" && RBEnergias.SelectedValue == "1")
+            string vEstado = "";
+            DataTable vDatos = new DataTable();
+            String vQuery = "STEISP_ATM_Generales 36,'" + Session["ATM_COD_VERIF"] + "'";
+            vDatos = vConexion.ObtenerTabla(vQuery);
+            foreach (DataRow item in vDatos.Rows)
             {
-                
-                vService.EnviarMensaje(
-                      vCorreoAlerta,
-                      typeBody.Alertas,
-                       "<b>Buen día.<br> Se le notifica que ATM (" + txtcodATM.Text+") "+txtnomATM.Text+ " NO<b> cuenta con protección de energía eléctrica y tampoco cuenta con climatización decuada, datos proporcionados por el técnico responsable: "+txtTecnicoResponsable.Text + " al completar la lista de verificación del mantenimiento preventivo programado realizado el día: "+ Session["ATM_FECHAMANT_VERIF_CREAR"] + "<br> Favor tomar nota de la alerta para evitar inconvenientes futuros.<br>Saludos",
-                      "ATM NO CUENTA CON CLIMATIZACIÓN ADECUADA Y ATM NO CUENTA CON PROTECCIÓN DE ENERGIA ELECTRICA",
-                      "Observaciones realizadas por el técnico responsable:<br>"+txtobseracionesVerif.Text
-                      );
+                vEstado = item["estadoMantenimiento"].ToString();
             }
-            if (RBClima.SelectedValue == "2" && RBEnergias.SelectedValue == "1")
+
+            if (vEstado == "7")
             {
-                vService.EnviarMensaje(
-                     vCorreoAlerta,
-                     typeBody.Alertas,
-                      "<b>Buen día.<br> Se le notifica que ATM (" + txtcodATM.Text + ") " + txtnomATM.Text + " NO<b> cuenta con climatización decuada, datos proporcionados por el técnico responsable: " + txtTecnicoResponsable.Text + " al completar la lista de verificación del mantenimiento preventivo programado realizado el día: " + Session["ATM_FECHAMANT_VERIF_CREAR"] + "<br> Favor tomar nota de la alerta para evitar inconvenientes futuros.<br>Saludos",
-                      "ATM NO CUENTA CON CLIMATIZACIÓN ADECUADA",
-                     "Observaciones realizadas por el técnico responsable:<br>" + txtobseracionesVerif.Text
-                     );
-            }
-            if (RBClima.SelectedValue == "1" && RBEnergias.SelectedValue == "2")
-            {
-                vService.EnviarMensaje(
-                     vCorreoAlerta,
-                     typeBody.Alertas,
-                       "<b>Buen día.<br> Se le notifica que ATM (" + txtcodATM.Text + ") " + txtnomATM.Text + " NO<b> cuenta con protección de energía eléctrica, datos proporcionados por el técnico responsable: " + txtTecnicoResponsable.Text + " al completar la lista de verificación del mantenimiento preventivo programado realizado el día: " + Session["ATM_FECHAMANT_VERIF_CREAR"] + "<br> Favor tomar nota de la alerta para evitar inconvenientes futuros.<br>Saludos",
-                      "ATM NO CUENTA CON PROTECCIÓN DE ENERGIA ELECTRICA",
-                     "Observaciones realizadas por el técnico responsable:<br>" + txtobseracionesVerif.Text
-                     );
+                SmtpService vService = new SmtpService();
+                //String vCorreoAlerta = "acedillo@bancatlan.hn,unidadatmkiosco@bancatlan.hn,aaguilarr@bancatlan.hn,drodriguez@bancatlan.hn,cfmelara@bancatlan.hn,eurrea@bancatlan.hn,jfigueroa@bancatlan.hn,megarcia@bancatlan.hn,gccoello@bancatlan.hn,dazuniga@bancatlan.hn,ojfunes@bancatlan.hn,emoyuela@bancatlan.hn,dzepeda@bancatlan.hn,acalderon@bancatlan.hn,diantunez@bancatlan.hn,rapena@bancatlan.hn";
+                String vCorreoAlerta = "acedillo@bancatlan.hn,eurrea@bancatlan.hn";
+                if (RBClima.SelectedValue == "1" && RBEnergias.SelectedValue == "1")
+                {
+
+                    vService.EnviarMensaje(
+                          vCorreoAlerta,
+                          typeBody.Alertas,
+                           "<b>Buen día.<br> Se le notifica que ATM (" + txtcodATM.Text + ") " + txtnomATM.Text + " NO<b> cuenta con protección de energía eléctrica y tampoco cuenta con climatización decuada, datos proporcionados por el técnico responsable: " + txtTecnicoResponsable.Text + " al completar la lista de verificación del mantenimiento preventivo programado realizado el día: " + Session["ATM_FECHAMANT_VERIF_CREAR"] + "<br> Favor tomar nota de la alerta para evitar inconvenientes futuros.<br>Saludos",
+                          "ATM NO CUENTA CON CLIMATIZACIÓN ADECUADA Y ATM NO CUENTA CON PROTECCIÓN DE ENERGIA ELECTRICA",
+                          "Observaciones realizadas por el técnico responsable:<br>" + txtobseracionesVerif.Text
+                          );
+                }
+                if (RBClima.SelectedValue == "2" && RBEnergias.SelectedValue == "1")
+                {
+                    vService.EnviarMensaje(
+                         vCorreoAlerta,
+                         typeBody.Alertas,
+                          "<b>Buen día.<br> Se le notifica que ATM (" + txtcodATM.Text + ") " + txtnomATM.Text + " NO<b> cuenta con climatización decuada, datos proporcionados por el técnico responsable: " + txtTecnicoResponsable.Text + " al completar la lista de verificación del mantenimiento preventivo programado realizado el día: " + Session["ATM_FECHAMANT_VERIF_CREAR"] + "<br> Favor tomar nota de la alerta para evitar inconvenientes futuros.<br>Saludos",
+                          "ATM NO CUENTA CON CLIMATIZACIÓN ADECUADA",
+                         "Observaciones realizadas por el técnico responsable:<br>" + txtobseracionesVerif.Text
+                         );
+                }
+                if (RBClima.SelectedValue == "1" && RBEnergias.SelectedValue == "2")
+                {
+                    vService.EnviarMensaje(
+                         vCorreoAlerta,
+                         typeBody.Alertas,
+                           "<b>Buen día.<br> Se le notifica que ATM (" + txtcodATM.Text + ") " + txtnomATM.Text + " NO<b> cuenta con protección de energía eléctrica, datos proporcionados por el técnico responsable: " + txtTecnicoResponsable.Text + " al completar la lista de verificación del mantenimiento preventivo programado realizado el día: " + Session["ATM_FECHAMANT_VERIF_CREAR"] + "<br> Favor tomar nota de la alerta para evitar inconvenientes futuros.<br>Saludos",
+                          "ATM NO CUENTA CON PROTECCIÓN DE ENERGIA ELECTRICA",
+                         "Observaciones realizadas por el técnico responsable:<br>" + txtobseracionesVerif.Text
+                         );
+                }
             }
         }
 
@@ -1499,7 +1512,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
             if (vEstado == "7")
             {
-                CorreosAlertas();
+                //CorreosAlertas();
 
                 string vCorreoEncargadoZona = "";
                 if (Convert.ToString(Session["ATM_IDZONA_VERIF_CREAR"]) == "1")
@@ -1576,8 +1589,9 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                                 //EnviarCorreo();
                                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
                                 Mensaje("Lista de verificación aprobada con éxito", WarningType.Success);
-                                EnviarCorreo();
-                                CorreoSuscripcion();
+                                //EnviarCorreo();
+                                //CorreoSuscripcion();
+                                CorreosAlertas();
                                 vaciarValorImg();
                                 Session["vConfirmar"] = "0";
                                 Response.Redirect("buscarAprobarVerificacion.aspx");
