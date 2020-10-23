@@ -72,6 +72,7 @@ namespace Infatlan_STEI_ATM.pages.devolver
                     vDatos = vConexion.ObtenerTabla(vQuery);
                     foreach (DataRow item in vDatos.Rows)
                     {
+                        Session["ATM_COD_VERIF"] = codVerificacion;
                         Session["ATM_CODATM_VERIF_CREAR"] = item["Codigo"].ToString();
                         Session["ATM_NOMATM_VERIF_CREAR"] = item["NomATM"].ToString();
                         Session["ATM_DIRECCION_VERIF_CREAR"] = item["Direccion"].ToString();

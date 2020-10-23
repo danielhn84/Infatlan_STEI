@@ -510,6 +510,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                             Session["ATM_USUCREADOR_VERIF_CREAR"] = item["UsuarioCreador"].ToString();
                             Session["ATM_ATMACTIVO_VERIF_CREAR"] = item["ATMActivo"].ToString();
                             Session["ATM_USUARIO_VERIF_CREAR"] = item["UsuResponsable"].ToString();
+                           
 
                         }
 

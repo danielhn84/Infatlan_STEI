@@ -489,12 +489,16 @@
                             <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
                                 <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                                     <label class="col-form-label">Sistema Operativo</label>
-                                    <asp:TextBox runat="server" ID="txtsoVerif" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                    <%--<asp:TextBox runat="server" ID="txtsoVerif" CssClass="form-control" Enabled="false"></asp:TextBox>--%>
+                                     <asp:DropDownList ID="DDLSo" CssClass="form-control" runat="server">
+                                    </asp:DropDownList>
                                 </div>
 
                                 <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                                     <label class="col-form-label">Versión del software</label>
-                                    <asp:TextBox runat="server" ID="txtversionswVerif" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                    <%--<asp:TextBox runat="server" ID="txtversionswVerif" CssClass="form-control" Enabled="false"></asp:TextBox>--%>
+                                     <asp:DropDownList ID="DDLVersionSW" CssClass="form-control" runat="server">
+                                    </asp:DropDownList>
                                 </div>
 
                                 <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
@@ -584,6 +588,22 @@
                                 <div class="row col-8 align-self-center" style="margin-left: auto; margin-right: auto">
                                     <label class="col-form-label">Comentario por lectora sin antiskimming</label>
                                     <asp:TextBox runat="server" ID="txtantiSkimming" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                </div>
+                            </div><br />
+                            <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">
+                                <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
+                                    <label class="col-form-label">¿Se cambiaron piezas?</label>
+                                    <asp:DropDownList AutoPostBack="true" OnTextChanged="DDLCambioPiezas_TextChanged" ID="DDLCambioPiezas" CssClass="form-control col-12" runat="server">
+                                        <asp:ListItem Value="0" Text="Seleccione opción..."></asp:ListItem>
+                                        <asp:ListItem Value="1" Text="Si"></asp:ListItem>
+                                        <asp:ListItem Value="2" Text="No"></asp:ListItem>
+                                    </asp:DropDownList>
+                                </div><br /><br />
+                                 <%--</div>--%>
+                                 <%-- <div class="row col-12 align-self-center" style="margin-left: auto; margin-right: auto">--%>
+                                <div class="row col-8 align-self-center" style="margin-left: auto; margin-right: auto">
+                                   <%-- <label class="col-form-label">Comentario por lectora sin antiskimming</label>--%>
+                                    <asp:TextBox runat="server" ID="txtCambioMateriales" PlaceHolder="Ingrese piezas que se usaron en mantenimiento..."  CssClass="form-control" Enabled="false" TextMode="MultiLine" Rows="3"></asp:TextBox>
                                 </div>
                             </div>
                         </ContentTemplate>

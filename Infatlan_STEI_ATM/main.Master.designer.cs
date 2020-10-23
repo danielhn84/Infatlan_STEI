@@ -168,6 +168,15 @@ namespace Infatlan_STEI
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl LIAvances;
 
         /// <summary>
+        /// Control LIPermisos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LIPermisos;
+
+        /// <summary>
         /// Control FormaPrincipal.
         /// </summary>
         /// <remarks>

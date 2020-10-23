@@ -1412,11 +1412,13 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
             SmtpService vService = new SmtpService();
             vService.EnviarMensaje(
-                       "acedillo@bancatlan.hn,acamador@bancatlan.hn",
-                       typeBody.Alertas,
+                       "acedillo@bancatlan.hn",
+                       typeBody.ATM,
                         "Mantenimiento de ATM Finalizado",
                        "Problemas encontrados en el mantenimiento",                      
-                       "Errores identificados por el tecnico"
+                       "Errores identificados por el tecnico",
+                       "",
+                            "/sites/ATM/pages/mantenimiento/buscarVerificacion.aspx"
                        );
 
         }

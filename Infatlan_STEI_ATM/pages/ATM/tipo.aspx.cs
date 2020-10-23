@@ -8,6 +8,7 @@ using Infatlan_STEI_ATM.clases;
 using System.Data;
 using System.Drawing.Imaging;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Configuration;
 
@@ -168,42 +169,126 @@ namespace Infatlan_STEI_ATM.pages.ATM
 
         //public static byte[] SaveImageToByteArray(Image images, int jpegQuality = 75)
         //{
-            
+        //    //System.Web.UI.WebControls.Image images = new System.Web.UI.WebControls.Image();
+
         //    using (var ms = new MemoryStream())
         //    {
         //        var jpegEncoder = GetEncoder(ImageFormat.Jpeg);
         //        var encoderParameters = new EncoderParameters(1);
         //        encoderParameters.Param[0] = new EncoderParameter(Encoder.Quality, (long)jpegQuality);
         //        images.Save(ms, jpegEncoder, encoderParameters);
-               
+
         //        return ms.ToArray();
-                
+
         //    }
 
         //}
 
+        //private Image getImageFromBytes(byte[] myByteArray)
+        //{
+        //    System.IO.MemoryStream newImageStream = new System.IO.MemoryStream(myByteArray, 0, myByteArray.Length);
+        //    Image image = Image.FromStream(newImageStream, true);
+        //    Bitmap resized = new Bitmap(image, image.Width / 2, image.Height / 2);
+        //    image.Dispose();
+        //    newImageStream.Dispose();
+        //    return resized;
+        //}
+
+
+
         protected void btnPrueba_Click(object sender, EventArgs e)
         {
-                         
-          
-            //IMAGENES1
-            String vNombreDepot1 = String.Empty;
-            HttpPostedFile bufferDeposito1 = FUDiscoDuro.PostedFile;
-            byte[] vFileDeposito1 = null;
-            string vExtension1 = string.Empty;
 
-            if (bufferDeposito1 != null)
+
+            //if (FUDiscoDuro.HasFile)
+            //{
+            //    // Find the fileUpload control
+            //    string filename = FUDiscoDuro.FileName;
+
+            //    // Check if the directory we want the image uploaded to actually exists or not
+            //    if (!Directory.Exists(MapPath(@"Uploaded-Files")))
+            //    {
+            //        // If it doesn't then we just create it before going any further
+            //        Directory.CreateDirectory(MapPath(@"Uploaded-Files"));
+            //    }
+
+            //    // Specify the upload directory
+            //    string directory = Server.MapPath(@"Uploaded-Files\");
+
+            //    // Create a bitmap of the content of the fileUpload control in memory
+            //    Bitmap originalBMP = new Bitmap(FUDiscoDuro.FileContent);
+
+            //    // Calculate the new image dimensions
+            //    int origWidth = originalBMP.Width;
+            //    int origHeight = originalBMP.Height;
+            //    int sngRatio = origWidth / origHeight;
+            //    int newWidth = 100;
+            //    int newHeight = newWidth / sngRatio;
+
+            //    //int newWidth = 100;
+            //    //int newHeight = newWidth / sngRatio;
+
+            //    // Create a new bitmap which will hold the previous resized bitmap
+            //    Bitmap newBMP = new Bitmap(originalBMP, newWidth, newHeight);
+            //    // Create a graphic based on the new bitmap
+            //    Graphics oGraphics = Graphics.FromImage(newBMP);
+
+            //    // Set the properties for the new graphic file
+            //    oGraphics.SmoothingMode = SmoothingMode.AntiAlias; oGraphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            //    // Draw the new graphic based on the resized bitmap
+            //    oGraphics.DrawImage(originalBMP, 0, 0, newWidth, newHeight);
+
+            //    // Save the new graphic file to the server
+            //    newBMP.Save(directory + "tn_" + filename);
+
+            //    // Once finished with the bitmap objects, we deallocate them.
+            //    originalBMP.Dispose();
+            //    newBMP.Dispose();
+            //    oGraphics.Dispose();
+
+
+            //    //Image1.ImageUrl = @"/Uploaded-Files/tn_" + filename;
+            //}
+
+
+            //IMAGENES1
+            //String vNombreDepot1 = String.Empty;
+            //HttpPostedFile bufferDeposito1 = FUDiscoDuro.PostedFile;
+            //byte[] vFileDeposito1 = null;
+            //string vExtension1 = string.Empty;
+
+            //if (bufferDeposito1 != null)
+            //{
+            //    vNombreDepot1 = FUDiscoDuro.FileName;
+            //    Stream vStream1 = bufferDeposito1.InputStream;
+            //    BinaryReader vReader1 = new BinaryReader(vStream1);
+            //    vFileDeposito1 = vReader1.ReadBytes((int)vStream1.Length);
+            //    vExtension1 = System.IO.Path.GetExtension(FUDiscoDuro.FileName);
+            //}
+            //String vArchivo1 = String.Empty;
+            //if (vFileDeposito1 != null)
+            //    vArchivo1 = Convert.ToBase64String(vFileDeposito1);
+
+
+            Bitmap originalBMP = new Bitmap(FUDiscoDuro.FileContent);
+            byte[] imageData;
+            var newSize = originalBMP.Width;
+            //var newHeight = originalBMP.Height * newSize / originalBMP.Width;
+            var newHeight = originalBMP.Height / 3;
+            newSize = originalBMP.Width / 3;
+            //newSize = originalBMP.Width * newSize / originalBMP.Height;
+
+            Bitmap originalBMP2= new Bitmap(originalBMP.GetThumbnailImage(newSize, newHeight, null, IntPtr.Zero));
+
+            using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
             {
-                vNombreDepot1 = FUDiscoDuro.FileName;
-                Stream vStream1 = bufferDeposito1.InputStream;
-                BinaryReader vReader1 = new BinaryReader(vStream1);
-                vFileDeposito1 = vReader1.ReadBytes((int)vStream1.Length);
-                vExtension1 = System.IO.Path.GetExtension(FUDiscoDuro.FileName);
+                originalBMP2.Save(stream, ImageFormat.Jpeg);
+                stream.Position = 0;
+                imageData = new byte[stream.Length];
+                stream.Read(imageData, 0, imageData.Length);
+                stream.Close();
             }
-            String vArchivo1 = String.Empty;
-            if (vFileDeposito1 != null)
-                vArchivo1 = Convert.ToBase64String(vFileDeposito1);
-           
+            string vArchivo1 = Convert.ToBase64String(imageData);
 
 
             string vQuery = "[STEISP_ATM_Generales] 42, '" + vArchivo1 + "'";

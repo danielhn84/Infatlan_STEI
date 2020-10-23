@@ -8,6 +8,8 @@ using Infatlan_STEI_ATM.clases;
 using System.Data;
 using System.IO;
 using System.Configuration;
+using System.Drawing.Imaging;
+using System.Drawing;
 
 namespace Infatlan_STEI_ATM.pages.mantenimiento
 {
@@ -43,6 +45,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
                             llenarFormRechazado();
                             llenarImagenes();
+                            materialesMantenimiento();
                             break;
                         case "4":
                             RBClima.Enabled = false;
@@ -55,6 +58,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                             llenarFormRechazado();
                             llenarImagenes();
                             aprobacionCampos();
+                            materialesMantenimiento();
                             txtlatitudATM.Enabled = false;
                             txtlongitudATM.Enabled = false;
                             break;
@@ -66,7 +70,6 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 }
         }
     }
-
 
         void vaciarValorImg()
         {
@@ -90,6 +93,8 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         
         void aprobacionCampos()
         {
+            DDLSo.Enabled = false;
+            DDLVersionSW.Enabled = false;
             txtHllegadaInfatlan.Enabled = false;
             txthsalidaInfa.Enabled = false;
             TxFechaInicio.Enabled = false;
@@ -140,6 +145,8 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             ckpasos18.Enabled = false;
             ckpasos19.Enabled = false;
             ckpasos20.Enabled = false;
+            DDLCambioPiezas.Enabled = false;
+            txtCambioMateriales.Enabled = false;
         }
 
         public void Mensaje(string vMensaje, WarningType type)
@@ -333,8 +340,8 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             txtTecnicoResponsable.Text = Session["ATM_TECNICO_VERIF_CREAR"].ToString();
             //Session["ATM_USUARIO_VERIF_CREAR"] 
             txtidentidad.Text = Session["ATM_IDENTIDAD_VERIF_CREAR"].ToString();
-            txtsoVerif.Text = Session["ATM_SO_VERIF_CREAR"].ToString();
-            txtversionswVerif.Text = Session["ATM_VERSIONSW_VERIF_CREAR"].ToString();
+            //txtsoVerif.Text = Session["ATM_SO_VERIF_CREAR"].ToString();
+            //txtversionswVerif.Text = Session["ATM_VERSIONSW_VERIF_CREAR"].ToString();
             txtcomentarioATMLinea.Text = Session["ATM_ATMACTIVO_VERIF_CREAR"].ToString();
             //txtcodATM.Text = Session["codATM"].ToString();
             // DDLsucursalATM.SelectedIndex = CargarInformacionDDL(DDLsucursalATM, Session["sucursalATM"].ToString());
@@ -360,6 +367,17 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 }
             }
 
+            DataTable vDatosSO = new DataTable();
+            String vQuerySO = "SPSTEI_ATM 1,'" + txtcodATM.Text + "'";
+            vDatosSO = vConexionATM.ObtenerTablaATM(vQuerySO);
+            foreach (DataRow item in vDatosSO.Rows)
+            {
+                DDLSo.SelectedIndex = CargarInformacionDDL(DDLSo, item["idSO"].ToString());
+                DDLVersionSW.SelectedIndex = CargarInformacionDDL(DDLVersionSW, item["idVersionSw"].ToString());
+            }
+
+            
+
         }
 
         void validar()
@@ -372,6 +390,10 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 throw new Exception("Favor ingrese la hora en la que inicio mantenimiento.");
             if (TxFechaRegreso.Text == "" || TxFechaRegreso.Text == string.Empty)
                 throw new Exception("Favor ingrese la hora en la que termino mantenimiento.");
+            if (DDLSo.SelectedValue == "0")
+                throw new Exception("Favor seleccione sistema operativo.");
+            if (DDLVersionSW.SelectedValue == "0")
+                throw new Exception("Favor seleccione versión del software.");
             if (DDLtipoTeclado.SelectedValue == "0")
                 throw new Exception("Favor seleccione teclado.");
             if (DDLtipoProc.SelectedValue == "0")
@@ -434,6 +456,13 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 throw new Exception("Favor agregar imagen del mapa de ubicación de ATM.");
             if (txtcomentarioATMLinea.Text == "" || txtcomentarioATMLinea.Text == string.Empty)
                 throw new Exception("Favor ingrese comentario sobre ATM en línea.");
+            if(DDLCambioPiezas.SelectedValue=="0")
+                throw new Exception("Favor seleccione opción de cambio de piezas.");
+            if (DDLCambioPiezas.SelectedValue == "1")
+            {
+                if (txtCambioMateriales.Text == "" || txtCambioMateriales.Text == string.Empty)
+                    throw new Exception("Favor ingrese materiales que utilizó en mantenimiento.");
+            }
 
             //string vDevolver = "";
             //String vAdvertencia = "";
@@ -483,6 +512,22 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                         DDLtipoTeclado.Items.Add(new ListItem { Value = item["Id_Teclado_ATM"].ToString(), Text = item["Descripcion"].ToString() });
                         //}
                         //    Session["SUCURSAL"] = "1";
+                    }
+
+                    String vQuerySO = "STEISP_ATM_Generales 9";
+                    DataTable vDatosSO = vConexion.ObtenerTabla(vQuerySO);
+                    DDLSo.Items.Add(new ListItem { Value = "0", Text = "Seleccione sistema operativo..." });
+                    foreach (DataRow item in vDatosSO.Rows)
+                    {
+                        DDLSo.Items.Add(new ListItem { Value = item["idSO"].ToString(), Text = item["nombreSO"].ToString() });
+                    }
+
+                    String vQuerySW = "SPSTEI_ATM 8";
+                    DataTable vDatosSW = vConexionATM.ObtenerTablaATM(vQuerySW);
+                    DDLVersionSW.Items.Add(new ListItem { Value = "0", Text = "Seleccione version del software..." });
+                    foreach (DataRow item in vDatosSW.Rows)
+                    {
+                        DDLVersionSW.Items.Add(new ListItem { Value = item["Id_Software_ATM"].ToString(), Text = item["Descripcion"].ToString() });
                     }
 
                 }
@@ -616,13 +661,32 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             {
                 vEstado = item["estadoMantenimiento"].ToString();
             }
+            string vCorreoResponsable = "";
+            string vQueryD = "STEISP_ATM_Generales 33,'" + Session["ATM_USU_RESPONSABLE_MANT"] + "'";
+            DataTable vDatosTecnicoResponsable = vConexion.ObtenerTabla(vQueryD);
+
+            for (int i = 0; i < vDatosTecnicoResponsable.Rows.Count; i++)
+            {
+                vCorreoResponsable = vDatosTecnicoResponsable.Rows[i]["correo"].ToString();
+            }
 
             if (vEstado == "7")
             {
                 SmtpService vService = new SmtpService();
-                //String vCorreoAlerta = "acedillo@bancatlan.hn,unidadatmkiosco@bancatlan.hn,aaguilarr@bancatlan.hn,drodriguez@bancatlan.hn,cfmelara@bancatlan.hn,eurrea@bancatlan.hn,jfigueroa@bancatlan.hn,megarcia@bancatlan.hn,gccoello@bancatlan.hn,dazuniga@bancatlan.hn,ojfunes@bancatlan.hn,emoyuela@bancatlan.hn,dzepeda@bancatlan.hn,acalderon@bancatlan.hn,diantunez@bancatlan.hn,rapena@bancatlan.hn";
-                String vCorreoAlerta = "acedillo@bancatlan.hn,eurrea@bancatlan.hn";
-                if (RBClima.SelectedValue == "1" && RBEnergias.SelectedValue == "1")
+                String vCorreoAlerta = "unidadatmkiosco@bancatlan.hn,aaguilarr@bancatlan.hn,drodriguez@bancatlan.hn,cfmelara@bancatlan.hn,eurrea@bancatlan.hn,jfigueroa@bancatlan.hn,megarcia@bancatlan.hn,gccoello@bancatlan.hn,dazuniga@bancatlan.hn,ojfunes@bancatlan.hn,emoyuela@bancatlan.hn,dzepeda@bancatlan.hn,acalderon@bancatlan.hn,diantunez@bancatlan.hn,rapena@bancatlan.hn,"+ vCorreoResponsable;
+                //String vCorreoAlerta = "acedillo@bancatlan.hn,eurrea@bancatlan.hn";
+                if (RBClima.SelectedValue == "1" && RBEnergias.SelectedValue == "1" && txtobseracionesVerif.Text!="")
+                {
+
+                    vService.EnviarMensaje(
+                          vCorreoAlerta,
+                          typeBody.Alertas,
+                           "<b>Buen día.<br> Se le notifica que ATM (" + txtcodATM.Text + ") " + txtnomATM.Text + " cuenta con protección de energía eléctrica y cuenta con climatización adecuada, datos proporcionados por el técnico responsable: " + txtTecnicoResponsable.Text + " al completar la lista de verificación del mantenimiento preventivo programado realizado el día: " + Session["ATM_FECHAMANT_VERIF_CREAR"] + "<br> Favor tomar nota de la alerta para evitar inconvenientes futuros.<br>Saludos",
+                          "OBSERVACIONES REFERENTES AL MANTENIMIENTO DE ATM",
+                          "Observaciones realizadas por el técnico responsable:<br>" + txtobseracionesVerif.Text
+                          );
+                }
+                if (RBClima.SelectedValue == "2" && RBEnergias.SelectedValue == "2")
                 {
 
                     vService.EnviarMensaje(
@@ -788,10 +852,12 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
                 string vQuery = "SPSTEI_ATM 35, '" + Session["ATM_CODATM_VERIF_CREAR"] + "','" + DDLtipoTeclado.SelectedValue + "','" + DDLtipoProc.SelectedValue + "'," +
                     "'" + DDLtipoCargaVerif.SelectedValue + "','" + DDLmarcaDiscoDuro.SelectedValue + "','" + txtSerieDiscoDuro.Text + "','" + txtcapacidadDiscoVerif.Text + " GB" + "','" + txtserieATM.Text + "'," +
-                    "'" + txtinventarioVerif.Text + "','" + txtramVerif.Text + " GB" + "','" + Session["USUARIO"].ToString() + "','" + txtlatitudATM.Text + "','" + txtlongitudATM.Text + "'";
+                    "'" + txtinventarioVerif.Text + "','" + txtramVerif.Text + " GB" + "','" + Session["USUARIO"].ToString() + "','" + txtlatitudATM.Text + "','" + txtlongitudATM.Text + "'," +
+                    "'"+DDLSo.SelectedValue+"','"+DDLVersionSW.SelectedValue+"'";
                 Int32 vInfo = vConexionATM.ejecutarSQLATM(vQuery);
                 if (vInfo == 1)
                 {
+                    
                     //IMAGENES1
                     String vNombreDepot11 = String.Empty;
                     HttpPostedFile bufferDeposito11 = FUmapaATM.PostedFile;
@@ -1044,41 +1110,75 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             else
                 respuesta20 = "No";
         }
-        //IMAGENES1
-        String vNombreDepot1 = String.Empty;
-        HttpPostedFile bufferDeposito1T = FUClimatizacion.PostedFile;
-        byte[] vFileDeposito1 = null;
-        string vExtension = string.Empty;
+            //IMAGENES1
+            Bitmap originalBMP = new Bitmap(FUClimatizacion.FileContent);
+            byte[] imageData;
+            var newHeight = originalBMP.Height / 3;
+            var newWidth = originalBMP.Width / 3;
 
-        if (bufferDeposito1T != null)
-        {
-            vNombreDepot1 = FUClimatizacion.FileName;
-            Stream vStream = bufferDeposito1T.InputStream;
-            BinaryReader vReader = new BinaryReader(vStream);
-            vFileDeposito1 = vReader.ReadBytes((int)vStream.Length);
-            vExtension = System.IO.Path.GetExtension(FUClimatizacion.FileName);
-        }
-        String vArchivo = String.Empty;
-        if (vFileDeposito1 != null)
-            vArchivo = Convert.ToBase64String(vFileDeposito1);
-        /////////////////////////////////////////////////////////////////////
-        //IMAGENES2
-        String vNombreDepot2 = String.Empty;
-        HttpPostedFile bufferDeposito2 = FUEnergia.PostedFile;
-        byte[] vFileDeposito2 = null;
-        string vExtension2 = string.Empty;
+            Bitmap originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
 
-        if (bufferDeposito2 != null)
-        {
-            vNombreDepot2 = FUEnergia.FileName;
-            Stream vStream2 = bufferDeposito2.InputStream;
-            BinaryReader vReader2 = new BinaryReader(vStream2);
-            vFileDeposito2 = vReader2.ReadBytes((int)vStream2.Length);
-            vExtension2 = System.IO.Path.GetExtension(FUEnergia.FileName);
-        }
-        String vArchivo2 = String.Empty;
-        if (vFileDeposito2 != null)
-            vArchivo2 = Convert.ToBase64String(vFileDeposito2);
+            using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+            {
+                originalBMPReducido.Save(stream, ImageFormat.Jpeg);
+                stream.Position = 0;
+                imageData = new byte[stream.Length];
+                stream.Read(imageData, 0, imageData.Length);
+                stream.Close();
+            }
+            string vArchivo = Convert.ToBase64String(imageData);
+
+            //String vNombreDepot1 = String.Empty;
+            //HttpPostedFile bufferDeposito1T = FUClimatizacion.PostedFile;
+            //byte[] vFileDeposito1 = null;
+            //string vExtension = string.Empty;
+
+            //if (bufferDeposito1T != null)
+            //{
+            //    vNombreDepot1 = FUClimatizacion.FileName;
+            //    Stream vStream = bufferDeposito1T.InputStream;
+            //    BinaryReader vReader = new BinaryReader(vStream);
+            //    vFileDeposito1 = vReader.ReadBytes((int)vStream.Length);
+            //    vExtension = System.IO.Path.GetExtension(FUClimatizacion.FileName);
+            //}
+            //String vArchivo = String.Empty;
+            //if (vFileDeposito1 != null)
+            //    vArchivo = Convert.ToBase64String(vFileDeposito1);
+            /////////////////////////////////////////////////////////////////////
+            //IMAGENES2
+            Bitmap originalBMP2 = new Bitmap(FUEnergia.FileContent);
+            byte[] imageData2;
+            var newHeight2 = originalBMP2.Height / 3;
+            var newWidth2 = originalBMP2.Width / 3;
+
+            Bitmap originalBMPReducido2 = new Bitmap(originalBMP2.GetThumbnailImage(newWidth2, newHeight2, null, IntPtr.Zero));
+
+            using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+            {
+                originalBMPReducido2.Save(stream, ImageFormat.Jpeg);
+                stream.Position = 0;
+                imageData2 = new byte[stream.Length];
+                stream.Read(imageData2, 0, imageData2.Length);
+                stream.Close();
+            }
+            string vArchivo2 = Convert.ToBase64String(imageData2);
+
+        //    String vNombreDepot2 = String.Empty;
+        //HttpPostedFile bufferDeposito2 = FUEnergia.PostedFile;
+        //byte[] vFileDeposito2 = null;
+        //string vExtension2 = string.Empty;
+
+        //if (bufferDeposito2 != null)
+        //{
+        //    vNombreDepot2 = FUEnergia.FileName;
+        //    Stream vStream2 = bufferDeposito2.InputStream;
+        //    BinaryReader vReader2 = new BinaryReader(vStream2);
+        //    vFileDeposito2 = vReader2.ReadBytes((int)vStream2.Length);
+        //    vExtension2 = System.IO.Path.GetExtension(FUEnergia.FileName);
+        //}
+        //String vArchivo2 = String.Empty;
+        //if (vFileDeposito2 != null)
+        //    vArchivo2 = Convert.ToBase64String(vFileDeposito2);
         /////////////////////////////////////////////////////////////////////
         string climatizacion = null;
         string energia = null;
@@ -1102,8 +1202,12 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 "'" + respuesta11 + "','" + respuesta12 + "','" + respuesta13 + "','" + respuesta14 + "'," +
                 "'" + respuesta15 + "','" + respuesta16 + "','" + respuesta17 + "','" + respuesta18 + "'," +
                 "'" + respuesta19 + "','" + respuesta20 + "','" + climatizacion + "','" + vArchivo + "'," +
-                "'" + energia + "','" + vArchivo2 + "','" + dropantiskimming.SelectedItem.Text + "','" + txtantiSkimming.Text + "'";
+                "'" + energia + "','" + vArchivo2 + "','" + dropantiskimming.SelectedItem.Text + "','" + txtantiSkimming.Text + "'," +
+                "'"+ DDLCambioPiezas.SelectedValue + "','" + txtCambioMateriales.Text + "'";
                 Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+
+                 string vQueryM = "STEISP_ATM_ListaVerificacion 4, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + DDLCambioPiezas.SelectedValue + "','"+txtCambioMateriales.Text+"'";
+                  vConexion.ejecutarSQL(vQueryM);
 
                 if (FUClimatizacion.HasFile != false)
                 {
@@ -1133,7 +1237,8 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     "'" + respuesta11 + "','" + respuesta12 + "','" + respuesta13 + "','" + respuesta14 + "'," +
                     "'" + respuesta15 + "','" + respuesta16 + "','" + respuesta17 + "','" + respuesta18 + "'," +
                     "'" + respuesta19 + "','" + respuesta20 + "','" + climatizacion + "','" + vArchivo + "'," +
-                    "'" + energia + "','" + vArchivo2 + "','" + dropantiskimming.SelectedItem.Text + "','" + txtantiSkimming.Text + "'";
+                    "'" + energia + "','" + vArchivo2 + "','" + dropantiskimming.SelectedItem.Text + "','" + txtantiSkimming.Text + "'," +
+                    "'"+DDLCambioPiezas.SelectedValue+"','"+txtCambioMateriales.Text+"'";
                     Int32 vInfo = vConexion.ejecutarSQL(vQuery);
 
                     //string vQuery2 = "STEI_ATM_Actualizar_Imagenes 11, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo + "'";
@@ -1150,6 +1255,18 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         }
     }
 
+        void materialesMantenimiento()
+        {
+            DataTable vDatos = new DataTable();
+            String vQuery = "STEISP_ATM_SELECCIONES 6,'" + Session["ATM_COD_VERIF"] + "'";
+            vDatos = vConexion.ObtenerTabla(vQuery);
+            foreach (DataRow item in vDatos.Rows)
+            {
+                DDLCambioPiezas.SelectedIndex = CargarInformacionDDL(DDLCambioPiezas, item["material"].ToString());
+                txtCambioMateriales.Text = item["comentarioMaterial"].ToString();
+               
+            }
+        }
 
         void ImgVerificacion()
             {
@@ -1470,6 +1587,344 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             }
         }
 
+        void ImgVerificacionReducido()
+        {
+            string id = Request.QueryString["id"];
+            string tipo = Request.QueryString["tipo"];
+
+            //IMAGENES1
+            Bitmap originalBMP = new Bitmap(FUDiscoDuro.FileContent);
+            byte[] imageData;
+            var newHeight = originalBMP.Height / 3;
+            var newWidth = originalBMP.Width / 3;
+
+            Bitmap originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+
+            using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+            {
+                originalBMPReducido.Save(stream, ImageFormat.Jpeg);
+                stream.Position = 0;
+                imageData = new byte[stream.Length];
+                stream.Read(imageData, 0, imageData.Length);
+                stream.Close();
+            }
+            string vArchivo1 = Convert.ToBase64String(imageData);
+
+            //////////////////////////////////////////////////////////////////////////////
+            //IMAGENES2
+            Bitmap originalBMP2 = new Bitmap(FUATMDesarmadoPS.FileContent);
+            byte[] imageData2;
+            var newHeight2 = originalBMP2.Height / 3;
+            var newWidth2 = originalBMP2.Width / 3;
+
+            Bitmap originalBMPReducido2 = new Bitmap(originalBMP2.GetThumbnailImage(newWidth2, newHeight2, null, IntPtr.Zero));
+
+            using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+            {
+                originalBMPReducido2.Save(stream, ImageFormat.Jpeg);
+                stream.Position = 0;
+                imageData2 = new byte[stream.Length];
+                stream.Read(imageData2, 0, imageData2.Length);
+                stream.Close();
+            }
+            string vArchivo2 = Convert.ToBase64String(imageData2);
+
+            ////////////////////////////////////////////////////////////////////////////////
+            //IMAGENES3
+            Bitmap originalBMP3 = new Bitmap(FUATMDesarmadoPI.FileContent);
+            byte[] imageData3;
+            var newHeight3 = originalBMP3.Height / 3;
+            var newWidth3 = originalBMP3.Width / 3;
+
+            Bitmap originalBMPReducido3 = new Bitmap(originalBMP3.GetThumbnailImage(newWidth3, newHeight3, null, IntPtr.Zero));
+
+            using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+            {
+                originalBMPReducido3.Save(stream, ImageFormat.Jpeg);
+                stream.Position = 0;
+                imageData3 = new byte[stream.Length];
+                stream.Read(imageData3, 0, imageData3.Length);
+                stream.Close();
+            }
+            string vArchivo3 = Convert.ToBase64String(imageData3);
+
+            ////////////////////////////////////////////////////////////////////////////////
+            //IMAGENES4
+            Bitmap originalBMP4 = new Bitmap(FUDispositivoVendor.FileContent);
+            byte[] imageData4;
+            var newHeight4 = originalBMP4.Height / 3;
+            var newWidth4 = originalBMP4.Width / 3;
+
+            Bitmap originalBMPReducido4 = new Bitmap(originalBMP4.GetThumbnailImage(newWidth4, newHeight4, null, IntPtr.Zero));
+
+            using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+            {
+                originalBMPReducido4.Save(stream, ImageFormat.Jpeg);
+                stream.Position = 0;
+                imageData4 = new byte[stream.Length];
+                stream.Read(imageData4, 0, imageData4.Length);
+                stream.Close();
+            }
+            string vArchivo4 = Convert.ToBase64String(imageData4);
+
+
+            ////////////////////////////////////////////////////////////////////////////////
+            //IMAGENES5
+            Bitmap originalBMP5 = new Bitmap(FUSYSTEMINFO.FileContent);
+            byte[] imageData5;
+            var newHeight5 = originalBMP5.Height / 3;
+            var newWidth5 = originalBMP5.Width / 3;
+
+            Bitmap originalBMPReducido5 = new Bitmap(originalBMP5.GetThumbnailImage(newWidth5, newHeight5, null, IntPtr.Zero));
+
+            using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+            {
+                originalBMPReducido5.Save(stream, ImageFormat.Jpeg);
+                stream.Position = 0;
+                imageData5 = new byte[stream.Length];
+                stream.Read(imageData5, 0, imageData5.Length);
+                stream.Close();
+            }
+            string vArchivo5 = Convert.ToBase64String(imageData5);
+
+
+            ////////////////////////////////////////////////////////////////////////////////
+            //IMAGENES6
+            Bitmap originalBMP6 = new Bitmap(FUAntiskimmin.FileContent);
+            byte[] imageData6;
+            var newHeight6 = originalBMP6.Height / 3;
+            var newWidth6 = originalBMP6.Width / 3;
+
+            Bitmap originalBMPReducido6 = new Bitmap(originalBMP6.GetThumbnailImage(newWidth6, newHeight6, null, IntPtr.Zero));
+
+            using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+            {
+                originalBMPReducido6.Save(stream, ImageFormat.Jpeg);
+                stream.Position = 0;
+                imageData6 = new byte[stream.Length];
+                stream.Read(imageData6, 0, imageData6.Length);
+                stream.Close();
+            }
+            string vArchivo6 = Convert.ToBase64String(imageData6);
+
+
+            ////////////////////////////////////////////////////////////////////////////////
+            //IMAGENES7
+            Bitmap originalBMP7 = new Bitmap(FUMonitorFiltro.FileContent);
+            byte[] imageData7;
+            var newHeight7 = originalBMP7.Height / 3;
+            var newWidth7 = originalBMP7.Width / 3;
+
+            Bitmap originalBMPReducido7 = new Bitmap(originalBMP7.GetThumbnailImage(newWidth7, newHeight7, null, IntPtr.Zero));
+
+            using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+            {
+                originalBMPReducido7.Save(stream, ImageFormat.Jpeg);
+                stream.Position = 0;
+                imageData7 = new byte[stream.Length];
+                stream.Read(imageData7, 0, imageData7.Length);
+                stream.Close();
+            }
+            string vArchivo7 = Convert.ToBase64String(imageData7);
+
+            
+            ////////////////////////////////////////////////////////////////////////////////
+            //IMAGENES8
+            Bitmap originalBMP8 = new Bitmap(FUPadlewheel.FileContent);
+            byte[] imageData8;
+            var newHeight8 = originalBMP8.Height / 3;
+            var newWidth8 = originalBMP8.Width / 3;
+
+            Bitmap originalBMPReducido8 = new Bitmap(originalBMP8.GetThumbnailImage(newWidth8, newHeight8, null, IntPtr.Zero));
+
+            using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+            {
+                originalBMPReducido8.Save(stream, ImageFormat.Jpeg);
+                stream.Position = 0;
+                imageData8 = new byte[stream.Length];
+                stream.Read(imageData8, 0, imageData8.Length);
+                stream.Close();
+            }
+            string vArchivo8 = Convert.ToBase64String(imageData8);
+
+           
+            ////////////////////////////////////////////////////////////////////////////////
+            //IMAGENES9
+            Bitmap originalBMP9 = new Bitmap(FUDispDesarmado.FileContent);
+            byte[] imageData9;
+            var newHeight9 = originalBMP9.Height / 3;
+            var newWidth9 = originalBMP9.Width / 3;
+
+            Bitmap originalBMPReducido9 = new Bitmap(originalBMP9.GetThumbnailImage(newWidth9, newHeight9, null, IntPtr.Zero));
+
+            using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+            {
+                originalBMPReducido9.Save(stream, ImageFormat.Jpeg);
+                stream.Position = 0;
+                imageData9 = new byte[stream.Length];
+                stream.Read(imageData9, 0, imageData9.Length);
+                stream.Close();
+            }
+            string vArchivo9 = Convert.ToBase64String(imageData9);
+
+            
+            ////////////////////////////////////////////////////////////////////////////////
+            //IMAGENES10
+            Bitmap originalBMP10 = new Bitmap(FUTeclado.FileContent);
+            byte[] imageData10;
+            var newHeight10 = originalBMP10.Height / 3;
+            var newWidth10 = originalBMP10.Width / 3;
+
+            Bitmap originalBMPReducido10 = new Bitmap(originalBMP10.GetThumbnailImage(newWidth10, newHeight10, null, IntPtr.Zero));
+
+            using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+            {
+                originalBMPReducido10.Save(stream, ImageFormat.Jpeg);
+                stream.Position = 0;
+                imageData10 = new byte[stream.Length];
+                stream.Read(imageData10, 0, imageData10.Length);
+                stream.Close();
+            }
+            string vArchivo10 = Convert.ToBase64String(imageData10);
+
+            
+            ////////////////////////////////////////////////////////////////////////////////
+            //IMAGENES11
+            Bitmap originalBMP11 = new Bitmap(FUATMLinea.FileContent);
+            byte[] imageData11;
+            var newHeight11 = originalBMP11.Height / 3;
+            var newWidth11 = originalBMP11.Width / 3;
+
+            Bitmap originalBMPReducido11 = new Bitmap(originalBMP6.GetThumbnailImage(newWidth11, newHeight11, null, IntPtr.Zero));
+
+            using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+            {
+                originalBMPReducido11.Save(stream, ImageFormat.Jpeg);
+                stream.Position = 0;
+                imageData11 = new byte[stream.Length];
+                stream.Read(imageData11, 0, imageData11.Length);
+                stream.Close();
+            }
+            string vArchivo11 = Convert.ToBase64String(imageData11);
+
+           
+
+            if (tipo == "2")
+            {
+                try
+                {
+                    if (FUDiscoDuro.HasFile != false)
+                    {
+                        string vQuery = "STEI_ATM_Actualizar_Imagenes 1, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo1 + "'";
+                        Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                    }
+                    if (FUATMDesarmadoPS.HasFile != false)
+                    {
+                        string vQuery = "STEI_ATM_Actualizar_Imagenes 2, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo2 + "'";
+                        Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                    }
+                    if (FUATMDesarmadoPI.HasFile != false)
+                    {
+                        string vQuery = "STEI_ATM_Actualizar_Imagenes 3, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo3 + "'";
+                        Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                    }
+                    if (FUDispositivoVendor.HasFile != false)
+                    {
+                        string vQuery = "STEI_ATM_Actualizar_Imagenes 4, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo4 + "'";
+                        Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                    }
+                    if (FUSYSTEMINFO.HasFile != false)
+                    {
+                        string vQuery = "STEI_ATM_Actualizar_Imagenes 5, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo5 + "'";
+                        Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                    }
+                    if (FUAntiskimmin.HasFile != false)
+                    {
+                        string vQuery = "STEI_ATM_Actualizar_Imagenes 6, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo6 + "'";
+                        Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                    }
+                    if (FUMonitorFiltro.HasFile != false)
+                    {
+                        string vQuery = "STEI_ATM_Actualizar_Imagenes 7, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo7 + "'";
+                        Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                    }
+                    if (FUPadlewheel.HasFile != false)
+                    {
+                        string vQuery = "STEI_ATM_Actualizar_Imagenes 8, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo8 + "'";
+                        Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                    }
+                    if (FUDispDesarmado.HasFile != false)
+                    {
+                        string vQuery = "STEI_ATM_Actualizar_Imagenes 9, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo9 + "'";
+                        Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                    }
+                    if (FUTeclado.HasFile != false)
+                    {
+                        string vQuery = "STEI_ATM_Actualizar_Imagenes 10, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo10 + "'";
+                        Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                    }
+                    if (FUATMLinea.HasFile != false)
+                    {
+                        string vQuery = "STEI_ATM_Actualizar_Imagenes 13, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo11 + "'";
+                        Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                    }
+                }
+                catch (Exception Ex)
+                {
+                    throw;
+                }
+            }
+            else
+            {
+                try
+                {
+                    //string vQuery = "STEISP_ATM_ImagenesVerif 1, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo1 + "','" + vArchivo2 + "','" + vArchivo3 + "'," +
+                    //    "'" + vArchivo4 + "','" + vArchivo5 + "','" + vArchivo6 + "','" + vArchivo7 + "','" + vArchivo8 + "','" + vArchivo9 + "', '" + vArchivo10 + "','" + vArchivo11 + "'";
+                    //Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+
+
+                    string vQuery = "STEI_ATM_Actualizar_Imagenes 14, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo1 + "'";
+                    Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+
+                    string vQuery2 = "STEI_ATM_Actualizar_Imagenes 2, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo2 + "'";
+                    Int32 vInfo2 = vConexion.ejecutarSQL(vQuery2);
+
+                    string vQuery3 = "STEI_ATM_Actualizar_Imagenes 3, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo3 + "'";
+                    Int32 vInfo3 = vConexion.ejecutarSQL(vQuery3);
+
+                    string vQuery4 = "STEI_ATM_Actualizar_Imagenes 4, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo4 + "'";
+                    Int32 vInfo4 = vConexion.ejecutarSQL(vQuery4);
+
+                    string vQuery5 = "STEI_ATM_Actualizar_Imagenes 5, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo5 + "'";
+                    Int32 vInfo5 = vConexion.ejecutarSQL(vQuery5);
+
+                    string vQuery6 = "STEI_ATM_Actualizar_Imagenes 6, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo6 + "'";
+                    Int32 vInfo6 = vConexion.ejecutarSQL(vQuery6);
+
+                    string vQuery7 = "STEI_ATM_Actualizar_Imagenes 7, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo7 + "'";
+                    Int32 vInfo7 = vConexion.ejecutarSQL(vQuery7);
+
+                    string vQuery8 = "STEI_ATM_Actualizar_Imagenes 8, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo8 + "'";
+                    Int32 vInfo8 = vConexion.ejecutarSQL(vQuery8);
+
+                    string vQuery9 = "STEI_ATM_Actualizar_Imagenes 9, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo9 + "'";
+                    Int32 vInfo9 = vConexion.ejecutarSQL(vQuery9);
+
+                    string vQuery10 = "STEI_ATM_Actualizar_Imagenes 10, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo10 + "'";
+                    Int32 vInfo10 = vConexion.ejecutarSQL(vQuery10);
+
+                    string vQuery11 = "STEI_ATM_Actualizar_Imagenes 13, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo11 + "'";
+                    Int32 vInfo11 = vConexion.ejecutarSQL(vQuery11);
+
+
+                }
+                catch (Exception Ex)
+                {
+                    throw;
+                }
+            }
+        }
+
         protected void dropantiskimming_TextChanged(object sender, EventArgs e)
             {
 
@@ -1589,8 +2044,8 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                                 //EnviarCorreo();
                                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
                                 Mensaje("Lista de verificación aprobada con éxito", WarningType.Success);
-                                //EnviarCorreo();
-                                //CorreoSuscripcion();
+                                EnviarCorreo();
+                                CorreoSuscripcion();
                                 CorreosAlertas();
                                 vaciarValorImg();
                                 Session["vConfirmar"] = "0";
@@ -1611,7 +2066,8 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                         ActualizarVerifATM();
                         ActualizarATM();
                         //ActualizarMateriales();                                                                     
-                        ImgVerificacion();
+                        //ImgVerificacion();
+                        ImgVerificacionReducido();
                         PreguntasVerif();
                         EnviarCorreo();
                         vaciarValorImg();
@@ -1950,6 +2406,15 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
            
         }
 
-       
+        protected void DDLCambioPiezas_TextChanged(object sender, EventArgs e)
+        {
+            if (DDLCambioPiezas.SelectedValue == "1")
+                txtCambioMateriales.Enabled = true;
+            else
+            {
+                txtCambioMateriales.Enabled = false;
+                txtCambioMateriales.Text = "";
+            }
+        }
     }
 }
