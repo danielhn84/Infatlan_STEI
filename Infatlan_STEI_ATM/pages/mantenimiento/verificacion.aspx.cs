@@ -352,6 +352,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             GVNewMateriales.DataSource = vDatos2;
             GVNewMateriales.DataBind();
             Session["ATM_DEVOLVER_MATERIALES_VERIF"] = vDatos2;
+            //MATERAILES
 
             DataTable vDatosImg = new DataTable();
             String vQueryImg = "SPSTEI_ATM 33,'" + txtcodATM.Text + "'";
@@ -675,17 +676,17 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 SmtpService vService = new SmtpService();
                 String vCorreoAlerta = "unidadatmkiosco@bancatlan.hn,aaguilarr@bancatlan.hn,drodriguez@bancatlan.hn,cfmelara@bancatlan.hn,eurrea@bancatlan.hn,jfigueroa@bancatlan.hn,megarcia@bancatlan.hn,gccoello@bancatlan.hn,dazuniga@bancatlan.hn,ojfunes@bancatlan.hn,emoyuela@bancatlan.hn,dzepeda@bancatlan.hn,acalderon@bancatlan.hn,diantunez@bancatlan.hn,rapena@bancatlan.hn,"+ vCorreoResponsable;
                 //String vCorreoAlerta = "acedillo@bancatlan.hn,eurrea@bancatlan.hn";
-                if (RBClima.SelectedValue == "1" && RBEnergias.SelectedValue == "1" && txtobseracionesVerif.Text!="")
-                {
+                //if (RBClima.SelectedValue == "1" && RBEnergias.SelectedValue == "1" && txtobseracionesVerif.Text!="")
+                //{
 
-                    vService.EnviarMensaje(
-                          vCorreoAlerta,
-                          typeBody.Alertas,
-                           "<b>Buen día.<br> Se le notifica que ATM (" + txtcodATM.Text + ") " + txtnomATM.Text + " cuenta con protección de energía eléctrica y cuenta con climatización adecuada, datos proporcionados por el técnico responsable: " + txtTecnicoResponsable.Text + " al completar la lista de verificación del mantenimiento preventivo programado realizado el día: " + Session["ATM_FECHAMANT_VERIF_CREAR"] + "<br> Favor tomar nota de la alerta para evitar inconvenientes futuros.<br>Saludos",
-                          "OBSERVACIONES REFERENTES AL MANTENIMIENTO DE ATM",
-                          "Observaciones realizadas por el técnico responsable:<br>" + txtobseracionesVerif.Text
-                          );
-                }
+                //    vService.EnviarMensaje(
+                //          vCorreoAlerta,
+                //          typeBody.Alertas,
+                //           "<b>Buen día.<br> Se le notifica que ATM (" + txtcodATM.Text + ") " + txtnomATM.Text + " cuenta con protección de energía eléctrica y cuenta con climatización adecuada, datos proporcionados por el técnico responsable: " + txtTecnicoResponsable.Text + " al completar la lista de verificación del mantenimiento preventivo programado realizado el día: " + Session["ATM_FECHAMANT_VERIF_CREAR"] + "<br> Favor tomar nota de la alerta para evitar inconvenientes futuros.<br>Saludos",
+                //          "OBSERVACIONES REFERENTES AL MANTENIMIENTO DE ATM",
+                //          "Observaciones realizadas por el técnico responsable:<br>" + txtobseracionesVerif.Text
+                //          );
+                //}
                 if (RBClima.SelectedValue == "2" && RBEnergias.SelectedValue == "2")
                 {
 
@@ -1111,23 +1112,35 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 respuesta20 = "No";
         }
             //IMAGENES1
-            Bitmap originalBMP = new Bitmap(FUClimatizacion.FileContent);
-            byte[] imageData;
-            var newHeight = originalBMP.Height / 3;
-            var newWidth = originalBMP.Width / 3;
-
-            Bitmap originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
-
-            using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+            string vArchivo = "";
+            if (FUClimatizacion.FileName != "")
             {
-                originalBMPReducido.Save(stream, ImageFormat.Jpeg);
-                stream.Position = 0;
-                imageData = new byte[stream.Length];
-                stream.Read(imageData, 0, imageData.Length);
-                stream.Close();
+                Bitmap originalBMP = new Bitmap(FUClimatizacion.FileContent);
+                byte[] imageData;
+                Bitmap originalBMPReducido;
+                if (originalBMP.Height > 1000 && originalBMP.Width > 1000)
+                {
+                    var newHeight = originalBMP.Height / 3;
+                    var newWidth = originalBMP.Width / 3;
+                    originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+                }
+                else
+                {
+                    var newHeight = originalBMP.Height;
+                    var newWidth = originalBMP.Width;
+                    originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+                }
+               
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData = new byte[stream.Length];
+                    stream.Read(imageData, 0, imageData.Length);
+                    stream.Close();
+                }
+                 vArchivo = Convert.ToBase64String(imageData);
             }
-            string vArchivo = Convert.ToBase64String(imageData);
-
             //String vNombreDepot1 = String.Empty;
             //HttpPostedFile bufferDeposito1T = FUClimatizacion.PostedFile;
             //byte[] vFileDeposito1 = null;
@@ -1146,23 +1159,34 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             //    vArchivo = Convert.ToBase64String(vFileDeposito1);
             /////////////////////////////////////////////////////////////////////
             //IMAGENES2
-            Bitmap originalBMP2 = new Bitmap(FUEnergia.FileContent);
-            byte[] imageData2;
-            var newHeight2 = originalBMP2.Height / 3;
-            var newWidth2 = originalBMP2.Width / 3;
-
-            Bitmap originalBMPReducido2 = new Bitmap(originalBMP2.GetThumbnailImage(newWidth2, newHeight2, null, IntPtr.Zero));
-
-            using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+            string vArchivo2 = "";
+            if (FUEnergia.FileName != "")
             {
-                originalBMPReducido2.Save(stream, ImageFormat.Jpeg);
-                stream.Position = 0;
-                imageData2 = new byte[stream.Length];
-                stream.Read(imageData2, 0, imageData2.Length);
-                stream.Close();
+                Bitmap originalBMP2 = new Bitmap(FUEnergia.FileContent);
+                byte[] imageData2;
+                Bitmap originalBMPReducido2;
+                if (originalBMP2.Height > 1000 && originalBMP2.Width > 1000)
+                {
+                    var newHeight2 = originalBMP2.Height / 3;
+                    var newWidth2 = originalBMP2.Width / 3;
+                    originalBMPReducido2 = new Bitmap(originalBMP2.GetThumbnailImage(newWidth2, newHeight2, null, IntPtr.Zero));
+                }
+                else
+                {
+                    var newHeight2 = originalBMP2.Height;
+                    var newWidth2 = originalBMP2.Width;
+                    originalBMPReducido2 = new Bitmap(originalBMP2.GetThumbnailImage(newWidth2, newHeight2, null, IntPtr.Zero));
+                }
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido2.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData2 = new byte[stream.Length];
+                    stream.Read(imageData2, 0, imageData2.Length);
+                    stream.Close();
+                }
+                 vArchivo2 = Convert.ToBase64String(imageData2);
             }
-            string vArchivo2 = Convert.ToBase64String(imageData2);
-
         //    String vNombreDepot2 = String.Empty;
         //HttpPostedFile bufferDeposito2 = FUEnergia.PostedFile;
         //byte[] vFileDeposito2 = null;
@@ -1206,8 +1230,8 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 "'"+ DDLCambioPiezas.SelectedValue + "','" + txtCambioMateriales.Text + "'";
                 Int32 vInfo = vConexion.ejecutarSQL(vQuery);
 
-                 string vQueryM = "STEISP_ATM_ListaVerificacion 4, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + DDLCambioPiezas.SelectedValue + "','"+txtCambioMateriales.Text+"'";
-                  vConexion.ejecutarSQL(vQueryM);
+                 //string vQueryM = "STEISP_ATM_ListaVerificacion 4, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + DDLCambioPiezas.SelectedValue + "','"+txtCambioMateriales.Text+"'";
+                 // vConexion.ejecutarSQL(vQueryM);
 
                 if (FUClimatizacion.HasFile != false)
                 {
@@ -1591,222 +1615,357 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         {
             string id = Request.QueryString["id"];
             string tipo = Request.QueryString["tipo"];
-
+             string vArchivo1 = "";
+            string vArchivo2 = "";
+            string vArchivo3 = "";
+            string vArchivo4 = "";
+            string vArchivo5 = "";
+            string vArchivo6 = "";
+            string vArchivo7 = "";
+            string vArchivo8 = "";
+            string vArchivo9 = "";
+            string vArchivo10 = "";
+            string vArchivo11 = "";
             //IMAGENES1
-            Bitmap originalBMP = new Bitmap(FUDiscoDuro.FileContent);
-            byte[] imageData;
-            var newHeight = originalBMP.Height / 3;
-            var newWidth = originalBMP.Width / 3;
-
-            Bitmap originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
-
-            using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+            if (FUDiscoDuro.FileName != "")
             {
-                originalBMPReducido.Save(stream, ImageFormat.Jpeg);
-                stream.Position = 0;
-                imageData = new byte[stream.Length];
-                stream.Read(imageData, 0, imageData.Length);
-                stream.Close();
-            }
-            string vArchivo1 = Convert.ToBase64String(imageData);
+                Bitmap originalBMPReducido;
+                Bitmap originalBMP = new Bitmap(FUDiscoDuro.FileContent);
+                byte[] imageData;
+                if (originalBMP.Height > 1000 && originalBMP.Width > 1000)
+                {
+                    var newHeight = originalBMP.Height / 3;
+                    var newWidth = originalBMP.Width / 3;
+                     originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+                }
+                else
+                {
+                  var  newHeight = originalBMP.Height;
+                  var  newWidth = originalBMP.Width;
+                     originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+                }
 
+                //Bitmap originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData = new byte[stream.Length];
+                    stream.Read(imageData, 0, imageData.Length);
+                    stream.Close();
+                }
+                 vArchivo1 = Convert.ToBase64String(imageData);
+            }
             //////////////////////////////////////////////////////////////////////////////
             //IMAGENES2
-            Bitmap originalBMP2 = new Bitmap(FUATMDesarmadoPS.FileContent);
-            byte[] imageData2;
-            var newHeight2 = originalBMP2.Height / 3;
-            var newWidth2 = originalBMP2.Width / 3;
-
-            Bitmap originalBMPReducido2 = new Bitmap(originalBMP2.GetThumbnailImage(newWidth2, newHeight2, null, IntPtr.Zero));
-
-            using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+            if (FUATMDesarmadoPS.FileName != "")
             {
-                originalBMPReducido2.Save(stream, ImageFormat.Jpeg);
-                stream.Position = 0;
-                imageData2 = new byte[stream.Length];
-                stream.Read(imageData2, 0, imageData2.Length);
-                stream.Close();
-            }
-            string vArchivo2 = Convert.ToBase64String(imageData2);
+                Bitmap originalBMP2 = new Bitmap(FUATMDesarmadoPS.FileContent);
+                byte[] imageData2;
+                Bitmap originalBMPReducido2;
+                if (originalBMP2.Height > 1000 && originalBMP2.Width > 1000)
+                {
+                    var newHeight2 = originalBMP2.Height / 3;
+                    var newWidth2 = originalBMP2.Width / 3;
+                    originalBMPReducido2 = new Bitmap(originalBMP2.GetThumbnailImage(newWidth2, newHeight2, null, IntPtr.Zero));
+                }
+                else
+                {
+                    var newHeight2 = originalBMP2.Height;
+                    var newWidth2 = originalBMP2.Width;
+                    originalBMPReducido2 = new Bitmap(originalBMP2.GetThumbnailImage(newWidth2, newHeight2, null, IntPtr.Zero));
+                }                
 
+                //Bitmap originalBMPReducido2 = new Bitmap(originalBMP2.GetThumbnailImage(newWidth2, newHeight2, null, IntPtr.Zero));
+
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido2.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData2 = new byte[stream.Length];
+                    stream.Read(imageData2, 0, imageData2.Length);
+                    stream.Close();
+                }
+                 vArchivo2 = Convert.ToBase64String(imageData2);
+            }
             ////////////////////////////////////////////////////////////////////////////////
             //IMAGENES3
-            Bitmap originalBMP3 = new Bitmap(FUATMDesarmadoPI.FileContent);
-            byte[] imageData3;
-            var newHeight3 = originalBMP3.Height / 3;
-            var newWidth3 = originalBMP3.Width / 3;
-
-            Bitmap originalBMPReducido3 = new Bitmap(originalBMP3.GetThumbnailImage(newWidth3, newHeight3, null, IntPtr.Zero));
-
-            using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+            if (FUATMDesarmadoPI.FileName != "")
             {
-                originalBMPReducido3.Save(stream, ImageFormat.Jpeg);
-                stream.Position = 0;
-                imageData3 = new byte[stream.Length];
-                stream.Read(imageData3, 0, imageData3.Length);
-                stream.Close();
+                Bitmap originalBMP3 = new Bitmap(FUATMDesarmadoPI.FileContent);
+                byte[] imageData3;
+                Bitmap originalBMPReducido3;
+                if (originalBMP3.Height > 1000 && originalBMP3.Width > 1000)
+                {
+                    var newHeight3 = originalBMP3.Height / 3;
+                    var newWidth3 = originalBMP3.Width / 3;
+                    originalBMPReducido3 = new Bitmap(originalBMP3.GetThumbnailImage(newWidth3, newHeight3, null, IntPtr.Zero));
+                }
+                else
+                {
+                    var newHeight3 = originalBMP3.Height;
+                    var newWidth3 = originalBMP3.Width;
+                    originalBMPReducido3 = new Bitmap(originalBMP3.GetThumbnailImage(newWidth3, newHeight3, null, IntPtr.Zero));
+                }
+               
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido3.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData3 = new byte[stream.Length];
+                    stream.Read(imageData3, 0, imageData3.Length);
+                    stream.Close();
+                }
+                vArchivo3 = Convert.ToBase64String(imageData3);
             }
-            string vArchivo3 = Convert.ToBase64String(imageData3);
-
             ////////////////////////////////////////////////////////////////////////////////
             //IMAGENES4
-            Bitmap originalBMP4 = new Bitmap(FUDispositivoVendor.FileContent);
-            byte[] imageData4;
-            var newHeight4 = originalBMP4.Height / 3;
-            var newWidth4 = originalBMP4.Width / 3;
-
-            Bitmap originalBMPReducido4 = new Bitmap(originalBMP4.GetThumbnailImage(newWidth4, newHeight4, null, IntPtr.Zero));
-
-            using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+            if (FUDispositivoVendor.FileName != "")
             {
-                originalBMPReducido4.Save(stream, ImageFormat.Jpeg);
-                stream.Position = 0;
-                imageData4 = new byte[stream.Length];
-                stream.Read(imageData4, 0, imageData4.Length);
-                stream.Close();
+                Bitmap originalBMP4 = new Bitmap(FUDispositivoVendor.FileContent);
+                byte[] imageData4;
+                Bitmap originalBMPReducido4;
+                if (originalBMP4.Height > 1000 && originalBMP4.Width > 1000)
+                {
+                    var newHeight4 = originalBMP4.Height / 3;
+                    var newWidth4 = originalBMP4.Width / 3;
+                    originalBMPReducido4 = new Bitmap(originalBMP4.GetThumbnailImage(newWidth4, newHeight4, null, IntPtr.Zero));
+                }
+                else
+                {
+                    var newHeight4 = originalBMP4.Height;
+                    var newWidth4 = originalBMP4.Width;
+                    originalBMPReducido4 = new Bitmap(originalBMP4.GetThumbnailImage(newWidth4, newHeight4, null, IntPtr.Zero));
+                }
+               
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido4.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData4 = new byte[stream.Length];
+                    stream.Read(imageData4, 0, imageData4.Length);
+                    stream.Close();
+                }
+                vArchivo4 = Convert.ToBase64String(imageData4);
             }
-            string vArchivo4 = Convert.ToBase64String(imageData4);
-
 
             ////////////////////////////////////////////////////////////////////////////////
             //IMAGENES5
-            Bitmap originalBMP5 = new Bitmap(FUSYSTEMINFO.FileContent);
-            byte[] imageData5;
-            var newHeight5 = originalBMP5.Height / 3;
-            var newWidth5 = originalBMP5.Width / 3;
-
-            Bitmap originalBMPReducido5 = new Bitmap(originalBMP5.GetThumbnailImage(newWidth5, newHeight5, null, IntPtr.Zero));
-
-            using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+            if (FUSYSTEMINFO.FileName != "")
             {
-                originalBMPReducido5.Save(stream, ImageFormat.Jpeg);
-                stream.Position = 0;
-                imageData5 = new byte[stream.Length];
-                stream.Read(imageData5, 0, imageData5.Length);
-                stream.Close();
+                Bitmap originalBMP5 = new Bitmap(FUSYSTEMINFO.FileContent);
+                byte[] imageData5;
+                Bitmap originalBMPReducido5;
+                if (originalBMP5.Height > 1000 && originalBMP5.Width > 1000)
+                {
+                    var newHeight5 = originalBMP5.Height / 3;
+                    var newWidth5 = originalBMP5.Width / 3;
+                    originalBMPReducido5 = new Bitmap(originalBMP5.GetThumbnailImage(newWidth5, newHeight5, null, IntPtr.Zero));
+                }
+                else
+                {
+                    var newHeight5 = originalBMP5.Height;
+                    var newWidth5 = originalBMP5.Width;
+                    originalBMPReducido5 = new Bitmap(originalBMP5.GetThumbnailImage(newWidth5, newHeight5, null, IntPtr.Zero));
+                }
+               
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido5.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData5 = new byte[stream.Length];
+                    stream.Read(imageData5, 0, imageData5.Length);
+                    stream.Close();
+                }
+                vArchivo5 = Convert.ToBase64String(imageData5);
             }
-            string vArchivo5 = Convert.ToBase64String(imageData5);
-
 
             ////////////////////////////////////////////////////////////////////////////////
             //IMAGENES6
-            Bitmap originalBMP6 = new Bitmap(FUAntiskimmin.FileContent);
-            byte[] imageData6;
-            var newHeight6 = originalBMP6.Height / 3;
-            var newWidth6 = originalBMP6.Width / 3;
-
-            Bitmap originalBMPReducido6 = new Bitmap(originalBMP6.GetThumbnailImage(newWidth6, newHeight6, null, IntPtr.Zero));
-
-            using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+            if (FUAntiskimmin.FileName != "")
             {
-                originalBMPReducido6.Save(stream, ImageFormat.Jpeg);
-                stream.Position = 0;
-                imageData6 = new byte[stream.Length];
-                stream.Read(imageData6, 0, imageData6.Length);
-                stream.Close();
+                Bitmap originalBMP6 = new Bitmap(FUAntiskimmin.FileContent);
+                byte[] imageData6;
+                Bitmap originalBMPReducido6;
+                if (originalBMP6.Height > 1000 && originalBMP6.Width > 1000)
+                {
+                    var newHeight6 = originalBMP6.Height / 3;
+                    var newWidth6 = originalBMP6.Width / 3;
+                    originalBMPReducido6 = new Bitmap(originalBMP6.GetThumbnailImage(newWidth6, newHeight6, null, IntPtr.Zero));
+                }
+                else
+                {
+                    var newHeight6 = originalBMP6.Height;
+                    var newWidth6 = originalBMP6.Width;
+                    originalBMPReducido6 = new Bitmap(originalBMP6.GetThumbnailImage(newWidth6, newHeight6, null, IntPtr.Zero));
+                }
+                
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido6.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData6 = new byte[stream.Length];
+                    stream.Read(imageData6, 0, imageData6.Length);
+                    stream.Close();
+                }
+                vArchivo6 = Convert.ToBase64String(imageData6);
             }
-            string vArchivo6 = Convert.ToBase64String(imageData6);
-
 
             ////////////////////////////////////////////////////////////////////////////////
             //IMAGENES7
-            Bitmap originalBMP7 = new Bitmap(FUMonitorFiltro.FileContent);
-            byte[] imageData7;
-            var newHeight7 = originalBMP7.Height / 3;
-            var newWidth7 = originalBMP7.Width / 3;
-
-            Bitmap originalBMPReducido7 = new Bitmap(originalBMP7.GetThumbnailImage(newWidth7, newHeight7, null, IntPtr.Zero));
-
-            using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+            if (FUMonitorFiltro.FileName != "")
             {
-                originalBMPReducido7.Save(stream, ImageFormat.Jpeg);
-                stream.Position = 0;
-                imageData7 = new byte[stream.Length];
-                stream.Read(imageData7, 0, imageData7.Length);
-                stream.Close();
+                Bitmap originalBMP7 = new Bitmap(FUMonitorFiltro.FileContent);
+                byte[] imageData7;
+                Bitmap originalBMPReducido7;
+                if (originalBMP7.Height > 1000 && originalBMP7.Width > 1000)
+                {
+                    var newHeight7 = originalBMP7.Height / 3;
+                    var newWidth7 = originalBMP7.Width / 3;
+                    originalBMPReducido7 = new Bitmap(originalBMP7.GetThumbnailImage(newWidth7, newHeight7, null, IntPtr.Zero));
+                }
+                else
+                {
+                    var newHeight7 = originalBMP7.Height;
+                    var newWidth7 = originalBMP7.Width;
+                    originalBMPReducido7 = new Bitmap(originalBMP7.GetThumbnailImage(newWidth7, newHeight7, null, IntPtr.Zero));
+                }
+               
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido7.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData7 = new byte[stream.Length];
+                    stream.Read(imageData7, 0, imageData7.Length);
+                    stream.Close();
+                }
+                vArchivo7 = Convert.ToBase64String(imageData7);
             }
-            string vArchivo7 = Convert.ToBase64String(imageData7);
 
-            
             ////////////////////////////////////////////////////////////////////////////////
             //IMAGENES8
-            Bitmap originalBMP8 = new Bitmap(FUPadlewheel.FileContent);
-            byte[] imageData8;
-            var newHeight8 = originalBMP8.Height / 3;
-            var newWidth8 = originalBMP8.Width / 3;
-
-            Bitmap originalBMPReducido8 = new Bitmap(originalBMP8.GetThumbnailImage(newWidth8, newHeight8, null, IntPtr.Zero));
-
-            using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+            if (FUPadlewheel.FileName != "")
             {
-                originalBMPReducido8.Save(stream, ImageFormat.Jpeg);
-                stream.Position = 0;
-                imageData8 = new byte[stream.Length];
-                stream.Read(imageData8, 0, imageData8.Length);
-                stream.Close();
+                Bitmap originalBMP8 = new Bitmap(FUPadlewheel.FileContent);
+                byte[] imageData8;
+                Bitmap originalBMPReducido8;
+                if (originalBMP8.Height > 1000 && originalBMP8.Width > 1000)
+                {
+                    var newHeight8 = originalBMP8.Height / 3;
+                    var newWidth8 = originalBMP8.Width / 3;
+                    originalBMPReducido8 = new Bitmap(originalBMP8.GetThumbnailImage(newWidth8, newHeight8, null, IntPtr.Zero));
+                }
+                else
+                {
+                    var newHeight8 = originalBMP8.Height;
+                    var newWidth8 = originalBMP8.Width;
+                    originalBMPReducido8 = new Bitmap(originalBMP8.GetThumbnailImage(newWidth8, newHeight8, null, IntPtr.Zero));
+                }
+                
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido8.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData8 = new byte[stream.Length];
+                    stream.Read(imageData8, 0, imageData8.Length);
+                    stream.Close();
+                }
+                vArchivo8 = Convert.ToBase64String(imageData8);
             }
-            string vArchivo8 = Convert.ToBase64String(imageData8);
 
-           
             ////////////////////////////////////////////////////////////////////////////////
             //IMAGENES9
-            Bitmap originalBMP9 = new Bitmap(FUDispDesarmado.FileContent);
-            byte[] imageData9;
-            var newHeight9 = originalBMP9.Height / 3;
-            var newWidth9 = originalBMP9.Width / 3;
-
-            Bitmap originalBMPReducido9 = new Bitmap(originalBMP9.GetThumbnailImage(newWidth9, newHeight9, null, IntPtr.Zero));
-
-            using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+            if (FUDispDesarmado.FileName != "")
             {
-                originalBMPReducido9.Save(stream, ImageFormat.Jpeg);
-                stream.Position = 0;
-                imageData9 = new byte[stream.Length];
-                stream.Read(imageData9, 0, imageData9.Length);
-                stream.Close();
+                Bitmap originalBMP9 = new Bitmap(FUDispDesarmado.FileContent);
+                byte[] imageData9;
+                Bitmap originalBMPReducido9;
+                if (originalBMP9.Height > 1000 && originalBMP9.Width > 1000)
+                {
+                    var newHeight9 = originalBMP9.Height / 3;
+                    var newWidth9 = originalBMP9.Width / 3;
+                    originalBMPReducido9 = new Bitmap(originalBMP9.GetThumbnailImage(newWidth9, newHeight9, null, IntPtr.Zero));
+                }
+                else
+                {
+                    var newHeight9 = originalBMP9.Height;
+                    var newWidth9 = originalBMP9.Width;
+                    originalBMPReducido9 = new Bitmap(originalBMP9.GetThumbnailImage(newWidth9, newHeight9, null, IntPtr.Zero));
+                }
+                
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido9.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData9 = new byte[stream.Length];
+                    stream.Read(imageData9, 0, imageData9.Length);
+                    stream.Close();
+                }
+                vArchivo9 = Convert.ToBase64String(imageData9);
             }
-            string vArchivo9 = Convert.ToBase64String(imageData9);
 
-            
             ////////////////////////////////////////////////////////////////////////////////
             //IMAGENES10
-            Bitmap originalBMP10 = new Bitmap(FUTeclado.FileContent);
-            byte[] imageData10;
-            var newHeight10 = originalBMP10.Height / 3;
-            var newWidth10 = originalBMP10.Width / 3;
-
-            Bitmap originalBMPReducido10 = new Bitmap(originalBMP10.GetThumbnailImage(newWidth10, newHeight10, null, IntPtr.Zero));
-
-            using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+            if (FUTeclado.FileName != "")
             {
-                originalBMPReducido10.Save(stream, ImageFormat.Jpeg);
-                stream.Position = 0;
-                imageData10 = new byte[stream.Length];
-                stream.Read(imageData10, 0, imageData10.Length);
-                stream.Close();
+                Bitmap originalBMP10 = new Bitmap(FUTeclado.FileContent);
+                byte[] imageData10;
+                Bitmap originalBMPReducido10;
+                if (originalBMP10.Height > 1000 && originalBMP10.Width > 1000)
+                {
+                    var newHeight10 = originalBMP10.Height / 3;
+                    var newWidth10 = originalBMP10.Width / 3;
+                    originalBMPReducido10 = new Bitmap(originalBMP10.GetThumbnailImage(newWidth10, newHeight10, null, IntPtr.Zero));
+                }
+                else
+                {
+                    var newHeight10 = originalBMP10.Height;
+                    var newWidth10 = originalBMP10.Width;
+                    originalBMPReducido10 = new Bitmap(originalBMP10.GetThumbnailImage(newWidth10, newHeight10, null, IntPtr.Zero));
+                }
+                
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido10.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData10 = new byte[stream.Length];
+                    stream.Read(imageData10, 0, imageData10.Length);
+                    stream.Close();
+                }
+                vArchivo10 = Convert.ToBase64String(imageData10);
             }
-            string vArchivo10 = Convert.ToBase64String(imageData10);
 
-            
             ////////////////////////////////////////////////////////////////////////////////
             //IMAGENES11
-            Bitmap originalBMP11 = new Bitmap(FUATMLinea.FileContent);
-            byte[] imageData11;
-            var newHeight11 = originalBMP11.Height / 3;
-            var newWidth11 = originalBMP11.Width / 3;
-
-            Bitmap originalBMPReducido11 = new Bitmap(originalBMP6.GetThumbnailImage(newWidth11, newHeight11, null, IntPtr.Zero));
-
-            using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+            if (FUATMLinea.FileName != "")
             {
-                originalBMPReducido11.Save(stream, ImageFormat.Jpeg);
-                stream.Position = 0;
-                imageData11 = new byte[stream.Length];
-                stream.Read(imageData11, 0, imageData11.Length);
-                stream.Close();
+                Bitmap originalBMP11 = new Bitmap(FUATMLinea.FileContent);
+                byte[] imageData11;
+                Bitmap originalBMPReducido11;
+                if (originalBMP11.Height > 1000 && originalBMP11.Width > 1000)
+                {
+                    var newHeight11 = originalBMP11.Height / 3;
+                    var newWidth11 = originalBMP11.Width / 3;
+                    originalBMPReducido11 = new Bitmap(originalBMP11.GetThumbnailImage(newWidth11, newHeight11, null, IntPtr.Zero));
+                }
+                else
+                {
+                    var newHeight11 = originalBMP11.Height;
+                    var newWidth11 = originalBMP11.Width;
+                    originalBMPReducido11 = new Bitmap(originalBMP11.GetThumbnailImage(newWidth11, newHeight11, null, IntPtr.Zero));
+                }
+                
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido11.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData11 = new byte[stream.Length];
+                    stream.Read(imageData11, 0, imageData11.Length);
+                    stream.Close();
+                }
+                vArchivo11 = Convert.ToBase64String(imageData11);
             }
-            string vArchivo11 = Convert.ToBase64String(imageData11);
-
            
 
             if (tipo == "2")
@@ -1945,7 +2104,6 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
             }
         }      
-
 
         protected void btnmodal_Click(object sender, EventArgs e)
             {
