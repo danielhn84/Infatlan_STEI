@@ -173,8 +173,8 @@ namespace Infatlan_STEI_ATM.pages.calendario
                                         //Session["FechaRepetida"] = null;
                                         int vRespuesta = vConexion.ejecutarSQL(vQuery);
                                         //VALIDA QUE ATM ESTE ACTIVO
-                                        //String vQuery2 = "STEISP_ATM_VERIFICACION 8, '" + CodATM + "',1";
-                                        //DataTable vDatos2 = vConexion.ObtenerTabla(vQuery2);
+                                        String vQuery2 = "STEISP_ATM_VERIFICACION 8, '" + CodATM + "'";
+                                        DataTable vDatos2 = vConexion.ObtenerTabla(vQuery2);
                                         if (vRespuesta == 1)
                                         {
                                             vSuccess++;

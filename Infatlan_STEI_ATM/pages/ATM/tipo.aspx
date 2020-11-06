@@ -10,7 +10,25 @@
         function closeModal() { $('#modalcreartipoATM').modal('hide'); }
         function closeModal2() { $('#modaltipoATM').modal('hide'); }
     </script>
-
+    <script type="text/javascript">
+        //IMAGEN1        
+        function img1(input) {
+            if (input.files && input.files[0]) {
+                //PRIMERA IMAGEN              
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    //$('#imgDiscoDuro').css('visibility', 'visible');
+                    //$('#imgDiscoDuro').attr('src', e.target.result);  
+                    var ruta1 = e.target.result;
+                    document.getElementById('<%=imgDiscoDuro.ClientID%>').src = ruta1;
+                    document.getElementById('<%=HFDiscoDuro.ClientID%>').value = 'si';
+                }
+                reader.readAsDataURL(input.files[0]);
+                //PRIMERA IMAGEN              
+            }
+        }
+        //IMAGEN1
+        </script>
     <link href="/css/GridStyle.css" rel="stylesheet" />
 
 
@@ -43,6 +61,23 @@
 
     <div class="card">
         <div class="card-body">
+
+             <asp:UpdatePanel ID="UpdatePanel8" runat="server">
+        <ContentTemplate>
+
+            <asp:FileUpload ID="FUDiscoDuro" runat="server" onchange="img1(this);" />
+            <img id="imgDiscoDuro" runat="server" height="600" width="550" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" />
+            <asp:Button Text="PRUEBA" ID="btnPrueba" OnClick="btnPrueba_Click" runat="server" />
+            <asp:HiddenField ID="HFDiscoDuro" runat="server" />
+
+        </ContentTemplate>
+                  <Triggers>
+                        <asp:PostBackTrigger ControlID="btnPrueba" />
+                    </Triggers>
+    </asp:UpdatePanel>
+
+
+
             <h4 class="card-title">Tipo de ATM</h4>
             <h6 class="card-subtitle">Ingresar nuevo tipo de ATM</h6>
             <div class="row col-12">

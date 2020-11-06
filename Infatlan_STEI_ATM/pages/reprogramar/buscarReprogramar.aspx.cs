@@ -144,7 +144,7 @@ namespace Infatlan_STEI_ATM.pages.reprogramar
                             lbMotivoCancelo.Text= item["NCancelar"].ToString();
                             lbdetalle.Text= item["DetMotivo"].ToString();
                             Session["ATM_IDZONA_REPROGRAMAR"]= item["IDZona"].ToString();
-                            Session["UsuResponsable"] = item["Usuario"].ToString();
+                            Session["UsuResponsable"] = item["UsuResponsable"].ToString();
                         }
                         TxBuscarTecnicoATM.Text = string.Empty;
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal();", true);
@@ -166,6 +166,14 @@ namespace Infatlan_STEI_ATM.pages.reprogramar
         }
         void CorreoReprogramar()
         {
+            string vCorreoEncargadoZona = "";
+            if (Convert.ToString(Session["ATM_IDZONA_REPROGRAMAR"]) == "1")
+                vCorreoEncargadoZona = "emontoya@bancatlan.hn";
+            if (Convert.ToString(Session["ATM_IDZONA_REPROGRAMAR"]) == "2")
+                vCorreoEncargadoZona = "jdgarcia@bancatlan.hn";
+            if (Convert.ToString(Session["ATM_IDZONA_REPROGRAMAR"]) == "3")
+                vCorreoEncargadoZona = "acalderon@bancatlan.hn";
+
             SmtpService vService = new SmtpService();
             string vQueryD = "STEISP_ATM_Generales 33,'" + Session["UsuResponsable"] + "'";
             DataTable vDatosTecnicoResponsable = vConexion.ObtenerTabla(vQueryD);
@@ -201,11 +209,19 @@ namespace Infatlan_STEI_ATM.pages.reprogramar
                             "Notificación de Mantenimiento ATM",
                             "Buen día, se le notifica que se ha reprogramado solicitud de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["nombre"].ToString() + ", mantenimiento al ATM " + lbModalNomATM.Text + " para la fecha " + txtNewFechaInicio.Text,
                               "El usuario <b>" + item["Nombre"].ToString() + "</b> reprogramó: <br> Notificación de Mantenimiento",
-                              "",
+                              vCorreoEncargadoZona,
                               "/sites/ATM/pages/mantenimiento/notificacion.aspx"
                             );
-                    //ENVIAR A TECNICOS ASIGNADOS
-                    //string vNombreJefe = "ELVIS ALEXANDER MONTOYA PEREIRA";
+                    //ENVIAR A RESPONSABLES DE ATM
+                    String vKioskos = "unidadatmkiosco@bancatlan.hn";
+                    vService.EnviarMensaje(vKioskos,
+                          typeBody.ATM,
+                          "Notificación de Mantenimiento ATM",
+                          "Buen día, se le notifica que se ha reprogramado solicitud de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["nombre"].ToString() + ", mantenimiento al ATM " + lbModalNomATM.Text + " para la fecha " + txtNewFechaInicio.Text,
+                            "El usuario <b>" + item["Nombre"].ToString() + "</b> reprogramó: <br> Notificación de Mantenimiento",
+                            "",
+                            ""
+                          );
 
                 }
             }

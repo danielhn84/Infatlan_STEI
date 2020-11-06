@@ -547,29 +547,29 @@ namespace Infatlan_STEI_ATM.pages.ATM
                         vConexionATM.ejecutarSQLATM(vQuery2);
                     }
 
-                   // string vCodUbicacion = "";
+                    string vCodUbicacion = "";
 
-                    //String vQueryCod = "SPSTEI_ATM 1, '" + txtcodATM.Text + "'";
-                    //DataTable vDatosCod = vConexionATM.ObtenerTablaATM(vQueryCod);
-                    //foreach (DataRow item in vDatosCod.Rows)
-                    //{
-                    //    vCodUbicacion = item["codUbicacion"].ToString();
-                    //}
+                    String vQueryCod = "SPSTEI_ATM 1, '" + txtcodATM.Text + "'";
+                    DataTable vDatosCod = vConexionATM.ObtenerTablaATM(vQueryCod);
+                    foreach (DataRow item in vDatosCod.Rows)
+                    {
+                        vCodUbicacion = item["codUbicacion"].ToString();
+                    }
 
-                    //if (vCodUbicacion == "")
+                    if (vCodUbicacion == "")
+                    {
+                        //ACTUALIZAR UBICACIONES
+                        string IDUbi = "5";
+                        int vEstado = 1;
+                        String vQuery3 = "STEISP_INVENTARIO_Ubicaciones 4, '" + Session["InvUbicacion"] + "','" + IDUbi + "', '" + DDLsucursalATM.SelectedValue + "','" + txtcodUbicacion.Text + "','" + txtdireccion.Text + "','" + vEstado + "','" + Session["USUARIO"].ToString() + "','" + txtnombreATM.Text + "'";
+                        DataTable vDatos3 = vConexion.ObtenerTabla(vQuery3);
+                    }
+                    //VALIDA QUE ATM ESTE ACTIVO
+                    //String vQuery2 = "STEISP_ATM_VERIFICACION 9, '" + txtcodATM.Text + "',1";
+                    //DataTable vDatos2 = vConexion.ObtenerTabla(vQuery2);
+                    //if (vInfo == 1)
                     //{
-                    //    //ACTUALIZAR UBICACIONES
-                    //    string IDUbi = "5";
-                    //    int vEstado = 1;
-                    //    String vQuery3 = "STEISP_INVENTARIO_Ubicaciones 4, '" + Session["InvUbicacion"] + "','" + IDUbi + "', '" + DDLsucursalATM.SelectedValue + "','" + txtcodUbicacion.Text + "','" + txtdireccion.Text + "','" + vEstado + "','" + Session["USUARIO"].ToString() + "','" + txtnombreATM.Text + "'";
-                    //    DataTable vDatos3 = vConexion.ObtenerTabla(vQuery3);
-                    //}
-                        //VALIDA QUE ATM ESTE ACTIVO
-                        //String vQuery2 = "STEISP_ATM_VERIFICACION 9, '" + txtcodATM.Text + "',1";
-                        //DataTable vDatos2 = vConexion.ObtenerTabla(vQuery2);
-                        //if (vInfo == 1)
-                        //{
-                        Limpiar();
+                    Limpiar();
                     cargarDataATM();
                     limpiarImagen();
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);                   

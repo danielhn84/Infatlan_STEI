@@ -331,7 +331,7 @@
                                     <div class="col-6">
                                         <asp:Button runat="server" ID="btnEnviarNotificacion" OnClick="btnEnviarNotificacion_Click" CssClass="btn btn-success" Text="Crear notificación" />
                                         <asp:Button runat="server" ID="btnCancelarAprobNotif" Visible="false" OnClick="btnCancelarAprobNotif_Click" CssClass="btn btn-danger" Text="Reprogramar" />
-                                         <asp:Button runat="server" ID="btnPrueba" Visible="true" OnClick="btnPrueba_Click" CssClass="btn btn-danger" Text="PRUEBA" />
+                                         <asp:Button runat="server" ID="btnPrueba" Visible="false" OnClick="btnPrueba_Click" CssClass="btn btn-danger" Text="PRUEBA" />
                                         <asp:Label Text="" runat="server" ID="LBPrueba"/>
                                     </div>
                                 </ContentTemplate>

@@ -366,22 +366,22 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         protected global::System.Web.UI.UpdatePanel UpdatePanel2;
 
         /// <summary>
-        /// Control txtsoVerif.
+        /// Control DDLSo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtsoVerif;
+        protected global::System.Web.UI.WebControls.DropDownList DDLSo;
 
         /// <summary>
-        /// Control txtversionswVerif.
+        /// Control DDLVersionSW.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtversionswVerif;
+        protected global::System.Web.UI.WebControls.DropDownList DDLVersionSW;
 
         /// <summary>
         /// Control txtpuertoVerif.
@@ -508,6 +508,24 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtantiSkimming;
+
+        /// <summary>
+        /// Control DDLCambioPiezas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DDLCambioPiezas;
+
+        /// <summary>
+        /// Control txtCambioMateriales.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCambioMateriales;
 
         /// <summary>
         /// Control GVNewMateriales.
@@ -699,15 +717,6 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         protected global::System.Web.UI.HtmlControls.HtmlImage imgTeclado;
 
         /// <summary>
-        /// Control RBClima.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList RBClima;
-
-        /// <summary>
         /// Control FUClimatizacion.
         /// </summary>
         /// <remarks>
@@ -715,6 +724,15 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload FUClimatizacion;
+
+        /// <summary>
+        /// Control RBClima.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList RBClima;
 
         /// <summary>
         /// Control imgClimatizacion.
@@ -726,15 +744,6 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         protected global::System.Web.UI.HtmlControls.HtmlImage imgClimatizacion;
 
         /// <summary>
-        /// Control RBEnergias.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList RBEnergias;
-
-        /// <summary>
         /// Control FUEnergia.
         /// </summary>
         /// <remarks>
@@ -742,6 +751,15 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload FUEnergia;
+
+        /// <summary>
+        /// Control RBEnergias.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList RBEnergias;
 
         /// <summary>
         /// Control imgEnergia.
@@ -753,15 +771,6 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         protected global::System.Web.UI.HtmlControls.HtmlImage imgEnergia;
 
         /// <summary>
-        /// Control txtcomentarioATMLinea.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtcomentarioATMLinea;
-
-        /// <summary>
         /// Control FUATMLinea.
         /// </summary>
         /// <remarks>
@@ -769,6 +778,15 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload FUATMLinea;
+
+        /// <summary>
+        /// Control txtcomentarioATMLinea.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtcomentarioATMLinea;
 
         /// <summary>
         /// Control imgATMLinea.

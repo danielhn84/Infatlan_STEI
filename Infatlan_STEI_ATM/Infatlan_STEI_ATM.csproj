@@ -47,6 +47,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Excel.4.5.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\..\..\..\Desktop\C#\Practicas\Infatlan_Biometrico3\Infatlan_Biometrico\Biometrico\bin\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ImageResizer.4.2.8\lib\net45\ImageResizer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.DirectoryServices.AccountManagement" />
@@ -3355,7 +3361,9 @@
     <Content Include="dist\js\sidebarmenu.js" />
     <Content Include="dist\js\waves.js" />
     <Content Include="email\TemplateMail.html" />
+    <Content Include="email\TemplateMailAlertas.html" />
     <Content Include="Excel.4.5.dll" />
+    <Content Include="Global.asax" />
     <Content Include="img\logo.png" />
     <Content Include="pages\calendario\avances.aspx" />
     <Content Include="pages\devolver\rechazados.aspx" />
@@ -3405,6 +3413,7 @@
     <Content Include="pages\material\buscarAprobar.aspx" />
     <Content Include="pages\material\buscarMaterial.aspx" />
     <Content Include="pages\material\material.aspx" />
+    <Content Include="pages\permisos\permisos.aspx" />
     <Content Include="pages\reprogramar\buscarReprogramar.aspx" />
     <Content Include="pages\ATM\cancelarVerificacion.aspx" />
     <Content Include="pages\ATM\detalleModelo.aspx" />
@@ -3451,6 +3460,9 @@
     <Compile Include="clases\Security.cs" />
     <Compile Include="clases\SmtpService.cs">
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="pages\calendario\avances.aspx.cs">
       <DependentUpon>avances.aspx</DependentUpon>
@@ -3537,6 +3549,13 @@
     </Compile>
     <Compile Include="pages\material\material.aspx.designer.cs">
       <DependentUpon>material.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\permisos\permisos.aspx.cs">
+      <DependentUpon>permisos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\permisos\permisos.aspx.designer.cs">
+      <DependentUpon>permisos.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\reprogramar\buscarReprogramar.aspx.cs">
       <DependentUpon>buscarReprogramar.aspx</DependentUpon>

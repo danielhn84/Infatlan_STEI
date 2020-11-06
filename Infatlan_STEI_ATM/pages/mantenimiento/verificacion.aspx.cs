@@ -8,6 +8,8 @@ using Infatlan_STEI_ATM.clases;
 using System.Data;
 using System.IO;
 using System.Configuration;
+using System.Drawing.Imaging;
+using System.Drawing;
 
 namespace Infatlan_STEI_ATM.pages.mantenimiento
 {
@@ -15,13 +17,14 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
     {
         bd vConexion = new bd();
         bd vConexionATM = new bd();
-        protected void Page_Load(object sender, EventArgs e){
+        protected void Page_Load(object sender, EventArgs e) {
             string id = Request.QueryString["id"];
             string tipo = Request.QueryString["tipo"];
             Session["VERIF"] = null;
 
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
+            if (!Page.IsPostBack) {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
                     RBEnergias.SelectedValue = "1";
                     RBClima.SelectedValue = "1";
                     vaciarValorImg();
@@ -42,6 +45,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
                             llenarFormRechazado();
                             llenarImagenes();
+                            materialesMantenimiento();
                             break;
                         case "4":
                             RBClima.Enabled = false;
@@ -54,16 +58,18 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                             llenarFormRechazado();
                             llenarImagenes();
                             aprobacionCampos();
+                            materialesMantenimiento();
                             txtlatitudATM.Enabled = false;
                             txtlongitudATM.Enabled = false;
                             break;
                     }
                 }
-                else {
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
-            }
         }
+    }
 
         void vaciarValorImg()
         {
@@ -87,6 +93,8 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         
         void aprobacionCampos()
         {
+            DDLSo.Enabled = false;
+            DDLVersionSW.Enabled = false;
             txtHllegadaInfatlan.Enabled = false;
             txthsalidaInfa.Enabled = false;
             TxFechaInicio.Enabled = false;
@@ -137,6 +145,8 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             ckpasos18.Enabled = false;
             ckpasos19.Enabled = false;
             ckpasos20.Enabled = false;
+            DDLCambioPiezas.Enabled = false;
+            txtCambioMateriales.Enabled = false;
         }
 
         public void Mensaje(string vMensaje, WarningType type)
@@ -330,8 +340,8 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             txtTecnicoResponsable.Text = Session["ATM_TECNICO_VERIF_CREAR"].ToString();
             //Session["ATM_USUARIO_VERIF_CREAR"] 
             txtidentidad.Text = Session["ATM_IDENTIDAD_VERIF_CREAR"].ToString();
-            txtsoVerif.Text = Session["ATM_SO_VERIF_CREAR"].ToString();
-            txtversionswVerif.Text = Session["ATM_VERSIONSW_VERIF_CREAR"].ToString();
+            //txtsoVerif.Text = Session["ATM_SO_VERIF_CREAR"].ToString();
+            //txtversionswVerif.Text = Session["ATM_VERSIONSW_VERIF_CREAR"].ToString();
             txtcomentarioATMLinea.Text = Session["ATM_ATMACTIVO_VERIF_CREAR"].ToString();
             //txtcodATM.Text = Session["codATM"].ToString();
             // DDLsucursalATM.SelectedIndex = CargarInformacionDDL(DDLsucursalATM, Session["sucursalATM"].ToString());
@@ -342,6 +352,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             GVNewMateriales.DataSource = vDatos2;
             GVNewMateriales.DataBind();
             Session["ATM_DEVOLVER_MATERIALES_VERIF"] = vDatos2;
+            //MATERAILES
 
             DataTable vDatosImg = new DataTable();
             String vQueryImg = "SPSTEI_ATM 33,'" + txtcodATM.Text + "'";
@@ -357,6 +368,17 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 }
             }
 
+            DataTable vDatosSO = new DataTable();
+            String vQuerySO = "SPSTEI_ATM 1,'" + txtcodATM.Text + "'";
+            vDatosSO = vConexionATM.ObtenerTablaATM(vQuerySO);
+            foreach (DataRow item in vDatosSO.Rows)
+            {
+                DDLSo.SelectedIndex = CargarInformacionDDL(DDLSo, item["idSO"].ToString());
+                DDLVersionSW.SelectedIndex = CargarInformacionDDL(DDLVersionSW, item["idVersionSw"].ToString());
+            }
+
+            
+
         }
 
         void validar()
@@ -369,6 +391,10 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 throw new Exception("Favor ingrese la hora en la que inicio mantenimiento.");
             if (TxFechaRegreso.Text == "" || TxFechaRegreso.Text == string.Empty)
                 throw new Exception("Favor ingrese la hora en la que termino mantenimiento.");
+            if (DDLSo.SelectedValue == "0")
+                throw new Exception("Favor seleccione sistema operativo.");
+            if (DDLVersionSW.SelectedValue == "0")
+                throw new Exception("Favor seleccione versión del software.");
             if (DDLtipoTeclado.SelectedValue == "0")
                 throw new Exception("Favor seleccione teclado.");
             if (DDLtipoProc.SelectedValue == "0")
@@ -431,6 +457,13 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 throw new Exception("Favor agregar imagen del mapa de ubicación de ATM.");
             if (txtcomentarioATMLinea.Text == "" || txtcomentarioATMLinea.Text == string.Empty)
                 throw new Exception("Favor ingrese comentario sobre ATM en línea.");
+            if(DDLCambioPiezas.SelectedValue=="0")
+                throw new Exception("Favor seleccione opción de cambio de piezas.");
+            if (DDLCambioPiezas.SelectedValue == "1")
+            {
+                if (txtCambioMateriales.Text == "" || txtCambioMateriales.Text == string.Empty)
+                    throw new Exception("Favor ingrese materiales que utilizó en mantenimiento.");
+            }
 
             //string vDevolver = "";
             //String vAdvertencia = "";
@@ -480,6 +513,22 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                         DDLtipoTeclado.Items.Add(new ListItem { Value = item["Id_Teclado_ATM"].ToString(), Text = item["Descripcion"].ToString() });
                         //}
                         //    Session["SUCURSAL"] = "1";
+                    }
+
+                    String vQuerySO = "STEISP_ATM_Generales 9";
+                    DataTable vDatosSO = vConexion.ObtenerTabla(vQuerySO);
+                    DDLSo.Items.Add(new ListItem { Value = "0", Text = "Seleccione sistema operativo..." });
+                    foreach (DataRow item in vDatosSO.Rows)
+                    {
+                        DDLSo.Items.Add(new ListItem { Value = item["idSO"].ToString(), Text = item["nombreSO"].ToString() });
+                    }
+
+                    String vQuerySW = "SPSTEI_ATM 8";
+                    DataTable vDatosSW = vConexionATM.ObtenerTablaATM(vQuerySW);
+                    DDLVersionSW.Items.Add(new ListItem { Value = "0", Text = "Seleccione version del software..." });
+                    foreach (DataRow item in vDatosSW.Rows)
+                    {
+                        DDLVersionSW.Items.Add(new ListItem { Value = item["Id_Software_ATM"].ToString(), Text = item["Descripcion"].ToString() });
                     }
 
                 }
@@ -603,6 +652,75 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             }
         }
 
+        void CorreosAlertas()
+        {
+            string vEstado = "";
+            DataTable vDatos = new DataTable();
+            String vQuery = "STEISP_ATM_Generales 36,'" + Session["ATM_COD_VERIF"] + "'";
+            vDatos = vConexion.ObtenerTabla(vQuery);
+            foreach (DataRow item in vDatos.Rows)
+            {
+                vEstado = item["estadoMantenimiento"].ToString();
+            }
+            string vCorreoResponsable = "";
+            string vQueryD = "STEISP_ATM_Generales 33,'" + Session["ATM_USU_RESPONSABLE_MANT"] + "'";
+            DataTable vDatosTecnicoResponsable = vConexion.ObtenerTabla(vQueryD);
+
+            for (int i = 0; i < vDatosTecnicoResponsable.Rows.Count; i++)
+            {
+                vCorreoResponsable = vDatosTecnicoResponsable.Rows[i]["correo"].ToString();
+            }
+
+            if (vEstado == "7")
+            {
+                SmtpService vService = new SmtpService();
+                String vCorreoAlerta = "unidadatmkiosco@bancatlan.hn,aaguilarr@bancatlan.hn,drodriguez@bancatlan.hn,cfmelara@bancatlan.hn,eurrea@bancatlan.hn,jfigueroa@bancatlan.hn,megarcia@bancatlan.hn,gccoello@bancatlan.hn,dazuniga@bancatlan.hn,ojfunes@bancatlan.hn,emoyuela@bancatlan.hn,dzepeda@bancatlan.hn,acalderon@bancatlan.hn,diantunez@bancatlan.hn,rapena@bancatlan.hn,"+ vCorreoResponsable;
+                //String vCorreoAlerta = "acedillo@bancatlan.hn,eurrea@bancatlan.hn";
+                //if (RBClima.SelectedValue == "1" && RBEnergias.SelectedValue == "1" && txtobseracionesVerif.Text!="")
+                //{
+
+                //    vService.EnviarMensaje(
+                //          vCorreoAlerta,
+                //          typeBody.Alertas,
+                //           "<b>Buen día.<br> Se le notifica que ATM (" + txtcodATM.Text + ") " + txtnomATM.Text + " cuenta con protección de energía eléctrica y cuenta con climatización adecuada, datos proporcionados por el técnico responsable: " + txtTecnicoResponsable.Text + " al completar la lista de verificación del mantenimiento preventivo programado realizado el día: " + Session["ATM_FECHAMANT_VERIF_CREAR"] + "<br> Favor tomar nota de la alerta para evitar inconvenientes futuros.<br>Saludos",
+                //          "OBSERVACIONES REFERENTES AL MANTENIMIENTO DE ATM",
+                //          "Observaciones realizadas por el técnico responsable:<br>" + txtobseracionesVerif.Text
+                //          );
+                //}
+                if (RBClima.SelectedValue == "2" && RBEnergias.SelectedValue == "2")
+                {
+
+                    vService.EnviarMensaje(
+                          vCorreoAlerta,
+                          typeBody.Alertas,
+                           "<b>Buen día.<br> Se le notifica que ATM (" + txtcodATM.Text + ") " + txtnomATM.Text + " NO<b> cuenta con protección de energía eléctrica y tampoco cuenta con climatización decuada, datos proporcionados por el técnico responsable: " + txtTecnicoResponsable.Text + " al completar la lista de verificación del mantenimiento preventivo programado realizado el día: " + Session["ATM_FECHAMANT_VERIF_CREAR"] + "<br> Favor tomar nota de la alerta para evitar inconvenientes futuros.<br>Saludos",
+                          "ATM NO CUENTA CON CLIMATIZACIÓN ADECUADA Y ATM NO CUENTA CON PROTECCIÓN DE ENERGIA ELECTRICA",
+                          "Observaciones realizadas por el técnico responsable:<br>" + txtobseracionesVerif.Text
+                          );
+                }
+                if (RBClima.SelectedValue == "2" && RBEnergias.SelectedValue == "1")
+                {
+                    vService.EnviarMensaje(
+                         vCorreoAlerta,
+                         typeBody.Alertas,
+                          "<b>Buen día.<br> Se le notifica que ATM (" + txtcodATM.Text + ") " + txtnomATM.Text + " NO<b> cuenta con climatización decuada, datos proporcionados por el técnico responsable: " + txtTecnicoResponsable.Text + " al completar la lista de verificación del mantenimiento preventivo programado realizado el día: " + Session["ATM_FECHAMANT_VERIF_CREAR"] + "<br> Favor tomar nota de la alerta para evitar inconvenientes futuros.<br>Saludos",
+                          "ATM NO CUENTA CON CLIMATIZACIÓN ADECUADA",
+                         "Observaciones realizadas por el técnico responsable:<br>" + txtobseracionesVerif.Text
+                         );
+                }
+                if (RBClima.SelectedValue == "1" && RBEnergias.SelectedValue == "2")
+                {
+                    vService.EnviarMensaje(
+                         vCorreoAlerta,
+                         typeBody.Alertas,
+                           "<b>Buen día.<br> Se le notifica que ATM (" + txtcodATM.Text + ") " + txtnomATM.Text + " NO<b> cuenta con protección de energía eléctrica, datos proporcionados por el técnico responsable: " + txtTecnicoResponsable.Text + " al completar la lista de verificación del mantenimiento preventivo programado realizado el día: " + Session["ATM_FECHAMANT_VERIF_CREAR"] + "<br> Favor tomar nota de la alerta para evitar inconvenientes futuros.<br>Saludos",
+                          "ATM NO CUENTA CON PROTECCIÓN DE ENERGIA ELECTRICA",
+                         "Observaciones realizadas por el técnico responsable:<br>" + txtobseracionesVerif.Text
+                         );
+                }
+            }
+        }
+
         void EnviarCorreo()
         {
             string vCorreoEncargadoZona = "";
@@ -630,34 +748,42 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 {
                     foreach (DataRow item in vDatos.Rows)
                     {
-                        //ENVIAR A JEFE
-                        if (!item["correo"].ToString().Trim().Equals(""))
+                        if (Session["USUARIO"].ToString() == "eurrea")
                         {
-                            vService.EnviarMensaje(
-                            item["correo"].ToString(),
-                            typeBody.ATM,
-                            "Notificación de Mantenimiento ATM",
-                            "Buen día, se le notifica que ha aprobado solicitud de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["nombre"].ToString() + ", mantenimiento al ATM " + txtnomATM.Text ,
-                            "El usuario <b>" + item["Nombre"].ToString() + "</b> aprobó: <br> Verificación de Mantenimiento",
-                             "",
-                             "/sites/ATM/pages/mantenimiento/buscarAprobarVerificacion.aspx"
-                            );
-
-                            //vFlagEnvioSupervisor = true;
-                        }
-                        //ENVIAR A EDWIN
-                        //string vNombre = "EDWIN ALBERTO URREA PENA";
-                        vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIMail"],
+                            //ENVIAR A JEFE
+                            if (!item["correo"].ToString().Trim().Equals(""))
+                            {
+                                vService.EnviarMensaje(
+                                item["correo"].ToString(),
                                 typeBody.ATM,
                                 "Notificación de Mantenimiento ATM",
-                                   "Buen día, se le notifica que ha aprobado solicitud de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["nombre"].ToString() + ", mantenimiento al ATM " + txtnomATM.Text,
+                                "Buen día, se le notifica que ha aprobado solicitud de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["nombre"].ToString() + ", mantenimiento al ATM " + txtnomATM.Text,
                                 "El usuario <b>" + item["Nombre"].ToString() + "</b> aprobó: <br> Verificación de Mantenimiento",
-                                  vCorreoEncargadoZona,
-                                  "/sites/ATM/pages/mantenimiento/buscarAprobarVerificacion.aspx"
+                                 vCorreoEncargadoZona,
+                                 "/sites/ATM/pages/mantenimiento/buscarAprobarVerificacion.aspx"
                                 );
-                        //ENVIAR A TECNICOS ASIGNADOS
-                        //string vNombreJefe = "ELVIS ALEXANDER MONTOYA PEREIRA";
 
+                                //vFlagEnvioSupervisor = true;
+                            }
+                        }
+                        else
+                        {
+                            if (!item["correo"].ToString().Trim().Equals(""))
+                            {
+                                vService.EnviarMensaje(
+                                item["correo"].ToString(),
+                                typeBody.ATM,
+                                "Notificación de Mantenimiento ATM",
+                                "Buen día, se le notifica que ha aprobado solicitud de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["nombre"].ToString() + ", mantenimiento al ATM " + txtnomATM.Text,
+                                "El usuario <b>" + item["Nombre"].ToString() + "</b> aprobó: <br> Verificación de Mantenimiento",
+                                 ConfigurationManager.AppSettings["STEIMail"],
+                                 "/sites/ATM/pages/mantenimiento/buscarAprobarVerificacion.aspx"
+                                );
+
+                                //vFlagEnvioSupervisor = true;
+                            }
+                          
+                        }
                     }
                 }
                 if (vDatosTecnicoResponsable.Rows.Count > 0)
@@ -675,20 +801,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                             );
                     }
                 }
-                if (vDatosTecnicos.Rows.Count > 0)
-                {
-                    foreach (DataRow itemT in vDatosTecnicos.Rows)
-                    {
-                        vService.EnviarMensaje(itemT["correo"].ToString(),
-                            typeBody.ATM,
-                            "Notificación de Mantenimiento ATM",
-                            "Buen día, se le notifica que se ha aprobado solicitud de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["nombre"].ToString() + ", mantenimiento al ATM " + txtnomATM.Text,
-                              "El usuario <b>" + vDatos.Rows[0]["Nombre"].ToString() + "</b> aprobó: <br> Verificación de Mantenimiento de ATM al que ha sido asignado como parte del equipo de trabajo.",
-                              "",
-                             "/login.aspx"
-                            );
-                    }
-                }              
+                          
             }
             else//CREAR
             {
@@ -726,20 +839,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
                     }
                 }              
-                if (vDatosTecnicos.Rows.Count > 0)
-                {
-                    foreach (DataRow itemT in vDatosTecnicos.Rows)
-                    {
-                        vService.EnviarMensaje(itemT["correo"].ToString(),
-                            typeBody.ATM,
-                            "Notificación de Mantenimiento ATM",
-                            "Buen día, se le notifica que se ha creado una verificación de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["nombre"].ToString() + ", mantenimiento al ATM " + txtnomATM.Text,
-                              "El usuario <b>" + vDatos.Rows[0]["Nombre"].ToString() + "</b> creó: <br> Verificación de Mantenimiento de ATM al que ha sido asignado como parte del equipo de trabajo.",
-                              "",
-                             "/login.aspx"
-                            );
-                    }
-                }
+               
                 
 
             }
@@ -753,10 +853,12 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
                 string vQuery = "SPSTEI_ATM 35, '" + Session["ATM_CODATM_VERIF_CREAR"] + "','" + DDLtipoTeclado.SelectedValue + "','" + DDLtipoProc.SelectedValue + "'," +
                     "'" + DDLtipoCargaVerif.SelectedValue + "','" + DDLmarcaDiscoDuro.SelectedValue + "','" + txtSerieDiscoDuro.Text + "','" + txtcapacidadDiscoVerif.Text + " GB" + "','" + txtserieATM.Text + "'," +
-                    "'" + txtinventarioVerif.Text + "','" + txtramVerif.Text + " GB" + "','" + Session["USUARIO"].ToString() + "','" + txtlatitudATM.Text + "','" + txtlongitudATM.Text + "'";
+                    "'" + txtinventarioVerif.Text + "','" + txtramVerif.Text + " GB" + "','" + Session["USUARIO"].ToString() + "','" + txtlatitudATM.Text + "','" + txtlongitudATM.Text + "'," +
+                    "'"+DDLSo.SelectedValue+"','"+DDLVersionSW.SelectedValue+"'";
                 Int32 vInfo = vConexionATM.ejecutarSQLATM(vQuery);
                 if (vInfo == 1)
                 {
+                    
                     //IMAGENES1
                     String vNombreDepot11 = String.Empty;
                     HttpPostedFile bufferDeposito11 = FUmapaATM.PostedFile;
@@ -1009,41 +1111,98 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             else
                 respuesta20 = "No";
         }
-        //IMAGENES1
-        String vNombreDepot1 = String.Empty;
-        HttpPostedFile bufferDeposito1T = FUClimatizacion.PostedFile;
-        byte[] vFileDeposito1 = null;
-        string vExtension = string.Empty;
+            //IMAGENES1
+            string vArchivo = "";
+            if (FUClimatizacion.FileName != "")
+            {
+                Bitmap originalBMP = new Bitmap(FUClimatizacion.FileContent);
+                byte[] imageData;
+                Bitmap originalBMPReducido;
+                if (originalBMP.Height > 1000 && originalBMP.Width > 1000)
+                {
+                    var newHeight = originalBMP.Height / 3;
+                    var newWidth = originalBMP.Width / 3;
+                    originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+                }
+                else
+                {
+                    var newHeight = originalBMP.Height;
+                    var newWidth = originalBMP.Width;
+                    originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+                }
+               
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData = new byte[stream.Length];
+                    stream.Read(imageData, 0, imageData.Length);
+                    stream.Close();
+                }
+                 vArchivo = Convert.ToBase64String(imageData);
+            }
+            //String vNombreDepot1 = String.Empty;
+            //HttpPostedFile bufferDeposito1T = FUClimatizacion.PostedFile;
+            //byte[] vFileDeposito1 = null;
+            //string vExtension = string.Empty;
 
-        if (bufferDeposito1T != null)
-        {
-            vNombreDepot1 = FUClimatizacion.FileName;
-            Stream vStream = bufferDeposito1T.InputStream;
-            BinaryReader vReader = new BinaryReader(vStream);
-            vFileDeposito1 = vReader.ReadBytes((int)vStream.Length);
-            vExtension = System.IO.Path.GetExtension(FUClimatizacion.FileName);
-        }
-        String vArchivo = String.Empty;
-        if (vFileDeposito1 != null)
-            vArchivo = Convert.ToBase64String(vFileDeposito1);
-        /////////////////////////////////////////////////////////////////////
-        //IMAGENES2
-        String vNombreDepot2 = String.Empty;
-        HttpPostedFile bufferDeposito2 = FUEnergia.PostedFile;
-        byte[] vFileDeposito2 = null;
-        string vExtension2 = string.Empty;
+            //if (bufferDeposito1T != null)
+            //{
+            //    vNombreDepot1 = FUClimatizacion.FileName;
+            //    Stream vStream = bufferDeposito1T.InputStream;
+            //    BinaryReader vReader = new BinaryReader(vStream);
+            //    vFileDeposito1 = vReader.ReadBytes((int)vStream.Length);
+            //    vExtension = System.IO.Path.GetExtension(FUClimatizacion.FileName);
+            //}
+            //String vArchivo = String.Empty;
+            //if (vFileDeposito1 != null)
+            //    vArchivo = Convert.ToBase64String(vFileDeposito1);
+            /////////////////////////////////////////////////////////////////////
+            //IMAGENES2
+            string vArchivo2 = "";
+            if (FUEnergia.FileName != "")
+            {
+                Bitmap originalBMP2 = new Bitmap(FUEnergia.FileContent);
+                byte[] imageData2;
+                Bitmap originalBMPReducido2;
+                if (originalBMP2.Height > 1000 && originalBMP2.Width > 1000)
+                {
+                    var newHeight2 = originalBMP2.Height / 3;
+                    var newWidth2 = originalBMP2.Width / 3;
+                    originalBMPReducido2 = new Bitmap(originalBMP2.GetThumbnailImage(newWidth2, newHeight2, null, IntPtr.Zero));
+                }
+                else
+                {
+                    var newHeight2 = originalBMP2.Height;
+                    var newWidth2 = originalBMP2.Width;
+                    originalBMPReducido2 = new Bitmap(originalBMP2.GetThumbnailImage(newWidth2, newHeight2, null, IntPtr.Zero));
+                }
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido2.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData2 = new byte[stream.Length];
+                    stream.Read(imageData2, 0, imageData2.Length);
+                    stream.Close();
+                }
+                 vArchivo2 = Convert.ToBase64String(imageData2);
+            }
+        //    String vNombreDepot2 = String.Empty;
+        //HttpPostedFile bufferDeposito2 = FUEnergia.PostedFile;
+        //byte[] vFileDeposito2 = null;
+        //string vExtension2 = string.Empty;
 
-        if (bufferDeposito2 != null)
-        {
-            vNombreDepot2 = FUEnergia.FileName;
-            Stream vStream2 = bufferDeposito2.InputStream;
-            BinaryReader vReader2 = new BinaryReader(vStream2);
-            vFileDeposito2 = vReader2.ReadBytes((int)vStream2.Length);
-            vExtension2 = System.IO.Path.GetExtension(FUEnergia.FileName);
-        }
-        String vArchivo2 = String.Empty;
-        if (vFileDeposito2 != null)
-            vArchivo2 = Convert.ToBase64String(vFileDeposito2);
+        //if (bufferDeposito2 != null)
+        //{
+        //    vNombreDepot2 = FUEnergia.FileName;
+        //    Stream vStream2 = bufferDeposito2.InputStream;
+        //    BinaryReader vReader2 = new BinaryReader(vStream2);
+        //    vFileDeposito2 = vReader2.ReadBytes((int)vStream2.Length);
+        //    vExtension2 = System.IO.Path.GetExtension(FUEnergia.FileName);
+        //}
+        //String vArchivo2 = String.Empty;
+        //if (vFileDeposito2 != null)
+        //    vArchivo2 = Convert.ToBase64String(vFileDeposito2);
         /////////////////////////////////////////////////////////////////////
         string climatizacion = null;
         string energia = null;
@@ -1067,8 +1226,12 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 "'" + respuesta11 + "','" + respuesta12 + "','" + respuesta13 + "','" + respuesta14 + "'," +
                 "'" + respuesta15 + "','" + respuesta16 + "','" + respuesta17 + "','" + respuesta18 + "'," +
                 "'" + respuesta19 + "','" + respuesta20 + "','" + climatizacion + "','" + vArchivo + "'," +
-                "'" + energia + "','" + vArchivo2 + "','" + dropantiskimming.SelectedItem.Text + "','" + txtantiSkimming.Text + "'";
+                "'" + energia + "','" + vArchivo2 + "','" + dropantiskimming.SelectedItem.Text + "','" + txtantiSkimming.Text + "'," +
+                "'"+ DDLCambioPiezas.SelectedValue + "','" + txtCambioMateriales.Text + "'";
                 Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+
+                 //string vQueryM = "STEISP_ATM_ListaVerificacion 4, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + DDLCambioPiezas.SelectedValue + "','"+txtCambioMateriales.Text+"'";
+                 // vConexion.ejecutarSQL(vQueryM);
 
                 if (FUClimatizacion.HasFile != false)
                 {
@@ -1089,25 +1252,45 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         }
         else
         {
-            try
-            {
-                string vQuery = "STEISP_ATM_ListaVerificacion 1, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + respuesta1 + "','" + respuesta2 + "'," +
-                "'" + respuesta3 + "','" + respuesta4 + "','" + respuesta5 + "','" + respuesta6 + "'," +
-                "'" + respuesta7 + "','" + respuesta8 + "','" + respuesta9 + "','" + respuesta10 + "'," +
-                "'" + respuesta11 + "','" + respuesta12 + "','" + respuesta13 + "','" + respuesta14 + "'," +
-                "'" + respuesta15 + "','" + respuesta16 + "','" + respuesta17 + "','" + respuesta18 + "'," +
-                "'" + respuesta19 + "','" + respuesta20 + "','" + climatizacion + "','" + vArchivo + "'," +
-                "'" + energia + "','" + vArchivo2 + "','" + dropantiskimming.SelectedItem.Text + "','" + txtantiSkimming.Text + "'";
-                Int32 vInfo = vConexion.ejecutarSQL(vQuery);
-            }
-            catch (Exception Ex)
-            {
-                throw;
-            }
+                string Vacio = "";
+                try
+                {
+                    string vQuery = "STEISP_ATM_ListaVerificacion 1, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + respuesta1 + "','" + respuesta2 + "'," +
+                    "'" + respuesta3 + "','" + respuesta4 + "','" + respuesta5 + "','" + respuesta6 + "'," +
+                    "'" + respuesta7 + "','" + respuesta8 + "','" + respuesta9 + "','" + respuesta10 + "'," +
+                    "'" + respuesta11 + "','" + respuesta12 + "','" + respuesta13 + "','" + respuesta14 + "'," +
+                    "'" + respuesta15 + "','" + respuesta16 + "','" + respuesta17 + "','" + respuesta18 + "'," +
+                    "'" + respuesta19 + "','" + respuesta20 + "','" + climatizacion + "','" + vArchivo + "'," +
+                    "'" + energia + "','" + vArchivo2 + "','" + dropantiskimming.SelectedItem.Text + "','" + txtantiSkimming.Text + "'," +
+                    "'"+DDLCambioPiezas.SelectedValue+"','"+txtCambioMateriales.Text+"'";
+                    Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+
+                    //string vQuery2 = "STEI_ATM_Actualizar_Imagenes 11, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo + "'";
+                    //Int32 vInfo2 = vConexion.ejecutarSQL(vQuery2);
+
+                    //string vQuery3 = "STEI_ATM_Actualizar_Imagenes 12, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo2 + "'";
+                    //Int32 vInfo3 = vConexion.ejecutarSQL(vQuery3);
+                }
+                catch (Exception Ex)
+                {
+                    throw;
+                }
 
         }
     }
 
+        void materialesMantenimiento()
+        {
+            DataTable vDatos = new DataTable();
+            String vQuery = "STEISP_ATM_SELECCIONES 6,'" + Session["ATM_COD_VERIF"] + "'";
+            vDatos = vConexion.ObtenerTabla(vQuery);
+            foreach (DataRow item in vDatos.Rows)
+            {
+                DDLCambioPiezas.SelectedIndex = CargarInformacionDDL(DDLCambioPiezas, item["material"].ToString());
+                txtCambioMateriales.Text = item["comentarioMaterial"].ToString();
+               
+            }
+        }
 
         void ImgVerificacion()
             {
@@ -1381,13 +1564,517 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             {
                 try
                 {
-                    string vQuery = "STEISP_ATM_ImagenesVerif 1, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo1 + "','" + vArchivo2 + "','" + vArchivo3 + "'," +
-                        "'" + vArchivo4 + "','" + vArchivo5 + "','" + vArchivo6 + "','" + vArchivo7 + "','" + vArchivo8 + "','" + vArchivo9 + "', '" + vArchivo10 + "','" + vArchivo11 + "'";
-                    Int32 vInfo = vConexion.ejecutarSQL(vQuery);
-                    if (vInfo == 1)
-                    {
+                    //string vQuery = "STEISP_ATM_ImagenesVerif 1, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo1 + "','" + vArchivo2 + "','" + vArchivo3 + "'," +
+                    //    "'" + vArchivo4 + "','" + vArchivo5 + "','" + vArchivo6 + "','" + vArchivo7 + "','" + vArchivo8 + "','" + vArchivo9 + "', '" + vArchivo10 + "','" + vArchivo11 + "'";
+                    //Int32 vInfo = vConexion.ejecutarSQL(vQuery);
 
+                   
+                        string vQuery = "STEI_ATM_Actualizar_Imagenes 14, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo1 + "'";
+                        Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                   
+                        string vQuery2 = "STEI_ATM_Actualizar_Imagenes 2, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo2 + "'";
+                        Int32 vInfo2 = vConexion.ejecutarSQL(vQuery2);
+                   
+                        string vQuery3 = "STEI_ATM_Actualizar_Imagenes 3, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo3 + "'";
+                        Int32 vInfo3 = vConexion.ejecutarSQL(vQuery3);
+                   
+                        string vQuery4 = "STEI_ATM_Actualizar_Imagenes 4, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo4 + "'";
+                        Int32 vInfo4 = vConexion.ejecutarSQL(vQuery4);
+                   
+                        string vQuery5 = "STEI_ATM_Actualizar_Imagenes 5, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo5 + "'";
+                        Int32 vInfo5 = vConexion.ejecutarSQL(vQuery5);
+                   
+                        string vQuery6 = "STEI_ATM_Actualizar_Imagenes 6, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo6 + "'";
+                        Int32 vInfo6 = vConexion.ejecutarSQL(vQuery6);
+                   
+                        string vQuery7 = "STEI_ATM_Actualizar_Imagenes 7, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo7 + "'";
+                        Int32 vInfo7 = vConexion.ejecutarSQL(vQuery7);
+                    
+                        string vQuery8 = "STEI_ATM_Actualizar_Imagenes 8, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo8 + "'";
+                        Int32 vInfo8 = vConexion.ejecutarSQL(vQuery8);
+                   
+                        string vQuery9 = "STEI_ATM_Actualizar_Imagenes 9, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo9 + "'";
+                        Int32 vInfo9 = vConexion.ejecutarSQL(vQuery9);
+                   
+                        string vQuery10 = "STEI_ATM_Actualizar_Imagenes 10, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo10 + "'";
+                        Int32 vInfo10 = vConexion.ejecutarSQL(vQuery10);
+                   
+                        string vQuery11 = "STEI_ATM_Actualizar_Imagenes 13, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo11 + "'";
+                        Int32 vInfo11 = vConexion.ejecutarSQL(vQuery11);
+                    
+
+                }
+                catch (Exception Ex)
+                {
+                    throw;
+                }
+            }
+        }
+
+        void ImgVerificacionReducido()
+        {
+            string id = Request.QueryString["id"];
+            string tipo = Request.QueryString["tipo"];
+             string vArchivo1 = "";
+            string vArchivo2 = "";
+            string vArchivo3 = "";
+            string vArchivo4 = "";
+            string vArchivo5 = "";
+            string vArchivo6 = "";
+            string vArchivo7 = "";
+            string vArchivo8 = "";
+            string vArchivo9 = "";
+            string vArchivo10 = "";
+            string vArchivo11 = "";
+            //IMAGENES1
+            if (FUDiscoDuro.FileName != "")
+            {
+                Bitmap originalBMPReducido;
+                Bitmap originalBMP = new Bitmap(FUDiscoDuro.FileContent);
+                byte[] imageData;
+                if (originalBMP.Height > 1000 && originalBMP.Width > 1000)
+                {
+                    var newHeight = originalBMP.Height / 3;
+                    var newWidth = originalBMP.Width / 3;
+                     originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+                }
+                else
+                {
+                  var  newHeight = originalBMP.Height;
+                  var  newWidth = originalBMP.Width;
+                     originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+                }
+
+                //Bitmap originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData = new byte[stream.Length];
+                    stream.Read(imageData, 0, imageData.Length);
+                    stream.Close();
+                }
+                 vArchivo1 = Convert.ToBase64String(imageData);
+            }
+            //////////////////////////////////////////////////////////////////////////////
+            //IMAGENES2
+            if (FUATMDesarmadoPS.FileName != "")
+            {
+                Bitmap originalBMP2 = new Bitmap(FUATMDesarmadoPS.FileContent);
+                byte[] imageData2;
+                Bitmap originalBMPReducido2;
+                if (originalBMP2.Height > 1000 && originalBMP2.Width > 1000)
+                {
+                    var newHeight2 = originalBMP2.Height / 3;
+                    var newWidth2 = originalBMP2.Width / 3;
+                    originalBMPReducido2 = new Bitmap(originalBMP2.GetThumbnailImage(newWidth2, newHeight2, null, IntPtr.Zero));
+                }
+                else
+                {
+                    var newHeight2 = originalBMP2.Height;
+                    var newWidth2 = originalBMP2.Width;
+                    originalBMPReducido2 = new Bitmap(originalBMP2.GetThumbnailImage(newWidth2, newHeight2, null, IntPtr.Zero));
+                }                
+
+                //Bitmap originalBMPReducido2 = new Bitmap(originalBMP2.GetThumbnailImage(newWidth2, newHeight2, null, IntPtr.Zero));
+
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido2.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData2 = new byte[stream.Length];
+                    stream.Read(imageData2, 0, imageData2.Length);
+                    stream.Close();
+                }
+                 vArchivo2 = Convert.ToBase64String(imageData2);
+            }
+            ////////////////////////////////////////////////////////////////////////////////
+            //IMAGENES3
+            if (FUATMDesarmadoPI.FileName != "")
+            {
+                Bitmap originalBMP3 = new Bitmap(FUATMDesarmadoPI.FileContent);
+                byte[] imageData3;
+                Bitmap originalBMPReducido3;
+                if (originalBMP3.Height > 1000 && originalBMP3.Width > 1000)
+                {
+                    var newHeight3 = originalBMP3.Height / 3;
+                    var newWidth3 = originalBMP3.Width / 3;
+                    originalBMPReducido3 = new Bitmap(originalBMP3.GetThumbnailImage(newWidth3, newHeight3, null, IntPtr.Zero));
+                }
+                else
+                {
+                    var newHeight3 = originalBMP3.Height;
+                    var newWidth3 = originalBMP3.Width;
+                    originalBMPReducido3 = new Bitmap(originalBMP3.GetThumbnailImage(newWidth3, newHeight3, null, IntPtr.Zero));
+                }
+               
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido3.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData3 = new byte[stream.Length];
+                    stream.Read(imageData3, 0, imageData3.Length);
+                    stream.Close();
+                }
+                vArchivo3 = Convert.ToBase64String(imageData3);
+            }
+            ////////////////////////////////////////////////////////////////////////////////
+            //IMAGENES4
+            if (FUDispositivoVendor.FileName != "")
+            {
+                Bitmap originalBMP4 = new Bitmap(FUDispositivoVendor.FileContent);
+                byte[] imageData4;
+                Bitmap originalBMPReducido4;
+                if (originalBMP4.Height > 1000 && originalBMP4.Width > 1000)
+                {
+                    var newHeight4 = originalBMP4.Height / 3;
+                    var newWidth4 = originalBMP4.Width / 3;
+                    originalBMPReducido4 = new Bitmap(originalBMP4.GetThumbnailImage(newWidth4, newHeight4, null, IntPtr.Zero));
+                }
+                else
+                {
+                    var newHeight4 = originalBMP4.Height;
+                    var newWidth4 = originalBMP4.Width;
+                    originalBMPReducido4 = new Bitmap(originalBMP4.GetThumbnailImage(newWidth4, newHeight4, null, IntPtr.Zero));
+                }
+               
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido4.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData4 = new byte[stream.Length];
+                    stream.Read(imageData4, 0, imageData4.Length);
+                    stream.Close();
+                }
+                vArchivo4 = Convert.ToBase64String(imageData4);
+            }
+
+            ////////////////////////////////////////////////////////////////////////////////
+            //IMAGENES5
+            if (FUSYSTEMINFO.FileName != "")
+            {
+                Bitmap originalBMP5 = new Bitmap(FUSYSTEMINFO.FileContent);
+                byte[] imageData5;
+                Bitmap originalBMPReducido5;
+                if (originalBMP5.Height > 1000 && originalBMP5.Width > 1000)
+                {
+                    var newHeight5 = originalBMP5.Height / 3;
+                    var newWidth5 = originalBMP5.Width / 3;
+                    originalBMPReducido5 = new Bitmap(originalBMP5.GetThumbnailImage(newWidth5, newHeight5, null, IntPtr.Zero));
+                }
+                else
+                {
+                    var newHeight5 = originalBMP5.Height;
+                    var newWidth5 = originalBMP5.Width;
+                    originalBMPReducido5 = new Bitmap(originalBMP5.GetThumbnailImage(newWidth5, newHeight5, null, IntPtr.Zero));
+                }
+               
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido5.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData5 = new byte[stream.Length];
+                    stream.Read(imageData5, 0, imageData5.Length);
+                    stream.Close();
+                }
+                vArchivo5 = Convert.ToBase64String(imageData5);
+            }
+
+            ////////////////////////////////////////////////////////////////////////////////
+            //IMAGENES6
+            if (FUAntiskimmin.FileName != "")
+            {
+                Bitmap originalBMP6 = new Bitmap(FUAntiskimmin.FileContent);
+                byte[] imageData6;
+                Bitmap originalBMPReducido6;
+                if (originalBMP6.Height > 1000 && originalBMP6.Width > 1000)
+                {
+                    var newHeight6 = originalBMP6.Height / 3;
+                    var newWidth6 = originalBMP6.Width / 3;
+                    originalBMPReducido6 = new Bitmap(originalBMP6.GetThumbnailImage(newWidth6, newHeight6, null, IntPtr.Zero));
+                }
+                else
+                {
+                    var newHeight6 = originalBMP6.Height;
+                    var newWidth6 = originalBMP6.Width;
+                    originalBMPReducido6 = new Bitmap(originalBMP6.GetThumbnailImage(newWidth6, newHeight6, null, IntPtr.Zero));
+                }
+                
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido6.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData6 = new byte[stream.Length];
+                    stream.Read(imageData6, 0, imageData6.Length);
+                    stream.Close();
+                }
+                vArchivo6 = Convert.ToBase64String(imageData6);
+            }
+
+            ////////////////////////////////////////////////////////////////////////////////
+            //IMAGENES7
+            if (FUMonitorFiltro.FileName != "")
+            {
+                Bitmap originalBMP7 = new Bitmap(FUMonitorFiltro.FileContent);
+                byte[] imageData7;
+                Bitmap originalBMPReducido7;
+                if (originalBMP7.Height > 1000 && originalBMP7.Width > 1000)
+                {
+                    var newHeight7 = originalBMP7.Height / 3;
+                    var newWidth7 = originalBMP7.Width / 3;
+                    originalBMPReducido7 = new Bitmap(originalBMP7.GetThumbnailImage(newWidth7, newHeight7, null, IntPtr.Zero));
+                }
+                else
+                {
+                    var newHeight7 = originalBMP7.Height;
+                    var newWidth7 = originalBMP7.Width;
+                    originalBMPReducido7 = new Bitmap(originalBMP7.GetThumbnailImage(newWidth7, newHeight7, null, IntPtr.Zero));
+                }
+               
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido7.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData7 = new byte[stream.Length];
+                    stream.Read(imageData7, 0, imageData7.Length);
+                    stream.Close();
+                }
+                vArchivo7 = Convert.ToBase64String(imageData7);
+            }
+
+            ////////////////////////////////////////////////////////////////////////////////
+            //IMAGENES8
+            if (FUPadlewheel.FileName != "")
+            {
+                Bitmap originalBMP8 = new Bitmap(FUPadlewheel.FileContent);
+                byte[] imageData8;
+                Bitmap originalBMPReducido8;
+                if (originalBMP8.Height > 1000 && originalBMP8.Width > 1000)
+                {
+                    var newHeight8 = originalBMP8.Height / 3;
+                    var newWidth8 = originalBMP8.Width / 3;
+                    originalBMPReducido8 = new Bitmap(originalBMP8.GetThumbnailImage(newWidth8, newHeight8, null, IntPtr.Zero));
+                }
+                else
+                {
+                    var newHeight8 = originalBMP8.Height;
+                    var newWidth8 = originalBMP8.Width;
+                    originalBMPReducido8 = new Bitmap(originalBMP8.GetThumbnailImage(newWidth8, newHeight8, null, IntPtr.Zero));
+                }
+                
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido8.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData8 = new byte[stream.Length];
+                    stream.Read(imageData8, 0, imageData8.Length);
+                    stream.Close();
+                }
+                vArchivo8 = Convert.ToBase64String(imageData8);
+            }
+
+            ////////////////////////////////////////////////////////////////////////////////
+            //IMAGENES9
+            if (FUDispDesarmado.FileName != "")
+            {
+                Bitmap originalBMP9 = new Bitmap(FUDispDesarmado.FileContent);
+                byte[] imageData9;
+                Bitmap originalBMPReducido9;
+                if (originalBMP9.Height > 1000 && originalBMP9.Width > 1000)
+                {
+                    var newHeight9 = originalBMP9.Height / 3;
+                    var newWidth9 = originalBMP9.Width / 3;
+                    originalBMPReducido9 = new Bitmap(originalBMP9.GetThumbnailImage(newWidth9, newHeight9, null, IntPtr.Zero));
+                }
+                else
+                {
+                    var newHeight9 = originalBMP9.Height;
+                    var newWidth9 = originalBMP9.Width;
+                    originalBMPReducido9 = new Bitmap(originalBMP9.GetThumbnailImage(newWidth9, newHeight9, null, IntPtr.Zero));
+                }
+                
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido9.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData9 = new byte[stream.Length];
+                    stream.Read(imageData9, 0, imageData9.Length);
+                    stream.Close();
+                }
+                vArchivo9 = Convert.ToBase64String(imageData9);
+            }
+
+            ////////////////////////////////////////////////////////////////////////////////
+            //IMAGENES10
+            if (FUTeclado.FileName != "")
+            {
+                Bitmap originalBMP10 = new Bitmap(FUTeclado.FileContent);
+                byte[] imageData10;
+                Bitmap originalBMPReducido10;
+                if (originalBMP10.Height > 1000 && originalBMP10.Width > 1000)
+                {
+                    var newHeight10 = originalBMP10.Height / 3;
+                    var newWidth10 = originalBMP10.Width / 3;
+                    originalBMPReducido10 = new Bitmap(originalBMP10.GetThumbnailImage(newWidth10, newHeight10, null, IntPtr.Zero));
+                }
+                else
+                {
+                    var newHeight10 = originalBMP10.Height;
+                    var newWidth10 = originalBMP10.Width;
+                    originalBMPReducido10 = new Bitmap(originalBMP10.GetThumbnailImage(newWidth10, newHeight10, null, IntPtr.Zero));
+                }
+                
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido10.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData10 = new byte[stream.Length];
+                    stream.Read(imageData10, 0, imageData10.Length);
+                    stream.Close();
+                }
+                vArchivo10 = Convert.ToBase64String(imageData10);
+            }
+
+            ////////////////////////////////////////////////////////////////////////////////
+            //IMAGENES11
+            if (FUATMLinea.FileName != "")
+            {
+                Bitmap originalBMP11 = new Bitmap(FUATMLinea.FileContent);
+                byte[] imageData11;
+                Bitmap originalBMPReducido11;
+                if (originalBMP11.Height > 1000 && originalBMP11.Width > 1000)
+                {
+                    var newHeight11 = originalBMP11.Height / 3;
+                    var newWidth11 = originalBMP11.Width / 3;
+                    originalBMPReducido11 = new Bitmap(originalBMP11.GetThumbnailImage(newWidth11, newHeight11, null, IntPtr.Zero));
+                }
+                else
+                {
+                    var newHeight11 = originalBMP11.Height;
+                    var newWidth11 = originalBMP11.Width;
+                    originalBMPReducido11 = new Bitmap(originalBMP11.GetThumbnailImage(newWidth11, newHeight11, null, IntPtr.Zero));
+                }
+                
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido11.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData11 = new byte[stream.Length];
+                    stream.Read(imageData11, 0, imageData11.Length);
+                    stream.Close();
+                }
+                vArchivo11 = Convert.ToBase64String(imageData11);
+            }
+           
+
+            if (tipo == "2")
+            {
+                try
+                {
+                    if (FUDiscoDuro.HasFile != false)
+                    {
+                        string vQuery = "STEI_ATM_Actualizar_Imagenes 1, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo1 + "'";
+                        Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                     }
+                    if (FUATMDesarmadoPS.HasFile != false)
+                    {
+                        string vQuery = "STEI_ATM_Actualizar_Imagenes 2, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo2 + "'";
+                        Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                    }
+                    if (FUATMDesarmadoPI.HasFile != false)
+                    {
+                        string vQuery = "STEI_ATM_Actualizar_Imagenes 3, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo3 + "'";
+                        Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                    }
+                    if (FUDispositivoVendor.HasFile != false)
+                    {
+                        string vQuery = "STEI_ATM_Actualizar_Imagenes 4, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo4 + "'";
+                        Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                    }
+                    if (FUSYSTEMINFO.HasFile != false)
+                    {
+                        string vQuery = "STEI_ATM_Actualizar_Imagenes 5, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo5 + "'";
+                        Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                    }
+                    if (FUAntiskimmin.HasFile != false)
+                    {
+                        string vQuery = "STEI_ATM_Actualizar_Imagenes 6, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo6 + "'";
+                        Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                    }
+                    if (FUMonitorFiltro.HasFile != false)
+                    {
+                        string vQuery = "STEI_ATM_Actualizar_Imagenes 7, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo7 + "'";
+                        Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                    }
+                    if (FUPadlewheel.HasFile != false)
+                    {
+                        string vQuery = "STEI_ATM_Actualizar_Imagenes 8, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo8 + "'";
+                        Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                    }
+                    if (FUDispDesarmado.HasFile != false)
+                    {
+                        string vQuery = "STEI_ATM_Actualizar_Imagenes 9, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo9 + "'";
+                        Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                    }
+                    if (FUTeclado.HasFile != false)
+                    {
+                        string vQuery = "STEI_ATM_Actualizar_Imagenes 10, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo10 + "'";
+                        Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                    }
+                    if (FUATMLinea.HasFile != false)
+                    {
+                        string vQuery = "STEI_ATM_Actualizar_Imagenes 13, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo11 + "'";
+                        Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+                    }
+                }
+                catch (Exception Ex)
+                {
+                    throw;
+                }
+            }
+            else
+            {
+                try
+                {
+                    //string vQuery = "STEISP_ATM_ImagenesVerif 1, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo1 + "','" + vArchivo2 + "','" + vArchivo3 + "'," +
+                    //    "'" + vArchivo4 + "','" + vArchivo5 + "','" + vArchivo6 + "','" + vArchivo7 + "','" + vArchivo8 + "','" + vArchivo9 + "', '" + vArchivo10 + "','" + vArchivo11 + "'";
+                    //Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+
+
+                    string vQuery = "STEI_ATM_Actualizar_Imagenes 14, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo1 + "'";
+                    Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+
+                    string vQuery2 = "STEI_ATM_Actualizar_Imagenes 2, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo2 + "'";
+                    Int32 vInfo2 = vConexion.ejecutarSQL(vQuery2);
+
+                    string vQuery3 = "STEI_ATM_Actualizar_Imagenes 3, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo3 + "'";
+                    Int32 vInfo3 = vConexion.ejecutarSQL(vQuery3);
+
+                    string vQuery4 = "STEI_ATM_Actualizar_Imagenes 4, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo4 + "'";
+                    Int32 vInfo4 = vConexion.ejecutarSQL(vQuery4);
+
+                    string vQuery5 = "STEI_ATM_Actualizar_Imagenes 5, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo5 + "'";
+                    Int32 vInfo5 = vConexion.ejecutarSQL(vQuery5);
+
+                    string vQuery6 = "STEI_ATM_Actualizar_Imagenes 6, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo6 + "'";
+                    Int32 vInfo6 = vConexion.ejecutarSQL(vQuery6);
+
+                    string vQuery7 = "STEI_ATM_Actualizar_Imagenes 7, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo7 + "'";
+                    Int32 vInfo7 = vConexion.ejecutarSQL(vQuery7);
+
+                    string vQuery8 = "STEI_ATM_Actualizar_Imagenes 8, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo8 + "'";
+                    Int32 vInfo8 = vConexion.ejecutarSQL(vQuery8);
+
+                    string vQuery9 = "STEI_ATM_Actualizar_Imagenes 9, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo9 + "'";
+                    Int32 vInfo9 = vConexion.ejecutarSQL(vQuery9);
+
+                    string vQuery10 = "STEI_ATM_Actualizar_Imagenes 10, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo10 + "'";
+                    Int32 vInfo10 = vConexion.ejecutarSQL(vQuery10);
+
+                    string vQuery11 = "STEI_ATM_Actualizar_Imagenes 13, '" + Session["ATM_IDMANT_VERIF_CREAR"] + "','" + vArchivo11 + "'";
+                    Int32 vInfo11 = vConexion.ejecutarSQL(vQuery11);
+
 
                 }
                 catch (Exception Ex)
@@ -1418,7 +2105,6 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             }
         }      
 
-
         protected void btnmodal_Click(object sender, EventArgs e)
             {
 
@@ -1439,6 +2125,8 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
             if (vEstado == "7")
             {
+                //CorreosAlertas();
+
                 string vCorreoEncargadoZona = "";
                 if (Convert.ToString(Session["ATM_IDZONA_VERIF_CREAR"]) == "1")
                     vCorreoEncargadoZona = "emontoya@bancatlan.hn";
@@ -1447,7 +2135,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 if (Convert.ToString(Session["ATM_IDZONA_VERIF_CREAR"]) == "3")
                     vCorreoEncargadoZona = "acalderon@bancatlan.hn";
 
-                string vQueryD = "STEISP_ATM_Generales 33,'" + Session["ATM_USUARIO_VERIF_CREAR"] + "'";
+                string vQueryD = "STEISP_ATM_Generales 33,'" + Session["ATM_USU_RESPONSABLE_MANT"] + "'";
                 DataTable vDatosTecnicoResponsable = vConexion.ObtenerTabla(vQueryD);
                 string vQueryTecnicos = "STEISP_ATM_Generales 39,'" + Session["ATM_COD_VERIF"] + "'";
                 DataTable vDatosTecnicos = vConexion.ObtenerTabla(vQueryTecnicos);
@@ -1461,7 +2149,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
                 for (int i = 0; i < vDatosTecnicoResponsable.Rows.Count; i++)
                 {
-                    vCorreoResponsable = vDatosTecnicoResponsable.Rows[i]["correo"].ToString();
+                    vCorreoResponsable = vDatosTecnicoResponsable.Rows[i]["correo"].ToString()+";";
                 }
                 for (int i = 0; i < vDatosTecnicos.Rows.Count; i++)
                 {
@@ -1481,9 +2169,9 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 string vReporteViaticos = "Verificacion";
                 string vCorreoAdmin = "acedillo@bancatlan.hn";
                 //vCorreosTodos = vCorreosTecnicos + vCorreosJefes + vCorreoAdmin;
-                vCorreosTodos = vCorreosTecnicos + vCorreosJefes + vCorreoResponsable;
+                vCorreosTodos = vCorreoResponsable + vCorreosTecnicos + vCorreosJefes;
                 //string vCorreoCopia = "acamador@bancatlan.hn";
-                string vCorreoCopia = "eurrea@bancatlan.hn;"+vCorreoEncargadoZona;
+                string vCorreoCopia = "eurrea@bancatlan.hn;unidadatmkiosco@bancatlan.hn;" + vCorreoEncargadoZona;
                 string vAsuntoRV = "Lista de Verificación";
                 string vBody = "Lista de Verificación";
                 int vEstadoSuscripcion = 0;
@@ -1516,6 +2204,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                                 Mensaje("Lista de verificación aprobada con éxito", WarningType.Success);
                                 EnviarCorreo();
                                 CorreoSuscripcion();
+                                CorreosAlertas();
                                 vaciarValorImg();
                                 Session["vConfirmar"] = "0";
                                 Response.Redirect("buscarAprobarVerificacion.aspx");
@@ -1532,14 +2221,16 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     }
                     else
                     {
-                        ActualizarATM();
-                        ActualizarMateriales();
                         ActualizarVerifATM();
-                        ImgVerificacion();
+                        ActualizarATM();
+                        //ActualizarMateriales();                                                                     
+                        //ImgVerificacion();
+                        ImgVerificacionReducido();
                         PreguntasVerif();
                         EnviarCorreo();
                         vaciarValorImg();
                         Session["vConfirmar"] = "0";
+                        //Response.Redirect("/sites/ATM/default.aspx");
                         if (tipo == "2")
                         {
                             Response.Redirect("../../pages/devolver/rechazados.aspx");
@@ -1564,7 +2255,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             }
 
         protected void btnRechazarVerif_Click(object sender, EventArgs e)
-            {
+        {
             txtAlerta2.Visible = false;
             H5Alerta.Visible = false;
             txtmotivoRechazo.Text = string.Empty;
@@ -1590,7 +2281,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             if (Convert.ToString(Session["ATM_IDZONA_VERIF_CREAR"]) == "3")
                 vCorreoEncargadoZona = "acalderon@bancatlan.hn";
 
-            string vQueryD = "STEISP_ATM_Generales 33,'" + Session["ATM_USUARIO_VERIF_CREAR"] + "'";
+            string vQueryD = "STEISP_ATM_Generales 33,'" + Session["ATM_USU_RESPONSABLE_MANT"] + "'";
             DataTable vDatosTecnicoResponsable = vConexion.ObtenerTabla(vQueryD);
             DataTable vDatos = (DataTable)Session["AUTHCLASS"];
             string vQueryTecnicos = "STEISP_ATM_Generales 39,'" + Session["ATM_IDMANT_VERIF_CREAR"] + "'";
@@ -1598,10 +2289,13 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             string vQueryJefes = "STEISP_ATM_Generales 38,'" + Session["ATM_IDMANT_VERIF_CREAR"] + "'";
             DataTable vDatosJefeAgencias = vConexion.ObtenerTabla(vQueryJefes);
 
-                if (vDatos.Rows.Count > 0)
+            if (vDatos.Rows.Count > 0)
+            {
+                foreach (DataRow item in vDatos.Rows)
                 {
-                    foreach (DataRow item in vDatos.Rows)
+                    if (Session["USUARIO"].ToString() == "eurrea")
                     {
+
                         //ENVIAR A JEFE
                         if (!item["correo"].ToString().Trim().Equals(""))
                         {
@@ -1610,13 +2304,31 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                             typeBody.ATM,
                             "Notificación de Mantenimiento ATM",
                             "Buen día, se le notifica que ha devuelto solicitud de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["nombre"].ToString() + ", mantenimiento al ATM " + txtnomATM.Text,
-                            "El usuario <b>" + item["Nombre"].ToString() + "</b> devolvió: <br> Verificación de Mantenimiento<br><br> Motivo= "+txtmotivoRechazo.Text,
+                            "El usuario <b>" + item["Nombre"].ToString() + "</b> devolvió: <br> Verificación de Mantenimiento<br><br> Motivo= " + txtmotivoRechazo.Text,
+                             vCorreoEncargadoZona,
+                             "/pages/devolver/rechazados.aspx"
+                            );
+
+                            //vFlagEnvioSupervisor = true;
+                        }
+                    }
+                    else
+                    {
+                        if (!item["correo"].ToString().Trim().Equals(""))
+                        {
+                            vService.EnviarMensaje(
+                            item["correo"].ToString(),
+                            typeBody.ATM,
+                            "Notificación de Mantenimiento ATM",
+                            "Buen día, se le notifica que ha devuelto solicitud de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["nombre"].ToString() + ", mantenimiento al ATM " + txtnomATM.Text,
+                            "El usuario <b>" + item["Nombre"].ToString() + "</b> devolvió: <br> Verificación de Mantenimiento<br><br> Motivo= " + txtmotivoRechazo.Text,
                              "",
                              "/pages/devolver/rechazados.aspx"
                             );
 
                             //vFlagEnvioSupervisor = true;
                         }
+
                         //ENVIAR A EDWIN
                         //string vNombre = "EDWIN ALBERTO URREA PENA";
                         vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIMail"],
@@ -1627,12 +2339,12 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                                   vCorreoEncargadoZona,
                                   "/sites/ATM/pages/devolver/rechazados.aspx"
                                 );
-                        //ENVIAR A TECNICOS ASIGNADOS
-                        //string vNombreJefe = "ELVIS ALEXANDER MONTOYA PEREIRA";
+
 
                     }
                 }
-                if (vDatosTecnicoResponsable.Rows.Count > 0)
+            }
+            if (vDatosTecnicoResponsable.Rows.Count > 0)
                 {
                     foreach (DataRow item in vDatosTecnicoResponsable.Rows)
                     {
@@ -1650,7 +2362,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         }
 
         protected void btnRechazarModal_Click(object sender, EventArgs e)
-            {
+        {
             if (txtmotivoRechazo.Text == "" || txtmotivoRechazo.Text == string.Empty)
             {
                 txtAlerta2.Visible = true;
@@ -1707,7 +2419,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         {
             try
             {
-                //validar();
+                validar();
                
                 lbcodATM.Text = txtcodATM.Text;
                 lbNombreATM.Text = txtnomATM.Text;
@@ -1850,6 +2562,17 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     Mensaje(Ex.Message, WarningType.Danger);
                 }
            
+        }
+
+        protected void DDLCambioPiezas_TextChanged(object sender, EventArgs e)
+        {
+            if (DDLCambioPiezas.SelectedValue == "1")
+                txtCambioMateriales.Enabled = true;
+            else
+            {
+                txtCambioMateriales.Enabled = false;
+                txtCambioMateriales.Text = "";
+            }
         }
     }
 }

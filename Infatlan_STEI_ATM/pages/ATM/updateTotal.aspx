@@ -221,7 +221,7 @@
                                         <label class="col-form-label col-12">Ubicación del ATM(Mapa)</label>                                        
                                         <div class="col-12">
                                             <asp:FileUpload ID="FUMapaATM" runat="server" onchange="img1(this);" /><br /><br />
-                                            <img id="imgMapaATM" runat="server" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px; height: auto; width: 100%" />
+                                            <img id="imgMapaATM" runat="server" src="/assets/images/vistaPrevia1.JPG" style="border-width: 0px; height: auto; width: 100%" />
                                         </div>
                                         </div>
                                     <!--DECIMA FILA-->
