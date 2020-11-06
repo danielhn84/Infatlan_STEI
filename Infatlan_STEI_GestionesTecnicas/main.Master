@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="main.master.cs" Inherits="Infatlan_STEI.main" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="main.master.cs" Inherits="Infatlan_STEI_GestionesTecnicas.main" %>
 
 <!DOCTYPE html>
 
@@ -11,12 +11,12 @@
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/logo_mini.png">
     <title>Infatlan - STEI</title>
+    <link rel="stylesheet" href="/css/animate.min.css" />
     <link href="/assets/node_modules/morrisjs/morris.css" rel="stylesheet">
     <link href="/assets/node_modules/toast-master/css/jquery.toast.css" rel="stylesheet">
     <link href="/dist/css/animate.min.css" rel="stylesheet" />
     <link href="/dist/css/style.min.css" rel="stylesheet">
     <link href="/dist/css/pages/dashboard1.css" rel="stylesheet">
-    <link href="/dist/css/pages/dashboard4.css" rel="stylesheet">
     <script type="text/javascript"> 
         infatlan = {
             showNotification: function (from, align, mensaje, tipo) {
@@ -36,14 +36,7 @@
     <asp:ContentPlaceHolder ID="Head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body class="skin-default dark fixed-layout">
-
-    <div class="preloader">
-        <div class="loader">
-            <div class="loader__figure"></div>
-            <p class="loader__label">STEI</p>
-        </div>
-    </div>
+<body class="skin-default fixed-layout">
     <div id="main-wrapper">
         <header class="topbar">
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
@@ -63,16 +56,11 @@
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item"><a class="nav-link nav-toggler d-block d-sm-none waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a></li>
                         <li class="nav-item"><a class="nav-link sidebartoggler d-none d-lg-block d-md-block waves-effect waves-dark" href="javascript:void(0)"><i class="icon-menu"></i></a></li>
-
-                        <%--<li class="nav-item">
-                                <form class="app-search d-none d-md-block d-lg-block">
-                                    <input type="text" class="form-control" placeholder="Search & enter">
-                                </form>
-                            </li>--%>
                     </ul>
+
                     <ul class="navbar-nav my-lg-0">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-bell"></i>
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ti-bell"></i>
                                 <div class="notify"><asp:Literal Text="" ID="LitPointer" runat="server" /></div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right mailbox scale-up">
@@ -82,9 +70,6 @@
                                         <div class="message-center">
                                             <asp:Literal Text="" ID="LitNotificaciones" runat="server" />
                                         </div>
-                                    </li>
-                                    <li>
-                                        <a class="nav-link text-center link" href="/paginas/messages.aspx"> <strong>Ver Mensajes</strong> <i class="fa fa-angle-right"></i> </a>
                                     </li>
                                 </ul>
                             </div>
@@ -98,10 +83,6 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right animated flipInY">
                                 <a href="/logout.aspx" class="dropdown-item"><i class="fa fa-power-off"></i>Logout</a>
-                                <a class="dropdown-item" style="display: none">
-                                    <input class="dropdown-item" type="Text" id="TxUser" value="" runat="server" clientidmode="AutoID" />
-                                    <asp:Literal Text="" ID="LitUser" ClientIDMode="AutoID" runat="server" />
-                                </a>
                             </div>
                         </li>
                     </ul>
@@ -113,56 +94,27 @@
             <div class="scroll-sidebar">
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Modulos</span></a>
+                        <li><a href="/default.aspx" aria-expanded="false"><i class="icon-action-undo"></i><span class="hide-menu">Volver</span></a></li>
+                        <li><a class="waves-effect waves-dark" href="/sites/inventario/pages/inventario.aspx" aria-expanded="false"><i class="icon-basket-loaded"></i><span class="hide-menu">Inventario</span></a></li>
+                        <li><a class="waves-effect waves-dark" href="/sites/inventario/pages/transacciones.aspx" aria-expanded="false"><i class="icon-folder-alt"></i><span class="hide-menu">Transacciones</span></a></li>
+                        <li><a class="waves-effect waves-dark" href="/sites/inventario/pages/articulos.aspx" aria-expanded="false"><i class="icon-home"></i><span class="hide-menu">Almacén</span></a></li>
+                        <li><a class="waves-effect waves-dark" href="/sites/inventario/pages/proveedores.aspx" aria-expanded="false"><i class="icon-people"></i><span class="hide-menu">Proveedores</span></a></li>
+                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-wrench"></i><span class="hide-menu">Configuración</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li runat="server" id="LIAgencias" visible="false">
-                                    <a href="#" onclick="window.location.href = '/sites/agencias/default.aspx?u=' + document.getElementById('<%= TxUser.ClientID %>').value">Agencias</a>
-                                </li>
-                                <li runat="server" id="LIATM" visible="false">
-                                    <a href="#" onclick="window.location.href = '/sites/ATM/default.aspx?u=' + document.getElementById('<%= TxUser.ClientID %>').value">ATM</a>
-                                </li>
-                                <li runat="server" id="LICableado" visible="false">
-                                    <a href="#" onclick="window.location.href = '/sites/cableado/default.aspx?u=' + document.getElementById('<%= TxUser.ClientID %>').value">Cableado</a>
-                                </li>
-                                <li runat="server" id="LIInventario" visible="false">
-                                    <a href="#" onclick="window.location.href = '/sites/inventario/default.aspx?u=' + document.getElementById('<%= TxUser.ClientID %>').value">Inventarios</a>
-                                </li>
-                                <li runat="server" id="LIComunicaciones" visible="false">
-                                    <a href="#" onclick="window.location.href = '/sites/comunicaciones/default.aspx?u=' + document.getElementById('<%= TxUser.ClientID %>').value">Comunicaciones</a>
-                                </li>
-
-                                <li runat="server" id="LIGestionesTec" visible="true">
-                                    <a href="#" onclick="window.location.href = '/sites/gestiones/default.aspx?u=' + document.getElementById('<%= TxUser.ClientID %>').value">Gestiones Técnicas</a>
-                                </li>
-                                
+                                <li><a href="/sites/inventario/pages/Configuracion/tipoArticulo.aspx">Articulos</a></li>
+                                <li runat="server" visible="false"><a href="/sites/inventario/pages/Configuracion/articuloDetalle.aspx">Detalle articulo</a></li>
+                                <li><a href="/sites/inventario/pages/Configuracion/contratos.aspx">Contratos</a></li>
+                                <li><a href="/sites/inventario/pages/Configuracion/marcas.aspx">Marcas</a></li>
+                                <li><a href="/sites/inventario/pages/perfiles.aspx">Perfiles</a></li>
+                                <li><a href="/sites/inventario/pages/Configuracion/ubicaciones.aspx">Ubicaciones</a></li>
+                                <li runat="server" id="LiCargar" visible="false"><a href="/sites/inventario/pages/Configuracion/cargaRegistros.aspx">Cargar Datos</a></li>
                             </ul>
                         </li>
-                        <li runat="server" id="LiCumplimiento" visible="false"><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-pie-chart"></i><span class="hide-menu">Cumplimiento</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li runat="server" id="LIFormulario" visible="false"><a href="/paginas/reportes/metasCumplimiento.aspx">Formulario</a></li>
-                                <li runat="server" id="LIPendientes" visible="false"><a href="/paginas/reportes/metasPendientes.aspx">Pendientes</a></li>
-                                <li runat="server" id="LIModificar" visible="false"><a href="/paginas/reportes/metasModificar.aspx">Modificar</a></li>
-                                <li><a href="/paginas/reportes/cursosEmpleados.aspx">Evaluaciones</a></li>
-                                <li><a class="has-arrow waves-effect waves-dark" aria-expanded="false" href="javascript:void(0)"><span class="hide-menu">Ajustes<span class="badge badge-pill badge-cyan ml-auto"></span></span></a>
-                                    <ul aria-expanded="false" class="collapse">
-                                        <li><a href="/paginas/reportes/ajustes/motivos.aspx">Motivos</a></li>
-                                        <li><a href="/paginas/reportes/ajustes/cursos.aspx">Cursos</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li runat="server" visible="false" id="LIConfiguracion"><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-wrench"></i><span class="hide-menu">Configuración<span class="badge badge-pill badge-cyan ml-auto">2</span></span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="/paginas/configuraciones/usuarios.aspx">Usuarios</a></li>
-                                <li><a href="/paginas/configuraciones/permisos.aspx">Permisos</a></li>
-                            </ul>
-                        </li>
-                        <li><a class="waves-effect waves-dark" href="/paginas/messages.aspx"><i class="icon-envelope"></i><span class="hide-menu">Mensajes</span></a></li>
-                        <li><a class="waves-effect waves-dark" href="/paginas/faqs.aspx"><i class="icon-bubbles"></i><span class="hide-menu">FAQs</span></a></li>
                     </ul>
                 </nav>
             </div>
         </aside>
+
         <form id="FormaPrincipal" runat="server">
             <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
             <div class="page-wrapper">
@@ -178,7 +130,6 @@
         <footer class="footer">
             © 2020 Infatlan
         </footer>
-
     </div>
 
     <script src="/assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
@@ -192,21 +143,18 @@
     <script src="/assets/node_modules/raphael/raphael-min.js"></script>
     <script src="/assets/node_modules/morrisjs/morris.min.js"></script>
     <script src="/assets/node_modules/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <script src="/js/dashboard1.js"></script>
     <script src="/assets/node_modules/toast-master/js/jquery.toast.js"></script>
 
-    <script src="/assets/node_modules/toast-master/js/jquery.toast.js"></script>
-    <script src="/dist/js/bootstrap-notify.js"></script>
-
-    <script src="/assets/node_modules/skycons/skycons.js"></script>
-    <script src="/dist/js/dashboard1.js"></script>
-
-<%--    <script src="/js/off-canvas.js"></script>
+    <script src="/js/off-canvas.js"></script>
     <script src="/js/hoverable-collapse.js"></script>
     <script src="/js/template.js"></script>
     <script src="/js/dashboard.js"></script>
     <script src="/js/data-table.js"></script>
     <script src="/js/jquery.dataTables.js"></script>
-    <script src="/js/dataTables.bootstrap4.js"></script>--%>
+    <script src="/js/dataTables.bootstrap4.js"></script>
+    <script src="/js/bootstrap-notify.js"></script>
+
     <asp:ContentPlaceHolder ID="Script" runat="server">
     </asp:ContentPlaceHolder>
 </body>
