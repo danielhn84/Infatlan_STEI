@@ -114,6 +114,15 @@ namespace Infatlan_STEI
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl LIComunicaciones;
 
         /// <summary>
+        /// Control LIGestionesTec.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LIGestionesTec;
+
+        /// <summary>
         /// Control LiCumplimiento.
         /// </summary>
         /// <remarks>
