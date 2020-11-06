@@ -1185,24 +1185,6 @@ namespace Infatlan_STEI_Agencias.pages
         protected global::System.Web.UI.WebControls.TextBox TxResponsableModalEnviarLV;
 
         /// <summary>
-        /// Control Div3.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div3;
-
-        /// <summary>
-        /// Control Label6.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label6;
-
-        /// <summary>
         /// Control UpdatePanel12.
         /// </summary>
         /// <remarks>

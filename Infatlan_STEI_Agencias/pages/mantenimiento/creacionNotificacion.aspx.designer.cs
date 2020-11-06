@@ -231,13 +231,13 @@ namespace Infatlan_STEI_Agencias.pages
         protected global::System.Web.UI.UpdatePanel UpdatePrincipalBotones;
 
         /// <summary>
-        /// Control BtnEnviarNotificacion.
+        /// Control UpdateModificacionBotones.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnEnviarNotificacion;
+        protected global::System.Web.UI.UpdatePanel UpdateModificacionBotones;
 
         /// <summary>
         /// Control BtnCancelarNotificacion.
@@ -247,6 +247,15 @@ namespace Infatlan_STEI_Agencias.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnCancelarNotificacion;
+
+        /// <summary>
+        /// Control BtnEnviarNotificacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnEnviarNotificacion;
 
         /// <summary>
         /// Control UpdatePanel2.
@@ -319,24 +328,6 @@ namespace Infatlan_STEI_Agencias.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TxHrFinModal;
-
-        /// <summary>
-        /// Control Div3.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div3;
-
-        /// <summary>
-        /// Control Label6.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label6;
 
         /// <summary>
         /// Control UpdatePanel5.
