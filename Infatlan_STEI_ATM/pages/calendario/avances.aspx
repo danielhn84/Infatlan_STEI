@@ -50,6 +50,7 @@
                                             <asp:BoundField DataField="ID" HeaderText="Código" Visible="false" ItemStyle-HorizontalAlign="center" />
                                             <asp:BoundField DataField="CodATM" HeaderText="Código" ItemStyle-HorizontalAlign="center" />
                                             <asp:BoundField DataField="Nombre" HeaderText="ATM" ItemStyle-HorizontalAlign="center" />
+                                            <asp:BoundField DataField="Responsable" HeaderText="Responsable" ItemStyle-HorizontalAlign="center" />
                                             <asp:BoundField DataField="Fecha" HeaderText="Fecha Mantenimiento" HtmlEncode=False DataFormatString="{0:dd/MM/yyyy}" ItemStyle-HorizontalAlign="center" />
                                             <asp:BoundField DataField="Avance" HeaderText="Avance" ItemStyle-HorizontalAlign="center" />                                           
                                         </Columns>

@@ -1113,47 +1113,64 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 }
                 else
                 {
-                    txtcodATMNotif.Text = vDatos.Rows[0]["Codigo"].ToString();
-                    txtUbicacionATM.Text = vDatos.Rows[0]["Ubicacion"].ToString();
-                    txtdireccion.Text = vDatos.Rows[0]["Direccion"].ToString();
-                    txtsucursalNotif.Text = vDatos.Rows[0]["Sucursal"].ToString();
-                    txtipNotif.Text = vDatos.Rows[0]["IP"].ToString();
-                    txtzonaNotif.Text = vDatos.Rows[0]["Zona"].ToString();
-                    Session["NomATM"] = vDatos.Rows[0]["NomATM"].ToString();
-                    Session["IdUbi"] = vDatos.Rows[0]["IdUbi"].ToString();
-                    Session["ID"] = vDatos.Rows[0]["ID"].ToString();
-                    Session["IDZona"] = vDatos.Rows[0]["IDZona"].ToString();
-                    if (Session["IdUbi"].ToString() == "1")
-                    {
-                        lbSelectJefeAge.Visible = true;
-                        GVjefesAgencias.Visible = true;
-                        DIVBuscarJefes.Visible = true;
-                        H3JefeAgencia.Visible = true;
-                        Session["ATM_EMPLEADOS"] = null;
-                        Session["ATM_EMPLEADOS2"] = null;
-                        Session["NotifJefeAgenciaATM"] = null;
-                        GVjefesAgencias.DataSource = null;
-                        GVjefesAgencias.DataBind();
-                        GVJefesAD.DataSource = null;
-                        GVJefesAD.DataBind();
-                        GVBusqueda.DataSource = null;
-                        GVBusqueda.DataBind();
-                    }
-                    else
-                    {
-                        DIVBuscarJefes.Visible = false;
-                        H3JefeAgencia.Visible = false;
-                        lbSelectJefeAge.Visible = false;
-                        Session["ATM_EMPLEADOS"] = null;
-                        Session["ATM_EMPLEADOS2"] = null;
-                        Session["NotifJefeAgenciaATM"] = null;
-                        GVjefesAgencias.DataSource = null;
-                        GVjefesAgencias.DataBind();
-                        GVJefesAD.DataSource = null;
-                        GVJefesAD.DataBind();
-                        GVBusqueda.DataSource = null;
-                        GVBusqueda.DataBind();
-                    }
+                    //string vFaltante = "";
+                    //if (vDatos.Rows[0]["Ubicacion"].ToString() == "")
+                    //    vFaltante = vFaltante + "Ubicación,";
+                    //if (vDatos.Rows[0]["Sucursal"].ToString() == "")
+                    //    vFaltante = vFaltante + "Sucursal,";
+                    //if (vDatos.Rows[0]["IP"].ToString() == "")
+                    //    vFaltante = vFaltante + "IP,";
+                    //if (vDatos.Rows[0]["Zona"].ToString() == "")
+                    //    vFaltante = vFaltante + "Zona,";
+
+                    //if (vFaltante != "")
+                    //{
+                    //    Mensaje("Al ATM "+DDLmantemientoPendiente.SelectedItem.Text+" le falta información de: " + vFaltante + " ,para continuar con el proceso de notificación de mantenimiento favor completar información.", WarningType.Danger);
+                    //}
+                    //else
+                    //{
+                        txtcodATMNotif.Text = vDatos.Rows[0]["Codigo"].ToString();
+                        txtUbicacionATM.Text = vDatos.Rows[0]["Ubicacion"].ToString();
+                        txtdireccion.Text = vDatos.Rows[0]["Direccion"].ToString();
+                        txtsucursalNotif.Text = vDatos.Rows[0]["Sucursal"].ToString();
+                        txtipNotif.Text = vDatos.Rows[0]["IP"].ToString();
+                        txtzonaNotif.Text = vDatos.Rows[0]["Zona"].ToString();
+                        Session["NomATM"] = vDatos.Rows[0]["NomATM"].ToString();
+                        Session["IdUbi"] = vDatos.Rows[0]["IdUbi"].ToString();
+                        Session["ID"] = vDatos.Rows[0]["ID"].ToString();
+                        Session["IDZona"] = vDatos.Rows[0]["IDZona"].ToString();
+                        if (Session["IdUbi"].ToString() == "1")
+                        {
+                            lbSelectJefeAge.Visible = true;
+                            GVjefesAgencias.Visible = true;
+                            DIVBuscarJefes.Visible = true;
+                            H3JefeAgencia.Visible = true;
+                            Session["ATM_EMPLEADOS"] = null;
+                            Session["ATM_EMPLEADOS2"] = null;
+                            Session["NotifJefeAgenciaATM"] = null;
+                            GVjefesAgencias.DataSource = null;
+                            GVjefesAgencias.DataBind();
+                            GVJefesAD.DataSource = null;
+                            GVJefesAD.DataBind();
+                            GVBusqueda.DataSource = null;
+                            GVBusqueda.DataBind();
+                        }
+                        else
+                        {
+                            DIVBuscarJefes.Visible = false;
+                            H3JefeAgencia.Visible = false;
+                            lbSelectJefeAge.Visible = false;
+                            Session["ATM_EMPLEADOS"] = null;
+                            Session["ATM_EMPLEADOS2"] = null;
+                            Session["NotifJefeAgenciaATM"] = null;
+                            GVjefesAgencias.DataSource = null;
+                            GVjefesAgencias.DataBind();
+                            GVJefesAD.DataSource = null;
+                            GVJefesAD.DataBind();
+                            GVBusqueda.DataSource = null;
+                            GVBusqueda.DataBind();
+                        }
+                    //}
                 }
 
             }

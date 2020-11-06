@@ -273,6 +273,22 @@
             }
         }
         //IMAGEN14
+        //IMAGEN15
+        function img15(input) {
+
+            if (input.files && input.files[0]) {
+                //PRIMERA IMAGEN
+                var reader = new FileReader();
+                reader.onload = function (e) {      
+                    var ruta15 = e.target.result;
+                    document.getElementById('<%=imgHojaMantenimiento.ClientID%>').src = ruta15;
+                    document.getElementById('<%=HFHojaMantenimiento.ClientID%>').value = 'si';
+                }
+                reader.readAsDataURL(input.files[0]);
+                //PRIMERA IMAGEN              
+            }
+        }
+        //IMAGEN15
 
     </script>
 </asp:Content>
@@ -781,6 +797,12 @@
                                     <td>
                                         <img id="imgATMLinea" runat="server" height="600" width="550" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
                                 </tr>
+                                <tr>
+                                    <td class="title"><a class="link" href="javascript:void(0)">Hoja de mantenimiento Diebold</a><br />
+                                   <asp:FileUpload ID="FUHojaMantenimiento" runat="server" onchange="img15(this);" /></td>
+                                    <td>
+                                        <img id="imgHojaMantenimiento" runat="server" height="600" width="550" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" /></td>
+                                </tr>
                                  <tr>
                                     <td class="title" colspan="3"><a class="link" href="javascript:void(0)">Ubicación del ATM(Mapa)</a><%--</td>--%>
                                    <%-- <td>--%>
@@ -830,6 +852,7 @@
             <asp:HiddenField ID="HFEnergia" runat="server" />
             <asp:HiddenField ID="HFClima" runat="server" />
             <asp:HiddenField ID="HFMapa" runat="server" />
+            <asp:HiddenField ID="HFHojaMantenimiento" runat="server" />
         </ContentTemplate>
     </asp:UpdatePanel>
 
