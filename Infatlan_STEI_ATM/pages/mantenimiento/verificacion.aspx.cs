@@ -161,57 +161,57 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             //td1img1.Visible = true;
             //td2img1.Visible = false;
             //IMAGEN1
-            string vImagen1 = Session["ATM_VERIF_IMG1"].ToString();
+            string vImagen1 = Convert.ToString(Session["ATM_VERIF_IMG1"]);
             string srcImgen1 = "data:image;base64," + vImagen1;
             imgDiscoDuro.Src = srcImgen1;
             HFDiscoDuro.Value = "si";
             //IMAGEN2
-            string vImagen2 = Session["ATM_VERIF_IMG2"].ToString();
+            string vImagen2 = Convert.ToString(Session["ATM_VERIF_IMG2"]);
             string srcImgen2 = "data:image;base64," + vImagen2;
             imgATMDesarmadoPS.Src = srcImgen2;
             HFATMDesarmadoPS.Value = "si";
             //IMAGEN3
-            string vImagen3 = Session["ATM_VERIF_IMG3"].ToString();
+            string vImagen3 = Convert.ToString(Session["ATM_VERIF_IMG3"]);
             string srcImgen3 = "data:image;base64," + vImagen3;
             imgATMDesarmadoPI.Src = srcImgen3;
             HFATMDesarmadoPI.Value = "si";
             //IMAGEN4
-            string vImagen4 = Session["ATM_VERIF_IMG4"].ToString();
+            string vImagen4 = Convert.ToString(Session["ATM_VERIF_IMG4"]);
             string srcImgen4 = "data:image;base64," + vImagen4;
             imgDispositivoVendor.Src = srcImgen4;
             HFDispositivoVendor.Value = "si";
             //IMAGEN5
-            string vImagen5 = Session["ATM_VERIF_IMG5"].ToString();
+            string vImagen5 = Convert.ToString(Session["ATM_VERIF_IMG5"]);
             string srcImgen5 = "data:image;base64," + vImagen5;
             imgSYSTEMINFO.Src = srcImgen5;
             HFSYSTEMINFO.Value = "si";
             //IMAGEN6
-            string vImagen6 = Session["ATM_VERIF_IMG6"].ToString();
+            string vImagen6 = Convert.ToString(Session["ATM_VERIF_IMG6"]);
             string srcImgen6 = "data:image;base64," + vImagen6;
             imgAntiskimmin.Src = srcImgen6;
             HFAntiskimmin.Value = "si";
             //IMAGEN7
-            string vImagen7 = Session["ATM_VERIF_IMG7"].ToString();
+            string vImagen7 = Convert.ToString(Session["ATM_VERIF_IMG7"]);
             string srcImgen7 = "data:image;base64," + vImagen7;
             imgMonitorFiltro.Src = srcImgen7;
             HFMonitorFiltro.Value = "si";
             //IMAGEN8
-            string vImagen8 = Session["ATM_VERIF_IMG8"].ToString();
+            string vImagen8 = Convert.ToString(Session["ATM_VERIF_IMG8"]);
             string srcImgen8 = "data:image;base64," + vImagen8;
             imgPadlewheel.Src = srcImgen8;
             HFPadlewheel.Value = "si";
             //IMAGEN9
-            string vImagen9 = Session["ATM_VERIF_IMG9"].ToString();
+            string vImagen9 = Convert.ToString(Session["ATM_VERIF_IMG9"]);
             string srcImgen9 = "data:image;base64," + vImagen9;
             imgDispDesarmado.Src = srcImgen9;
             HFDispDesarmado.Value = "si";
             //IMAGEN10
-            string vImagen10 = Session["ATM_VERIF_IMG10"].ToString();
+            string vImagen10 = Convert.ToString(Session["ATM_VERIF_IMG10"]);
             string srcImgen10 = "data:image;base64," + vImagen10;
             imgTeclado.Src = srcImgen10;
             HFTeclado.Value = "si";
             //IMAGEN11
-            string vImagen11 = Session["ATM_VERIF_IMG21"].ToString();
+            string vImagen11 = Convert.ToString(Session["ATM_VERIF_IMG21"]);
             string srcImgen11 = "data:image;base64," + vImagen11;
             HFEnergia.Value = "si";
             if (vImagen11 == "")
@@ -220,7 +220,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             else
                 imgClimatizacion.Src = srcImgen11;
             //IMAGEN12
-            string vImagen12 = Session["ATM_VERIF_IMG22"].ToString();
+            string vImagen12 = Convert.ToString(Session["ATM_VERIF_IMG22"]);
             string srcImgen12 = "data:image;base64," + vImagen12;
             HFClima.Value = "si";
             if (vImagen12 == "")
@@ -229,7 +229,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             else
                 imgEnergia.Src = srcImgen12;
             //IMAGEN13
-            string vImagen13 = Session["ATM_VERIF_IMG11"].ToString();
+            string vImagen13 = Convert.ToString(Session["ATM_VERIF_IMG11"]);
             string srcImgen13 = "data:image;base64," + vImagen13;
             imgATMLinea.Src = srcImgen13;
             HFATMLinea.Value = "si";
@@ -260,47 +260,47 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             TxFechaRegreso.Text = Session["ATM_HRFIN_VERIF_CREAR"].ToString();
             txtobseracionesVerif.Text = Session["ATM_OBSERVACIONES_VERIF_CREAR"].ToString();
 
-            if (Session["ATM_VERIF_PREG1"].ToString() == "Si")
+            if (Convert.ToString(Session["ATM_VERIF_PREG1"]) == "Si")
                 ckpasos1.SelectedValue = "1";
-            if (Session["ATM_VERIF_PREG2"].ToString() == "Si")
+            if (Convert.ToString(Session["ATM_VERIF_PREG2"]) == "Si")
                 ckpasos2.SelectedValue = "2";
-            if (Session["ATM_VERIF_PREG3"].ToString() == "Si")
+            if (Convert.ToString(Session["ATM_VERIF_PREG3"]) == "Si")
                 ckpasos3.SelectedValue = "3";
-            if (Session["ATM_VERIF_PREG4"].ToString() == "Si")
+            if (Convert.ToString(Session["ATM_VERIF_PREG4"]) == "Si")
                 ckpasos4.SelectedValue = "4";
-            if (Session["ATM_VERIF_PREG5"].ToString() == "Si")
+            if (Convert.ToString(Session["ATM_VERIF_PREG5"]) == "Si")
                 ckpasos5.SelectedValue = "5";
-            if (Session["ATM_VERIF_PREG6"].ToString() == "Si")
+            if (Convert.ToString(Session["ATM_VERIF_PREG6"]) == "Si")
                 ckpasos6.SelectedValue = "6";
-            if (Session["ATM_VERIF_PREG7"].ToString() == "Si")
+            if (Convert.ToString(Session["ATM_VERIF_PREG7"]) == "Si")
                 ckpasos7.SelectedValue = "7";
-            if (Session["ATM_VERIF_PREG8"].ToString() == "Si")
+            if (Convert.ToString(Session["ATM_VERIF_PREG8"]) == "Si")
                 ckpasos8.SelectedValue = "8";
-            if (Session["ATM_VERIF_PREG9"].ToString() == "Si")
+            if (Convert.ToString(Session["ATM_VERIF_PREG9"]) == "Si")
                 ckpasos9.SelectedValue = "9";
-            if (Session["ATM_VERIF_PREG10"].ToString() == "Si")
+            if (Convert.ToString(Session["ATM_VERIF_PREG10"]) == "Si")
                 ckpasos10.SelectedValue = "10";
-            if (Session["ATM_VERIF_PREG11"].ToString() == "Si")
+            if (Convert.ToString(Session["ATM_VERIF_PREG11"]) == "Si")
                 ckpasos11.SelectedValue = "11";
-            if (Session["ATM_VERIF_PREG12"].ToString() == "Si")
+            if (Convert.ToString(Session["ATM_VERIF_PREG12"]) == "Si")
                 ckpasos12.SelectedValue = "12";
-            if (Session["ATM_VERIF_PREG13"].ToString() == "Si")
+            if (Convert.ToString(Session["ATM_VERIF_PREG13"]) == "Si")
                 ckpasos13.SelectedValue = "13";
-            if (Session["ATM_VERIF_PREG14"].ToString() == "Si")
+            if (Convert.ToString(Session["ATM_VERIF_PREG14"]) == "Si")
                 ckpasos14.SelectedValue = "14";
-            if (Session["ATM_VERIF_PREG15"].ToString() == "Si")
+            if (Convert.ToString(Session["ATM_VERIF_PREG15"]) == "Si")
                 ckpasos15.SelectedValue = "15";
-            if (Session["ATM_VERIF_PREG16"].ToString() == "Si")
+            if (Convert.ToString(Session["ATM_VERIF_PREG16"]) == "Si")
                 ckpasos16.SelectedValue = "16";
-            if (Session["ATM_VERIF_PREG17"].ToString() == "Si")
+            if (Convert.ToString(Session["ATM_VERIF_PREG17"]) == "Si")
                 ckpasos17.SelectedValue = "17";
-            if (Session["ATM_VERIF_PREG18"].ToString() == "Si")
+            if (Convert.ToString(Session["ATM_VERIF_PREG18"]) == "Si")
                 ckpasos18.SelectedValue = "18";
-            if (Session["ATM_VERIF_PREG19"].ToString() == "Si")
+            if (Convert.ToString(Session["ATM_VERIF_PREG19"]) == "Si")
                 ckpasos19.SelectedValue = "19";
-            if (Session["ATM_VERIF_PREG20"].ToString() == "Si")
+            if (Convert.ToString(Session["ATM_VERIF_PREG20"]) == "Si")
                 ckpasos20.SelectedValue = "20";
-            if (Session["ATM_VERIF_PREG23"].ToString() == "Si")
+            if (Convert.ToString(Session["ATM_VERIF_PREG23"]) == "Si")
             {
                 dropantiskimming.SelectedValue = "1";
                 txtantiSkimming.Enabled = true;
@@ -310,13 +310,13 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 dropantiskimming.SelectedValue = "2";
                 txtantiSkimming.Enabled = false;
             }
-            txtantiSkimming.Text = Session["ATM_VERIF_RESP23"].ToString();
-            if (Session["ATM_VERIF_PREG21"].ToString() == "Si")
+            txtantiSkimming.Text = Convert.ToString(Session["ATM_VERIF_RESP23"]);
+            if (Convert.ToString(Session["ATM_VERIF_PREG21"]) == "Si")
                 RBClima.SelectedValue = "1";
             else
                 RBClima.SelectedValue = "2";
            
-            if (Session["ATM_VERIF_PREG22"].ToString() == "Si")
+            if (Convert.ToString(Session["ATM_VERIF_PREG22"]) == "Si")
                 RBEnergias.SelectedValue = "1";
             else
                 RBEnergias.SelectedValue = "2";
@@ -1129,34 +1129,57 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             else
                 respuesta20 = "No";
         }
+            /////////////////////////////////////////////////////////////////////
             //IMAGENES1
             string vArchivo = "";
             if (FUClimatizacion.FileName != "")
             {
                 Bitmap originalBMP = new Bitmap(FUClimatizacion.FileContent);
                 byte[] imageData;
-                Bitmap originalBMPReducido;
-
-               
-                    if (originalBMP.Height > 3000 && originalBMP.Width > 3000)
+                Bitmap originalBMPReducido=null;
+                long imgTamano;
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    if (originalBMP.RawFormat.Equals(ImageFormat.Jpeg))
                     {
-                        var newHeight = originalBMP.Height / 2;
-                        var newWidth = originalBMP.Width / 2;
-                        originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
-                    }
-                    else if (originalBMP.Height > 2500 && originalBMP.Width > 2500)
-                    {
-                        var newHeight = originalBMP.Height - 500;
-                        var newWidth = originalBMP.Width - 500;
-                        originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
-                        
+                        originalBMP.Save(stream, ImageFormat.Jpeg);
                     }
                     else
                     {
-                        var newHeight = originalBMP.Height;
-                        var newWidth = originalBMP.Width;
-                        originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+                        originalBMP.Save(stream, ImageFormat.Png);
                     }
+
+                    imgTamano = stream.Length;
+                    double imgPeso = (double)imgTamano / 1024;
+                    if (imgPeso >= 1000)
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                        stream.Position = 0;
+                        imageData = new byte[stream.Length];
+                        stream.Read(imageData, 0, imageData.Length);
+                        stream.Close();
+                    }
+                }
+                double imgKB = (double)imgTamano / 1024.0;
+                if (imgKB < 1000)
+                {
+                    originalBMPReducido = new Bitmap(FUClimatizacion.FileContent);
+                }
+                else {
+                        //if (originalBMP.Height > 2000 && originalBMP.Width > 2000)
+                        //{
+                            var newHeight = originalBMP.Height / 4;
+                            var newWidth = originalBMP.Width / 4;
+                            originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+                        //}
+                        //else if (originalBMP.Height < 2000 && originalBMP.Width < 2000)
+                        //{
+                        //    var newHeight = originalBMP.Height / 3;
+                        //    var newWidth = originalBMP.Width / 3;
+                        //    originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+
+                        //}
+                }
                 
                 using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
                 {
@@ -1167,23 +1190,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     stream.Close();
                 }
                  vArchivo = Convert.ToBase64String(imageData);
-            }
-            //String vNombreDepot1 = String.Empty;
-            //HttpPostedFile bufferDeposito1T = FUClimatizacion.PostedFile;
-            //byte[] vFileDeposito1 = null;
-            //string vExtension = string.Empty;
-
-            //if (bufferDeposito1T != null)
-            //{
-            //    vNombreDepot1 = FUClimatizacion.FileName;
-            //    Stream vStream = bufferDeposito1T.InputStream;
-            //    BinaryReader vReader = new BinaryReader(vStream);
-            //    vFileDeposito1 = vReader.ReadBytes((int)vStream.Length);
-            //    vExtension = System.IO.Path.GetExtension(FUClimatizacion.FileName);
-            //}
-            //String vArchivo = String.Empty;
-            //if (vFileDeposito1 != null)
-            //    vArchivo = Convert.ToBase64String(vFileDeposito1);
+            }            
             /////////////////////////////////////////////////////////////////////
             //IMAGENES2
             string vArchivo2 = "";
@@ -1191,27 +1198,50 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             {
                 Bitmap originalBMP2 = new Bitmap(FUEnergia.FileContent);
                 byte[] imageData2;
-                Bitmap originalBMPReducido2;
-
-               
-                    if (originalBMP2.Height > 3000 && originalBMP2.Width > 3000)
+                Bitmap originalBMPReducido2=null;
+                long imgTamano;
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    if (originalBMP2.RawFormat.Equals(ImageFormat.Jpeg))
                     {
-                        var newHeight2 = originalBMP2.Height / 2;
-                        var newWidth2 = originalBMP2.Width / 2;
-                        originalBMPReducido2 = new Bitmap(originalBMP2.GetThumbnailImage(newWidth2, newHeight2, null, IntPtr.Zero));
-                    }
-                    else if (originalBMP2.Height > 2500 && originalBMP2.Width > 2500)
-                    {
-                        var newHeight2 = originalBMP2.Height - 500;
-                        var newWidth2 = originalBMP2.Width - 500;
-                        originalBMPReducido2 = new Bitmap(originalBMP2.GetThumbnailImage(newWidth2, newHeight2, null, IntPtr.Zero));
+                        originalBMP2.Save(stream, ImageFormat.Jpeg);
                     }
                     else
                     {
-                        var newHeight2 = originalBMP2.Height;
-                        var newWidth2 = originalBMP2.Width;
-                        originalBMPReducido2 = new Bitmap(originalBMP2.GetThumbnailImage(newWidth2, newHeight2, null, IntPtr.Zero));
+                        originalBMP2.Save(stream, ImageFormat.Png);
                     }
+
+                    imgTamano = stream.Length;
+                    double imgPeso = (double)imgTamano / 1024;
+                    if (imgPeso >= 1000)
+                    {
+                        originalBMP2.Save(stream, ImageFormat.Png);
+                        stream.Position = 0;
+                        imageData2 = new byte[stream.Length];
+                        stream.Read(imageData2, 0, imageData2.Length);
+                        stream.Close();
+                    }
+                }
+                double imgKB = (double)imgTamano / 1024.0;
+                if (imgKB < 1000)
+                {
+                    originalBMPReducido2 = new Bitmap(FUEnergia.FileContent);
+                }
+                else
+                {
+                    //if (originalBMP2.Height > 2000 && originalBMP2.Width > 2000)
+                    //{
+                        var newHeight2 = originalBMP2.Height / 4;
+                        var newWidth2 = originalBMP2.Width / 4;
+                        originalBMPReducido2 = new Bitmap(originalBMP2.GetThumbnailImage(newWidth2, newHeight2, null, IntPtr.Zero));
+                    //}
+                    //else if (originalBMP2.Height < 2000 && originalBMP2.Width < 2000)
+                    //{
+                    //    var newHeight2 = originalBMP2.Height / 3;
+                    //    var newWidth2 = originalBMP2.Width / 3;
+                    //    originalBMPReducido2 = new Bitmap(originalBMP2.GetThumbnailImage(newWidth2, newHeight2, null, IntPtr.Zero));
+                    //}
+                }
                 
                 using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
                 {
@@ -1223,33 +1253,57 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 }
                  vArchivo2 = Convert.ToBase64String(imageData2);
             }
-
+            /////////////////////////////////////////////////////////////////////
+            //IMAGENES3
             String vArchivo3 = "";
             if (FUHojaMantenimiento.FileName != "")
             {
                 Bitmap originalBMP3 = new Bitmap(FUHojaMantenimiento.FileContent);
                 byte[] imageData3;
-                Bitmap originalBMPReducido3;
-
-                
-                    if (originalBMP3.Height > 3000 && originalBMP3.Width > 3000)
+                Bitmap originalBMPReducido3=null;
+                long imgTamano;
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    if (originalBMP3.RawFormat.Equals(ImageFormat.Jpeg))
                     {
-                        var newHeight3 = originalBMP3.Height / 2;
-                        var newWidth3 = originalBMP3.Width / 2;
-                        originalBMPReducido3 = new Bitmap(originalBMP3.GetThumbnailImage(newWidth3, newHeight3, null, IntPtr.Zero));
-                    }
-                    else if (originalBMP3.Height > 2500 && originalBMP3.Width > 2500)
-                    {
-                        var newHeight3 = originalBMP3.Height - 500;
-                        var newWidth3 = originalBMP3.Width - 500;
-                        originalBMPReducido3 = new Bitmap(originalBMP3.GetThumbnailImage(newWidth3, newHeight3, null, IntPtr.Zero));
+                        originalBMP3.Save(stream, ImageFormat.Jpeg);
                     }
                     else
                     {
-                        var newHeight3 = originalBMP3.Height;
-                        var newWidth3 = originalBMP3.Width;
-                        originalBMPReducido3 = new Bitmap(originalBMP3.GetThumbnailImage(newWidth3, newHeight3, null, IntPtr.Zero));
+                        originalBMP3.Save(stream, ImageFormat.Png);
                     }
+
+                    imgTamano = stream.Length;
+                    double imgPeso = (double)imgTamano / 1024;
+                    if (imgPeso >= 1000)
+                    {
+                        originalBMP3.Save(stream, ImageFormat.Png);
+                        stream.Position = 0;
+                        imageData3 = new byte[stream.Length];
+                        stream.Read(imageData3, 0, imageData3.Length);
+                        stream.Close();
+                    }
+                }
+                double imgKB = (double)imgTamano / 1024.0;
+                if (imgKB < 1000)
+                {
+                    originalBMPReducido3 = new Bitmap(FUHojaMantenimiento.FileContent);
+                }
+                else
+                {
+                    //if (originalBMP3.Height > 2000 && originalBMP3.Width > 2000)
+                    //{
+                        var newHeight3 = originalBMP3.Height / 4;
+                        var newWidth3 = originalBMP3.Width / 4;
+                        originalBMPReducido3 = new Bitmap(originalBMP3.GetThumbnailImage(newWidth3, newHeight3, null, IntPtr.Zero));
+                    //}
+                    //else if (originalBMP3.Height < 2000 && originalBMP3.Width < 2000)
+                    //{
+                    //    var newHeight3 = originalBMP3.Height / 2;
+                    //    var newWidth3 = originalBMP3.Width / 2;
+                    //    originalBMPReducido3 = new Bitmap(originalBMP3.GetThumbnailImage(newWidth3, newHeight3, null, IntPtr.Zero));
+                    //}
+                }
                 
                 using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
                 {
@@ -1260,23 +1314,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     stream.Close();
                 }
                 vArchivo3 = Convert.ToBase64String(imageData3);
-            }
-            //    String vNombreDepot2 = String.Empty;
-            //HttpPostedFile bufferDeposito2 = FUEnergia.PostedFile;
-            //byte[] vFileDeposito2 = null;
-            //string vExtension2 = string.Empty;
-
-            //if (bufferDeposito2 != null)
-            //{
-            //    vNombreDepot2 = FUEnergia.FileName;
-            //    Stream vStream2 = bufferDeposito2.InputStream;
-            //    BinaryReader vReader2 = new BinaryReader(vStream2);
-            //    vFileDeposito2 = vReader2.ReadBytes((int)vStream2.Length);
-            //    vExtension2 = System.IO.Path.GetExtension(FUEnergia.FileName);
-            //}
-            //String vArchivo2 = String.Empty;
-            //if (vFileDeposito2 != null)
-            //    vArchivo2 = Convert.ToBase64String(vFileDeposito2);
+            }          
             /////////////////////////////////////////////////////////////////////
             string climatizacion = null;
         string energia = null;
@@ -1712,33 +1750,63 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             //IMAGENES1
             if (FUDiscoDuro.FileName != "")
             {
-                Bitmap originalBMPReducido;
+                Bitmap originalBMPReducido = null; 
                 Bitmap originalBMP = new Bitmap(FUDiscoDuro.FileContent);
-                byte[] imageData;
-
-               
-                    if (originalBMP.Height > 3000 && originalBMP.Width > 3000)
-                    {
-                        var newHeight = originalBMP.Height / 2;
-                        var newWidth = originalBMP.Width / 2;
-                        originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
-                    }
-                    else if (originalBMP.Height > 2000 && originalBMP.Width > 2000)
-                    {
-                        var newHeight = originalBMP.Height - 500;
-                        var newWidth = originalBMP.Width - 500;
-                        originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(originalBMP.Width + 3500, originalBMP.Height + 3500, null, IntPtr.Zero));
-                        //originalBMPReducido = new Bitmap(FUDiscoDuro.FileContent);
+                byte[] imageData=null;
+                long imgTamano;
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {                  
+                    if (originalBMP.RawFormat.Equals(ImageFormat.Jpeg)){
+                       originalBMP.Save(stream, ImageFormat.Jpeg);
+                        //originalBMP.SetResolution(100, 100);
                     }
                     else
                     {
-                        var newHeight = originalBMP.Height;
-                        var newWidth = originalBMP.Width;
-                        originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(originalBMP.Width, originalBMP.Height, null, IntPtr.Zero));
-                        //originalBMPReducido = new Bitmap(FUDiscoDuro.FileContent);
+                        originalBMP.Save(stream, ImageFormat.Png);
                     }
-                
-                //Bitmap originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+                    
+                    imgTamano = stream.Length;
+                    double imgPeso = (double)imgTamano / 1024;
+                    if (imgPeso >= 1000)
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                        stream.Position = 0;
+                        imageData = new byte[stream.Length];
+                        stream.Read(imageData, 0, imageData.Length);
+                        stream.Close();
+                    }
+                }
+                double imgKB = (double)imgTamano / 1024.0;
+                if (imgKB < 1000)
+                {
+                    originalBMPReducido = new Bitmap(FUDiscoDuro.FileContent);
+                }
+                else
+                {
+                   
+                    //if (originalBMP.Height > 2000 && originalBMP.Width > 2000 )
+                    //{
+                        var newHeight = originalBMP.Height/4;
+                        var newWidth = originalBMP.Width/4;
+                        originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+                    //}
+
+                    //else if (originalBMP.Height < 2000 && originalBMP.Width < 2000)
+                    //{
+                    //    var newHeight = originalBMP.Height/3;
+                    //    var newWidth = originalBMP.Width/3;
+                    //    originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+                    //}
+                    //Bitmap newImage = new Bitmap(newWidth, newHeight);
+                    //using (Graphics gr = Graphics.FromImage(originalBMPReducido)) 
+                    //{
+                    //    gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality; 
+                    //    gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic; 
+                    //    gr.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality; 
+                    //    gr.DrawImage(originalBMPReducido, new Rectangle(0, 0, newWidth, newHeight));
+                    //}
+
+                }
 
                 using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
                 {
@@ -1748,7 +1816,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     stream.Read(imageData, 0, imageData.Length);
                     stream.Close();
                 }
-                 vArchivo1 = Convert.ToBase64String(imageData);
+                vArchivo1 = Convert.ToBase64String(imageData);
             }
             //////////////////////////////////////////////////////////////////////////////
             //IMAGENES2
@@ -1756,29 +1824,52 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             {
                 Bitmap originalBMP2 = new Bitmap(FUATMDesarmadoPS.FileContent);
                 byte[] imageData2;
-                Bitmap originalBMPReducido2;
+                Bitmap originalBMPReducido2 = null; ;
+                long imgTamano;
 
-               
-                    if (originalBMP2.Height > 3000 && originalBMP2.Width > 3000)
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    if (originalBMP2.RawFormat.Equals(ImageFormat.Jpeg))
                     {
-                        var newHeight2 = originalBMP2.Height / 2;
-                        var newWidth2 = originalBMP2.Width / 2;
-                        originalBMPReducido2 = new Bitmap(originalBMP2.GetThumbnailImage(newWidth2, newHeight2, null, IntPtr.Zero));
-                    }
-                    else if (originalBMP2.Height > 2500 && originalBMP2.Width > 2500)
-                    {
-                        var newHeight2 = originalBMP2.Height -500;
-                        var newWidth2 = originalBMP2.Width -500;
-                        originalBMPReducido2 = new Bitmap(originalBMP2.GetThumbnailImage(newWidth2, newHeight2, null, IntPtr.Zero));
-
+                        originalBMP2.Save(stream, ImageFormat.Jpeg);
                     }
                     else
                     {
-                        var newHeight2 = originalBMP2.Height;
-                        var newWidth2 = originalBMP2.Width;
-                        originalBMPReducido2 = new Bitmap(originalBMP2.GetThumbnailImage(newWidth2, newHeight2, null, IntPtr.Zero));
-
+                        originalBMP2.Save(stream, ImageFormat.Png);
                     }
+
+                    imgTamano = stream.Length;
+                    double imgPeso = (double)imgTamano / 1024;
+                    if (imgPeso >= 1000)
+                    {
+                        originalBMP2.Save(stream, ImageFormat.Png);
+                        stream.Position = 0;
+                        imageData2 = new byte[stream.Length];
+                        stream.Read(imageData2, 0, imageData2.Length);
+                        stream.Close();
+                    }
+                }
+                double imgKB = (double)imgTamano / 1024.0;
+                if (imgKB < 1000)
+                {
+                    originalBMPReducido2 = new Bitmap(FUATMDesarmadoPS.FileContent);
+                }
+                else
+                {
+                    //if (originalBMP2.Height > 2000 && originalBMP2.Width > 2000)
+                    //{
+                        var newHeight2 = originalBMP2.Height / 4;
+                        var newWidth2 = originalBMP2.Width / 4;
+                        originalBMPReducido2 = new Bitmap(originalBMP2.GetThumbnailImage(newWidth2, newHeight2, null, IntPtr.Zero));
+                    //}
+                    //else if (originalBMP2.Height < 2000 && originalBMP2.Width < 2000)
+                    //{
+                    //    var newHeight2 = originalBMP2.Height / 3;
+                    //    var newWidth2 = originalBMP2.Width / 3;
+                    //    originalBMPReducido2 = new Bitmap(originalBMP2.GetThumbnailImage(newWidth2, newHeight2, null, IntPtr.Zero));
+
+                    //}
+                }
                 
                 //Bitmap originalBMPReducido2 = new Bitmap(originalBMP2.GetThumbnailImage(newWidth2, newHeight2, null, IntPtr.Zero));
 
@@ -1798,29 +1889,53 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             {
                 Bitmap originalBMP3 = new Bitmap(FUATMDesarmadoPI.FileContent);
                 byte[] imageData3;
-                Bitmap originalBMPReducido3;
+                Bitmap originalBMPReducido3=null;
+                long imgTamano;
 
-               
-                    if (originalBMP3.Height > 3000 && originalBMP3.Width > 3000)
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    if (originalBMP3.RawFormat.Equals(ImageFormat.Jpeg))
                     {
-                        var newHeight3 = originalBMP3.Height / 2;
-                        var newWidth3 = originalBMP3.Width / 2;
-                        originalBMPReducido3 = new Bitmap(originalBMP3.GetThumbnailImage(newWidth3, newHeight3, null, IntPtr.Zero));
-                    }
-                    else if (originalBMP3.Height > 2500 && originalBMP3.Width > 2500)
-                    {
-                        var newHeight3 = originalBMP3.Height - 500;
-                        var newWidth3 = originalBMP3.Width - 500;
-                        originalBMPReducido3 = new Bitmap(originalBMP3.GetThumbnailImage(newWidth3, newHeight3, null, IntPtr.Zero));
-
+                        originalBMP3.Save(stream, ImageFormat.Jpeg);
                     }
                     else
                     {
-                        var newHeight3 = originalBMP3.Height;
-                        var newWidth3 = originalBMP3.Width;
-                        originalBMPReducido3 = new Bitmap(originalBMP3.GetThumbnailImage(newWidth3, newHeight3, null, IntPtr.Zero));
+                        originalBMP3.Save(stream, ImageFormat.Png);
                     }
-                
+
+                    imgTamano = stream.Length;
+                    double imgPeso = (double)imgTamano / 1024;
+                    if (imgPeso >= 1000)
+                    {
+                        originalBMP3.Save(stream, ImageFormat.Png);
+                        stream.Position = 0;
+                        imageData3 = new byte[stream.Length];
+                        stream.Read(imageData3, 0, imageData3.Length);
+                        stream.Close();
+                    }
+                }
+                double imgKB = (double)imgTamano / 1024.0;
+                if (imgKB < 1000)
+                {
+                    originalBMPReducido3 = new Bitmap(FUATMDesarmadoPI.FileContent);
+                }
+                else
+                {
+                    //if (originalBMP3.Height > 2000 && originalBMP3.Width > 2000)
+                    //{
+                        var newHeight3 = originalBMP3.Height / 4;
+                        var newWidth3 = originalBMP3.Width / 4;
+                        originalBMPReducido3 = new Bitmap(originalBMP3.GetThumbnailImage(newWidth3, newHeight3, null, IntPtr.Zero));
+                    //}
+                    //else if (originalBMP3.Height < 2000 && originalBMP3.Width < 2000)
+                    //{
+                    //    var newHeight3 = originalBMP3.Height / 3;
+                    //    var newWidth3 = originalBMP3.Width / 3;
+                    //    originalBMPReducido3 = new Bitmap(originalBMP3.GetThumbnailImage(newWidth3, newHeight3, null, IntPtr.Zero));
+
+                    //}
+                    
+                }
                 using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
                 {
                     originalBMPReducido3.Save(stream, ImageFormat.Jpeg);
@@ -1837,29 +1952,52 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             {
                 Bitmap originalBMP4 = new Bitmap(FUDispositivoVendor.FileContent);
                 byte[] imageData4;
-                Bitmap originalBMPReducido4;
+                Bitmap originalBMPReducido4 = null;
+                long imgTamano;
 
-                
-                    if (originalBMP4.Height > 3000 && originalBMP4.Width > 3000)
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    if (originalBMP4.RawFormat.Equals(ImageFormat.Jpeg))
                     {
-                        var newHeight4 = originalBMP4.Height / 2;
-                        var newWidth4 = originalBMP4.Width / 2;
-                        originalBMPReducido4 = new Bitmap(originalBMP4.GetThumbnailImage(newWidth4, newHeight4, null, IntPtr.Zero));
-                    }
-                    else if (originalBMP4.Height > 2500 && originalBMP4.Width > 2500)
-                    {
-                        var newHeight4 = originalBMP4.Height - 500;
-                        var newWidth4 = originalBMP4.Width - 500;
-                        originalBMPReducido4 = new Bitmap(originalBMP4.GetThumbnailImage(newWidth4, newHeight4, null, IntPtr.Zero));
+                        originalBMP4.Save(stream, ImageFormat.Jpeg);
                     }
                     else
                     {
-                        var newHeight4 = originalBMP4.Height;
-                        var newWidth4 = originalBMP4.Width;
-                        //originalBMPReducido4 = new Bitmap(originalBMP4.GetThumbnailImage(newWidth4, newHeight4, null, IntPtr.Zero));
-                        originalBMPReducido4 = new Bitmap(FUDispositivoVendor.FileContent);
+                        originalBMP4.Save(stream, ImageFormat.Png);
                     }
-                
+
+                    imgTamano = stream.Length;
+                    double imgPeso = (double)imgTamano / 1024;
+                    if (imgPeso >= 1000)
+                    {
+                        originalBMP4.Save(stream, ImageFormat.Png);
+                        stream.Position = 0;
+                        imageData4 = new byte[stream.Length];
+                        stream.Read(imageData4, 0, imageData4.Length);
+                        stream.Close();
+                    }
+                }
+                double imgKB = (double)imgTamano / 1024.0;
+                if (imgKB < 1000)
+                {
+                    originalBMPReducido4 = new Bitmap(FUDispositivoVendor.FileContent);
+                }
+                else
+                {
+                    //if (originalBMP4.Height > 2000 && originalBMP4.Width > 2000)
+                    //{
+                        var newHeight4 = originalBMP4.Height / 4;
+                        var newWidth4 = originalBMP4.Width / 4;
+                        originalBMPReducido4 = new Bitmap(originalBMP4.GetThumbnailImage(newWidth4, newHeight4, null, IntPtr.Zero));
+                    //}
+                    //else if (originalBMP4.Height < 2000 && originalBMP4.Width < 2000)
+                    //{
+                    //    var newHeight4 = originalBMP4.Height / 3;
+                    //    var newWidth4 = originalBMP4.Width / 3;
+                    //    originalBMPReducido4 = new Bitmap(originalBMP4.GetThumbnailImage(newWidth4, newHeight4, null, IntPtr.Zero));
+                    //}
+                   
+                }
                 using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
                 {
                     originalBMPReducido4.Save(stream, ImageFormat.Jpeg);
@@ -1877,28 +2015,52 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             {
                 Bitmap originalBMP5 = new Bitmap(FUSYSTEMINFO.FileContent);
                 byte[] imageData5;
-                Bitmap originalBMPReducido5;
+                Bitmap originalBMPReducido5=null;
+                long imgTamano;
 
-               
-                    if (originalBMP5.Height > 3000 && originalBMP5.Width > 3000)
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    if (originalBMP5.RawFormat.Equals(ImageFormat.Jpeg))
                     {
-                        var newHeight5 = originalBMP5.Height / 2;
-                        var newWidth5 = originalBMP5.Width / 2;
-                        originalBMPReducido5 = new Bitmap(originalBMP5.GetThumbnailImage(newWidth5, newHeight5, null, IntPtr.Zero));
-                    }
-                    else if (originalBMP5.Height > 2500 && originalBMP5.Width > 2500)
-                    {
-                        var newHeight5 = originalBMP5.Height - 500;
-                        var newWidth5 = originalBMP5.Width - 500;
-                        originalBMPReducido5 = new Bitmap(originalBMP5.GetThumbnailImage(newWidth5, newHeight5, null, IntPtr.Zero));
+                        originalBMP5.Save(stream, ImageFormat.Jpeg);
                     }
                     else
                     {
-                        var newHeight5 = originalBMP5.Height;
-                        var newWidth5 = originalBMP5.Width;
-                        originalBMPReducido5 = new Bitmap(originalBMP5.GetThumbnailImage(newWidth5, newHeight5, null, IntPtr.Zero));
+                        originalBMP5.Save(stream, ImageFormat.Png);
                     }
-                
+
+                    imgTamano = stream.Length;
+                    double imgPeso = (double)imgTamano / 1024;
+                    if (imgPeso >= 1000)
+                    {
+                        originalBMP5.Save(stream, ImageFormat.Png);
+                        stream.Position = 0;
+                        imageData5 = new byte[stream.Length];
+                        stream.Read(imageData5, 0, imageData5.Length);
+                        stream.Close();
+                    }
+                }
+                double imgKB = (double)imgTamano / 1024.0;
+                if (imgKB < 1000)
+                {
+                    originalBMPReducido5 = new Bitmap(FUSYSTEMINFO.FileContent);
+                }
+                else
+                {
+                    //if (originalBMP5.Height > 2000 && originalBMP5.Width > 2000)
+                    //{
+                        var newHeight5 = originalBMP5.Height / 4;
+                        var newWidth5 = originalBMP5.Width / 4;
+                        originalBMPReducido5 = new Bitmap(originalBMP5.GetThumbnailImage(newWidth5, newHeight5, null, IntPtr.Zero));
+                    //}
+                    //else if (originalBMP5.Height < 2000 && originalBMP5.Width < 2000)
+                    //{
+                    //    var newHeight5 = originalBMP5.Height / 3;
+                    //    var newWidth5 = originalBMP5.Width / 3;
+                    //    originalBMPReducido5 = new Bitmap(originalBMP5.GetThumbnailImage(newWidth5, newHeight5, null, IntPtr.Zero));
+                    //}
+
+                }
                 using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
                 {
                     originalBMPReducido5.Save(stream, ImageFormat.Jpeg);
@@ -1916,29 +2078,52 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             {
                 Bitmap originalBMP6 = new Bitmap(FUAntiskimmin.FileContent);
                 byte[] imageData6;
-                Bitmap originalBMPReducido6;
+                Bitmap originalBMPReducido6=null;
+                long imgTamano;
 
-                
-                    if (originalBMP6.Height > 3000 && originalBMP6.Width > 3000)
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    if (originalBMP6.RawFormat.Equals(ImageFormat.Jpeg))
                     {
-                        var newHeight6 = originalBMP6.Height / 2;
-                        var newWidth6 = originalBMP6.Width / 2;
-                        originalBMPReducido6 = new Bitmap(originalBMP6.GetThumbnailImage(newWidth6, newHeight6, null, IntPtr.Zero));
-                    }
-                    else if (originalBMP6.Height > 2500 && originalBMP6.Width > 2500)
-                    {
-                        var newHeight6 = originalBMP6.Height - 500;
-                        var newWidth6 = originalBMP6.Width - 500;
-                        originalBMPReducido6 = new Bitmap(originalBMP6.GetThumbnailImage(newWidth6, newHeight6, null, IntPtr.Zero));
-
+                        originalBMP6.Save(stream, ImageFormat.Jpeg);
                     }
                     else
                     {
-                        var newHeight6 = originalBMP6.Height;
-                        var newWidth6 = originalBMP6.Width;
-                        originalBMPReducido6 = new Bitmap(originalBMP6.GetThumbnailImage(newWidth6, newHeight6, null, IntPtr.Zero));
-
+                        originalBMP6.Save(stream, ImageFormat.Png);
                     }
+
+                    imgTamano = stream.Length;
+                    double imgPeso = (double)imgTamano / 1024;
+                    if (imgPeso >= 1000)
+                    {
+                        originalBMP6.Save(stream, ImageFormat.Png);
+                        stream.Position = 0;
+                        imageData6 = new byte[stream.Length];
+                        stream.Read(imageData6, 0, imageData6.Length);
+                        stream.Close();
+                    }
+                }
+                double imgKB = (double)imgTamano / 1024.0;
+                if (imgKB < 1000)
+                {
+                    originalBMPReducido6 = new Bitmap(FUAntiskimmin.FileContent);
+                }
+                else
+                {
+                    //if (originalBMP6.Height > 2000 && originalBMP6.Width > 2000)
+                    //{
+                        var newHeight6 = originalBMP6.Height / 4;
+                        var newWidth6 = originalBMP6.Width / 4;
+                        originalBMPReducido6 = new Bitmap(originalBMP6.GetThumbnailImage(newWidth6, newHeight6, null, IntPtr.Zero));
+                    //}
+                    //else if (originalBMP6.Height < 2000 && originalBMP6.Width < 2000)
+                    //{
+                    //    var newHeight6 = originalBMP6.Height / 3;
+                    //    var newWidth6 = originalBMP6.Width / 3;
+                    //    originalBMPReducido6 = new Bitmap(originalBMP6.GetThumbnailImage(newWidth6, newHeight6, null, IntPtr.Zero));
+
+                    //}
+                }
                 
                 using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
                 {
@@ -1957,27 +2142,51 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             {
                 Bitmap originalBMP7 = new Bitmap(FUMonitorFiltro.FileContent);
                 byte[] imageData7;
-                Bitmap originalBMPReducido7;
+                Bitmap originalBMPReducido7=null;
+                long imgTamano;
 
-                
-                    if (originalBMP7.Height > 3000 && originalBMP7.Width > 3000)
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    if (originalBMP7.RawFormat.Equals(ImageFormat.Jpeg))
                     {
-                        var newHeight7 = originalBMP7.Height / 2;
-                        var newWidth7 = originalBMP7.Width / 2;
-                        originalBMPReducido7 = new Bitmap(originalBMP7.GetThumbnailImage(newWidth7, newHeight7, null, IntPtr.Zero));
-                    }
-                    else if (originalBMP7.Height > 2500 && originalBMP7.Width > 2500)
-                    {
-                        var newHeight7 = originalBMP7.Height - 500;
-                        var newWidth7 = originalBMP7.Width - 500;
-                        originalBMPReducido7 = new Bitmap(originalBMP7.GetThumbnailImage(newWidth7, newHeight7, null, IntPtr.Zero));                      
+                        originalBMP7.Save(stream, ImageFormat.Jpeg);
                     }
                     else
                     {
-                        var newHeight7 = originalBMP7.Height;
-                        var newWidth7 = originalBMP7.Width;
-                        originalBMPReducido7 = new Bitmap(originalBMP7.GetThumbnailImage(newWidth7, newHeight7, null, IntPtr.Zero));
+                        originalBMP7.Save(stream, ImageFormat.Png);
                     }
+
+                    imgTamano = stream.Length;
+                    double imgPeso = (double)imgTamano / 1024;
+                    if (imgPeso >= 1000)
+                    {
+                        originalBMP7.Save(stream, ImageFormat.Png);
+                        stream.Position = 0;
+                        imageData7 = new byte[stream.Length];
+                        stream.Read(imageData7, 0, imageData7.Length);
+                        stream.Close();
+                    }
+                }
+                double imgKB = (double)imgTamano / 1024.0;
+                if (imgKB < 1000)
+                {
+                    originalBMPReducido7 = new Bitmap(FUMonitorFiltro.FileContent);
+                }
+                else
+                {
+                    //if (originalBMP7.Height > 2000 && originalBMP7.Width > 2000)
+                    //{
+                        var newHeight7 = originalBMP7.Height / 4;
+                        var newWidth7 = originalBMP7.Width / 4;
+                        originalBMPReducido7 = new Bitmap(originalBMP7.GetThumbnailImage(newWidth7, newHeight7, null, IntPtr.Zero));
+                    //}
+                    //else if (originalBMP7.Height < 2000 && originalBMP7.Width < 2000)
+                    //{
+                    //    var newHeight7 = originalBMP7.Height / 3;
+                    //    var newWidth7 = originalBMP7.Width / 3;
+                    //    originalBMPReducido7 = new Bitmap(originalBMP7.GetThumbnailImage(newWidth7, newHeight7, null, IntPtr.Zero));
+                    //}
+                } 
                 
                 using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
                 {
@@ -1996,28 +2205,51 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             {
                 Bitmap originalBMP8 = new Bitmap(FUPadlewheel.FileContent);
                 byte[] imageData8;
-                Bitmap originalBMPReducido8;
+                Bitmap originalBMPReducido8=null;
+                long imgTamano;
 
-                
-                
-                    if (originalBMP8.Height > 3000 && originalBMP8.Width > 3000)
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    if (originalBMP8.RawFormat.Equals(ImageFormat.Jpeg))
                     {
-                        var newHeight8 = originalBMP8.Height / 2;
-                        var newWidth8 = originalBMP8.Width / 2;
-                        originalBMPReducido8 = new Bitmap(originalBMP8.GetThumbnailImage(newWidth8, newHeight8, null, IntPtr.Zero));
-                    }
-                    else if (originalBMP8.Height > 2500 && originalBMP8.Width > 2500)
-                    {
-                        var newHeight8 = originalBMP8.Height - 500;
-                        var newWidth8 = originalBMP8.Width - 500;                 
-                        originalBMPReducido8 = new Bitmap(originalBMP8.GetThumbnailImage(newWidth8, newHeight8, null, IntPtr.Zero));
+                        originalBMP8.Save(stream, ImageFormat.Jpeg);
                     }
                     else
                     {
-                        var newHeight8 = originalBMP8.Height;
-                        var newWidth8 = originalBMP8.Width;
-                        originalBMPReducido8 = new Bitmap(originalBMP8.GetThumbnailImage(newWidth8, newHeight8, null, IntPtr.Zero));
+                        originalBMP8.Save(stream, ImageFormat.Png);
                     }
+
+                    imgTamano = stream.Length;
+                    double imgPeso = (double)imgTamano / 1024;
+                    if (imgPeso >= 1000)
+                    {
+                        originalBMP8.Save(stream, ImageFormat.Png);
+                        stream.Position = 0;
+                        imageData8 = new byte[stream.Length];
+                        stream.Read(imageData8, 0, imageData8.Length);
+                        stream.Close();
+                    }
+                }
+                double imgKB = (double)imgTamano / 1024.0;
+                if (imgKB < 1000)
+                {
+                    originalBMPReducido8 = new Bitmap(FUPadlewheel.FileContent);
+                }
+                else
+                {
+                    //if (originalBMP8.Height > 2000 && originalBMP8.Width > 2000)
+                    //{
+                        var newHeight8 = originalBMP8.Height / 4;
+                        var newWidth8 = originalBMP8.Width / 4;
+                        originalBMPReducido8 = new Bitmap(originalBMP8.GetThumbnailImage(newWidth8, newHeight8, null, IntPtr.Zero));
+                    //}
+                    //else if (originalBMP8.Height < 2000 && originalBMP8.Width < 2000)
+                    //{
+                    //    var newHeight8 = originalBMP8.Height / 3;
+                    //    var newWidth8 = originalBMP8.Width / 3;
+                    //    originalBMPReducido8 = new Bitmap(originalBMP8.GetThumbnailImage(newWidth8, newHeight8, null, IntPtr.Zero));
+                    //}
+                }  
                 
                 using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
                 {
@@ -2036,29 +2268,51 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             {
                 Bitmap originalBMP9 = new Bitmap(FUDispDesarmado.FileContent);
                 byte[] imageData9;
-                Bitmap originalBMPReducido9;
+                Bitmap originalBMPReducido9=null;
+                long imgTamano;
 
-               
-                    if (originalBMP9.Height > 3000 && originalBMP9.Width > 3000)
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    if (originalBMP9.RawFormat.Equals(ImageFormat.Jpeg))
                     {
-                        var newHeight9 = originalBMP9.Height / 2;
-                        var newWidth9 = originalBMP9.Width / 2;
-                        originalBMPReducido9 = new Bitmap(originalBMP9.GetThumbnailImage(newWidth9, newHeight9, null, IntPtr.Zero));
-                    }
-                    else if (originalBMP9.Height > 2500 && originalBMP9.Width > 2500)
-                    {
-                        var newHeight9 = originalBMP9.Height - 500;
-                        var newWidth9 = originalBMP9.Width - 500;                        
-                        originalBMPReducido9 = new Bitmap(originalBMP9.GetThumbnailImage(newWidth9, newHeight9, null, IntPtr.Zero));
+                        originalBMP9.Save(stream, ImageFormat.Jpeg);
                     }
                     else
                     {
-                        var newHeight9 = originalBMP9.Height;
-                        var newWidth9 = originalBMP9.Width;
-                        originalBMPReducido9 = new Bitmap(originalBMP9.GetThumbnailImage(newWidth9, newHeight9, null, IntPtr.Zero));
-                        
+                        originalBMP9.Save(stream, ImageFormat.Png);
                     }
-                
+
+                    imgTamano = stream.Length;
+                    double imgPeso = (double)imgTamano / 1024;
+                    if (imgPeso >= 1000)
+                    {
+                        originalBMP9.Save(stream, ImageFormat.Png);
+                        stream.Position = 0;
+                        imageData9 = new byte[stream.Length];
+                        stream.Read(imageData9, 0, imageData9.Length);
+                        stream.Close();
+                    }
+                }
+                double imgKB = (double)imgTamano / 1024.0;
+                if (imgKB < 1000)
+                {
+                    originalBMPReducido9 = new Bitmap(FUDispDesarmado.FileContent);
+                }
+                else
+                {
+                    //if (originalBMP9.Height > 2000 && originalBMP9.Width > 2000)
+                    //{
+                        var newHeight9 = originalBMP9.Height / 4;
+                        var newWidth9 = originalBMP9.Width / 4;
+                        originalBMPReducido9 = new Bitmap(originalBMP9.GetThumbnailImage(newWidth9, newHeight9, null, IntPtr.Zero));
+                    //}
+                    //else if (originalBMP9.Height < 2000 && originalBMP9.Width < 2000)
+                    //{
+                    //    var newHeight9 = originalBMP9.Height / 3;
+                    //    var newWidth9 = originalBMP9.Width / 3;
+                    //    originalBMPReducido9 = new Bitmap(originalBMP9.GetThumbnailImage(newWidth9, newHeight9, null, IntPtr.Zero));
+                    //}
+                }
                 using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
                 {
                     originalBMPReducido9.Save(stream, ImageFormat.Jpeg);
@@ -2076,27 +2330,51 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             {
                 Bitmap originalBMP10 = new Bitmap(FUTeclado.FileContent);
                 byte[] imageData10;
-                Bitmap originalBMPReducido10;
+                Bitmap originalBMPReducido10=null;
+                long imgTamano;
 
-               
-                    if (originalBMP10.Height > 3000 && originalBMP10.Width > 3000)
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    if (originalBMP10.RawFormat.Equals(ImageFormat.Jpeg))
                     {
-                        var newHeight10 = originalBMP10.Height / 2;
-                        var newWidth10 = originalBMP10.Width / 2;
-                        originalBMPReducido10 = new Bitmap(originalBMP10.GetThumbnailImage(newWidth10, newHeight10, null, IntPtr.Zero));
-                    }
-                    else if (originalBMP10.Height > 2500 && originalBMP10.Width > 2500)
-                    {
-                        var newHeight10 = originalBMP10.Height - 500;
-                        var newWidth10 = originalBMP10.Width - 500;                        
-                        originalBMPReducido10 = new Bitmap(originalBMP10.GetThumbnailImage(newWidth10, newHeight10, null, IntPtr.Zero));
+                        originalBMP10.Save(stream, ImageFormat.Jpeg);
                     }
                     else
                     {
-                        var newHeight10 = originalBMP10.Height;
-                        var newWidth10 = originalBMP10.Width;
-                        originalBMPReducido10 = new Bitmap(originalBMP10.GetThumbnailImage(newWidth10, newHeight10, null, IntPtr.Zero));
+                        originalBMP10.Save(stream, ImageFormat.Png);
                     }
+
+                    imgTamano = stream.Length;
+                    double imgPeso = (double)imgTamano / 1024;
+                    if (imgPeso > 1000)
+                    {
+                        originalBMP10.Save(stream, ImageFormat.Png);
+                        stream.Position = 0;
+                        imageData10 = new byte[stream.Length];
+                        stream.Read(imageData10, 0, imageData10.Length);
+                        stream.Close();
+                    }
+                }
+                double imgKB = (double)imgTamano / 1024.0;
+                if (imgKB < 1000)
+                {
+                    originalBMPReducido10 = new Bitmap(FUTeclado.FileContent);
+                }
+                else
+                {
+                    //if (originalBMP10.Height > 2000 && originalBMP10.Width > 2000)
+                    //{
+                        var newHeight10 = originalBMP10.Height / 4;
+                        var newWidth10 = originalBMP10.Width / 4;
+                        originalBMPReducido10 = new Bitmap(originalBMP10.GetThumbnailImage(newWidth10, newHeight10, null, IntPtr.Zero));
+                    //}
+                    //else if (originalBMP10.Height < 2000 && originalBMP10.Width < 2000)
+                    //{
+                    //    var newHeight10 = originalBMP10.Height / 3;
+                    //    var newWidth10 = originalBMP10.Width / 3;
+                    //    originalBMPReducido10 = new Bitmap(originalBMP10.GetThumbnailImage(newWidth10, newHeight10, null, IntPtr.Zero));
+                    //}
+                }  
                 
                 using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
                 {
@@ -2115,28 +2393,51 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             {
                 Bitmap originalBMP11 = new Bitmap(FUATMLinea.FileContent);
                 byte[] imageData11;
-                Bitmap originalBMPReducido11;
+                Bitmap originalBMPReducido11=null;
+                long imgTamano;
 
-                
-                    if (originalBMP11.Height > 3000 && originalBMP11.Width > 3000)
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    if (originalBMP11.RawFormat.Equals(ImageFormat.Jpeg))
                     {
-                        var newHeight11 = originalBMP11.Height / 2;
-                        var newWidth11 = originalBMP11.Width / 2;
-                        originalBMPReducido11 = new Bitmap(originalBMP11.GetThumbnailImage(newWidth11, newHeight11, null, IntPtr.Zero));
-                    }
-                    else if (originalBMP11.Height > 2500 && originalBMP11.Width > 2500)
-                    {
-                        var newHeight11 = originalBMP11.Height - 500;
-                        var newWidth11 = originalBMP11.Width - 500;                        
-                        originalBMPReducido11 = new Bitmap(originalBMP11.GetThumbnailImage(newWidth11, newHeight11, null, IntPtr.Zero));
+                        originalBMP11.Save(stream, ImageFormat.Jpeg);
                     }
                     else
                     {
-                        var newHeight11 = originalBMP11.Height;
-                        var newWidth11 = originalBMP11.Width;
-                        originalBMPReducido11 = new Bitmap(originalBMP11.GetThumbnailImage(newWidth11, newHeight11, null, IntPtr.Zero));
+                        originalBMP11.Save(stream, ImageFormat.Png);
                     }
-                
+
+                    imgTamano = stream.Length;
+                    double imgPeso = (double)imgTamano / 1024;
+                    if (imgPeso >= 1000)
+                    {
+                        originalBMP11.Save(stream, ImageFormat.Png);
+                        stream.Position = 0;
+                        imageData11 = new byte[stream.Length];
+                        stream.Read(imageData11, 0, imageData11.Length);
+                        stream.Close();
+                    }
+                }
+                double imgKB = (double)imgTamano / 1024.0;
+                if (imgKB < 1000)
+                {
+                    originalBMPReducido11 = new Bitmap(FUATMLinea.FileContent);
+                }
+                else {
+                    //if (originalBMP11.Height > 2000 && originalBMP11.Width > 2000)
+                    //{
+                        var newHeight11 = originalBMP11.Height / 4;
+                        var newWidth11 = originalBMP11.Width / 4;
+                        originalBMPReducido11 = new Bitmap(originalBMP11.GetThumbnailImage(newWidth11, newHeight11, null, IntPtr.Zero));
+                    //}
+                    //else if (originalBMP11.Height < 2000 && originalBMP11.Width < 2000)
+                    //{
+                    //    var newHeight11 = originalBMP11.Height / 3;
+                    //    var newWidth11 = originalBMP11.Width / 3;
+                    //    originalBMPReducido11 = new Bitmap(originalBMP11.GetThumbnailImage(newWidth11, newHeight11, null, IntPtr.Zero));
+                    //}
+                }
+                   
                 using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
                 {
                     originalBMPReducido11.Save(stream, ImageFormat.Jpeg);
@@ -2316,6 +2617,17 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 if (Convert.ToString(Session["ATM_IDZONA_VERIF_CREAR"]) == "3")
                     vCorreoEncargadoZona = "acalderon@bancatlan.hn";
 
+                string vDepto = "";
+                DataTable vDatosDepto = new DataTable();
+                String vQueryDepto = "STEISP_ATM_Generales 48,'" + txtcodATM.Text + "'";
+                vDatosDepto = vConexion.ObtenerTabla(vQueryDepto);
+                foreach (DataRow item in vDatosDepto.Rows)
+                {
+                    vDepto = item["Depto"].ToString();
+                }
+                if (vDepto == "18")
+                    vCorreoEncargadoZona = "acalderon@bancatlan.hn;jdgarcia@bancatlan.hn";
+
                 string vQueryD = "STEISP_ATM_Generales 33,'" + Session["ATM_USU_RESPONSABLE_MANT"] + "'";
                 DataTable vDatosTecnicoResponsable = vConexion.ObtenerTabla(vQueryD);
                 string vQueryTecnicos = "STEISP_ATM_Generales 39,'" + Session["ATM_COD_VERIF"] + "'";
@@ -2404,6 +2716,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     {
                         ActualizarVerifATM();
                         ActualizarATM();
+
                         //ActualizarMateriales();                                                                     
                         //ImgVerificacion();
                         ImgVerificacionReducido();
@@ -2431,9 +2744,9 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         }
 
         protected void btnModalCerrarVerif_Click(object sender, EventArgs e)
-            {
+        {
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
-            }
+        }
 
         protected void btnRechazarVerif_Click(object sender, EventArgs e)
         {

@@ -112,10 +112,10 @@
                                                     <label class="col-form-label">Modelo de ATM</label>
                                                     <asp:DropDownList runat="server" AutoPostBack="true" ID="DDLModeloATM" OnTextChanged="DDLModeloATM_TextChanged" CssClass="form-control"></asp:DropDownList>
                                                 </div>
-                                                <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
-                                                    <label class="col-form-label">Tipo de modelo de ATM</label>
-                                                    <asp:DropDownList runat="server" ID="DDLDetalleModelo" CssClass="form-control col-12"></asp:DropDownList>
-                                                </div>
+                                               <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
+                                            <label class="col-form-label">Inventario de ATM</label>
+                                            <asp:TextBox runat="server" CssClass="form-control" ID="txtinventarioATM"></asp:TextBox>
+                                        </div>
                                             </div>
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
@@ -181,21 +181,18 @@
                                             <label class="col-form-label">Capacidad del disco(GB)</label>
                                             <asp:TextBox runat="server" CssClass="form-control" ID="txtcapacidadDisco" TextMode="Number"></asp:TextBox>
                                         </div>
-                                           <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
-                                            <label class="col-form-label">Inventario de ATM</label>
-                                            <asp:TextBox runat="server" CssClass="form-control" ID="txtinventarioATM"></asp:TextBox>
+                                         
+                                        <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
+                                            <label class="col-form-label">Código de ubicación</label>
+                                            <asp:TextBox runat="server" CssClass="form-control" Enabled="false" ID="txtcodUbicacion"></asp:TextBox>
                                         </div>
-                                       
                                     </div>
                                     <!--/SEXTA FILA-->
 
                                     <!--SEPTIMA FILA-->
                                     <div class="row col-12">
                                       
-                                          <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
-                                            <label class="col-form-label">Código de ubicación</label>
-                                            <asp:TextBox runat="server" CssClass="form-control" Enabled="false" ID="txtcodUbicacion"></asp:TextBox>
-                                        </div>
+                                         
                                         <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
                                             <label class="col-form-label">Latitud</label>
                                             <asp:TextBox runat="server" CssClass="form-control" ID="txtlatitud"></asp:TextBox>
@@ -205,6 +202,8 @@
                                             <label class="col-form-label">Longitud</label>
                                             <asp:TextBox runat="server" CssClass="form-control" ID="txtlongitud"></asp:TextBox>
                                         </div>
+                                        <div class="row col-4 align-self-center" style="margin-left: auto; margin-right: auto">
+                                            </div>
                                     </div>
                                     <!--/SEPTIMA FILA-->
                                     

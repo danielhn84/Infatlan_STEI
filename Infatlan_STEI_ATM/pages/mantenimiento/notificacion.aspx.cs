@@ -538,6 +538,16 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 if (Convert.ToString(Session["IDZona"]) == "3")
                     vCorreoEncargadoZona = "acalderon@bancatlan.hn";
 
+                string vDepto = "";
+                DataTable vDatosDepto = new DataTable();
+                String vQueryDepto = "STEISP_ATM_Generales 48,'" + txtcodATMNotif.Text + "'";
+                vDatosDepto = vConexion.ObtenerTabla(vQueryDepto);
+                foreach (DataRow item in vDatosDepto.Rows)
+                {
+                    vDepto = item["Depto"].ToString();
+                }
+                if(vDepto=="18")
+                    vCorreoEncargadoZona = "acalderon@bancatlan.hn;jdgarcia@bancatlan.hn";
 
                 string vReporteViaticos = "Notificacion";
                 string vCorreoAdmin = "acedillo@bancatlan.hn";
@@ -961,7 +971,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             txtsucursalNotif.Text = Session["SucursalATM"].ToString();
             txtipNotif.Text = Session["IPATM"].ToString();
             txtzonaNotif.Text = Session["zonaATM"].ToString();
-            DLLtecResponsable.SelectedIndex = CargarInformacionDDL(DLLtecResponsable, Session["usuario"].ToString());           
+            DLLtecResponsable.SelectedIndex = CargarInformacionDDL(DLLtecResponsable, Session["usuarioR"].ToString());           
             txtidentidadTecResponsable.Text = Session["identidad"].ToString();
 
         }

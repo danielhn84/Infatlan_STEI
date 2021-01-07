@@ -17,7 +17,10 @@ namespace Infatlan_STEI
             try{
                 if (!Convert.ToBoolean(Session["AUTH"]))
                     Response.Redirect("/login.aspx");
-                
+
+                DataTable vDatosP = (DataTable)Session["AUTHCLASS"];
+                string ver = Session["USUARIO"].ToString();
+
                 if (!Page.IsPostBack){
                     if (!vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Consulta)
                         Response.Redirect("/default.aspx");
@@ -90,6 +93,16 @@ namespace Infatlan_STEI
                     LIReprogramar.Visible = false;
                     LICalendario.Visible = false;
                     LIAvances.Visible = false;
+                    LICancelar.Visible = false;
+                    LICambiarFecha.Visible = false;
+
+                    LIAvancesCorrectivo.Visible = false;
+                    LICorrectivoNotif.Visible = false;
+                    LICorrectivoVerifCrea.Visible = false;
+                    LICorrectivoVerifAprobar.Visible = false;
+                    LICorrectivoVerifDevolver.Visible = false;
+
+
 
 
                     DataTable vDatosMain = new DataTable();
@@ -100,6 +113,8 @@ namespace Infatlan_STEI
                         if (item["permisos"].ToString()=="True")
                         {
                             LIPermisos.Visible = true;
+                            LICancelar.Visible = true;
+                            LICambiarFecha.Visible = true;
                         }
                         if (item["ATM"].ToString() == "True")
                         {
@@ -110,6 +125,7 @@ namespace Infatlan_STEI
                             LINotifATM.Visible = true;
                             LIModCrear.Visible = true;
                             LIModAprobar.Visible = true;
+                            LICorrectivoNotif.Visible = true;
                         }
                         //if (item["aprobarNotif"].ToString() == "True")
                         //{
@@ -120,17 +136,21 @@ namespace Infatlan_STEI
                         {
                             LIVerifATM.Visible = true;
                             LIVerCrear.Visible = true;
-                        }
-                        if (item["crearVerif"].ToString() == "True")
-                        {
-                            LIVerifATM.Visible = true;
-                            LIVerCrear.Visible = true;
+                            LICorrectivoVerifCrea.Visible = true;
+                            LICorrectivoVerifDevolver.Visible = true;
                             LIDevoluciones.Visible = true;
                         }
+                        //if (item["crearVerif"].ToString() == "True")
+                        //{
+                        //    LIVerifATM.Visible = true;
+                        //    LIVerCrear.Visible = true;
+                        //    LIDevoluciones.Visible = true;
+                        //}
                         if (item["aprobarVerif"].ToString() == "True")
                         {
                             LIVerifATM.Visible = true;
                             LIVerAprobar.Visible = true;
+                            LICorrectivoVerifAprobar.Visible = true;
                         }
                         if (item["reprogramar"].ToString() == "True")
                         {
@@ -143,6 +163,7 @@ namespace Infatlan_STEI
                         if (item["avance"].ToString() == "True")
                         {
                             LIAvances.Visible = true;
+                            LIAvancesCorrectivo.Visible = true;
                         }
 
                     }

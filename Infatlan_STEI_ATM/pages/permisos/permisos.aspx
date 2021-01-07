@@ -40,8 +40,8 @@
                             <asp:dropdownlist AutoPostBack="true" id="DDLUsuarios" CssClass="form-control" runat="server" OnSelectedIndexChanged="DDLUsuarios_SelectedIndexChanged"></asp:dropdownlist>
                         </div>
                     </div>
-                    <div class="table-responsive m-t-40">
-                         <table runat="server" id="TBLPermisos" visible="false" class="tablesaw table-bordered table-hover table no-wrap" data-tablesaw-mode="swipe"
+                    <div class="table-responsive m-t-40" runat="server" visible="false" id="DIVTable">
+                         <table runat="server" id="TBLPermisos" visible="true" class="tablesaw table-bordered table-hover table no-wrap" data-tablesaw-mode="swipe"
                 data-tablesaw-sortable data-tablesaw-sortable-switch data-tablesaw-minimap
                 data-tablesaw-mode-switch>
                 <thead>

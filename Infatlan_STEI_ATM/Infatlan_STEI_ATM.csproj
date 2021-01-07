@@ -3366,6 +3366,14 @@
     <Content Include="Global.asax" />
     <Content Include="img\logo.png" />
     <Content Include="pages\calendario\avances.aspx" />
+    <Content Include="pages\correctivo\aprobarVerifCorrectivo.aspx" />
+    <Content Include="pages\correctivo\avancesVerifCorrectivo.aspx" />
+    <Content Include="pages\correctivo\crearVerifCorrectivo.aspx" />
+    <Content Include="pages\correctivo\devolverVerifCorrectivo.aspx" />
+    <Content Include="pages\correctivo\mantCorrectivoNotificacion.aspx" />
+    <Content Include="pages\correctivo\mantCorrectivoVerificacion.aspx" />
+    <Content Include="pages\correctivo\notificarCorrectivo.aspx" />
+    <Content Include="pages\correctivo\reprogramarCorrectivo.aspx" />
     <Content Include="pages\devolver\rechazados.aspx" />
     <Content Include="pages\mantenimiento\buscarAprobarVerificacion.aspx" />
     <Content Include="pages\mantenimiento\buscarVerificacion.aspx" />
@@ -3410,6 +3418,7 @@
     <Content Include="pages\mantenimiento\aprobarNotificacion.aspx" />
     <Content Include="pages\mantenimiento\aprobarVerificacion.aspx" />
     <Content Include="pages\mantenimiento\buscarAprobarNotificacion.aspx" />
+    <Content Include="pages\mantenimiento\cancelarMantenimiento.aspx" />
     <Content Include="pages\material\buscarAprobar.aspx" />
     <Content Include="pages\material\buscarMaterial.aspx" />
     <Content Include="pages\material\material.aspx" />
@@ -3422,6 +3431,7 @@
     <Content Include="pages\ATM\modelo.aspx" />
     <Content Include="pages\ATM\procesador.aspx" />
     <Content Include="pages\Prueba.aspx" />
+    <Content Include="pages\reprogramar\newFecha.aspx" />
     <Content Include="pages\reprogramar\reprogramacion.aspx" />
     <Content Include="pages\ATM\so.aspx" />
     <Content Include="pages\ATM\teclado.aspx" />
@@ -3470,6 +3480,62 @@
     </Compile>
     <Compile Include="pages\calendario\avances.aspx.designer.cs">
       <DependentUpon>avances.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\correctivo\aprobarVerifCorrectivo.aspx.cs">
+      <DependentUpon>aprobarVerifCorrectivo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\correctivo\aprobarVerifCorrectivo.aspx.designer.cs">
+      <DependentUpon>aprobarVerifCorrectivo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\correctivo\avancesVerifCorrectivo.aspx.cs">
+      <DependentUpon>avancesVerifCorrectivo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\correctivo\avancesVerifCorrectivo.aspx.designer.cs">
+      <DependentUpon>avancesVerifCorrectivo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\correctivo\crearVerifCorrectivo.aspx.cs">
+      <DependentUpon>crearVerifCorrectivo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\correctivo\crearVerifCorrectivo.aspx.designer.cs">
+      <DependentUpon>crearVerifCorrectivo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\correctivo\devolverVerifCorrectivo.aspx.cs">
+      <DependentUpon>devolverVerifCorrectivo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\correctivo\devolverVerifCorrectivo.aspx.designer.cs">
+      <DependentUpon>devolverVerifCorrectivo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\correctivo\mantCorrectivoNotificacion.aspx.cs">
+      <DependentUpon>mantCorrectivoNotificacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\correctivo\mantCorrectivoNotificacion.aspx.designer.cs">
+      <DependentUpon>mantCorrectivoNotificacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\correctivo\mantCorrectivoVerificacion.aspx.cs">
+      <DependentUpon>mantCorrectivoVerificacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\correctivo\mantCorrectivoVerificacion.aspx.designer.cs">
+      <DependentUpon>mantCorrectivoVerificacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\correctivo\notificarCorrectivo.aspx.cs">
+      <DependentUpon>notificarCorrectivo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\correctivo\notificarCorrectivo.aspx.designer.cs">
+      <DependentUpon>notificarCorrectivo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\correctivo\reprogramarCorrectivo.aspx.cs">
+      <DependentUpon>reprogramarCorrectivo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\correctivo\reprogramarCorrectivo.aspx.designer.cs">
+      <DependentUpon>reprogramarCorrectivo.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\devolver\rechazados.aspx.cs">
       <DependentUpon>rechazados.aspx</DependentUpon>
@@ -3528,6 +3594,13 @@
     </Compile>
     <Compile Include="pages\mantenimiento\buscarAprobarNotificacion.aspx.designer.cs">
       <DependentUpon>buscarAprobarNotificacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\mantenimiento\cancelarMantenimiento.aspx.cs">
+      <DependentUpon>cancelarMantenimiento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\mantenimiento\cancelarMantenimiento.aspx.designer.cs">
+      <DependentUpon>cancelarMantenimiento.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\material\buscarAprobar.aspx.cs">
       <DependentUpon>buscarAprobar.aspx</DependentUpon>
@@ -3613,6 +3686,13 @@
     <Compile Include="pages\Prueba.aspx.designer.cs">
       <DependentUpon>Prueba.aspx</DependentUpon>
     </Compile>
+    <Compile Include="pages\reprogramar\newFecha.aspx.cs">
+      <DependentUpon>newFecha.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\reprogramar\newFecha.aspx.designer.cs">
+      <DependentUpon>newFecha.aspx</DependentUpon>
+    </Compile>
     <Compile Include="pages\reprogramar\reprogramacion.aspx.cs">
       <DependentUpon>reprogramacion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3691,6 +3771,16 @@
       <DependentUpon>versionSw.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ReportExecutionService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\icons\font-awesome\fonts\fontawesome-webfont.eot" />
@@ -4860,6 +4950,33 @@
     <Content Include="scss\widgets\widgets.scss" />
     <Content Include="pages\plantillas\PlantillaATM.xlsx" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Web References\ReportExecutionService\DocumentMapNode.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\ReportExecutionService\ExecutionInfo.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\ReportExecutionService\ExecutionInfo2.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\ReportExecutionService\ExecutionInfo3.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\ReportExecutionService\Extension.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\ReportExecutionService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\ReportExecutionService\reportexecution2005.wsdl" />
+    <Content Include="Web References\ReportExecutionService\Warning.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -4867,7 +4984,25 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://10.128.0.52/reportserver/reportexecution2005.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ReportExecutionService\</RelPath>
+      <UpdateFromURL>http://10.128.0.52/reportserver/reportexecution2005.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Infatlan_STEI_ATM_ReportExecutionService_ReportExecutionService</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
