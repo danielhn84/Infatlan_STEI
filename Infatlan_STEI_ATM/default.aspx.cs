@@ -52,6 +52,14 @@ namespace Infatlan_STEI_ATM
                 DataTable vDatos3 = vConexion.ObtenerTabla(vQuery3);
                 H2MantRealizado.InnerText = vDatos3.Rows[0]["Contar"].ToString();
 
+                String vQuery5 = "[STEISP_ATM_GeneralesCorrectivo] 11, '" + Session["USUARIO"].ToString() + "'";
+                DataTable vDatos5 = vConexion.ObtenerTabla(vQuery5);
+                H1MantCorAsignados.InnerText = vDatos5.Rows[0]["Contar"].ToString();
+
+                String vQuery6 = "[STEISP_ATM_GeneralesCorrectivo] 12, '" + Session["USUARIO"].ToString() + "'";
+                DataTable vDatos6 = vConexion.ObtenerTabla(vQuery6);
+                H1MantCorRealizados.InnerText = vDatos6.Rows[0]["Contar"].ToString();
+
                 DataTable vDatos4 = new DataTable();
                 vDatos4 = vConexion.ObtenerTabla("STEISP_ATM_ConteosDefault 4, '" + Session["USUARIO"].ToString() + "'");
                 GVMantenimiento.DataSource = vDatos4;

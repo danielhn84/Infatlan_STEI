@@ -79,13 +79,13 @@ namespace Infatlan_STEI_ATM.pages.permisos
                 if (DDLUsuarios.SelectedValue=="0")
                 {
                     limpiar();
-                    TBLPermisos.Visible = false;
+                    DIVTable.Visible = false;
                     BtnAceptar.Visible = false;
                 }
                 else
                 {
                    limpiar();
-                   TBLPermisos.Visible = true;
+                    DIVTable.Visible = true;
                     BtnAceptar.Visible = true;
 
                     

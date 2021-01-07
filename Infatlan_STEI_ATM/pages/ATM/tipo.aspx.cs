@@ -51,6 +51,17 @@ namespace Infatlan_STEI_ATM.pages.ATM
                             LbEdit.Visible = true;
                         }
                     }
+
+                    DataTable vDatos2 = new DataTable();
+                    String vQuery2 = "STEISP_ATM_Generales 43";
+                    vDatos2 = vConexion.ObtenerTabla(vQuery2);
+                    foreach (DataRow item in vDatos2.Rows)
+                    {
+                        string vImagen1 = item["IMG"].ToString();
+                        string srcImgen1 = "data:image;base64," + vImagen1;
+                        imgDiscoDuro.Src = srcImgen1;
+                    }
+
                     Session["tipoATM"] = vDatos;
                 }catch (Exception Ex){
 
@@ -272,17 +283,17 @@ namespace Infatlan_STEI_ATM.pages.ATM
 
             Bitmap originalBMP = new Bitmap(FUDiscoDuro.FileContent);
             byte[] imageData;
-            var newSize = originalBMP.Width;
+            var newSize = originalBMP.Width/3;
             //var newHeight = originalBMP.Height * newSize / originalBMP.Width;
-            var newHeight = originalBMP.Height / 3;
-            newSize = originalBMP.Width / 3;
+            var newHeight = originalBMP.Height/3;
+            //newSize = originalBMP.Width*3;
             //newSize = originalBMP.Width * newSize / originalBMP.Height;
 
             Bitmap originalBMP2= new Bitmap(originalBMP.GetThumbnailImage(newSize, newHeight, null, IntPtr.Zero));
 
             using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
             {
-                originalBMP2.Save(stream, ImageFormat.Jpeg);
+                originalBMP.Save(stream, ImageFormat.Jpeg);
                 stream.Position = 0;
                 imageData = new byte[stream.Length];
                 stream.Read(imageData, 0, imageData.Length);
@@ -290,9 +301,30 @@ namespace Infatlan_STEI_ATM.pages.ATM
             }
             string vArchivo1 = Convert.ToBase64String(imageData);
 
+           // Bitmap newImage = new Bitmap(newWidth, newHeight);
+            //using (Graphics gr = Graphics.FromImage(newImage))
+            //{
+            //    gr.SmoothingMode = SmoothingMode.HighQuality;
+            //    gr.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            //    gr.PixelOffsetMode = PixelOffsetMode.HighQuality;
+            //    gr.DrawImage(imgDiscoDuro, new Rectangle(0, 0, newWidth, newHeight));
+            //}
+
 
             string vQuery = "[STEISP_ATM_Generales] 42, '" + vArchivo1 + "'";
             Int32 vInfo = vConexion.ejecutarSQL(vQuery);
+
+            DataTable vDatos2 = new DataTable();
+            String vQuery2 = "STEISP_ATM_Generales 43";
+            vDatos2 = vConexion.ObtenerTabla(vQuery2);
+            foreach (DataRow item in vDatos2.Rows)
+            {
+                string vImagen1 = item["IMG"].ToString();
+                string srcImgen1 = "data:image;base64," + vImagen1;
+                imgDiscoDuro.Src = srcImgen1;
+            }
+
+            
         }
     }
     

@@ -30,9 +30,21 @@
         <div class="card-body">
             <h4 class="card-title">Avances</h4>
             <h6 class="card-subtitle">Lista de mantenimientos y su progreso</h6><br />
+            <div class="row">
+                <div class="col-4">
+                    <asp:UpdatePanel runat="server">
+                        <ContentTemplate>
+                            <asp:DropDownList AutoPostBack="true" ID="DDLFiltroEstado" OnTextChanged="DDLFiltroEstado_TextChanged" CssClass="form-control col-12" runat="server"></asp:DropDownList>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+                 <div class="col-8">
+                     <asp:LinkButton runat="server" ID="btnReporte" OnClick="btnReporte_Click" style="background-color:green; color:white;" ToolTip="Descargar reporte excel" CssClass="btn btn-seccess ti-files"></asp:LinkButton>
+                 </div>
+            </div>
             <asp:UpdatePanel runat="server">
                 <ContentTemplate>
-                    <asp:DropDownList AutoPostBack="true" ID="DDLFiltroEstado" OnTextChanged="DDLFiltroEstado_TextChanged" CssClass="form-control col-4" runat="server"> </asp:DropDownList>
+                    
                      <div class="col-md-12 align-self-center" style="margin-left: auto; margin-right: auto">
                                 <div class="table-responsive">
                                     <asp:GridView ID="GVAvances" runat="server"
@@ -44,12 +56,14 @@
                                         AllowPaging="true"
                                         GridLines="None"
                                         HeaderStyle-HorizontalAlign="center"
-                                        PageSize="10" OnPageIndexChanging="GVAvances_PageIndexChanging"
+                                        PageSize="10" OnPageIndexChanging="GVAvances_PageIndexChanging" 
+                                        OnRowCommand="GVAvances_RowCommand"
                                         Style="margin: 30px 0px 20px 0px">
-                                        <Columns>
+                                        <Columns>                                        
                                             <asp:BoundField DataField="ID" HeaderText="Código" Visible="false" ItemStyle-HorizontalAlign="center" />
                                             <asp:BoundField DataField="CodATM" HeaderText="Código" ItemStyle-HorizontalAlign="center" />
                                             <asp:BoundField DataField="Nombre" HeaderText="ATM" ItemStyle-HorizontalAlign="center" />
+                                            <asp:BoundField DataField="Responsable" HeaderText="Responsable" ItemStyle-HorizontalAlign="center" />
                                             <asp:BoundField DataField="Fecha" HeaderText="Fecha Mantenimiento" HtmlEncode=False DataFormatString="{0:dd/MM/yyyy}" ItemStyle-HorizontalAlign="center" />
                                             <asp:BoundField DataField="Avance" HeaderText="Avance" ItemStyle-HorizontalAlign="center" />                                           
                                         </Columns>

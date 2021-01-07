@@ -42,6 +42,24 @@ namespace Infatlan_STEI_ATM
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl H2MantAsignados;
 
         /// <summary>
+        /// Control H1MantCorRealizados.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl H1MantCorRealizados;
+
+        /// <summary>
+        /// Control H1MantCorAsignados.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl H1MantCorAsignados;
+
+        /// <summary>
         /// Control GVMantenimiento.
         /// </summary>
         /// <remarks>

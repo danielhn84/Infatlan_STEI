@@ -110,7 +110,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                             Session["cancelaATM"] = item["Cancelado"].ToString();
                             Session["sysaidATM"] = item["SysAid"].ToString();
                             Session["tecnicoATM"] = item["Tecnico"].ToString();
-                            Session["usuario"] = item["Usuario"].ToString();
+                            Session["usuarioR"] = item["Usuario"].ToString();
                             Session["identidad"] = item["Identidad"].ToString();
                             Session["codATM"] = item["Codigo"].ToString();
                             Session["emailEmpleadoATM"] = item["Correo"].ToString();
