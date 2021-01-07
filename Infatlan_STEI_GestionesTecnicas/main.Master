@@ -94,13 +94,16 @@
             <div class="scroll-sidebar">
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
+                        
                         <li><a href="/default.aspx" aria-expanded="false"><i class="icon-action-undo"></i><span class="hide-menu">Volver</span></a></li>
-                        <li><a class="waves-effect waves-dark" href="/sites/inventario/pages/inventario.aspx" aria-expanded="false"><i class="icon-basket-loaded"></i><span class="hide-menu">Inventario</span></a></li>
-                        <li><a class="waves-effect waves-dark" href="/sites/inventario/pages/transacciones.aspx" aria-expanded="false"><i class="icon-folder-alt"></i><span class="hide-menu">Transacciones</span></a></li>
+                        <li><a class="waves-effect waves-dark" href="/sites/gestiones/pages/creacionTareas.aspx" aria-expanded="false"><i class="fa fa-calendar-check-o"></i><span class="hide-menu">Creación Tareas</span></a></li>
+                       <li><a class="waves-effect waves-dark" href="/sites/gestiones/pages/tareas.aspx" aria-expanded="false"><i class="icon-basket-loaded"></i><span class="hide-menu">Tareas</span></a></li>
+                        <li><a class="waves-effect waves-dark" href="/sites/gestiones/pages/tareas.aspx" aria-expanded="false"><i class="icon-basket-loaded"></i><span class="hide-menu">Tareas</span></a></li>
+<%--                        <li><a class="waves-effect waves-dark" href="/sites/inventario/pages/transacciones.aspx" aria-expanded="false"><i class="icon-folder-alt"></i><span class="hide-menu">Transacciones</span></a></li>
                         <li><a class="waves-effect waves-dark" href="/sites/inventario/pages/articulos.aspx" aria-expanded="false"><i class="icon-home"></i><span class="hide-menu">Almacén</span></a></li>
                         <li><a class="waves-effect waves-dark" href="/sites/inventario/pages/proveedores.aspx" aria-expanded="false"><i class="icon-people"></i><span class="hide-menu">Proveedores</span></a></li>
-                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-wrench"></i><span class="hide-menu">Configuración</span></a>
-                            <ul aria-expanded="false" class="collapse">
+                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-wrench"></i><span class="hide-menu">Configuración</span></a>--%>
+                           <%-- <ul aria-expanded="false" class="collapse">
                                 <li><a href="/sites/inventario/pages/Configuracion/tipoArticulo.aspx">Articulos</a></li>
                                 <li runat="server" visible="false"><a href="/sites/inventario/pages/Configuracion/articuloDetalle.aspx">Detalle articulo</a></li>
                                 <li><a href="/sites/inventario/pages/Configuracion/contratos.aspx">Contratos</a></li>
@@ -108,8 +111,8 @@
                                 <li><a href="/sites/inventario/pages/perfiles.aspx">Perfiles</a></li>
                                 <li><a href="/sites/inventario/pages/Configuracion/ubicaciones.aspx">Ubicaciones</a></li>
                                 <li runat="server" id="LiCargar" visible="false"><a href="/sites/inventario/pages/Configuracion/cargaRegistros.aspx">Cargar Datos</a></li>
-                            </ul>
-                        </li>
+                            </ul>--%>
+                       <%-- </li>--%>
                     </ul>
                 </nav>
             </div>

@@ -250,32 +250,5 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
         {
             string vIdTipoAgenciaModificar = e.CommandArgument.ToString();
         }
-
-        //protected void GVTipoAgencias_RowCommand(object sender, GridViewCommandEventArgs e)
-        //{
-        //    if (e.CommandName == "Modifcar")
-        //    {
-        //        DivAlerta.Visible = false;
-        //        UpdateModal.Update();
-
-        //        string vIdTipoAgenciaModificar = e.CommandArgument.ToString();
-        //        Session["AG_TA_ID_AREA_MODIFICAR"] = vIdTipoAgenciaModificar;
-
-        //        try
-        //        {
-        //            String vQuery2 = " STEISP_AGENCIA_TiposAgencia 3," + vIdTipoAgenciaModificar;
-        //            DataTable vDatos = vConexion.obtenerDataTable(vQuery2);
-        //            TxIdTipoAgenciaModal.Text = vDatos.Rows[0]["idTipoAgencia"].ToString();
-        //            TxTipoAgenciaModal.Text = vDatos.Rows[0]["nombre"].ToString();
-        //            DdlEstadoTipoAgencia.SelectedValue = vDatos.Rows[0]["estado"].ToString();
-        //            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModalModificarTipoAgencia();", true);
-
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            Mensaje(ex.Message, WarningType.Danger);
-        //        }
-        //    }
-        //}
     }
 }

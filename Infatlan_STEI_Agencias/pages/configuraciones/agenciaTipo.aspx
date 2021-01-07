@@ -117,9 +117,7 @@
                             <div class="table-responsive">
                                 <asp:UpdatePanel runat="server" ID="UPTipoAgencias" UpdateMode="Conditional">
                                     <ContentTemplate>
-                             
-
-
+                            
 
                                         <asp:GridView ID="GVTipoAgenciasBASA" runat="server"
                                             CssClass="table table-bordered"
