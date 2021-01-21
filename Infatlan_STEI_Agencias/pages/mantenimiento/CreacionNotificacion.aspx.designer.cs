@@ -186,6 +186,15 @@ namespace Infatlan_STEI_Agencias.pages
         protected global::System.Web.UI.WebControls.GridView GVBusqueda;
 
         /// <summary>
+        /// Control H3JefeAgencia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl H3JefeAgencia;
+
+        /// <summary>
         /// Control txtbuscarJefeNotif.
         /// </summary>
         /// <remarks>

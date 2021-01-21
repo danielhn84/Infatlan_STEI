@@ -64,10 +64,10 @@
 
 
 
-            <asp:UpdatePanel ID="UpdateModal" runat="server" UpdateMode="Conditional">
+            <asp:UpdatePanel ID="UpdateModal111" runat="server">
                 <ContentTemplate>
                     <div class="col-md-12" runat="server" id="DivAlerta" visible="false" style="display: flex; background-color: tomato; justify-content: center">
-                        <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbMensaje"></asp:Label>
+                        <asp:Label runat="server" CssClass="col-form-label" ID="LbMensaje"></asp:Label>
                     </div>
                 </ContentTemplate>
             </asp:UpdatePanel>
@@ -75,10 +75,10 @@
 
 
 
-            <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+            <asp:UpdatePanel ID="UpdatePanel111" runat="server">
                 <ContentTemplate>
-                    <div class="col-md-12" runat="server" id="Div1" visible="false" style="display: flex; background-color:darkgreen; justify-content: center">
-                        <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbMensajeSuccsess"></asp:Label>
+                    <div class="col-md-12" runat="server" id="Div1" visible="false" >
+                        <asp:Label runat="server" CssClass="col-form-label" ID="LbMensajeSuccsess"></asp:Label>
                     </div>
                 </ContentTemplate>
             </asp:UpdatePanel>

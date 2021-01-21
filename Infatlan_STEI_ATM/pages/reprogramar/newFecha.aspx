@@ -89,7 +89,7 @@
             <div class="modal-content">
                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                     <ContentTemplate>
-                <div class="modal-header" style="background-color:darkslategrey; color:white;">           
+                <div class="modal-header" >           
                       <h4 class="modal-title" runat="server" id="H4Titulo"></h4>
                 </div>
              
@@ -114,7 +114,7 @@
                     <ContentTemplate>
                         <div class="modal-footer col-12">
                                 <asp:Button runat="server" ID="btnCerrar" OnClick="btnCerrar_Click" CssClass="btn btn-secundary mr-2" Text="Cancelar" />
-                                <asp:Button runat="server" ID="btnNuevaFecha" OnClick="btnNuevaFecha_Click" CssClass="btn btn-dark mr-2" Text="Agregar" /> 
+                                <asp:Button runat="server" ID="btnNuevaFecha" OnClick="btnNuevaFecha_Click" CssClass="btn btn-success mr-2" Text="Agregar" /> 
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>

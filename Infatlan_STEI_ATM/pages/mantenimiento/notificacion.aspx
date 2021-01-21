@@ -324,11 +324,11 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
 
-                    <div class="row">
-                        <div class="col-12">
+                    <%--<div class="row">
+                        <div class="modal-footer col-12">--%>
                             <asp:UpdatePanel runat="server">
                                 <ContentTemplate>
-                                    <div class="col-6">
+                                    <div class="modal-footer col-12">
                                         <asp:Button runat="server" ID="btnEnviarNotificacion" OnClick="btnEnviarNotificacion_Click" CssClass="btn btn-success" Text="Crear notificación" />
                                         <asp:Button runat="server" ID="btnCancelarAprobNotif" Visible="false" OnClick="btnCancelarAprobNotif_Click" CssClass="btn btn-danger" Text="Reprogramar" />
                                          <asp:Button runat="server" ID="btnPrueba" Visible="false" OnClick="btnPrueba_Click" CssClass="btn btn-danger" Text="PRUEBA" />
@@ -336,8 +336,8 @@
                                     </div>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
-                        </div>
-                    </div>
+                       <%-- </div>
+                    </div>--%>
                 </div>
             </div>
         </div>

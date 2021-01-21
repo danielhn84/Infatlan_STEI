@@ -821,18 +821,18 @@
                 </div>
             </div>
             
-            <div class="row m-t-20">
-                <div class="col-12">
+            <%--<div class="row m-t-20">
+                <div class="col-12">--%>
                     <asp:UpdatePanel ID="UPEnviarVerif" runat="server">
                         <ContentTemplate>
-                            <div class="col-12">
+                            <div class="modal-footer col-12">
                                 <asp:Button runat="server" OnClick="btnEnviarVerif_Click" ID="btnEnviarVerif" CssClass="btn btn-success" Text="Guardar verificación" />
                                 <asp:Button runat="server" ID="btnRechazarVerif" Visible="false" OnClick="btnRechazarVerif_Click" CssClass="btn btn-danger" Text="Devolver" />                                
                             </div>
                         </ContentTemplate>
                     </asp:UpdatePanel>
-                </div>
-            </div>
+               <%-- </div>
+            </div>--%>
         </div>
     </div>
 

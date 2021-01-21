@@ -53,7 +53,8 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 String vQuery1 = "STEISP_AGENCIA_CreacionAgencia 2";
                 DataTable vDatos1 = vConexion.obtenerDataTable(vQuery1);
                 DDLDepartamento.Items.Add(new ListItem { Value = "0", Text = "Seleccione una opción" });
-              
+                DDLDepartamentoModificar.Items.Add(new ListItem { Value = "0", Text = "Seleccione una opción" });
+
                 if (vDatos1.Rows.Count > 0)
                 {
                     foreach (DataRow item in vDatos1.Rows)
@@ -68,7 +69,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 String vQuery2 = "STEISP_AGENCIA_CreacionAgencia 10";
                 DataTable vDatos2 = vConexion.obtenerDataTable(vQuery2);
                 DDLMunicipioModificar.Items.Add(new ListItem { Value = "0", Text = "Seleccione una opción" });
-
+                DDLMunicipio.Items.Add(new ListItem { Value = "0", Text = "Seleccione una opción" });
                 if (vDatos2.Rows.Count > 0)
                 {
                     foreach (DataRow item in vDatos2.Rows)
@@ -248,7 +249,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 else
                 {
                     EnumerableRowCollection<DataRow> filtered = vDatos.AsEnumerable()
-                        . Where(r => r.Field<String>("nombre").Contains(vBusqueda));
+                        . Where(r => r.Field<String>("Agencia").Contains(vBusqueda));
 
                     Boolean isNumeric = int.TryParse(vBusqueda, out int n);
                     if (isNumeric)
@@ -262,7 +263,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
 
                     DataTable vDatosFiltrados = new DataTable();
                     vDatosFiltrados.Columns.Add("idAgencia");
-                    vDatosFiltrados.Columns.Add("nombre");
+                    vDatosFiltrados.Columns.Add("Agencia");
                     vDatosFiltrados.Columns.Add("codigoAgencia");
                     vDatosFiltrados.Columns.Add("direccion");
                     vDatosFiltrados.Columns.Add("telefono");
@@ -274,7 +275,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                     {
                         vDatosFiltrados.Rows.Add(
                             item["idAgencia"].ToString(),
-                            item["nombre"].ToString(),
+                            item["Agencia"].ToString(),
                             item["codigoAgencia"].ToString(),
                             item["direccion"].ToString(),
                             item["telefono"].ToString(),
@@ -312,32 +313,37 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 {
                     String vQuery2 = " STEISP_AGENCIA_CreacionAgencia 5," + vIdAgenciaModificar;
                     DataTable vDatos = vConexion.obtenerDataTable(vQuery2);
-                    Int32 RbConductorModificarConverido = Convert.ToInt32(vDatos.Rows[0]["requiereConductor"]);
-                    Int32 DDLEstadoConvertido = Convert.ToInt32(vDatos.Rows[0]["estado"]);
+                foreach (DataRow item in vDatos.Rows)
+                {
+                        RbConductorModificar.SelectedValue = item["requiereConductor"].ToString();
+                        string estado= item["estado"].ToString();
+                        DDLEstado.SelectedValue=item["estado"].ToString();
 
-                    TxCodigoModificar.Text= vDatos.Rows[0]["codigoAgencia"].ToString();
-                    TxAgenciaModificar.Text = vDatos.Rows[0]["nombre"].ToString();
-                    TxDireccionModificar.Text = vDatos.Rows[0]["direccion"].ToString();
-                    TxTelefonoModificar.Text = vDatos.Rows[0]["telefono"].ToString();
-                    TxLatitudModificar.Text = vDatos.Rows[0]["lat"].ToString();
-                    TxLongitudModificar.Text = vDatos.Rows[0]["lng"].ToString();
-                    DDLTipoAgenciaModificar.SelectedValue= vDatos.Rows[0]["idTipoAgencia"].ToString();
-                    DDLDepartamentoModificar.SelectedValue= vDatos.Rows[0]["idDepartamento"].ToString();
-                    Session["AG_CA_ID_DEPARTAMENTO"] = vDatos.Rows[0]["idDepartamento"].ToString();
+                    TxCodigoModificar.Text = item["codigoAgencia"].ToString();
+                    TxAgenciaModificar.Text = item["nombre"].ToString();
+                    TxDireccionModificar.Text = item["direccion"].ToString();
+                    TxTelefonoModificar.Text = item["telefono"].ToString();
+                    TxLatitudModificar.Text = item["lat"].ToString();
+                    TxLongitudModificar.Text = item["lng"].ToString();
+                    DDLTipoAgenciaModificar.SelectedValue = item["idTipoAgencia"].ToString();
+                    DDLDepartamentoModificar.SelectedValue = item["idDepartamento"].ToString()==""?"0": item["idDepartamento"].ToString();
+                    Session["AG_CA_ID_DEPARTAMENTO"] = item["idDepartamento"].ToString() == "" ? "0" : item["idDepartamento"].ToString();
 
-                    DDLMunicipioModificar.SelectedValue = vDatos.Rows[0]["municipio"].ToString();
-                    txtcodUbicacion.Text= vDatos.Rows[0]["codigoUbicacion"].ToString();
-                    Session["AG_CA_CODIGO_UBICACION"] = vDatos.Rows[0]["codigoUbicacion"].ToString();
+                        DDLMunicipioModificar.SelectedValue = item["municipio"].ToString() == "" ? "0" : item["municipio"].ToString();
+                    txtcodUbicacion.Text = item["codigoUbicacion"].ToString();
+                    Session["AG_CA_CODIGO_UBICACION"] = item["codigoUbicacion"].ToString();
 
-                    Session["AG_CA_ID_UBICACION"] = vDatos.Rows[0]["idUbicacion"].ToString();
+                    Session["AG_CA_ID_UBICACION"] = item["idUbicacion"].ToString();
 
-                    DDLEstado.SelectedValue = DDLEstadoConvertido.ToString();
-                    RbConductorModificar.SelectedValue= RbConductorModificarConverido.ToString();
+                    //DDLEstado.SelectedValue = DDLEstadoConvertido.ToString();
+                    //RbConductorModificar.SelectedValue = RbConductorModificarConverido.ToString();
 
-                    TituloModalCrearAgencia.Text = "Modificar Agencia "+ TxAgenciaModificar.Text;
+                    TituloModalCrearAgencia.Text = "Modificar Agencia " + TxAgenciaModificar.Text;
                     UpdatePanel3.Update();
 
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModalModificarAgencia();", true);
+                    
+                }
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModalModificarAgencia();", true);
                 }
                 catch (Exception ex)
                 {
@@ -540,6 +546,11 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
         protected void TxAgenciaModificar_TextChanged(object sender, EventArgs e)
         {
             limpiarDivAlertaModal();
+        }
+
+        protected void btnReporte_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

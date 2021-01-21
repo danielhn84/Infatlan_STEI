@@ -33,13 +33,13 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
         protected global::System.Web.UI.WebControls.FileUpload FUMantenimientosAgencia;
 
         /// <summary>
-        /// Control UpdateModal.
+        /// Control UpdateModal111.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdateModal;
+        protected global::System.Web.UI.UpdatePanel UpdateModal111;
 
         /// <summary>
         /// Control DivAlerta.
@@ -60,13 +60,13 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
         protected global::System.Web.UI.WebControls.Label LbMensaje;
 
         /// <summary>
-        /// Control UpdatePanel1.
+        /// Control UpdatePanel111.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel111;
 
         /// <summary>
         /// Control Div1.

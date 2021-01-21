@@ -7,8 +7,10 @@ using System.Web.UI.WebControls;
 using System.IO;
 using System.Data;
 using Infatlan_STEI_Agencias.classes;
+using System.Configuration;
+using System.Drawing.Imaging;
 using System.Drawing;
- 
+
 namespace Infatlan_STEI_Agencias.pages
 {
     public partial class LvIndividual : System.Web.UI.Page
@@ -27,17 +29,34 @@ namespace Infatlan_STEI_Agencias.pages
                         if (vEx.Equals("2")){
                             modoVistaCampos(true);
                             cargarDataVista();
-                        }else if (vEx.Equals("1")){
+                            BtnEnviarLv.Visible = false;
+                            BtnDevolver.Visible = true;
+                            BtnAprobar.Visible = true;
+                            DDLTipoAgencia.Enabled = false;
+                            TxtTelefono.ReadOnly = true;
+                            TxLatitud.ReadOnly = true;
+                            TxLongitud.ReadOnly = true;
+                            txtDireccion.ReadOnly = true;
+                        }
+                        else if (vEx.Equals("1")){
                             cargarDataLlenado();
-                            OcultarTarjeta();
+                            //OcultarTarjeta();
                             mostrarAsteriscos();
-                        }else if (vEx.Equals("3")){
+                            RblClimatizacionAdecuada.SelectedValue = "1";
+                            RblUPS.SelectedValue = "1";
+                            RbPolvoSuciedad.SelectedValue = "1";
+                            RblHumedadSustancias.SelectedValue = "1";
+                            RblRoboDaño.SelectedValue = "1";
+                            RblElementosAjenos.SelectedValue = "1";
+                        }
+                        else if (vEx.Equals("3")){
                             cargarDataModificar();
-                            OcultarTarjeta();
+                            //OcultarTarjeta();
                             mostrarAsteriscos();
                             habilitarFU();
                         }
                     }
+                    cargar();
                 }else {
                     Response.Redirect("/login.aspx");
                 }
@@ -68,7 +87,7 @@ namespace Infatlan_STEI_Agencias.pages
             TxCantEscaner.ReadOnly = vActivo;
             TxCantDatacard.ReadOnly = vActivo;
             
-            RBLManEquipoComu.Enabled = false;
+            //RBLManEquipoComu.Enabled = false;
             FuImageNoMantEquipoComu.Visible = false;            
             TxMotivoNoMantEquipoComu.ReadOnly = true;
           
@@ -98,13 +117,35 @@ namespace Infatlan_STEI_Agencias.pages
             FuEspacioFisico.Visible = false;
 
             TxObservacionesGenerales.ReadOnly = true;
-
-            TituloPagina.Text = "Aprobar Lista de Verificación";
-            UpTitulo.Update();
-
+           
             BtnEnviarLv.Visible = false;
-            BtnRegresarCompletarLV.Visible = false;
-            DivAprobacion.Visible = true;
+           
+        }
+
+        void cargar()
+        {
+            DDLTipoAgencia.Items.Clear();
+            String vQuery = "STEISP_AGENCIA_CreacionAgencia 1";
+            DataTable vDatos = vConexion.obtenerDataTable(vQuery);
+            DDLTipoAgencia.Items.Add(new ListItem { Value = "0", Text = "Seleccione una opción" });
+            if (vDatos.Rows.Count > 0)
+            {
+                foreach (DataRow item in vDatos.Rows)
+                {
+                    DDLTipoAgencia.Items.Add(new ListItem { Value = item["idTipoAgencia"].ToString(), Text = item["nombre"].ToString() });                  
+                }
+            }
+
+            String vQuery2 = "[STEISP_AGENCIA_CompletarListaVerificacion] 13,'"+TxCodigoAgencia.Text+"'";
+            DataTable vDatos2 = vConexion.obtenerDataTable(vQuery2);
+            foreach (DataRow item in vDatos2.Rows)
+            {
+                DDLTipoAgencia.SelectedValue = item["idTipoAgencia"].ToString();
+                TxtTelefono.Text = item["telefono"].ToString();
+                txtDireccion.Text = item["direccion"].ToString();
+                TxLatitud.Text = item["lat"].ToString();
+                TxLongitud.Text = item["lng"].ToString();
+            }
         }
         
         void cargarDataVista()
@@ -162,17 +203,20 @@ namespace Infatlan_STEI_Agencias.pages
                 String vDocumentoNoMantEquipoComunicacion = vDatos2.Rows[0]["fotoNoManEquipoComu"].ToString();
                 string srcNoMantEquipoComunicacion = "data:image;base64," + vDocumentoNoMantEquipoComunicacion;
                 ImgPreviewNoMantEquipoComu.Src = srcNoMantEquipoComunicacion;
-                if (RBLManEquipoComuRespuesta.Equals("True")){
-                    RBLManEquipoComu.SelectedValue = "1";
-                    ImgPreviewNoMantEquipoComu.Visible = true;
-                } else {
-                    RBLManEquipoComu.SelectedValue = "0";
-                    ImgPreviewNoMantEquipoComu.Visible = false;               
-                    TxMotivoNoMantEquipoComu.Visible = true;
-                }
+                //if (RBLManEquipoComuRespuesta.Equals("True"))
+                //{
+                //    //RBLManEquipoComu.SelectedValue = "1";
+                //    ImgPreviewNoMantEquipoComu.Visible = true;
+                //}
+                //else
+                //{
+                //    //RBLManEquipoComu.SelectedValue = "0";
+                //    ImgPreviewNoMantEquipoComu.Visible = false;
+                //    TxMotivoNoMantEquipoComu.Visible = true;
+                //}
 
 
-            //SECCION PRUEBAS DE PC
+                //SECCION PRUEBAS DE PC
                 DataTable vDatos3 = new DataTable();
                 vDatos3 = (DataTable)Session["AG_LvPA_DATOS_PRUEBAS_PC"];
 
@@ -195,13 +239,17 @@ namespace Infatlan_STEI_Agencias.pages
                 String vDocumentoClimatizacion = vDatos4.Rows[0]["fotoClimatizacionAdecuada"].ToString();
                 string srcClimatizacion = "data:image;base64," + vDocumentoClimatizacion;
                 ImgPreviewClimatizacion.Src = srcClimatizacion;
+                ImgPreviewNoMantEquipoComu.Visible = true;
 
-                if (RblClimatizacionAdecuadaRespuesta.Equals("True")){
+                if (RblClimatizacionAdecuadaRespuesta.Equals("True"))
+                {
                     RblClimatizacionAdecuada.SelectedValue = "1";
-                    ImgPreviewClimatizacion.Visible = true;
-                } else{
+                    //ImgPreviewClimatizacion.Visible = true;
+                }
+                else
+                {
                     RblClimatizacionAdecuada.SelectedValue = "0";
-                    ImgPreviewClimatizacion.Visible = false;
+                    //ImgPreviewClimatizacion.Visible = false;
                 }
 
 
@@ -210,15 +258,18 @@ namespace Infatlan_STEI_Agencias.pages
                 string srcUPS = "data:image;base64," + vDocumentoUPS;
                 ImgPreviewUPS.Src = srcUPS;
 
-                if (RblUPSRespuesta.Equals("True")){
+                if (RblUPSRespuesta.Equals("True"))
+                {
                     RblUPS.SelectedValue = "1";
-                    ImgPreviewUPS.Visible = true;
-                }else {
+                    //ImgPreviewUPS.Visible = true;
+                }
+                else
+                {
                     RblUPS.SelectedValue = "0";
-                    ImgPreviewUPS.Visible = false;
+                    //ImgPreviewUPS.Visible = false;
                 }
 
-            //SECCION ENTORNO COMUNICACION
+                //SECCION ENTORNO COMUNICACION
                 DataTable vDatos5 = new DataTable();
                 vDatos5 = (DataTable)Session["AG_LvPA_DATOS_ENTORNO_COMUNICACION"];
 
@@ -227,12 +278,15 @@ namespace Infatlan_STEI_Agencias.pages
                 string srcPolvoSuciedad = "data:image;base64," + vDocumentoPolvoSuciedad;
                 ImgPreviewPolvoSuciedad.Src = srcPolvoSuciedad;
 
-                if (RbPolvoSuciedadRespuesta.Equals("True")){
+                if (RbPolvoSuciedadRespuesta.Equals("True"))
+                {
                     RbPolvoSuciedad.SelectedValue = "1";
-                    ImgPreviewPolvoSuciedad.Visible = true;
-                }else{
+                    //ImgPreviewPolvoSuciedad.Visible = true;
+                }
+                else
+                {
                     RbPolvoSuciedad.SelectedValue = "0";
-                    ImgPreviewPolvoSuciedad.Visible = false;
+                    //ImgPreviewPolvoSuciedad.Visible = false;
                 }
 
 
@@ -241,12 +295,15 @@ namespace Infatlan_STEI_Agencias.pages
                 string srcHumedadSustancias = "data:image;base64," + vDocumentoHumedadSustancias;
                 ImgPreviewHumedadSustancias.Src = srcHumedadSustancias;
 
-                if (RblHumedadSustanciasRespuesta.Equals("True")){
+                if (RblHumedadSustanciasRespuesta.Equals("True"))
+                {
                     RblHumedadSustancias.SelectedValue = "1";
-                    ImgPreviewHumedadSustancias.Visible = true;
-                }else{
+                    //ImgPreviewHumedadSustancias.Visible = true;
+                }
+                else
+                {
                     RblHumedadSustancias.SelectedValue = "0";
-                    ImgPreviewHumedadSustancias.Visible = false;
+                    //ImgPreviewHumedadSustancias.Visible = false;
                 }
 
 
@@ -255,12 +312,15 @@ namespace Infatlan_STEI_Agencias.pages
                 string srcRoboDaño= "data:image;base64," + vDocumentoRoboDaño;
                 ImgPreviewRoboDaño.Src = srcRoboDaño;
 
-                if (RblRoboDañoRespuesta.Equals("True")){
+                if (RblRoboDañoRespuesta.Equals("True"))
+                {
                     RblRoboDaño.SelectedValue = "1";
-                    ImgPreviewRoboDaño.Visible = true;
-                }else{
+                    //ImgPreviewRoboDaño.Visible = true;
+                }
+                else
+                {
                     RblRoboDaño.SelectedValue = "0";
-                    ImgPreviewRoboDaño.Visible = false;
+                    //ImgPreviewRoboDaño.Visible = false;
                 }
 
 
@@ -269,28 +329,31 @@ namespace Infatlan_STEI_Agencias.pages
                 string srcElementosAjenos = "data:image;base64," + vDocumentoElementosAjenos;
                 ImgPreviewElementosAjenos.Src = srcElementosAjenos;
 
-                if (RblRoboDañoRespuesta.Equals("True")) {
+                if (RblRoboDañoRespuesta.Equals("True"))
+                {
                     RblElementosAjenos.SelectedValue = "1";
-                    ImgPreviewElementosAjenos.Visible = true;
-                }else{
+                    //ImgPreviewElementosAjenos.Visible = true;
+                }
+                else
+                {
                     RblElementosAjenos.SelectedValue = "0";
-                    ImgPreviewElementosAjenos.Visible = false;                   
+                    //ImgPreviewElementosAjenos.Visible = false;
                 }
 
 
-            //IMAGENES OBLIGATORIAS
+                //IMAGENES OBLIGATORIAS
                 DataTable vDatos6 = new DataTable();
                 vDatos6 = (DataTable)Session["AG_LvPA_DATOS_IMAGENES_OBLIGATORIAS"];
 
                 String vDocumentoRack = vDatos6.Rows[0]["fotoRackComunicacion"].ToString();
                 string srcRack= "data:image;base64," + vDocumentoRack;
                 ImgPreviewRack.Src = srcRack;
-                ImgPreviewRack.Visible = true;
+                //ImgPreviewRack.Visible = true;
 
                 String vDocumentoEntorno = vDatos6.Rows[0]["fotoEntorno"].ToString();
                 string srcEntorno = "data:image;base64," + vDocumentoEntorno;
                 ImgPreviewEspacioFisico.Src = srcEntorno;
-                ImgPreviewEspacioFisico.Visible = true;
+                //ImgPreviewEspacioFisico.Visible = true;
 
 
                 TxObservacionesGenerales.Text = vDatos6.Rows[0]["observaciones"].ToString();
@@ -304,35 +367,33 @@ namespace Infatlan_STEI_Agencias.pages
             }
         }
         
-        private void validacionesAprobarLV()
-        {
-            if (RblAprobarLV.SelectedValue.Equals(""))
-                throw new Exception("Falta completar opción ¿Desea aprobar LV?.");
+        //private void validacionesAprobarLV()
+        //{
+            //if (RblAprobarLV.SelectedValue.Equals(""))
+            //    throw new Exception("Falta completar opción ¿Desea aprobar LV?.");
 
-            if (RblAprobarLV.SelectedValue.Equals("0") && (TxMotivoCancelacionLV.Text == "" || TxMotivoCancelacionLV.Text == string.Empty))
-                throw new Exception("Falta que ingrese el motivo de cancelacion de la lista de verificación");
-        }
+            //if (RblAprobarLV.SelectedValue.Equals("0") && (TxMotivoCancelacionLV.Text == "" || TxMotivoCancelacionLV.Text == string.Empty))
+            //    throw new Exception("Falta que ingrese el motivo de cancelacion de la lista de verificación");
+        //}
         
         protected void BtnEnviarAprobacion_Click(object sender, EventArgs e)
         {
             try
             {
-                validacionesAprobarLV();
+                //validacionesAprobarLV();
                 Lugar.Text = TxLugar.Text;
                 TxIdMantenimiento.Text = Session["AG_LvPC_ID_MANTENIMIENTO_LV_APROBAR_JEFE"].ToString();
                 TxFechaModal.Text = TxFechaMant.Text;
                 TxAreaModal.Text = TxArea.Text;
                 TxResponsableModal.Text = TxNombreTecnicoResponsable.Text;
-                TxMotivoRegreso.Text = TxMotivoCancelacionLV.Text;
+                //TxMotivoRegreso.Text = TxMotivoCancelacionLV.Text;
 
                 if (Titulo.Text == "Regresar LV") {
                     DivMotivo.Visible = true;
-                    DivRegresarLV.Visible = true;
-                    DivAprobarLV.Visible = false;
+                   
                 } else {
                     DivMotivo.Visible = false;
-                    DivAprobarLV.Visible = true;
-                    DivRegresarLV.Visible = false;
+                    
                 }
              
                 UpTituloAprobar.Update();
@@ -344,32 +405,87 @@ namespace Infatlan_STEI_Agencias.pages
             }
         }
         
-        protected void RblAprobarLV_SelectedIndexChanged(object sender, EventArgs e)
+        //protected void RblAprobarLV_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    if (RblAprobarLV.SelectedValue.Equals("1"))
+        //    {
+        //        DivEtiqueta.Visible = false;
+        //        DivTexto.Visible = false;
+        //        Titulo.Text = "Aprobar LV";
+        //        TxMotivoCancelacionLV.Text = String.Empty;
+        //    }
+        //    else
+        //    {
+        //        DivEtiqueta.Visible = true;
+        //        DivTexto.Visible = true;
+        //        Titulo.Text = "Regresar LV";
+        //        TxMotivoCancelacionLV.Text = String.Empty;
+        //    }
+        //}
+        
+        //private void LimpiarAprobarLV()
+        //{
+        //    RblAprobarLV.SelectedIndex = -1;
+        //    TxMotivoCancelacionLV.Text = String.Empty;
+        //}
+
+        void CorreoAlerta()
         {
-            if (RblAprobarLV.SelectedValue.Equals("1"))
+            if (RblClimatizacionAdecuada.SelectedValue == "0" || RblUPS.SelectedValue == "0" || RbPolvoSuciedad.SelectedValue == "1" || RblHumedadSustancias.SelectedValue == "1" || RblRoboDaño.SelectedValue == "1" || RblElementosAjenos.SelectedValue == "1")
             {
-                DivEtiqueta.Visible = false;
-                DivTexto.Visible = false;
-                Titulo.Text = "Aprobar LV";
-                TxMotivoCancelacionLV.Text = String.Empty;
-            }
-            else
-            {
-                DivEtiqueta.Visible = true;
-                DivTexto.Visible = true;
-                Titulo.Text = "Regresar LV";
-                TxMotivoCancelacionLV.Text = String.Empty;
+
+                string vIDMantenimiento = Convert.ToString(Session["AG_LvPC_ID_MANTENIMIENTO_LV_APROBAR_JEFE"]);
+
+                string vQueryD = "[STEISP_AGENCIA_AprobarNotificacion] 9,'" + vIDMantenimiento + "'";
+                DataTable vDatosTecnicoResponsable = vConexion.obtenerDataTable(vQueryD);
+                string vCorreoResponsable = vDatosTecnicoResponsable.Rows[0]["Nombre"].ToString();
+
+
+                string Formato = "yyyy-MM-dd";
+                //String vCorreoAlerta = "acedillo@bancatlan.hn";
+                SmtpService vService = new SmtpService();
+                String vCorreoAlerta = "aaguilarr@bancatlan.hn,drodriguez@bancatlan.hn,cfmelara@bancatlan.hn,eurrea@bancatlan.hn,jfigueroa@bancatlan.hn,megarcia@bancatlan.hn,gccoello@bancatlan.hn,dazuniga@bancatlan.hn,ojfunes@bancatlan.hn,emoyuela@bancatlan.hn,dzepeda@bancatlan.hn,acalderon@bancatlan.hn,diantunez@bancatlan.hn,rapena@bancatlan.hn," + vCorreoResponsable;
+                string Climatizacion = "-No cuenta con climatización adecuada<br>";
+                string UPS = "-No cuenta con protección de energía electrica<br>";
+                string PolvoSuciedad = "-Se encontró rastros de polvo y suciedad en área de comunicaciones<br>";
+                string HumedadSustancias = "-Se encontró rastros de humedad y sustancias no aptas en el área de comunicaciones<br>";
+                string RoboDaño = "-Expuesto a robo o daños al área de comunicaciones<br>";
+                string ElementosAjenos = "-Se encontraron elementos ajenos al área de comunicaciones<br>";
+
+                if (RblClimatizacionAdecuada.SelectedValue == "1")
+                    Climatizacion = "";
+                if (RblUPS.SelectedValue == "1")
+                    UPS = "";
+                if (RbPolvoSuciedad.SelectedValue == "0")
+                    PolvoSuciedad = "";
+                if (RblHumedadSustancias.SelectedValue == "0")
+                    HumedadSustancias = "";
+                if (RblRoboDaño.SelectedValue == "0")
+                    RoboDaño = "";
+                if (RblElementosAjenos.SelectedValue == "0")
+                    ElementosAjenos = "";
+
+                string Alerta = Climatizacion + UPS + PolvoSuciedad + HumedadSustancias + RoboDaño + ElementosAjenos;
+
+                vService.EnviarMensaje(
+                              vCorreoAlerta,
+                              typeBody.Alertas,
+                               "<b>Buen día.<br> Se le notifica que Agencia (" + TxLugar.Text + ")<b> NO cuenta con una serie de protecciones que debe ser analizada, datos proporcionados por el técnico responsable: " + TxNombreTecnicoResponsable.Text + " al completar la lista de verificación del mantenimiento preventivo programado realizado el día: " + DateTime.Now.ToString(Formato) + "<br><b>Alertas detectadas en mantenimiento:<br>" + Alerta+ "<br> Favor tomar nota de la alerta para evitar inconvenientes futuros.",
+                              "OBSERVACIONES A MANTENIMINETO DE AGENCIAS",
+                              "Observaciones realizadas por el técnico responsable:<br>" + TxObservacionesGenerales.Text
+                              );
             }
         }
-        
-        private void LimpiarAprobarLV()
+
+        void ActualizarAgencia()
         {
-            RblAprobarLV.SelectedIndex = -1;
-            TxMotivoCancelacionLV.Text = String.Empty;
+            String vQuery1 = "STEISP_AGENCIA_CompletarListaVerificacion 12,'" + TxCodigoAgencia.Text + "','" + DDLTipoAgencia.SelectedValue + "','" + TxtTelefono.Text + "','" + txtDireccion.Text + "','" + TxLatitud.Text + "','" + TxLongitud.Text + "'";
+            Int32 vInformacion1 = vConexion.ejecutarSql(vQuery1);
         }
         
         protected void btnModalAprobarLV_Click(object sender, EventArgs e)
         {
+            
             try
             {
                 if (Titulo.Text == "Regresar LV")
@@ -392,6 +508,9 @@ namespace Infatlan_STEI_Agencias.pages
                     Int32 vInformacion2 = vConexion.ejecutarSql(vQuery2);
 
                     if (vInformacion2 == 1){
+                        CorreoSuscripcion();
+                        EnviarCorreoAprobar();
+                        CorreoAlerta();
                         Mensaje("Lista de verificación aprobada con exito.", WarningType.Success);
                     } else{
                         Mensaje("Favor contactarse con el administrador, lista de verificación no se pudo aprobar con exito.", WarningType.Danger);
@@ -402,13 +521,13 @@ namespace Infatlan_STEI_Agencias.pages
             {
                 Mensaje(ex.Message, WarningType.Danger);
             }
-            LimpiarAprobarLV();
+            //LimpiarAprobarLV();
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModalAprobarRegresarLv();", true);
             Response.Redirect("/sites/agencias/pages/mantenimiento/lvPendientesAprobarJefes.aspx");          
         }
         
         protected void BtnRegresarPendienteAprobar_Click(object sender, EventArgs e){
-            LimpiarAprobarLV();
+            //LimpiarAprobarLV();
             Response.Redirect("/sites/agencias/pages/mantenimiento/lvPendientesModificar.aspx");
         }
         
@@ -449,8 +568,6 @@ namespace Infatlan_STEI_Agencias.pages
                     DivAlertaTecnicosParticipantes.Visible = true;
                 }
 
-                TituloPagina.Text = "Completar Lista de Verificación";
-
             }
             catch (Exception ex)
             {
@@ -458,12 +575,12 @@ namespace Infatlan_STEI_Agencias.pages
             }
         }
         
-        void OcultarTarjeta()
-        {
-            DivAprobacion.Visible = false;
-            ocultarBotonVolver1.Visible = true;
-            UpdatePanel5.Update();
-        }
+        //void OcultarTarjeta()
+        //{
+        //    //DivAprobacion.Visible = false;
+        //    //ocultarBotonVolver1.Visible = true;
+        //    UpdatePanel5.Update();
+        //}
         
         void mostrarAsteriscos()
         {
@@ -471,54 +588,88 @@ namespace Infatlan_STEI_Agencias.pages
             lbHoraLlegada.Visible = true;
             lbInicioMant.Visible = true;
             lbFinMant.Visible = true;
-            lbCantMaquinas.Visible = true;
-            lbCantImpresora.Visible = true;
-            lbCantEscaner.Visible = true;
-            lbCantDatacard.Visible = true;
-            lbRealizoMantEquipoComu.Visible = true;
+            //lbCantMaquinas.Visible = true;
+            //lbCantImpresora.Visible = true;
+            //lbCantEscaner.Visible = true;
+            //lbCantDatacard.Visible = true;
+            //lbRealizoMantEquipoComu.Visible = true;
             lbProbaronEquipo.Visible = true;
-            lbClimatizacion.Visible = true;
-            lbUps.Visible = true;
-            lbPolvo.Visible = true;
-            lbHumedad.Visible = true;
-            lbRobo.Visible = true;
-            lbElementos.Visible = true;
-            lbRack.Visible = true;
-            lbEntorno.Visible = true;
 
             //DivRack.Visible = true;
             //DivEspacio.Visible = true;
         }
-        
-        protected void RBLManEquipoComu_SelectedIndexChanged1(object sender, EventArgs e)
-        {
-            if (RBLManEquipoComu.SelectedValue.Equals("1"))
-            {
-                ImgPreviewNoMantEquipoComu.Visible = true;
-                TxMotivoNoMantEquipoComu.Visible = false;
-                UpdatePanel2.Update();
-                FuImageNoMantEquipoComu.Visible = true;
-                //TxResNoManEquipoComu.Text = String.Empty;
-                TxResNoManEquipoComu1.Value = String.Empty;
-                UpdatePanel8.Update();
-                ImgPreviewNoMantEquipoComu.Src = "../../assets/images/vistaPrevia1.JPG";
-            }
-            else
-            {
-                TxMotivoNoMantEquipoComu.Visible = true;
-                ImgPreviewNoMantEquipoComu.Visible = false;
-                FuImageNoMantEquipoComu.Visible = false;
-                UpdatePanel2.Update();
-                //TxResNoManEquipoComu.Text = String.Empty;
-                TxResNoManEquipoComu1.Value = String.Empty;
-                UpdatePanel8.Update();
-            }
 
+        void CorreoSuscripcion()
+        {
+
+
+            int vIDMantenimiento = Convert.ToInt32(Session["AG_LvPC_ID_MANTENIMIENTO_LV_APROBAR_JEFE"]);
+
+            string vQueryD = "[STEISP_AGENCIA_AprobarNotificacion] 9,'" + vIDMantenimiento + "'";
+            DataTable vDatosTecnicoResponsable = vConexion.obtenerDataTable(vQueryD);
+            string vQueryTecnicos = "[STEISP_AGENCIA_AprobarNotificacion] 10,'" + vIDMantenimiento + "'";
+            DataTable vDatosTecnicos = vConexion.obtenerDataTable(vQueryTecnicos);
+            string vQueryJefes = "[STEISP_AGENCIA_AprobarNotificacion] 11,'" + vIDMantenimiento + "'";
+            DataTable vDatosJefeAgencias = vConexion.obtenerDataTable(vQueryJefes);
+            string vQueryZona = "[STEISP_AGENCIA_AprobarNotificacion] 12,'" + vIDMantenimiento + "'";
+            DataTable vDatosZona = vConexion.obtenerDataTable(vQueryZona);
+
+            string vCorreosTecnicos = "";
+            string vCorreosJefes = "";
+            string vCorreosTodos = "";
+            string vCorreoResponsable = "";
+            for (int i = 0; i < vDatosTecnicoResponsable.Rows.Count; i++)
+            {
+                vCorreoResponsable = vDatosTecnicoResponsable.Rows[i]["Correo"].ToString() + ";";
+
+            }
+            for (int i = 0; i < vDatosTecnicos.Rows.Count; i++)
+            {
+                string vCorreo = vDatosTecnicos.Rows[i]["correo"].ToString() + ";";
+                vCorreosTecnicos = vCorreosTecnicos + vCorreo;
+                if (vCorreosTecnicos == ";")
+                    vCorreosTecnicos = "";
+            }
+            for (int i = 0; i < vDatosJefeAgencias.Rows.Count; i++)
+            {
+                string vCorreo = vDatosJefeAgencias.Rows[i]["CorreoJefe"].ToString() + ";";
+                vCorreosJefes = vCorreosJefes + vCorreo;
+                if (vCorreosJefes == ";")
+                    vCorreosJefes = "";
+            }
+            string vZonaAgencia = "";
+            for (int i = 0; i < vDatosJefeAgencias.Rows.Count; i++)
+            {
+                vZonaAgencia = vDatosZona.Rows[i]["Zona"].ToString();
+            }
+            string vCorreoEncargadoZona = "";
+            if (vZonaAgencia == "1")
+                vCorreoEncargadoZona = "emontoya@bancatlan.hn";
+            if (vZonaAgencia == "2")
+                vCorreoEncargadoZona = "jdgarcia@bancatlan.hn";
+            if (vZonaAgencia == "3")
+                vCorreoEncargadoZona = "acalderon@bancatlan.hn";
+
+            string vReporteViaticos = "Verificacion";
+            string vCorreoAdmin = "acedillo@bancatlan.hn";
+            //string vCorreoCopia = "acamador@bancatlan.hn"+";";
+            //string vCorreoCopia = "eurrea@bancatlan.hn;unidadatmkiosco@bancatlan.hn;" + vCorreoEncargadoZona;
+            string vCorreoCopia = "eurrea@bancatlan.hn;" + vCorreoEncargadoZona;
+            //vCorreosTodos = vCorreosTecnicos + vCorreosJefes + vCorreoAdmin;
+            vCorreosTodos = vCorreoResponsable + vCorreosTecnicos + vCorreosJefes;
+            string vAsuntoRV = "Formato de verificación";
+            string vBody = "Formato de verificación";
+
+            string vQueryRep = "STEISP_AGENCIA_AprobarNotificacion 13,'" + vIDMantenimiento + "','" + vReporteViaticos + "','" + vCorreosTodos + "','" + vCorreoCopia + "','" + vAsuntoRV + "','" + vBody + "'";
+            vConexion.ejecutarSql(vQueryRep);
 
         }
-        
+
         protected void RBProbaronEquipo_SelectedIndexChanged(object sender, EventArgs e)
         {
+            TxMotivoNoProbaronEquipo.Text = "";
+            UpNoProbaronEquipo.Update();
+
             if (RBProbaronEquipo.SelectedValue.Equals("1"))
             {
 
@@ -539,139 +690,13 @@ namespace Infatlan_STEI_Agencias.pages
 
         }
         
-        protected void RblClimatizacionAdecuada_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (RblClimatizacionAdecuada.SelectedValue.Equals("0"))
-            {
-                FuClimatizacion.Visible = false;
-                ImgPreviewClimatizacion.Visible = false;
-                UpClimatizacion.Update();
-                //TxClimatizacion.Text = String.Empty;
-                TxClimatizacion1.Value = String.Empty;
-                UpdatePanel8.Update();
-            } else{
-                FuClimatizacion.Visible = true;
-                ImgPreviewClimatizacion.Visible = true;
-                UpClimatizacion.Update();
-                //TxClimatizacion.Text = String.Empty;
-                TxClimatizacion1.Value = String.Empty;
-                UpdatePanel8.Update();
-                ImgPreviewClimatizacion.Src = "../../assets/images/vistaPrevia1.JPG";
-            }            
-        }
-        
-        protected void RblUPS_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (RblUPS.SelectedValue.Equals("0"))
-            {
-                FuUPS.Visible = false;
-                ImgPreviewUPS.Visible = false;
-                UpUPS.Update();
-                //TxUPS.Text = String.Empty;
-                TxUPS1.Value = String.Empty;
-                UpdatePanel8.Update();
-            }else{
-                FuUPS.Visible = true;
-                ImgPreviewUPS.Visible = true;
-                UpUPS.Update();
-                //TxUPS.Text = String.Empty;
-                TxUPS1.Value = String.Empty;
-                UpdatePanel8.Update();
-                ImgPreviewUPS.Src = "../../assets/images/vistaPrevia1.JPG";
-            }
-        }
-        
-        protected void RbPolvoSuciedad_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (RbPolvoSuciedad.SelectedValue.Equals("0"))
-            {
-                FuPolvoSuciedad.Visible = false;
-                ImgPreviewPolvoSuciedad.Visible = false;
-                UpPolvoSuciedad.Update();
-                //TxPolvoSuciedad.Text = String.Empty;
-                TxPolvoSuciedad1.Value = String.Empty;
-                UpdatePanel8.Update();
-            }else{
-                FuPolvoSuciedad.Visible = true;
-                ImgPreviewPolvoSuciedad.Visible = true;
-                UpPolvoSuciedad.Update();
-                //TxPolvoSuciedad.Text = String.Empty;
-                TxPolvoSuciedad1.Value = String.Empty;
-                UpdatePanel8.Update();
-                ImgPreviewPolvoSuciedad.Src = "../../assets/images/vistaPrevia1.JPG";
-            }
-        }
-        
-        protected void RblHumedadSustancias_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (RblHumedadSustancias.SelectedValue.Equals("0"))
-            {
-                FuHumedadSustancias.Visible = false;
-                ImgPreviewHumedadSustancias.Visible = false;
-                UpHumedadSustancias.Update();
-                //TxHumedadSustancias.Text = String.Empty;
-                TxHumedadSustancias1.Value = String.Empty;
-                UpdatePanel8.Update();
-            }else{
-                FuHumedadSustancias.Visible = true;
-                ImgPreviewHumedadSustancias.Visible = true;
-                UpHumedadSustancias.Update();
-                //TxHumedadSustancias.Text = String.Empty;
-                TxHumedadSustancias1.Value = String.Empty;
-                UpdatePanel8.Update();
-                ImgPreviewHumedadSustancias.Src = "../../assets/images/vistaPrevia1.JPG";
-            }
-        }     
-        
-        protected void RblRoboDaño_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (RblRoboDaño.SelectedValue.Equals("0"))
-            {
-                FuRoboDaño.Visible = false;
-                ImgPreviewRoboDaño.Visible = false;
-                UpRoboDaño.Update();
-                //TxRoboDaño.Text = String.Empty;
-                TxRoboDaño1.Value = String.Empty;
-                UpdatePanel8.Update();
-            }else{
-                FuRoboDaño.Visible = true;
-                ImgPreviewRoboDaño.Visible = true;
-                UpRoboDaño.Update();
-                //TxRoboDaño.Text = String.Empty;
-                TxRoboDaño1.Value = String.Empty;
-                UpdatePanel8.Update();
-                ImgPreviewRoboDaño.Src = "../../assets/images/vistaPrevia1.JPG";
-            }
-        }
-        
-        protected void RblElementosAjenos_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (RblElementosAjenos.SelectedValue.Equals("0"))
-            {
-                FuElementosAjenos.Visible = false;
-                ImgPreviewElementosAjenos.Visible = false;
-                UpElementosAjenos.Update();
-                //TxElementosAjenos.Text = String.Empty;
-                TxElementosAjenos1.Value = String.Empty;
-                UpdatePanel8.Update();
-            }
-            else
-            {
-                FuElementosAjenos.Visible = true;
-                ImgPreviewElementosAjenos.Visible = true;
-                UpElementosAjenos.Update();
-                //TxElementosAjenos.Text = String.Empty;
-                TxElementosAjenos1.Value = String.Empty;
-                UpdatePanel8.Update();
-                ImgPreviewElementosAjenos.Src = "../../assets/images/vistaPrevia1.JPG";
-            }
-        }
         
         protected void BtnEnviarLv_Click(object sender, EventArgs e)
         {          
             try
             {
                 String vEx = Request.QueryString["ex"];
+               
                 validacionesEnvioLV();
                 TxFechaModalEnviarLV.Text = TxFechaMant.Text;
                 TxLugarModalEnviarLV.Text = TxCodigoAgencia.Text + " - " + TxLugar.Text;
@@ -684,11 +709,11 @@ namespace Infatlan_STEI_Agencias.pages
                     
                 {
                     TxIdMantenimientoModalEnviarLV.Text = Session["AG_LvPM_ID_MANTENIMIENTO_LV_MODIFICAR"].ToString();
-                    TituloModalEnviarLV.Text = "Enviar LV Modificada " + TxLugar.Text;
+                    TituloModalEnviarLV.Text = "Enviar " + TxLugar.Text;
                 }
                 else{
                     TxIdMantenimientoModalEnviarLV.Text = Session["AG_LvPC_ID_MANTENIMIENTO_LV_COMPLETAR"].ToString();
-                    TituloModalEnviarLV.Text = "Enviar LV  " + TxLugar.Text;
+                    TituloModalEnviarLV.Text = "Enviar " + TxLugar.Text;
                 }
                    
 
@@ -769,6 +794,21 @@ namespace Infatlan_STEI_Agencias.pages
             if (TxHoraFinMant.Text == "" || TxHoraFinMant.Text == string.Empty)
                 throw new Exception("Falta completar el campo hora fin del mantenimiento.");
 
+            if (TxtTelefono.Text == "" || TxtTelefono.Text == string.Empty)
+                throw new Exception("Falta completar teléfono.");
+
+            if (DDLTipoAgencia.SelectedValue == "0")
+                throw new Exception("Falta seleccionar tipo de agencia.");
+
+            if (TxLatitud.Text == "" || TxLatitud.Text == string.Empty)
+                throw new Exception("Falta completar latitud.");
+
+            if (TxLongitud.Text == "" || TxLongitud.Text == string.Empty)
+                throw new Exception("Falta completar longitud.");
+
+            if (txtDireccion.Text == "" || txtDireccion.Text == string.Empty)
+                throw new Exception("Falta completar dirección.");
+
             if (TxCantMaquinas.Text == "" || TxCantMaquinas.Text == string.Empty)
                 throw new Exception("Falta completar el campo (Cant Maquinas).");
 
@@ -781,16 +821,7 @@ namespace Infatlan_STEI_Agencias.pages
             if (TxCantDatacard.Text == "" || TxCantDatacard.Text == string.Empty)
                 throw new Exception("Falta completar el campo (Cant Datacards).");
 
-            if (RBLManEquipoComu.SelectedValue.Equals("") )
-                throw new Exception("Falta completar opción (¿Realizó mantenimiento al equipo de comunicación?).");
-
-            if (RBLManEquipoComu.SelectedValue.Equals(""))
-                throw new Exception("Falta completar opción (¿Realizó mantenimiento al equipo de comunicación?).");
-
-
-            if (RBLManEquipoComu.SelectedValue.Equals("0") && (TxMotivoNoMantEquipoComu.Text== string.Empty  || TxMotivoNoMantEquipoComu.Text == ""))
-                throw new Exception("Falta ingresar motivo por el cual no dio mantenimiento al equipo de comunicación.");
-
+           
             if (RBProbaronEquipo.SelectedValue.Equals(""))
                 throw new Exception("Falta completar opción (¿Se probaron todos los equipos?).");
 
@@ -815,8 +846,7 @@ namespace Infatlan_STEI_Agencias.pages
             if (RblElementosAjenos.SelectedValue.Equals(""))
                 throw new Exception("Falta completar opción (¿Se encuentran elementos ajenos a los equipos de comunicación en el cuarto de comunicaciones? (Ejemplo: sillas, papeles, basura, electrodomesticos, etc)?).");
           
-            if (RBLManEquipoComu.SelectedValue.Equals("1") && TxResNoManEquipoComu1.Value== string.Empty)
-                throw new Exception("Falta que adjunte imagen del mantenimiento al equipo de comunicación.");
+           
 
             if (RblClimatizacionAdecuada.SelectedValue.Equals("1") && TxClimatizacion1.Value== string.Empty)
                 throw new Exception("Falta que adjunte imagen del equipo de comunicación cuenta con una climatización adecuada.");
@@ -840,9 +870,1842 @@ namespace Infatlan_STEI_Agencias.pages
                 throw new Exception("Falta que adjunte imagen de los elementos ajenos que encontro en el cuarto de comunicaciones? (Ejemplo: sillas, papeles, basura, electrodomesticos, etc).");
      
             if (TxEspacioFisico1.Value == string.Empty)
-                throw new Exception("Falta que adjunte imagen del espacio fisico en donde se encuentra el equipo de comunicaciones (Entorno).");                   
+                throw new Exception("Falta que adjunte imagen del espacio fisico en donde se encuentra el equipo de comunicaciones (Entorno).");   
+            if(TxResNoManEquipoComu1.Value==string.Empty)
+                throw new Exception("Favor subir imagen de mantenimiento de equipo");
+            if (TxClimatizacion1.Value == string.Empty)
+                throw new Exception("Favor subir imagen de climatización");
+            if (TxUPS1.Value == string.Empty)
+                throw new Exception("Favor subir imagen de UPS");
+            if (TxRack1.Value == string.Empty)
+                throw new Exception("Favor subir imagen de rack");
+            if (TxPolvoSuciedad1.Value == string.Empty)
+                throw new Exception("Favor subir imagen de suciedad en el área");
+            if (TxHumedadSustancias1.Value == string.Empty)
+                throw new Exception("Favor subir imagen de humedad en el área");
+            if (TxRoboDaño1.Value == string.Empty)
+                throw new Exception("Favor subir imagen de robo/daño");
+            if (TxElementosAjenos1.Value == string.Empty)
+                throw new Exception("Favor subir imagen de elementos ajenos al área de trabajo");
+            if (TxEspacioFisico1.Value == string.Empty)
+                throw new Exception("Favor subir imagen de espacio físico");
+
         }
-        
+
+        void modificarImagenes()
+        {
+            string vIDMantenimiento = Session["AG_LvPM_ID_MANTENIMIENTO_LV_MODIFICAR"].ToString();
+
+            //IMAGENES1
+            String vNombreDepot1 = String.Empty;
+            HttpPostedFile bufferDeposito1 = FuClimatizacion.PostedFile;
+            byte[] vFileDeposito1 = null;
+            string vExtClimatizacion = string.Empty;
+
+
+            if (bufferDeposito1 != null)
+            {
+                vNombreDepot1 = FuClimatizacion.FileName;
+                Stream vStream1 = bufferDeposito1.InputStream;
+                BinaryReader vReader1 = new BinaryReader(vStream1);
+                vFileDeposito1 = vReader1.ReadBytes((int)vStream1.Length);
+                vExtClimatizacion = System.IO.Path.GetExtension(FuClimatizacion.FileName);
+            }
+            String vClimatizacion = String.Empty;
+            if (vFileDeposito1 != null)
+                vClimatizacion = Convert.ToBase64String(vFileDeposito1);
+            //////////////////////////////////////////////////////////////////////////////
+            //IMAGENES2
+            String vNombreDepot2 = String.Empty;
+            HttpPostedFile bufferDeposito2 = FuUPS.PostedFile;
+            byte[] vFileDeposito2 = null;
+            string vExtUPS = string.Empty;
+
+
+            if (bufferDeposito2 != null)
+            {
+                vNombreDepot2 = FuUPS.FileName;
+                Stream vStream2 = bufferDeposito2.InputStream;
+                BinaryReader vReader2 = new BinaryReader(vStream2);
+                vFileDeposito2 = vReader2.ReadBytes((int)vStream2.Length);
+                vExtUPS = System.IO.Path.GetExtension(FuUPS.FileName);
+            }
+            String vUPS = String.Empty;
+            if (vFileDeposito2 != null)
+                vUPS = Convert.ToBase64String(vFileDeposito2);
+            //////////////////////////////////////////////////////////////////////////////
+            //IMAGENES3
+            String vNombreDepot3 = String.Empty;
+            HttpPostedFile bufferDeposito3 = FuPolvoSuciedad.PostedFile;
+            byte[] vFileDeposito3 = null;
+            string vExtPolvoSuciedad = string.Empty;
+
+
+            if (bufferDeposito3 != null)
+            {
+                vNombreDepot3 = FuPolvoSuciedad.FileName;
+                Stream vStream3 = bufferDeposito3.InputStream;
+                BinaryReader vReader3 = new BinaryReader(vStream3);
+                vFileDeposito3 = vReader3.ReadBytes((int)vStream3.Length);
+                vExtPolvoSuciedad = System.IO.Path.GetExtension(FuPolvoSuciedad.FileName);
+            }
+            String vPolvoSuciedad = String.Empty;
+            if (vFileDeposito3 != null)
+                vPolvoSuciedad = Convert.ToBase64String(vFileDeposito3);
+            //////////////////////////////////////////////////////////////////////////////
+            //IMAGENES4
+            String vNombreDepot4 = String.Empty;
+            HttpPostedFile bufferDeposito4 = FuHumedadSustancias.PostedFile;
+            byte[] vFileDeposito4 = null;
+            string vExtHumedad = string.Empty;
+
+            if (bufferDeposito4 != null)
+            {
+                vNombreDepot4 = FuHumedadSustancias.FileName;
+                Stream vStream4 = bufferDeposito4.InputStream;
+                BinaryReader vReader4 = new BinaryReader(vStream4);
+                vFileDeposito4 = vReader4.ReadBytes((int)vStream4.Length);
+                vExtHumedad = System.IO.Path.GetExtension(FuHumedadSustancias.FileName);
+            }
+            String vHumedadSustancias = String.Empty;
+            if (vFileDeposito4 != null)
+                vHumedadSustancias = Convert.ToBase64String(vFileDeposito4);
+            //////////////////////////////////////////////////////////////////////////////
+            //IMAGENES5
+            String vNombreDepot5 = String.Empty;
+            HttpPostedFile bufferDeposito5 = FuRoboDaño.PostedFile;
+            byte[] vFileDeposito5 = null;
+            string vExtDaños = string.Empty;
+
+            if (bufferDeposito5 != null)
+            {
+                vNombreDepot5 = FuRoboDaño.FileName;
+                Stream vStream5 = bufferDeposito5.InputStream;
+                BinaryReader vReader5 = new BinaryReader(vStream5);
+                vFileDeposito5 = vReader5.ReadBytes((int)vStream5.Length);
+                vExtDaños = System.IO.Path.GetExtension(FuRoboDaño.FileName);
+            }
+            String vRoboDaño = String.Empty;
+            if (vFileDeposito5 != null)
+                vRoboDaño = Convert.ToBase64String(vFileDeposito5);
+            //////////////////////////////////////////////////////////////////////////////
+            //IMAGENES6
+            String vNombreDepot6 = String.Empty;
+            HttpPostedFile bufferDeposito6 = FuElementosAjenos.PostedFile;
+            byte[] vFileDeposito6 = null;
+            string vExtElementosAjenos = string.Empty;
+
+            if (bufferDeposito6 != null)
+            {
+                vNombreDepot6 = FuElementosAjenos.FileName;
+                Stream vStream6 = bufferDeposito6.InputStream;
+                BinaryReader vReader6 = new BinaryReader(vStream6);
+                vFileDeposito6 = vReader6.ReadBytes((int)vStream6.Length);
+                vExtElementosAjenos = System.IO.Path.GetExtension(FuElementosAjenos.FileName);
+            }
+            String vElementosAjenos = String.Empty;
+            if (vFileDeposito6 != null)
+                vElementosAjenos = Convert.ToBase64String(vFileDeposito6);
+            //////////////////////////////////////////////////////////////////////////////
+            //IMAGENES7
+            String vNombreDepot7 = String.Empty;
+            HttpPostedFile bufferDeposito7 = FuImageNoMantEquipoComu.PostedFile;
+            byte[] vFileDeposito7 = null;
+            string vExtMantEquipo = string.Empty;
+
+            if (bufferDeposito7 != null)
+            {
+                vNombreDepot7 = FuImageNoMantEquipoComu.FileName;
+                Stream vStream7 = bufferDeposito7.InputStream;
+                BinaryReader vReader7 = new BinaryReader(vStream7);
+                vFileDeposito7 = vReader7.ReadBytes((int)vStream7.Length);
+                vExtMantEquipo = System.IO.Path.GetExtension(FuImageNoMantEquipoComu.FileName);
+            }
+            String vManteEquipo = String.Empty;
+            if (vFileDeposito7 != null)
+                vManteEquipo = Convert.ToBase64String(vFileDeposito7);
+            //////////////////////////////////////////////////////////////////////////////
+            //IMAGENES8
+            String vNombreDepot8 = String.Empty;
+            HttpPostedFile bufferDeposito8 = FuRack.PostedFile;
+            byte[] vFileDeposito8 = null;
+            string vExtRack = string.Empty;
+
+            if (bufferDeposito8 != null)
+            {
+                vNombreDepot8 = FuRack.FileName;
+                Stream vStream8 = bufferDeposito8.InputStream;
+                BinaryReader vReader8 = new BinaryReader(vStream8);
+                vFileDeposito8 = vReader8.ReadBytes((int)vStream8.Length);
+                vExtRack = System.IO.Path.GetExtension(FuRack.FileName);
+            }
+            String vRack = String.Empty;
+            if (vFileDeposito8 != null)
+                vRack = Convert.ToBase64String(vFileDeposito8);
+            //////////////////////////////////////////////////////////////////////////////
+            //IMAGENES9
+            String vNombreDepot9 = String.Empty;
+            HttpPostedFile bufferDeposito9 = FuEspacioFisico.PostedFile;
+            byte[] vFileDeposito9 = null;
+            string vExtEntorno = string.Empty;
+
+            if (bufferDeposito9 != null)
+            {
+                vNombreDepot9 = FuEspacioFisico.FileName;
+                Stream vStream9 = bufferDeposito9.InputStream;
+                BinaryReader vReader9 = new BinaryReader(vStream9);
+                vFileDeposito9 = vReader9.ReadBytes((int)vStream9.Length);
+                vExtEntorno = System.IO.Path.GetExtension(FuEspacioFisico.FileName);
+            }
+            String vEspacio = String.Empty;
+            if (vFileDeposito9 != null)
+                vEspacio = Convert.ToBase64String(vFileDeposito9);
+
+            if (vEspacio != "")
+            {
+                String vQueryEs = "STEISP_AGENCIA_ModificarListaVerificacion 12," + vIDMantenimiento +
+                                            ",'" + vEspacio +
+                                            "','" + vExtEntorno + "'";
+                 vConexion.ejecutarSql(vQueryEs);
+            }
+            if (vManteEquipo != "")
+            {
+                String vQueryMant = "[STEISP_AGENCIA_ModificarListaVerificacion] 20, '" + vIDMantenimiento + "','" + vExtMantEquipo + "','" + vManteEquipo + "','" + TxMotivoNoMantEquipoComu.Text + "'";
+                vConexion.ejecutarSql(vQueryMant);
+            }
+            if (vClimatizacion != "")
+            {
+                String vQueryCli = "[STEISP_AGENCIA_ModificarListaVerificacion] 14, '" + vIDMantenimiento + "','" + RblClimatizacionAdecuada.SelectedValue + "','" + vExtClimatizacion + "','" + vClimatizacion + "'";
+                vConexion.ejecutarSql(vQueryCli);
+            }
+            if (vUPS != "")
+            {
+                String vQueryUPS = "[STEISP_AGENCIA_ModificarListaVerificacion] 15, '" + vIDMantenimiento + "','" + RblUPS.SelectedValue + "','" + vExtUPS + "','" + vUPS + "'";
+                 vConexion.ejecutarSql(vQueryUPS);
+            }
+            if (vPolvoSuciedad != "")
+            {
+                String vQueryPolvo = "[STEISP_AGENCIA_ModificarListaVerificacion] 16, '" + vIDMantenimiento + "','" + RbPolvoSuciedad.SelectedValue + "','" + vExtPolvoSuciedad + "','" + vPolvoSuciedad + "'";
+                vConexion.ejecutarSql(vQueryPolvo);
+            }
+            if (vHumedadSustancias != "")
+            {
+                String vQueryHumedad = "[STEISP_AGENCIA_ModificarListaVerificacion] 17, '" + vIDMantenimiento + "','" + RblHumedadSustancias.SelectedValue + "','" + vExtHumedad + "','" + vHumedadSustancias + "'";
+                vConexion.ejecutarSql(vQueryHumedad);
+            }
+            if (vRoboDaño != "")
+            {
+                String vQueryRobo = "[STEISP_AGENCIA_ModificarListaVerificacion] 18, '" + vIDMantenimiento + "','" + RblRoboDaño.SelectedValue + "','" + vExtDaños + "','" + vRoboDaño + "'";
+                vConexion.ejecutarSql(vQueryRobo);
+            }
+            if (vElementosAjenos != "")
+            {
+                String vQueryEle = "[STEISP_AGENCIA_ModificarListaVerificacion] 19, '" + vIDMantenimiento + "','" + RblElementosAjenos.SelectedValue + "','" + vExtElementosAjenos + "','" + vElementosAjenos + "'";
+                vConexion.ejecutarSql(vQueryEle);
+            }
+            if (vRack != "")
+            {
+                String vQueryRack = "STEISP_AGENCIA_ModificarListaVerificacion 7," + vIDMantenimiento +
+                                                         ",'" + vRack +
+                                                         "','" + vExtRack + "'";
+                vConexion.ejecutarSql(vQueryRack);
+            }
+        }
+
+        void modificarImagenesReducido()
+        {
+            string vIDMantenimiento = Session["AG_LvPM_ID_MANTENIMIENTO_LV_MODIFICAR"].ToString();
+
+            //IMAGENES1
+
+            String vClimatizacion = String.Empty;
+            String vExtClimatizacion = string.Empty;
+            if (FuClimatizacion.FileName != "")
+            {
+                //Bitmap originalBMPReducido = null;
+                //Bitmap originalBMP = new Bitmap(FuClimatizacion.FileContent);
+                //byte[] imageData = null;
+                //byte[] imageData2 = null;
+                ////long imgTamano;
+                //vExtClimatizacion = System.IO.Path.GetExtension(FuClimatizacion.FileName);               
+
+                //using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                //{
+                //    originalBMP.Save(stream, ImageFormat.Png);
+                //    stream.Position = 0;
+                //    imageData = new byte[stream.Length+Convert.ToInt32(stream.Length*0.50)];
+                //    stream.Read(imageData, 0, imageData.Length);
+                //    stream.Close();
+                //}
+                //var newHeight = originalBMP.Height;
+                //var newWidth = originalBMP.Width;
+                //originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+                //using (System.IO.MemoryStream stream2 = new System.IO.MemoryStream())
+                //{
+                //    originalBMPReducido.Save(stream2, ImageFormat.Jpeg);
+                //    stream2.Position = 0;
+                //    imageData2 = new byte[stream2.Length];
+                //    stream2.Read(imageData2, 0, imageData2.Length);
+                //    stream2.Close();
+                //}
+                //vClimatizacion = Convert.ToBase64String(imageData2);
+            }
+            if (FuClimatizacion.FileName != "")
+            {
+                Bitmap originalBMPReducido = null;
+                Bitmap originalBMP = new Bitmap(FuClimatizacion.FileContent);
+                byte[] imageData = null;
+                long imgTamano;
+                vExtClimatizacion = System.IO.Path.GetExtension(FuClimatizacion.FileName);
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    if (originalBMP.RawFormat.Equals(ImageFormat.Jpeg))
+                    {
+                        originalBMP.Save(stream, ImageFormat.Jpeg);
+                        //originalBMP.SetResolution(100, 100);
+                    }
+                    else
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                    }
+
+                    imgTamano = stream.Length;
+                    double imgPeso = (double)imgTamano / 1024;
+                    if (imgPeso >= 1000)
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                        stream.Position = 0;
+                        imageData = new byte[stream.Length];
+                        stream.Read(imageData, 0, imageData.Length);
+                        stream.Close();
+                    }
+                }
+                double imgKB = (double)imgTamano / 1024.0;
+                if (imgKB < 1000)
+                {
+                    originalBMPReducido = new Bitmap(FuClimatizacion.FileContent);
+                }
+                else
+                {
+                    var newHeight = originalBMP.Height / 2;
+                    var newWidth = originalBMP.Width / 2;
+                    originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+                }
+
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData = new byte[stream.Length];
+                    stream.Read(imageData, 0, imageData.Length);
+                    stream.Close();
+                }
+                vClimatizacion = Convert.ToBase64String(imageData);
+            }
+
+            //////////////////////////////////////////////////////////////////////////////
+            //IMAGENES2
+            String vUPS = String.Empty;
+            string vExtUPS = string.Empty;
+            if (FuUPS.FileName != "")
+            {
+                Bitmap originalBMPReducido = null;
+                Bitmap originalBMP = new Bitmap(FuUPS.FileContent);
+                byte[] imageData = null;
+                long imgTamano;
+                vExtUPS = System.IO.Path.GetExtension(FuUPS.FileName);
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    if (originalBMP.RawFormat.Equals(ImageFormat.Jpeg))
+                    {
+                        originalBMP.Save(stream, ImageFormat.Jpeg);
+                        //originalBMP.SetResolution(100, 100);
+                    }
+                    else
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                    }
+
+                    imgTamano = stream.Length;
+                    double imgPeso = (double)imgTamano / 1024;
+                    if (imgPeso >= 1000)
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                        stream.Position = 0;
+                        imageData = new byte[stream.Length];
+                        stream.Read(imageData, 0, imageData.Length);
+                        stream.Close();
+                    }
+                }
+                double imgKB = (double)imgTamano / 1024.0;
+                if (imgKB < 1000)
+                {
+                    originalBMPReducido = new Bitmap(FuUPS.FileContent);
+                }
+                else
+                {
+                    var newHeight = originalBMP.Height / 2;
+                    var newWidth = originalBMP.Width / 2;
+                    originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+                }
+
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData = new byte[stream.Length];
+                    stream.Read(imageData, 0, imageData.Length);
+                    stream.Close();
+                }
+                vUPS = Convert.ToBase64String(imageData);
+            }
+
+            //////////////////////////////////////////////////////////////////////////////
+            //IMAGENES3
+            string vExtPolvoSuciedad = string.Empty;
+            String vPolvoSuciedad = String.Empty;
+            if (FuPolvoSuciedad.FileName != "")
+            {
+                Bitmap originalBMPReducido = null;
+                Bitmap originalBMP = new Bitmap(FuPolvoSuciedad.FileContent);
+                byte[] imageData = null;
+                long imgTamano;
+                vExtPolvoSuciedad = System.IO.Path.GetExtension(FuPolvoSuciedad.FileName);
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    if (originalBMP.RawFormat.Equals(ImageFormat.Jpeg))
+                    {
+                        originalBMP.Save(stream, ImageFormat.Jpeg);
+                        //originalBMP.SetResolution(100, 100);
+                    }
+                    else
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                    }
+
+                    imgTamano = stream.Length;
+                    double imgPeso = (double)imgTamano / 1024;
+                    if (imgPeso >= 1000)
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                        stream.Position = 0;
+                        imageData = new byte[stream.Length];
+                        stream.Read(imageData, 0, imageData.Length);
+                        stream.Close();
+                    }
+                }
+                double imgKB = (double)imgTamano / 1024.0;
+                if (imgKB < 1000)
+                {
+                    originalBMPReducido = new Bitmap(FuPolvoSuciedad.FileContent);
+                }
+                else
+                {
+                    var newHeight = originalBMP.Height / 2;
+                    var newWidth = originalBMP.Width / 2;
+                    originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+                }
+
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData = new byte[stream.Length];
+                    stream.Read(imageData, 0, imageData.Length);
+                    stream.Close();
+                }
+                vPolvoSuciedad = Convert.ToBase64String(imageData);
+            }
+
+
+            //////////////////////////////////////////////////////////////////////////////
+            //IMAGENES4
+            String vHumedadSustancias = String.Empty;
+            string vExtHumedad = string.Empty;
+            if (FuHumedadSustancias.FileName != "")
+            {
+                Bitmap originalBMPReducido = null;
+                Bitmap originalBMP = new Bitmap(FuHumedadSustancias.FileContent);
+                byte[] imageData = null;
+                long imgTamano;
+                vExtHumedad = System.IO.Path.GetExtension(FuHumedadSustancias.FileName);
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    if (originalBMP.RawFormat.Equals(ImageFormat.Jpeg))
+                    {
+                        originalBMP.Save(stream, ImageFormat.Jpeg);
+                        //originalBMP.SetResolution(100, 100);
+                    }
+                    else
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                    }
+
+                    imgTamano = stream.Length;
+                    double imgPeso = (double)imgTamano / 1024;
+                    if (imgPeso >= 1000)
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                        stream.Position = 0;
+                        imageData = new byte[stream.Length];
+                        stream.Read(imageData, 0, imageData.Length);
+                        stream.Close();
+                    }
+                }
+                double imgKB = (double)imgTamano / 1024.0;
+                if (imgKB < 1000)
+                {
+                    originalBMPReducido = new Bitmap(FuHumedadSustancias.FileContent);
+                }
+                else
+                {
+                    var newHeight = originalBMP.Height / 2;
+                    var newWidth = originalBMP.Width / 2;
+                    originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+                }
+
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData = new byte[stream.Length];
+                    stream.Read(imageData, 0, imageData.Length);
+                    stream.Close();
+                }
+                vHumedadSustancias = Convert.ToBase64String(imageData);
+            }
+
+           
+            //////////////////////////////////////////////////////////////////////////////
+            //IMAGENES5
+            String vRoboDaño = String.Empty;
+            string vExtDaños = string.Empty;
+            if (FuRoboDaño.FileName != "")
+            {
+                Bitmap originalBMPReducido = null;
+                Bitmap originalBMP = new Bitmap(FuRoboDaño.FileContent);
+                byte[] imageData = null;
+                long imgTamano;
+                vExtDaños = System.IO.Path.GetExtension(FuRoboDaño.FileName);
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    if (originalBMP.RawFormat.Equals(ImageFormat.Jpeg))
+                    {
+                        originalBMP.Save(stream, ImageFormat.Jpeg);
+                        //originalBMP.SetResolution(100, 100);
+                    }
+                    else
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                    }
+
+                    imgTamano = stream.Length;
+                    double imgPeso = (double)imgTamano / 1024;
+                    if (imgPeso >= 1000)
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                        stream.Position = 0;
+                        imageData = new byte[stream.Length];
+                        stream.Read(imageData, 0, imageData.Length);
+                        stream.Close();
+                    }
+                }
+                double imgKB = (double)imgTamano / 1024.0;
+                if (imgKB < 1000)
+                {
+                    originalBMPReducido = new Bitmap(FuRoboDaño.FileContent);
+                }
+                else
+                {
+                    var newHeight = originalBMP.Height / 2;
+                    var newWidth = originalBMP.Width / 2;
+                    originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+                }
+
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData = new byte[stream.Length];
+                    stream.Read(imageData, 0, imageData.Length);
+                    stream.Close();
+                }
+                vRoboDaño = Convert.ToBase64String(imageData);
+            }
+
+            //////////////////////////////////////////////////////////////////////////////
+            //IMAGENES6
+            String vElementosAjenos = String.Empty;
+            string vExtElementosAjenos = string.Empty;
+            if (FuElementosAjenos.FileName != "")
+            {
+                Bitmap originalBMPReducido = null;
+                Bitmap originalBMP = new Bitmap(FuElementosAjenos.FileContent);
+                byte[] imageData = null;
+                long imgTamano;
+                vExtElementosAjenos = System.IO.Path.GetExtension(FuElementosAjenos.FileName);
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    if (originalBMP.RawFormat.Equals(ImageFormat.Jpeg))
+                    {
+                        originalBMP.Save(stream, ImageFormat.Jpeg);
+                        //originalBMP.SetResolution(100, 100);
+                    }
+                    else
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                    }
+
+                    imgTamano = stream.Length;
+                    double imgPeso = (double)imgTamano / 1024;
+                    if (imgPeso >= 1000)
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                        stream.Position = 0;
+                        imageData = new byte[stream.Length];
+                        stream.Read(imageData, 0, imageData.Length);
+                        stream.Close();
+                    }
+                }
+                double imgKB = (double)imgTamano / 1024.0;
+                if (imgKB < 1000)
+                {
+                    originalBMPReducido = new Bitmap(FuElementosAjenos.FileContent);
+                }
+                else
+                {
+                    var newHeight = originalBMP.Height / 2;
+                    var newWidth = originalBMP.Width / 2;
+                    originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+                }
+
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData = new byte[stream.Length];
+                    stream.Read(imageData, 0, imageData.Length);
+                    stream.Close();
+                }
+                vElementosAjenos = Convert.ToBase64String(imageData);
+            }
+
+
+            //////////////////////////////////////////////////////////////////////////////
+            //IMAGENES7
+            String vManteEquipo = String.Empty;
+            string vExtMantEquipo = string.Empty;
+            if (FuImageNoMantEquipoComu.FileName != "")
+            {
+                Bitmap originalBMPReducido = null;
+                Bitmap originalBMP = new Bitmap(FuImageNoMantEquipoComu.FileContent);
+                byte[] imageData = null;
+                long imgTamano;
+                vExtMantEquipo = System.IO.Path.GetExtension(FuImageNoMantEquipoComu.FileName);
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    if (originalBMP.RawFormat.Equals(ImageFormat.Jpeg))
+                    {
+                        originalBMP.Save(stream, ImageFormat.Jpeg);
+                        //originalBMP.SetResolution(100, 100);
+                    }
+                    else
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                    }
+
+                    imgTamano = stream.Length;
+                    double imgPeso = (double)imgTamano / 1024;
+                    if (imgPeso >= 1000)
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                        stream.Position = 0;
+                        imageData = new byte[stream.Length];
+                        stream.Read(imageData, 0, imageData.Length);
+                        stream.Close();
+                    }
+                }
+                double imgKB = (double)imgTamano / 1024.0;
+                if (imgKB < 1000)
+                {
+                    originalBMPReducido = new Bitmap(FuImageNoMantEquipoComu.FileContent);
+                }
+                else
+                {
+                    var newHeight = originalBMP.Height / 2;
+                    var newWidth = originalBMP.Width / 2;
+                    originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+                }
+
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData = new byte[stream.Length];
+                    stream.Read(imageData, 0, imageData.Length);
+                    stream.Close();
+                }
+                vManteEquipo = Convert.ToBase64String(imageData);
+            }
+
+
+            //////////////////////////////////////////////////////////////////////////////
+            //IMAGENES8
+            String vRack = String.Empty;
+            string vExtRack = string.Empty;
+            if (FuRack.FileName != "")
+            {
+                Bitmap originalBMPReducido = null;
+                Bitmap originalBMP = new Bitmap(FuRack.FileContent);
+                byte[] imageData = null;
+                long imgTamano;
+                vExtRack = System.IO.Path.GetExtension(FuRack.FileName);
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    if (originalBMP.RawFormat.Equals(ImageFormat.Jpeg))
+                    {
+                        originalBMP.Save(stream, ImageFormat.Jpeg);
+                        //originalBMP.SetResolution(100, 100);
+                    }
+                    else
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                    }
+
+                    imgTamano = stream.Length;
+                    double imgPeso = (double)imgTamano / 1024;
+                    if (imgPeso >= 1000)
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                        stream.Position = 0;
+                        imageData = new byte[stream.Length];
+                        stream.Read(imageData, 0, imageData.Length);
+                        stream.Close();
+                    }
+                }
+                double imgKB = (double)imgTamano / 1024.0;
+                if (imgKB < 1000)
+                {
+                    originalBMPReducido = new Bitmap(FuRack.FileContent);
+                }
+                else
+                {
+                    var newHeight = originalBMP.Height / 2;
+                    var newWidth = originalBMP.Width / 2;
+                    originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+                }
+
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData = new byte[stream.Length];
+                    stream.Read(imageData, 0, imageData.Length);
+                    stream.Close();
+                }
+                vRack = Convert.ToBase64String(imageData);
+            }
+
+
+            //////////////////////////////////////////////////////////////////////////////
+            //IMAGENES9
+            String vEspacio = String.Empty;
+            string vExtEntorno = string.Empty;
+            if (FuEspacioFisico.FileName != "")
+            {
+                Bitmap originalBMPReducido = null;
+                Bitmap originalBMP = new Bitmap(FuEspacioFisico.FileContent);
+                byte[] imageData = null;
+                long imgTamano;
+                vExtEntorno = System.IO.Path.GetExtension(FuEspacioFisico.FileName);
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    if (originalBMP.RawFormat.Equals(ImageFormat.Jpeg))
+                    {
+                        originalBMP.Save(stream, ImageFormat.Jpeg);
+                        //originalBMP.SetResolution(100, 100);
+                    }
+                    else
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                    }
+
+                    imgTamano = stream.Length;
+                    double imgPeso = (double)imgTamano / 1024;
+                    if (imgPeso >= 1000)
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                        stream.Position = 0;
+                        imageData = new byte[stream.Length];
+                        stream.Read(imageData, 0, imageData.Length);
+                        stream.Close();
+                    }
+                }
+                double imgKB = (double)imgTamano / 1024.0;
+                if (imgKB < 1000)
+                {
+                    originalBMPReducido = new Bitmap(FuEspacioFisico.FileContent);
+                }
+                else
+                {
+                    var newHeight = originalBMP.Height / 2;
+                    var newWidth = originalBMP.Width / 2;
+                    originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+                }
+
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData = new byte[stream.Length];
+                    stream.Read(imageData, 0, imageData.Length);
+                    stream.Close();
+                }
+                vEspacio = Convert.ToBase64String(imageData);
+            }
+
+
+            if (vEspacio != "")
+            {
+                String vQueryEs = "STEISP_AGENCIA_ModificarListaVerificacion 12," + vIDMantenimiento +
+                                            ",'" + vEspacio +
+                                            "','" + vExtEntorno + "'";
+                vConexion.ejecutarSql(vQueryEs);
+            }
+            if (vManteEquipo != "")
+            {
+                String vQueryMant = "[STEISP_AGENCIA_ModificarListaVerificacion] 20, '" + vIDMantenimiento + "','" + vExtMantEquipo + "','" + vManteEquipo + "','" + TxMotivoNoMantEquipoComu.Text + "'";
+                vConexion.ejecutarSql(vQueryMant);
+            }
+            if (vClimatizacion != "")
+            {
+                String vQueryCli = "[STEISP_AGENCIA_ModificarListaVerificacion] 14, '" + vIDMantenimiento + "','" + RblClimatizacionAdecuada.SelectedValue + "','" + vExtClimatizacion + "','" + vClimatizacion + "'";
+                vConexion.ejecutarSql(vQueryCli);
+            }
+            if (vUPS != "")
+            {
+                String vQueryUPS = "[STEISP_AGENCIA_ModificarListaVerificacion] 15, '" + vIDMantenimiento + "','" + RblUPS.SelectedValue + "','" + vExtUPS + "','" + vUPS + "'";
+                vConexion.ejecutarSql(vQueryUPS);
+            }
+            if (vPolvoSuciedad != "")
+            {
+                String vQueryPolvo = "[STEISP_AGENCIA_ModificarListaVerificacion] 16, '" + vIDMantenimiento + "','" + RbPolvoSuciedad.SelectedValue + "','" + vExtPolvoSuciedad + "','" + vPolvoSuciedad + "'";
+                vConexion.ejecutarSql(vQueryPolvo);
+            }
+            if (vHumedadSustancias != "")
+            {
+                String vQueryHumedad = "[STEISP_AGENCIA_ModificarListaVerificacion] 17, '" + vIDMantenimiento + "','" + RblHumedadSustancias.SelectedValue + "','" + vExtHumedad + "','" + vHumedadSustancias + "'";
+                vConexion.ejecutarSql(vQueryHumedad);
+            }
+            if (vRoboDaño != "")
+            {
+                String vQueryRobo = "[STEISP_AGENCIA_ModificarListaVerificacion] 18, '" + vIDMantenimiento + "','" + RblRoboDaño.SelectedValue + "','" + vExtDaños + "','" + vRoboDaño + "'";
+                vConexion.ejecutarSql(vQueryRobo);
+            }
+            if (vElementosAjenos != "")
+            {
+                String vQueryEle = "[STEISP_AGENCIA_ModificarListaVerificacion] 19, '" + vIDMantenimiento + "','" + RblElementosAjenos.SelectedValue + "','" + vExtElementosAjenos + "','" + vElementosAjenos + "'";
+                vConexion.ejecutarSql(vQueryEle);
+            }
+            if (vRack != "")
+            {
+                String vQueryRack = "STEISP_AGENCIA_ModificarListaVerificacion 7," + vIDMantenimiento +
+                                                         ",'" + vRack +
+                                                         "','" + vExtRack + "'";
+                vConexion.ejecutarSql(vQueryRack);
+            }
+        }
+
+        void crearImagenesReducido()
+        {
+            string vIDMantenimiento = Session["AG_LvPC_ID_MANTENIMIENTO_LV_COMPLETAR"].ToString();
+
+            //IMAGENES1
+
+            String vClimatizacion = String.Empty;
+            String vExtClimatizacion = string.Empty;
+            if (FuClimatizacion.FileName != "")
+            {
+                Bitmap originalBMPReducido = null;
+                Bitmap originalBMP = new Bitmap(FuClimatizacion.FileContent);
+                byte[] imageData = null;
+                long imgTamano;
+                vExtClimatizacion = System.IO.Path.GetExtension(FuClimatizacion.FileName);
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    if (originalBMP.RawFormat.Equals(ImageFormat.Jpeg))
+                    {
+                        originalBMP.Save(stream, ImageFormat.Jpeg);
+                        //originalBMP.SetResolution(100, 100);
+                    }
+                    else
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                    }
+
+                    imgTamano = stream.Length;
+                    double imgPeso = (double)imgTamano / 1024;
+                    if (imgPeso >= 1000)
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                        stream.Position = 0;
+                        imageData = new byte[stream.Length];
+                        stream.Read(imageData, 0, imageData.Length);
+                        stream.Close();
+                    }
+                }
+                double imgKB = (double)imgTamano / 1024.0;
+                if (imgKB < 1000)
+                {
+                    originalBMPReducido = new Bitmap(FuClimatizacion.FileContent);
+                }
+                else
+                {
+                    var newHeight = originalBMP.Height / 2;
+                    var newWidth = originalBMP.Width / 2;
+                    originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+                }
+
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData = new byte[stream.Length];
+                    stream.Read(imageData, 0, imageData.Length);
+                    stream.Close();
+                }
+                vClimatizacion = Convert.ToBase64String(imageData);
+            }
+
+            //////////////////////////////////////////////////////////////////////////////
+            //IMAGENES2
+            String vUPS = String.Empty;
+            string vExtUPS = string.Empty;
+            if (FuUPS.FileName != "")
+            {
+                Bitmap originalBMPReducido = null;
+                Bitmap originalBMP = new Bitmap(FuUPS.FileContent);
+                byte[] imageData = null;
+                long imgTamano;
+                vExtUPS = System.IO.Path.GetExtension(FuUPS.FileName);
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    if (originalBMP.RawFormat.Equals(ImageFormat.Jpeg))
+                    {
+                        originalBMP.Save(stream, ImageFormat.Jpeg);
+                        //originalBMP.SetResolution(100, 100);
+                    }
+                    else
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                    }
+
+                    imgTamano = stream.Length;
+                    double imgPeso = (double)imgTamano / 1024;
+                    if (imgPeso >= 1000)
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                        stream.Position = 0;
+                        imageData = new byte[stream.Length];
+                        stream.Read(imageData, 0, imageData.Length);
+                        stream.Close();
+                    }
+                }
+                double imgKB = (double)imgTamano / 1024.0;
+                if (imgKB < 1000)
+                {
+                    originalBMPReducido = new Bitmap(FuUPS.FileContent);
+                }
+                else
+                {
+                    var newHeight = originalBMP.Height / 2;
+                    var newWidth = originalBMP.Width / 2;
+                    originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+                }
+
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData = new byte[stream.Length];
+                    stream.Read(imageData, 0, imageData.Length);
+                    stream.Close();
+                }
+                vUPS = Convert.ToBase64String(imageData);
+            }
+
+            //////////////////////////////////////////////////////////////////////////////
+            //IMAGENES3
+            string vExtPolvoSuciedad = string.Empty;
+            String vPolvoSuciedad = String.Empty;
+            if (FuPolvoSuciedad.FileName != "")
+            {
+                Bitmap originalBMPReducido = null;
+                Bitmap originalBMP = new Bitmap(FuPolvoSuciedad.FileContent);
+                byte[] imageData = null;
+                long imgTamano;
+                vExtPolvoSuciedad = System.IO.Path.GetExtension(FuPolvoSuciedad.FileName);
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    if (originalBMP.RawFormat.Equals(ImageFormat.Jpeg))
+                    {
+                        originalBMP.Save(stream, ImageFormat.Jpeg);
+                        //originalBMP.SetResolution(100, 100);
+                    }
+                    else
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                    }
+
+                    imgTamano = stream.Length;
+                    double imgPeso = (double)imgTamano / 1024;
+                    if (imgPeso >= 1000)
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                        stream.Position = 0;
+                        imageData = new byte[stream.Length];
+                        stream.Read(imageData, 0, imageData.Length);
+                        stream.Close();
+                    }
+                }
+                double imgKB = (double)imgTamano / 1024.0;
+                if (imgKB < 1000)
+                {
+                    originalBMPReducido = new Bitmap(FuPolvoSuciedad.FileContent);
+                }
+                else
+                {
+                    var newHeight = originalBMP.Height / 2;
+                    var newWidth = originalBMP.Width / 2;
+                    originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+                }
+
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData = new byte[stream.Length];
+                    stream.Read(imageData, 0, imageData.Length);
+                    stream.Close();
+                }
+                vPolvoSuciedad = Convert.ToBase64String(imageData);
+            }
+
+
+            //////////////////////////////////////////////////////////////////////////////
+            //IMAGENES4
+            String vHumedadSustancias = String.Empty;
+            string vExtHumedad = string.Empty;
+            if (FuHumedadSustancias.FileName != "")
+            {
+                Bitmap originalBMPReducido = null;
+                Bitmap originalBMP = new Bitmap(FuHumedadSustancias.FileContent);
+                byte[] imageData = null;
+                long imgTamano;
+                vExtHumedad = System.IO.Path.GetExtension(FuHumedadSustancias.FileName);
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    if (originalBMP.RawFormat.Equals(ImageFormat.Jpeg))
+                    {
+                        originalBMP.Save(stream, ImageFormat.Jpeg);
+                        //originalBMP.SetResolution(100, 100);
+                    }
+                    else
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                    }
+
+                    imgTamano = stream.Length;
+                    double imgPeso = (double)imgTamano / 1024;
+                    if (imgPeso >= 1000)
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                        stream.Position = 0;
+                        imageData = new byte[stream.Length];
+                        stream.Read(imageData, 0, imageData.Length);
+                        stream.Close();
+                    }
+                }
+                double imgKB = (double)imgTamano / 1024.0;
+                if (imgKB < 1000)
+                {
+                    originalBMPReducido = new Bitmap(FuHumedadSustancias.FileContent);
+                }
+                else
+                {
+                    var newHeight = originalBMP.Height / 2;
+                    var newWidth = originalBMP.Width / 2;
+                    originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+                }
+
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData = new byte[stream.Length];
+                    stream.Read(imageData, 0, imageData.Length);
+                    stream.Close();
+                }
+                vHumedadSustancias = Convert.ToBase64String(imageData);
+            }
+
+
+            //////////////////////////////////////////////////////////////////////////////
+            //IMAGENES5
+            String vRoboDaño = String.Empty;
+            string vExtDaños = string.Empty;
+            if (FuRoboDaño.FileName != "")
+            {
+                Bitmap originalBMPReducido = null;
+                Bitmap originalBMP = new Bitmap(FuRoboDaño.FileContent);
+                byte[] imageData = null;
+                long imgTamano;
+                vExtDaños = System.IO.Path.GetExtension(FuRoboDaño.FileName);
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    if (originalBMP.RawFormat.Equals(ImageFormat.Jpeg))
+                    {
+                        originalBMP.Save(stream, ImageFormat.Jpeg);
+                        //originalBMP.SetResolution(100, 100);
+                    }
+                    else
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                    }
+
+                    imgTamano = stream.Length;
+                    double imgPeso = (double)imgTamano / 1024;
+                    if (imgPeso >= 1000)
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                        stream.Position = 0;
+                        imageData = new byte[stream.Length];
+                        stream.Read(imageData, 0, imageData.Length);
+                        stream.Close();
+                    }
+                }
+                double imgKB = (double)imgTamano / 1024.0;
+                if (imgKB < 1000)
+                {
+                    originalBMPReducido = new Bitmap(FuRoboDaño.FileContent);
+                }
+                else
+                {
+                    var newHeight = originalBMP.Height / 2;
+                    var newWidth = originalBMP.Width / 2;
+                    originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+                }
+
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData = new byte[stream.Length];
+                    stream.Read(imageData, 0, imageData.Length);
+                    stream.Close();
+                }
+                vRoboDaño = Convert.ToBase64String(imageData);
+            }
+
+            //////////////////////////////////////////////////////////////////////////////
+            //IMAGENES6
+            String vElementosAjenos = String.Empty;
+            string vExtElementosAjenos = string.Empty;
+            if (FuElementosAjenos.FileName != "")
+            {
+                Bitmap originalBMPReducido = null;
+                Bitmap originalBMP = new Bitmap(FuElementosAjenos.FileContent);
+                byte[] imageData = null;
+                long imgTamano;
+                vExtElementosAjenos = System.IO.Path.GetExtension(FuElementosAjenos.FileName);
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    if (originalBMP.RawFormat.Equals(ImageFormat.Jpeg))
+                    {
+                        originalBMP.Save(stream, ImageFormat.Jpeg);
+                        //originalBMP.SetResolution(100, 100);
+                    }
+                    else
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                    }
+
+                    imgTamano = stream.Length;
+                    double imgPeso = (double)imgTamano / 1024;
+                    if (imgPeso >= 1000)
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                        stream.Position = 0;
+                        imageData = new byte[stream.Length];
+                        stream.Read(imageData, 0, imageData.Length);
+                        stream.Close();
+                    }
+                }
+                double imgKB = (double)imgTamano / 1024.0;
+                if (imgKB < 1000)
+                {
+                    originalBMPReducido = new Bitmap(FuElementosAjenos.FileContent);
+                }
+                else
+                {
+                    var newHeight = originalBMP.Height / 2;
+                    var newWidth = originalBMP.Width / 2;
+                    originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+                }
+
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData = new byte[stream.Length];
+                    stream.Read(imageData, 0, imageData.Length);
+                    stream.Close();
+                }
+                vElementosAjenos = Convert.ToBase64String(imageData);
+            }
+
+
+            //////////////////////////////////////////////////////////////////////////////
+            //IMAGENES7
+            String vManteEquipo = String.Empty;
+            string vExtMantEquipo = string.Empty;
+            if (FuImageNoMantEquipoComu.FileName != "")
+            {
+                Bitmap originalBMPReducido = null;
+                Bitmap originalBMP = new Bitmap(FuImageNoMantEquipoComu.FileContent);
+                byte[] imageData = null;
+                long imgTamano;
+                vExtMantEquipo = System.IO.Path.GetExtension(FuImageNoMantEquipoComu.FileName);
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    if (originalBMP.RawFormat.Equals(ImageFormat.Jpeg))
+                    {
+                        originalBMP.Save(stream, ImageFormat.Jpeg);
+                        //originalBMP.SetResolution(100, 100);
+                    }
+                    else
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                    }
+
+                    imgTamano = stream.Length;
+                    double imgPeso = (double)imgTamano / 1024;
+                    if (imgPeso >= 1000)
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                        stream.Position = 0;
+                        imageData = new byte[stream.Length];
+                        stream.Read(imageData, 0, imageData.Length);
+                        stream.Close();
+                    }
+                }
+                double imgKB = (double)imgTamano / 1024.0;
+                if (imgKB < 1000)
+                {
+                    originalBMPReducido = new Bitmap(FuImageNoMantEquipoComu.FileContent);
+                }
+                else
+                {
+                    var newHeight = originalBMP.Height / 2;
+                    var newWidth = originalBMP.Width / 2;
+                    originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+                }
+
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData = new byte[stream.Length];
+                    stream.Read(imageData, 0, imageData.Length);
+                    stream.Close();
+                }
+                vManteEquipo = Convert.ToBase64String(imageData);
+            }
+
+
+            //////////////////////////////////////////////////////////////////////////////
+            //IMAGENES8
+            String vRack = String.Empty;
+            string vExtRack = string.Empty;
+            if (FuRack.FileName != "")
+            {
+                Bitmap originalBMPReducido = null;
+                Bitmap originalBMP = new Bitmap(FuRack.FileContent);
+                byte[] imageData = null;
+                long imgTamano;
+                vExtRack = System.IO.Path.GetExtension(FuRack.FileName);
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    if (originalBMP.RawFormat.Equals(ImageFormat.Jpeg))
+                    {
+                        originalBMP.Save(stream, ImageFormat.Jpeg);
+                        //originalBMP.SetResolution(100, 100);
+                    }
+                    else
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                    }
+
+                    imgTamano = stream.Length;
+                    double imgPeso = (double)imgTamano / 1024;
+                    if (imgPeso >= 1000)
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                        stream.Position = 0;
+                        imageData = new byte[stream.Length];
+                        stream.Read(imageData, 0, imageData.Length);
+                        stream.Close();
+                    }
+                }
+                double imgKB = (double)imgTamano / 1024.0;
+                if (imgKB < 1000)
+                {
+                    originalBMPReducido = new Bitmap(FuRack.FileContent);
+                }
+                else
+                {
+                    var newHeight = originalBMP.Height / 2;
+                    var newWidth = originalBMP.Width / 2;
+                    originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+                }
+
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData = new byte[stream.Length];
+                    stream.Read(imageData, 0, imageData.Length);
+                    stream.Close();
+                }
+                vRack = Convert.ToBase64String(imageData);
+            }
+
+
+            //////////////////////////////////////////////////////////////////////////////
+            //IMAGENES9
+            String vEspacio = String.Empty;
+            string vExtEntorno = string.Empty;
+            if (FuEspacioFisico.FileName != "")
+            {
+                Bitmap originalBMPReducido = null;
+                Bitmap originalBMP = new Bitmap(FuEspacioFisico.FileContent);
+                byte[] imageData = null;
+                long imgTamano;
+                vExtEntorno = System.IO.Path.GetExtension(FuEspacioFisico.FileName);
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    if (originalBMP.RawFormat.Equals(ImageFormat.Jpeg))
+                    {
+                        originalBMP.Save(stream, ImageFormat.Jpeg);
+                        //originalBMP.SetResolution(100, 100);
+                    }
+                    else
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                    }
+
+                    imgTamano = stream.Length;
+                    double imgPeso = (double)imgTamano / 1024;
+                    if (imgPeso >= 1000)
+                    {
+                        originalBMP.Save(stream, ImageFormat.Png);
+                        stream.Position = 0;
+                        imageData = new byte[stream.Length];
+                        stream.Read(imageData, 0, imageData.Length);
+                        stream.Close();
+                    }
+                }
+                double imgKB = (double)imgTamano / 1024.0;
+                if (imgKB < 1000)
+                {
+                    originalBMPReducido = new Bitmap(FuEspacioFisico.FileContent);
+                }
+                else
+                {
+                    var newHeight = originalBMP.Height / 2;
+                    var newWidth = originalBMP.Width / 2;
+                    originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
+                }
+
+                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    originalBMPReducido.Save(stream, ImageFormat.Jpeg);
+                    stream.Position = 0;
+                    imageData = new byte[stream.Length];
+                    stream.Read(imageData, 0, imageData.Length);
+                    stream.Close();
+                }
+                vEspacio = Convert.ToBase64String(imageData);
+            }
+
+            int valor = 0;
+            String vQuery2 = "STEISP_AGENCIA_CompletarListaVerificacion 6," + Session["AG_LvPC_ID_MANTENIMIENTO_LV_COMPLETAR"] +
+                                                  "," + TxCantMaquinas.Text +
+                                                  "," + TxCantImpresoraFinanciera.Text +
+                                                  "," + TxCantDatacard.Text +
+                                                  "," + TxCantEscaner.Text +
+                                                  "," + valor +
+                                                  ",'" + TxMotivoNoMantEquipoComu.Text +
+                                                  "','" + vManteEquipo +
+                                                  "','" + vExtMantEquipo + "'";
+            Int32 vInformacion2 = vConexion.ejecutarSql(vQuery2);
+
+            String vQuery4 = "STEISP_AGENCIA_CompletarListaVerificacion 8," + Session["AG_LvPC_ID_MANTENIMIENTO_LV_COMPLETAR"] +
+                                                "," + RblClimatizacionAdecuada.SelectedValue +
+                                                ",'" + vClimatizacion +
+                                                "','" + vExtClimatizacion + "'" +
+
+                                                "," + RblUPS.SelectedValue +
+                                                ",'" + vUPS +
+                                                "','" + vExtUPS + "'" +
+
+                                                ",'" + vRack +
+                                                "','" + vExtRack + "'";
+
+            Int32 vInformacion4 = vConexion.ejecutarSql(vQuery4);
+
+            String vQuery5 = "STEISP_AGENCIA_CompletarListaVerificacion 9," + Session["AG_LvPC_ID_MANTENIMIENTO_LV_COMPLETAR"] +
+                                                "," + RbPolvoSuciedad.SelectedValue +
+                                                ",'" + vPolvoSuciedad +
+                                                "','" + vExtPolvoSuciedad + "'" +
+
+                                                "," + RblHumedadSustancias.SelectedValue +
+                                                ",'" + vHumedadSustancias +
+                                                "','" + vExtHumedad + "'" +
+
+                                                "," + RblRoboDaño.SelectedValue +
+                                                ",'" + vRoboDaño +
+                                                "','" + vExtDaños + "'" +
+
+                                                "," + RblElementosAjenos.SelectedValue +
+                                                ",'" + vElementosAjenos +
+                                                "','" + vExtElementosAjenos + "'" +
+
+                                                ",'" + vEspacio +
+                                                "','" + vExtEntorno + "','" +
+                                                    TxObservacionesGenerales.Text + "'";
+
+            Int32 vInformacion5 = vConexion.ejecutarSql(vQuery5);
+        }
+
+        void EnviarCorreoCrear()
+        {
+            SmtpService vService = new SmtpService();
+            string vZonaAgencia = "";
+            string vIDMantenimiento = Convert.ToString(Session["AG_LvPC_ID_MANTENIMIENTO_LV_COMPLETAR"]);
+
+            string vQueryD = "[STEISP_AGENCIA_AprobarNotificacion] 9,'" + vIDMantenimiento + "'";
+            DataTable vDatosTecnicoResponsable = vConexion.obtenerDataTable(vQueryD);
+            string vQueryTecnicos = "[STEISP_AGENCIA_AprobarNotificacion] 10,'" + vIDMantenimiento + "'";
+            DataTable vDatosTecnicos = vConexion.obtenerDataTable(vQueryTecnicos);
+            string vQueryJefes = "[STEISP_AGENCIA_AprobarNotificacion] 11,'" + vIDMantenimiento + "'";
+            DataTable vDatosJefeAgencias = vConexion.obtenerDataTable(vQueryJefes);
+            string vQueryZona = "[STEISP_AGENCIA_AprobarNotificacion] 12,'" + vIDMantenimiento + "'";
+            DataTable vDatosZona = vConexion.obtenerDataTable(vQueryZona);
+            DataTable vDatos = (DataTable)Session["AUTHCLASS"];
+
+
+            for (int i = 0; i < vDatosZona.Rows.Count; i++)
+            {
+                vZonaAgencia = vDatosZona.Rows[i]["Zona"].ToString();
+            }
+            string vCorreoEncargadoZona = "";
+            if (vZonaAgencia == "1")
+                vCorreoEncargadoZona = "emontoya@bancatlan.hn";
+            if (vZonaAgencia == "2")
+                vCorreoEncargadoZona = "jdgarcia@bancatlan.hn";
+            if (vZonaAgencia == "3")
+                vCorreoEncargadoZona = "acalderon@bancatlan.hn";
+
+            if (vDatos.Rows.Count > 0)
+            {
+                foreach (DataRow item in vDatos.Rows)
+                {
+                    
+                        //ENVIAR A JEFE
+                        if (!item["correo"].ToString().Trim().Equals(""))
+                        {
+                            vService.EnviarMensaje(item["correo"].ToString(),
+                            typeBody.EnvioCorreo,
+                            "Verificación de Mantenimiento Agencia",
+                            "Buen día, se le notifica que se creó verificación de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["Nombre"].ToString() + ", mantenimiento a Agencia " + TxLugarModalEnviarLV.Text,
+                            "El usuario <b>" + item["Nombre"].ToString() + "</b> creó: <br> Verificación de Mantenimiento",
+                            "",
+                            "/sites/agencias/pages/mantenimiento/lvPendientesAprobarJefes.aspx"
+                            );
+
+                            //vFlagEnvioSupervisor = true;
+                        }
+                        //ENVIAR A EDWIN
+                        //string vNombre = "EDWIN ALBERTO URREA PENA";
+                        vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIMail"],
+                                typeBody.EnvioCorreo,
+                                "Verificación de Mantenimiento Agencia",
+                                "Buen día, se le notifica que se creó verificación de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["Nombre"].ToString() + ", mantenimiento a Agencia " + TxLugarModalEnviarLV.Text,
+                                  "El usuario <b>" + item["Nombre"].ToString() + "</b> creó: <br> Verificación de Mantenimiento",
+                                   vCorreoEncargadoZona,
+                                   "/sites/agencias/pages/mantenimiento/lvPendientesAprobarJefes.aspx"
+                                );
+
+                    
+
+                }
+            }
+            if (vDatosTecnicoResponsable.Rows.Count > 0)
+            {
+                //foreach (DataRow item in vDatosTecnicoResponsable.Rows)
+                //{
+                //    //ENVIAR A RESPONSABLE
+                //    vService.EnviarMensaje(item["Correo"].ToString(),
+                //        typeBody.EnvioCorreo,
+                //       "Verificación de Mantenimiento Agencia",
+                //        "Buen día, se le notifica que se creó verificación de mantenimiento, el encargado es " + item["Nombre"].ToString() + ", mantenimiento a agencia " + TxLugarModalEnviarLV.Text,
+                //          "El usuario <b>" + vDatos.Rows[0]["Nombre"].ToString() + "</b> creó: <br> Verificación de Mantenimiento de Agencia al que ha sido asignado como responsable.",
+                //            "",
+                //        "/login.spx"
+                //        );
+                //}
+            }
+            if (vDatosTecnicos.Rows.Count > 0)
+            {
+                foreach (DataRow itemT in vDatosTecnicos.Rows)
+                {
+                    vService.EnviarMensaje(itemT["correo"].ToString(),
+                        typeBody.EnvioCorreo,
+                        "Verificación de Mantenimiento Agencia",
+                        "Buen día, se le notifica que se creó verificación de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["Nombre"].ToString() + ", mantenimiento a Agencia " + TxLugarModalEnviarLV.Text,
+                          "El usuario <b>" + vDatos.Rows[0]["Nombre"].ToString() + "</b> creó: <br> Verificación de Mantenimiento de Agencia al que ha sido asignado como parte del equipo de trabajo",
+                            "",
+                        "/login.aspx"
+                        );
+                }
+            }
+            if (vDatosJefeAgencias.Rows.Count > 0)
+            {
+                //foreach (DataRow item in vDatosJefeAgencias.Rows)
+                //{
+                //    //ENVIAR A JEFES DE AGENCIA
+                //    if (!item["CorreoJefe"].ToString().Trim().Equals(""))
+                //    {
+                //        vService.EnviarMensaje(item["CorreoJefe"].ToString(),
+                //            typeBody.EnvioCorreo,
+                //            "Verificación de Mantenimiento Agencia",
+                //                "Buen día, se le notifica que se creó verificación de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["Nombre"].ToString() + ", mantenimiento a Agencia " + TxLugarModalEnviarLV.Text,
+                //                  "Se le informa que dicho mantenimiento se hará en la agencia al que usted se encuentra asignado.",
+                //                   "",
+                //                   ""
+                //            );
+                //    }
+                //}
+            }
+
+        }
+
+        void EnviarCorreoModificar()
+        {
+            SmtpService vService = new SmtpService();
+            string vZonaAgencia = "";
+            string vIDMantenimiento = Convert.ToString(Session["AG_LvPM_ID_MANTENIMIENTO_LV_MODIFICAR"]);
+
+            string vQueryD = "[STEISP_AGENCIA_AprobarNotificacion] 9,'" + vIDMantenimiento + "'";
+            DataTable vDatosTecnicoResponsable = vConexion.obtenerDataTable(vQueryD);
+            string vQueryTecnicos = "[STEISP_AGENCIA_AprobarNotificacion] 10,'" + vIDMantenimiento + "'";
+            DataTable vDatosTecnicos = vConexion.obtenerDataTable(vQueryTecnicos);
+            string vQueryJefes = "[STEISP_AGENCIA_AprobarNotificacion] 11,'" + vIDMantenimiento + "'";
+            DataTable vDatosJefeAgencias = vConexion.obtenerDataTable(vQueryJefes);
+            string vQueryZona = "[STEISP_AGENCIA_AprobarNotificacion] 12,'" + vIDMantenimiento + "'";
+            DataTable vDatosZona = vConexion.obtenerDataTable(vQueryZona);
+            DataTable vDatos = (DataTable)Session["AUTHCLASS"];
+
+
+            for (int i = 0; i < vDatosZona.Rows.Count; i++)
+            {
+                vZonaAgencia = vDatosZona.Rows[i]["Zona"].ToString();
+            }
+            string vCorreoEncargadoZona = "";
+            if (vZonaAgencia == "1")
+                vCorreoEncargadoZona = "emontoya@bancatlan.hn";
+            if (vZonaAgencia == "2")
+                vCorreoEncargadoZona = "jdgarcia@bancatlan.hn";
+            if (vZonaAgencia == "3")
+                vCorreoEncargadoZona = "acalderon@bancatlan.hn";
+
+            if (vDatos.Rows.Count > 0)
+            {
+                foreach (DataRow item in vDatos.Rows)
+                {
+
+                    //ENVIAR A JEFE
+                    if (!item["correo"].ToString().Trim().Equals(""))
+                    {
+                        vService.EnviarMensaje(item["correo"].ToString(),
+                        typeBody.EnvioCorreo,
+                        "Verificación de Mantenimiento Agencia",
+                        "Buen día, se le notifica que se creó verificación de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["Nombre"].ToString() + ", mantenimiento a Agencia " + TxLugarModalEnviarLV.Text,
+                        "El usuario <b>" + item["Nombre"].ToString() + "</b> creó: <br> Verificación de Mantenimiento",
+                        "",
+                        "/sites/agencias/pages/mantenimiento/lvPendientesAprobarJefes.aspx"
+                        );
+
+                        //vFlagEnvioSupervisor = true;
+                    }
+                    //ENVIAR A EDWIN
+                    //string vNombre = "EDWIN ALBERTO URREA PENA";
+                    vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIMail"],
+                            typeBody.EnvioCorreo,
+                            "Verificación de Mantenimiento Agencia",
+                            "Buen día, se le notifica que se creó verificación de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["Nombre"].ToString() + ", mantenimiento a Agencia " + TxLugarModalEnviarLV.Text,
+                              "El usuario <b>" + item["Nombre"].ToString() + "</b> creó: <br> Verificación de Mantenimiento",
+                               vCorreoEncargadoZona,
+                               "/sites/agencias/pages/mantenimiento/lvPendientesAprobarJefes.aspx"
+                            );
+
+
+
+                }
+            }
+            if (vDatosTecnicoResponsable.Rows.Count > 0)
+            {
+                //foreach (DataRow item in vDatosTecnicoResponsable.Rows)
+                //{
+                //    //ENVIAR A RESPONSABLE
+                //    vService.EnviarMensaje(item["Correo"].ToString(),
+                //        typeBody.EnvioCorreo,
+                //       "Verificación de Mantenimiento Agencia",
+                //        "Buen día, se le notifica que se creó verificación de mantenimiento, el encargado es " + item["Nombre"].ToString() + ", mantenimiento a agencia " + TxLugarModalEnviarLV.Text,
+                //          "El usuario <b>" + vDatos.Rows[0]["Nombre"].ToString() + "</b> creó: <br> Verificación de Mantenimiento de Agencia al que ha sido asignado como responsable.",
+                //            "",
+                //        "/login.spx"
+                //        );
+                //}
+            }
+            if (vDatosTecnicos.Rows.Count > 0)
+            {
+                foreach (DataRow itemT in vDatosTecnicos.Rows)
+                {
+                    vService.EnviarMensaje(itemT["correo"].ToString(),
+                        typeBody.EnvioCorreo,
+                        "Verificación de Mantenimiento Agencia",
+                        "Buen día, se le notifica que se creó verificación de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["Nombre"].ToString() + ", mantenimiento a Agencia " + TxLugarModalEnviarLV.Text,
+                          "El usuario <b>" + vDatos.Rows[0]["Nombre"].ToString() + "</b> creó: <br> Verificación de Mantenimiento de Agencia al que ha sido asignado como parte del equipo de trabajo",
+                            "",
+                        "/login.aspx"
+                        );
+                }
+            }
+            if (vDatosJefeAgencias.Rows.Count > 0)
+            {
+                //foreach (DataRow item in vDatosJefeAgencias.Rows)
+                //{
+                //    //ENVIAR A JEFES DE AGENCIA
+                //    if (!item["CorreoJefe"].ToString().Trim().Equals(""))
+                //    {
+                //        vService.EnviarMensaje(item["CorreoJefe"].ToString(),
+                //            typeBody.EnvioCorreo,
+                //            "Verificación de Mantenimiento Agencia",
+                //                "Buen día, se le notifica que se creó verificación de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["Nombre"].ToString() + ", mantenimiento a Agencia " + TxLugarModalEnviarLV.Text,
+                //                  "Se le informa que dicho mantenimiento se hará en la agencia al que usted se encuentra asignado.",
+                //                   "",
+                //                   ""
+                //            );
+                //    }
+                //}
+            }
+
+        }
+
+        void EnviarCorreoDevolver()
+        {
+            SmtpService vService = new SmtpService();
+            string vZonaAgencia = "";
+            string vIDMantenimiento = Convert.ToString(Session["AG_LvPC_ID_MANTENIMIENTO_LV_APROBAR_JEFE"]);
+
+            string vQueryD = "[STEISP_AGENCIA_AprobarNotificacion] 9,'" + vIDMantenimiento + "'";
+            DataTable vDatosTecnicoResponsable = vConexion.obtenerDataTable(vQueryD);
+            string vQueryTecnicos = "[STEISP_AGENCIA_AprobarNotificacion] 10,'" + vIDMantenimiento + "'";
+            DataTable vDatosTecnicos = vConexion.obtenerDataTable(vQueryTecnicos);
+            string vQueryJefes = "[STEISP_AGENCIA_AprobarNotificacion] 11,'" + vIDMantenimiento + "'";
+            DataTable vDatosJefeAgencias = vConexion.obtenerDataTable(vQueryJefes);
+            string vQueryZona = "[STEISP_AGENCIA_AprobarNotificacion] 12,'" + vIDMantenimiento + "'";
+            DataTable vDatosZona = vConexion.obtenerDataTable(vQueryZona);
+            DataTable vDatos = (DataTable)Session["AUTHCLASS"];
+
+
+            for (int i = 0; i < vDatosZona.Rows.Count; i++)
+            {
+                vZonaAgencia = vDatosZona.Rows[i]["Zona"].ToString();
+            }
+            string vCorreoEncargadoZona = "";
+            if (vZonaAgencia == "1")
+                vCorreoEncargadoZona = "emontoya@bancatlan.hn";
+            if (vZonaAgencia == "2")
+                vCorreoEncargadoZona = "jdgarcia@bancatlan.hn";
+            if (vZonaAgencia == "3")
+                vCorreoEncargadoZona = "acalderon@bancatlan.hn";
+
+            if (vDatos.Rows.Count > 0)
+            {
+                foreach (DataRow item in vDatos.Rows)
+                {
+                    //if (Session["USUARIO"].ToString() == "eurrea" || Session["USUARIO"].ToString() == "emontoya" || Session["USUARIO"].ToString() == "jdgarcia" || Session["USUARIO"].ToString() == "acalderon")
+                    //{
+                        vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIMail"],
+                           typeBody.EnvioCorreo,
+                           "Verificación de Mantenimiento Agencia",
+                           "Buen día, se le notifica que se devolvió verificación de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["Nombre"].ToString() + ", mantenimiento a Agencia " + TxLugar.Text,
+                             "El usuario <b>" + item["Nombre"].ToString() + "</b> devolvió: <br> Verificación de Mantenimiento<br>Motivo: "+TxtMotivoDevolver.Text,
+                              vCorreoEncargadoZona,
+                              "/sites/agencias/pages/mantenimiento/lvPendientesAprobarJefes.aspx"
+                           );
+                   
+
+                }
+            }
+            if (vDatosTecnicoResponsable.Rows.Count > 0)
+            {
+                foreach (DataRow item in vDatosTecnicoResponsable.Rows)
+                {
+                    //ENVIAR A RESPONSABLE
+                    vService.EnviarMensaje(item["Correo"].ToString(),
+                        typeBody.EnvioCorreo,
+                       "Verificación de Mantenimiento Agencia",
+                        "Buen día, se le notifica que se devolvió verificación de mantenimiento, el encargado es " + item["Nombre"].ToString() + ", mantenimiento a agencia " + TxLugar.Text,
+                          "El usuario <b>" + vDatos.Rows[0]["Nombre"].ToString() + "</b> devolvió: <br> Verificación de Mantenimiento de Agencia al que ha sido asignado como responsable.<br>Motivo: " + TxtMotivoDevolver.Text,
+                            "",
+                        "/login.spx"
+                        );
+                }
+            }
+            if (vDatosTecnicos.Rows.Count > 0)
+            {
+                //foreach (DataRow itemT in vDatosTecnicos.Rows)
+                //{
+                //    vService.EnviarMensaje(itemT["correo"].ToString(),
+                //        typeBody.EnvioCorreo,
+                //        "Verificación de Mantenimiento Agencia",
+                //        "Buen día, se le notifica que se creó verificación de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["Nombre"].ToString() + ", mantenimiento a Agencia " + TxLugarModalEnviarLV.Text,
+                //          "El usuario <b>" + vDatos.Rows[0]["Nombre"].ToString() + "</b> creó: <br> Verificación de Mantenimiento de Agencia al que ha sido asignado como parte del equipo de trabajo",
+                //            "",
+                //        "/login.aspx"
+                //        );
+                //}
+            }
+            if (vDatosJefeAgencias.Rows.Count > 0)
+            {
+                //foreach (DataRow item in vDatosJefeAgencias.Rows)
+                //{
+                //    //ENVIAR A JEFES DE AGENCIA
+                //    if (!item["CorreoJefe"].ToString().Trim().Equals(""))
+                //    {
+                //        vService.EnviarMensaje(item["CorreoJefe"].ToString(),
+                //            typeBody.EnvioCorreo,
+                //            "Verificación de Mantenimiento Agencia",
+                //                "Buen día, se le notifica que se creó verificación de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["Nombre"].ToString() + ", mantenimiento a Agencia " + TxLugarModalEnviarLV.Text,
+                //                  "Se le informa que dicho mantenimiento se hará en la agencia al que usted se encuentra asignado.",
+                //                   "",
+                //                   ""
+                //            );
+                //    }
+                //}
+            }
+
+        }
+
+        void EnviarCorreoAprobar()
+        {
+            SmtpService vService = new SmtpService();
+            string vZonaAgencia = "";
+            string vIDMantenimiento = Convert.ToString(Session["AG_LvPC_ID_MANTENIMIENTO_LV_APROBAR_JEFE"]);
+
+            string vQueryD = "[STEISP_AGENCIA_AprobarNotificacion] 9,'" + vIDMantenimiento + "'";
+            DataTable vDatosTecnicoResponsable = vConexion.obtenerDataTable(vQueryD);
+            string vQueryTecnicos = "[STEISP_AGENCIA_AprobarNotificacion] 10,'" + vIDMantenimiento + "'";
+            DataTable vDatosTecnicos = vConexion.obtenerDataTable(vQueryTecnicos);
+            string vQueryJefes = "[STEISP_AGENCIA_AprobarNotificacion] 11,'" + vIDMantenimiento + "'";
+            DataTable vDatosJefeAgencias = vConexion.obtenerDataTable(vQueryJefes);
+            string vQueryZona = "[STEISP_AGENCIA_AprobarNotificacion] 12,'" + vIDMantenimiento + "'";
+            DataTable vDatosZona = vConexion.obtenerDataTable(vQueryZona);
+            DataTable vDatos = (DataTable)Session["AUTHCLASS"];
+
+
+            for (int i = 0; i < vDatosZona.Rows.Count; i++)
+            {
+                vZonaAgencia = vDatosZona.Rows[i]["Zona"].ToString();
+            }
+            string vCorreoEncargadoZona = "";
+            if (vZonaAgencia == "1")
+                vCorreoEncargadoZona = "emontoya@bancatlan.hn";
+            if (vZonaAgencia == "2")
+                vCorreoEncargadoZona = "jdgarcia@bancatlan.hn";
+            if (vZonaAgencia == "3")
+                vCorreoEncargadoZona = "acalderon@bancatlan.hn";
+
+            if (vDatos.Rows.Count > 0)
+            {
+                foreach (DataRow item in vDatos.Rows)
+                {
+                    //ENVIAR A EDWIN
+                    //string vNombre = "EDWIN ALBERTO URREA PENA";
+                    vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIMail"],
+                            typeBody.EnvioCorreo,
+                            "Verificación de Mantenimiento Agencia",
+                            "Buen día, se le notifica que se aprobó verificación de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["Nombre"].ToString() + ", mantenimiento a Agencia " + TxLugar.Text,
+                              "El usuario <b>" + item["Nombre"].ToString() + "</b> aprobó: <br> Verificación de Mantenimiento",
+                               vCorreoEncargadoZona,
+                               "/sites/agencias/pages/mantenimiento/lvPendientesAprobarJefes.aspx"
+                            );
+                }
+            }
+            if (vDatosTecnicoResponsable.Rows.Count > 0)
+            {
+                foreach (DataRow item in vDatosTecnicoResponsable.Rows)
+                {
+                    //ENVIAR A RESPONSABLE
+                    vService.EnviarMensaje(item["Correo"].ToString(),
+                        typeBody.EnvioCorreo,
+                       "Verificación de Mantenimiento Agencia",
+                        "Buen día, se le notifica que se aprobó verificación de mantenimiento, el encargado es " + item["Nombre"].ToString() + ", mantenimiento a agencia " + TxLugar.Text,
+                          "El usuario <b>" + vDatos.Rows[0]["Nombre"].ToString() + "</b> aprobó: <br> Verificación de Mantenimiento de Agencia al que ha sido asignado como responsable.",
+                            "",
+                        "/login.spx"
+                        );
+                }
+            }
+            if (vDatosTecnicos.Rows.Count > 0)
+            {
+                //foreach (DataRow itemT in vDatosTecnicos.Rows)
+                //{
+                //    vService.EnviarMensaje(itemT["correo"].ToString(),
+                //        typeBody.EnvioCorreo,
+                //        "Verificación de Mantenimiento Agencia",
+                //        "Buen día, se le notifica que se creó verificación de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["Nombre"].ToString() + ", mantenimiento a Agencia " + TxLugarModalEnviarLV.Text,
+                //          "El usuario <b>" + vDatos.Rows[0]["Nombre"].ToString() + "</b> creó: <br> Verificación de Mantenimiento de Agencia al que ha sido asignado como parte del equipo de trabajo",
+                //            "",
+                //        "/login.aspx"
+                //        );
+                //}
+            }
+            if (vDatosJefeAgencias.Rows.Count > 0)
+            {
+                //foreach (DataRow item in vDatosJefeAgencias.Rows)
+                //{
+                //    //ENVIAR A JEFES DE AGENCIA
+                //    if (!item["CorreoJefe"].ToString().Trim().Equals(""))
+                //    {
+                //        vService.EnviarMensaje(item["CorreoJefe"].ToString(),
+                //            typeBody.EnvioCorreo,
+                //            "Verificación de Mantenimiento Agencia",
+                //                "Buen día, se le notifica que se creó verificación de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["Nombre"].ToString() + ", mantenimiento a Agencia " + TxLugarModalEnviarLV.Text,
+                //                  "Se le informa que dicho mantenimiento se hará en la agencia al que usted se encuentra asignado.",
+                //                   "",
+                //                   ""
+                //            );
+                //    }
+                //}
+            }
+
+        }
+
         protected void btnModalEnviarLv_Click(object sender, EventArgs e)
         {
             String vEx = Request.QueryString["ex"];
@@ -852,316 +2715,26 @@ namespace Infatlan_STEI_Agencias.pages
                     //INSERTAR ID DEL MANTENIMIENTO EN LA TABLA DE PREGUNTAS
                     String vQuery1 = "STEISP_AGENCIA_CompletarListaVerificacion 5," + Session["AG_LvPC_ID_MANTENIMIENTO_LV_COMPLETAR"];
                     Int32 vInformacion1 = vConexion.ejecutarSql(vQuery1);
+                    if(vInformacion1 > 0){
+                        //Insertar "DATOS TECNICOS" en la tabla de preguntas
+                        String vQuery3 = "STEISP_AGENCIA_CompletarListaVerificacion 7," + Session["AG_LvPC_ID_MANTENIMIENTO_LV_COMPLETAR"] +
+                                                        "," + RBProbaronEquipo.SelectedValue +
+                                                        ",'" + TxMotivoNoProbaronEquipo.Text + "'";
+                        Int32 vInformacion3 = vConexion.ejecutarSql(vQuery3);
 
-                    ////INSERTAR "DATOS TECNICOS"
-                    //Imagen No Mantenimiento EquipoComunicacion
-                    String vNombreNoMantEquipoComu = String.Empty;
-                    HttpPostedFile bufferDeposito1T = FuImageNoMantEquipoComu.PostedFile;
-                    byte[] vFileDepositoNoMantEquipoComu = null;
-                    String vExtensionNoMantEquipoComu = String.Empty;
-
-                    if (bufferDeposito1T != null)
-                    {
-                        vNombreNoMantEquipoComu = FuImageNoMantEquipoComu.FileName;
-                        Stream vStream = bufferDeposito1T.InputStream;
-                        BinaryReader vReader = new BinaryReader(vStream);
-                        vFileDepositoNoMantEquipoComu = vReader.ReadBytes((int)vStream.Length);
-                        vExtensionNoMantEquipoComu = System.IO.Path.GetExtension(FuImageNoMantEquipoComu.FileName);
+                        String vQuery6 = "STEISP_AGENCIA_CompletarListaVerificacion 10,'" + Session["AG_LvPC_ID_MANTENIMIENTO_LV_COMPLETAR"] +
+                                                                       "','" + TxHoraInicioMant.Text +
+                                                                       "','" + TxHoraFinMant.Text +
+                                                                       "','" + TxHoraSalidaINFA.Text +
+                                                                       "','" + TxHoraLlegadaINFA.Text + "'";
+                        Int32 vInformacion6 = vConexion.ejecutarSql(vQuery6);
+                        ActualizarAgencia();
+                        crearImagenesReducido();
+                        EnviarCorreoCrear();
+                        limpiar();
+                        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModalEnvioLv();", true);
+                        Response.Redirect("/sites/agencias/pages/mantenimiento/lvPendientesCompletar.aspx");
                     }
-
-
-                    String vArchivoNoMantEquipoComu = String.Empty;
-                    if (vFileDepositoNoMantEquipoComu != null)
-                    {
-                        vArchivoNoMantEquipoComu = Convert.ToBase64String(vFileDepositoNoMantEquipoComu);
-                    }
-                    else
-                    {
-                        vArchivoNoMantEquipoComu = "";
-                    }
-
-
-                    String vQuery2 = "STEISP_AGENCIA_CompletarListaVerificacion 6," + Session["AG_LvPC_ID_MANTENIMIENTO_LV_COMPLETAR"] +
-                                                "," + TxCantMaquinas.Text +
-                                                "," + TxCantImpresoraFinanciera.Text +
-                                                "," + TxCantDatacard.Text +
-                                                "," + TxCantEscaner.Text +
-                                                "," + RBLManEquipoComu.SelectedValue +
-                                                ",'" + TxMotivoNoMantEquipoComu.Text +
-                                                "','" + vArchivoNoMantEquipoComu +
-                                                "','" + vExtensionNoMantEquipoComu + "'";
-
-                    Int32 vInformacion2 = vConexion.ejecutarSql(vQuery2);
-
-                    //Insertar "DATOS TECNICOS" en la tabla de preguntas
-                    String vQuery3 = "STEISP_AGENCIA_CompletarListaVerificacion 7," + Session["AG_LvPC_ID_MANTENIMIENTO_LV_COMPLETAR"] +
-                                                    "," + RBProbaronEquipo.SelectedValue +
-                                                    ",'" + TxMotivoNoProbaronEquipo.Text + "'";
-                    Int32 vInformacion3 = vConexion.ejecutarSql(vQuery3);
-
-
-                    // //Insertar "EQUIPO DE COMUNICACION" en la tabla de preguntas
-                    // //Imagen No Mantenimiento EquipoComunicacion
-                    String vNombreClimatizacion = String.Empty;
-                    HttpPostedFile bufferDepositoClimatizacion = FuClimatizacion.PostedFile;
-                    byte[] vFileDepositoClimatizacion = null;
-                    String vExtensionClimatizacion = String.Empty;
-
-                    if (bufferDepositoClimatizacion != null)
-                    {
-                        vNombreClimatizacion = FuClimatizacion.FileName;
-                        Stream vStream = bufferDepositoClimatizacion.InputStream;
-                        BinaryReader vReader = new BinaryReader(vStream);
-                        vFileDepositoClimatizacion = vReader.ReadBytes((int)vStream.Length);
-                        vExtensionClimatizacion = System.IO.Path.GetExtension(FuClimatizacion.FileName);
-                    }
-
-
-                    String vArchivoClimatizacion = String.Empty;
-                    if (vFileDepositoClimatizacion != null)
-                    {
-                        vArchivoClimatizacion = Convert.ToBase64String(vFileDepositoClimatizacion);
-                    }
-                    else
-                    {
-                        vArchivoClimatizacion = "";
-                    }
-
-                    //Imagen UPS
-                    String vNombreUPS = String.Empty;
-                    HttpPostedFile bufferDepositoUPS = FuUPS.PostedFile;
-                    byte[] vFileDepositoUPS = null;
-                    String vExtensionUPS = String.Empty;
-
-                    if (bufferDepositoUPS != null)
-                    {
-                        vNombreUPS = FuUPS.FileName;
-                        Stream vStream = bufferDepositoUPS.InputStream;
-                        BinaryReader vReader = new BinaryReader(vStream);
-                        vFileDepositoUPS = vReader.ReadBytes((int)vStream.Length);
-                        vExtensionUPS = System.IO.Path.GetExtension(FuUPS.FileName);
-                    }
-
-
-                    String vArchivoUPS = String.Empty;
-                    if (vFileDepositoUPS != null)
-                    {
-                        vArchivoUPS = Convert.ToBase64String(vFileDepositoUPS);
-                    }
-                    else
-                    {
-                        vArchivoUPS = "";
-                    }
-
-
-                    //Imagen Rack
-                    String vNombreRack = String.Empty;
-                    HttpPostedFile bufferDepositoRack = FuRack.PostedFile;
-                    byte[] vFileDepositoRack = null;
-                    String vExtensionRack = String.Empty;
-
-                    if (bufferDepositoRack != null)
-                    {
-                        vNombreRack = FuRack.FileName;
-                        Stream vStream = bufferDepositoRack.InputStream;
-                        BinaryReader vReader = new BinaryReader(vStream);
-                        vFileDepositoRack = vReader.ReadBytes((int)vStream.Length);
-                        vExtensionRack = System.IO.Path.GetExtension(FuRack.FileName);
-                    }
-
-
-                    String vArchivoRack = String.Empty;
-                    if (vFileDepositoRack != null)
-                    {
-                        vArchivoRack = Convert.ToBase64String(vFileDepositoRack);
-                    }
-                    else
-                    {
-                        vArchivoRack = "";
-                    }
-
-
-                    String vQuery4 = "STEISP_AGENCIA_CompletarListaVerificacion 8," + Session["AG_LvPC_ID_MANTENIMIENTO_LV_COMPLETAR"] +
-                                                "," + RblClimatizacionAdecuada.SelectedValue +
-                                                ",'" + vArchivoRack +
-                                                "','" + vExtensionRack + "'" +
-
-                                                "," + RblUPS.SelectedValue +
-                                                ",'" + vArchivoUPS +
-                                                "','" + vExtensionUPS + "'" +
-
-                                                ",'" + vArchivoRack +
-                                                "','" + vExtensionRack + "'";
-
-                    Int32 vInformacion4 = vConexion.ejecutarSql(vQuery4);
-
-
-                    //Insertar "ENTORNO CUARTO DE COMUNICACIONES" en la tabla de preguntas
-                    //Imagen Polvo o Suciedad
-                    String vNombrePolvo = String.Empty;
-                    HttpPostedFile bufferDepositoPolvo = FuPolvoSuciedad.PostedFile;
-                    byte[] vFileDepositoPolvo = null;
-                    String vExtensionPolvo = String.Empty;
-
-                    if (bufferDepositoPolvo != null)
-                    {
-                        vNombrePolvo = FuPolvoSuciedad.FileName;
-                        Stream vStream = bufferDepositoPolvo.InputStream;
-                        BinaryReader vReader = new BinaryReader(vStream);
-                        vFileDepositoPolvo = vReader.ReadBytes((int)vStream.Length);
-                        vExtensionPolvo = System.IO.Path.GetExtension(FuPolvoSuciedad.FileName);
-                    }
-
-
-                    String vArchivoPolvo = String.Empty;
-                    if (vFileDepositoPolvo != null)
-                    {
-                        vArchivoPolvo = Convert.ToBase64String(vFileDepositoPolvo);
-                    }
-                    else
-                    {
-                        vArchivoPolvo = "";
-                    }
-
-                    //Imagen Humedad
-                    String vNombreHumedad = String.Empty;
-                    HttpPostedFile bufferDepositoHumedad = FuHumedadSustancias.PostedFile;
-                    byte[] vFileDepositoHumedad = null;
-                    String vExtensionHumedad = String.Empty;
-
-                    if (bufferDepositoHumedad != null)
-                    {
-                        vNombreHumedad = FuHumedadSustancias.FileName;
-                        Stream vStream = bufferDepositoHumedad.InputStream;
-                        BinaryReader vReader = new BinaryReader(vStream);
-                        vFileDepositoHumedad = vReader.ReadBytes((int)vStream.Length);
-                        vExtensionHumedad = System.IO.Path.GetExtension(FuHumedadSustancias.FileName);
-                    }
-
-
-                    String vArchivoHumedad = String.Empty;
-                    if (vFileDepositoHumedad != null)
-                    {
-                        vArchivoHumedad = Convert.ToBase64String(vFileDepositoHumedad);
-                    }
-                    else
-                    {
-                        vArchivoHumedad = "";
-                    }
-
-
-                    //Imagen Robo
-                    String vNombreRobo = String.Empty;
-                    HttpPostedFile bufferDepositoRobo = FuRoboDaño.PostedFile;
-                    byte[] vFileDepositoRobo = null;
-                    String vExtensionRobo = String.Empty;
-
-                    if (bufferDepositoRobo != null)
-                    {
-                        vNombreRobo = FuRoboDaño.FileName;
-                        Stream vStream = bufferDepositoRobo.InputStream;
-                        BinaryReader vReader = new BinaryReader(vStream);
-                        vFileDepositoRobo = vReader.ReadBytes((int)vStream.Length);
-                        vExtensionRobo = System.IO.Path.GetExtension(FuRoboDaño.FileName);
-                    }
-
-                    String vArchivoRobo = String.Empty;
-                    if (vFileDepositoRobo != null)
-                    {
-                        vArchivoRobo = Convert.ToBase64String(vFileDepositoRobo);
-                    }
-                    else
-                    {
-                        vArchivoRobo = "";
-                    }
-
-
-
-                    //Imagen Elementos Ajenos
-                    String vNombreElementosAjenos = String.Empty;
-                    HttpPostedFile bufferDepositoElementosAjenos = FuElementosAjenos.PostedFile;
-                    byte[] vFileDepositoElementosAjenos = null;
-                    String vExtensionElementosAjenos = String.Empty;
-
-                    if (bufferDepositoElementosAjenos != null)
-                    {
-                        vNombreElementosAjenos = FuElementosAjenos.FileName;
-                        Stream vStream = bufferDepositoElementosAjenos.InputStream;
-                        BinaryReader vReader = new BinaryReader(vStream);
-                        vFileDepositoElementosAjenos = vReader.ReadBytes((int)vStream.Length);
-                        vExtensionElementosAjenos = System.IO.Path.GetExtension(FuElementosAjenos.FileName);
-                    }
-
-
-                    String vArchivoElementosAjenos = String.Empty;
-                    if (vFileDepositoElementosAjenos != null)
-                    {
-                        vArchivoElementosAjenos = Convert.ToBase64String(vFileDepositoElementosAjenos);
-                    }
-                    else
-                    {
-                        vArchivoElementosAjenos = "";
-                    }
-
-
-
-                    //Imagen Entorno
-                    String vNombreDepotEntorno = String.Empty;
-                    HttpPostedFile bufferDepositoEntorno = FuEspacioFisico.PostedFile;
-                    byte[] vFileDepositEntorno = null;
-                    String vExtensionEntorno = String.Empty;
-
-                    if (bufferDepositoEntorno != null)
-                    {
-                        vNombreDepotEntorno = FuEspacioFisico.FileName;
-                        Stream vStream = bufferDepositoEntorno.InputStream;
-                        BinaryReader vReader = new BinaryReader(vStream);
-                        vFileDepositEntorno = vReader.ReadBytes((int)vStream.Length);
-                        vExtensionEntorno = System.IO.Path.GetExtension(FuEspacioFisico.FileName);
-                    }
-
-
-                    String vArchivoEntorno = String.Empty;
-                    if (vFileDepositEntorno != null)
-                    {
-                        vArchivoEntorno = Convert.ToBase64String(vFileDepositEntorno);
-                    }
-                    else
-                    {
-                        vArchivoEntorno = "";
-                    }
-
-                    String vQuery5 = "STEISP_AGENCIA_CompletarListaVerificacion 9," + Session["AG_LvPC_ID_MANTENIMIENTO_LV_COMPLETAR"] +
-                                                "," + RbPolvoSuciedad.SelectedValue +
-                                                ",'" + vArchivoPolvo +
-                                                "','" + vExtensionPolvo + "'" +
-
-                                                "," + RblHumedadSustancias.SelectedValue +
-                                                ",'" + vArchivoHumedad +
-                                                "','" + vExtensionHumedad + "'" +
-
-                                                "," + RblRoboDaño.SelectedValue +
-                                                ",'" + vArchivoRobo +
-                                                "','" + vExtensionRobo + "'" +
-
-                                                "," + RblElementosAjenos.SelectedValue +
-                                                ",'" + vArchivoElementosAjenos +
-                                                "','" + vExtensionElementosAjenos + "'" +
-
-
-                                                ",'" + vArchivoEntorno +
-                                                "','" + vExtensionEntorno + "','" +
-                                                    TxObservacionesGenerales.Text + "'";
-
-                    Int32 vInformacion5 = vConexion.ejecutarSql(vQuery5);
-
-
-                    String vQuery6 = "STEISP_AGENCIA_CompletarListaVerificacion 10,'" + Session["AG_LvPC_ID_MANTENIMIENTO_LV_COMPLETAR"] +
-                                                                   "','" + TxHoraInicioMant.Text +
-                                                                   "','" + TxHoraFinMant.Text +
-                                                                   "','" + TxHoraSalidaINFA.Text +
-                                                                   "','" + TxHoraLlegadaINFA.Text + "'";
-                    Int32 vInformacion6 = vConexion.ejecutarSql(vQuery6);
                 }
                 else if (vEx.Equals("3"))
                 {
@@ -1174,332 +2747,15 @@ namespace Infatlan_STEI_Agencias.pages
                                                 ",'"+ TxObservacionesGenerales.Text + "'";
                     Int32 vInformacion1 = vConexion.ejecutarSql(vQuery1);
 
-                    //Imagen No Mantenimiento EquipoComunicacion
-                    String vNombreNoMantEquipoComu = String.Empty;
-                    HttpPostedFile bufferDeposito1T = FuImageNoMantEquipoComu.PostedFile;
-                    byte[] vFileDepositoNoMantEquipoComu = null;
-                    String vExtensionNoMantEquipoComu = String.Empty;
-                    String vArchivoNoMantEquipoComu = String.Empty;
-                    vNombreNoMantEquipoComu = FuImageNoMantEquipoComu.FileName;
-
-                    if (vNombreNoMantEquipoComu != "" && RBLManEquipoComu.SelectedValue=="1")
-                    {
-                        
-                        Stream vStream = bufferDeposito1T.InputStream;
-                        BinaryReader vReader = new BinaryReader(vStream);
-                        vFileDepositoNoMantEquipoComu = vReader.ReadBytes((int)vStream.Length);
-                        vExtensionNoMantEquipoComu = System.IO.Path.GetExtension(FuImageNoMantEquipoComu.FileName);                  
-                        vArchivoNoMantEquipoComu = Convert.ToBase64String(vFileDepositoNoMantEquipoComu);
-                        TxMotivoNoMantEquipoComu.Text= String.Empty;
-
-
-
-                        String vQuery2 = "STEISP_AGENCIA_ModificarListaVerificacion 3," + Session["AG_LvPM_ID_MANTENIMIENTO_LV_MODIFICAR"] +
-                                           "," + RBLManEquipoComu.SelectedValue +
-                                           ",'" + vArchivoNoMantEquipoComu +
-                                           "','" + vExtensionNoMantEquipoComu +
-                                           "','" + TxMotivoNoMantEquipoComu.Text + "'";
-                        Int32 vInformacion2 = vConexion.ejecutarSql(vQuery2);
-
-
-                    }
-                    else if(vNombreNoMantEquipoComu == "" && RBLManEquipoComu.SelectedValue == "0")
-                    {
-                        vExtensionNoMantEquipoComu = "";
-                        vArchivoNoMantEquipoComu = "";
-
-                        String vQuery2 = "STEISP_AGENCIA_ModificarListaVerificacion 3," + Session["AG_LvPM_ID_MANTENIMIENTO_LV_MODIFICAR"] +
-                                           "," + RBLManEquipoComu.SelectedValue +
-                                           ",'" + vArchivoNoMantEquipoComu +
-                                           "','" + vExtensionNoMantEquipoComu +
-                                           "','" + TxMotivoNoMantEquipoComu.Text + "'";
-                        Int32 vInformacion2 = vConexion.ejecutarSql(vQuery2);
-
-                    }
-
-
+                   
 
                     //ACTUALIZAR TARJETA PRUEBAS
                     //Insertar "DATOS PRUEBAS" en la tabla de preguntas
-                    String vQuery3 = "STEISP_AGENCIA_CompletarListaVerificacion 4," + Session["AG_LvPM_ID_MANTENIMIENTO_LV_MODIFICAR"] +
+                    String vQuery3 = "[STEISP_AGENCIA_ModificarListaVerificacion] 4," + Session["AG_LvPM_ID_MANTENIMIENTO_LV_MODIFICAR"] +
                                                     "," + RBProbaronEquipo.SelectedValue +
                                                     ",'" + TxMotivoNoProbaronEquipo.Text + "'";
                     Int32 vInformacion3 = vConexion.ejecutarSql(vQuery3);
 
-
-
-                    // Insertar "EQUIPO DE COMUNICACION" en la tabla de preguntas
-                    // Imagen No Mantenimiento EquipoComunicacion
-                    String vNombreClimatizacion = String.Empty;
-                    HttpPostedFile bufferDepositoClimatizacion = FuClimatizacion.PostedFile;
-                    byte[] vFileDepositoClimatizacion = null;
-                    String vExtensionClimatizacion = String.Empty;
-                    String vArchivoClimatizacion = String.Empty;
-                    vNombreClimatizacion = FuClimatizacion.FileName;
-
-                    if (vNombreClimatizacion != "" && RblClimatizacionAdecuada.SelectedValue == "1")
-                    {                       
-                        Stream vStream = bufferDepositoClimatizacion.InputStream;
-                        BinaryReader vReader = new BinaryReader(vStream);
-                        vFileDepositoClimatizacion = vReader.ReadBytes((int)vStream.Length);
-                        vExtensionClimatizacion = System.IO.Path.GetExtension(FuClimatizacion.FileName);
-                        vArchivoClimatizacion = Convert.ToBase64String(vFileDepositoClimatizacion);
-
-                        String vQuery4 = "STEISP_AGENCIA_ModificarListaVerificacion 5," + Session["AG_LvPM_ID_MANTENIMIENTO_LV_MODIFICAR"] +
-                    "," + RblClimatizacionAdecuada.SelectedValue +
-                    ",'" + vArchivoClimatizacion +
-                    "','" + vExtensionClimatizacion + "'";
-                        Int32 vInformacion4 = vConexion.ejecutarSql(vQuery4);
-
-
-                    }
-                    else if (vNombreClimatizacion == "" && RblClimatizacionAdecuada.SelectedValue == "0")
-                    {
-                        vExtensionClimatizacion ="";
-                        vArchivoClimatizacion = "";
-
-                        String vQuery4 = "STEISP_AGENCIA_ModificarListaVerificacion 5," + Session["AG_LvPM_ID_MANTENIMIENTO_LV_MODIFICAR"] +
-                    "," + RblClimatizacionAdecuada.SelectedValue +
-                    ",'" + vArchivoClimatizacion +
-                    "','" + vExtensionClimatizacion + "'";
-                        Int32 vInformacion4 = vConexion.ejecutarSql(vQuery4);
-
-                    }
-
-
-
-
-                    //Imagen UPS
-                    String vNombreUPS = String.Empty;
-                    HttpPostedFile bufferDepositoUPS = FuUPS.PostedFile;
-                    byte[] vFileDepositoUPS = null;
-                    String vExtensionUPS = String.Empty;
-                    String vArchivoUPS = String.Empty;
-                    vNombreUPS = FuUPS.FileName;
-
-                    if (vNombreUPS != "" && RblUPS.SelectedValue == "1")
-                    {
-                        
-                        Stream vStream = bufferDepositoUPS.InputStream;
-                        BinaryReader vReader = new BinaryReader(vStream);
-                        vFileDepositoUPS = vReader.ReadBytes((int)vStream.Length);
-                        vExtensionUPS = System.IO.Path.GetExtension(FuUPS.FileName);
-                        vArchivoUPS = Convert.ToBase64String(vFileDepositoUPS);
-                        
-                        String vQuery5 = "STEISP_AGENCIA_ModificarListaVerificacion 6," + Session["AG_LvPM_ID_MANTENIMIENTO_LV_MODIFICAR"] +
-                                         "," + RblUPS.SelectedValue +
-                                         ",'" + vArchivoUPS +
-                                         "','" + vExtensionUPS + "'";
-                        Int32 vInformacion5 = vConexion.ejecutarSql(vQuery5);
-                    }
-                    else if (vNombreUPS == "" && RblUPS.SelectedValue == "0")
-                    {
-                        vExtensionUPS = "";
-                        vArchivoUPS = "";
-
-                        String vQuery5 = "STEISP_AGENCIA_ModificarListaVerificacion 6," + Session["AG_LvPM_ID_MANTENIMIENTO_LV_MODIFICAR"] +
-                                         "," + RblUPS.SelectedValue +
-                                         ",'" + vArchivoUPS +
-                                         "','" + vExtensionUPS + "'";
-                                                Int32 vInformacion5 = vConexion.ejecutarSql(vQuery5);
-                    }
-
-
-
-
-                    //Imagen Rack
-                    String vNombreRack = String.Empty;
-                    HttpPostedFile bufferDepositoRack = FuRack.PostedFile;
-                    byte[] vFileDepositoRack = null;
-                    String vExtensionRack = String.Empty;
-                    String vArchivoRack = String.Empty;
-                    vNombreRack = FuRack.FileName;
-
-                    if (vNombreRack != "")
-                    {
-                        
-                        Stream vStream = bufferDepositoRack.InputStream;
-                        BinaryReader vReader = new BinaryReader(vStream);
-                        vFileDepositoRack = vReader.ReadBytes((int)vStream.Length);
-                        vExtensionRack = System.IO.Path.GetExtension(FuRack.FileName);
-                        vArchivoRack = Convert.ToBase64String(vFileDepositoRack);
-
-                        String vQuery6 = "STEISP_AGENCIA_ModificarListaVerificacion 7," + Session["AG_LvPM_ID_MANTENIMIENTO_LV_MODIFICAR"] +
-                                         ",'" + vArchivoRack +
-                                         "','" + vExtensionRack + "'";
-                        Int32 vInformacion6 = vConexion.ejecutarSql(vQuery6);
-                    }
-
-
-                    //Insertar "ENTORNO CUARTO DE COMUNICACIONES" en la tabla de preguntas
-                    //Imagen Polvo o Suciedad
-                    String vNombrePolvo = String.Empty;
-                    HttpPostedFile bufferDepositoPolvo = FuPolvoSuciedad.PostedFile;
-                    byte[] vFileDepositoPolvo = null;
-                    String vExtensionPolvo = String.Empty;
-                    String vArchivoPolvo = String.Empty;
-                    vNombrePolvo = FuPolvoSuciedad.FileName;
-
-                    if (vNombrePolvo != "" && RbPolvoSuciedad.SelectedValue=="1")
-                    {
-                        vNombrePolvo = FuPolvoSuciedad.FileName;
-                        Stream vStream = bufferDepositoPolvo.InputStream;
-                        BinaryReader vReader = new BinaryReader(vStream);
-                        vFileDepositoPolvo = vReader.ReadBytes((int)vStream.Length);
-                        vExtensionPolvo = System.IO.Path.GetExtension(FuPolvoSuciedad.FileName);
-                        vArchivoPolvo = Convert.ToBase64String(vFileDepositoPolvo);
-                        String vQuery7 = "STEISP_AGENCIA_ModificarListaVerificacion 8," + Session["AG_LvPM_ID_MANTENIMIENTO_LV_MODIFICAR"] +
-                                            "," + RbPolvoSuciedad.SelectedValue +
-                                            ",'" + vArchivoPolvo +
-                                            "','" + vExtensionPolvo + "'";
-                        Int32 vInformacion7 = vConexion.ejecutarSql(vQuery7);
-
-                    }
-                    else if(vNombrePolvo == "" && RbPolvoSuciedad.SelectedValue == "0")
-                    {
-                        vExtensionPolvo = "";
-                        vArchivoPolvo = "";
-                        String vQuery7 = "STEISP_AGENCIA_ModificarListaVerificacion 8," + Session["AG_LvPM_ID_MANTENIMIENTO_LV_MODIFICAR"] +
-                                        "," + RbPolvoSuciedad.SelectedValue +
-                                        ",'" + vArchivoPolvo +
-                                        "','" + vExtensionPolvo + "'";
-                        Int32 vInformacion7 = vConexion.ejecutarSql(vQuery7);
-                    }
-
-
-
-
-                    //Imagen Humedad
-                    String vNombreHumedad = String.Empty;
-                    HttpPostedFile bufferDepositoHumedad = FuHumedadSustancias.PostedFile;
-                    byte[] vFileDepositoHumedad = null;
-                    String vExtensionHumedad = String.Empty;
-                    String vArchivoHumedad = String.Empty;
-                    vNombreHumedad = FuHumedadSustancias.FileName;
-
-                    if (vNombreHumedad != "" && RblHumedadSustancias.SelectedValue=="1")
-                    {
-                        
-                        Stream vStream = bufferDepositoHumedad.InputStream;
-                        BinaryReader vReader = new BinaryReader(vStream);
-                        vFileDepositoHumedad = vReader.ReadBytes((int)vStream.Length);
-                        vExtensionHumedad = System.IO.Path.GetExtension(FuHumedadSustancias.FileName);
-                        vArchivoHumedad = Convert.ToBase64String(vFileDepositoHumedad);
-                        String vQuery8 = "STEISP_AGENCIA_ModificarListaVerificacion 9," + Session["AG_LvPM_ID_MANTENIMIENTO_LV_MODIFICAR"] +
-                                            "," + RblHumedadSustancias.SelectedValue +
-                                            ",'" + vArchivoHumedad +
-                                            "','" + vExtensionHumedad + "'";
-                        Int32 vInformacion8 = vConexion.ejecutarSql(vQuery8);
-                    }
-                    else if (vNombreHumedad == "" && RblHumedadSustancias.SelectedValue == "0")
-                    {
-                        vExtensionHumedad = "";
-                        vArchivoHumedad ="";
-
-                        String vQuery8 = "STEISP_AGENCIA_ModificarListaVerificacion 9," + Session["AG_LvPM_ID_MANTENIMIENTO_LV_MODIFICAR"] +
-                                             "," + RblHumedadSustancias.SelectedValue +
-                                             ",'" + vArchivoHumedad +
-                                             "','" + vExtensionHumedad + "'";
-                        Int32 vInformacion8 = vConexion.ejecutarSql(vQuery8);
-
-                    }
-
-
-
-
-                    //Imagen Robo
-                    String vNombreRobo = String.Empty;
-                    HttpPostedFile bufferDepositoRobo = FuRoboDaño.PostedFile;
-                    byte[] vFileDepositoRobo = null;
-                    String vExtensionRobo = String.Empty;
-                    String vArchivoRobo = String.Empty;
-                    vNombreRobo = FuRoboDaño.FileName;
-                    if (vNombreRobo != "" && RblRoboDaño.SelectedValue=="1")
-                    {
-                        vNombreRobo = FuRoboDaño.FileName;
-                        Stream vStream = bufferDepositoRobo.InputStream;
-                        BinaryReader vReader = new BinaryReader(vStream);
-                        vFileDepositoRobo = vReader.ReadBytes((int)vStream.Length);
-                        vExtensionRobo = System.IO.Path.GetExtension(FuRoboDaño.FileName);
-                        vArchivoRobo = Convert.ToBase64String(vFileDepositoRobo);
-                        String vQuery9 = "STEISP_AGENCIA_ModificarListaVerificacion 10," + Session["AG_LvPM_ID_MANTENIMIENTO_LV_MODIFICAR"] +
-                                            "," + RblRoboDaño.SelectedValue +
-                                            ",'" + vArchivoRobo +
-                                            "','" + vExtensionRobo + "'";
-                        Int32 vInformacion9 = vConexion.ejecutarSql(vQuery9);
-
-                    } else if (vNombreRobo == "" && RblRoboDaño.SelectedValue == "0") {
-                        vExtensionRobo = "";
-                        vArchivoRobo = "";
-                        String vQuery9 = "STEISP_AGENCIA_ModificarListaVerificacion 10," + Session["AG_LvPM_ID_MANTENIMIENTO_LV_MODIFICAR"] +
-                                            "," + RblRoboDaño.SelectedValue +
-                                            ",'" + vArchivoRobo +
-                                            "','" + vExtensionRobo + "'";
-                        Int32 vInformacion9 = vConexion.ejecutarSql(vQuery9);
-                    }
-
-
-
-                    //Imagen Elementos Ajenos
-                    String vNombreElementosAjenos = String.Empty;
-                    HttpPostedFile bufferDepositoElementosAjenos = FuElementosAjenos.PostedFile;
-                    byte[] vFileDepositoElementosAjenos = null;
-                    String vExtensionElementosAjenos = String.Empty;
-                    String vArchivoElementosAjenos = String.Empty;
-                    vNombreElementosAjenos = FuElementosAjenos.FileName;
-
-                    if (vNombreElementosAjenos != "" && RblElementosAjenos.SelectedValue=="1")
-                    {
-                        
-                        Stream vStream = bufferDepositoElementosAjenos.InputStream;
-                        BinaryReader vReader = new BinaryReader(vStream);
-                        vFileDepositoElementosAjenos = vReader.ReadBytes((int)vStream.Length);
-                        vExtensionElementosAjenos = System.IO.Path.GetExtension(FuElementosAjenos.FileName);
-                        vArchivoElementosAjenos = Convert.ToBase64String(vFileDepositoElementosAjenos);
-
-                        String vQuery10 = "STEISP_AGENCIA_ModificarListaVerificacion 11," + Session["AG_LvPM_ID_MANTENIMIENTO_LV_MODIFICAR"] +
-                                            "," + RblElementosAjenos.SelectedValue +
-                                            ",'" + vArchivoElementosAjenos +
-                                            "','" + vExtensionElementosAjenos + "'";
-                        Int32 vInformacion10 = vConexion.ejecutarSql(vQuery10);
-
-                    }
-                    else if (vNombreElementosAjenos == "" && RblElementosAjenos.SelectedValue == "0"){
-                        vExtensionElementosAjenos = "";
-                        vArchivoElementosAjenos = "";
-
-                        String vQuery10 = "STEISP_AGENCIA_ModificarListaVerificacion 11," + Session["AG_LvPM_ID_MANTENIMIENTO_LV_MODIFICAR"] +
-                                            "," + RblElementosAjenos.SelectedValue +
-                                            ",'" + vArchivoElementosAjenos +
-                                            "','" + vExtensionElementosAjenos + "'";
-                        Int32 vInformacion10 = vConexion.ejecutarSql(vQuery10);
-                    }
-
-
-                  
-                    //Imagen Entorno
-                    String vNombreDepotEntorno = String.Empty;
-                    HttpPostedFile bufferDepositoEntorno = FuEspacioFisico.PostedFile;
-                    byte[] vFileDepositEntorno = null;
-                    String vExtensionEntorno = String.Empty;
-                    String vArchivoEntorno = String.Empty;
-                    vNombreDepotEntorno = FuEspacioFisico.FileName;
-
-                    if (vNombreDepotEntorno != "")
-                    {
-                       
-                        Stream vStream = bufferDepositoEntorno.InputStream;
-                        BinaryReader vReader = new BinaryReader(vStream);
-                        vFileDepositEntorno = vReader.ReadBytes((int)vStream.Length);
-                        vExtensionEntorno = System.IO.Path.GetExtension(FuEspacioFisico.FileName);
-                        vArchivoEntorno = Convert.ToBase64String(vFileDepositEntorno);
-
-                        String vQuery11 = "STEISP_AGENCIA_ModificarListaVerificacion 12," + Session["AG_LvPM_ID_MANTENIMIENTO_LV_MODIFICAR"] +
-                                            ",'" + vArchivoEntorno +
-                                            "','" + vExtensionEntorno + "'";
-                        Int32 vInformacion11 = vConexion.ejecutarSql(vQuery11);
-
-                    }
                     
                     ////DATOS GENERALES
                     String vQuery12 = "STEISP_AGENCIA_ModificarListaVerificacion 13,'" + Session["AG_LvPM_ID_MANTENIMIENTO_LV_MODIFICAR"] +
@@ -1508,19 +2764,18 @@ namespace Infatlan_STEI_Agencias.pages
                                                "','" + TxHoraSalidaINFA.Text +
                                                "','" + TxHoraLlegadaINFA.Text + "'";
                     Int32 vInformacion12 = vConexion.ejecutarSql(vQuery12);
-
+                    ActualizarAgencia();
+                    modificarImagenesReducido();
+                    EnviarCorreoModificar();
+                    limpiar();
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModalEnvioLv();", true);
+                    Response.Redirect("/sites/agencias/pages/mantenimiento/lvPendientesModificar.aspx");
                 }
             }
             catch (Exception ex)
             {
                 Mensaje(ex.Message, WarningType.Danger);
-            }
-
-
-            limpiar();
-            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModalEnvioLv();", true);
-            Response.Redirect("/sites/agencias/pages/mantenimiento/lvPendientesCompletar.aspx");
-
+            }           
         }     
         
         private void limpiar()
@@ -1545,7 +2800,7 @@ namespace Infatlan_STEI_Agencias.pages
             TxCantDatacard.Text = String.Empty;
 
 
-            RBLManEquipoComu.SelectedIndex = -1;
+            
             TxMotivoNoMantEquipoComu.Text = String.Empty;
 
             RBProbaronEquipo.SelectedIndex = -1;
@@ -1583,15 +2838,15 @@ namespace Infatlan_STEI_Agencias.pages
 
         }
         
-        protected void BtnRegresarCompletarLV_Click(object sender, EventArgs e)
-        {
-            try
-            {
-             limpiar();
-             Response.Redirect("/sites/agencias/pages/mantenimiento/lvPendientesAprobarJefes.aspx");
-            }
-            catch (Exception Ex) { Mensaje(Ex.Message, WarningType.Danger); }
-        }
+        //protected void BtnRegresarCompletarLV_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //     limpiar();
+        //     Response.Redirect("/sites/agencias/pages/mantenimiento/lvPendientesAprobarJefes.aspx");
+        //    }
+        //    catch (Exception Ex) { Mensaje(Ex.Message, WarningType.Danger); }
+        //}
 
         //**********************************************************************************************************************//
         //*****************************************  MODIFICAR LISTA DE VERIFICACION  *****************************************//
@@ -1601,9 +2856,6 @@ namespace Infatlan_STEI_Agencias.pages
         {
             try
             {
-
-                TituloPagina.Text = "Modificar Lista de Verificación";
-                UpTitulo.Update();
 
                 //DATOS GENERALES
                 DataTable vDatos = new DataTable();
@@ -1619,6 +2871,21 @@ namespace Infatlan_STEI_Agencias.pages
                 TxHoraFinMant.Text = vDatos.Rows[0]["horaManteniminetoFinal"].ToString();
                 TxNombreTecnicoResponsable.Text = vDatos.Rows[0]["Responsable"].ToString();
 
+                String vQueryProbar = "[STEISP_AGENCIA_ModificarListaVerificacion] 21," + Session["AG_LvPM_ID_MANTENIMIENTO_LV_MODIFICAR"];
+                DataTable vDatosProbar = vConexion.obtenerDataTable(vQueryProbar);
+                //RBProbaronEquipo.SelectedValue= vDatosProbar.Rows[0]["proboTodoEquipo"].ToString();
+                TxMotivoNoProbaronEquipo.Text= vDatosProbar.Rows[0]["motivoNoProboTodoEquipo"].ToString();
+
+                if (vDatosProbar.Rows[0]["proboTodoEquipo"].ToString().Equals("True"))
+                {
+                    RBProbaronEquipo.SelectedValue = "1";
+                    TxMotivoNoProbaronEquipo.Visible = false;
+                }
+                else
+                {
+                    RBProbaronEquipo.SelectedValue = "0";
+                    TxMotivoNoProbaronEquipo.Visible = true;
+                }
 
                 //TECNICO RESPONSABLE  
                 DataTable vDatos1 = new DataTable();
@@ -1659,16 +2926,17 @@ namespace Infatlan_STEI_Agencias.pages
                 String vDocumentoNoMantEquipoComunicacion = vDatos2.Rows[0]["fotoNoManEquipoComu"].ToString();
                 string srcNoMantEquipoComunicacion = "data:image;base64," + vDocumentoNoMantEquipoComunicacion;
                 ImgPreviewNoMantEquipoComu.Src = srcNoMantEquipoComunicacion;
+                TxResNoManEquipoComu1.Value = "si";
                 if (RBLManEquipoComuRespuesta.Equals("True"))
                 {
-                    RBLManEquipoComu.SelectedValue = "1";
-                    ImgPreviewNoMantEquipoComu.Visible = true;
+                    
+                    //ImgPreviewNoMantEquipoComu.Visible = true;
                     //TxResNoManEquipoComu.Text = "si";
                     TxResNoManEquipoComu1.Value = "si";
                 }
                 else{
-                    RBLManEquipoComu.SelectedValue = "0";
-                    ImgPreviewNoMantEquipoComu.Visible = false;
+                    
+                    //ImgPreviewNoMantEquipoComu.Visible = false;
                     TxMotivoNoMantEquipoComu.Visible = true;
                 }
 
@@ -1677,18 +2945,18 @@ namespace Infatlan_STEI_Agencias.pages
                 DataTable vDatos3 = new DataTable();
                 vDatos3 = (DataTable)Session["AG_LvPM_DATOS_PRUEBAS_PC"];
 
-                string RBProbaronEquipoRespuesta = vDatos3.Rows[0]["proboTodoEquipo"].ToString();
-                TxMotivoNoProbaronEquipo.Text = vDatos3.Rows[0]["motivoNoProboTodoEquipo"].ToString();
-                if (RBProbaronEquipoRespuesta.Equals("True"))
-                {
-                    RBProbaronEquipo.SelectedValue = "1";
-                    TxMotivoNoProbaronEquipo.Visible = false;
-                }
-                else
-                {
-                    RBProbaronEquipo.SelectedValue = "0";
-                    TxMotivoNoProbaronEquipo.Visible = true;
-                }
+                //string RBProbaronEquipoRespuesta = vDatos3.Rows[0]["proboTodoEquipo"].ToString();
+                //TxMotivoNoProbaronEquipo.Text = vDatos3.Rows[0]["motivoNoProboTodoEquipo"].ToString();
+                //if (RBProbaronEquipoRespuesta.Equals("True"))
+                //{
+                //    RBProbaronEquipo.SelectedValue = "1";
+                //    TxMotivoNoProbaronEquipo.Visible = false;
+                //}
+                //else
+                //{
+                //    RBProbaronEquipo.SelectedValue = "0";
+                //    TxMotivoNoProbaronEquipo.Visible = true;
+                //}
 
 
                 //SECCION EQUIPO DE COMUNICACION
@@ -1699,11 +2967,12 @@ namespace Infatlan_STEI_Agencias.pages
                 String vDocumentoClimatizacion = vDatos4.Rows[0]["fotoClimatizacionAdecuada"].ToString();
                 string srcClimatizacion = "data:image;base64," + vDocumentoClimatizacion;
                 ImgPreviewClimatizacion.Src = srcClimatizacion;
+                TxClimatizacion1.Value = "si";
 
                 if (RblClimatizacionAdecuadaRespuesta.Equals("True"))
                 {
                     RblClimatizacionAdecuada.SelectedValue = "1";
-                    ImgPreviewClimatizacion.Visible = true;
+                    //ImgPreviewClimatizacion.Visible = true;
                     //TxClimatizacion.Text = "si";
                     TxClimatizacion1.Value = "si";
 
@@ -1711,7 +2980,7 @@ namespace Infatlan_STEI_Agencias.pages
                 else
                 {
                     RblClimatizacionAdecuada.SelectedValue = "0";
-                    ImgPreviewClimatizacion.Visible = false;
+                    //ImgPreviewClimatizacion.Visible = false;
                 }
 
 
@@ -1719,18 +2988,19 @@ namespace Infatlan_STEI_Agencias.pages
                 String vDocumentoUPS = vDatos4.Rows[0]["fotoEnergiaElectricaUPS"].ToString();
                 string srcUPS = "data:image;base64," + vDocumentoUPS;
                 ImgPreviewUPS.Src = srcUPS;
+                TxUPS1.Value = "si";
 
                 if (RblUPSRespuesta.Equals("True"))
                 {
                     RblUPS.SelectedValue = "1";
-                    ImgPreviewUPS.Visible = true;
+                    //ImgPreviewUPS.Visible = true;
                     //TxUPS.Text = "si";
                     TxUPS1.Value = "si";
                 }
                 else
                 {
                     RblUPS.SelectedValue = "0";
-                    ImgPreviewUPS.Visible = false;
+                    //ImgPreviewUPS.Visible = false;
                 }
 
                 //SECCION ENTORNO COMUNICACION
@@ -1741,18 +3011,19 @@ namespace Infatlan_STEI_Agencias.pages
                 String vDocumentoPolvoSuciedad = vDatos5.Rows[0]["fotoExpuestoPolvoSuciedad"].ToString();
                 string srcPolvoSuciedad = "data:image;base64," + vDocumentoPolvoSuciedad;
                 ImgPreviewPolvoSuciedad.Src = srcPolvoSuciedad;
+                TxPolvoSuciedad1.Value = "si";
 
                 if (RbPolvoSuciedadRespuesta.Equals("True"))
                 {
                     RbPolvoSuciedad.SelectedValue = "1";
-                    ImgPreviewPolvoSuciedad.Visible = true;
+                    //ImgPreviewPolvoSuciedad.Visible = true;
                     //TxPolvoSuciedad.Text = "si";
                     TxPolvoSuciedad1.Value = "si";
                 }
                 else
                 {
                     RbPolvoSuciedad.SelectedValue = "0";
-                    ImgPreviewPolvoSuciedad.Visible = false;
+                    //ImgPreviewPolvoSuciedad.Visible = false;
                 }
 
 
@@ -1760,18 +3031,19 @@ namespace Infatlan_STEI_Agencias.pages
                 String vDocumentoHumedadSustancias = vDatos5.Rows[0]["fotoRastrosHumedadSustancias"].ToString();
                 string srcHumedadSustancias = "data:image;base64," + vDocumentoHumedadSustancias;
                 ImgPreviewHumedadSustancias.Src = srcHumedadSustancias;
+                TxHumedadSustancias1.Value = "si";
 
                 if (RblHumedadSustanciasRespuesta.Equals("True"))
                 {
                     RblHumedadSustancias.SelectedValue = "1";
-                    ImgPreviewHumedadSustancias.Visible = true;
+                    //ImgPreviewHumedadSustancias.Visible = true;
                     //TxHumedadSustancias.Text = "si";
                     TxHumedadSustancias1.Value= "si";
                 }
                 else
                 {
                     RblHumedadSustancias.SelectedValue = "0";
-                    ImgPreviewHumedadSustancias.Visible = false;
+                    //ImgPreviewHumedadSustancias.Visible = false;
                 }
 
 
@@ -1779,18 +3051,19 @@ namespace Infatlan_STEI_Agencias.pages
                 String vDocumentoRoboDaño = vDatos5.Rows[0]["fotoExpuestoRoboDaño"].ToString();
                 string srcRoboDaño = "data:image;base64," + vDocumentoRoboDaño;
                 ImgPreviewRoboDaño.Src = srcRoboDaño;
+                TxRoboDaño1.Value = "si";
 
                 if (RblRoboDañoRespuesta.Equals("True"))
                 {
                     RblRoboDaño.SelectedValue = "1";
-                    ImgPreviewRoboDaño.Visible = true;
+                    //ImgPreviewRoboDaño.Visible = true;
                     //TxRoboDaño.Text = "si";
                     TxRoboDaño1.Value = "si";
                 }
                 else
                 {
                     RblRoboDaño.SelectedValue = "0";
-                    ImgPreviewRoboDaño.Visible = false;
+                    //ImgPreviewRoboDaño.Visible = false;
                 }
 
 
@@ -1798,18 +3071,19 @@ namespace Infatlan_STEI_Agencias.pages
                 String vDocumentoElementosAjenos = vDatos5.Rows[0]["fotoElementosExtraños"].ToString();
                 string srcElementosAjenos = "data:image;base64," + vDocumentoElementosAjenos;
                 ImgPreviewElementosAjenos.Src = srcElementosAjenos;
+                TxElementosAjenos1.Value = "si";
 
                 if (RblElementosAjenosRespuesta.Equals("True"))
                 {
                     RblElementosAjenos.SelectedValue = "1";
-                    ImgPreviewElementosAjenos.Visible = true;
+                    //ImgPreviewElementosAjenos.Visible = true;
                     //TxElementosAjenos.Text = "si";
                     TxElementosAjenos1.Value = "si";
                 }
                 else
                 {
                     RblElementosAjenos.SelectedValue = "0";
-                    ImgPreviewElementosAjenos.Visible = false;
+                    //ImgPreviewElementosAjenos.Visible = false;
                 }
 
 
@@ -1853,11 +3127,65 @@ namespace Infatlan_STEI_Agencias.pages
             FuElementosAjenos.Visible = true;
         }
 
+        protected void BtnDevolver_Click(object sender, EventArgs e)
+        {
+            DIVAlerta.Visible = false;
+            TxIdMantDevolver.Text = Session["AG_LvPC_ID_MANTENIMIENTO_LV_APROBAR_JEFE"].ToString();
+            LbTituloDevolver.Text = "Devolver "+TxLugar.Text;
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModalDevolverLv();", true);
+        }
 
+        protected void BtnAprobar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //validacionesAprobarLV();
+                Lugar.Text = TxLugar.Text;
+                TxIdMantenimiento.Text = Session["AG_LvPC_ID_MANTENIMIENTO_LV_APROBAR_JEFE"].ToString();
+                TxFechaModal.Text = TxFechaMant.Text;
+                TxAreaModal.Text = TxArea.Text;
+                TxResponsableModal.Text = TxNombreTecnicoResponsable.Text;
+                //TxMotivoRegreso.Text = TxMotivoCancelacionLV.Text;
 
+                if (Titulo.Text == "Regresar LV")
+                {
+                    DivMotivo.Visible = true;
+                   
+                }
+                else
+                {
+                    DivMotivo.Visible = false;
+                   
+                }
 
+                UpTituloAprobar.Update();
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModalAprobacionLv();", true);
 
+            }
+            catch (Exception ex)
+            {
+                Mensaje(ex.Message, WarningType.Danger);
+            }
+        }
 
+        protected void BtnModalDevolver_Click(object sender, EventArgs e)
+        {
+            if (TxtMotivoDevolver.Text == "")
+                DIVAlerta.Visible = true;
+            else {
+                DIVAlerta.Visible = false;
+                String vQuery1 = "STEISP_AGENCIA_AprobarLvJefesSuplentes 11," + Session["AG_LvPC_ID_MANTENIMIENTO_LV_APROBAR_JEFE"] +
+                            "," + Session["USUARIO"] +
+                            ",'" + TxtMotivoDevolver.Text + "'";
+                Int32 vInformacion1 = vConexion.ejecutarSql(vQuery1);
+
+                if (vInformacion1 == 1)
+                {
+                    EnviarCorreoDevolver();
+                    Response.Redirect("lvPendientesAprobarJefes.aspx");
+                }
+            }
+        }
     }
 
 

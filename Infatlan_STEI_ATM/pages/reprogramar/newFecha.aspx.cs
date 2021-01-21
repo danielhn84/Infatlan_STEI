@@ -133,7 +133,9 @@ namespace Infatlan_STEI_ATM.pages.reprogramar
             try
             {                
                 string codMantenimiento = e.CommandArgument.ToString();
-
+                txtMotivoCambio.Text = "";
+                txtNewFecha.Text = "";
+                txtAlerta2.Visible = false;
                 if (e.CommandName == "Select")
                 {
                     H4Titulo.InnerText = "Cambiar fecha de Mantenimiento-"+codMantenimiento;
@@ -177,6 +179,15 @@ namespace Infatlan_STEI_ATM.pages.reprogramar
                 Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                 if (vInfo != 0)
                 {
+                    string estado = "";
+                    if (Convert.ToDateTime(txtNewFecha.Text) >= DateTime.Now)
+                        estado = "1";
+                    else
+                        estado = "11";
+
+                    string vQuery2 = "STEISP_ATM_CancelarMantenimiento 9, '" + Session["ID_MANTENIMIENTO_CAMBIO"] + "','" + estado + "'";
+                     vConexion.ejecutarSQL(vQuery2);
+
                     txtMotivoCambio.Text = "";
                     txtNewFecha.Text = "";
                     txtAlerta2.Visible = false;
