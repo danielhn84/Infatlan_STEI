@@ -450,6 +450,7 @@
     <Content Include="assets\images\img2.jpg" />
     <Content Include="assets\images\img3.jpg" />
     <Content Include="assets\images\loading.gif" />
+    <Content Include="assets\images\Logo-blanco.png" />
     <Content Include="assets\images\logo-icon.png" />
     <Content Include="assets\images\logo-light-icon.png" />
     <Content Include="assets\images\logo-light-text.png" />

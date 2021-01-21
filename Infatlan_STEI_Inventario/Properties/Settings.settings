@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Infatlan_STEI_Inventario.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Infatlan_STEI_Inventario_SapActivos_ZWS_AF_INFATLAN" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://VSRVSAPQASERP.ADBancat.hn:8000/sap/bc/srt/rfc/sap/zws_af_infatlan/200/zws_af_infatlan/zws_af_infatlan</Value>
+    </Setting>
+    <Setting Name="Infatlan_STEI_Inventario_SapInventario_ZWS_AF_INF" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://VSRVSAPQASERP.ADBancat.hn:8000/sap/bc/srt/rfc/sap/zws_af_inf/200/zws_af_inf/zws_af_inf</Value>
+    </Setting>
+    <Setting Name="Infatlan_STEI_Inventario_SapService_ZWS_AF_INF" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://vsrvsaperpprd.adbancat.hn:8000/sap/bc/srt/rfc/sap/zws_af_inf/300/zws_af_inf/zws_af_inf</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

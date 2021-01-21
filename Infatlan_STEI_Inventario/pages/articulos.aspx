@@ -97,6 +97,7 @@
                                         <asp:TextBox runat="server" PlaceHolder="Ingrese Id o Tipo y presione Enter" ID="TxBusqueda" AutoPostBack="true" OnTextChanged="TxBusqueda_TextChanged" CssClass="form-control form-control-line"></asp:TextBox>
                                     </div>
                                     <asp:Button runat="server" Visible="false" ID="BtnNuevo" CssClass="btn btn-success" Text="Nuevo" OnClick="BtnNuevo_Click" />
+                                    <%--<asp:Button runat="server" Visible="true" ID="BtnCargaSAP" CssClass="btn btn-dark" Text="Cargar Datos" OnClick="BtnCargaSAP_Click" />--%>
                                 </div>
 
                                 <div class="table-responsive m-t-20">
@@ -115,6 +116,7 @@
                                             <asp:BoundField DataField="Marca" HeaderText="Marca" />
                                             <asp:BoundField DataField="modelo" HeaderText="Modelo" />
                                             <asp:BoundField DataField="cantidad" HeaderText="Cant" />
+                                            <asp:BoundField DataField="codInventario" HeaderText="Inventario" />
                                             <asp:BoundField DataField="precioUnit" HeaderText="Precio" />
                                             <asp:BoundField DataField="Proveedor" HeaderText="Proveedor" />
                                             <asp:BoundField DataField="descripcion" HeaderText="Detalle" />

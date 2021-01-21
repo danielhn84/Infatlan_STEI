@@ -438,6 +438,14 @@ namespace Infatlan_STEI_Inventario.pages
                 GVBusqueda.PageIndex = e.NewPageIndex;
                 GVBusqueda.DataSource = (DataTable)Session["INV_STOCK"];
                 GVBusqueda.DataBind();
+                if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 1).Edicion){
+                    foreach (GridViewRow item in GVBusqueda.Rows){
+                        LinkButton LbEdit = item.FindControl("BtnEdit") as LinkButton;
+                        LinkButton LbAdd = item.FindControl("BtnEditar2") as LinkButton;
+                        LbEdit.Visible = true;
+                        LbAdd.Visible = true;
+                    }
+                }
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);
             }
