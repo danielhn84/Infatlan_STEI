@@ -67,20 +67,30 @@
             <h6 class="card-subtitle">Lista de ATMs creados</h6>
             <div class="row col-12">
                 <div class="col-12 grid-margin stretch-card">
+                    <div class="row">
+                            <div class="form-group row col-6">
+                                        <label class="col-sm-3 col-form-label">Buscar ATM</label>
+                                        <div class="col-sm-9">
+                                            <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+                                                <ContentTemplate>
+                                                    <asp:TextBox ID="TxBuscarATM" OnTextChanged="TxBuscarATM_TextChanged" runat="server" placeholder="ingrese ATM - Presione afuera para proceder" class="form-control" AutoPostBack="true"></asp:TextBox>
+                                                </ContentTemplate>
+                                            </asp:UpdatePanel>
+                                        </div>
+                                    </div>
+                        <div class="col-3">
+                            <asp:DropDownList runat="server" AutoPostBack="true" ID="DDLFiltroEstado" CssClass="form-control col-12">
+                                <asp:ListItem Value="2" Text="Todos" />
+                                <asp:ListItem Value="1" Text="Activo" />
+                                <asp:ListItem Value="0" Text="Inactivo" />
+                            </asp:DropDownList>
+                        </div>
+                        <div class="col-3">
+                            <asp:LinkButton runat="server" ID="btnReporte" OnClick="btnReporte_Click" Style="background-color: green; color: white;" ToolTip="Descargar reporte excel" CssClass="btn btn-seccess ti-files"></asp:LinkButton>
+                        </div>
+                    </div>
                     <asp:UpdatePanel ID="UpdateDivBusquedas" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Buscar ATM</label>
-                                    <div class="col-sm-9">
-                                        <asp:UpdatePanel ID="UpdatePanel5" runat="server">
-                                            <ContentTemplate>
-                                                <asp:TextBox ID="TxBuscarATM" OnTextChanged="TxBuscarATM_TextChanged" runat="server" placeholder="ingrese ATM - Presione afuera para proceder" class="form-control" AutoPostBack="true"></asp:TextBox>
-                                            </ContentTemplate>
-                                        </asp:UpdatePanel>
-                                    </div>
-                                </div>
-                            </div>
 
                             <div class="table-responsive m-t-20">
                                 <asp:UpdatePanel ID="UpdateGridView" runat="server" UpdateMode="Conditional">

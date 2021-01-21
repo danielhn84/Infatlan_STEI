@@ -32,6 +32,7 @@ namespace Infatlan_STEI_Inventario.pages
                     limpiarSessiones();
                     cargarDatos();
                     cargarDatosEDC();
+                    cargarDatosDC();
                     cargarDatosEnlace();
                 }else {
                     Response.Redirect("/login.aspx");
@@ -125,6 +126,124 @@ namespace Infatlan_STEI_Inventario.pages
                     }
                 }
             }catch (Exception ex){
+                Mensaje(ex.Message, WarningType.Danger);
+            }
+        }
+
+        void cargarDatosDC()
+        {
+            try
+            {
+                String vQuery = "[STEISP_INVENTARIO_StockDC] 1";
+                DataTable vDatos = vConexion.obtenerDataTable(vQuery);
+
+                if (vDatos.Rows.Count > 0)
+                {
+                    GvBusquedaDC.DataSource = vDatos;
+                    GvBusquedaDC.DataBind();
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 1).Edicion)
+                    {
+                        foreach (GridViewRow item in GvBusquedaDC.Rows)
+                        {
+                            LinkButton LbEdit = item.FindControl("BtnEditar") as LinkButton;
+                            LbEdit.Visible = true;
+                        }
+                    }
+
+                    Session["INV_STOCKDC"] = vDatos;
+                }
+
+                //TIPO STOCK 
+                vQuery = "[STEISP_INVENTARIO_Generales] 7,'True'";
+                vDatos = vConexion.obtenerDataTable(vQuery);
+
+                if (vDatos.Rows.Count > 0)
+                {
+                    DDLModalCreaTipoDC.Items.Clear();
+                    DDLModalCreaTipoDC.Items.Add(new ListItem { Value = "0", Text = "Seleccione" });
+                    DDLModalModTipo.Items.Clear();
+                    DDLModalModTipo.Items.Add(new ListItem { Value = "0", Text = "Seleccione" });
+                    foreach (DataRow item in vDatos.Rows)
+                    {
+                        DDLModalCreaTipoDC.Items.Add(new ListItem { Value = item["idTipoStock"].ToString(), Text = item["nombre"].ToString() });
+                        DDLModalModTipo.Items.Add(new ListItem { Value = item["idTipoStock"].ToString(), Text = item["nombre"].ToString() });
+                    }
+                    DDLModalCreaTipoDC.SelectedValue = "59";
+                    DDLModalCreaTipoDC.CssClass="select2 form-control custom-select";
+                    DDLModalModTipo.CssClass = "select2 form-control custom-select";
+                }
+
+                // CONTRATOS
+                vQuery = "[STEISP_INVENTARIO_Generales] 12";
+                vDatos = vConexion.obtenerDataTable(vQuery);
+
+                if (vDatos.Rows.Count > 0)
+                {
+                    DDLModalCreaContratosDC.Items.Clear();
+                    DDLModalCreaContratosDC.Items.Add(new ListItem { Value = "0", Text = "Seleccione" });
+                    DDLmodalModContratos.Items.Clear();
+                    DDLmodalModContratos.Items.Add(new ListItem { Value = "0", Text = "Seleccione" });
+                    foreach (DataRow item in vDatos.Rows)
+                    {
+                        DDLModalCreaContratosDC.Items.Add(new ListItem { Value = item["idContrato"].ToString(), Text = item["contrato"].ToString() });
+                        DDLmodalModContratos.Items.Add(new ListItem { Value = item["idContrato"].ToString(), Text = item["contrato"].ToString() });
+                    }
+                }
+
+                // UBICACIONES 
+                vQuery = "[STEISP_INVENTARIO_Ubicaciones] 1";
+                vDatos = vConexion.obtenerDataTable(vQuery);
+
+                if (vDatos.Rows.Count > 0)
+                {
+                    DDLModalCreaUbicacionDC.Items.Clear();
+                    DDLModalCreaUbicacionDC.Items.Add(new ListItem { Value = "0", Text = "Seleccione" });
+                    DDLModalModUbicacion.Items.Clear();
+                    DDLModalModUbicacion.Items.Add(new ListItem { Value = "0", Text = "Seleccione" });
+                    foreach (DataRow item in vDatos.Rows)
+                    {
+                        int vCarac = item["direccion"].ToString().Length;
+                        DDLModalCreaUbicacionDC.Items.Add(new ListItem { Value = item["idUbicacion"].ToString(), Text = item["codigo"].ToString() + " - " + item["direccion"].ToString().Substring(0, vCarac > 25 ? 25 : vCarac) });
+                        DDLModalModUbicacion.Items.Add(new ListItem { Value = item["idUbicacion"].ToString(), Text = item["codigo"].ToString() + " - " + item["direccion"].ToString().Substring(0, vCarac > 25 ? 25 : vCarac) });
+                    }
+                }
+
+                // REGIONES 
+                vQuery = "[STEISP_INVENTARIO_Generales] 10";
+                vDatos = vConexion.obtenerDataTable(vQuery);
+
+                if (vDatos.Rows.Count > 0)
+                {
+                    DDLModalCreaRegionDC.Items.Clear();
+                    DDLModalCreaRegionDC.Items.Add(new ListItem { Value = "0", Text = "Seleccione" });
+                    DDLModalModRegion.Items.Clear();
+                    DDLModalModRegion.Items.Add(new ListItem { Value = "0", Text = "Seleccione" });
+                    foreach (DataRow item in vDatos.Rows)
+                    {
+                        DDLModalCreaRegionDC.Items.Add(new ListItem { Value = item["idRegion"].ToString(), Text = item["nombre"].ToString() });
+                        DDLModalModRegion.Items.Add(new ListItem { Value = item["idRegion"].ToString(), Text = item["nombre"].ToString() });
+                    }
+                }
+
+                // CATEGORIA DC 
+                vQuery = "[STEISP_INVENTARIO_Generales] 17";
+                vDatos = vConexion.obtenerDataTable(vQuery);
+
+                if (vDatos.Rows.Count > 0)
+                {
+                    DDLModalCreaCategoriaDC.Items.Clear();
+                    DDLModalCreaCategoriaDC.Items.Add(new ListItem { Value = "0", Text = "Seleccione" });
+                    DDLModalModCategoria.Items.Clear();
+                    DDLModalModCategoria.Items.Add(new ListItem { Value = "0", Text = "Seleccione" });
+                    foreach (DataRow item in vDatos.Rows)
+                    {
+                        DDLModalCreaCategoriaDC.Items.Add(new ListItem { Value = item["idCatDC"].ToString(), Text = item["nombre"].ToString() });
+                        DDLModalModCategoria.Items.Add(new ListItem { Value = item["idCatDC"].ToString(), Text = item["nombre"].ToString() });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
@@ -1213,15 +1332,222 @@ namespace Infatlan_STEI_Inventario.pages
             }
         }
 
-        protected void BtnCargaSAP_Click(object sender, EventArgs e){
-            try{
-                String vFechaInicio = "2017-01-01", vFechaFin = "2021-01-01";
-                SapConnector vSap = new SapConnector();
-                String vResultado = vSap.getInformacion(vFechaInicio, vFechaFin);
-                Mensaje(vResultado, WarningType.Success);
-                cargarDatos();
-            }catch (Exception ex){
+        protected void TxBusQUEDADC_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void BtnNuevoDC_Click(object sender, EventArgs e)
+        {
+
+            DIVAlerta.Visible = false;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openDC();", true);
+        }
+
+        protected void GvBusquedaDC_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            DIVModalModAlertaDC.Visible = false;
+            DIVAlerta.Visible = false;
+            string codStockDC = e.CommandArgument.ToString();
+            if (e.CommandName == "EditarArticuloDC")
+            {
+                DataTable vDatos = new DataTable();
+                String vQuery = "STEISP_INVENTARIO_StockDC 4,'" + codStockDC + "'";
+                vDatos = vConexion.obtenerDataTable(vQuery);
+                foreach (DataRow item in vDatos.Rows)
+                {
+                    Session["ID_DC"] = codStockDC;
+                    TxModalModNombre.Text = item["nombre"].ToString();
+                    LbModAlertaDC.Text = "Modificar Equipo de Data Center - " + TxModalModNombre.Text;
+                    TxModalModFecha.Text = Convert.ToDateTime(item["fechaMantenimiento"]).ToString("yyyy-MM-dd");
+                    DDLModalModTipo.SelectedValue = item["idTipo"].ToString();
+                    DDLmodalModContratos.SelectedValue = item["idContrato"].ToString();
+                    DDLModalModCategoria.SelectedValue = item["idCategoria"].ToString();
+                    TxModalModIP.Text = item["IP"].ToString();
+                    DDLModalModRegion.SelectedValue = item["idRegion"].ToString();
+                    TxModalModLatitud.Text = item["latitud"].ToString();
+                    TxModalModLongitud.Text = item["longitud"].ToString();
+                    DDLModalModUbicacion.SelectedValue = item["idUbicacion"].ToString();
+                    TxModalModDescripcion.Text = item["descripcion"].ToString();
+                    DDLModalModEstado.SelectedValue= item["estado"].ToString();
+
+                    DDLModalModTipo.CssClass = "select2 form-control custom-select";
+                    DDLmodalModContratos.CssClass = "select2 form-control custom-select";
+                    DDLModalModCategoria.CssClass = "select2 form-control custom-select";
+                    DDLModalModUbicacion.CssClass = "select2 form-control custom-select";
+                }
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModDC();", true);
+            }
+            if (e.CommandName == "VerInfoDC")
+            {
+
+                DataTable vDatos = new DataTable();
+                String vQuery = "STEISP_INVENTARIO_StockDC 3,'" + codStockDC + "'";
+                vDatos = vConexion.obtenerDataTable(vQuery);
+                foreach (DataRow item in vDatos.Rows)
+                {                   
+                    LbNombreDC.Text = item["nombre"].ToString();
+                    LbInfoDC.Text = "Información de "+LbNombreDC.Text;
+                    LbMantenimientoDC.Text = Convert.ToDateTime(item["fecha"]).ToString("yyyy/MM/dd");
+                    LbTipoDC.Text = item["tipoStock"].ToString();
+                    LbContratosDC.Text = item["contrato"].ToString();
+                    LbCategoriaDC.Text = item["categoria"].ToString();
+                    LbIPDC.Text = item["IP"].ToString();
+                    LbRegionDC.Text = item["regiones"].ToString();
+                    LbLatitudDC.Text = item["latitud"].ToString();
+                    LbLongitudDC.Text = item["longitud"].ToString();
+                    LbUbicacionDC.Text = item["ubicacion"].ToString();
+                    LbDescripcionDC.Text = item["descripcion"].ToString();
+                    if (item["estado"].ToString() == "1")
+                        LbEstadoDC.Text = "Activo";
+                    else
+                        LbEstadoDC.Text = "Inactivo";
+                }
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openInfoDC();", true);
+            }
+           
+        }
+
+        protected void GvBusquedaDC_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            try
+            {
+                GvBusquedaDC.PageIndex = e.NewPageIndex;
+                GvBusquedaDC.DataSource = (DataTable)Session["INV_STOCKDC"];
+                GvBusquedaDC.DataBind();
+
+            }
+            catch (Exception ex)
+            {
                 Mensaje(ex.Message, WarningType.Danger);
+            }
+        }
+
+        protected void BtnCreaDC_Click(object sender, EventArgs e)
+        {
+            DIVAlerta.Visible = true;
+            if (TxModalCreaNombreDC.Text == "" || TxModalCreaNombreDC.Text == string.Empty)
+                LbMensajeDC.Text="Favor ingrese el nombre que registrará.";
+            else if (DDLModalCreaContratosDC.SelectedValue == "0")
+                LbMensajeDC.Text = "Favor seleccione el contrato que registrará.";
+            else if (DDLModalCreaCategoriaDC.SelectedValue == "0")
+                LbMensajeDC.Text = "Favor seleccione categoría que registrará.";
+            else if (DDLModalCreaRegionDC.SelectedValue == "0")
+                LbMensajeDC.Text = "Favor seleccione región que registrará.";
+            else if (TxModalCreaLatitudDC.Text == "" || TxModalCreaLatitudDC.Text == string.Empty)
+                LbMensajeDC.Text = "Favor ingrese latitud que registrará.";
+            else if (TxModalCreaLongitudDC.Text == "" || TxModalCreaLongitudDC.Text == string.Empty)
+                LbMensajeDC.Text = "Favor ingrese longitud que registrará.";
+            else if (DDLModalCreaUbicacionDC.SelectedValue == "0")
+                LbMensajeDC.Text = "Favor seleccione ubicación que registrará.";
+            else if (TxModalCreaUltimoMantDC.Text == "" || TxModalCreaUltimoMantDC.Text == string.Empty)
+                LbMensajeDC.Text = "Favor ingrese último mantenimiento que registrará.";
+            else if (TxModalCreaDescripcionDC.Text == "" || TxModalCreaDescripcionDC.Text == string.Empty)
+                LbMensajeDC.Text = "Favor ingrese descripción que registrará.";
+            else
+            {
+                LbMensajeDC.Text = "";
+                DIVAlerta.Visible = false;
+
+                string vQuery = "STEISP_INVENTARIO_StockDC 2, '" + DDLModalCreaContratosDC.SelectedValue + "','" + DDLModalCreaCategoriaDC.SelectedValue + "'," +
+                    "'" + DDLModalCreaRegionDC.SelectedValue + "','"+DDLModalCreaUbicacionDC.SelectedValue+"','"+TxModalCreaNombreDC.Text+"'," +
+                    "'"+TxModalCreaIPDC.Text+"','"+TxModalCreaLatitudDC.Text+ "','" + TxModalCreaLongitudDC.Text + "','"+TxModalCreaDescripcionDC.Text+"'," +
+                    "'" + DDLModalCreaEstadoDC.SelectedValue + "','" + DDLModalCreaTipoDC.SelectedValue + "','" + TxModalCreaUltimoMantDC.Text + "'";
+                Int32 vInfo = vConexion.ejecutarSql(vQuery);
+                if (vInfo == 1)
+                {
+                    limpiarModalesDC();
+                    cargarDatosDC();
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "cerrarDC();", true);
+                    Mensaje("Stock de data center creado con éxito.",WarningType.Success);
+                }
+            }
+        }
+
+        void validarDC()
+        {
+            if (TxModalCreaNombreDC.Text == "" || TxModalCreaNombreDC.Text == string.Empty)
+                throw new Exception("Favor ingrese el nombre que registrará.");
+            if (DDLModalCreaContratosDC.SelectedValue == "0")
+                throw new Exception("Favor seleccione el contrato que registrará.");
+            if (DDLModalCreaCategoriaDC.SelectedValue == "0")
+                throw new Exception("Favor seleccione categoría que registrará.");
+            if (DDLModalCreaRegionDC.SelectedValue == "0")
+                throw new Exception("Favor seleccione región que registrará.");
+            if (TxModalCreaLatitudDC.Text == "" || TxModalCreaLatitudDC.Text == string.Empty)
+                throw new Exception("Favor ingrese latitud que registrará.");
+            if (TxModalCreaLongitudDC.Text == "" || TxModalCreaLongitudDC.Text == string.Empty)
+                throw new Exception("Favor ingrese longitud que registrará.");
+            if (DDLModalCreaUbicacionDC.SelectedValue == "0")
+                throw new Exception("Favor seleccione ubicación que registrará.");
+            if (TxModalCreaUltimoMantDC.Text == "" || TxModalCreaUltimoMantDC.Text == string.Empty)
+                throw new Exception("Favor ingrese último mantenimiento que registrará.");
+            if (TxModalCreaDescripcionDC.Text == "" || TxModalCreaDescripcionDC.Text == string.Empty)
+                throw new Exception("Favor ingrese descripción que registrará.");
+        }
+
+        void limpiarModalesDC()
+        {
+            TxModalCreaNombreDC.Text = "";
+            TxModalModNombre.Text = "";
+            DDLModalCreaContratosDC.SelectedValue = "0";
+            DDLmodalModContratos.SelectedValue = "0";
+            DDLModalCreaCategoriaDC.SelectedValue = "0";
+            DDLModalModCategoria.SelectedValue = "0";
+            TxModalCreaIPDC.Text = "";
+            TxModalModIP.Text = "";
+            DDLModalCreaRegionDC.SelectedValue = "0";
+            DDLModalModRegion.SelectedValue = "0";
+            TxModalCreaLatitudDC.Text = "";
+            TxModalModLatitud.Text = "";
+            TxModalCreaLongitudDC.Text = "";
+            TxModalModLongitud.Text = "";
+            DDLModalCreaUbicacionDC.SelectedValue = "0";
+            DDLModalModUbicacion.SelectedValue = "0";
+            TxModalCreaUltimoMantDC.Text = "";
+            TxModalModFecha.Text = "";
+            TxModalCreaDescripcionDC.Text = "";
+            TxModalModDescripcion.Text = "";
+        }
+
+        protected void BtnModDC_Click(object sender, EventArgs e)
+        {
+            DIVModalModAlertaDC.Visible = true;
+            if (TxModalModNombre.Text == "" || TxModalModNombre.Text == string.Empty)
+                LbModalModAlertaDC.Text = "Favor ingrese el nombre que registrará.";
+            else if (DDLmodalModContratos.SelectedValue == "0")
+                LbModalModAlertaDC.Text = "Favor seleccione el contrato que registrará.";
+            else if (DDLModalModCategoria.SelectedValue == "0")
+                LbModalModAlertaDC.Text = "Favor seleccione categoría que registrará.";
+            else if (DDLModalModRegion.SelectedValue == "0")
+                LbModalModAlertaDC.Text = "Favor seleccione región que registrará.";
+            else if (TxModalModLatitud.Text == "" || TxModalModLatitud.Text == string.Empty)
+                LbModalModAlertaDC.Text = "Favor ingrese latitud que registrará.";
+            else if (TxModalModLongitud.Text == "" || TxModalModLongitud.Text == string.Empty)
+                LbModalModAlertaDC.Text = "Favor ingrese longitud que registrará.";
+            else if (DDLModalModUbicacion.SelectedValue == "0")
+                LbModalModAlertaDC.Text = "Favor seleccione ubicación que registrará.";
+            else if (TxModalModFecha.Text == "" || TxModalModFecha.Text == string.Empty)
+                LbModalModAlertaDC.Text = "Favor ingrese último mantenimiento que registrará.";
+            else if (TxModalModDescripcion.Text == "" || TxModalModDescripcion.Text == string.Empty)
+                LbModalModAlertaDC.Text = "Favor ingrese descripción que registrará.";
+            else
+            {
+                LbModalModAlertaDC.Text = "";
+                DIVModalModAlertaDC.Visible = false;
+
+                string vQuery = "STEISP_INVENTARIO_StockDC 5,'"+ Session["ID_DC"] + "', '" + DDLmodalModContratos.SelectedValue + "','" + DDLModalModCategoria.SelectedValue + "'," +
+                    "'" + DDLModalModRegion.SelectedValue + "','" + DDLModalModUbicacion.SelectedValue + "','" + TxModalModNombre.Text + "'," +
+                    "'" + TxModalModIP.Text + "','" + TxModalModLatitud.Text + "','" + TxModalModLongitud.Text + "','" + TxModalModDescripcion.Text + "'," +
+                    "'" + DDLModalModEstado.SelectedValue + "','" + TxModalModFecha.Text + "'";
+                Int32 vInfo = vConexion.ejecutarSql(vQuery);
+                if (vInfo == 1)
+                {
+                    limpiarModalesDC();
+                    cargarDatosDC();
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "cerrarModDC();", true);
+                    Mensaje("Stock de data center modificado con éxito.", WarningType.Success);
+                }
             }
         }
     }

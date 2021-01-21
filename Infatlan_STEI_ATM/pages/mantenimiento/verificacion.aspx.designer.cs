@@ -366,22 +366,22 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         protected global::System.Web.UI.UpdatePanel UpdatePanel2;
 
         /// <summary>
-        /// Control txtsoVerif.
+        /// Control DDLSo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtsoVerif;
+        protected global::System.Web.UI.WebControls.DropDownList DDLSo;
 
         /// <summary>
-        /// Control txtversionswVerif.
+        /// Control DDLVersionSW.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtversionswVerif;
+        protected global::System.Web.UI.WebControls.DropDownList DDLVersionSW;
 
         /// <summary>
         /// Control txtpuertoVerif.
@@ -508,6 +508,24 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtantiSkimming;
+
+        /// <summary>
+        /// Control DDLCambioPiezas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DDLCambioPiezas;
+
+        /// <summary>
+        /// Control txtCambioMateriales.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCambioMateriales;
 
         /// <summary>
         /// Control GVNewMateriales.
@@ -780,6 +798,24 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         protected global::System.Web.UI.HtmlControls.HtmlImage imgATMLinea;
 
         /// <summary>
+        /// Control FUHojaMantenimiento.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload FUHojaMantenimiento;
+
+        /// <summary>
+        /// Control imgHojaMantenimiento.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlImage imgHojaMantenimiento;
+
+        /// <summary>
         /// Control FUmapaATM.
         /// </summary>
         /// <remarks>
@@ -967,6 +1003,15 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField HFMapa;
+
+        /// <summary>
+        /// Control HFHojaMantenimiento.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HFHojaMantenimiento;
 
         /// <summary>
         /// Control UpdatePanel3.

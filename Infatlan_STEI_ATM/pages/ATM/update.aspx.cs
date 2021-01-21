@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using System.Net;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using Infatlan_STEI_ATM.clases;
@@ -146,7 +147,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
                 else
                 {
                     EnumerableRowCollection<DataRow> filtered = vDatos.AsEnumerable()
-                        .Where(r => r.Field<String>("Nombre").Contains(vBusqueda));
+                        .Where(r => r.Field<String>("Codigo").Contains(vBusqueda));
 
                     DataTable vDatosFiltrados = new DataTable();
                     vDatosFiltrados.Columns.Add("Codigo");
@@ -187,6 +188,112 @@ namespace Infatlan_STEI_ATM.pages.ATM
             catch (Exception Ex)
             {
 
+            }
+        }
+
+        protected void btnReporte_Click(object sender, EventArgs e)
+        {
+            if (DDLFiltroEstado.SelectedValue == "2")
+            {
+                String vError = String.Empty;
+                try
+                {
+                    ReportExecutionService.ReportExecutionService vRSE = new ReportExecutionService.ReportExecutionService();
+                    vRSE.Credentials = new NetworkCredential("report_user", "kEbn2HUzd$Fs2T", "adbancat.hn");
+                    vRSE.Url = "http://10.128.0.52/reportserver/reportexecution2005.asmx";
+
+
+
+                    vRSE.ExecutionHeaderValue = new ReportExecutionService.ExecutionHeader();
+                    var vEInfo = new ReportExecutionService.ExecutionInfo();
+                    vEInfo = vRSE.LoadReport("/STEI/reporteGlobalITM", null);
+
+
+                    //String vIDEstado = DDLFiltroEstado.SelectedValue;
+                    List<ReportExecutionService.ParameterValue> vParametros = new List<ReportExecutionService.ParameterValue>();
+                    //vParametros.Add(new ReportExecutionService.ParameterValue { Name = "ID", Value = vIDEstado });
+
+
+
+                    vRSE.SetExecutionParameters(vParametros.ToArray(), "en-US");
+
+
+
+                    String deviceinfo = "<DeviceInfo><Toolbar>false</Toolbar></DeviceInfo>";
+                    String mime;
+                    String encoding;
+                    string[] stream;
+                    ReportExecutionService.Warning[] warning;
+
+
+
+                    byte[] vResultado = vRSE.Render("EXCEL", deviceinfo, out mime, out encoding, out encoding, out warning, out stream);
+                    //byte[] vResultado = vRSE.Render("pdf", deviceinfo, out mime, out encoding, out encoding, out warning, out stream);
+
+                    //File.WriteAllBytes("c:\\files\\test.pdf", vResultado);
+
+                    Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                    Response.AppendHeader("Content-Type", "application/vnd.ms-excel");
+                    //Response.AppendHeader("Content-Type", "application/pdf");
+                    byte[] bytFile = vResultado;
+                    Response.OutputStream.Write(bytFile, 0, bytFile.Length);
+                    Response.AddHeader("Content-disposition", "attachment;filename=ATMGlobal.xls");
+                    //Response.AddHeader("Content-disposition", "attachment;filename=DescargaPDFArea.pdf");
+                    Response.End();
+                }
+                catch (Exception Ex) { vError = Ex.Message; }
+                DDLFiltroEstado.SelectedValue = "0";
+            }
+            else
+            {
+                String vError = String.Empty;
+                try
+                {
+                    ReportExecutionService.ReportExecutionService vRSE = new ReportExecutionService.ReportExecutionService();
+                    vRSE.Credentials = new NetworkCredential("report_user", "kEbn2HUzd$Fs2T", "adbancat.hn");
+                    vRSE.Url = "http://10.128.0.52/reportserver/reportexecution2005.asmx";
+
+
+
+                    vRSE.ExecutionHeaderValue = new ReportExecutionService.ExecutionHeader();
+                    var vEInfo = new ReportExecutionService.ExecutionInfo();
+                    vEInfo = vRSE.LoadReport("/STEI/reporteIEstadoTM", null);
+
+
+                    String vIDEstado = DDLFiltroEstado.SelectedValue;
+                    List<ReportExecutionService.ParameterValue> vParametros = new List<ReportExecutionService.ParameterValue>();
+                    vParametros.Add(new ReportExecutionService.ParameterValue { Name = "ID", Value = vIDEstado });
+
+
+
+                    vRSE.SetExecutionParameters(vParametros.ToArray(), "en-US");
+
+
+
+                    String deviceinfo = "<DeviceInfo><Toolbar>false</Toolbar></DeviceInfo>";
+                    String mime;
+                    String encoding;
+                    string[] stream;
+                    ReportExecutionService.Warning[] warning;
+
+
+
+                    byte[] vResultado = vRSE.Render("EXCEL", deviceinfo, out mime, out encoding, out encoding, out warning, out stream);
+                    //byte[] vResultado = vRSE.Render("pdf", deviceinfo, out mime, out encoding, out encoding, out warning, out stream);
+
+                    //File.WriteAllBytes("c:\\files\\test.pdf", vResultado);
+
+                    Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                    Response.AppendHeader("Content-Type", "application/vnd.ms-excel");
+                    //Response.AppendHeader("Content-Type", "application/pdf");
+                    byte[] bytFile = vResultado;
+                    Response.OutputStream.Write(bytFile, 0, bytFile.Length);
+                    Response.AddHeader("Content-disposition", "attachment;filename=ATM" + DDLFiltroEstado.SelectedItem.Text + ".xls");
+                    //Response.AddHeader("Content-disposition", "attachment;filename=DescargaPDFArea.pdf");
+                    Response.End();
+                }
+                catch (Exception Ex) { vError = Ex.Message; }
+                DDLFiltroEstado.SelectedValue = "0";
             }
         }
     }

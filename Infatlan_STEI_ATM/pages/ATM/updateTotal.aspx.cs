@@ -90,16 +90,16 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     }
                     DDLModeloATM.SelectedIndex = CargarInformacionDDL(DDLModeloATM, vModelo);
 
-                    String vQueryDet = "STEISP_ATM_Generales 3,'" + DDLModeloATM.SelectedValue + "'";
-                        DataTable vDatosDet = vConexion.ObtenerTabla(vQueryDet);
-                        DDLDetalleModelo.Items.Clear();
-                        DDLDetalleModelo.Items.Add(new ListItem { Value = "0", Text = "Seleccione detalle de modelo..." });
-                        foreach (DataRow itemDet in vDatosDet.Rows)
-                        {
-                            DDLDetalleModelo.Items.Add(new ListItem { Value = itemDet["idDetalleModeloATM"].ToString(), Text = itemDet["nombreDetalleModeloATM"].ToString() });
-                        }
+                    //String vQueryDet = "STEISP_ATM_Generales 3,'" + DDLModeloATM.SelectedValue + "'";
+                    //    DataTable vDatosDet = vConexion.ObtenerTabla(vQueryDet);
+                    //    DDLDetalleModelo.Items.Clear();
+                    //    DDLDetalleModelo.Items.Add(new ListItem { Value = "0", Text = "Seleccione detalle de modelo..." });
+                    //    foreach (DataRow itemDet in vDatosDet.Rows)
+                    //    {
+                    //        DDLDetalleModelo.Items.Add(new ListItem { Value = itemDet["idDetalleModeloATM"].ToString(), Text = itemDet["nombreDetalleModeloATM"].ToString() });
+                    //    }
                     
-                    DDLDetalleModelo.SelectedIndex = CargarInformacionDDL(DDLDetalleModelo, item["modeloATM"].ToString());
+                    //DDLDetalleModelo.SelectedIndex = CargarInformacionDDL(DDLDetalleModelo, item["modeloATM"].ToString());
 
                     
                 }
@@ -154,7 +154,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
             DDLUbicacionATM.Items.Clear();
             DDLTipoATM.Items.Clear();
             DDLModeloATM.Items.Clear();
-            DDLDetalleModelo.Items.Clear();
+            //DDLDetalleModelo.Items.Clear();
             DDLTipoCarga.Items.Clear();
             DDLProcesadorATM.Items.Clear();
             DDLTecladoATM.Items.Clear();
@@ -391,7 +391,6 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     //{
                     String vQuery = "SPSTEI_ATM 9";
                     DataTable vDatos = vConexionATM.ObtenerTablaATM(vQuery);
-                    DDLestado.Items.Add(new ListItem { Value = "0", Text = "Seleccione estado de ATM..." });
                     foreach (DataRow item in vDatos.Rows)
                     {
                         DDLestado.Items.Add(new ListItem { Value = item["Id_Estatus_ATM"].ToString(), Text = item["Descripcion"].ToString() });
@@ -411,14 +410,14 @@ namespace Infatlan_STEI_ATM.pages.ATM
         {
             try
             {
-                String vQuery = "STEISP_ATM_Generales 3," + DDLModeloATM.SelectedValue + "";
-                DataTable vDatos = vConexion.ObtenerTabla(vQuery);
-                DDLDetalleModelo.Items.Clear();
-                DDLDetalleModelo.Items.Add(new ListItem { Value = "0", Text = "Seleccione detalle de modelo..." });
-                foreach (DataRow item in vDatos.Rows)
-                {
-                    DDLDetalleModelo.Items.Add(new ListItem { Value = item["idDetalleModeloATM"].ToString(), Text = item["nombreDetalleModeloATM"].ToString() });
-                }
+                //String vQuery = "STEISP_ATM_Generales 3," + DDLModeloATM.SelectedValue + "";
+                //DataTable vDatos = vConexion.ObtenerTabla(vQuery);
+                //DDLDetalleModelo.Items.Clear();
+                //DDLDetalleModelo.Items.Add(new ListItem { Value = "0", Text = "Seleccione detalle de modelo..." });
+                //foreach (DataRow item in vDatos.Rows)
+                //{
+                //    DDLDetalleModelo.Items.Add(new ListItem { Value = item["idDetalleModeloATM"].ToString(), Text = item["nombreDetalleModeloATM"].ToString() });
+                //}
             }
             catch (Exception ex)
             {
@@ -437,8 +436,8 @@ namespace Infatlan_STEI_ATM.pages.ATM
             //    throw new Exception("Favor seleccione tipo de ATM.");
             if (DDLModeloATM.SelectedValue == "0")
                 throw new Exception("Favor seleccione modelo de ATM.");
-            if (DDLDetalleModelo.SelectedValue == "0")
-                throw new Exception("Favor seleccione detalle de modelo.");
+            //if (DDLDetalleModelo.SelectedValue == "0")
+            //    throw new Exception("Favor seleccione detalle de modelo.");
             if (DDLTipoCarga.SelectedValue == "0")
                 throw new Exception("Favor seleccione tipo de carga.");
             if (DDLProcesadorATM.SelectedValue == "0")
@@ -481,7 +480,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
         {
             try
             {
-                //validarFromulario();
+                validarFromulario();
                 lbcodATM.Text = txtcodATM.Text;
                 lbNombreATM.Text = txtnombreATM.Text;
                 lbsucursalATM.Text = DDLsucursalATM.SelectedItem.Text;
@@ -504,15 +503,12 @@ namespace Infatlan_STEI_ATM.pages.ATM
         {
             
             try
-            {
-               
-
-               
+            {                           
 
                 string vQuery = "STEISP_ATM_CrearATM 1,'" + txtcodATM.Text + "'," +
                     "" + DDLsucursalATM.SelectedValue + "," +
                     "" + DDLUbicacionATM.SelectedValue + "," +
-                    "" + DDLDetalleModelo.SelectedValue + ", " + DDLTipoCarga.SelectedValue + "," +
+                    "" + DDLModeloATM.SelectedValue + ", " + DDLTipoCarga.SelectedValue + "," +
                     "" + DDLProcesadorATM.SelectedValue + "," + DDLTecladoATM.SelectedValue + "," +
                     "'" + txtserieATM.Text + "','" + txtramATM.Text + " GB" + "', " + DDLso.SelectedValue + "," +
                     "'" + txtserieDisco.Text + "','" + txtcapacidadDisco.Text + " GB" + "'," + DDLmarca.SelectedValue + "," +
@@ -622,7 +618,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     }
 
                 }
-                catch (Exception Ex)
+                catch (Exception)
                 {
 
                     throw;

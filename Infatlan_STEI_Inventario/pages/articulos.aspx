@@ -31,6 +31,15 @@
         function openMarca() { $('#ModalMarcas').modal('show'); }
         function cerrarMarca() { $('#ModalMarcas').modal('hide'); }
 
+        function openDC() { $('#ModalCreaDC').modal('show'); }
+        function cerrarDC() { $('#ModalCreaDC').modal('hide'); }
+
+        function openModDC() { $('#ModalModDC').modal('show'); }
+        function cerrarModDC() { $('#ModalModDC').modal('hide'); }
+
+        function openInfoDC() { $('#ModalInfoDC').modal('show'); }
+        
+
         function ModalConfirmar() {
             $('#ModalConfirmar').modal('show');
             document.getElementById('tch3').value = '';
@@ -73,6 +82,7 @@
                     <a class="nav-item nav-link active" id="nav_cargar_tab" data-toggle="tab" href="#navNuevo" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="icon-plus"> </i>General</a>
                     <a runat="server" visible="true" class="nav-item nav-link" id="Registros" data-toggle="tab" href="#navEDC" role="tab" aria-controls="nav-profile" aria-selected="false"><i style="margin-right:5px" class="icon-puzzle"></i>Equipos de comunicación</a>
                     <a runat="server" visible="true" class="nav-item nav-link" id="Enlaces" data-toggle="tab" href="#navEnlace" role="tab" aria-controls="nav-profile" aria-selected="false"><i style="margin-right:5px" class="icon-vector"></i>Enlaces</a>
+                    <a runat="server" visible="true" class="nav-item nav-link" id="DataCenter" data-toggle="tab" href="#navDataCenter" role="tab" aria-controls="nav-profile" aria-selected="false"><i style="margin-right:5px" class="icon-target"></i>Data Center</a>
                 </div>
             </nav>
             <hr />
@@ -87,7 +97,7 @@
                                         <asp:TextBox runat="server" PlaceHolder="Ingrese Id o Tipo y presione Enter" ID="TxBusqueda" AutoPostBack="true" OnTextChanged="TxBusqueda_TextChanged" CssClass="form-control form-control-line"></asp:TextBox>
                                     </div>
                                     <asp:Button runat="server" Visible="false" ID="BtnNuevo" CssClass="btn btn-success" Text="Nuevo" OnClick="BtnNuevo_Click" />
-                                    <asp:Button runat="server" Visible="true" ID="BtnCargaSAP" CssClass="btn btn-dark" Text="Cargar Datos" OnClick="BtnCargaSAP_Click" />
+                                    <%--<asp:Button runat="server" Visible="true" ID="BtnCargaSAP" CssClass="btn btn-dark" Text="Cargar Datos" OnClick="BtnCargaSAP_Click" />--%>
                                 </div>
 
                                 <div class="table-responsive m-t-20">
@@ -224,6 +234,58 @@
                                                     </asp:LinkButton>
 
                                                     <asp:LinkButton ID="BtnInfo" runat="server" class="btn btn-secondary" Title="Info" CommandArgument='<%# Eval("idEnlace") %>' CommandName="VerInfo">
+                                                        <i class="icon-info"></i>
+                                                    </asp:LinkButton>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                        </Columns>
+                                    </asp:GridView>
+                                </div>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+
+                 <div class="tab-pane fade" id="navDataCenter" role="tabpanel" aria-labelledby="nav-tecnicos-tab">
+                    <asp:UpdatePanel runat="server" ID="UpdatePanel16">
+                        <ContentTemplate>
+                            <div class="card-body">
+                                <div class="row col-12">
+                                    <div class="row col-7">
+                                        <label class="col-2 col-form-label">Búsqueda</label>
+                                        <div class="col-8">
+                                            <asp:TextBox runat="server" PlaceHolder="Ingrese Id o Nombre y presione Enter" ID="TxBusQUEDADC" AutoPostBack="true" OnTextChanged="TxBusQUEDADC_TextChanged" CssClass="form-control form-control-line"></asp:TextBox>
+                                        </div>
+                                        <asp:Button runat="server" Visible="true" ID="BtnNuevoDC" CssClass="btn btn-success" Text="Nuevo" OnClick="BtnNuevoDC_Click" />
+                                    </div>
+                                </div>
+                            
+                                <div class="table-responsive m-t-20">
+                                    <asp:GridView ID="GvBusquedaDC" runat="server"
+                                        CssClass="table table-bordered"
+                                        PagerStyle-CssClass="pgr"
+                                        HeaderStyle-CssClass="table"
+                                        RowStyle-CssClass="rows"
+                                        AutoGenerateColumns="false"
+                                        AllowPaging="true"
+                                        GridLines="None" OnRowCommand="GvBusquedaDC_RowCommand"
+                                        PageSize="10" OnPageIndexChanging="GvBusquedaDC_PageIndexChanging">
+                                        <Columns>
+                                            <asp:BoundField DataField="idStockDC" HeaderText="No." />
+                                            <asp:BoundField DataField="nombre" HeaderText="Nombre" />
+                                            <asp:BoundField DataField="contrato" HeaderText="Contrato" />
+                                            <asp:BoundField DataField="categoria" HeaderText="Categoria" />
+                                            <asp:BoundField DataField="IP" HeaderText="IP" />
+                                            <asp:BoundField DataField="regiones" HeaderText="Region" />
+                                           <%-- <asp:BoundField DataField="latitud" HeaderText="Latitud" />
+                                            <asp:BoundField DataField="longitud" HeaderText="Longitud" />--%>
+                                            <asp:BoundField DataField="fechaMantenimiento" HeaderText="Mantenimiento" />
+                                            <asp:TemplateField HeaderText="">
+                                                <ItemTemplate>
+                                                    <asp:LinkButton ID="BtnEditar" Visible="false" runat="server" class="btn btn-info" Title="Editar" CommandArgument='<%# Eval("idStockDC") %>' CommandName="EditarArticuloDC">
+                                                        <i class="icon-pencil"></i>
+                                                    </asp:LinkButton>
+                                                    <asp:LinkButton ID="BtnInfo" runat="server" class="btn btn-secondary" Title="Ver" CommandArgument='<%# Eval("idStockDC") %>' CommandName="VerInfoDC">
                                                         <i class="icon-info"></i>
                                                     </asp:LinkButton>
                                                 </ItemTemplate>
@@ -609,6 +671,531 @@
                         <ContentTemplate>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                             <asp:Button ID="BtnAceptarEDC" runat="server" Text="Aceptar" class="btn btn-success" OnClick="BtnAceptarEDC_Click"/>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <%--MODAL DE ARTICULOS DC--%>
+    <div class="modal fade" id="ModalCreaDC" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="ModalLabelCreaDC">
+                        <asp:UpdatePanel ID="UpdatePanel25" runat="server" >
+                            <ContentTemplate>
+                                <asp:Label ID="Label3" runat="server" Text="Crear Nuevo Equipo de Data Center"></asp:Label>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-3" style="margin-left:2%">
+                                    <label class="col-form-label">Nombre</label>
+                                </div>
+                                <div class="col-8">
+                                    <asp:UpdatePanel ID="UpdatePanel51" runat="server">
+                                        <ContentTemplate>
+                                            <asp:TextBox ID="TxModalCreaNombreDC" class="form-control" runat="server"></asp:TextBox>                                            
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-3">
+                                    <label class="col-form-label">Tipo</label>
+                                </div>
+                                <div class="col-8">
+                                    <asp:DropDownList ID="DDLModalCreaTipoDC" Enabled="false" runat="server" class="select2 form-control custom-select" style="width: 100%"></asp:DropDownList>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-3" style="margin-left:2%">
+                                    <label class="col-form-label">Contratos</label>
+                                </div>
+                                <div class="col-8">
+                                    <asp:DropDownList ID="DDLModalCreaContratosDC" runat="server" class="select2 form-control custom-select" style="width: 100%"></asp:DropDownList>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-3">
+                                    <label class="col-form-label">Categoría</label>
+                                </div>
+                                <div class="col-8">
+                                    <asp:DropDownList ID="DDLModalCreaCategoriaDC" runat="server" class="select2 form-control custom-select" style="width: 100%"></asp:DropDownList>
+                                </div>
+                            </div>
+                        </div>
+                                
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-3" style="margin-left:2%">
+                                    <label class="col-form-label">IP</label>
+                                </div>
+                                <div class="col-8">
+                                    <asp:UpdatePanel ID="UpdatePanel53" runat="server">
+                                        <ContentTemplate>
+                                            <asp:TextBox ID="TxModalCreaIPDC" placeholder="" class="form-control" runat="server"></asp:TextBox>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-3">
+                                    <label class="col-form-label">Región</label>
+                                </div>
+                                <div class="col-8">
+                                    <asp:UpdatePanel ID="UpdatePanel54" runat="server">
+                                        <ContentTemplate>
+                                            <asp:DropDownList ID="DDLModalCreaRegionDC" runat="server" class="form-control"></asp:DropDownList>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+                                
+                                
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-3" style="margin-left:2%">
+                                    <label class="col-form-label">Latitud</label>
+                                </div>
+                                <div class="col-8">
+                                    <asp:UpdatePanel ID="UpdatePanel57" runat="server">
+                                        <ContentTemplate>
+                                            <asp:TextBox ID="TxModalCreaLatitudDC" class="form-control" runat="server"></asp:TextBox>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-3">
+                                    <label class="col-form-label">Longitud</label>
+                                </div>
+                                <div class="col-8">
+                                    <asp:UpdatePanel ID="UpdatePanel58" runat="server">
+                                        <ContentTemplate>
+                                            <asp:TextBox ID="TxModalCreaLongitudDC" class="form-control" runat="server"></asp:TextBox>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-3" style="margin-left:2%">
+                                    <label class="col-form-label">Ubicación</label>
+                                </div>
+                                <div class="col-8">
+                                    <asp:DropDownList ID="DDLModalCreaUbicacionDC" runat="server" class="select2 form-control custom-select" style="width: 100%"></asp:DropDownList>                                            
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-4">
+                                    <label>Ultimo Mantenimiento</label>
+                                </div>
+                                <div class="col-7">
+                                    <asp:UpdatePanel ID="UpdatePanel59" runat="server">
+                                        <ContentTemplate>
+                                            <asp:TextBox ID="TxModalCreaUltimoMantDC" TextMode="Date" class="form-control" runat="server"></asp:TextBox>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="col-12">
+                            <div class="form-group row">
+                                <div class="col-4">
+                                    <label>Descripción</label>
+                                </div>
+                                <div class="col-12">
+                                    <asp:UpdatePanel ID="UpdatePanel55" runat="server">
+                                        <ContentTemplate>
+                                            <asp:TextBox ID="TxModalCreaDescripcionDC" TextMode="MultiLine" Rows="3" class="form-control" runat="server"></asp:TextBox>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <asp:UpdatePanel ID="UpdatePanel60" runat="server">
+                                <ContentTemplate>
+                                        <div class="form-group row" runat="server" visible="false" id="Div1">
+                                            <div class="col-3" style="margin-left:2%">
+                                                <label class="col-form-label">Estado</label>
+                                            </div>
+                                            <div class="col-8">
+                                                <asp:DropDownList runat="server" ID="DDLModalCreaEstadoDC" CssClass="form-control">
+                                                    <asp:ListItem Value="1" Text="Activo"></asp:ListItem>
+                                                    <asp:ListItem Value="0" Text="Inactivo"></asp:ListItem>
+                                                </asp:DropDownList>
+                                            </div>
+                                        </div>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </div>
+                        
+                        <div class="col-12">
+                            <asp:UpdatePanel ID="UpdatePanel61" runat="server">
+                                <ContentTemplate>
+                                    <div class="col-12" runat="server" id="DIVAlerta" visible="false" style="display: flex; background-color:tomato; justify-content:center">
+                                        <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbMensajeDC"></asp:Label>
+                                    </div>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <asp:UpdatePanel ID="UpdatePanel62" runat="server">
+                        <ContentTemplate>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <asp:Button ID="BtnCreaDC" runat="server" Text="Aceptar" class="btn btn-success" OnClick="BtnCreaDC_Click"/>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+            </div>
+        </div>
+    </div>
+
+      <%--MODAL INFO ARTICULOS DC--%>
+    <div class="modal fade" id="ModalInfoDC" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="ModalLabelInfoDC">
+                        <asp:UpdatePanel ID="UpdatePanel52" runat="server" >
+                            <ContentTemplate>
+                                <asp:Label ID="LbInfoDC" runat="server" Text=""></asp:Label>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <asp:UpdatePanel runat="server">
+                        <ContentTemplate>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label class="col-form-label"><b>Nombre:&nbsp&nbsp</b></label>
+                                    <asp:Label ID="LbNombreDC" class="col-form-label" runat="server"></asp:Label>
+                                </div>
+
+                                <div class="col-6">
+                                    <label class="col-form-label"><b>Tipo:&nbsp&nbsp</b></label>
+                                    <asp:Label ID="LbTipoDC" class="col-form-label" runat="server"></asp:Label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <label class="col-form-label"><b>Contratos:&nbsp&nbsp</b></label>
+                                    <asp:Label ID="LbContratosDC" class="col-form-label" runat="server"></asp:Label>
+                                </div>
+                                <div class="col-6">
+                                    <label class="col-form-label"><b>Categoría:&nbsp&nbsp</b></label>
+                                    <asp:Label ID="LbCategoriaDC" class="col-form-label" runat="server"></asp:Label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label class="col-form-label"><b>IP:&nbsp&nbsp&nbsp</b></label>
+                                    <asp:Label ID="LbIPDC" class="col-form-label" runat="server"></asp:Label>
+                                </div>
+                                <div class="col-6">
+                                    <label class="col-form-label"><b>Región:&nbsp&nbsp</b></label>
+                                    <asp:Label ID="LbRegionDC" class="col-form-label" runat="server"></asp:Label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label class="col-form-label"><b>Latitud:&nbsp&nbsp</b></label>
+                                    <asp:Label ID="LbLatitudDC" class="col-form-label" runat="server"></asp:Label>
+                                </div>
+                                <div class="col-6">
+                                    <label class="col-form-label"><b>Longitud:&nbsp&nbsp</b></label>
+                                    <asp:Label ID="LbLongitudDC" class="col-form-label" runat="server"></asp:Label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label class="col-form-label"><b>Ubicación:&nbsp&nbsp</b></label>
+                                    <asp:Label ID="LbUbicacionDC" class="col-form-label" runat="server"></asp:Label>
+                                </div>
+                                <div class="col-6">
+                                    <label><b>Ultimo Mantenimiento:&nbsp</b></label>
+                                    <asp:Label ID="LbMantenimientoDC" class="col-form-label" runat="server"></asp:Label>
+                                </div>
+                            </div>
+                             <div class="row">
+                                <div class="col-6">
+                                            <label><b>Estado:&nbsp&nbsp</b></label>
+                                            <asp:Label ID="LbEstadoDC" class="col-form-label" runat="server"></asp:Label>
+                                        </div>
+                                    </div>
+                            <div class="row">
+                                <div class="col-12">
+                                            <label><b>Descripción:&nbsp&nbsp</b></label>
+                                            <asp:Label ID="LbDescripcionDC" class="col-form-label" runat="server"></asp:Label>
+                                        </div>
+                                    </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+
+                       
+                        
+                </div>
+                <div class="modal-footer">
+                    <asp:UpdatePanel ID="UpdatePanel71" runat="server">
+                        <ContentTemplate>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <%--MODAL MODIFICAR ARTICULOS DC--%>
+    <div class="modal fade" id="ModalModDC" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="ModalLabelModDC">
+                        <asp:UpdatePanel ID="UpdatePanel56" runat="server" >
+                            <ContentTemplate>
+                                <asp:Label ID="LbModAlertaDC" runat="server" Text=""></asp:Label>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-3" style="margin-left:2%">
+                                    <label class="col-form-label">Nombre</label>
+                                </div>
+                                <div class="col-8">
+                                    <asp:UpdatePanel ID="UpdatePanel63" runat="server">
+                                        <ContentTemplate>
+                                            <asp:TextBox ID="TxModalModNombre" class="form-control" runat="server"></asp:TextBox>                                            
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-3">
+                                    <label class="col-form-label">Tipo</label>
+                                </div>
+                                <div class="col-8">
+                                    <asp:UpdatePanel runat="server">
+                                        <ContentTemplate>
+                                             <asp:DropDownList ID="DDLModalModTipo" Enabled="false" runat="server" class="select2 form-control custom-select" style="width: 100%"></asp:DropDownList>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-3" style="margin-left:2%">
+                                    <label class="col-form-label">Contratos</label>
+                                </div>
+                                <div class="col-8">
+                                    <asp:UpdatePanel runat="server">
+                                        <ContentTemplate>
+                                               <asp:DropDownList ID="DDLmodalModContratos" runat="server" class="select2 form-control custom-select" style="width: 100%"></asp:DropDownList>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-3">
+                                    <label class="col-form-label">Categoría</label>
+                                </div>
+                                <div class="col-8">
+                                    <asp:UpdatePanel runat="server">
+                                        <ContentTemplate>
+                                                <asp:DropDownList ID="DDLModalModCategoria" runat="server" class="select2 form-control custom-select" style="width: 100%"></asp:DropDownList>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                                
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-3" style="margin-left:2%">
+                                    <label class="col-form-label">IP</label>
+                                </div>
+                                <div class="col-8">
+                                    <asp:UpdatePanel ID="UpdatePanel64" runat="server">
+                                        <ContentTemplate>
+                                            <asp:TextBox ID="TxModalModIP" placeholder="" class="form-control" runat="server"></asp:TextBox>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-3">
+                                    <label class="col-form-label">Región</label>
+                                </div>
+                                <div class="col-8">
+                                    <asp:UpdatePanel ID="UpdatePanel65" runat="server">
+                                        <ContentTemplate>
+                                            <asp:DropDownList ID="DDLModalModRegion" runat="server" class="form-control"></asp:DropDownList>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+                                
+                                
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-3" style="margin-left:2%">
+                                    <label class="col-form-label">Latitud</label>
+                                </div>
+                                <div class="col-8">
+                                    <asp:UpdatePanel ID="UpdatePanel66" runat="server">
+                                        <ContentTemplate>
+                                            <asp:TextBox ID="TxModalModLatitud" class="form-control" runat="server"></asp:TextBox>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-3">
+                                    <label class="col-form-label">Longitud</label>
+                                </div>
+                                <div class="col-8">
+                                    <asp:UpdatePanel ID="UpdatePanel67" runat="server">
+                                        <ContentTemplate>
+                                            <asp:TextBox ID="TxModalModLongitud" class="form-control" runat="server"></asp:TextBox>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-3" style="margin-left:2%">
+                                    <label class="col-form-label">Ubicación</label>
+                                </div>
+                                <div class="col-8">
+                                    <asp:UpdatePanel runat="server">
+                                        <ContentTemplate>
+                                               <asp:DropDownList ID="DDLModalModUbicacion" runat="server" class="select2 form-control custom-select" style="width: 100%"></asp:DropDownList>                                            
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-4">
+                                    <label>Ultimo Mantenimiento</label>
+                                </div>
+                                <div class="col-7">
+                                    <asp:UpdatePanel ID="UpdatePanel68" runat="server">
+                                        <ContentTemplate>
+                                            <asp:TextBox ID="TxModalModFecha" TextMode="Date" class="form-control" runat="server"></asp:TextBox>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <asp:UpdatePanel ID="UpdatePanel72" runat="server">
+                                <ContentTemplate>
+                                        <div class="form-group row" runat="server" visible="true">
+                                            <div class="col-3" style="margin-left:2%">
+                                                <label class="col-form-label">Estado</label>
+                                            </div>
+                                            <div class="col-8">
+                                                <asp:DropDownList runat="server" ID="DDLModalModEstado" CssClass="form-control">
+                                                    <asp:ListItem Value="1" Text="Activo"></asp:ListItem>
+                                                    <asp:ListItem Value="0" Text="Inactivo"></asp:ListItem>
+                                                </asp:DropDownList>
+                                            </div>
+                                        </div>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </div>
+                         <div class="col-12">
+                            <div class="form-group row">
+                                <div class="col-4">
+                                    <label>Descripción</label>
+                                </div>
+                                <div class="col-12">
+                                    <asp:UpdatePanel ID="UpdatePanel70" runat="server">
+                                        <ContentTemplate>
+                                            <asp:TextBox ID="TxModalModDescripcion" TextMode="MultiLine" Rows="3" class="form-control" runat="server"></asp:TextBox>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="col-12">
+                            <asp:UpdatePanel ID="UpdatePanel73" runat="server">
+                                <ContentTemplate>
+                                    <div class="col-12" runat="server" id="DIVModalModAlertaDC" visible="false" style="display: flex; background-color:tomato; justify-content:center">
+                                        <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbModalModAlertaDC"></asp:Label>
+                                    </div>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <asp:UpdatePanel ID="UpdatePanel74" runat="server">
+                        <ContentTemplate>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <asp:Button ID="BtnModDC" runat="server" Text="Aceptar" class="btn btn-success" OnClick="BtnModDC_Click"/>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>

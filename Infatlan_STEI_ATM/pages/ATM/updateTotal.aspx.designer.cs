@@ -114,13 +114,13 @@ namespace Infatlan_STEI_ATM.pages.ATM
         protected global::System.Web.UI.WebControls.DropDownList DDLModeloATM;
 
         /// <summary>
-        /// Control DDLDetalleModelo.
+        /// Control txtinventarioATM.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DDLDetalleModelo;
+        protected global::System.Web.UI.WebControls.TextBox txtinventarioATM;
 
         /// <summary>
         /// Control DDLTipoCarga.
@@ -220,15 +220,6 @@ namespace Infatlan_STEI_ATM.pages.ATM
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtcapacidadDisco;
-
-        /// <summary>
-        /// Control txtinventarioATM.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtinventarioATM;
 
         /// <summary>
         /// Control txtcodUbicacion.

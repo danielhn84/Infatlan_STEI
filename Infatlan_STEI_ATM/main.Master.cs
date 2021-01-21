@@ -17,7 +17,10 @@ namespace Infatlan_STEI
             try{
                 if (!Convert.ToBoolean(Session["AUTH"]))
                     Response.Redirect("/login.aspx");
-                
+
+                DataTable vDatosP = (DataTable)Session["AUTHCLASS"];
+                string ver = Session["USUARIO"].ToString();
+
                 if (!Page.IsPostBack){
                     if (!vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Consulta)
                         Response.Redirect("/default.aspx");
@@ -73,21 +76,104 @@ namespace Infatlan_STEI
                     LitNotificaciones.Text = vString;
                     LitPointer.Text = vPointer;
                     string vUsuario = Session["USUARIO"].ToString();
-                    if (vUsuario != "eurrea" && vUsuario != "mgarcia" && vUsuario != "acedillo")
-                        LIMenuATM.Visible = false;
-                    if (vUsuario != "eurrea" && vUsuario != "mgarcia" && vUsuario != "acedillo" && vUsuario != "emontoya" && vUsuario != "jdgarcia" && vUsuario != "acalderon" && vUsuario != "mbriceno" && vUsuario != "dantunez" && vUsuario != "cmguzman")
+
+                    LIPermisos.Visible = false;
+                    LIMenuATM.Visible = false;
+                    LINotifATM.Visible = false;
+                    LIModCrear.Visible = false;
+                    LINotifATM.Visible = false;
+                    LIModAprobar.Visible = false;
+                    LIVerifATM.Visible = false;
+                    LIVerCrear.Visible = false;
+                    LIVerifATM.Visible = false;
+                    LIVerCrear.Visible = false;
+                    LIDevoluciones.Visible = false;
+                    LIVerifATM.Visible = false;
+                    LIVerAprobar.Visible = false;
+                    LIReprogramar.Visible = false;
+                    LICalendario.Visible = false;
+                    LIAvances.Visible = false;
+                    LICancelar.Visible = false;
+                    LICambiarFecha.Visible = false;
+
+                    LIAvancesCorrectivo.Visible = false;
+                    LICorrectivoNotif.Visible = false;
+                    LICorrectivoVerifCrea.Visible = false;
+                    LICorrectivoVerifAprobar.Visible = false;
+                    LICorrectivoVerifDevolver.Visible = false;
+
+
+
+
+                    DataTable vDatosMain = new DataTable();
+                    String vQueryMain = "[STEISP_ATM_Generales] 46,'" + vUsuario + "'";
+                    vDatosMain = vConexion.ObtenerTabla(vQueryMain);
+                    foreach (DataRow item in vDatosMain.Rows)
                     {
-                        LINotifATM.Visible = false;
-                        LIReprogramar.Visible = false;
-                        LICalendario.Visible = false;
+                        if (item["permisos"].ToString()=="True")
+                        {
+                            LIPermisos.Visible = true;
+                            LICancelar.Visible = true;
+                            LICambiarFecha.Visible = true;
+                        }
+                        if (item["ATM"].ToString() == "True")
+                        {
+                            LIMenuATM.Visible = true;
+                        }
+                        if (item["crearNotif"].ToString() == "True")
+                        {
+                            LINotifATM.Visible = true;
+                            LIModCrear.Visible = true;
+                            LIModAprobar.Visible = true;
+                            LICorrectivoNotif.Visible = true;
+                        }
+                        //if (item["aprobarNotif"].ToString() == "True")
+                        //{
+                        //    LINotifATM.Visible = true;
+                        //    LIModAprobar.Visible = true;
+                        //}
+                        if (item["crearVerif"].ToString() == "True")
+                        {
+                            LIVerifATM.Visible = true;
+                            LIVerCrear.Visible = true;
+                            LICorrectivoVerifCrea.Visible = true;
+                            LICorrectivoVerifDevolver.Visible = true;
+                            LIDevoluciones.Visible = true;
+                        }
+                        //if (item["crearVerif"].ToString() == "True")
+                        //{
+                        //    LIVerifATM.Visible = true;
+                        //    LIVerCrear.Visible = true;
+                        //    LIDevoluciones.Visible = true;
+                        //}
+                        if (item["aprobarVerif"].ToString() == "True")
+                        {
+                            LIVerifATM.Visible = true;
+                            LIVerAprobar.Visible = true;
+                            LICorrectivoVerifAprobar.Visible = true;
+                        }
+                        if (item["reprogramar"].ToString() == "True")
+                        {
+                            LIReprogramar.Visible = true;
+                        }
+                        if (item["calendario"].ToString() == "True")
+                        {
+                            LICalendario.Visible = true;
+                        }
+                        if (item["avance"].ToString() == "True")
+                        {
+                            LIAvances.Visible = true;
+                            LIAvancesCorrectivo.Visible = true;
+                        }
+
                     }
-                    if (vUsuario == "mbriceno" || vUsuario== "dantunez" || vUsuario== "cmguzman")
-                    {
-                        LIVerifATM.Visible = false;
-                        LIDevoluciones.Visible = false;
-                        LIReprogramar.Visible = false;
-                        LICalendario.Visible = false;
-                    }
+
+                    //if (vUsuario== "jmembreno")
+                    //{
+                    //    LINotifATM.Visible = true;
+                    //    LIVerAprobar.Visible = false;
+                    //}
+                   
                 }
             }catch (Exception ex){
                 String vError = ex.Message;

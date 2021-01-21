@@ -130,6 +130,11 @@
                                 <li runat="server" id="LIComunicaciones" visible="false">
                                     <a href="#" onclick="window.location.href = '/sites/comunicaciones/default.aspx?u=' + document.getElementById('<%= TxUser.ClientID %>').value">Comunicaciones</a>
                                 </li>
+
+                                <li runat="server" id="LIGestionesTec" visible="true">
+                                    <a href="#" onclick="window.location.href = '/sites/gestiones/default.aspx?u=' + document.getElementById('<%= TxUser.ClientID %>').value">Gestiones Técnicas</a>
+                                </li>
+                                
                             </ul>
                         </li>
                         <li runat="server" id="LiCumplimiento" visible="false"><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-pie-chart"></i><span class="hide-menu">Cumplimiento</span></a>
