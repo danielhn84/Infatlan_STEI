@@ -52,12 +52,12 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="/default.aspx" >
                         <b style="margin-left: 10px">
-                            <img src="/assets/images/logo-text.png" alt="homepage" class="dark-logo" />
-                            <img src="/assets/images/logo_mini.png" alt="homepage" class="light-logo" />
+                            <%--<img src="/assets/images/logo-text.png" alt="homepage" class="dark-logo" />
+                            <img src="/assets/images/logo_mini.png" alt="homepage" class="light-logo" />--%>
                         </b>
                         <span >
-                            <img src="/assets/images/logo-text.png" alt="homepage" class="dark-logo" />
-                            <img src="/assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
+                            <%--<img src="/assets/images/logo-blanco.png" alt="homepage" class="dark-logo" />--%>
+                            <img src="/assets/images/logo-blanco.png" width="150" class="light-logo" alt="homepage" />
                         </span>
                     </a>
                 </div>
@@ -125,7 +125,7 @@
                             </ul>
                         </li>
                         
-                        <li><a class="waves-effect waves-dark" href="pages-faq.html" aria-expanded="false"><i class="icon-bubble"></i><span class="hide-menu">FAQs</span></a></li>                  
+                        
                     </ul>
                 </nav>
             </div>
