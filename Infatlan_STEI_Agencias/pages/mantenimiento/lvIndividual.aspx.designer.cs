@@ -24,24 +24,6 @@ namespace Infatlan_STEI_Agencias.pages
         protected global::System.Web.UI.UpdateProgress UpdateProgress1;
 
         /// <summary>
-        /// Control UpTitulo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpTitulo;
-
-        /// <summary>
-        /// Control TituloPagina.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label TituloPagina;
-
-        /// <summary>
         /// Control TxFechaMant.
         /// </summary>
         /// <remarks>
@@ -240,13 +222,49 @@ namespace Infatlan_STEI_Agencias.pages
         protected global::System.Web.UI.WebControls.GridView GVTecnicosParticipantes;
 
         /// <summary>
-        /// Control lbCantMaquinas.
+        /// Control DDLTipoAgencia.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbCantMaquinas;
+        protected global::System.Web.UI.WebControls.DropDownList DDLTipoAgencia;
+
+        /// <summary>
+        /// Control TxtTelefono.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxtTelefono;
+
+        /// <summary>
+        /// Control TxLatitud.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxLatitud;
+
+        /// <summary>
+        /// Control TxLongitud.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxLongitud;
+
+        /// <summary>
+        /// Control txtDireccion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDireccion;
 
         /// <summary>
         /// Control TxCantMaquinas.
@@ -258,15 +276,6 @@ namespace Infatlan_STEI_Agencias.pages
         protected global::System.Web.UI.WebControls.TextBox TxCantMaquinas;
 
         /// <summary>
-        /// Control lbCantImpresora.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbCantImpresora;
-
-        /// <summary>
         /// Control TxCantImpresoraFinanciera.
         /// </summary>
         /// <remarks>
@@ -274,15 +283,6 @@ namespace Infatlan_STEI_Agencias.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TxCantImpresoraFinanciera;
-
-        /// <summary>
-        /// Control lbCantEscaner.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbCantEscaner;
 
         /// <summary>
         /// Control TxCantEscaner.
@@ -294,15 +294,6 @@ namespace Infatlan_STEI_Agencias.pages
         protected global::System.Web.UI.WebControls.TextBox TxCantEscaner;
 
         /// <summary>
-        /// Control lbCantDatacard.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbCantDatacard;
-
-        /// <summary>
         /// Control TxCantDatacard.
         /// </summary>
         /// <remarks>
@@ -310,60 +301,6 @@ namespace Infatlan_STEI_Agencias.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TxCantDatacard;
-
-        /// <summary>
-        /// Control UpdatePanel2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
-
-        /// <summary>
-        /// Control lbRealizoMantEquipoComu.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbRealizoMantEquipoComu;
-
-        /// <summary>
-        /// Control RBLManEquipoComu.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList RBLManEquipoComu;
-
-        /// <summary>
-        /// Control FuImageNoMantEquipoComu.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FuImageNoMantEquipoComu;
-
-        /// <summary>
-        /// Control ImgPreviewNoMantEquipoComu.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage ImgPreviewNoMantEquipoComu;
-
-        /// <summary>
-        /// Control TxMotivoNoMantEquipoComu.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxMotivoNoMantEquipoComu;
 
         /// <summary>
         /// Control UpNoProbaronEquipo.
@@ -402,31 +339,31 @@ namespace Infatlan_STEI_Agencias.pages
         protected global::System.Web.UI.WebControls.TextBox TxMotivoNoProbaronEquipo;
 
         /// <summary>
-        /// Control UpClimatizacion.
+        /// Control FuImageNoMantEquipoComu.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpClimatizacion;
+        protected global::System.Web.UI.WebControls.FileUpload FuImageNoMantEquipoComu;
 
         /// <summary>
-        /// Control lbClimatizacion.
+        /// Control TxMotivoNoMantEquipoComu.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbClimatizacion;
+        protected global::System.Web.UI.WebControls.TextBox TxMotivoNoMantEquipoComu;
 
         /// <summary>
-        /// Control RblClimatizacionAdecuada.
+        /// Control ImgPreviewNoMantEquipoComu.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList RblClimatizacionAdecuada;
+        protected global::System.Web.UI.HtmlControls.HtmlImage ImgPreviewNoMantEquipoComu;
 
         /// <summary>
         /// Control FuClimatizacion.
@@ -438,6 +375,15 @@ namespace Infatlan_STEI_Agencias.pages
         protected global::System.Web.UI.WebControls.FileUpload FuClimatizacion;
 
         /// <summary>
+        /// Control RblClimatizacionAdecuada.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList RblClimatizacionAdecuada;
+
+        /// <summary>
         /// Control ImgPreviewClimatizacion.
         /// </summary>
         /// <remarks>
@@ -445,33 +391,6 @@ namespace Infatlan_STEI_Agencias.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlImage ImgPreviewClimatizacion;
-
-        /// <summary>
-        /// Control UpUPS.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpUPS;
-
-        /// <summary>
-        /// Control lbUps.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbUps;
-
-        /// <summary>
-        /// Control RblUPS.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList RblUPS;
 
         /// <summary>
         /// Control FuUPS.
@@ -483,6 +402,15 @@ namespace Infatlan_STEI_Agencias.pages
         protected global::System.Web.UI.WebControls.FileUpload FuUPS;
 
         /// <summary>
+        /// Control RblUPS.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList RblUPS;
+
+        /// <summary>
         /// Control ImgPreviewUPS.
         /// </summary>
         /// <remarks>
@@ -490,33 +418,6 @@ namespace Infatlan_STEI_Agencias.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlImage ImgPreviewUPS;
-
-        /// <summary>
-        /// Control UpPolvoSuciedad.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpPolvoSuciedad;
-
-        /// <summary>
-        /// Control lbPolvo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbPolvo;
-
-        /// <summary>
-        /// Control RbPolvoSuciedad.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList RbPolvoSuciedad;
 
         /// <summary>
         /// Control FuPolvoSuciedad.
@@ -528,6 +429,15 @@ namespace Infatlan_STEI_Agencias.pages
         protected global::System.Web.UI.WebControls.FileUpload FuPolvoSuciedad;
 
         /// <summary>
+        /// Control RbPolvoSuciedad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList RbPolvoSuciedad;
+
+        /// <summary>
         /// Control ImgPreviewPolvoSuciedad.
         /// </summary>
         /// <remarks>
@@ -535,33 +445,6 @@ namespace Infatlan_STEI_Agencias.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlImage ImgPreviewPolvoSuciedad;
-
-        /// <summary>
-        /// Control UpHumedadSustancias.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpHumedadSustancias;
-
-        /// <summary>
-        /// Control lbHumedad.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbHumedad;
-
-        /// <summary>
-        /// Control RblHumedadSustancias.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList RblHumedadSustancias;
 
         /// <summary>
         /// Control FuHumedadSustancias.
@@ -573,6 +456,15 @@ namespace Infatlan_STEI_Agencias.pages
         protected global::System.Web.UI.WebControls.FileUpload FuHumedadSustancias;
 
         /// <summary>
+        /// Control RblHumedadSustancias.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList RblHumedadSustancias;
+
+        /// <summary>
         /// Control ImgPreviewHumedadSustancias.
         /// </summary>
         /// <remarks>
@@ -580,33 +472,6 @@ namespace Infatlan_STEI_Agencias.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlImage ImgPreviewHumedadSustancias;
-
-        /// <summary>
-        /// Control UpRoboDaño.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpRoboDaño;
-
-        /// <summary>
-        /// Control lbRobo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbRobo;
-
-        /// <summary>
-        /// Control RblRoboDaño.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList RblRoboDaño;
 
         /// <summary>
         /// Control FuRoboDaño.
@@ -618,6 +483,15 @@ namespace Infatlan_STEI_Agencias.pages
         protected global::System.Web.UI.WebControls.FileUpload FuRoboDaño;
 
         /// <summary>
+        /// Control RblRoboDaño.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList RblRoboDaño;
+
+        /// <summary>
         /// Control ImgPreviewRoboDaño.
         /// </summary>
         /// <remarks>
@@ -625,33 +499,6 @@ namespace Infatlan_STEI_Agencias.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlImage ImgPreviewRoboDaño;
-
-        /// <summary>
-        /// Control UpElementosAjenos.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpElementosAjenos;
-
-        /// <summary>
-        /// Control lbElementos.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbElementos;
-
-        /// <summary>
-        /// Control RblElementosAjenos.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList RblElementosAjenos;
 
         /// <summary>
         /// Control FuElementosAjenos.
@@ -663,6 +510,15 @@ namespace Infatlan_STEI_Agencias.pages
         protected global::System.Web.UI.WebControls.FileUpload FuElementosAjenos;
 
         /// <summary>
+        /// Control RblElementosAjenos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList RblElementosAjenos;
+
+        /// <summary>
         /// Control ImgPreviewElementosAjenos.
         /// </summary>
         /// <remarks>
@@ -670,15 +526,6 @@ namespace Infatlan_STEI_Agencias.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlImage ImgPreviewElementosAjenos;
-
-        /// <summary>
-        /// Control lbRack.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbRack;
 
         /// <summary>
         /// Control FuRack.
@@ -697,15 +544,6 @@ namespace Infatlan_STEI_Agencias.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlImage ImgPreviewRack;
-
-        /// <summary>
-        /// Control lbEntorno.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbEntorno;
 
         /// <summary>
         /// Control FuEspacioFisico.
@@ -744,6 +582,24 @@ namespace Infatlan_STEI_Agencias.pages
         protected global::System.Web.UI.UpdatePanel UpdatePanel5;
 
         /// <summary>
+        /// Control BtnDevolver.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnDevolver;
+
+        /// <summary>
+        /// Control BtnAprobar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnAprobar;
+
+        /// <summary>
         /// Control BtnEnviarLv.
         /// </summary>
         /// <remarks>
@@ -751,114 +607,6 @@ namespace Infatlan_STEI_Agencias.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnEnviarLv;
-
-        /// <summary>
-        /// Control BtnRegresarCompletarLV.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnRegresarCompletarLV;
-
-        /// <summary>
-        /// Control ocultarBotonVolver1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ocultarBotonVolver1;
-
-        /// <summary>
-        /// Control DivAprobacion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivAprobacion;
-
-        /// <summary>
-        /// Control UpdatePanel9.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel9;
-
-        /// <summary>
-        /// Control RblAprobarLV.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList RblAprobarLV;
-
-        /// <summary>
-        /// Control DivEtiqueta.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivEtiqueta;
-
-        /// <summary>
-        /// Control DivTexto.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivTexto;
-
-        /// <summary>
-        /// Control TxMotivoCancelacionLV.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxMotivoCancelacionLV;
-
-        /// <summary>
-        /// Control UpdatePanel10.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel10;
-
-        /// <summary>
-        /// Control BtnEnviarAprobacion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnEnviarAprobacion;
-
-        /// <summary>
-        /// Control BtnRegresarPendienteAprobar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnRegresarPendienteAprobar;
-
-        /// <summary>
-        /// Control ocultarBotonVolver.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ocultarBotonVolver;
 
         /// <summary>
         /// Control UpdatePanel8.
@@ -1041,60 +789,6 @@ namespace Infatlan_STEI_Agencias.pages
         protected global::System.Web.UI.WebControls.TextBox TxMotivoRegreso;
 
         /// <summary>
-        /// Control DivAprobarLV.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivAprobarLV;
-
-        /// <summary>
-        /// Control Label2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
-
-        /// <summary>
-        /// Control Label1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
-
-        /// <summary>
-        /// Control DivRegresarLV.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivRegresarLV;
-
-        /// <summary>
-        /// Control Label3.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
-
-        /// <summary>
-        /// Control Label4.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label4;
-
-        /// <summary>
         /// Control UpdatePanel4.
         /// </summary>
         /// <remarks>
@@ -1201,5 +895,86 @@ namespace Infatlan_STEI_Agencias.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnModalEnviarLv;
+
+        /// <summary>
+        /// Control UpdatePanel1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+
+        /// <summary>
+        /// Control LbTituloDevolver.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LbTituloDevolver;
+
+        /// <summary>
+        /// Control UpdatePanel2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
+
+        /// <summary>
+        /// Control TxIdMantDevolver.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxIdMantDevolver;
+
+        /// <summary>
+        /// Control TxtMotivoDevolver.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxtMotivoDevolver;
+
+        /// <summary>
+        /// Control DIVAlerta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DIVAlerta;
+
+        /// <summary>
+        /// Control TxAlerta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxAlerta;
+
+        /// <summary>
+        /// Control UpdatePanel7.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel7;
+
+        /// <summary>
+        /// Control BtnModalDevolver.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnModalDevolver;
     }
 }

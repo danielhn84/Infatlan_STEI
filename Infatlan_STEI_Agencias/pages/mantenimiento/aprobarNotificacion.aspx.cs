@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.IO;
 using System.Data;
+using System.Configuration;
 using Infatlan_STEI_Agencias.classes;
 
 
@@ -58,7 +59,278 @@ namespace Infatlan_STEI_Agencias.pages
         public void Mensaje(string vMensaje, WarningType type){
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
-        
+
+        void CorreoSuscripcion()
+        {
+            int vIDMantenimiento = Convert.ToInt32(Session["AG_CN_ID_MANTENIMIENTO"]);
+
+                string vQueryD = "[STEISP_AGENCIA_AprobarNotificacion] 9,'" + vIDMantenimiento + "'";
+                DataTable vDatosTecnicoResponsable = vConexion.obtenerDataTable(vQueryD);
+                string vQueryTecnicos = "[STEISP_AGENCIA_AprobarNotificacion] 10,'" + vIDMantenimiento + "'";
+                DataTable vDatosTecnicos = vConexion.obtenerDataTable(vQueryTecnicos);
+                string vQueryJefes = "[STEISP_AGENCIA_AprobarNotificacion] 11,'" + vIDMantenimiento + "'";
+                DataTable vDatosJefeAgencias = vConexion.obtenerDataTable(vQueryJefes);
+                string vQueryZona = "[STEISP_AGENCIA_AprobarNotificacion] 12,'" + vIDMantenimiento + "'";
+                DataTable vDatosZona = vConexion.obtenerDataTable(vQueryZona);
+
+            string vCorreosTecnicos = "";
+                string vCorreosJefes = "";
+                string vCorreosTodos = "";
+                string vCorreoResponsable = "";
+                for (int i = 0; i < vDatosTecnicoResponsable.Rows.Count; i++)
+                {
+                    vCorreoResponsable = vDatosTecnicoResponsable.Rows[i]["Correo"].ToString() + ";";
+
+                }
+                for (int i = 0; i < vDatosTecnicos.Rows.Count; i++)
+                {
+                    string vCorreo = vDatosTecnicos.Rows[i]["correo"].ToString() + ";";
+                    vCorreosTecnicos = vCorreosTecnicos + vCorreo;
+                    if (vCorreosTecnicos == ";")
+                        vCorreosTecnicos = "";
+                }
+                for (int i = 0; i < vDatosJefeAgencias.Rows.Count; i++)
+                {
+                    string vCorreo = vDatosJefeAgencias.Rows[i]["CorreoJefe"].ToString() + ";";
+                    vCorreosJefes = vCorreosJefes + vCorreo;
+                    if (vCorreosJefes == ";")
+                        vCorreosJefes = "";
+                }
+            string vZonaAgencia = "";
+            for (int i = 0; i < vDatosZona.Rows.Count; i++)
+            {
+                vZonaAgencia = vDatosZona.Rows[i]["Zona"].ToString();
+            }
+                string vCorreoEncargadoZona = "";
+                if ( vZonaAgencia== "1")
+                    vCorreoEncargadoZona = "emontoya@bancatlan.hn";
+                if (vZonaAgencia == "2")
+                    vCorreoEncargadoZona = "jdgarcia@bancatlan.hn";
+                if (vZonaAgencia == "3")
+                    vCorreoEncargadoZona = "acalderon@bancatlan.hn";
+
+                //string vDepto = "";
+                //DataTable vDatosDepto = new DataTable();
+                //String vQueryDepto = "STEISP_ATM_Generales 48,'" + txtcodATMNotif.Text + "'";
+                //vDatosDepto = vConexion.ObtenerTabla(vQueryDepto);
+                //foreach (DataRow item in vDatosDepto.Rows)
+                //{
+                //    vDepto = item["Depto"].ToString();
+                //}
+                //if (vDepto == "18")
+                //    vCorreoEncargadoZona = "acalderon@bancatlan.hn;jdgarcia@bancatlan.hn";
+
+                string vReporteViaticos = "Notificacion";
+                string vCorreoAdmin = "acedillo@bancatlan.hn";
+            //string vCorreoCopia = "acamador@bancatlan.hn"+";";
+            //string vCorreoCopia = "eurrea@bancatlan.hn;unidadatmkiosco@bancatlan.hn;" + vCorreoEncargadoZona;
+            string vCorreoCopia = "eurrea@bancatlan.hn;" + vCorreoEncargadoZona;
+            //vCorreosTodos = vCorreosTecnicos + vCorreosJefes + vCorreoAdmin;
+            vCorreosTodos = vCorreoResponsable + vCorreosTecnicos + vCorreosJefes;
+                string vAsuntoRV = "Formato de notificación";
+                string vBody = "Formato de notificación";
+
+                string vQueryRep = "STEISP_AGENCIA_AprobarNotificacion 13,'"+ vIDMantenimiento + "','" + vReporteViaticos + "','" + vCorreosTodos + "','" + vCorreoCopia + "','" + vAsuntoRV + "','" + vBody + "'";
+                vConexion.ejecutarSql(vQueryRep);
+            
+        }
+
+        void EnviarCorreo()
+        {
+            SmtpService vService = new SmtpService();
+            string vZonaAgencia = "";
+            string vIDMantenimiento = Convert.ToString(Session["AG_CN_ID_MANTENIMIENTO"]);
+            string vLugar = Session["vLugar"].ToString();
+
+            string vQueryD = "[STEISP_AGENCIA_AprobarNotificacion] 9,'" + vIDMantenimiento + "'";
+            DataTable vDatosTecnicoResponsable = vConexion.obtenerDataTable(vQueryD);
+            string vQueryTecnicos = "[STEISP_AGENCIA_AprobarNotificacion] 10,'" + vIDMantenimiento + "'";
+            DataTable vDatosTecnicos = vConexion.obtenerDataTable(vQueryTecnicos);
+            string vQueryJefes = "[STEISP_AGENCIA_AprobarNotificacion] 11,'" + vIDMantenimiento + "'";
+            DataTable vDatosJefeAgencias = vConexion.obtenerDataTable(vQueryJefes);
+            string vQueryZona = "[STEISP_AGENCIA_AprobarNotificacion] 12,'" + vIDMantenimiento + "'";
+            DataTable vDatosZona = vConexion.obtenerDataTable(vQueryZona);
+            DataTable vDatos = (DataTable)Session["AUTHCLASS"];
+
+
+            for (int i = 0; i < vDatosZona.Rows.Count; i++)
+            {
+                vZonaAgencia = vDatosZona.Rows[i]["Zona"].ToString();
+            }
+            string vCorreoEncargadoZona = "";
+            if (vZonaAgencia == "1")
+                vCorreoEncargadoZona = "emontoya@bancatlan.hn";
+            if (vZonaAgencia == "2")
+                vCorreoEncargadoZona = "jdgarcia@bancatlan.hn";
+            if (vZonaAgencia == "3")
+                vCorreoEncargadoZona = "acalderon@bancatlan.hn";
+
+            if (vDatos.Rows.Count > 0)
+            {
+                foreach (DataRow item in vDatos.Rows)
+                {
+                    //if (Session["USUARIO"].ToString() == "eurrea" || Session["USUARIO"].ToString() == "emontoya" || Session["USUARIO"].ToString() == "jdgarcia" || Session["USUARIO"].ToString() == "acalderon")
+                    //{
+                        vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIMail"],
+                            typeBody.EnvioCorreo,
+                            "Notificación de Mantenimiento Agencia",
+                            "Buen día, se le notifica que se aprobó solicitud de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["Nombre"].ToString() + ", mantenimiento a Agencia " + vLugar,
+                              "El usuario <b>" + item["Nombre"].ToString() + "</b> aprobó: <br> Notificación de Mantenimiento",
+                               vCorreoEncargadoZona,
+                               "/sites/agencias/pages/mantenimiento/aprobarNotificacion.aspx"
+                            );
+                   
+
+                }
+            }
+            if (vDatosTecnicoResponsable.Rows.Count > 0)
+            {
+                foreach (DataRow item in vDatosTecnicoResponsable.Rows)
+                {
+                    //ENVIAR A RESPONSABLE
+                    vService.EnviarMensaje(item["Correo"].ToString(),
+                        typeBody.EnvioCorreo,
+                       "Notificación de Mantenimiento Agencia",
+                        "Buen día, se le notifica que se aprobó solicitud de mantenimiento, el encargado es " + item["Nombre"].ToString() + ", mantenimiento a agencia " +vLugar,
+                          "El usuario <b>" + vDatos.Rows[0]["Nombre"].ToString() + "</b> aprobó: <br> Notificación de Mantenimiento de Agencia al que ha sido asignado como responsable.",
+                            "",
+                        "/login.spx"
+                        );
+                }
+            }
+            if (vDatosTecnicos.Rows.Count > 0)
+            {
+                foreach (DataRow itemT in vDatosTecnicos.Rows)
+                {
+                    vService.EnviarMensaje(itemT["correo"].ToString(),
+                        typeBody.EnvioCorreo,
+                        "Notificación de Mantenimiento Agencia",
+                        "Buen día, se le notifica que se aprobó solicitud de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["Nombre"].ToString() + ", mantenimiento a Agencia " + vLugar,
+                          "El usuario <b>" + vDatos.Rows[0]["Nombre"].ToString() + "</b> aprobó: <br> Notificación de Mantenimiento de Agencia al que ha sido asignado como parte del equipo de trabajo",
+                            "",
+                        "/login.aspx"
+                        );
+                }
+            }
+            if (vDatosJefeAgencias.Rows.Count > 0)
+            {
+                foreach (DataRow item in vDatosJefeAgencias.Rows)
+                {
+                    //ENVIAR A JEFES DE AGENCIA
+                    if (!item["CorreoJefe"].ToString().Trim().Equals(""))
+                    {
+                        vService.EnviarMensaje(item["CorreoJefe"].ToString(),
+                            typeBody.EnvioCorreo,
+                            "Notificación de Mantenimiento Agencia",
+                                "Buen día, se le notifica que se aprobó solicitud de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["Nombre"].ToString() + ", mantenimiento a Agencia " + vLugar,
+                                  "Se le informa que dicho mantenimiento se hará en la agencia al que usted se encuentra asignado.",
+                                   "",
+                                   ""
+                            );
+                    }
+                }
+            }
+
+        }
+
+        void EnviarCorreoCancelar()
+        {
+            SmtpService vService = new SmtpService();
+            string vZonaAgencia = "";
+            string vIDMantenimiento = Convert.ToString(Session["AG_CN_ID_MANTENIMIENTO"]);
+            string vLugar = Session["vLugar"].ToString();
+
+            string vQueryD = "[STEISP_AGENCIA_AprobarNotificacion] 9,'" + vIDMantenimiento + "'";
+            DataTable vDatosTecnicoResponsable = vConexion.obtenerDataTable(vQueryD);
+            string vQueryTecnicos = "[STEISP_AGENCIA_AprobarNotificacion] 10,'" + vIDMantenimiento + "'";
+            DataTable vDatosTecnicos = vConexion.obtenerDataTable(vQueryTecnicos);
+            string vQueryJefes = "[STEISP_AGENCIA_AprobarNotificacion] 11,'" + vIDMantenimiento + "'";
+            DataTable vDatosJefeAgencias = vConexion.obtenerDataTable(vQueryJefes);
+            string vQueryZona = "[STEISP_AGENCIA_AprobarNotificacion] 12,'" + vIDMantenimiento + "'";
+            DataTable vDatosZona = vConexion.obtenerDataTable(vQueryZona);
+            DataTable vDatos = (DataTable)Session["AUTHCLASS"];
+
+
+            for (int i = 0; i < vDatosZona.Rows.Count; i++)
+            {
+                vZonaAgencia = vDatosZona.Rows[i]["Zona"].ToString();
+            }
+            string vCorreoEncargadoZona = "";
+            if (vZonaAgencia == "1")
+                vCorreoEncargadoZona = "emontoya@bancatlan.hn";
+            if (vZonaAgencia == "2")
+                vCorreoEncargadoZona = "jdgarcia@bancatlan.hn";
+            if (vZonaAgencia == "3")
+                vCorreoEncargadoZona = "acalderon@bancatlan.hn";
+
+            if (vDatos.Rows.Count > 0)
+            {
+                foreach (DataRow item in vDatos.Rows)
+                {
+                    //if (Session["USUARIO"].ToString() == "eurrea" || Session["USUARIO"].ToString() == "emontoya" || Session["USUARIO"].ToString() == "jdgarcia" || Session["USUARIO"].ToString() == "acalderon")
+                    //{
+                        //string vNombre = "EDWIN ALBERTO URREA PENA";
+                        vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIMail"],
+                                typeBody.EnvioCorreo,
+                                "Notificación de Mantenimiento Agencia",
+                                "Buen día, se le notifica que se canceló solicitud de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["Nombre"].ToString() + ", mantenimiento a Agencia " + vLugar,
+                                  "El usuario <b>" + item["Nombre"].ToString() + "</b> canceló: <br> Notificación de Mantenimiento<br>Motivo: " + TxDetalle.Text,
+                                   vCorreoEncargadoZona,
+                                   "/sites/agencias/pages/mantenimiento/aprobarNotificacion.aspx"
+                                );
+                  
+                }
+            }
+            if (vDatosTecnicoResponsable.Rows.Count > 0)
+            {
+                foreach (DataRow item in vDatosTecnicoResponsable.Rows)
+                {
+                    //ENVIAR A RESPONSABLE
+                    vService.EnviarMensaje(item["Correo"].ToString(),
+                        typeBody.EnvioCorreo,
+                       "Notificación de Mantenimiento Agencia",
+                        "Buen día, se le notifica que se canceló solicitud de mantenimiento, el encargado es " + item["Nombre"].ToString() + ", mantenimiento a agencia " + vLugar,
+                          "El usuario <b>" + vDatos.Rows[0]["Nombre"].ToString() + "</b> canceló: <br> Notificación de Mantenimiento de Agencia al que ha sido asignado como responsable.<br>Motivo: " + TxDetalle.Text,
+                            "",
+                        "/login.spx"
+                        );
+                }
+            }
+            if (vDatosTecnicos.Rows.Count > 0)
+            {
+                foreach (DataRow itemT in vDatosTecnicos.Rows)
+                {
+                    vService.EnviarMensaje(itemT["correo"].ToString(),
+                        typeBody.EnvioCorreo,
+                        "Notificación de Mantenimiento Agencia",
+                        "Buen día, se le notifica que se canceló solicitud de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["Nombre"].ToString() + ", mantenimiento a Agencia " + vLugar,
+                          "El usuario <b>" + vDatos.Rows[0]["Nombre"].ToString() + "</b> canceló: <br> Notificación de Mantenimiento de Agencia al que ha sido asignado como parte del equipo de trabajo.<br>Motivo: " + TxDetalle.Text,
+                            "",
+                        "/login.aspx"
+                        );
+                }
+            }
+            if (vDatosJefeAgencias.Rows.Count > 0)
+            {
+                foreach (DataRow item in vDatosJefeAgencias.Rows)
+                {
+                    //ENVIAR A JEFES DE AGENCIA
+                    if (!item["CorreoJefe"].ToString().Trim().Equals(""))
+                    {
+                        vService.EnviarMensaje(item["CorreoJefe"].ToString(),
+                            typeBody.EnvioCorreo,
+                            "Notificación de Mantenimiento Agencia",
+                                "Buen día, se le notifica que se canceló solicitud de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["Nombre"].ToString() + ", mantenimiento a Agencia " + vLugar,
+                                  "Se le informa que dicho mantenimiento se canceló en la agencia al que usted se encuentra asignado.<br>Motivo: " + TxDetalle.Text,
+                                   "",
+                                   ""
+                            );
+                    }
+                }
+            }
+
+        }
+
         protected void GVBusqueda_RowCommand(object sender, GridViewCommandEventArgs e){
             if (e.CommandName == "Aprobar"){
                 limpiarModalAprobarNotificacion();
@@ -72,6 +344,7 @@ namespace Infatlan_STEI_Agencias.pages
                 {
                     string vIdMantenimientoSelect = item["id_Mantenimiento"].ToString();
                     string vLugar = item["Lugar"].ToString();
+                    Session["vLugar"] = item["Lugar"].ToString();
                     string vFecha = item["fecha"].ToString();
                     string vResponsable = item["Responsable"].ToString();
                     string vArea = item["Area"].ToString();
@@ -107,7 +380,7 @@ namespace Infatlan_STEI_Agencias.pages
                 String vQuery = "STEISP_AGENCIA_AprobarNotificacion 3," + vIdMantenimiento;
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
                 string vLugar = vDatos.Rows[0]["Lugar"].ToString();
-
+                Session["vLugar"] = vDatos.Rows[0]["Lugar"].ToString();
                 lbTituloCancelar.Text = "Cancelar Notificación " + vLugar;
                 UpdatePanel6.Update();
 
@@ -122,6 +395,8 @@ namespace Infatlan_STEI_Agencias.pages
                 Int32 vInfo = vConexion.ejecutarSql(vQuery);
 
                 if (vInfo == 1){
+                    CorreoSuscripcion();
+                    EnviarCorreo();
                     Mensaje("Notificación aprobada con exito. ", WarningType.Success);
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
                 }
@@ -204,10 +479,10 @@ namespace Infatlan_STEI_Agencias.pages
         private void validaciones()
         {           
             if (DDLMotivo.SelectedValue.Equals("0"))
-                throw new Exception("Falta completar datos, Favor seleccionar un motivo de cancelación del mantenimiento. ");
+                throw new Exception("Favor seleccionar motivo de cancelación del mantenimiento. ");
             
             if (TxDetalle.Text.Equals(""))
-                throw new Exception("Falta completar datos, Favor ingrese detalle de la cancelación del mantenimiento. ");
+                throw new Exception("Favor ingrese detalle de la cancelación del mantenimiento. ");
           
         }
         
@@ -216,11 +491,12 @@ namespace Infatlan_STEI_Agencias.pages
             try
             {
                 validaciones();
-                String vQuery = "STEISP_AGENCIA_AprobarNotificacion  4," + Session["AG_CN_ID_MANTENIMIENTO"] +"," +Session["USUARIO"]+ "," + "'"+  DDLMotivo.SelectedItem.Text+ "'"+ "," + "'"+ TxDetalle.Text + "'";
+                EnviarCorreoCancelar();
+                String vQuery = "STEISP_AGENCIA_AprobarNotificacion  4," + Session["AG_CN_ID_MANTENIMIENTO"] + "," + Session["USUARIO"] + "," + "'" + DDLMotivo.SelectedItem.Text + "'" + "," + "'" + TxDetalle.Text + "'";
                 Int32 vInfo = vConexion.ejecutarSql(vQuery);
 
-                String vQuery1 = "STEISP_AGENCIA_AprobarNotificacion  6," + Session["AG_CN_ID_MANTENIMIENTO"] ;
-                Int32 vInfo1 = vConexion.ejecutarSql(vQuery1);
+                //String vQuery1 = "STEISP_AGENCIA_AprobarNotificacion  6," + Session["AG_CN_ID_MANTENIMIENTO"] ;
+                //Int32 vInfo1 = vConexion.ejecutarSql(vQuery1);
 
                 if (vInfo == 1)
                 {
