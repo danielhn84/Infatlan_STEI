@@ -319,6 +319,14 @@ namespace Infatlan_STEI_Inventario.pages
                 GVBusqueda.PageIndex = e.NewPageIndex;
                 GVBusqueda.DataSource = (DataTable)Session["INV_STOCK"];
                 GVBusqueda.DataBind();
+                if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 1).Edicion){
+                    foreach (GridViewRow item in GVBusqueda.Rows){
+                        LinkButton LbEdit = item.FindControl("BtnEdit") as LinkButton;
+                        LinkButton LbAdd = item.FindControl("BtnEditar2") as LinkButton;
+                        LbEdit.Visible = true;
+                        LbAdd.Visible = true;
+                    }
+                }
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);
             }
@@ -1200,6 +1208,18 @@ namespace Infatlan_STEI_Inventario.pages
             try{
                 String vIdEnlace = Session["INV_ENLACE_ADJUNTO"].ToString();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "window.open('" + vIdEnlace + "');", true);
+            }catch (Exception ex){
+                Mensaje(ex.Message, WarningType.Danger);
+            }
+        }
+
+        protected void BtnCargaSAP_Click(object sender, EventArgs e){
+            try{
+                String vFechaInicio = "2017-01-01", vFechaFin = "2021-01-01";
+                SapConnector vSap = new SapConnector();
+                String vResultado = vSap.getInformacion(vFechaInicio, vFechaFin);
+                Mensaje(vResultado, WarningType.Success);
+                cargarDatos();
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);
             }

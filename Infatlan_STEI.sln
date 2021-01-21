@@ -30,6 +30,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infatlan_STEI_Comunicacion"
 		{EEA3C292-C647-4F46-9F29-35A0C6B437EF} = {EEA3C292-C647-4F46-9F29-35A0C6B437EF}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aoaisdpo", "aoaisdpo\aoaisdpo.csproj", "{49D772AA-70B7-44AA-9D0C-435F9D79C1B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infatlan_STEI_Service", "Infatlan_STEI_Service\Infatlan_STEI_Service.csproj", "{B049FEF5-DA3B-4151-91D0-5D1F311F896C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,6 +64,14 @@ Global
 		{B866F35A-DDED-4463-83A5-A3A362BCA9B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B866F35A-DDED-4463-83A5-A3A362BCA9B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B866F35A-DDED-4463-83A5-A3A362BCA9B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49D772AA-70B7-44AA-9D0C-435F9D79C1B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49D772AA-70B7-44AA-9D0C-435F9D79C1B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49D772AA-70B7-44AA-9D0C-435F9D79C1B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49D772AA-70B7-44AA-9D0C-435F9D79C1B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B049FEF5-DA3B-4151-91D0-5D1F311F896C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B049FEF5-DA3B-4151-91D0-5D1F311F896C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B049FEF5-DA3B-4151-91D0-5D1F311F896C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B049FEF5-DA3B-4151-91D0-5D1F311F896C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

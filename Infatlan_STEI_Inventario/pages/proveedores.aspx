@@ -111,66 +111,55 @@
                 <div class="modal-body">
                     <asp:UpdatePanel ID="UpdatePanelModal" runat="server">
                         <ContentTemplate>
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="form-group row">
-                                        <div class="col-2" style="margin-left:2%">
-                                            <label class="col-form-label">Nombre</label>
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <asp:TextBox ID="TxNombre" class="form-control text-uppercase" runat="server"></asp:TextBox>                                            
-                                        </div>
+                            <div class="row col-12">
+                                <div class="row col-6">
+                                    <label class="col-4 col-form-label">Nombre</label>
+                                    <div class="col-8">
+                                        <asp:TextBox ID="TxNombre" class="form-control text-uppercase" runat="server"></asp:TextBox>
                                     </div>
                                 </div>
-                                <div class="col-6">
-                                    <div class="form-group row">
-                                        <div class="col-3" >
-                                            <label class="col-form-label">Responsable</label>
-                                        </div>
-                                        <div class="col-8">
-                                            <asp:TextBox ID="TxResponsable" class="form-control" runat="server"></asp:TextBox>                                            
-                                        </div>
+                                <div class="row col-6">
+                                    <label class="col-4 col-form-label">Código SAP</label>
+                                    <div class="col-8">
+                                        <asp:TextBox ID="TxCodigoSAP" class="form-control text-uppercase" runat="server"></asp:TextBox>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row col-12 mt-3">
+                                <div class="row col-6">
+                                    <label class="col-4 col-form-label">Responsable</label>
+                                    <div class="col-8">
+                                        <asp:TextBox ID="TxResponsable" class="form-control" runat="server"></asp:TextBox>                                            
+                                    </div>
+                                </div>
+                                <div class="row col-6">
+                                    <label class="col-4 col-form-label">Teléfono</label>
+                                    <div class="col-8">
+                                        <asp:TextBox ID="TxTelefono" class="form-control" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row col-12 mt-3">
+                                <div class="row col-6">
+                                    <label class="col-4 col-form-label">Dirección</label>
+                                    <div class="col-8">
+                                        <asp:TextBox ID="TxDireccion" TextMode="MultiLine" class="form-control" runat="server"></asp:TextBox>                                                                                        
+                                    </div>
+                                </div>
+                                <div class="row col-6" runat="server" visible="false" id="DivEstado">
+                                    <label class="col-4 col-form-label">Estado</label>
+                                    <div class="col-8">
+                                        <asp:DropDownList runat="server" ID="DDLEstado" CssClass="form-control">
+                                            <asp:ListItem Value="1" Text="Activo"></asp:ListItem>
+                                            <asp:ListItem Value="0" Text="Inactivo"></asp:ListItem>
+                                        </asp:DropDownList>
+                                    </div>
+                                </div>
+                            </div>
 
-                                <div class="col-6">
-                                    <div class="form-group row">
-                                        <div class="col-2" style="margin-left:2%">
-                                            <label class="col-form-label">Teléfono</label>
-                                        </div>
-                                        <div class="col-9">
-                                            <asp:TextBox ID="TxTelefono" class="form-control" runat="server"></asp:TextBox>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group row">
-                                        <div class="col-3">
-                                            <label class="col-form-label">Direccion</label>
-                                        </div>
-                                        <div class="col-8">
-                                            <asp:TextBox ID="TxDireccion" TextMode="MultiLine" class="form-control" runat="server"></asp:TextBox>                                                                                        
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="col-6" style="margin-top:-3%;" runat="server" visible="false" id="DivEstado">
-                                    <div class="form-group row">
-                                        <div class="col-2" style="margin-left:2%">
-                                            <label class="col-form-label">Estado</label>
-                                        </div>
-                                        <div class="col-9">
-                                            <asp:DropDownList runat="server" ID="DDLEstado" CssClass="form-control">
-                                                <asp:ListItem Value="1" Text="Activo"></asp:ListItem>
-                                                <asp:ListItem Value="0" Text="Inactivo"></asp:ListItem>
-                                            </asp:DropDownList>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-12" runat="server" id="DivMensaje" visible="false" style="display: flex; background-color:tomato; justify-content:center">
-                                    <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbAdvertencia"></asp:Label>
-                                </div>
+                            <div class="col-12" runat="server" id="DivMensaje" visible="false" style="display: flex; background-color:tomato; justify-content:center">
+                                <asp:Label runat="server" CssClass="col-form-label text-white" ID="LbAdvertencia"></asp:Label>
                             </div>
                         </ContentTemplate>
                     </asp:UpdatePanel>

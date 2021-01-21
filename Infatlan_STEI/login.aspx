@@ -74,11 +74,11 @@
             </div>
         </div>
     </div>--%>
-    <section id="wrapper" class="login-register login-sidebar" style="background-image:url(../assets/images/opacity.png);">
-        <div class="login-box card">
+    <section id="wrapper" class="login-register ">
+        <div class="login-box card" style="border-radius: 20px">
             <div class="card-body">
                 <form class="form-horizontal form-material m-t-40 text-center" id="loginform" runat="server">
-                    <a class="db"><img src="../assets/images/logo.png" alt="Home" /></a>
+                    <a class="db"><img src="../assets/images/logo-rojo.png" width="150" alt="Home" /></a>
                     <h3 class="m-t-20"><b>Bienvenidos | STEI</b></h3>
                     <h6 class="font-weight-light">Ingrese sus credenciales.</h6>
                     <br />
@@ -96,7 +96,7 @@
                         <br />
 
                         <div class="form-group text-center">
-                                <asp:Button ID="BtnLogin" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" runat="server" Text="Entrar" OnClick="BtnLogin_Click" />                              
+                                <asp:Button ID="BtnLogin" class="btn btn-block btn-info btn-lg font-weight-medium auth-form-btn" runat="server" Text="Entrar" OnClick="BtnLogin_Click" />                              
                         </div>
 
                     <asp:HiddenField ID="HiddenField1" runat="server" />

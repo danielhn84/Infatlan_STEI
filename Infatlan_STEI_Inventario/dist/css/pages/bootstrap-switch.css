@@ -25,8 +25,8 @@ Bootstrap Switch
   border-radius: 2px; }
 
 .bootstrap-switch .bootstrap-switch-handle-on {
-  border-bottom-left-radius: 2px;
-  border-top-left-radius: 2px; }
+  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0px; }
 
 .bootstrap-switch .bootstrap-switch-handle-off {
   border-bottom-right-radius: 2px;
