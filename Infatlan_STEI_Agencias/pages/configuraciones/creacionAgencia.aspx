@@ -43,12 +43,88 @@
             <p>Información general de cada agencia</p>
 
             <ul class="nav nav-tabs" role="tablist">
-                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#home" role="tab"><span class="hidden-sm-up"><i class="fa fa-save"></i></span><span class="hidden-xs-down"> Guardar</span></a> </li>
-                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="icon-pencil"></i></span><span class="hidden-xs-down"> Modificar</span></a> </li>
+                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#home" role="tab"><span class="hidden-sm-up"><i class="fa fa-save"></i></span><span class="hidden-xs-down"> Modificar</span></a> </li>
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="icon-pencil"></i></span><span class="hidden-xs-down"> Crear</span></a> </li>
             </ul>
             <div class="tab-content tabcontent-border">
-                <!--PRIMER CONTENIDO-->
+                <!--SEGUNDO CONTENIDO-->
                 <div class="tab-pane active p-20" id="home" role="tabpanel">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <asp:UpdatePanel ID="UpdatePanel5" runat="server" UpdateMode="Conditional">
+                                    <ContentTemplate>
+                                        <div class="row col-12">
+                                            <div class="col-6">
+                                               <%-- <div class="row p-t-20">
+                                                    <div class="col-md-1">
+                                                        <label class="control-label">Buscar:</label></label>                                      
+                                                    </div>
+                                                    <div class="col-md-6">--%>
+                                                        <asp:TextBox ID="TxBuscarAgencia" runat="server" placeholder="Búsqueda por agencia o codigo, luego presione Enter..." class="form-control" AutoPostBack="true" OnTextChanged="TxBuscarAgencia_TextChanged"></asp:TextBox>
+                                                  <%--  </div>
+                                                </div>--%>
+                                            </div>
+                                            <div class="col-3">
+                                                <asp:DropDownList runat="server" AutoPostBack="true" ID="DDLFiltroEstado" CssClass="form-control col-12">
+                                                    <asp:ListItem Value="2" Text="Todos" />
+                                                    <asp:ListItem Value="1" Text="Activo" />
+                                                    <asp:ListItem Value="0" Text="Inactivo" />
+                                                </asp:DropDownList>
+                                            </div>
+                                            <div class="col-3">
+                                                <asp:LinkButton runat="server" ID="btnReporte" OnClick="btnReporte_Click" Style="background-color: green; color: white;" ToolTip="Descargar reporte excel" CssClass="btn btn-seccess ti-files"></asp:LinkButton>
+                                            </div>
+                                        </div>
+                                        <div class="row col-12">
+                                            <div class="col-12 grid-margin stretch-card">
+                                                <div class="table-table-responsive m-t-20">
+                                                    <asp:UpdatePanel runat="server" ID="UPAgencias" UpdateMode="Conditional">
+                                                        <ContentTemplate>
+                                                            <asp:GridView ID="GVAgencias" runat="server"
+                                                                CssClass="table table-bordered"
+                                                                PagerStyle-CssClass="pgr"
+                                                                HeaderStyle-CssClass="table" HeaderStyle-HorizontalAlign="center"
+                                                                RowStyle-CssClass="rows"
+                                                                AutoGenerateColumns="false"
+                                                                AllowPaging="true"
+                                                                GridLines="None"
+                                                                PageSize="10" OnPageIndexChanging="GVAgencias_PageIndexChanging" OnRowCommand="GVAgencias_RowCommand">
+                                                                <Columns>
+                                                                    <asp:TemplateField HeaderText="Acción" ItemStyle-HorizontalAlign="center">
+                                                                        <ItemTemplate>
+                                                                            <asp:LinkButton ID="LbModificar" class="btn btn-info mr-2" runat="server" Title="Modificar" CommandName="Modifcar" CommandArgument='<%# Eval("idAgencia") %>'>
+                                                       <i class="icon-pencil" ></i>
+                                                                            </asp:LinkButton>
+                                                                        </ItemTemplate>
+                                                                        <ItemStyle Width="10%" />
+                                                                    </asp:TemplateField>
+                                                                    <asp:BoundField DataField="idAgencia" HeaderText="Id" Visible="false" ControlStyle-Width="10%" />
+                                                                    <asp:BoundField DataField="Agencia" HeaderText="Agencia" ControlStyle-Width="50%" />
+                                                                    <asp:BoundField DataField="codigoAgencia" HeaderText="Codigo" Visible="false" ControlStyle-Width="30%" />
+                                                                    <asp:BoundField DataField="direccion" HeaderText="Direccion" Visible="false" ControlStyle-Width="30%" />
+                                                                    <asp:BoundField DataField="telefono" HeaderText="Telefono" Visible="false" ControlStyle-Width="30%" />
+                                                                    <asp:BoundField DataField="TipoAgencia" HeaderText="Tipo" ControlStyle-Width="30%" />
+                                                                    <asp:BoundField DataField="departamento" HeaderText="Departamento" Visible="false" ControlStyle-Width="30%" />
+                                                                    <asp:BoundField DataField="estado" HeaderText="Estado" ControlStyle-Width="30%" />
+                                                                </Columns>
+                                                            </asp:GridView>
+                                                        </ContentTemplate>
+                                                    </asp:UpdatePanel>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!--/SEGUNDO CONTENIDO-->
+                <!--PRIMER CONTENIDO-->
+                <div class="tab-pane p-20" id="profile" role="tabpanel">
                     <asp:UpdatePanel runat="server" ID="UPprimercontenido">
                         <ContentTemplate>
                             <!--Inicio Fila 1-->
@@ -141,71 +217,7 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
-                <!--/PRIMER CONTENIDO-->
-
-                <!--SEGUNDO CONTENIDO-->
-                <div class="tab-pane  p-20" id="profile" role="tabpanel">
-                    <div class="col-md-12">
-                        <div class="form-group row">
-                            <div class="col-sm-12">
-                                <asp:UpdatePanel ID="UpdatePanel5" runat="server" UpdateMode="Conditional">
-                                    <ContentTemplate>
-                                        <div class="row p-t-20">
-                                            <div class="col-md-1">
-                                                <label class="control-label">Buscar:</label></label>                                      
-                                            </div>
-                                            <div class="col-md-6">
-                                                <asp:TextBox ID="TxBuscarAgencia" runat="server" placeholder="Búsqueda por agencia o codigo, luego presione Enter..." class="form-control" AutoPostBack="true" OnTextChanged="TxBuscarAgencia_TextChanged"></asp:TextBox>
-                                            </div>
-                                        </div>
-
-                                        <div class="row col-12">
-                                            <div class="col-12 grid-margin stretch-card">
-                                                <div class="table-table-responsive m-t-20">
-                                                    <asp:UpdatePanel runat="server" ID="UPAgencias" UpdateMode="Conditional">
-                                                        <ContentTemplate>
-                                                            <asp:GridView ID="GVAgencias" runat="server"
-                                                                CssClass="table table-bordered"
-                                                                PagerStyle-CssClass="pgr"
-                                                                HeaderStyle-CssClass="table" HeaderStyle-HorizontalAlign="center"
-                                                                RowStyle-CssClass="rows"
-                                                                AutoGenerateColumns="false"
-                                                                AllowPaging="true"
-                                                                GridLines="None"
-                                                                PageSize="10" OnPageIndexChanging="GVAgencias_PageIndexChanging" OnRowCommand="GVAgencias_RowCommand">
-                                                                <Columns>
-                                                                    <asp:TemplateField HeaderText="Acción" ItemStyle-HorizontalAlign="center">
-                                                                        <ItemTemplate>
-                                                                            <asp:LinkButton ID="LbModificar" class="btn btn-info mr-2" runat="server" Title="Modificar" CommandName="Modifcar" CommandArgument='<%# Eval("idAgencia") %>'>
-                                                       <i class="icon-pencil" ></i>
-                                                                            </asp:LinkButton>
-                                                                        </ItemTemplate>
-                                                                        <ItemStyle Width="10%" />
-                                                                    </asp:TemplateField>
-                                                                    <asp:BoundField DataField="idAgencia" HeaderText="Id" ControlStyle-Width="10%" />
-                                                                    <asp:BoundField DataField="nombre" HeaderText="Agencia" ControlStyle-Width="50%" />
-                                                                    <asp:BoundField DataField="codigoAgencia" HeaderText="Codigo" ControlStyle-Width="30%" />
-                                                                    <asp:BoundField DataField="direccion" HeaderText="Direccion" ControlStyle-Width="30%" />
-                                                                    <asp:BoundField DataField="telefono" HeaderText="Telefono" ControlStyle-Width="30%" />
-                                                                    <asp:BoundField DataField="TipoAgencia" HeaderText="Tipo" ControlStyle-Width="30%" />
-                                                                    <asp:BoundField DataField="departamento" HeaderText="Departamento" ControlStyle-Width="30%" />
-                                                                    <asp:BoundField DataField="estado" HeaderText="Estado" ControlStyle-Width="30%" />
-                                                                </Columns>
-                                                            </asp:GridView>
-                                                        </ContentTemplate>
-                                                    </asp:UpdatePanel>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <!--/SEGUNDO CONTENIDO-->
+                <!--/PRIMER CONTENIDO-->                
             </div>
         </div>
     </div>
@@ -217,8 +229,8 @@
                 <div class="modal-header">
                     <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
-                            <h3 class="modal-title">
-                                <asp:Label ID="TituloModalCrearAgencia" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label></h3>
+                            <h4 class="modal-title">
+                                <asp:Label ID="TituloModalCrearAgencia" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label></h4>
                         </ContentTemplate>
                     </asp:UpdatePanel>
 
@@ -342,8 +354,8 @@
                                     </div>
                                     <div class="col-md-4">
                                         <asp:DropDownList ID="DDLEstado" runat="server" AutoPostBack="true" CssClass="form-control">
-                                            <asp:ListItem Value="0" Text="Inactivo"></asp:ListItem>
                                             <asp:ListItem Value="1" Text="Activo"></asp:ListItem>
+                                            <asp:ListItem Value="0" Text="Inactivo"></asp:ListItem>
 
                                         </asp:DropDownList>
                                     </div>

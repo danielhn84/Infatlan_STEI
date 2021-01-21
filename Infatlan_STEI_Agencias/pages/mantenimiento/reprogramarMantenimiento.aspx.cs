@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.IO;
 using System.Data;
+using System.Configuration;
 using Infatlan_STEI_Agencias.classes;
 namespace Infatlan_STEI_Agencias.pages
 {
@@ -47,7 +48,87 @@ namespace Infatlan_STEI_Agencias.pages
         private void validaciones()
         {         
             if (TxNuevaFecha.Text.Equals(""))
-                throw new Exception("Falta completar datos,  Favor ingresar la nueva fecha de reprogramación del mantenimiento preventivo. ");
+                throw new Exception("Favor ingresar la nueva fecha del  mantenimiento preventivo de agencias.");
+        }
+
+        void EnviarCorreo()
+        {
+            SmtpService vService = new SmtpService();
+            string vZonaAgencia = "";
+            string vIDMantenimiento = Convert.ToString(Session["AG_RM_ID_MANTENIMIENTO"]);
+            //string vLugar = Session["vLugar"].ToString();
+
+            //string vQueryD = "[STEISP_AGENCIA_AprobarNotificacion] 9,'" + vIDMantenimiento + "'";
+            //DataTable vDatosTecnicoResponsable = vConexion.obtenerDataTable(vQueryD);
+            //string vQueryTecnicos = "[STEISP_AGENCIA_AprobarNotificacion] 10,'" + vIDMantenimiento + "'";
+            //DataTable vDatosTecnicos = vConexion.obtenerDataTable(vQueryTecnicos);
+            //string vQueryJefes = "[STEISP_AGENCIA_AprobarNotificacion] 11,'" + vIDMantenimiento + "'";
+            //DataTable vDatosJefeAgencias = vConexion.obtenerDataTable(vQueryJefes);
+            string vQueryZona = "[STEISP_AGENCIA_AprobarNotificacion] 12,'" + vIDMantenimiento + "'";
+            DataTable vDatosZona = vConexion.obtenerDataTable(vQueryZona);
+            DataTable vDatos = (DataTable)Session["AUTHCLASS"];
+
+
+            for (int i = 0; i < vDatosZona.Rows.Count; i++)
+            {
+                vZonaAgencia = vDatosZona.Rows[i]["Zona"].ToString();
+            }
+            string vCorreoEncargadoZona = "";
+            if (vZonaAgencia == "1")
+                vCorreoEncargadoZona = "emontoya@bancatlan.hn";
+            if (vZonaAgencia == "2")
+                vCorreoEncargadoZona = "jdgarcia@bancatlan.hn";
+            if (vZonaAgencia == "3")
+                vCorreoEncargadoZona = "acalderon@bancatlan.hn";
+
+            if (vDatos.Rows.Count > 0)
+            {
+                foreach (DataRow item in vDatos.Rows)
+                {
+                    if (Session["USUARIO"].ToString() == "eurrea" || Session["USUARIO"].ToString() == "emontoya" || Session["USUARIO"].ToString() == "jdgarcia" || Session["USUARIO"].ToString() == "acalderon")
+                    {
+                        vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIMail"],
+                            typeBody.EnvioCorreo,
+                            "Notificación de Mantenimiento Agencia",
+                            "Buen día, se le notifica que se reprogramó solicitud de mantenimiento  a Agencia " + TxLugar.Text + " para la fecha " + TxNuevaFecha.Text,
+                              "El usuario <b>" + item["Nombre"].ToString() + "</b> reprogramó: <br> Notificación de Mantenimiento",
+                               vCorreoEncargadoZona,
+                               "/sites/agencias/pages/mantenimiento/creacionNotificacion.aspx"
+                            );
+                    }
+                    else
+                    {
+                        //ENVIAR A JEFE
+                        if (!item["correo"].ToString().Trim().Equals(""))
+                        {
+                            vService.EnviarMensaje(item["correo"].ToString(),
+                            typeBody.EnvioCorreo,
+                             "Notificación de Mantenimiento Agencia",
+                            "Buen día, se le notifica que se reprogramó solicitud de mantenimiento  a Agencia " + TxLugar.Text + " para la fecha " + TxNuevaFecha.Text,
+                              "El usuario <b>" + item["Nombre"].ToString() + "</b> reprogramó: <br> Notificación de Mantenimiento",
+                            "",
+                            "/sites/agencias/pages/mantenimiento/creacionNotificacion.aspx"
+                            );
+
+                            //vFlagEnvioSupervisor = true;
+                        }
+                        //ENVIAR A EDWIN
+                        //string vNombre = "EDWIN ALBERTO URREA PENA";
+                        vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIMail"],
+                                typeBody.EnvioCorreo,
+                                 "Notificación de Mantenimiento Agencia",
+                            "Buen día, se le notifica que se reprogramó solicitud de mantenimiento  a Agencia " + TxLugar.Text + " para la fecha " + TxNuevaFecha.Text,
+                              "El usuario <b>" + item["Nombre"].ToString() + "</b> reprogramó: <br> Notificación de Mantenimiento",
+                                   vCorreoEncargadoZona,
+                                   "/sites/agencias/pages/mantenimiento/creacionNotificacion.aspx"
+                                );
+
+                    }
+
+                }
+            }
+            
+
         }
 
         protected void GvMantPendientesReprogramar_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -93,17 +174,23 @@ namespace Infatlan_STEI_Agencias.pages
             try
             {
                 validaciones();
+                int vIDMantenimiento = Convert.ToInt32(Session["AG_RM_ID_MANTENIMIENTO"]);
                 string vNuevaFecha = TxNuevaFecha.Text;
                 String vFormato = "yyyy/MM/dd";
-                String vFechaMant = Convert.ToDateTime(TxNuevaFecha.Text).ToString(vFormato); 
+                String vFechaMant = Convert.ToDateTime(TxNuevaFecha.Text).ToString(vFormato);
 
+                EnviarCorreo();
                 String vQuery = "STEISP_AGENCIA_ReprogramarMantenimiento  3," + Session["AG_RM_ID_MANTENIMIENTO"] + ",'" + Session["USUARIO"] + "','" + vFechaMant+"'";
                 Int32 vInfo = vConexion.ejecutarSql(vQuery);
-
                 if (vInfo == 1)
                 {
-                    Mensaje("Mantenimiento reprogramado con exito.", WarningType.Success);
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModalReprogramarMantenimiento();", true);
+                    String vQuery2 = "STEISP_AGENCIA_ReprogramarMantenimiento  4," + Session["AG_RM_ID_MANTENIMIENTO"] + "";
+                    Int32 vInfo2 = vConexion.ejecutarSql(vQuery2);
+                    if (vInfo > 0)
+                    {
+                        Mensaje("Mantenimiento reprogramado con exito.", WarningType.Success);
+                        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModalReprogramarMantenimiento();", true);
+                    }      
                 }
                 LimpiarModalReprogramarMantenimiento();
                 cargarDatos();

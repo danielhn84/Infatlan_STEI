@@ -16,12 +16,15 @@
             window.setTimeout("updateProgress.set_visible(true)", updateProgress.get_displayAfter());
             return true;
         }
-
+        modalDevolverLv
         function openModalEnvioLv() { $('#modalEnviarLv').modal('show'); }
         function closeModalEnvioLv() { $('#modalEnviarLv').modal('hide'); }
 
         function openModalAprobacionLv() { $('#modalAprobarLv').modal('show'); }
         function closeModalAprobacionLv() { $('#modalAprobarLv').modal('hide'); }
+
+        function openModalDevolverLv() { $('#modalDevolverLv').modal('show'); }
+        function closeModalDevolverLv() { $('#modalDevolverLv').modal('hide'); }
 
 
        
@@ -214,14 +217,10 @@
     <%--(INICIO) Targeta Datos Generales --%>
     <div class="card">
         <div class="card-body">
-            <asp:UpdatePanel ID="UpTitulo" runat="server" UpdateMode="Conditional">
-                <ContentTemplate>
-                    <h2 class="text-themecolor">
-                        <asp:Label ID="TituloPagina" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label>
-                    </h2>
-                </ContentTemplate>
-            </asp:UpdatePanel>
-            <h6 class="card-title">Datos Generales</h6>
+             <h4 class="card-title">Lista de verificación</h4>
+            <h6 class="card-subtitle">Ingresar datos de mantenimiento de Agencias</h6><br />
+             <h5 class="card-subtitle m-t-10"><i class="fa fa-book"></i><b> DATOS GENERALES</b></h5>
+                    <hr />
 
             <div class="row p-t-20">
                 <div class="col-md-6">
@@ -296,12 +295,14 @@
     <%--(INICIO) Targeta Personal Encargado --%>
     <div class="card">
         <div class="card-body">        
-          <h3 class="card-title">Personal Encargado</h3>
-           <br>
-            <h5 class="card-title">-Técnico Responsable</h5>
+          <h5 class="card-subtitle m-t-30"><i class="fa fa-user"></i><b> PERSONAL ENCARGADO DE MANTENIMIENTO</b></h5>
+           <hr />
+              <div class="col-md-12">
+           
+                  </div>
             <div class="row p-t-20">
                 <div class="col-md-6">
-                    <label class="control-label">Nombre:</label>
+                    <label class="control-label">Técnico Responsable:</label>
                     <asp:TextBox ID="TxNombreTecnicoResponsable" class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                 </div>
                 <div class="col-md-6">
@@ -311,9 +312,8 @@
             </div>
             <br>
             <br>
-
+            <label class="control-label">Técnicos Participantes:</label>
             <div class="col-md-12" id="DivTecnicosParticipantes" runat="server" visible="false">
-                <h5 class="card-title">-Técnicos Participantes </h5>
             </div>
             <div class="col-md-6" style="margin-left: auto; margin-right: auto" id="DivAlertaTecnicosParticipantes" runat="server" visible="false">
                 <div class="alert alert-info   align-content-md-center" style="align-self: auto">
@@ -326,6 +326,7 @@
             <div class="row col-12">
                 <div class="col-12 grid-margin stretch-card">
                     <div class="table-responsive">
+
                         <asp:UpdatePanel runat="server" ID="UPTecnicosParticipantes" UpdateMode="Conditional">
                             <ContentTemplate>
                                 <asp:GridView ID="GVTecnicosParticipantes" runat="server"
@@ -356,11 +357,62 @@
     <%--(INICIO) Targeta Datos Tecnicos --%>
     <div class="card">
         <div class="card-body">
-            <h3 class="card-title">Datos Técnicos</h3>
+           <h5 class="card-subtitle m-t-20"><i class="fa fa-check-square"></i><b> DATOS TÉCNICOS</b></h5><hr />
+            <asp:UpdatePanel runat="server">
+                <ContentTemplate>
+               
+             <div class="row p-t-20">
+                <div class="col-md-2">
+                    <label class="control-label">Tipo de Agencia:</label>
+                </div>
+
+                <div class="col-md-4">
+                   <asp:DropDownList ID="DDLTipoAgencia" runat="server" AutoPostBack="true" CssClass="form-control"></asp:DropDownList>
+                </div>
+
+                <div class="col-md-2">
+                   <label class="control-label">Teléfono:</label>
+                </div>
+
+                <div class="col-md-4">
+                    <asp:TextBox ID="TxtTelefono" class="form-control" runat="server"></asp:TextBox>
+                </div>
+            </div>
+
+             <div class="row p-t-20">
+                <div class="col-md-2">
+                    <label class="control-label">Latitud:</label>
+                </div>
+
+                <div class="col-md-4">
+                  <asp:TextBox ID="TxLatitud" class="form-control" runat="server"></asp:TextBox>
+                </div>
+
+                <div class="col-md-2">
+                   <label class="control-label">Longitud:</label>
+                </div>
+
+                <div class="col-md-4">
+                    <asp:TextBox ID="TxLongitud" class="form-control" runat="server"></asp:TextBox>
+                </div>
+            </div>
 
             <div class="row p-t-20">
                 <div class="col-md-2">
-                    <label class="control-label text-danger" runat="server" visible="false" id="lbCantMaquinas">*</label><label class="control-label">Cant Maquinas:</label>
+                    <label class="control-label">Dirección:</label>
+                </div>
+
+                <div class="col-md-12">
+                  <asp:TextBox ID="txtDireccion" TextMode="MultiLine" class="form-control" runat="server"></asp:TextBox>
+                </div>
+            </div>
+
+                     </ContentTemplate>
+            </asp:UpdatePanel>
+
+            <div class="row p-t-20">
+                <div class="col-md-2">
+                    <label class="control-label">Cant Maquinas:</label>
                 </div>
 
                 <div class="col-md-4">
@@ -368,7 +420,7 @@
                 </div>
 
                 <div class="col-md-2">
-                    <label class="control-label text-danger" runat="server" visible="false" id="lbCantImpresora">*</label><label class="control-label">Impresora Financiera:</label>
+                   <label class="control-label">Impresora Financiera:</label>
                 </div>
 
                 <div class="col-md-4">
@@ -378,7 +430,7 @@
 
             <div class="row p-t-20">
                 <div class="col-md-2">
-                    <label class="control-label text-danger" runat="server" visible="false" id="lbCantEscaner">*</label><label class="control-label">Cant Escaner Fenix:</label>
+                   <label class="control-label">Cant Escaner Fenix:</label>
                 </div>
 
                 <div class="col-md-4">
@@ -386,7 +438,7 @@
                 </div>
 
                 <div class="col-md-2">
-                    <label class="control-label text-danger" runat="server" visible="false" id="lbCantDatacard">*</label><label class="control-label">Cant Datacards:</label>
+                    <label class="control-label">Cant Datacards:</label>
                 </div>
 
                 <div class="col-md-4">
@@ -397,38 +449,7 @@
             <br>
             <br>
             <hr>
-
-            <asp:UpdatePanel runat="server" ID="UpdatePanel2" UpdateMode="Conditional">
-                <ContentTemplate>
-                    <div class="row p-t-20">
-                        <div class="col-md-6">
-                            <label class="control-label text-danger" runat="server" visible="false" id="lbRealizoMantEquipoComu">*</label><label class="control-label">¿Realizó mantenimiento al equipo de comunicación?</label>
-                        </div>
-                        <div class="col-md-2">
-                            <asp:RadioButtonList ID="RBLManEquipoComu" RepeatDirection="Horizontal" Width="90px" runat="server" AutoPostBack="True" OnSelectedIndexChanged="RBLManEquipoComu_SelectedIndexChanged1">
-                                <asp:ListItem Value="1">Si</asp:ListItem>
-                                <asp:ListItem Value="0">No</asp:ListItem>
-                            </asp:RadioButtonList>
-                        </div>
-
-                        <div class="col-md-4 ">
-                            <asp:FileUpload ID="FuImageNoMantEquipoComu" runat="server" Visible="false" onchange="showpreview(this); " class="form-control"   />
-                            <img id="ImgPreviewNoMantEquipoComu" height="250" width="382" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="false" />                           
-                        </div>
-               
-                    </div>
-                    <asp:TextBox ID="TxMotivoNoMantEquipoComu" class="form-control" runat="server" TextMode="MultiLine" Rows="5" placeholder="Ingrese motivo por el cual no realizo el mantenimiento al equipo de comunicación..." Visible="false"></asp:TextBox>
-                </ContentTemplate>
-            </asp:UpdatePanel>
-        </div>
-    </div>
-    <%--(FIN) Targeta Datos Tecnicos --%>
-
-    <%--(INICIO) Targeta Pruebas --%>
-    <div class="card">
-        <div class="card-body">
-            <h3 class="card-title">Pruebas de PC</h3>
-            <asp:UpdatePanel runat="server" ID="UpNoProbaronEquipo" UpdateMode="Conditional">
+             <asp:UpdatePanel runat="server" ID="UpNoProbaronEquipo" UpdateMode="Conditional">
                 <ContentTemplate>
                     <div class="row p-t-20">
                         <div class="col-md-6">
@@ -445,282 +466,170 @@
                     </div> 
                 </ContentTemplate>
             </asp:UpdatePanel>
+            
         </div>
     </div>
     <%--(FIN) Targeta Datos Tecnicos --%>
-             
-    <%--(INICIO) Targeta Equipo de Comunicacion --%>
+
+    <%--(INICIO) Imagenes --%>
     <div class="card">
         <div class="card-body">
-            <h3 class="card-title">Equipo de Comunicación</h3>
 
-            <%-- Pregunta 1 --%>
-            <asp:UpdatePanel runat="server" ID="UpClimatizacion" UpdateMode="Conditional">
-                <ContentTemplate>
-                    <div class="row p-t-20">
-                        <div class="col-md-6">
-                            <label class="control-label text-danger" runat="server" visible="false" id="lbClimatizacion">*</label><label class="control-label">¿El equipo de comunicación cuenta con una climatización adecuada?</label>
-                            (Aire Acondicionado)
-                        </div>
-                        <div class="col-md-2">
-                            <asp:RadioButtonList ID="RblClimatizacionAdecuada" RepeatDirection="Horizontal" Width="90px" runat="server" AutoPostBack="True" OnSelectedIndexChanged="RblClimatizacionAdecuada_SelectedIndexChanged">
-                                <asp:ListItem Value="1">Si</asp:ListItem>
-                                <asp:ListItem Value="0">No</asp:ListItem>
-                            </asp:RadioButtonList>
-                        </div>
+            <h5 class="card-subtitle m-t-30"><i class="fa fa-image"></i><b> COMPROBACION</b></h5>
+             <hr />
+             <h5 class="card-subtitle">Subir imagenes de lo solicitado de mantenimiento</h5>
+             <h6 class="card-subtitle" style="color: red;">Campos con * son obligatorios</h6>
+           <table class="tablesaw table-bordered table-hover table no-wrap" data-tablesaw-mode="swipe"
+                            data-tablesaw-sortable data-tablesaw-sortable-switch data-tablesaw-minimap
+                            data-tablesaw-mode-switch>
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="background-color: #5D6D7E; color: #D5DBDB;" data-tablesaw-sortable-col data-tablesaw-priority="persist" class="border">Imagen a subir</th>
+                                    <%--<th scope="col" style="background-color: #5D6D7E; color: #D5DBDB;" data-tablesaw-sortable-col data-tablesaw-priority="2" class="border">Seleccione imagen </th>--%>
+                                    <th scope="col" style="background-color: #5D6D7E; color: #D5DBDB;" data-tablesaw-sortable-col data-tablesaw-priority="1" class="border">
+                                        <abbr title="Imagenes del mantenimiento">Mostrar imagen</abbr>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                        <div class="col-md-4 ">
-                            <asp:FileUpload ID="FuClimatizacion" runat="server" Visible="false" onchange="showpreview1(this);" class="form-control" />
-                            <img id="ImgPreviewClimatizacion" height="250" width="460" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="false" />                          
-                        </div>
-
-                    </div>
-                    
-                </ContentTemplate>
-            </asp:UpdatePanel>
-
-            <%-- Pregunta 2 --%>
-            <asp:UpdatePanel runat="server" ID="UpUPS" UpdateMode="Conditional">
-                <ContentTemplate>
-                    <div class="row p-t-20">
-                        <div class="col-md-6">
-                            <label class="control-label text-danger" runat="server" visible="false" id="lbUps">*</label><label class="control-label">¿El equipo de comunicación cuenta con protección de energía eléctrica (UPS)?</label>
-                        </div>
-                        <div class="col-md-2">
-                            <asp:RadioButtonList ID="RblUPS" RepeatDirection="Horizontal" Width="90px" runat="server" AutoPostBack="True" OnSelectedIndexChanged="RblUPS_SelectedIndexChanged">
-                                <asp:ListItem Value="1">Si</asp:ListItem>
-                                <asp:ListItem Value="0">No</asp:ListItem>
-                            </asp:RadioButtonList>
-                        </div>
-
-                        <div class="col-md-4 ">
-                            <asp:FileUpload ID="FuUPS" runat="server" Visible="false" onchange="showpreview2(this); " class="form-control" />
-                            <img id="ImgPreviewUPS" height="250" width="460" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="false" />                           
-                        </div>
-                    </div>
-                </ContentTemplate>
-            </asp:UpdatePanel>
-
-        </div>
-    </div>
-    <%--(FIN) Targeta Equipo de Comunicacion --%>
-
-    <%--(INICIO) Targeta Entorno Cuarto de Comunicaciones --%>
-    <div class="card">
-        <div class="card-body">           
-             <h3 class="card-title"> Entorno Cuarto de Comunicaciones</h3>
-         
-            <%-- Pregunta 1 --%>
-            <asp:UpdatePanel runat="server" ID="UpPolvoSuciedad" UpdateMode="Conditional">
-                <ContentTemplate>
-                    <div class="row p-t-20">
-                        <div class="col-md-6">
-                            <label class="control-label text-danger" runat="server" visible="false" id="lbPolvo">*</label><label class="control-label">¿El equipo de comunicaciones esta expuesto a polvo o suciedad?</label>
-                        </div>
-                        <div class="col-md-2">
-                            <asp:RadioButtonList ID="RbPolvoSuciedad" RepeatDirection="Horizontal" Width="90px" runat="server" AutoPostBack="True" OnSelectedIndexChanged="RbPolvoSuciedad_SelectedIndexChanged">
-                                <asp:ListItem Value="1">Si</asp:ListItem>
-                                <asp:ListItem Value="0">No</asp:ListItem>
-                            </asp:RadioButtonList>
-                        </div>
-
-                        <div class="col-md-4 ">
-                            <asp:FileUpload ID="FuPolvoSuciedad" runat="server" Visible="false" onchange="showpreview4(this);" class="form-control" />
-                            <img id="ImgPreviewPolvoSuciedad" height="250" width="460" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="false" />
-                        </div>
-                    </div>
-                </ContentTemplate>
-            </asp:UpdatePanel>
-            
-            <%-- Pregunta 2  --%>
-            <asp:UpdatePanel runat="server" ID="UpHumedadSustancias" UpdateMode="Conditional">
-                <ContentTemplate>
-                    <div class="row p-t-20">
-                        <div class="col-md-6">
-                            <label class="control-label text-danger" runat="server" visible="false" id="lbHumedad">*</label><label class="control-label">¿Observan rastros de humedad u otras substancias en las paredes o piso?</label>
-                        </div>
-                        <div class="col-md-2">
-                            <asp:RadioButtonList ID="RblHumedadSustancias" RepeatDirection="Horizontal" Width="90px" runat="server" AutoPostBack="True" OnSelectedIndexChanged="RblHumedadSustancias_SelectedIndexChanged">
-                                <asp:ListItem Value="1">Si</asp:ListItem>
-                                <asp:ListItem Value="0">No</asp:ListItem>
-                            </asp:RadioButtonList>
-                        </div>
-                        <div class="col-md-4 ">
-                            <asp:FileUpload ID="FuHumedadSustancias" runat="server" Visible="false" onchange="showpreview5(this);" class="form-control" />
-                            <img id="ImgPreviewHumedadSustancias" height="250" width="460" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="false" />                            
-                        </div>
-                    </div>
-                </ContentTemplate>
-            </asp:UpdatePanel>
-           
-            <%-- Pregunta 3  --%>
-            <asp:UpdatePanel runat="server" ID="UpRoboDaño" UpdateMode="Conditional">
-                <ContentTemplate>
-                    <div class="row p-t-20">
-                        <div class="col-md-6">
-                            <label class="control-label text-danger" runat="server" visible="false" id="lbRobo">*</label><label class="control-label">¿El equipo de comunicaciones esta expuesto a robos o daño?</label>
-                        </div>
-                        <div class="col-md-2">
-                            <asp:RadioButtonList ID="RblRoboDaño" RepeatDirection="Horizontal" Width="90px" runat="server" AutoPostBack="True" OnSelectedIndexChanged="RblRoboDaño_SelectedIndexChanged">
-                                <asp:ListItem Value="1">Si</asp:ListItem>
-                                <asp:ListItem Value="0">No</asp:ListItem>
-                            </asp:RadioButtonList>
-                        </div>
-                        <div class="col-md-4 ">
-                            <asp:FileUpload ID="FuRoboDaño" runat="server" Visible="false" onchange="showpreview6(this);" class="form-control" />
-                            <img id="ImgPreviewRoboDaño" height="250" width="460" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="false" />                           
-                        </div>
-                    </div>
-                </ContentTemplate>
-            </asp:UpdatePanel>
-
-            <%-- Pregunta 4  --%>
-            <asp:UpdatePanel runat="server" ID="UpElementosAjenos" UpdateMode="Conditional">
-                <ContentTemplate>
-                    <div class="row p-t-20">
-                        <div class="col-md-6">
-                            <label class="control-label text-danger" runat="server" visible="false" id="lbElementos">*</label><label class="control-label">¿Encontro elementos ajenos en el cuarto de comunicaciones?</label>
-                            (Ejemplo: sillas, papeles, basura, electrodomesticos, etc)
-                        </div>
-                        <div class="col-md-2">
-                            <asp:RadioButtonList ID="RblElementosAjenos" RepeatDirection="Horizontal" Width="90px" runat="server" AutoPostBack="True" OnSelectedIndexChanged="RblElementosAjenos_SelectedIndexChanged">
-                                <asp:ListItem Value="1">Si</asp:ListItem>
-                                <asp:ListItem Value="0">No</asp:ListItem>
-                            </asp:RadioButtonList>
-                        </div>
-                        <div class="col-md-4">
-                            <asp:FileUpload ID="FuElementosAjenos" runat="server" Visible="false" onchange="showpreview7(this);" class="form-control" />
-                            <img id="ImgPreviewElementosAjenos" height="250" width="460" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="false" />                          
-                        </div>
-                    </div>
-                </ContentTemplate>
-            </asp:UpdatePanel>
-                       
-        </div>
-    </div>
-    <%--(FIN) Targeta Entorno Cuarto de Comunicaciones --%>
-
-    <%--(INICIO) Targeta Imagenes Obligatorias--%>
-    <div class="card">
-        <div class="card-body">
-            <h3 class="card-title">Entorno y Rack de Comunicaciones</h3>          
-            <%-- Pregunta 1 --%>
-            <div class="row p-t-20">
-                <div class="col-md-8">
-                    <label class="control-label text-danger" runat="server" visible="false" id="lbRack">*</label><label class="control-label">Subir Imagen Rack Comunicaciones</label>
-                </div>
-                <div class="col-md-4" style="vertical-align: middle; text-align: right">
-                    <asp:FileUpload ID="FuRack" runat="server" Visible="true" onchange="showpreview3(this);" class="form-control" />
-                    <img id="ImgPreviewRack" height="250" width="460" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="true" />
-                </div>
-            </div>
-
-            <%-- Pregunta 2 --%>
-            <div class="row p-t-20">
-                <div class="col-md-8">
-                    <label class="control-label text-danger" runat="server" visible="false" id="lbEntorno">*</label><label class="control-label">Foto del espacio fisico en donde se encuentra el equipo de comunicaciones (Entorno)</label>
-                </div>
-                <div class="col-md-4" style="vertical-align: middle; text-align: right">
-                    <asp:FileUpload ID="FuEspacioFisico" runat="server" Visible="true" onchange="showpreview8(this);" class="form-control" />
-                    <img id="ImgPreviewEspacioFisico" height="250" width="460" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" visible="true" />
-                </div>
-            </div>
-        </div>
-    </div>
-    <%--(FIN) Targeta Imagenes Obligatorias--%>
-
-    <%--(INICIO) Targeta Imagenes Observaciones--%>
-    <div class="card">
-        <div class="card-body">
-            <h3 class="card-title">Observaciones Generales</h3>
-            <div class="form-group row" runat="server">
-                <div class="row p-t-20 col-12">
+                                <tr>
+                                    <td class="title"><a class="link" href="javascript:void(0)">*¿Realizó mantenimiento al equipo de comunicación?</a><br /><br />
+                                       <asp:FileUpload ID="FuImageNoMantEquipoComu" runat="server" onchange="showpreview(this); "/><br /><br />
+                                        <asp:TextBox ID="TxMotivoNoMantEquipoComu" class="form-control" runat="server" TextMode="MultiLine" Rows="3" placeholder="Motivo por el cual no realizo el mantenimiento..." ></asp:TextBox>
+                                    </td>                                   
+                                    <td><img id="ImgPreviewNoMantEquipoComu" height="550" width="550" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server"/> </td>
+                                </tr>
+                                <tr>
+                                    <td class="title"><a class="link" href="javascript:void(0)">*¿Cuenta con una climatización adecuada?</a><br /><br />
+                                         <asp:FileUpload ID="FuClimatizacion" runat="server" onchange="showpreview1(this);"/><br /><br />
+                                        <asp:UpdatePanel runat="server">
+                                            <ContentTemplate>
+                                          <asp:RadioButtonList ID="RblClimatizacionAdecuada" RepeatDirection="Horizontal" Width="90px" runat="server" AutoPostBack="True">
+                                              <asp:ListItem Value="1">Si</asp:ListItem>
+                                              <asp:ListItem Value="0">No</asp:ListItem>
+                                          </asp:RadioButtonList>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                          
+                                    </td>
+                                    <td> <img id="ImgPreviewClimatizacion" height="550" width="550" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="title"><a class="link" href="javascript:void(0)">*¿Cuenta con protección de energía eléctrica (UPS)?</a><br /><br />
+                                        <asp:FileUpload ID="FuUPS" runat="server" onchange="showpreview2(this); "/><br /><br />
+                                        <asp:UpdatePanel runat="server">
+                                            <ContentTemplate>
+                                                 <asp:RadioButtonList ID="RblUPS" RepeatDirection="Horizontal" Width="90px" runat="server" AutoPostBack="True" >
+                                                    <asp:ListItem Value="1">Si</asp:ListItem>
+                                                    <asp:ListItem Value="0">No</asp:ListItem>
+                                                 </asp:RadioButtonList>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                    </td>
+                                    <td><img id="ImgPreviewUPS" height="550" width="550" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server"/></td>
+                                </tr>
+                                <tr>
+                                   <td class="title"><a class="link" href="javascript:void(0)">*¿El equipo está expuesto a polvo o suciedad?</a><br /><br />
+                                        <asp:FileUpload ID="FuPolvoSuciedad" runat="server" onchange="showpreview4(this);"/><br /><br />
+                                       <asp:UpdatePanel runat="server">
+                                           <ContentTemplate>
+                                                  <asp:RadioButtonList ID="RbPolvoSuciedad" RepeatDirection="Horizontal" Width="90px" runat="server" AutoPostBack="True">
+                                                        <asp:ListItem Value="1">Si</asp:ListItem>
+                                                        <asp:ListItem Value="0">No</asp:ListItem>
+                                                  </asp:RadioButtonList>
+                                           </ContentTemplate>
+                                       </asp:UpdatePanel>
+                                      
+                                    </td>
+                                    <td><img id="ImgPreviewPolvoSuciedad" height="550" width="550" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server"/></td>
+                                </tr>
+                                <tr>
+                                     <td class="title"><a class="link" href="javascript:void(0)">*¿Observan rastros de humedad u otras substancias<br /> en las paredes o piso?</a><br /><br />
+                                         <asp:FileUpload ID="FuHumedadSustancias" runat="server" onchange="showpreview5(this);"/><br /><br />
+                                         <asp:UpdatePanel runat="server">
+                                             <ContentTemplate>
+                                                 <asp:RadioButtonList ID="RblHumedadSustancias" RepeatDirection="Horizontal" Width="90px" runat="server" AutoPostBack="True">
+                                                     <asp:ListItem Value="1">Si</asp:ListItem>
+                                                     <asp:ListItem Value="0">No</asp:ListItem>
+                                                 </asp:RadioButtonList>
+                                             </ContentTemplate>
+                                         </asp:UpdatePanel> 
+                                         
+                                    </td>
+                                    <td><img id="ImgPreviewHumedadSustancias" height="550" width="550" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="title"><a class="link" href="javascript:void(0)">*¿El equipo de comunicaciones esta expuesto a robos o daño?</a><br /><br />
+                                        <asp:FileUpload ID="FuRoboDaño" runat="server" onchange="showpreview6(this);"/><br /><br />
+                                        <asp:UpdatePanel runat="server">
+                                            <ContentTemplate>
+                                                 <asp:RadioButtonList ID="RblRoboDaño" RepeatDirection="Horizontal" Width="90px" runat="server" AutoPostBack="True">
+                                                     <asp:ListItem Value="1">Si</asp:ListItem>
+                                                     <asp:ListItem Value="0">No</asp:ListItem>
+                                                 </asp:RadioButtonList>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>                                       
+                                    </td>
+                                    <td><img id="ImgPreviewRoboDaño" height="550" width="550" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server"/></td>
+                                </tr>
+                                <tr>
+                                   <td class="title"><a class="link" href="javascript:void(0)">*¿Encontro elementos ajenos en área de comunicaciones?</a><br /><br />
+                                        <asp:FileUpload ID="FuElementosAjenos" runat="server" onchange="showpreview7(this);" /><br /><br />
+                                       <asp:UpdatePanel runat="server">
+                                           <ContentTemplate>
+                                                <asp:RadioButtonList ID="RblElementosAjenos" RepeatDirection="Horizontal" Width="90px" runat="server" AutoPostBack="True">
+                                                     <asp:ListItem Value="1">Si</asp:ListItem>
+                                                    <asp:ListItem Value="0">No</asp:ListItem>
+                                                    </asp:RadioButtonList>
+                                           </ContentTemplate>
+                                       </asp:UpdatePanel>
+                                    </td>
+                                    <td><img id="ImgPreviewElementosAjenos" height="550" width="550" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server" /></td>
+                                </tr>
+                                <tr>
+                                     <td class="title"><a class="link" href="javascript:void(0)">*Rack Comunicaciones</a><br /><br />
+                                         <asp:FileUpload ID="FuRack" runat="server" Visible="true" onchange="showpreview3(this);"/>
+                                    </td>
+                                    <td><img id="ImgPreviewRack" height="550" width="550" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="title"><a class="link" href="javascript:void(0)">*Entorno donde está equipo de comunicaciones</a><br /><br />
+                                        <asp:FileUpload ID="FuEspacioFisico" runat="server" Visible="true" onchange="showpreview8(this);"/>
+                                    </td>
+                                    <td> <img id="ImgPreviewEspacioFisico" height="550" width="550" src="../../assets/images/vistaPrevia1.JPG" style="border-width: 0px;" runat="server"/></td>
+                                </tr>
+                                 </tbody>
+                        </table>
+            <p></p>
+             <div class="row p-t-20 col-12">
                     <label class="control-label col-md-2">Observaciones:</label>
                     <div class="col-md-10">
-                        <asp:TextBox ID="TxObservacionesGenerales" class="form-control" runat="server" TextMode="MultiLine" Rows="5"></asp:TextBox>
+                        <asp:TextBox ID="TxObservacionesGenerales" CssClass="form-control" runat="server" TextMode="MultiLine" Rows="5"></asp:TextBox>
                     </div>
                 </div>
-            </div>
-
             <asp:UpdatePanel ID="UpdatePanel5" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
-                    <div class="row p-t-20 col-md-12">
-                        <div class="col-md-4">
-                                <asp:Button ID="BtnEnviarLv" class="btn btn-block  btn-success" runat="server" Text="Enviar LV " OnClick="BtnEnviarLv_Click" />
-                        </div>
-                        <div class="col-md-4">
-                            <asp:Button ID="BtnRegresarCompletarLV" class="btn btn-block  btn-danger" runat="server" Text="Cancelar" OnClick="BtnRegresarCompletarLV_Click" />
-                        </div>
+                    <div class="modal-footer">
+                        <%--<asp:Button ID="BtnRegresarCompletarLV" class="btn btn-block  btn-danger" runat="server" Text="Cancelar" OnClick="BtnRegresarCompletarLV_Click" />--%>
+                        <asp:Button ID="BtnDevolver" Visible="false" class="btn btn-warning" runat="server" Text="Devolver " OnClick="BtnDevolver_Click" />
+                        <asp:Button ID="BtnAprobar" Visible="false" class="btn btn-success" runat="server" Text="Aprobar " OnClick="BtnAprobar_Click" /> 
+                        <asp:Button ID="BtnEnviarLv" class="btn btn-success" runat="server" Text="Enviar " OnClick="BtnEnviarLv_Click" />                      
+                           
+                       
 
-                        <div class="col-md-4" id="ocultarBotonVolver1" runat="server" visible="false">                  
+                       <%-- <div class="col-md-4" id="ocultarBotonVolver1" runat="server" visible="false">                  
                             <a href="../../default.aspx"" class="btn  btn-block btn-primary">Volver</a>
-                        </div>
+                        </div>--%>
                     </div>
-
-
-                                      
 
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>
     </div>
-    <%--(FIN) Targeta Imagenes Observaciones--%>
-
-
-     <%--(INICIO) Aprobacion--%>
-    <div class="card" runat="server" id="DivAprobacion" visible="false">
-        <div class="card-body">
-            <h3 class="card-title">Aprobación</h3>
-            <asp:UpdatePanel runat="server" ID="UpdatePanel9" UpdateMode="Conditional">
-                <ContentTemplate>
-                    <div class="row p-t-20">
-                        <div class="col-md-2">
-                            <label class="control-label text-danger">*</label><label class="control-label">¿Desea Aprobar LV?</label>
-                        </div>
-                        <div class="col-md-2">
-                            <asp:RadioButtonList ID="RblAprobarLV" RepeatDirection="Horizontal" Width="90px" runat="server" AutoPostBack="True" OnSelectedIndexChanged="RblAprobarLV_SelectedIndexChanged">
-                                <asp:ListItem Value="1">Si</asp:ListItem>
-                                <asp:ListItem Value="0">No</asp:ListItem>
-                            </asp:RadioButtonList>
-                        </div>
-
-                        <div class="col-md-1" id="DivEtiqueta" runat="server" visible="false">
-                            <label class="control-label text-danger">*</label><label class="control-label">Motivo:</label>
-                        </div>
-
-                        <div class="col-md-7" id="DivTexto" runat="server" visible="false">
-                            <asp:TextBox ID="TxMotivoCancelacionLV" class="form-control" runat="server" TextMode="MultiLine" Rows="5"></asp:TextBox>
-                        </div>
-                    </div>
-
-                </ContentTemplate>
-            </asp:UpdatePanel>
-
-            <br><br><br>
-            <asp:UpdatePanel ID="UpdatePanel10" runat="server">
-                <ContentTemplate>
-                    <div class="row p-t-20 col-md-12">
-                        <div class="col-md-4">
-                             <asp:Button ID="BtnEnviarAprobacion" class="btn btn-block btn-success" runat="server" Text="Enviar"  OnClick="BtnEnviarAprobacion_Click"/>
-                        </div>              
-                  
-                        <div class="col-md-4">
-                         <asp:Button ID="BtnRegresarPendienteAprobar" class="btn btn-block   btn-danger " runat="server" Text="Cancelar"  OnClick="BtnRegresarPendienteAprobar_Click" />   
-                        </div>
-
-                        <div class="col-md-4" id="ocultarBotonVolver" runat="server" >                  
-                            <a href="../../default.aspx"" class="btn  btn-block btn-primary">Volver</a>
-                        </div>
-                    </div>
-
-                   
-                    <br />
-                    <br />
-                </ContentTemplate>
-            </asp:UpdatePanel>
-        </div>
-    </div>
-     <%--(FIN) Respuesta--%>
+    <%--(FIN) Imagenes --%>
+            
+    
 
     <asp:UpdatePanel ID="UpdatePanel8" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
@@ -754,12 +663,12 @@
     <div class="modal fade" id="modalAprobarLv" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="width: 600px; top: 320px; left: 50%; transform: translate(-50%, -50%);">
-                <div class="modal-header bg-dark">
+                <div class="modal-header">
                     <asp:UpdatePanel ID="UpTituloAprobar" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
-                            <h3 class="modal-title" style="color: white" id="exampleModalLabel">
+                            <h4 class="modal-title" id="exampleModalLabel">
                                 <asp:Label ID="Titulo" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label>
-                                <asp:Label ID="Lugar" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label></h3>
+                                <asp:Label ID="Lugar" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label></h4>
                         </ContentTemplate>
                     </asp:UpdatePanel>
 
@@ -818,45 +727,9 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-12" style="margin-left: auto; margin-right: auto" id="DivAprobarLV" runat="server" visible="false">
-                                <div class="alert alert-success  alert-dismissible align-content-md-center" style="align-self: auto">
-                                    <div class="row">
-                                        <div class="col-3">
-                                            <p class="text-center"><img src="https://img.icons8.com/color/70/000000/accept-database.png"/><span class="dashicons dashicons-admin-home"></span></i></p>
-                                        </div>
-                                        <div class="col-9" style="text-align: center">
+                          
 
-                                            <h4><strong>¿Está seguro que desea Aprobar la LV?
-                                                <asp:Label ID="Label2" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label>
-                                            </strong></h4>
-                                            <p>Si esta seguro dar clic en el botón "Enviar"</p>
-                                        </div>
-                                        <br>
-                                        <p style="text-align: justify">Todos los involucrados recibiran un correo con un adjunto de la lista de verificación. </p>
-                                        <asp:Label ID="Label1" runat="server" Text="" Width="100%"></asp:Label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-12" style="margin-left: auto; margin-right: auto" id="DivRegresarLV" runat="server" visible="false">
-                                <div class="alert alert-success  alert-dismissible align-content-md-center" style="align-self: auto">
-                                    <div class="row">
-                                        <div class="col-3">
-                                            <p class="text-center"><img src="https://img.icons8.com/color/70/000000/accept-database.png"/><span class="dashicons dashicons-admin-home"></span></i></p>
-                                        </div>
-                                        <div class="col-9" style="text-align: center">
-
-                                            <h4><strong>¿Está seguro que desea Regresa la LV?
-                                        <asp:Label ID="Label3" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label>
-                                            </strong></h4>
-                                            <p>Si esta seguro dar clic en el botón "Enviar"</p>
-                                        </div>
-                                        <br>
-                                        <p style="text-align: justify">El técnico responsable recibira un correo para que proceda a realizar las correcciones que se le indico.</p>
-                                        <asp:Label ID="Label4" runat="server" Text="" Width="100%"></asp:Label>
-                                    </div>
-                                </div>
-                            </div>
+                           
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
@@ -867,7 +740,7 @@
                             <button type="button" class="btn btn-light"
                                 data-dismiss="modal">
                                 Close</button>
-                            <asp:Button ID="btnModalAprobarLV" runat="server" Text="Enviar" class="btn btn-dark" OnClick="btnModalAprobarLV_Click" />
+                            <asp:Button ID="btnModalAprobarLV" runat="server" Text="Enviar" class="btn btn-success" OnClick="btnModalAprobarLV_Click" />
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
@@ -885,8 +758,8 @@
                 <div class="modal-header">
                     <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
-                            <h3 class="modal-title"  >
-                                <asp:Label ID="TituloModalEnviarLV" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label></h3>
+                            <h4 class="modal-title"  >
+                                <asp:Label ID="TituloModalEnviarLV" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label></h4>
                         </ContentTemplate>
                     </asp:UpdatePanel>
 
@@ -971,7 +844,7 @@
                             <ContentTemplate>
                                 <button type="button" class="btn btn-light" data-dismiss="modal">
                                     Close</button>                            
-                                <asp:Button ID="btnModalEnviarLv" runat="server" Text="Enviar LV" class="btn btn-da" OnClick="btnModalEnviarLv_Click" />
+                                <asp:Button ID="btnModalEnviarLv" runat="server" Text="Enviar LV" class="btn btn-success" OnClick="btnModalEnviarLv_Click" />
                             </ContentTemplate>
                             <Triggers>
                                 <asp:PostBackTrigger ControlID="btnModalEnviarLv" />
@@ -982,6 +855,93 @@
         </div>
     </div>
     <%--FIN MODAL ENVIAR LV--%>
+
+    <%--INICIO MODAL DEVOLVER LV--%>
+    <div class="modal fade" id="modalDevolverLv" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="width: 600px; top: 320px; left: 50%; transform: translate(-50%, -50%);">
+                <div class="modal-header">
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                        <ContentTemplate>
+                            <h4 class="modal-title"  >
+                                <asp:Label ID="LbTituloDevolver" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label></h4>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+
+                    <button type="button" class="close"  data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                        <ContentTemplate>
+
+                            <div class="col-md-12" runat="server">
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label">Mantenimiento:</label>
+                                    <div class="col-md-9">
+                                        <asp:TextBox ID="TxIdMantDevolver" class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12" runat="server">
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label">Motivo:</label>
+                                    <div class="col-md-9">
+                                        <asp:TextBox ID="TxtMotivoDevolver" TextMode="MultiLine" Rows="3" class="form-control" runat="server" ></asp:TextBox>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" id="DIVAlerta" visible="false" runat="server">
+                                <div class="form-group row">                          
+                                    <div class="col-md-12">
+                                        <asp:TextBox ID="TxAlerta" ReadOnly="true" Text="No deje campos vacíos" style="text-align:center;color:white; background-color:red;" class="form-control" runat="server" ></asp:TextBox>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+
+<%--                    <div class="col-md-12" style="margin-left: auto; margin-right: auto" id="Div3" runat="server">
+                        <div class="alert alert-success  alert-dismissible align-content-md-center" style="align-self: auto">
+                            <div class="row">
+                                <div class="col-3">
+                                    <p class="text-center"><img src="https://img.icons8.com/color/70/000000/accept-database.png"/><span class="dashicons dashicons-admin-home"></span></i></p>
+                                </div>
+                                <div class="col-9" style="text-align: center">
+                                    <br>
+                                    <h4><strong>¿Está seguro que desea enviar la LV?</strong></h4>
+                                    <p>Si esta seguro dar clic en el botón "Enviar LV"</p>
+                                </div>
+                                <br>
+                                <p style="text-align: justify">El jefe o suplente recibirá un correo para que proceda aprobar o rechazar la lista de verificación. </p>
+                                <asp:Label ID="Label6" runat="server" Text="" Width="100%"></asp:Label>
+                            </div>
+                        </div>
+                    </div>--%>
+
+                </div>
+
+                <div class="modal-footer">
+                        <asp:UpdatePanel ID="UpdatePanel7" runat="server">
+                            <ContentTemplate>
+                                <button type="button" class="btn btn-light" data-dismiss="modal">
+                                    Close</button>                            
+                                <asp:Button ID="BtnModalDevolver" runat="server" Text="Devolver" class="btn btn-success" OnClick="BtnModalDevolver_Click" />
+                            </ContentTemplate>
+                           <%-- <Triggers>
+                                <asp:PostBackTrigger ControlID="btnModalEnviarLv" />
+                            </Triggers>--%>
+                        </asp:UpdatePanel>
+                    </div>              
+            </div>
+        </div>
+    </div>
+    <%--FIN MODAL DEVOLVER LV--%>
 
    
 

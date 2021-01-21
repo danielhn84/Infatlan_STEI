@@ -195,7 +195,6 @@ namespace Infatlan_STEI_ATM.pages.calendario
                 LbMensaje.Text=ex.Message;
             }
         }
-
         protected void BtnEnviar_Click1(object sender, EventArgs e){
             String archivoLog = string.Format("{0}_{1}", Convert.ToString(Session["USUARIO"]), DateTime.Now.ToString("yyyyMMdd"));
 

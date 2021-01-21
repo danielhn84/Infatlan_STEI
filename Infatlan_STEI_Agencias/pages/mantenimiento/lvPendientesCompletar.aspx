@@ -81,27 +81,20 @@
                                 AllowPaging="true"
                                 GridLines="None" OnPageIndexChanging="GVListaVerificacion_PageIndexChanging"
                                 PageSize="10" OnRowCommand="GVListaVerificacion_RowCommand">
-
                                 <Columns>
                                     <asp:TemplateField HeaderText="Acción" ItemStyle-HorizontalAlign="center" >
                                         <ItemTemplate>
-                                            <asp:LinkButton ID="LBAprobar" class="btn btn-success mr-2"  runat="server"  CommandName="Completar" CommandArgument='<%# Eval("id_Mantenimiento") %>'>
-                                                        <i class="icon-check" ></i>
-                                            </asp:LinkButton>
-
-                                            <asp:LinkButton ID="LBCancelar" class="btn btn-primary mr-2" runat="server" CommandName="Cancelar" CommandArgument='<%# Eval("id_Mantenimiento") %>'>
-                                                          <i class="icon-close" ></i>
-                                            </asp:LinkButton>
-                                             
-                                        </ItemTemplate>
-                                        <ItemStyle Width="12%" />
+                                                      <asp:LinkButton ID="LBAprobar" CssClass="btn btn-success"  runat="server"  CommandName="Completar" CommandArgument='<%# Eval("id_Mantenimiento") %>'><i class="icon-check" ></i></asp:LinkButton> 
+                                                       <asp:LinkButton ID="LBCancelar" CssClass="btn btn-primary" runat="server" CommandName="Cancelar" CommandArgument='<%# Eval("id_Mantenimiento") %>'><i class="icon-close" ></i></asp:LinkButton>
+                                         </ItemTemplate>
+                                        <%--<ItemStyle Width="12%" />--%>
                                     </asp:TemplateField>
-                                    <asp:BoundField DataField="id_Mantenimiento" HeaderText="Id"  ControlStyle-Width="10%" />
+                                    <asp:BoundField DataField="id_Mantenimiento" HeaderText="Id" Visible="false"  ControlStyle-Width="10%" />
                                     <asp:BoundField DataField="fecha" HeaderText="Fecha" ControlStyle-Width="10%" />
-                                    <asp:BoundField DataField="Cod_Agencia" HeaderText="Cod. Agencia" ControlStyle-Width="10%" />
+                                    <asp:BoundField DataField="Cod_Agencia" HeaderText="Cod. Agencia" Visible="false" ControlStyle-Width="10%" />
                                     <asp:BoundField DataField="Lugar" HeaderText="Lugar" ControlStyle-Width="10%" />
                                     <asp:BoundField DataField="Area" HeaderText="Area" ControlStyle-Width="10%" />                                                                       
-                                    <asp:BoundField DataField="sysAid" HeaderText="No. SysAid" ControlStyle-Width="10%" />
+                                    <asp:BoundField DataField="sysAid" HeaderText="No. SysAid" Visible="false" ControlStyle-Width="10%" />
                                     <asp:BoundField DataField="Responsable" HeaderText="Responsable" ControlStyle-Width="10%" />
                                    <asp:BoundField DataField="idUsuario" HeaderText="idUsuariob" ControlStyle-Width="10%"  Visible="false" />
                                 </Columns>
@@ -129,8 +122,8 @@
                 <div class="modal-header" >
                     <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
-                            <h3 class="modal-title"  id="exampleModalLabel" >Cancelar LV  
-                                <asp:Label ID="Titulo" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label></h3>
+                            <h4 class="modal-title"  id="exampleModalLabel" >Cancelar LV  
+                                <asp:Label ID="Titulo" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label></h4>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -141,114 +134,53 @@
                 <div class="modal-body">
                     <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                         <ContentTemplate>
-                            <div class="form-group row">
-                                 <div class="col-md-12" runat="server">
-                                    <div class="form-group row">
-                                        <div class="col-md-3">
-                                            <label class="control-label">Id Mantenimiento:</label></label>
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <asp:TextBox ID="TxIdMantenimiento" AutoPostBack="true" runat="server"  class="form-control" ReadOnly="true"></asp:TextBox>
+                            <%-- <div class="form-group row">--%>
+                            <div class="row col-12">
+                                <label class="control-label col-4">*Mantenimiento:</label></label>
+                                <asp:TextBox ID="TxIdMantenimiento" AutoPostBack="true" runat="server" class="form-control col-8" ReadOnly="true"></asp:TextBox>
+                            </div><p/>
+                            <div class="row col-12">
+                                <label class="control-label col-4">*Motivo:</label>
+                                <asp:DropDownList ID="DDLMotivo" runat="server" class="form-control col-8" OnSelectedIndexChanged="DDLMotivo_SelectedIndexChanged" AutoPostBack="true">
+                                    <asp:ListItem Value="0" Text="Seleccione motivo..."></asp:ListItem>
+                                    <asp:ListItem Value="1" Text="Personal de agencia canceló mantenimiento"></asp:ListItem>
+                                    <asp:ListItem Value="2" Text="Personal de agencia no se presentó al mantenimiento"></asp:ListItem>
+                                    <asp:ListItem Value="3" Text="Técnico no se presentó/ no cumplió el horario."></asp:ListItem>
+                                    <asp:ListItem Value="4" Text="Cambio Técnico Responsable"></asp:ListItem>
+                                </asp:DropDownList>
+                            </div><p/>
+                            <div class="row col-12">
+                                <asp:Label runat="server" Visible="false" ID="Etiqueta" class="control-label col-4">*Nuevo Técnico:</asp:Label>
+                                <asp:DropDownList ID="DDLNombreResponsable" runat="server" AutoPostBack="true" CssClass="form-control col-8" Visible="false" OnSelectedIndexChanged="DDLNombreResponsable_SelectedIndexChanged"></asp:DropDownList>
+                            </div><p/>
+                            <div class="row col-12">
+                                <label class="control-label col-4">*Detalle motivo:</label>
+                                <asp:TextBox ID="TxDetalle" class="form-control col-8" runat="server" TextMode="MultiLine" Rows="5" OnTextChanged="TxDetalle_TextChanged" AutoPostBack="true"></asp:TextBox>
+                            </div><p/>
 
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12" runat="server">
-                                    <div class="form-group row">
-                                        <div class="col-md-3">
-                                            <label class="control-label text-danger" runat="server" id="lbMotivo" >*</label><label class="control-label">Motivo:</label></label>                                      
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <asp:DropDownList ID="DDLMotivo" runat="server" class="form-control" OnSelectedIndexChanged="DDLMotivo_SelectedIndexChanged" AutoPostBack="true">
-                                                <asp:ListItem Value="0" Text="Seleccione motivo..."></asp:ListItem>
-                                                <asp:ListItem Value="1" Text="Personal de agencia canceló mantenimiento"></asp:ListItem>
-                                                <asp:ListItem Value="2" Text="Personal de agencia no se presentó al mantenimiento"></asp:ListItem>
-                                                <asp:ListItem Value="3" Text="Técnico no se presentó/ no cumplió el horario."></asp:ListItem>
-                                                <asp:ListItem Value="4" Text="Cambio Técnico Responsable"></asp:ListItem>
-                                            </asp:DropDownList>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                               
-
-                                <div class="col-md-12" runat="server">
-                                    <div class="form-group row">
-                                        <div class="col-md-3">
-                                            <label class="control-label   text-danger" runat="server" visible="false" id="asterisco">*</label><label class="control-label" runat="server" visible="false" id="etiqueta">Nuevo Técnico:</label></label>
-                                        <%--<asp:TextBox ID="TextBox1" AutoPostBack="true" runat="server" TextMode="Date" OnTextChanged="TextBox1_TextChanged" class="form-control"></asp:TextBox>--%>
-                                        </div>
-
-
-                                        <div class="col-sm-9">
-                                            <asp:DropDownList ID="DDLNombreResponsable" runat="server" AutoPostBack="true" CssClass="form-control" Visible="false" OnSelectedIndexChanged="DDLNombreResponsable_SelectedIndexChanged"></asp:DropDownList>
-
+                            <asp:UpdatePanel ID="UpdateModal" runat="server" UpdateMode="Conditional" Visible="false">
+                                <ContentTemplate>
+                                    <div class="col-md-10" style="margin-left: auto; margin-right: auto" runat="server">
+                                        <div class="alert alert-danger   align-content-md-center" style="align-self: auto">
+                                           <%-- <h3 class="text-danger" style="text-align: center"><i class="fa fa-exclamation-triangle"></i></h3>--%>
+                                            <asp:Label ID="LbMensajeModalErrorReprogramar" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label>
                                         </div>
                                     </div>
-                                </div>
+                                </ContentTemplate>
+                            </asp:UpdatePanel><p/>
 
-                                <div class="col-md-12" runat="server">
-                                    <div class="form-group row">
-
-                                        <div class="col-md-3">
-                                            <label class="control-label   text-danger">*</label><label class="control-label">Detalle motivo:</label></label>                                    
-                                        </div>
-
-
-                                        <div class="col-sm-9">
-                                            <asp:TextBox ID="TxDetalle" class="form-control" runat="server" TextMode="MultiLine" Rows="5" OnTextChanged="TxDetalle_TextChanged" AutoPostBack="true"></asp:TextBox>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <asp:UpdatePanel ID="UpdateModal" runat="server" UpdateMode="Conditional" Visible="false">
-                                    <ContentTemplate>
-                                        <div class="col-md-10" style="margin-left: auto; margin-right: auto" runat="server">
-                                            <div class="alert alert-danger   align-content-md-center" style="align-self: auto">
-                                                <h3 class="text-danger" style="text-align: center"><i class="fa fa-exclamation-triangle"></i></h3>
-                                                <asp:Label ID="LbMensajeModalErrorReprogramar" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label>
-                                            </div>
-                                        </div>
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
-
-
-                            </div>
+                            <%--                            </div>--%>
                         </ContentTemplate>
                     </asp:UpdatePanel>
-
-
-
-<%--                    <div class="col-md-12" style="margin-left: auto; margin-right: auto" id="Div1" runat="server">
-                        <div class="alert alert-success  alert-dismissible align-content-md-center" style="align-self: auto">
-                            <div class="row">
-                                <div class="col-3">          
-                                    <p class="text-center"><img src="https://img.icons8.com/color/70/000000/accept-database.png"/><span class="dashicons dashicons-admin-home"></span></i></p>
-                                </div>
-                                <div class="col-9" style="text-align: center">
-                                    <br>
-                                    <h4><strong>¿Desea cancelar la LV?</strong></h4>
-                                    <p>Si esta seguro dar clic en el botón "Cancelar LV"</p>
-                                </div>
-                                <br>
-                                <p style="text-align: justify">Si en el motivo selecciono la opción cambio técnico responsable se hara el respectivo cambio, caso contrario el jefe o suplente recibira un correo para que haga la respectiva reprogramación. </p>
-                                <asp:Label ID="Label1" runat="server" Text="" Width="100%"></asp:Label>
-                            </div>
-                        </div>
-                    </div>--%>
-
-
-
                 </div>
-             <%--   <div class="modal-footer">--%>
+                <div class="modal-footer">
                     <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                         <ContentTemplate>
                             <button type="button" class="btn btn-light" data-dismiss="modal">Cerrar</button>
-                            <asp:Button ID="BtnCancelarLV" runat="server" Text="Cancelar LV" class="btn btn-dark" OnClick="BtnCancelarLV_Click"/>
+                            <asp:Button ID="BtnCancelarLV" runat="server" Text="Cancelar LV" class="btn btn-success" OnClick="BtnCancelarLV_Click"/>
                         </ContentTemplate>
                     </asp:UpdatePanel>
+                    </div><br />
                 </div>
             </div>
         </div>

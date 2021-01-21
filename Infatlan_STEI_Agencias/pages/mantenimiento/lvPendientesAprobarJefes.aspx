@@ -88,12 +88,12 @@
                                         </ItemTemplate>
                                         <ItemStyle Width="10%" />
                                     </asp:TemplateField>
-                                    <asp:BoundField DataField="id_Mantenimiento" HeaderText="Id" ControlStyle-Width="10%" />
+                                    <asp:BoundField DataField="id_Mantenimiento" HeaderText="Id" Visible="false" ControlStyle-Width="10%" />
                                     <asp:BoundField DataField="fecha" HeaderText="Fecha" ControlStyle-Width="10%" />
-                                    <asp:BoundField DataField="Cod_Agencia" HeaderText="Cod. Agencia" ControlStyle-Width="10%" />
+                                    <asp:BoundField DataField="Cod_Agencia" HeaderText="Cod. Agencia" Visible="false" ControlStyle-Width="10%" />
                                     <asp:BoundField DataField="Lugar" HeaderText="Lugar" ControlStyle-Width="10%" />
                                     <asp:BoundField DataField="Area" HeaderText="Area" ControlStyle-Width="10%" />
-                                    <asp:BoundField DataField="sysAid" HeaderText="No. SysAid" ControlStyle-Width="10%" />
+                                    <asp:BoundField DataField="sysAid" HeaderText="No. SysAid" Visible="false" ControlStyle-Width="10%" />
                                     <asp:BoundField DataField="Responsable" HeaderText="Responsable" ControlStyle-Width="10%" />
                                     <asp:BoundField DataField="idUsuario" HeaderText="idUsuariob" ControlStyle-Width="10%" Visible="false" />
                                 </Columns>
@@ -102,11 +102,7 @@
                     </asp:UpdatePanel>
                 </div>
 
-                <div class="row p-t-20 col-md-12">
-                                <div class="col-md-4 " style="margin-left: auto; margin-right: auto">
-                                    <a href="../../default.aspx"" class="btn  btn-block btn-primary">Volver</a>
-                                </div>
-                            </div>
+               
                 <br>
             </div>
         </div>

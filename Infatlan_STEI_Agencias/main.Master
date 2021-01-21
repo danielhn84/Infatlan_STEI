@@ -103,29 +103,43 @@
                     <ul id="sidebarnav">
                         <li><a  href="/default.aspx" aria-expanded="false"><i class="icon-action-undo"></i><span class="hide-menu">Volver</span></a></li>
                        
-                        <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-home"></i><span class="hide-menu">Configuraciones</span></a>
+                        <li runat="server" id="LIConfig" visible="false"><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-home"></i><span class="hide-menu">Configuraciones</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="/sites/agencias/pages/configuraciones/creacionAgencia.aspx">Agencias</a></li>
-                                <li><a href="/sites/agencias/pages/configuraciones/agenciaTipo.aspx">Tipos de Agencia</a></li>                               
-                                <li><a href="/sites/agencias/pages/configuraciones/motivosCancelacionMantenimientos.aspx">Motivos</a></li>
-                                <li><a href="/sites/agencias/pages/configuraciones/tiposAreas.aspx">Areas</a></li>
-                                <li><a href="/sites/agencias/pages/configuraciones/calendarioMantenimientoAnual.aspx">Calendario Anual</a></li>
+                                
+                                    <li><a href="/sites/agencias/pages/configuraciones/creacionAgencia.aspx">Agencias</a></li>
+                                      <li><a href="/sites/agencias/pages/configuraciones/agenciaTipo.aspx">Tipos de Agencia</a></li>                               
+                                      <li><a href="/sites/agencias/pages/configuraciones/motivosCancelacionMantenimientos.aspx">Motivos</a></li>
+                                      <li><a href="/sites/agencias/pages/configuraciones/tiposAreas.aspx">Areas</a></li>
+                                      <%--<li runat="server" visible="false" id="LICalendario"><a href="/sites/agencias/pages/configuraciones/calendarioMantenimientoAnual.aspx">Calendario Anual</a></li>--%>
+                                   
                             </ul>
                         </li>                   
                         <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-wrench"></i><span class="hide-menu">Mantenimiento</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="/sites/agencias/pages/mantenimiento/creacionNotificacion.aspx">Crear Notificación</a></li>
-                                <li><a href="/sites/agencias/pages/mantenimiento/aprobarNotificacion.aspx">Aprobar Notificacion</a></li>
-                                <li><a href="/sites/agencias/pages/mantenimiento/solicitudMateriales.aspx">Solicitar Materiales</a></li>
-                                <li><a href="/sites/agencias/pages/mantenimiento/aprobarSolicitudMateriales.aspx">Aprobar Materiales</a></li>
-                                <li><a href="/sites/agencias/pages/mantenimiento/lvPendientesCompletar.aspx">Completar LV</a></li>
-                                <li><a href="/sites/agencias/pages/mantenimiento/lvPendientesAprobarJefes.aspx">Aprobar LV</a></li>
-                                <li><a href="/sites/agencias/pages/mantenimiento/lvPendientesModificar.aspx">Modificar LV</a></li>
-                                <li><a href="/sites/agencias/pages/mantenimiento/reprogramarMantenimiento.aspx">Reprogramar</a></li>
+                                <li runat="server" id="LINotif"><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><span class="hide-menu">Notificación<span class="badge badge-pill badge-cyan ml-auto"></span></span></a>
+                                  <ul aria-expanded="false" class="collapse">  
+                                        <li runat="server" id="LICreaNotif"><a href="/sites/agencias/pages/mantenimiento/creacionNotificacion.aspx">Crear</a></li>
+                                        <li runat="server" id="LIAprobarNotif"><a href="/sites/agencias/pages/mantenimiento/aprobarNotificacion.aspx">Aprobar</a></li>                                        
+                                       
+                                   </ul>
+                                </li>
+                                 <li runat="server" id="LIMateriales" visible="false"><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><span class="hide-menu">Materiales<span class="badge badge-pill badge-cyan ml-auto"></span></span></a>
+                                  <ul aria-expanded="false" class="collapse">  
+                                      <li runat="server" id="LISolicitarMaterial"><a href="/sites/agencias/pages/mantenimiento/solicitudMateriales.aspx">Solicitar</a></li>
+                                        <li runat="server" id="LIAprobarMaterial"><a href="/sites/agencias/pages/mantenimiento/aprobarSolicitudMateriales.aspx">Aprobar</a></li>
+                                  </ul>
+                                 </li>
+                                 <li runat="server" id="LIVerificacion"><a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><span class="hide-menu">Verificación<span class="badge badge-pill badge-cyan ml-auto"></span></span></a>
+                                  <ul aria-expanded="false" class="collapse">  
+                                       <li runat="server" id="LICreaVerif"><a href="/sites/agencias/pages/mantenimiento/lvPendientesCompletar.aspx">Crear</a></li>
+                                        <li runat="server" id="LIApruebaVerif"><a href="/sites/agencias/pages/mantenimiento/lvPendientesAprobarJefes.aspx">Aprobar</a></li>
+                                        <li runat="server" id="LIDevolverVerif"><a href="/sites/agencias/pages/mantenimiento/lvPendientesModificar.aspx">Devoluciones</a></li>
+                                  </ul>
+                                 </li>
                             </ul>
                         </li>
                         
-                        
+                        <li><a class="waves-effect waves-dark" href="pages-faq.html" aria-expanded="false"><i class="icon-bubble"></i><span class="hide-menu">FAQs</span></a></li>                  
                     </ul>
                 </nav>
             </div>
@@ -163,6 +177,7 @@
     <script src="/js/dashboard1.js"></script>
     <script src="/assets/node_modules/toast-master/js/jquery.toast.js"></script>
     <script src="/js/bootstrap-notify.js"></script>
+    <script src="/sites/agencias/js/bootstrap-notify.js"></script>
 
 
     <asp:ContentPlaceHolder ID="Script" runat="server">

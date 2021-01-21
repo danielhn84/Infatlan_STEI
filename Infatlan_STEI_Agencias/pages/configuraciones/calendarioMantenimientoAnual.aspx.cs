@@ -33,12 +33,11 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
         public Boolean cargarArchivo(String DireccionCarga, ref int vSuccess, ref int vError, String vUsuario, String TipoProceso)
         {
 
-            Div1.Visible = false;
-            UpdatePanel1.Update();
+            Div1.Visible = false;           
             DivAlerta.Visible = false;
-            UpdateModal.Update();
 
             Boolean vResultado = false;
+           
             try
             {
                 FileStream stream = File.Open(DireccionCarga, FileMode.Open, FileAccess.Read);
@@ -101,6 +100,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                     Session["AG_CMA_COD_AGENCIA_SUBIDO"] = "Completo";
                     Session["AG_CMA_FECHA_SUBIDO"] = "Completo";
                     Session["AG_CMA_AREA_SUBIDO"] = "Completo";
+                    string vAño = DateTime.Now.Year.ToString();
 
                     for (int i = 0; i < vDatos.Rows.Count; i++)
                     {
@@ -144,8 +144,8 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
 
                             Session["AG_CMA_AREA_SUBIDO"] = Session["AG_CMA_AREA_SUBIDO"] + ", " + Area;
                         }
-
-                        if (vFechaMant != "2020")
+                        
+                        if (vFechaMant != vAño)
                         {
                             if (Session["AG_CMA_FECHA_SUBIDO"].ToString() == "Completo")
                                 Session["AG_CMA_FECHA_SUBIDO"] = "";
@@ -153,6 +153,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
 
                             Session["AG_CMA_FECHA_SUBIDO"] = Session["AG_CMA_FECHA_SUBIDO"] + ", " + CodAgencia;
                         }
+                      
 
                     }
 
@@ -216,9 +217,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             try
             {
                 Div1.Visible = false;
-                UpdatePanel1.Update();
                 DivAlerta.Visible = false;
-                UpdateModal.Update();
 
                 String vDireccionCarga = ConfigurationManager.AppSettings["RUTA_SERVER"].ToString();
                 if (FUMantenimientosAgencia.HasFile)
@@ -243,28 +242,25 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                         if (Session["AG_CMA_AREA_SUBIDO"].ToString() != "Completo")
                             LbMensaje.Text = LbMensaje.Text + "Area " + Session["AG_CMA_AREA_SUBIDO"].ToString() + " tipo area no existe, favor verificar que esten ingresadas y activas." + "&emsp;";
                         DivAlerta.Visible = true;
-                        UpdateModal.Update();
 
                     }
                     else
                     {
                         LbMensajeSuccsess.Text = "Archivo de mantenimientos preventivos cargados con exito." + "<br>" + "<b style='color:white;'>Success:</b> " + vSuccess.ToString() + "&emsp;";
                         Div1.Visible = true;
-                        UpdatePanel1.Update();
                     }
                 }
                 else
                 {
                     LbMensaje.Text = "No se encontró ningún archivo a cargar.";
                     DivAlerta.Visible = true;
-                    UpdateModal.Update();
                 }
             }
             catch (Exception ex)
             {
                 LbMensaje.Text = ex.Message;
-
-             }
+                Div1.Visible = true;
+            }
         }
         
         protected void BtnCancelar_Click1(object sender, EventArgs e)
@@ -273,15 +269,11 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             {
 
                 Div1.Visible = false;
-                UpdatePanel1.Update();
                 DivAlerta.Visible = false;
-                UpdateModal.Update();
 
                 Mensaje("Acción cancelado con exito. ", WarningType.Success);
                 Div1.Visible = false;
-                UpdatePanel1.Update();
                 DivAlerta.Visible = false;
-                UpdateModal.Update();
             }
             catch (Exception ex)
             {

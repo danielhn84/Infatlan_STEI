@@ -45,8 +45,10 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
+                    <h4 class="card-title">Notificaciones</h4>
+                    <h6 class="card-subtitle">Creación de notificaciones de mantenimiento de agencias</h6>
                     <div class="form-body col-md-12">
-                        <h3 class="card-title">Datos Generales</h3>
+                       <h5 class="card-subtitle m-t-10"><i class="fa fa-book"></i><b> DATOS GENERALES</b></h5>
                         <asp:UpdatePanel runat="server" ID="UPFormulario">
                             <ContentTemplate>
                                 <!--Inicio Fila 1-->                                
@@ -152,31 +154,29 @@
                     <div class="form-body col-12">
                         <asp:UpdatePanel runat="server" ID="UpdatePanel1" UpdateMode="Conditional">
                             <ContentTemplate>
-                            <h3 class="card-title">Personal Encargado</h3>                             
+                            <h5 class="card-subtitle m-t-20"><i class="fa fa-user"></i><b> PERSONAL ENCARGADO</b></h5>                           
                                 <br>
-                                <h5 class="card-title">Técnico Responsable</h5>
+                               <%-- <h5 class="card-title">Técnico Responsable</h5>--%>
                                 <div class="row 20">
 
                                     <div class="col-6">
-                                       <%-- <label class="control-label  text-danger">*</label><label class="control-label">Nombre:</label>--%>
+                                       <label class="control-label">Técnico Responsable:</label>
                                         <asp:DropDownList ID="DDLNombreResponsable" runat="server" AutoPostBack="true" CssClass="form-control" OnSelectedIndexChanged="DDLNombreResponsable_SelectedIndexChanged" Enabled="false"></asp:DropDownList>
                                     </div>
                     
                                     <div class="col-6">
-                                        <%--<label class="control-label">Identidad:</label>--%>
+                                        <label class="control-label">Identidad:</label>
                                         <asp:TextBox ID="TxIdentidadResponsable" class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                                     </div>
                                 </div>
                                 <br>
                                 <br>
 
-                                <h5 class="card-title">Técnicos Participantes </h5>
-                    <%--            <label class="control-label">Nombre:</label>--%>
+                               <%-- <h5 class="card-title">Técnicos Participantes </h5>--%>
+                                <label class="control-label">Técnicos Participantes:</label>
                                 <asp:DropDownList ID="DDLNombreParticipantes" AutoPostBack="true" runat="server" CssClass="fstdropdown-select form-control" OnTextChanged="DDLNombreParticipantes_TextChanged" Enabled="false"></asp:DropDownList>
                                 <br>
                              
-                                <%--<div class="row col-12">--%>
-                                    <%--<div class="col-12 grid-margin stretch-card">--%>
                                         <div class="table-responsive m-t-40">
                                             <asp:GridView ID="GVBusqueda" runat="server"
                                                 CssClass="table table-bordered"
@@ -189,7 +189,7 @@
                                                 PageSize="10" OnPageIndexChanging="GVBusqueda_PageIndexChanging" OnRowCommand="GVBusqueda_RowCommand">
 
                                                 <Columns>
-                                                    <asp:TemplateField HeaderText="Acción" ItemStyle-HorizontalAlign="center">
+                                                    <asp:TemplateField HeaderText="Acción" ItemStyle-HorizontalAlign="center"  HeaderStyle-Width="60px">
                                                         <ItemTemplate>
                                                             <asp:LinkButton ID="LBEliminarTecnicoParticipantes"  class="btn btn-danger mr-2" runat="server" Title="Eliminar" CommandName="Eliminar" CommandArgument='<%# Eval("idUsuario") %>'>
   
@@ -198,18 +198,17 @@
                                                         </ItemTemplate>
                                                         <%--<ItemStyle Width="5%" />--%>
                                                     </asp:TemplateField>
-                                                    <asp:BoundField DataField="idUsuario" HeaderText="Usuario" ItemStyle-Width="25%" ItemStyle-HorizontalAlign="center" />
-                                                    <asp:BoundField DataField="nombre" HeaderText="Nombre" ItemStyle-Width="25%"/>
-                                                    <asp:BoundField DataField="identidad" HeaderText="Identidad" ItemStyle-Width="25%" ItemStyle-HorizontalAlign="center" />
+                                                    <asp:BoundField DataField="idUsuario" HeaderText="Usuario" ItemStyle-Width="30%" ItemStyle-HorizontalAlign="center" />
+                                                    <asp:BoundField DataField="nombre" HeaderText="Nombre" ItemStyle-Width="30%"/>
+                                                    <asp:BoundField DataField="identidad" HeaderText="Identidad" ItemStyle-Width="30%" ItemStyle-HorizontalAlign="center" />
+                                                     <asp:BoundField DataField="correo" HeaderText="Correo" Visible="false" ItemStyle-Width="30%" />
                                                 </Columns>
                                             </asp:GridView>
                                         </div>
-                                    <%--</div>--%>
-                                <%--</div>--%>
                                 <br>
             
 
-                                <h5 class="card-title">Jefes de Agencia </h5>
+                                <h5 class="card-subtitle m-t-20" runat="server" id="H3JefeAgencia"><i class="fa fa-user"></i><b> JEFES DE AGENCIA</b></h5>
                                 <div class="row">
                                     <div class="col-6">
                                         <asp:TextBox runat="server" ID="txtbuscarJefeNotif" placeholder="Búsqueda por nombre, apellido o correo, luego dar clic en el boton" ReadOnly="true" CssClass="form-control"></asp:TextBox>
@@ -219,9 +218,6 @@
                                     </div>
                                 </div>
 
-                          
-                         <%--       <div class="row col-12">
-                                    <div class="col-12 grid-margin stretch-card">--%>
                                         <div class="table-responsive m-t-40">
                                             <asp:GridView ID="GVJefesAD" runat="server"
                                                 CssClass="table table-bordered"
@@ -248,11 +244,7 @@
                                                 </Columns>
                                             </asp:GridView>
                                         </div>
-                                <%--    </div>
-                                </div>--%>
-
-                      <%--          <div class="row col-12">
-                                    <div class="col-12 grid-margin stretch-card">--%>
+    
                                         <div class="table-responsive m-t-40">
                                             <asp:GridView ID="GVjefesAgencias" runat="server"
                                                 CssClass="table table-bordered"
@@ -280,28 +272,13 @@
                                                 </Columns>
                                             </asp:GridView>
 
-                               <%--         </div>
-                                    </div>--%>
-
                                 </div>
-
-
-                              
-
-                         
                             </ContentTemplate>
                         </asp:UpdatePanel>
 
-
-
-
                         <asp:UpdatePanel ID="UpdatePrincipalBotones" runat="server">
                             <ContentTemplate>
-
-
-                                <div class="col-md-12" style="text-align: center">
-                                    <label class="control-label text-danger" style="text-align: center">Los campos con (*) son obligatorios</label>
-                                </div>
+                               
                      <%--       <div class="row p-t-20 col-md-12">
                                 <div class="col-md-4">
                                     <asp:Button ID="BtnEnviarNotificacion" class="btn btn-block btn-success" runat="server" Text="Enviar" OnClick="BtnEnviarNotificacion_Click" />
@@ -342,14 +319,13 @@
                  <div class="modal-header">
                     <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
-                            <h3 class="modal-title" >
-                                <asp:Label ID="lbTitulo" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label></h3>
+                            <h4 class="modal-title" ><asp:Label ID="lbTitulo" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label></h4>
                         </ContentTemplate>
                     </asp:UpdatePanel>
 
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <%--<button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                    </button>
+                    </button>--%>
 
                 </div>
                 <div class="modal-body">

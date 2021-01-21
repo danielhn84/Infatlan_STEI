@@ -108,12 +108,12 @@
                                             </ItemTemplate>
                                             <ItemStyle Width="13%" />
                                         </asp:TemplateField>
-                                        <asp:BoundField DataField="id_Mantenimiento" HeaderText="Id" />
-                                        <asp:BoundField DataField="fecha" HeaderText="Fecha"  />
-                                        <asp:BoundField DataField="Hr_Inicio" HeaderText="Hora Inicio" />
-                                        <asp:BoundField DataField="Hr_Fin" HeaderText="Hora Fin" />
+                                        <asp:BoundField DataField="id_Mantenimiento" HeaderText="Id" Visible="false" />
+                                        <asp:BoundField DataField="fecha" HeaderText="Fecha"/>
+                                        <asp:BoundField DataField="Hr_Inicio" HeaderText="Hora Inicio" Visible="false" />
+                                        <asp:BoundField DataField="Hr_Fin" HeaderText="Hora Fin" Visible="false"/>
                                         <asp:BoundField DataField="Lugar" HeaderText="Lugar" />
-                                        <asp:BoundField DataField="Cod_Agencia" HeaderText="Codigo Agencia" />
+                                        <asp:BoundField DataField="Cod_Agencia" HeaderText="Codigo Agencia" Visible="false" />
                                         <asp:BoundField DataField="Responsable" HeaderText="Responsable" />
                                         <asp:BoundField DataField="Area" HeaderText="Area" />
 
@@ -137,8 +137,7 @@
                    
                      <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
-                            <h3 class="modal-title"  >
-                                <asp:Label ID="lbTitulo" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label></h3>
+                            <h4 class="modal-title"  ><asp:Label ID="lbTitulo" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label></h4>
                         </ContentTemplate>
                     </asp:UpdatePanel>
 
@@ -204,10 +203,7 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
 
-
-       
-
-                        <div class="col-md-12" style="margin-left: auto; margin-right: auto" id="Div3" runat="server">
+                        <%--<div class="col-md-12" style="margin-left: auto; margin-right: auto" id="Div3" runat="server">
                             <div class="alert alert-success  alert-dismissible align-content-md-center" style="align-self: auto">
                                 <div class="row">
                                     <div class="col-12">
@@ -221,7 +217,7 @@
                                    
                                 </div>
                             </div>
-                        </div>
+                        </div>--%>
                
 
 
@@ -248,8 +244,7 @@
 
                      <asp:UpdatePanel ID="UpdatePanel6" runat="server" UpdateMode="Conditional">
                          <ContentTemplate>
-                             <h3 class="modal-title">
-                                 <asp:Label ID="lbTituloCancelar" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label></h3>
+                             <h4 class="modal-title"><asp:Label ID="lbTituloCancelar" runat="server" Text="" Style="margin-left: auto; margin-right: auto"></asp:Label></h4>
                          </ContentTemplate>
                      </asp:UpdatePanel>
 
@@ -293,11 +288,6 @@
                                             <asp:TextBox ID="TxDetalle" class="form-control" runat="server" TextMode="MultiLine" Rows="5"></asp:TextBox>
                                         </div>
                                     </div>
-                                </div>
-
-
-                                <div class="col-md-12" style="text-align: center">
-                                    <label class="control-label" style="text-align: center; color: tomato">Los campos con (*) son obligatorios</label>
                                 </div>
 
                                 <asp:UpdatePanel ID="UpdateModal" runat="server" UpdateMode="Conditional" >

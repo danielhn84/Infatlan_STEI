@@ -96,15 +96,6 @@ namespace Infatlan_STEI_Agencias.pages
         protected global::System.Web.UI.WebControls.TextBox TxIdMantenimiento;
 
         /// <summary>
-        /// Control lbMotivo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbMotivo;
-
-        /// <summary>
         /// Control DDLMotivo.
         /// </summary>
         /// <remarks>
@@ -114,22 +105,13 @@ namespace Infatlan_STEI_Agencias.pages
         protected global::System.Web.UI.WebControls.DropDownList DDLMotivo;
 
         /// <summary>
-        /// Control asterisco.
+        /// Control Etiqueta.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl asterisco;
-
-        /// <summary>
-        /// Control etiqueta.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl etiqueta;
+        protected global::System.Web.UI.WebControls.Label Etiqueta;
 
         /// <summary>
         /// Control DDLNombreResponsable.

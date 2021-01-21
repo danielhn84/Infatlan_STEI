@@ -54,7 +54,7 @@
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.5.452, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\ICSharpCode.SharpZipLib.dll</HintPath>
+      <HintPath>..\..\Infatlan_AuditControl\Infatlan_AuditControl\bin\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -6049,20 +6049,16 @@
     <Content Include="assets\node_modules\x-editable\dist\jqueryui-editable\img\loading.gif" />
     <Content Include="assets\node_modules\x-editable\dist\jqueryui-editable\js\jqueryui-editable.js" />
     <Content Include="assets\node_modules\x-editable\dist\jqueryui-editable\js\jqueryui-editable.min.js" />
-    <Content Include="bin\es\System.Net.Http.Formatting.resources.dll" />
-    <Content Include="bin\es\System.Web.Http.resources.dll" />
-    <Content Include="bin\es\System.Web.Http.WebHost.resources.dll" />
+    <Content Include="bin\AntiCSRF.dll" />
     <Content Include="bin\Excel.4.5.dll" />
     <Content Include="bin\ExcelDataReader.dll" />
-    <Content Include="bin\ExcelDataReader.pdb" />
-    <Content Include="bin\ExcelDataReader.xml" />
+    <Content Include="bin\ICSharpCode.SharpZipLib.dll" />
     <Content Include="bin\Infatlan_STEI_Agencias.dll" />
     <Content Include="bin\Infatlan_STEI_Agencias.pdb" />
     <Content Include="bin\Interop.zkemkeeper.dll" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
-    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
+    <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
     <Content Include="bin\Newtonsoft.Json.dll" />
-    <Content Include="bin\Newtonsoft.Json.xml" />
     <Content Include="bin\roslyn\csc.exe" />
     <Content Include="bin\roslyn\csi.exe" />
     <Content Include="bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll" />
@@ -6100,13 +6096,16 @@
     <Content Include="bin\roslyn\vbc.exe" />
     <Content Include="bin\roslyn\VBCSCompiler.exe" />
     <Content Include="bin\System.Net.Http.Formatting.dll" />
-    <Content Include="bin\System.Net.Http.Formatting.xml" />
+    <Content Include="bin\System.Web.Helpers.dll" />
+    <Content Include="bin\System.Web.Helpers.xml" />
     <Content Include="bin\System.Web.Http.dll" />
     <Content Include="bin\System.Web.Http.WebHost.dll" />
-    <Content Include="bin\System.Web.Http.WebHost.xml" />
-    <Content Include="bin\System.Web.Http.xml" />
+    <Content Include="bin\System.Web.Razor.dll" />
     <Content Include="bin\System.Web.Razor.xml" />
+    <Content Include="bin\System.Web.WebPages.Deployment.dll" />
     <Content Include="bin\System.Web.WebPages.Deployment.xml" />
+    <Content Include="bin\System.Web.WebPages.dll" />
+    <Content Include="bin\System.Web.WebPages.Razor.dll" />
     <Content Include="bin\System.Web.WebPages.Razor.xml" />
     <Content Include="bin\System.Web.WebPages.xml" />
     <Content Include="css\animate.min.css" />
@@ -6222,8 +6221,12 @@
     <Content Include="js\sidebarmenu.js" />
     <Content Include="js\waves.js" />
     <Content Include="mail\TemplateMail.html" />
-    <Content Include="mail\TemplateMail1.html" />
+    <Content Include="mail\TemplateMailAlertas.html" />
+    <Content Include="pages\configuraciones\avances.aspx" />
     <Content Include="pages\configuraciones\calendarioMantenimientoAnual.aspx" />
+    <Content Include="pages\configuraciones\cancelarMantenimiento.aspx" />
+    <Content Include="pages\configuraciones\newFecha.aspx" />
+    <Content Include="pages\configuraciones\permisos.aspx" />
     <Content Include="pages\mantenimiento\aprobarNotificacion.aspx" />
     <Content Include="pages\configuraciones\agenciaTipo.aspx" />
     <Content Include="pages\configuraciones\creacionAgencia.aspx" />
@@ -6264,12 +6267,40 @@
     <Compile Include="main.Master.designer.cs">
       <DependentUpon>main.Master</DependentUpon>
     </Compile>
+    <Compile Include="pages\configuraciones\avances.aspx.cs">
+      <DependentUpon>avances.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\configuraciones\avances.aspx.designer.cs">
+      <DependentUpon>avances.aspx</DependentUpon>
+    </Compile>
     <Compile Include="pages\configuraciones\calendarioMantenimientoAnual.aspx.cs">
       <DependentUpon>calendarioMantenimientoAnual.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="pages\configuraciones\calendarioMantenimientoAnual.aspx.designer.cs">
       <DependentUpon>calendarioMantenimientoAnual.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\configuraciones\cancelarMantenimiento.aspx.cs">
+      <DependentUpon>cancelarMantenimiento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\configuraciones\cancelarMantenimiento.aspx.designer.cs">
+      <DependentUpon>cancelarMantenimiento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\configuraciones\newFecha.aspx.cs">
+      <DependentUpon>newFecha.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\configuraciones\newFecha.aspx.designer.cs">
+      <DependentUpon>newFecha.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\configuraciones\permisos.aspx.cs">
+      <DependentUpon>permisos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\configuraciones\permisos.aspx.designer.cs">
+      <DependentUpon>permisos.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\mantenimiento\aprobarNotificacion.aspx.cs">
       <DependentUpon>aprobarNotificacion.aspx</DependentUpon>
@@ -6363,6 +6394,16 @@
       <DependentUpon>solicitudMateriales.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ReportExecutionService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="main.Master" />
@@ -7462,17 +7503,6 @@
     <Content Include="dist\scss\widgets\topbar-mail.scss" />
     <Content Include="dist\scss\widgets\weather-widget.scss" />
     <Content Include="dist\scss\widgets\widgets.scss" />
-    <Content Include="bin\Infatlan_STEI_Agencias.dll.config" />
-    <Content Include="bin\roslyn\csc.exe.config" />
-    <Content Include="bin\roslyn\csc.rsp" />
-    <Content Include="bin\roslyn\csi.exe.config" />
-    <Content Include="bin\roslyn\csi.rsp" />
-    <Content Include="bin\roslyn\Microsoft.CSharp.Core.targets" />
-    <Content Include="bin\roslyn\Microsoft.Managed.Core.targets" />
-    <Content Include="bin\roslyn\Microsoft.VisualBasic.Core.targets" />
-    <Content Include="bin\roslyn\vbc.exe.config" />
-    <Content Include="bin\roslyn\vbc.rsp" />
-    <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
     <Content Include="assets\node_modules\bootstrap-material-datetimepicker\.gitignore" />
     <Content Include="assets\node_modules\bootstrap-material-datetimepicker\bower.json" />
     <Content Include="assets\node_modules\bootstrap-material-datetimepicker\font\Material-Design-Icons.eot" />
@@ -8018,7 +8048,6 @@
     <Content Include="assets\node_modules\jquery-steps-master\.travis.yml" />
     <Content Include="assets\node_modules\jquery-steps-master\bower.json" />
     <Content Include="assets\node_modules\jquery-steps-master\build\jquery.steps-1.1.0.zip" />
-    <Content Include="assets\node_modules\jquery-steps-master\build\jQuery.Steps.1.1.0.nupkg" />
     <Content Include="assets\node_modules\jquery-steps-master\CHANGELOG.md" />
     <Content Include="assets\node_modules\jquery-steps-master\nuget\jQuery.Steps.nuspec" />
     <Content Include="assets\node_modules\jquery-steps-master\package.json" />
@@ -8315,6 +8344,17 @@
     <Content Include="assets\node_modules\typeahead.js-master\README.md" />
     <Content Include="assets\node_modules\typeahead.js-master\test\ci" />
     <Content Include="assets\node_modules\typeahead.js-master\typeahead.js.jquery.json" />
+    <Content Include="bin\Infatlan_STEI_Agencias.dll.config" />
+    <Content Include="bin\roslyn\csc.exe.config" />
+    <Content Include="bin\roslyn\csc.rsp" />
+    <Content Include="bin\roslyn\csi.exe.config" />
+    <Content Include="bin\roslyn\csi.rsp" />
+    <Content Include="bin\roslyn\Microsoft.CSharp.Core.targets" />
+    <Content Include="bin\roslyn\Microsoft.Managed.Core.targets" />
+    <Content Include="bin\roslyn\Microsoft.VisualBasic.Core.targets" />
+    <Content Include="bin\roslyn\vbc.exe.config" />
+    <Content Include="bin\roslyn\vbc.rsp" />
+    <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
     <None Include="packages.config" />
     <Content Include="scss\colors\blue-dark.scss" />
     <Content Include="scss\colors\blue.scss" />
@@ -8399,6 +8439,33 @@
     <Content Include="pages\plantilla\PlantillaAgencia.xlsx" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Web References\ReportExecutionService\DocumentMapNode.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\ReportExecutionService\ExecutionInfo.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\ReportExecutionService\ExecutionInfo2.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\ReportExecutionService\ExecutionInfo3.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\ReportExecutionService\Extension.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\ReportExecutionService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\ReportExecutionService\reportexecution2005.wsdl" />
+    <Content Include="Web References\ReportExecutionService\Warning.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -8426,7 +8493,28 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="bin\es\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://10.128.0.52/reportserver/reportexecution2005.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ReportExecutionService\</RelPath>
+      <UpdateFromURL>http://10.128.0.52/reportserver/reportexecution2005.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Infatlan_STEI_Agencias_ReportExecutionService_ReportExecutionService</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
