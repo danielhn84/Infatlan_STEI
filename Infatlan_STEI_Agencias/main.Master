@@ -138,7 +138,12 @@
                                  </li>
                             </ul>
                         </li>
-                        
+                         <li runat="server" id="LIReprogramar"><a class="waves-effect waves-dark" href="/sites/agencias/pages/mantenimiento/reprogramarMantenimiento.aspx" aria-expanded="false"><i class="ti-timer"></i><span class="hide-menu">Reprogramar</span></a></li>                             
+                         <li visible="false" runat="server" id="LIPermisos"><a href="/sites/agencias/pages/configuraciones/permisos.aspx" aria-expanded="false"><i class="ti-lock"></i><span class="hide-menu"> Permisos</span></a></li>
+                         <li visible="false" runat="server" id="LIAvances"><a href="/sites/agencias/pages/configuraciones/avances.aspx" aria-expanded="false"><i class="ti-stats-up"></i><span class="hide-menu"> Avances</span></a></li>
+                         <li visible="false" runat="server" id="LICancelar"><a href="/sites/agencias/pages/configuraciones/cancelarMantenimiento.aspx" aria-expanded="false"><i class="ti-na"></i><span class="hide-menu"> Cancelar</span></a></li>
+                         <li visible="false" runat="server" id="LICambiarFecha"><a href="/sites/agencias/pages/configuraciones/newFecha.aspx" aria-expanded="false"><i class="ti-layout-tab-window"></i><span class="hide-menu"> Cambiar Fecha</span></a></li>
+                        <li visible="false" runat="server" id="LICalendario"><a href="/sites/agencias/pages/configuraciones/calendarioMantenimientoAnual.aspx" aria-expanded="false"><i class="ti-calendar"></i><span class="hide-menu"> Calendario</span></a></li> 
                     </ul>
                 </nav>
             </div>
@@ -183,5 +188,3 @@
     </asp:ContentPlaceHolder>
 </body>
 </html>
-
-
