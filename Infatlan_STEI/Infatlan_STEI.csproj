@@ -454,6 +454,7 @@
     <Content Include="assets\images\logo-icon.png" />
     <Content Include="assets\images\logo-light-icon.png" />
     <Content Include="assets\images\logo-light-text.png" />
+    <Content Include="assets\images\Logo-rojo.png" />
     <Content Include="assets\images\logo-text.png" />
     <Content Include="assets\images\logo.png" />
     <Content Include="assets\images\logo_mini.png" />

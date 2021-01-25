@@ -4786,10 +4786,10 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <None Include="Web References\SapInventario\zws_af_inf.wsdl" />
-    <Content Include="Web References\SapService\Reference.map">
+    <None Include="Web References\SapService\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
+    </None>
     <Content Include="Web References\SapService\ZWS_AF_CONSULTAResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
