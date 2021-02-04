@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Infatlan_STEI_Agencias.classes;
+using System;
+using System.Data;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using Infatlan_STEI_Agencias.classes;
-using System.Configuration;
 
 namespace Infatlan_STEI_Agencias.pages.mantenimiento
 {
@@ -18,22 +14,27 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
 
-        protected void Page_Load(object sender, EventArgs e){
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!Page.IsPostBack)
+            {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
                     cargarDatos();
-                }else {
+                }
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
             }
         }
-        
+
         private void cargarDatos()
         {
             try
             {
                 String vQuery = "STEISP_AGENCIA_Materiales 7";
-                DataTable vDatos = vConexion.obtenerDataTable(vQuery);                
+                DataTable vDatos = vConexion.obtenerDataTable(vQuery);
 
                 GVMaterialesAprobar.DataSource = vDatos;
                 GVMaterialesAprobar.DataBind();
@@ -43,7 +44,7 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
-        
+
         protected void GVMaterialesAprobar_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             string vIdMantenimiento = e.CommandArgument.ToString();
@@ -63,7 +64,7 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
                 Session["AG_ASM_RESPONSABLE"] = vDatos.Rows[0]["usuarioResponsable"].ToString();
                 Session["AG_ASM_ID_MUNICIPIO"] = vDatos.Rows[0]["idMunicipio"].ToString();
                 Session["AG_ASM_LUGAR_NUEVO"] = vDatos.Rows[0]["idUbicacion"].ToString();
-                
+
                 Int32 RbConductorConverido = Convert.ToInt32(vDatos.Rows[0]["requiereConductor"]);
                 RbConductor.SelectedValue = RbConductorConverido.ToString();
                 lbTitulo.Text = "Aprobar Solicitud de Materiales " + TxAgencia.Text;
@@ -74,8 +75,8 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
 
                 //}
 
-                 vQuery = "STEISP_AGENCIA_Materiales 9," + vIdMantenimiento;
-                 vDatos = vConexion.obtenerDataTable(vQuery);
+                vQuery = "STEISP_AGENCIA_Materiales 9," + vIdMantenimiento;
+                vDatos = vConexion.obtenerDataTable(vQuery);
                 Session["AG_ASM_MATERIALES_SOLICITADOS"] = vDatos;
                 GVNewMaterialesAprobar.DataSource = vDatos;
                 GVNewMaterialesAprobar.DataBind();
@@ -84,39 +85,39 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModalAprobarMaterial();", true);
             }
         }
-        
+
         private void validaciones()
         {
             //if (RbConductor.SelectedValue.Equals("1")  && DDLConductor.SelectedValue.Equals("0"))
             //    throw new Exception("Falta completar datos, Favor seleccionar el conductor asignado. ");
 
         }
-        
+
         protected void btnModalAprobar_Click(object sender, EventArgs e)
         {
             try
             {
-            validaciones();
-            TransaccionInventario();
+                validaciones();
+                TransaccionInventario();
 
-            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModalAprobarMaterial();", true);
-            limpiarModal();
-            cargarDatos();
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModalAprobarMaterial();", true);
+                limpiarModal();
+                cargarDatos();
             }
             catch (Exception ex)
             {
                 LbMensajeModalError.Text = ex.Message;
                 DivAlerta.Visible = true;
                 UpdateModal.Update();
-            }            
+            }
         }
-        
+
         protected void DDLConductor_TextChanged(object sender, EventArgs e)
         {
             DivAlerta.Visible = false;
             UpdateModal.Update();
         }
-        
+
         void limpiarModal()
         {
             GVNewMaterialesAprobar.DataSource = null;
@@ -126,7 +127,7 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
             //DDLConductor.SelectedIndex = -1;
 
         }
-        
+
         void TransaccionInventario()
         {
             try
@@ -152,13 +153,13 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
                     }
                 }
 
-                if (vCantidadAbastecer >=1)
+                if (vCantidadAbastecer >= 1)
                 {
                     throw new Exception(vAbastecerMateriales);
                 }
 
 
-   
+
 
 
 
@@ -214,7 +215,7 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
                         //{
                         //    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "cerrarModal();", true);
                         //    Mensaje("Cambio realizado con éxito.", WarningType.Success);
-                           
+
                         //}
                     }
                     else if (Convert.ToDecimal(vCantidadActual) > Convert.ToDecimal(vCantidadSolicitada))
@@ -229,7 +230,7 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
                         //{
                         //    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "cerrarModal();", true);
                         //    Mensaje("Cambio realizado con éxito.", WarningType.Success);
-       
+
                         //}
                     }
 

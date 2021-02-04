@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Infatlan_STEI.classes;
+using System;
+using System.Configuration;
 using System.Data;
+using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Infatlan_STEI.classes;
-using System.Configuration;
 
 namespace Infatlan_STEI.paginas.reportes
 {
@@ -25,38 +23,34 @@ namespace Infatlan_STEI.paginas.reportes
                     String vEx = Request.QueryString["ex"];
                     if (vEx == "1")
                         ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "alert('Las llamadas atendidas son mayores que las totales')", true);
-                    else if (vEx == "2") {
+                    else if (vEx == "2"){
                         ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "alert('Reporte enviado con éxito.')", true);
                         cargarData();
-                    } else if (vEx == "3") {
+                    }else if (vEx == "3"){
                         ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "alert('Favor ingrese las observaciones de las llamadas.')", true);
                         cargarData();
-                    }else {
+                    }else{
                         String vId = Request.QueryString["id"];
-                        if (vId != null) {
+                        if (vId != null)
+                        {
                             Session["CUMPL_MODIFICAR"] = true;
                             LbIDReporte.Text = vId;
                             cargarInfo(vId);
-                            BtnEActualizar.Visible = true; 
+                            BtnEActualizar.Visible = true;
                         }else{
                             Session["CUMPL_MODIFICAR"] = false;
-                            //Session["CUMPL_RUPTURA"] = null;
-                            //Session["CUMPL_OSER"] = null;
-                            //Session["CUMPL_INSATISFACCION"] = null;
-                            //Session["CUMPL_RENDIMIENTO"] = null;
-
                             BtnEnviar.Visible = true;
                             String vQuery = "[STEISP_CUMPLIMIENTO_Reportes] 9, '" + Session["USUARIO"].ToString() + "'";
                             int vInfo = vConexion.obtenerId(vQuery);
-                            if (vInfo == 1) { 
+                            if (vInfo == 1){
                                 Session["CUMPL_FLAG_PENDIENTE"] = null;
                                 cargarData();
-                            }else { 
+                            }else{
                                 Session["CUMPL_FLAG_PENDIENTE"] = true;
                                 ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "alert('Ya tiene un reporte registrado hoy. Regrese mañana.')", true);
                             }
                         }
-                    }  
+                    }
                 }else{
                     Response.Redirect("/login.aspx");
                 }
@@ -68,7 +62,7 @@ namespace Infatlan_STEI.paginas.reportes
                 String vFechaFinal = "";
                 String vFecha = getFecha(ref vFechaFinal);
                 DataTable vDatos = (DataTable)Session["AUTHCLASS"];
-                
+
                 String vAssignedGroup = vDatos.Rows[0]["assignedGroup"].ToString();
                 cargarMediosPago(vFecha, vAssignedGroup, vFechaFinal);
                 cargarKPI(vFecha, vAssignedGroup, vFechaFinal);
@@ -80,13 +74,13 @@ namespace Infatlan_STEI.paginas.reportes
             }
         }
 
-        private String getFecha(ref String vFechaFinal) {
+        private String getFecha(ref String vFechaFinal){
             String vFecha = "";
             try{
-                if (DateTime.Now.DayOfWeek == DayOfWeek.Sunday) { 
+                if (DateTime.Now.DayOfWeek == DayOfWeek.Sunday){
                     vFecha = DateTime.Now.AddDays(-2).ToString("dd/MM/yyyy");
                     vFechaFinal = vFecha;
-                }else if (DateTime.Now.DayOfWeek == DayOfWeek.Monday) { 
+                }else if (DateTime.Now.DayOfWeek == DayOfWeek.Monday){
                     vFecha = DateTime.Now.AddDays(-3).ToString("dd/MM/yyyy");
                     vFechaFinal = DateTime.Now.ToString("dd/MM/yyyy");
                 }else{
@@ -101,7 +95,7 @@ namespace Infatlan_STEI.paginas.reportes
             return vFecha;
         }
 
-        public void cargarInfo(String vId) {
+        public void cargarInfo(String vId){
             try{
                 String vQuery = "[STEISP_CUMPLIMIENTO_Reportes] 4," + vId;
                 DataSet vDSet = vConexion.obtenerDataSet(vQuery);
@@ -147,7 +141,7 @@ namespace Infatlan_STEI.paginas.reportes
             }
         }
 
-        private void cargarTextos(DataTable vData) {
+        private void cargarTextos(DataTable vData){
             try{
                 TxCallAtendidas.ReadOnly = true;
                 TxCallTotal.ReadOnly = true;
@@ -183,9 +177,9 @@ namespace Infatlan_STEI.paginas.reportes
                     TxABAPorcentaje.Text = vABAProm.ToString();
                 }else
                     TxABAPorcentaje.Text = "100";
-                
+
                 LitABA.Text = "<div class='chart easy-pie-chart-4' data-percent='" + TxABAPorcentaje.Text + "'><span class='percent'></span></div>";
-                
+
                 TxCajaCumplidas.Text = vData.Rows[0]["cajaCompletos"].ToString();
                 TxCajaCumplidasNo.Text = vData.Rows[0]["cajaIncompletos"].ToString();
                 TxCajaObs.Text = vData.Rows[0]["cajaComentario"].ToString();
@@ -210,14 +204,14 @@ namespace Infatlan_STEI.paginas.reportes
             }catch (Exception ex){
                 throw new Exception(ex.Message);
             }
-        
+
         }
 
         public void Mensaje(string vMensaje, WarningType type){
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
-        
-        private void cargarMediosPago(String vFecha, String vAssignedGroup, String vFechaFinal) {
+
+        private void cargarMediosPago(String vFecha, String vAssignedGroup, String vFechaFinal){
             String vQuery = "[STEISP_CUMPLIMIENTO_Generales] 4,'" + vAssignedGroup + "','" + vFecha + "','" + vFechaFinal + "'";
             DataSet vDSMedios = vConexion.obtenerDataSetSA(vQuery);
 
@@ -261,8 +255,8 @@ namespace Infatlan_STEI.paginas.reportes
             TxCajaObs.Text = vPorcentaje > 90 ? "Meta Alcanzada" : "";
             LitCaja.Text = "<div class='chart easy-pie-chart-4' data-percent='" + vPorcentaje.ToString() + "'><span class='percent'></span></div>";
         }
-        
-        private void cargarKPI(String vFecha, String vAssignedGroup, String vFechaFinal) { 
+
+        private void cargarKPI(String vFecha, String vAssignedGroup, String vFechaFinal){
             String vQuery = "[STEISP_CUMPLIMIENTO_Generales] 2,'" + vAssignedGroup + "','" + vFecha + "','" + vFechaFinal + "'";
             DataSet vDSkpi = vConexion.obtenerDataSetSA(vQuery);
 
@@ -285,7 +279,7 @@ namespace Infatlan_STEI.paginas.reportes
             TxKPIObs.Text = vPorcentaje > 90 ? "Meta Alcanzada" : "";
         }
 
-        private void cargarRuptura(String vFecha, String vAssignedGroup, String vFechaFinal) {
+        private void cargarRuptura(String vFecha, String vAssignedGroup, String vFechaFinal){
             try{
                 String vQuery = "[STEISP_CUMPLIMIENTO_Generales] 3,'" + vAssignedGroup + "','" + vFecha + "','" + vFechaFinal + "'";
                 DataTable vData = vConexion.obtenerDataTableSA(vQuery);
@@ -302,10 +296,10 @@ namespace Infatlan_STEI.paginas.reportes
             }catch (Exception ex){
                 throw new Exception(ex.Message);
             }
-            
-        }  
-        
-        private void cargarOSER(String vFecha, String vAssignedGroup, String vFechaFinal) { 
+
+        }
+
+        private void cargarOSER(String vFecha, String vAssignedGroup, String vFechaFinal){
             String vQuery = "[STEISP_CUMPLIMIENTO_Generales] 1,'" + vAssignedGroup + "'";
             DataTable vDatos = vConexion.obtenerDataTableSA(vQuery);
             if (vDatos.Rows.Count > 0){
@@ -318,7 +312,7 @@ namespace Infatlan_STEI.paginas.reportes
             }
         }
 
-        private void cargarInsatisfaccion(String vFecha, String vAssignedGroup, String vFechaFinal) { 
+        private void cargarInsatisfaccion(String vFecha, String vAssignedGroup, String vFechaFinal){
             try{
                 String vQuery = "[STEISP_CUMPLIMIENTO_Generales] 15,'" + vAssignedGroup + "'" +
                     ",'" + vFecha + "','" + vFechaFinal + "'";
@@ -342,7 +336,7 @@ namespace Infatlan_STEI.paginas.reportes
 
                 int vNoAtendidas = Convert.ToInt32(TxCallTotal.Text) - Convert.ToInt32(TxCallAtendidas.Text);
                 TxCallAtendidasNo.Text = vNoAtendidas.ToString();
-                
+
                 float vAtendidasProm = float.Parse(TxCallAtendidas.Text) / float.Parse(TxCallTotal.Text) * 100;
                 TxCallPorcentajeSi.Text = Convert.ToDecimal(Math.Round(vAtendidasProm, 2)).ToString();
 
@@ -360,12 +354,11 @@ namespace Infatlan_STEI.paginas.reportes
                 UPCalls.Update();
                 UPanelRendimiento.Update();
             }catch (Exception ex){
-                //Mensaje(ex.Message, WarningType.Danger);
                 ScriptManager.RegisterClientScriptBlock(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + ex.Message + "','" + WarningType.Danger.ToString().ToLower() + "')", true);
             }
         }
 
-        private DataTable cargarRendimiento(String vFecha, String vFechaFinal) {
+        private DataTable cargarRendimiento(String vFecha, String vFechaFinal){
             DataTable vData = new DataTable();
             try{
                 String vQuery = "[STEISP_CUMPLIMIENTO_Rendimiento] 1,'" + Session["USUARIO"].ToString() + "'";
@@ -380,19 +373,18 @@ namespace Infatlan_STEI.paginas.reportes
                         obtenerEficiencia(vData, i, vFecha, vFechaFinal);
                         obtenerTotal(vData, i);
                     }
-                    
+
                     GvRendimiento.DataSource = vData;
                     GvRendimiento.DataBind();
                     Session["CUMPL_RENDIMIENTO"] = vData;
                 }
-
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);
             }
             return vData;
         }
 
-        private Decimal obtenerPorcentaje(int vCumplidas, int vIncumplidas) {
+        private Decimal obtenerPorcentaje(int vCumplidas, int vIncumplidas){
             int vSuma = vCumplidas + vIncumplidas;
 
             Decimal vPorcentaje = 100;
@@ -468,7 +460,7 @@ namespace Infatlan_STEI.paginas.reportes
                         }
                     }
 
-                    if (HttpContext.Current.Session["CUMPL_RUPTURA_PAGING"] != null ){
+                    if (HttpContext.Current.Session["CUMPL_RUPTURA_PAGING"] != null){
                         for (int i = 0; i < vData.Rows.Count; i++){
                             DataRowView drv = e.Row.DataItem as DataRowView;
 
@@ -481,7 +473,7 @@ namespace Infatlan_STEI.paginas.reportes
                 }
             }
         }
-        
+
         protected void GvOSER_PageIndexChanging(object sender, GridViewPageEventArgs e){
             try{
                 DataTable vData = (DataTable)Session["CUMPL_OSER"];
@@ -494,7 +486,7 @@ namespace Infatlan_STEI.paginas.reportes
                     vData.Rows[vCont]["comentario"] = TxComment.Text;
                     vCont++;
                 }
-                
+
                 Session["CUMPL_OSER_PAGING"] = true;
                 GvOSER.PageIndex = e.NewPageIndex;
                 GvOSER.DataSource = vData;
@@ -504,7 +496,7 @@ namespace Infatlan_STEI.paginas.reportes
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
-        
+
         protected void GvOSER_RowDataBound(object sender, GridViewRowEventArgs e){
             if (e.Row.RowType == DataControlRowType.DataRow){
                 var vDropDown = e.Row.Cells[2].FindControl("DDLRazonER") as DropDownList;
@@ -550,7 +542,7 @@ namespace Infatlan_STEI.paginas.reportes
                     vData.Rows[vCont]["comentario"] = TxComment.Text;
                     vCont++;
                 }
-                
+
                 Session["CUMPL_INSATISFACCION_PAGING"] = true;
                 GvInsatisfacciones.PageIndex = e.NewPageIndex;
                 GvInsatisfacciones.DataSource = (DataTable)Session["CUMPL_INSATISFACCION"];
@@ -567,7 +559,7 @@ namespace Infatlan_STEI.paginas.reportes
                     DataTable vDatos = (DataTable)Session["CUMPL_INSATISFACCION"];
                     vComment.Text = vDatos.Rows[e.Row.RowIndex]["observaciones"].ToString();
                 }
-                
+
                 if (HttpContext.Current.Session["CUMPL_INSATISFACCION_PAGING"] != null){
                     DataTable vData = (DataTable)Session["CUMPL_INSATISFACCION"];
                     for (int i = 0; i < vData.Rows.Count; i++){
@@ -607,7 +599,7 @@ namespace Infatlan_STEI.paginas.reportes
                     DataTable vDTRendimiento = (DataTable)Session["CUMPL_RENDIMIENTO"];
                     vComment.Text = vDTRendimiento.Rows[e.Row.RowIndex]["comentario"].ToString();
                 }
-                
+
                 if (HttpContext.Current.Session["CUMPL_RENDIMIENTO_PAGING"] != null){
                     DataTable vData = (DataTable)Session["CUMPL_RENDIMIENTO"];
                     for (int i = 0; i < vData.Rows.Count; i++){
@@ -621,7 +613,7 @@ namespace Infatlan_STEI.paginas.reportes
             }
         }
 
-        private void insertarKPI(DataTable vDatos, int vId, int vAccion) {
+        private void insertarKPI(DataTable vDatos, int vId, int vAccion){
             try{
                 for (int i = 0; i < vDatos.Rows.Count; i++){
                     if (vAccion == 1){
@@ -645,10 +637,10 @@ namespace Infatlan_STEI.paginas.reportes
             }
         }
 
-        private void insertarRupturas(DataTable vDatos, int vId, int vAccion) {
+        private void insertarRupturas(DataTable vDatos, int vId, int vAccion){
             try{
                 //1. Insertar 2. Actualizar
-                for (int i = 0; i < vDatos.Rows.Count; i++) {
+                for (int i = 0; i < vDatos.Rows.Count; i++){
                     String vQuery = "";
                     if (vAccion == 1){
                         Object[] vDatosReporte = new object[8];
@@ -665,7 +657,7 @@ namespace Infatlan_STEI.paginas.reportes
                         vXML = vXML.Replace("<?xml version=\"1.0\" encoding=\"utf-16\"?>", "");
                         vQuery = "[STEISP_CUMPLIMIENTO_Reportes] 6,0,0" +
                             ",'" + vXML + "'";
-                    }else if(vAccion == 2){
+                    }else if (vAccion == 2){
                         vQuery = "[STEISP_CUMPLIMIENTO_Reportes] 15" +
                             "," + LbIDReporte.Text +
                             "," + vDatos.Rows[i]["orden"].ToString() +
@@ -680,7 +672,7 @@ namespace Infatlan_STEI.paginas.reportes
             }
         }
 
-        private void insertarOSER(DataTable vDatos, int vId, int vAccion) {
+        private void insertarOSER(DataTable vDatos, int vId, int vAccion){
             try{
                 String vTipo = vAccion == 1 ? "7" : "";
                 for (int i = 0; i < vDatos.Rows.Count; i++){
@@ -693,12 +685,12 @@ namespace Infatlan_STEI.paginas.reportes
                         vDatosReporte[3] = vDatos.Rows[i]["responsable"].ToString();
                         vDatosReporte[4] = vDatos.Rows[i]["idRazon"];
                         vDatosReporte[5] = vDatos.Rows[i]["comentario"];
-            
+
                         String vXML = vMaestro.ObtenerCumplimientoOSER(vDatosReporte);
                         vXML = vXML.Replace("<?xml version=\"1.0\" encoding=\"utf-16\"?>", "");
                         vQuery = "[STEISP_CUMPLIMIENTO_Reportes] 7, 0, 0" +
                             ",'" + vXML + "'";
-                    }else if(vAccion == 2){
+                    }else if (vAccion == 2){
                         vQuery = "[STEISP_CUMPLIMIENTO_Reportes] 16" +
                             "," + LbIDReporte.Text +
                             "," + vDatos.Rows[i]["orden"].ToString() +
@@ -713,7 +705,7 @@ namespace Infatlan_STEI.paginas.reportes
             }
         }
 
-        private void insertarInsatisfacciones(DataTable vDatos, int vId, int vAccion) {
+        private void insertarInsatisfacciones(DataTable vDatos, int vId, int vAccion){
             try{
                 String vTipo = vAccion == 1 ? "10" : "";
                 for (int i = 0; i < vDatos.Rows.Count; i++){
@@ -726,13 +718,13 @@ namespace Infatlan_STEI.paginas.reportes
                         vDatosReporte[3] = vDatos.Rows[i]["responsable"].ToString();
                         vDatosReporte[4] = vDatos.Rows[i]["comentario"];
                         vDatosReporte[5] = vDatos.Rows[i]["observaciones"];
-            
+
                         String vXML = vMaestro.ObtenerCumplimientoSatisfaccion(vDatosReporte);
                         vXML = vXML.Replace("<?xml version=\"1.0\" encoding=\"utf-16\"?>", "");
                         vQuery = "[STEISP_CUMPLIMIENTO_Reportes] 10, 0, 0" +
                             ",'" + vXML + "'";
 
-                    }else if(vAccion == 2){
+                    }else if (vAccion == 2){
                         vQuery = "[STEISP_CUMPLIMIENTO_Reportes] 17" +
                             "," + LbIDReporte.Text +
                             "," + vDatos.Rows[i]["orden"].ToString() +
@@ -746,12 +738,12 @@ namespace Infatlan_STEI.paginas.reportes
             }
         }
 
-        private void insertarRendimiento(DataTable vDatos, int vId, int vAccion) {
+        private void insertarRendimiento(DataTable vDatos, int vId, int vAccion){
             try{
                 String vTipo = vAccion == 1 ? "8" : "";
                 for (int i = 0; i < vDatos.Rows.Count; i++){
                     String vQuery = "";
-                    if (vAccion == 1) {
+                    if (vAccion == 1){
                         Object[] vDatosReporte = new object[15];
                         vDatosReporte[0] = vId.ToString();
                         vDatosReporte[1] = vDatos.Rows[i]["idUsuario"].ToString();
@@ -773,7 +765,7 @@ namespace Infatlan_STEI.paginas.reportes
                         vXML = vXML.Replace("<?xml version=\"1.0\" encoding=\"utf-16\"?>", "");
                         vQuery = "[STEISP_CUMPLIMIENTO_Reportes] 8, 0, 0" +
                             ",'" + vXML + "'";
-                    } else if (vAccion == 2) {
+                    }else if (vAccion == 2){
                         vQuery = "[STEISP_CUMPLIMIENTO_Reportes] 18" +
                             "," + LbIDReporte.Text +
                             "," + vDatos.Rows[i]["idUsuario"].ToString() +
@@ -788,15 +780,15 @@ namespace Infatlan_STEI.paginas.reportes
         }
 
         //RENDIMIENTOS
-        private void promedioNotas(DataTable vData, int i) {
-            Decimal vPromedio = Convert.ToDecimal(vData.Rows[i]["conocimiento"].ToString().Replace("%",""));
+        private void promedioNotas(DataTable vData, int i){
+            Decimal vPromedio = Convert.ToDecimal(vData.Rows[i]["conocimiento"].ToString().Replace("%", ""));
             if (vPromedio >= 90)
                 vData.Rows[i]["conocimientoProm"] = vPromedio * 25 / 100;
             else
                 vData.Rows[i]["conocimientoProm"] = vPromedio * (25 - (90 - vPromedio)) / 100;
         }
-        
-        private void obtenerTareas(DataTable vData, int i, String vFecha, String vFechaFinal) {
+
+        private void obtenerTareas(DataTable vData, int i, String vFecha, String vFechaFinal){
             try{
                 String vQuery2 = "[STEISP_CUMPLIMIENTO_Generales] 8" +
                     ",'" + vData.Rows[i]["AssignedGroup"].ToString() + "'" +
@@ -812,10 +804,10 @@ namespace Infatlan_STEI.paginas.reportes
             }
         }
 
-        private void obtenerRuptura(DataTable vData, int i, String vFecha, String vFechaFinal) {
+        private void obtenerRuptura(DataTable vData, int i, String vFecha, String vFechaFinal){
             try{
                 String vQuery2 = "[STEISP_CUMPLIMIENTO_Generales] 10" +
-                        ",'" + vData.Rows[i]["AssignedGroup"].ToString() + "'" + 
+                        ",'" + vData.Rows[i]["AssignedGroup"].ToString() + "'" +
                         ",'" + vFecha + "'" +
                         ",'" + vData.Rows[i]["sysAid"].ToString() + "'" +
                         ",'" + vFechaFinal + "'";
@@ -833,7 +825,7 @@ namespace Infatlan_STEI.paginas.reportes
                         vNuevoAtencion = vAsignacion <= 60 ? vAtencion - (60 - vAsignacion) : vAtencion;
                         if (vNuevoAtencion > 180)
                             vCantRup++;
-                        else 
+                        else
                             vNoRup++;
                     }
                 }
@@ -903,23 +895,23 @@ namespace Infatlan_STEI.paginas.reportes
                 vData.Rows[i]["rupturas"] = vCantRup;
                 float sinRupturaProm = 0;
                 int vTareas = Convert.ToInt32(vData.Rows[i]["tareas"].ToString());
-                if (vTareas >= 1 && vCantRup == 0 )
+                if (vTareas >= 1 && vCantRup == 0)
                     sinRupturaProm = 100;
-                else if (vCantRup == 0 && vTareas == 0 )
-                    sinRupturaProm = 0;        
-                else if (vCantRup >= 1 && vTareas >= 1 )
-                    sinRupturaProm = 100- vCantRup * 100 / vTareas;
-                
+                else if (vCantRup == 0 && vTareas == 0)
+                    sinRupturaProm = 0;
+                else if (vCantRup >= 1 && vTareas >= 1)
+                    sinRupturaProm = 100 - vCantRup * 100 / vTareas;
+
                 vData.Rows[i]["sinRupturaProm"] = sinRupturaProm.ToString() + "%";
             }catch (Exception ex){
                 throw new Exception(ex.Message);
             }
         }
 
-        private void obtenerOpinion(DataTable vData, int i, String vFecha, String vFechaFinal) {
+        private void obtenerOpinion(DataTable vData, int i, String vFecha, String vFechaFinal){
             try{
                 String vQuery2 = "[STEISP_CUMPLIMIENTO_Generales] 9" +
-                        ",'" + vData.Rows[i]["sysAid"].ToString() + "'" + 
+                        ",'" + vData.Rows[i]["sysAid"].ToString() + "'" +
                         ",'" + vFecha + "','" + vFechaFinal + "'";
                 DataTable vRes = vConexion.obtenerDataTableSA(vQuery2);
                 if (vRes.Rows.Count > 0){
@@ -932,15 +924,15 @@ namespace Infatlan_STEI.paginas.reportes
                     int vRango1 = 91, vRango2 = 85, vRango3 = 75;
                     int valor1 = 85, valor2 = 50, valor3 = 0;
 
-                    if (vSatisfaccion >= vRango1 ){
+                    if (vSatisfaccion >= vRango1)
                         vSatisfaccion = vSatisfaccion;
-                    }else if (vSatisfaccion >= vRango2 && vSatisfaccion < vRango1 ){
+                    else if (vSatisfaccion >= vRango2 && vSatisfaccion < vRango1)
                         vSatisfaccion = valor1;
-                    }else if (vSatisfaccion >= vRango3 && vSatisfaccion < vRango2){
+                    else if (vSatisfaccion >= vRango3 && vSatisfaccion < vRango2)
                         vSatisfaccion = valor2;
-                    }else if (vSatisfaccion < vRango3) {
+                    else if (vSatisfaccion < vRango3)
                         vSatisfaccion = valor3;
-                    }
+                    
                     vData.Rows[i]["satisfaccion"] = vSatisfaccion.ToString() + "%";
                     vData.Rows[i]["satisfaccionProm"] = vSatisfaccion.ToString();
                 }
@@ -949,7 +941,7 @@ namespace Infatlan_STEI.paginas.reportes
             }
         }
 
-        private void obtenerProductividad(DataTable vData, int i, String vFecha, String vFechaFinal) {
+        private void obtenerProductividad(DataTable vData, int i, String vFecha, String vFechaFinal){
             try{
                 String vQuery2 = "[STEISP_CUMPLIMIENTO_Generales] 14" +
                         ",'" + vData.Rows[i]["AssignedGroup"].ToString() + "'" +
@@ -964,13 +956,13 @@ namespace Infatlan_STEI.paginas.reportes
 
                     float vPromedioProductividad = float.Parse(TotalTiempoInvertido.ToString()) / 360 * 100;
                     Decimal vPromedioTotal = Convert.ToDecimal(Math.Round(vPromedioProductividad, 2));
-                    
+
                     String vTotal = "";
                     if (vPromedioTotal >= 1 && vPromedioTotal < 100)
                         vTotal = vPromedioTotal.ToString() + "%";
                     else if (vPromedioTotal >= 100)
                         vTotal = "100%";
-                    else 
+                    else
                         vTotal = "0%";
 
                     vData.Rows[i]["produccion"] = vTotal;
@@ -1806,9 +1798,9 @@ namespace Infatlan_STEI.paginas.reportes
                 Boolean vForaneo = false;
                 float vTotal, RG_Ruptura, RG_Eficiencia, RG_Productividad, RG_Satisfaccion;
                 vForaneo = Convert.ToBoolean(vData.Rows[i]["flagForaneo"].ToString()) == true ? true : false;
-                
+
                 String vAssignedGroup = vData.Rows[i]["AssignedGroup"].ToString();
-                float vSatProm =  float.Parse(vData.Rows[i]["satisfaccionProm"].ToString());
+                float vSatProm = float.Parse(vData.Rows[i]["satisfaccionProm"].ToString());
                 if (vForaneo){
                     if (vSatProm > 1){
                         RG_Satisfaccion = vSatProm * float.Parse("0.20");
@@ -1828,9 +1820,9 @@ namespace Infatlan_STEI.paginas.reportes
                     if (vAssignedGroup == "Infa-COMUNICACIONES"){
                         if (vSatProm > 1){
                             RG_Satisfaccion = vSatProm * float.Parse("0.20");
-                            RG_Ruptura = float.Parse(vData.Rows[i]["sinRupturaProm"].ToString().Replace("%","")) * float.Parse("0.30");
+                            RG_Ruptura = float.Parse(vData.Rows[i]["sinRupturaProm"].ToString().Replace("%", "")) * float.Parse("0.30");
                             RG_Eficiencia = float.Parse(vData.Rows[i]["eficienciaProm"].ToString()) * float.Parse("0.15");
-                            RG_Productividad = float.Parse(vData.Rows[i]["produccion"].ToString().Replace("%","")) * float.Parse("0.10");
+                            RG_Productividad = float.Parse(vData.Rows[i]["produccion"].ToString().Replace("%", "")) * float.Parse("0.10");
                             vTotal = RG_Satisfaccion + float.Parse(vData.Rows[i]["conocimientoProm"].ToString()) + RG_Ruptura + RG_Eficiencia + RG_Productividad;
                         }else{
                             RG_Ruptura = float.Parse(vData.Rows[i]["sinRupturaProm"].ToString().Replace("%", "")) * float.Parse("0.40");
@@ -1842,11 +1834,12 @@ namespace Infatlan_STEI.paginas.reportes
 
                     }else{
                         float RG_Llamadas = float.Parse(TxCallPorcentajeSi.Text) * float.Parse("0.10");
-                        if (vSatProm > 1){
+                        if (vSatProm > 1)
+                        {
                             RG_Satisfaccion = vSatProm * float.Parse("0.20");
-                            RG_Ruptura = float.Parse(vData.Rows[i]["sinRupturaProm"].ToString().Replace("%","")) * float.Parse("0.20");
+                            RG_Ruptura = float.Parse(vData.Rows[i]["sinRupturaProm"].ToString().Replace("%", "")) * float.Parse("0.20");
                             RG_Eficiencia = float.Parse(vData.Rows[i]["eficienciaProm"].ToString()) * float.Parse("0.15");
-                            RG_Productividad = float.Parse(vData.Rows[i]["produccion"].ToString().Replace("%","")) * float.Parse("0.10");
+                            RG_Productividad = float.Parse(vData.Rows[i]["produccion"].ToString().Replace("%", "")) * float.Parse("0.10");
                             vTotal = RG_Satisfaccion + float.Parse(vData.Rows[i]["conocimientoProm"].ToString()) + RG_Ruptura + RG_Eficiencia + RG_Productividad + RG_Llamadas;
                         }else{
                             RG_Ruptura = float.Parse(vData.Rows[i]["sinRupturaProm"].ToString().Replace("%", "")) * float.Parse("0.3");
@@ -1857,19 +1850,19 @@ namespace Infatlan_STEI.paginas.reportes
                         vData.Rows[i]["total"] = (Convert.ToDecimal(Math.Round(vTotal, 2))).ToString() + "%";
                     }
                 }
-                
+
             }catch (Exception ex){
                 throw new Exception(ex.Message);
             }
         }
 
-        public void graficos(DataTable vData) { 
+        public void graficos(DataTable vData){
             try{
                 int vTotTR = 0, vTotTT = 0, vTotRup = 0, vTotNoRup = 0, vSolTareas = 0, vSolRupturas = 0;
                 int vHorasEmpleados = vData.Rows.Count * 360;
                 for (int i = 0; i < vData.Rows.Count; i++){
                     vData.Rows[i]["conocimientoProm"] = vData.Rows[i]["conocimientoProm"].ToString() == "" ? 0 : vData.Rows[i]["conocimientoProm"];
-                    
+
                     //SOLICITUDES
                     vData.Rows[i]["rupturas"] = vData.Rows[i]["rupturas"].ToString() == "" ? 0 : vData.Rows[i]["rupturas"];
                     vData.Rows[i]["tareas"] = vData.Rows[i]["tareas"].ToString() == "" ? 0 : vData.Rows[i]["tareas"];
@@ -1881,7 +1874,7 @@ namespace Infatlan_STEI.paginas.reportes
                     vData.Rows[i]["eficienciaNoRup"] = vData.Rows[i]["eficienciaNoRup"].ToString() == "" ? 0 : vData.Rows[i]["eficienciaNoRup"];
                     vTotRup += Convert.ToInt32(vData.Rows[i]["eficienciaRup"].ToString());
                     vTotNoRup += Convert.ToInt32(vData.Rows[i]["eficienciaNoRup"].ToString());
-                        
+
                     // PRODUCTIVIDAD
                     vData.Rows[i]["tiempoReal"] = vData.Rows[i]["tiempoReal"].ToString() == "" ? 0 : vData.Rows[i]["tiempoReal"];
                     vData.Rows[i]["tiempoTransporte"] = vData.Rows[i]["tiempoTransporte"].ToString() == "" ? 0 : vData.Rows[i]["tiempoTransporte"];
@@ -1894,7 +1887,7 @@ namespace Infatlan_STEI.paginas.reportes
                     Decimal SolPromCR = Convert.ToDecimal(Math.Round(vSolPromCR, 2));
                     Decimal vSolPromSR = 100 - SolPromCR;
                     TxGraf1.Value = SolPromCR.ToString().Replace(",", ".");
-                    TxGraf2.Value = vSolPromSR.ToString().Replace(",",".");
+                    TxGraf2.Value = vSolPromSR.ToString().Replace(",", ".");
                     DivCerradas.Visible = true;
                 }
 
@@ -1902,7 +1895,7 @@ namespace Infatlan_STEI.paginas.reportes
                 if (vTotPeticiones > 0){
                     float vRupProm = float.Parse(vTotRup.ToString()) / float.Parse(vTotPeticiones.ToString()) * 100;
                     Decimal vRupPromTotal = Convert.ToDecimal(Math.Round(vRupProm, 2));
-                    TxGraf3.Value = vRupPromTotal.ToString().Replace(",",".");
+                    TxGraf3.Value = vRupPromTotal.ToString().Replace(",", ".");
 
                     float vNoRupProm = float.Parse(vTotNoRup.ToString()) / float.Parse(vTotPeticiones.ToString()) * 100;
                     Decimal vNoRupPromTotal = Convert.ToDecimal(Math.Round(vNoRupProm, 2));
@@ -1914,7 +1907,7 @@ namespace Infatlan_STEI.paginas.reportes
                     float vTR = float.Parse(vTotTR.ToString()) / float.Parse(vHorasEmpleados.ToString()) * 100;
                     Decimal vTotalTR = Convert.ToDecimal(Math.Round(vTR, 2));
                     TxGraf5.Value = vTotalTR.ToString().Replace(",", ".");
-                    
+
                     float vTT = float.Parse(vTotTT.ToString()) / float.Parse(vHorasEmpleados.ToString()) * 100;
                     Decimal vTotalTT = Convert.ToDecimal(Math.Round(vTT, 2));
                     TxGraf6.Value = vTotalTT.ToString().Replace(",", ".");
@@ -1927,11 +1920,11 @@ namespace Infatlan_STEI.paginas.reportes
 
                 UPanelRendimientoGrafic.Update();
             }catch (Exception ex){
-                throw new Exception(ex.Message);
+                Mensaje(ex.Message, WarningType.Danger);
             }
         }
 
-        private void limpiarForm() {
+        private void limpiarForm(){
             try{
                 Session["CUMPL_KPI"] = null;
                 Session["CUMPL_RUPTURA"] = null;
@@ -1952,7 +1945,7 @@ namespace Infatlan_STEI.paginas.reportes
                 TxATMObs.Text = string.Empty;
                 TxATMPorcentaje.Text = string.Empty;
                 TxATMTotal.Text = string.Empty;
-                
+
                 TxABACumplimiento.Text = string.Empty;
                 TxABACumplimientoNo.Text = string.Empty;
                 TxABAObs.Text = string.Empty;
@@ -1975,10 +1968,10 @@ namespace Infatlan_STEI.paginas.reportes
             }catch (Exception ex){
                 throw new Exception(ex.Message);
             }
-        
+
         }
 
-        private void validaciones() {
+        private void validaciones(){
             if (Convert.ToBoolean(HttpContext.Current.Session["CUMPL_FLAG_PENDIENTE"]))
                 throw new Exception("Ya tiene un reporte registrado hoy. Regrese mañana.");
             if (TxCallTotal.Text == string.Empty || TxCallTotal.Text == "")
@@ -1995,6 +1988,7 @@ namespace Infatlan_STEI.paginas.reportes
                 throw new Exception("Favor ingrese las observaciones de Caja en Medios de pago.");
             if (float.Parse(TxKPIPorcentaje.Text) <= 90 && TxKPIObs.Text == "")
                 throw new Exception("Favor ingrese las observaciones de KPI.");
+
             DataTable vDatos = (DataTable)Session["CUMPL_RUPTURA"];
             if (vDatos != null && vDatos.Rows.Count > 0){
                 int vCont = GvRuptura.PageIndex != 0 ? GvRuptura.PageIndex * 10 : 0;
@@ -2034,8 +2028,7 @@ namespace Infatlan_STEI.paginas.reportes
                     TextBox TxComment = (TextBox)row.Cells[3].FindControl("TxSatisfaccionObs");
                     vDatos.Rows[vCont]["observaciones"] = TxComment.Text;
                     vCont++;
-                }
-                for (int i = 0; i < vDatos.Rows.Count; i++){
+                }for (int i = 0; i < vDatos.Rows.Count; i++){
                     if (vDatos.Rows[i]["observaciones"].ToString() == "")
                         throw new Exception("Favor ingrese las observaciones de las ordenes de servicio con baja calificacion.");
                 }
@@ -2047,13 +2040,11 @@ namespace Infatlan_STEI.paginas.reportes
                     TextBox TxComment = (TextBox)row.Cells[2].FindControl("TxRGObs");
                     vDatos.Rows[vCont]["comentario"] = TxComment.Text;
                     vCont++;
-                }
-                for (int i = 0; i < vDatos.Rows.Count; i++){
+                }for (int i = 0; i < vDatos.Rows.Count; i++){
                     if (vDatos.Rows[i]["comentario"].ToString() == "")
                         throw new Exception("Favor ingrese las observaciones del Rendimiento General.");
                 }
             }
-
         }
 
         protected void BtnEnviar_Click(object sender, EventArgs e){
@@ -2063,7 +2054,7 @@ namespace Infatlan_STEI.paginas.reportes
                 Session["CUMPL_ACCION_UPDATE"] = false;
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal();", true);
             }catch (Exception ex){
-                Mensaje(ex.Message, WarningType.Danger);   
+                Mensaje(ex.Message, WarningType.Danger);
             }
         }
 
@@ -2074,11 +2065,11 @@ namespace Infatlan_STEI.paginas.reportes
                 Session["CUMPL_ACCION_UPDATE"] = true;
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal();", true);
             }catch (Exception ex){
-                Mensaje(ex.Message, WarningType.Danger);   
+                Mensaje(ex.Message, WarningType.Danger);
             }
         }
 
-        protected void BtnConfirmar_Click(object sender, EventArgs e) {
+        protected void BtnConfirmar_Click(object sender, EventArgs e){
             try{
                 int vAccion = Convert.ToBoolean(Session["CUMPL_ACCION_UPDATE"]) ? 2 : 1;
 
@@ -2109,7 +2100,7 @@ namespace Infatlan_STEI.paginas.reportes
                     vQuery = "[STEISP_CUMPLIMIENTO_Reportes] 1, 0, 0" +
                         ",'" + vXML + "'";
                     vInfo = vConexion.obtenerId(vQuery);
-                }else if(vAccion == 2){
+                }else if (vAccion == 2){
                     vQuery = "[STEISP_CUMPLIMIENTO_Reportes] 14," + LbIDReporte.Text + ", 0" +
                             ",'" + vXML + "'";
                     vInfo = vConexion.ejecutarSql(vQuery);
@@ -2129,13 +2120,13 @@ namespace Infatlan_STEI.paginas.reportes
                     if (vDatos != null && vDatos.Rows.Count > 0)
                         insertarOSER(vDatos, vInfo, vAccion);
 
-                    vDatos = (DataTable)Session["CUMPL_RENDIMIENTO"];
-                    if (vDatos != null &&  vDatos.Rows.Count > 0)
-                        insertarRendimiento(vDatos, vInfo, vAccion);
-
                     vDatos = (DataTable)Session["CUMPL_INSATISFACCION"];
                     if (vDatos != null && vDatos.Rows.Count > 0)
                         insertarInsatisfacciones(vDatos, vInfo, vAccion);
+                    
+                    vDatos = (DataTable)Session["CUMPL_RENDIMIENTO"];
+                    if (vDatos != null && vDatos.Rows.Count > 0)
+                        insertarRendimiento(vDatos, vInfo, vAccion);
 
                     SmtpService vService = new SmtpService();
                     Boolean vFlag = false;
@@ -2157,9 +2148,9 @@ namespace Infatlan_STEI.paginas.reportes
                         Mensaje(vMensaje + " No se envió notificación. comuníquese con sistemas.", WarningType.Danger);
 
                     limpiarForm();
-                }else 
+                }else
                     Mensaje("Reporte no se pudo enviar. Comuníquese con sistemas.", WarningType.Danger);
-                
+
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
             }catch (Exception ex){
                 Mensaje(ex.Message, WarningType.Danger);

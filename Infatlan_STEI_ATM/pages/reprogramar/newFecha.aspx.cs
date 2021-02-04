@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Infatlan_STEI_ATM.clases;
+using System;
+using System.Data;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Infatlan_STEI_ATM.clases;
-using System.Data;
-using System.Drawing.Imaging;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.IO;
-using System.Configuration;
 
 namespace Infatlan_STEI_ATM.pages.reprogramar
 {
@@ -23,9 +16,9 @@ namespace Infatlan_STEI_ATM.pages.reprogramar
         {
             if (!Page.IsPostBack)
             {
-               
+
                 if (Convert.ToBoolean(Session["AUTH"]))
-                {                   
+                {
                     cargarData();
                 }
                 else
@@ -42,30 +35,30 @@ namespace Infatlan_STEI_ATM.pages.reprogramar
 
         void cargarData()
         {
-           
-                try
-                {
-                    DataTable vDatos = new DataTable();
-                    vDatos = vConexion.ObtenerTabla("STEISP_ATM_Generales 50");
-                    GVMantenimientos.DataSource = vDatos;
-                    GVMantenimientos.DataBind();
-                    //if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Edicion)
-                    //{
-                    //    foreach (GridViewRow item in GVBusqueda.Rows)
-                    //    {
-                    //        LinkButton LbEdit = item.FindControl("btnbajaATM") as LinkButton;
-                    //        LbEdit.Visible = true;
-                    //    }
-                    //}
 
-                   
-                    Session["ATM_CAMBIAR_FECHA"] = vDatos;
-                }
-                catch (Exception Ex)
-                {
-                   Mensaje(Ex.Message, WarningType.Danger);
-                }
-               
+            try
+            {
+                DataTable vDatos = new DataTable();
+                vDatos = vConexion.ObtenerTabla("STEISP_ATM_Generales 50");
+                GVMantenimientos.DataSource = vDatos;
+                GVMantenimientos.DataBind();
+                //if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Edicion)
+                //{
+                //    foreach (GridViewRow item in GVBusqueda.Rows)
+                //    {
+                //        LinkButton LbEdit = item.FindControl("btnbajaATM") as LinkButton;
+                //        LbEdit.Visible = true;
+                //    }
+                //}
+
+
+                Session["ATM_CAMBIAR_FECHA"] = vDatos;
+            }
+            catch (Exception Ex)
+            {
+                Mensaje(Ex.Message, WarningType.Danger);
+            }
+
         }
 
         protected void TxBuscarATM_TextChanged(object sender, EventArgs e)
@@ -131,14 +124,14 @@ namespace Infatlan_STEI_ATM.pages.reprogramar
         protected void GVMantenimientos_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             try
-            {                
+            {
                 string codMantenimiento = e.CommandArgument.ToString();
                 txtMotivoCambio.Text = "";
                 txtNewFecha.Text = "";
                 txtAlerta2.Visible = false;
                 if (e.CommandName == "Select")
                 {
-                    H4Titulo.InnerText = "Cambiar fecha de Mantenimiento-"+codMantenimiento;
+                    H4Titulo.InnerText = "Cambiar fecha de Mantenimiento-" + codMantenimiento;
                     DataTable vDatos = new DataTable();
                     String vQuery = "STEISP_ATM_Generales 36,'" + codMantenimiento + "'";
                     vDatos = vConexion.ObtenerTabla(vQuery);
@@ -175,7 +168,7 @@ namespace Infatlan_STEI_ATM.pages.reprogramar
                 String vOriginalFecha = Convert.ToDateTime(Session["FECHA_MANTENIMIENTO_CAMBIO"]).ToString(vFormato);
 
                 string vQuery = "STEISP_ATM_CancelarMantenimiento 8, '" + Session["ID_MANTENIMIENTO_CAMBIO"] + "','" + vOriginalFecha + "'," +
-                    "'"+ vNewFecha + "','"+txtMotivoCambio.Text+"','"+ Session["USUARIO"] + "'";
+                    "'" + vNewFecha + "','" + txtMotivoCambio.Text + "','" + Session["USUARIO"] + "'";
                 Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                 if (vInfo != 0)
                 {
@@ -186,14 +179,14 @@ namespace Infatlan_STEI_ATM.pages.reprogramar
                         estado = "11";
 
                     string vQuery2 = "STEISP_ATM_CancelarMantenimiento 9, '" + Session["ID_MANTENIMIENTO_CAMBIO"] + "','" + estado + "'";
-                     vConexion.ejecutarSQL(vQuery2);
+                    vConexion.ejecutarSQL(vQuery2);
 
                     txtMotivoCambio.Text = "";
                     txtNewFecha.Text = "";
                     txtAlerta2.Visible = false;
                     cargarData();
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
-                    Mensaje("Se cambió fecha exitósamente.",WarningType.Success);
+                    Mensaje("Se cambió fecha exitósamente.", WarningType.Success);
                 }
             }
         }

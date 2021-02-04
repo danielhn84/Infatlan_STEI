@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Infatlan_STEI_ATM.clases;
+using System;
+using System.Configuration;
+using System.Data;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Configuration;
-using System.Data.Sql;
-using System.Data.SqlClient;
-using Infatlan_STEI_ATM.clases;
 
 namespace Infatlan_STEI_ATM.pages.correctivo
 {
@@ -23,7 +19,7 @@ namespace Infatlan_STEI_ATM.pages.correctivo
                 if (Convert.ToBoolean(Session["AUTH"]))
                 {
                     cargarData();
-                    llenarForm();      
+                    llenarForm();
                 }
                 else
                 {
@@ -72,15 +68,15 @@ namespace Infatlan_STEI_ATM.pages.correctivo
             vDatos = vConexion.ObtenerTabla(vQuery);
             foreach (DataRow item in vDatos.Rows)
             {
-                txtATM.Text = item["Codigo"].ToString()+" - "+ item["NomATM"].ToString();
+                txtATM.Text = item["Codigo"].ToString() + " - " + item["NomATM"].ToString();
                 txtdireccion.Text = item["Direccion"].ToString();
                 txtipNotif.Text = item["IP"].ToString();
                 txtUbicacionATM.Text = item["Ubicacion"].ToString();
                 txtsucursalNotif.Text = item["Sucursal"].ToString();
                 txtzonaNotif.Text = item["Zona"].ToString();
 
-                
-                    DIVBuscarJefes.Visible = true;
+
+                DIVBuscarJefes.Visible = true;
             }
         }
 
@@ -92,7 +88,7 @@ namespace Infatlan_STEI_ATM.pages.correctivo
             GVjefesAgencias.DataBind();
             GVJefesAD.DataSource = null;
             GVJefesAD.DataBind();
-            Session["NOTIFCORRECTIVO"] = null;           
+            Session["NOTIFCORRECTIVO"] = null;
             DLLtecResponsable.Items.Clear();
             txtHrInicioMant.Text = string.Empty;
             txtHrFinMant.Text = string.Empty;
@@ -109,7 +105,7 @@ namespace Infatlan_STEI_ATM.pages.correctivo
         void validacionesNotificacion()
         {
             if (DLLtecResponsable.SelectedValue == "0")
-                throw new Exception("Favor seleccione técnico responsable.");        
+                throw new Exception("Favor seleccione técnico responsable.");
             if (txtHrFinMant.Text == "" || txtHrFinMant.Text == string.Empty)
                 throw new Exception("Favor ingrese la hora en la que termino mantenimiento.");
             if (txtHrInicioMant.Text == "" || txtHrInicioMant.Text == string.Empty)
@@ -142,41 +138,41 @@ namespace Infatlan_STEI_ATM.pages.correctivo
             //if (Convert.ToString(Session["IDZona"]) == "3")
             //    vCorreoEncargadoZona = "acalderon@bancatlan.hn";
 
-            
-                string vQueryD = "STEISP_ATM_Generales 33,'" + DLLtecResponsable.SelectedValue + "'";
-                DataTable vDatosTecnicoResponsable = vConexion.ObtenerTabla(vQueryD);
-                DataTable vDatos = (DataTable)Session["AUTHCLASS"];               
-                string vQueryJefes = "[STEISP_ATM_GeneralesCorrectivo] 13,'" + codATM + "','"+txtsysaid.Text+"'";
-                DataTable vDatosJefeAgencias = vConexion.ObtenerTabla(vQueryJefes);
 
-                if (vDatos.Rows.Count > 0)
+            string vQueryD = "STEISP_ATM_Generales 33,'" + DLLtecResponsable.SelectedValue + "'";
+            DataTable vDatosTecnicoResponsable = vConexion.ObtenerTabla(vQueryD);
+            DataTable vDatos = (DataTable)Session["AUTHCLASS"];
+            string vQueryJefes = "[STEISP_ATM_GeneralesCorrectivo] 13,'" + codATM + "','" + txtsysaid.Text + "'";
+            DataTable vDatosJefeAgencias = vConexion.ObtenerTabla(vQueryJefes);
+
+            if (vDatos.Rows.Count > 0)
+            {
+                foreach (DataRow item in vDatos.Rows)
                 {
-                    foreach (DataRow item in vDatos.Rows)
+                    //ENVIAR A JEFE CREADOR
+                    if (!item["correo"].ToString().Trim().Equals(""))
                     {
-                        //ENVIAR A JEFE CREADOR
-                        if (!item["correo"].ToString().Trim().Equals(""))
-                        {
-                            vService.EnviarMensaje(item["correo"].ToString(),
-                            typeBody.ATM,
-                            "Notificación de Mantenimiento Correctivo ATM",
-                            "Buen día, se le notifica que se creó una solicitud de mantenimiento correctivo, el encargado es " + vDatosTecnicoResponsable.Rows[0]["nombre"].ToString() + ", mantenimiento al ATM " + txtATM.Text ,
-                            "El usuario <b>" + item["Nombre"].ToString() + "</b> creó: <br> Notificación de Mantenimiento Correctivo",
-                            "",
-                            "/sites/ATM/pages/correctivo/notificarCorrectivo.aspx"
-                            );
+                        vService.EnviarMensaje(item["correo"].ToString(),
+                        typeBody.ATM,
+                        "Notificación de Mantenimiento Correctivo ATM",
+                        "Buen día, se le notifica que se creó una solicitud de mantenimiento correctivo, el encargado es " + vDatosTecnicoResponsable.Rows[0]["nombre"].ToString() + ", mantenimiento al ATM " + txtATM.Text,
+                        "El usuario <b>" + item["Nombre"].ToString() + "</b> creó: <br> Notificación de Mantenimiento Correctivo",
+                        "",
+                        "/sites/ATM/pages/correctivo/notificarCorrectivo.aspx"
+                        );
 
-                            //vFlagEnvioSupervisor = true;
-                        }
-                        //ENVIAR A EDWIN
-                        //string vNombre = "EDWIN ALBERTO URREA PENA";
-                        vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIMail"],
-                                typeBody.ATM,
-                                "Notificación de Mantenimiento correctivo ATM",
-                                "Buen día, se le notifica que se creó solicitud de mantenimiento correctivo, el encargado es " + vDatosTecnicoResponsable.Rows[0]["nombre"].ToString() + ", mantenimiento al ATM " + txtATM.Text,
-                                  "El usuario <b>" + item["Nombre"].ToString() + "</b> creó: <br> Notificación de Mantenimiento",
-                                   "",//vCorreoEncargadoZona,
-                                   "/sites/ATM/pages/correctivo/notificarCorrectivo.aspx"
-                                );
+                        //vFlagEnvioSupervisor = true;
+                    }
+                    //ENVIAR A EDWIN
+                    //string vNombre = "EDWIN ALBERTO URREA PENA";
+                    vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIMail"],
+                            typeBody.ATM,
+                            "Notificación de Mantenimiento correctivo ATM",
+                            "Buen día, se le notifica que se creó solicitud de mantenimiento correctivo, el encargado es " + vDatosTecnicoResponsable.Rows[0]["nombre"].ToString() + ", mantenimiento al ATM " + txtATM.Text,
+                              "El usuario <b>" + item["Nombre"].ToString() + "</b> creó: <br> Notificación de Mantenimiento",
+                               "",//vCorreoEncargadoZona,
+                               "/sites/ATM/pages/correctivo/notificarCorrectivo.aspx"
+                            );
 
                     //PRSONAL ENCARGADO DE ATM
                     String vKioskos = "unidadatmkiosco@bancatlan.hn";
@@ -191,42 +187,42 @@ namespace Infatlan_STEI_ATM.pages.correctivo
 
 
                 }
-                }
-                if (vDatosTecnicoResponsable.Rows.Count > 0)
+            }
+            if (vDatosTecnicoResponsable.Rows.Count > 0)
+            {
+                foreach (DataRow item in vDatosTecnicoResponsable.Rows)
                 {
-                    foreach (DataRow item in vDatosTecnicoResponsable.Rows)
+                    //ENVIAR A RESPONSABLE
+                    vService.EnviarMensaje(item["correo"].ToString(),
+                        typeBody.ATM,
+                       "Notificación de Mantenimiento correctivo ATM",
+                        "Buen día, se le notifica que se creó solicitud de mantenimientocorrectivo, el encargado es " + item["nombre"].ToString() + ", mantenimiento al ATM " + txtATM.Text,
+                          "El usuario <b>" + vDatos.Rows[0]["Nombre"].ToString() + "</b> creó: <br> Notificación de Mantenimiento de ATM al que ha sido asignado como responsable.",
+                            "",
+                        "/login.spx"
+                        );
+                }
+            }
+            if (vDatosJefeAgencias.Rows.Count > 0)
+            {
+                foreach (DataRow item in vDatosJefeAgencias.Rows)
+                {
+                    //ENVIAR A JEFES DE AGENCIA
+                    if (!item["correo"].ToString().Trim().Equals(""))
                     {
-                        //ENVIAR A RESPONSABLE
                         vService.EnviarMensaje(item["correo"].ToString(),
                             typeBody.ATM,
-                           "Notificación de Mantenimiento correctivo ATM",
-                            "Buen día, se le notifica que se creó solicitud de mantenimientocorrectivo, el encargado es " + item["nombre"].ToString() + ", mantenimiento al ATM " + txtATM.Text,
-                              "El usuario <b>" + vDatos.Rows[0]["Nombre"].ToString() + "</b> creó: <br> Notificación de Mantenimiento de ATM al que ha sido asignado como responsable.",
-                                "",
-                            "/login.spx"
+                            "Notificación de Mantenimiento ATM",
+                                "Buen día, se le notifica que se aprobó solicitud de mantenimiento correctivo, el encargado es " + vDatosTecnicoResponsable.Rows[0]["nombre"].ToString() + ", mantenimiento al ATM " + txtATM.Text,
+                                  "Solicitud de mantenimiento correctivo a ATM.",
+                                   "",
+                                   ""
                             );
                     }
-                }              
-                if (vDatosJefeAgencias.Rows.Count > 0)
-                {
-                    foreach (DataRow item in vDatosJefeAgencias.Rows)
-                    {
-                        //ENVIAR A JEFES DE AGENCIA
-                        if (!item["correo"].ToString().Trim().Equals(""))
-                        {
-                            vService.EnviarMensaje(item["correo"].ToString(),
-                                typeBody.ATM,
-                                "Notificación de Mantenimiento ATM",
-                                    "Buen día, se le notifica que se aprobó solicitud de mantenimiento correctivo, el encargado es " + vDatosTecnicoResponsable.Rows[0]["nombre"].ToString() + ", mantenimiento al ATM " + txtATM.Text,
-                                      "Solicitud de mantenimiento correctivo a ATM.",
-                                       "",
-                                       ""
-                                );
-                        }
-                    }
                 }
-            
-           
+            }
+
+
         }
 
         protected void DLLtecResponsable_TextChanged(object sender, EventArgs e)
@@ -250,17 +246,17 @@ namespace Infatlan_STEI_ATM.pages.correctivo
             try
             {
 
-           
-            validacionesNotificacion();
-            TimeSpan horainicio = TimeSpan.Parse(txtHrInicioMant.Text);
-            TimeSpan horafinal = TimeSpan.Parse(txtHrFinMant.Text);
-            Session["resta"] = horafinal - horainicio;
-            lbHrMantenimiento.Text = Session["resta"].ToString() + " horas";
-            lbTecnicoResp.Text = DLLtecResponsable.SelectedItem.Text;
-            lbcodATM.Text = txtATM.Text;
-            lbsucursalATM.Text = txtsucursalNotif.Text;
-            //lbTecnicoResp.Text = DLLtecResponsable.SelectedItem.Text;
-            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal();", true);
+
+                validacionesNotificacion();
+                TimeSpan horainicio = TimeSpan.Parse(txtHrInicioMant.Text);
+                TimeSpan horafinal = TimeSpan.Parse(txtHrFinMant.Text);
+                Session["resta"] = horafinal - horainicio;
+                lbHrMantenimiento.Text = Session["resta"].ToString() + " horas";
+                lbTecnicoResp.Text = DLLtecResponsable.SelectedItem.Text;
+                lbcodATM.Text = txtATM.Text;
+                lbsucursalATM.Text = txtsucursalNotif.Text;
+                //lbTecnicoResp.Text = DLLtecResponsable.SelectedItem.Text;
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal();", true);
             }
             catch (Exception ex)
             {
@@ -287,7 +283,7 @@ namespace Infatlan_STEI_ATM.pages.correctivo
                         string correos = vDatos.Rows[i]["Correo"].ToString();
                         string vNombre = vDatos.Rows[i]["Nombre"].ToString();
                         string vApellido = vDatos.Rows[i]["Apellido"].ToString();
-                        string vQuery = "STEISP_ATM_NotificacionCorrectivo 2, '" + codATM + "','" + correos + "','" + vNombre + "','" + vApellido + "','"+txtsysaid.Text+"'";
+                        string vQuery = "STEISP_ATM_NotificacionCorrectivo 2, '" + codATM + "','" + correos + "','" + vNombre + "','" + vApellido + "','" + txtsysaid.Text + "'";
                         vConexion.ejecutarSQL(vQuery);
                     }
                 }
@@ -320,7 +316,7 @@ namespace Infatlan_STEI_ATM.pages.correctivo
 
                 throw;
             }
-           
+
         }
 
         protected void btnBuscarJefe_Click(object sender, EventArgs e)

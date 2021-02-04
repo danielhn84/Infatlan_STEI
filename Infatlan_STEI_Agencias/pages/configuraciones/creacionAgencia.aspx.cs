@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Infatlan_STEI_Agencias.classes;
+using System;
+using System.Data;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Infatlan_STEI_Agencias.classes;
-using System.Data;
 
 
 namespace Infatlan_STEI_Agencias.pages.configuraciones
@@ -17,18 +15,23 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
         {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
-        
-        protected void Page_Load(object sender, EventArgs e){
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!Page.IsPostBack)
+            {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
                     cargarData();
                     cargarDataAgencias();
-                }else {
+                }
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
             }
         }
-        
+
         void cargarData()
         {
             try
@@ -38,7 +41,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 String vQuery = "STEISP_AGENCIA_CreacionAgencia 1";
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
                 DDLTipoAgencia.Items.Add(new ListItem { Value = "0", Text = "Seleccione una opción" });
-                
+
                 if (vDatos.Rows.Count > 0)
                 {
                     foreach (DataRow item in vDatos.Rows)
@@ -87,7 +90,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
-        
+
         private void validar()
         {
             if (TxAgencia.Text == "" || TxAgencia.Text == string.Empty)
@@ -107,7 +110,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
 
             if (TxLongitud.Text == "" || TxLongitud.Text == string.Empty)
                 throw new Exception("Falta ingresar longitud de la agencia.");
-           
+
             if (DDLTipoAgencia.SelectedValue.Equals("0"))
                 throw new Exception("Seleccione un tipo de agencia valido.");
 
@@ -116,11 +119,11 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
 
             if (DDLMunicipio.SelectedValue.Equals("0"))
                 throw new Exception("Seleccione un municipio al que pertenece la agencia.");
-            
+
             if (RblConductor.SelectedValue.Equals(""))
                 throw new Exception("Falta completar opción ¿Si requiere de conductorn para el traslado hacia la agencia?.");
         }
-        
+
         private void cargarDataAgencias()
         {
             try
@@ -136,7 +139,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
-        
+
         private void limpiar()
         {
             TxAgencia.Text = String.Empty;
@@ -150,7 +153,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             DDLMunicipio.SelectedIndex = -1;
             RblConductor.SelectedIndex = -1;
         }
-        
+
         protected void BtnEnviar_Click(object sender, EventArgs e)
         {
             try
@@ -186,7 +189,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                                    ",'" + codigoUbicacion +
                                     "','" + TxDireccion.Text +
                                     "','" + Session["USUARIO"] +
-                                    "','" + TxAgencia.Text + "'";                                    
+                                    "','" + TxAgencia.Text + "'";
                 Int32 vInformacion3 = vConexion.ejecutarSql(vQuery3);
 
 
@@ -204,7 +207,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
-        
+
         protected void BtnCancelar_Click(object sender, EventArgs e)
         {
             try
@@ -217,7 +220,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
-        
+
         protected void GVAgencias_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             try
@@ -225,13 +228,13 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 GVAgencias.PageIndex = e.NewPageIndex;
                 GVAgencias.DataSource = (DataTable)Session["AG_CA_AGENCIAS_BASA"];
                 GVAgencias.DataBind();
-            }             
+            }
             catch (Exception ex)
             {
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
-        
+
         protected void TxBuscarAgencia_TextChanged(object sender, EventArgs e)
         {
             try
@@ -244,12 +247,12 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                     GVAgencias.DataSource = vDatos;
                     GVAgencias.DataBind();
                     UPAgencias.Update();
-                    
+
                 }
                 else
                 {
                     EnumerableRowCollection<DataRow> filtered = vDatos.AsEnumerable()
-                        . Where(r => r.Field<String>("Agencia").Contains(vBusqueda));
+                        .Where(r => r.Field<String>("Agencia").Contains(vBusqueda));
 
                     Boolean isNumeric = int.TryParse(vBusqueda, out int n);
                     if (isNumeric)
@@ -285,7 +288,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                             );
                     }
 
-                    GVAgencias.DataSource  = vDatosFiltrados;
+                    GVAgencias.DataSource = vDatosFiltrados;
                     GVAgencias.DataBind();
                     Session["AG_CA_AGENCIAS_BASA"] = vDatosFiltrados;
                     UPAgencias.Update();
@@ -297,7 +300,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
-        
+
         protected void GVAgencias_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "Modifcar")
@@ -313,37 +316,37 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 {
                     String vQuery2 = " STEISP_AGENCIA_CreacionAgencia 5," + vIdAgenciaModificar;
                     DataTable vDatos = vConexion.obtenerDataTable(vQuery2);
-                foreach (DataRow item in vDatos.Rows)
-                {
+                    foreach (DataRow item in vDatos.Rows)
+                    {
                         RbConductorModificar.SelectedValue = item["requiereConductor"].ToString();
-                        string estado= item["estado"].ToString();
-                        DDLEstado.SelectedValue=item["estado"].ToString();
+                        string estado = item["estado"].ToString();
+                        DDLEstado.SelectedValue = item["estado"].ToString();
 
-                    TxCodigoModificar.Text = item["codigoAgencia"].ToString();
-                    TxAgenciaModificar.Text = item["nombre"].ToString();
-                    TxDireccionModificar.Text = item["direccion"].ToString();
-                    TxTelefonoModificar.Text = item["telefono"].ToString();
-                    TxLatitudModificar.Text = item["lat"].ToString();
-                    TxLongitudModificar.Text = item["lng"].ToString();
-                    DDLTipoAgenciaModificar.SelectedValue = item["idTipoAgencia"].ToString();
-                    DDLDepartamentoModificar.SelectedValue = item["idDepartamento"].ToString()==""?"0": item["idDepartamento"].ToString();
-                    Session["AG_CA_ID_DEPARTAMENTO"] = item["idDepartamento"].ToString() == "" ? "0" : item["idDepartamento"].ToString();
+                        TxCodigoModificar.Text = item["codigoAgencia"].ToString();
+                        TxAgenciaModificar.Text = item["nombre"].ToString();
+                        TxDireccionModificar.Text = item["direccion"].ToString();
+                        TxTelefonoModificar.Text = item["telefono"].ToString();
+                        TxLatitudModificar.Text = item["lat"].ToString();
+                        TxLongitudModificar.Text = item["lng"].ToString();
+                        DDLTipoAgenciaModificar.SelectedValue = item["idTipoAgencia"].ToString();
+                        DDLDepartamentoModificar.SelectedValue = item["idDepartamento"].ToString() == "" ? "0" : item["idDepartamento"].ToString();
+                        Session["AG_CA_ID_DEPARTAMENTO"] = item["idDepartamento"].ToString() == "" ? "0" : item["idDepartamento"].ToString();
 
                         DDLMunicipioModificar.SelectedValue = item["municipio"].ToString() == "" ? "0" : item["municipio"].ToString();
-                    txtcodUbicacion.Text = item["codigoUbicacion"].ToString();
-                    Session["AG_CA_CODIGO_UBICACION"] = item["codigoUbicacion"].ToString();
+                        txtcodUbicacion.Text = item["codigoUbicacion"].ToString();
+                        Session["AG_CA_CODIGO_UBICACION"] = item["codigoUbicacion"].ToString();
 
-                    Session["AG_CA_ID_UBICACION"] = item["idUbicacion"].ToString();
+                        Session["AG_CA_ID_UBICACION"] = item["idUbicacion"].ToString();
 
-                    //DDLEstado.SelectedValue = DDLEstadoConvertido.ToString();
-                    //RbConductorModificar.SelectedValue = RbConductorModificarConverido.ToString();
+                        //DDLEstado.SelectedValue = DDLEstadoConvertido.ToString();
+                        //RbConductorModificar.SelectedValue = RbConductorModificarConverido.ToString();
 
-                    TituloModalCrearAgencia.Text = "Modificar Agencia " + TxAgenciaModificar.Text;
-                    UpdatePanel3.Update();
+                        TituloModalCrearAgencia.Text = "Modificar Agencia " + TxAgenciaModificar.Text;
+                        UpdatePanel3.Update();
 
-                    
-                }
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModalModificarAgencia();", true);
+
+                    }
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModalModificarAgencia();", true);
                 }
                 catch (Exception ex)
                 {
@@ -351,7 +354,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 }
             }
         }
-        
+
         private void validarModificar()
         {
             if (TxAgenciaModificar.Text == "" || TxAgenciaModificar.Text == string.Empty)
@@ -381,7 +384,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             if (RbConductorModificar.SelectedValue.Equals(""))
                 throw new Exception("Falta completar opción ¿Si requiere de conductorn para el traslado hacia la agencia?.");
         }
-        
+
         private void limpiarDivAlertaModal()
         {
             DivAlerta.Visible = false;
@@ -404,12 +407,12 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                                   "'," + DDLTipoAgenciaModificar.SelectedValue +
                                   "," + DDLDepartamentoModificar.SelectedValue +
                                   ",'" + TxLatitudModificar.Text +
-                                  "','" + TxLongitudModificar.Text +                             
+                                  "','" + TxLongitudModificar.Text +
                                   "'," + RbConductorModificar.SelectedValue +
                                   "," + DDLEstado.SelectedValue +
-                                  ",'"+ Session["USUARIO"]+
-                                  "',"+ DDLMunicipioModificar.SelectedValue+
-                                   ",'"+ txtcodUbicacion.Text+"'";
+                                  ",'" + Session["USUARIO"] +
+                                  "'," + DDLMunicipioModificar.SelectedValue +
+                                   ",'" + txtcodUbicacion.Text + "'";
                 Int32 vInformacion1 = vConexion.ejecutarSql(vQuery1);
 
                 String vQuery2 = "STEISP_INVENTARIO_Ubicaciones 4,"
@@ -419,8 +422,8 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                                    "','" + TxDireccionModificar.Text +
                                    "'," + DDLEstado.SelectedValue +
                                    ",'" + Session["USUARIO"] +
-                                   "','"+ TxAgencia.Text + "'";
-                
+                                   "','" + TxAgencia.Text + "'";
+
                 Int32 vInformacion2 = vConexion.ejecutarSql(vQuery2);
 
 
@@ -431,7 +434,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
 
                     Mensaje("Datos actualizados de agencia con exito. ", WarningType.Success);
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModalModificarAgencia();", true);
-                    cargarDataAgencias();   
+                    cargarDataAgencias();
                     UPAgencias.Update();
 
                     //string motivo = "Se notifica que se ha modificado co éxito la agencia"+ txtcodUbicacion.Text + " ,ubicada:"+ TxDireccionModificar.Text;
@@ -442,9 +445,9 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                     //        vNombre,
                     //        "Motivo: " + motivo
                     //        );
-                    
 
-                    }
+
+                }
             }
             catch (Exception ex)
             {
@@ -455,14 +458,14 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             }
 
         }
-        
+
         protected void DDLDepartamento_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
                 if (DDLDepartamento.SelectedValue.Equals("8"))
                 {
-                    RblConductor.Enabled= true;
+                    RblConductor.Enabled = true;
                     RblConductor.SelectedIndex = -1;
                 }
                 else
@@ -478,7 +481,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             }
 
         }
-        
+
         private void cargarMunicipios(String vIdDepto)
         {
             if (vIdDepto != "0")
@@ -499,7 +502,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             else
                 DDLMunicipio.Items.Clear();
         }
-        
+
         protected void DDLDepartamentoModificar_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -534,12 +537,14 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             foreach (DataRow item in vDato2.Rows)
             {
                 codigoUbicacion = item["codigo"].ToString();
-              
+
             }
 
-            if(Session["AG_CA_ID_DEPARTAMENTO"].ToString()== DDLDepartamentoModificar.SelectedValue)
-            { txtcodUbicacion.Text = Session["AG_CA_CODIGO_UBICACION"].ToString();}
-            else { txtcodUbicacion.Text = codigoUbicacion;
+            if (Session["AG_CA_ID_DEPARTAMENTO"].ToString() == DDLDepartamentoModificar.SelectedValue)
+            { txtcodUbicacion.Text = Session["AG_CA_CODIGO_UBICACION"].ToString(); }
+            else
+            {
+                txtcodUbicacion.Text = codigoUbicacion;
             }
         }
 

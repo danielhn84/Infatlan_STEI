@@ -56,8 +56,7 @@
                             <img src="/assets/images/logo_mini.png" alt="homepage" class="light-logo" />--%>
                         </b>
                         <span >
-                            <%--<img src="/assets/images/logo-text.png" alt="homepage" class="dark-logo" />--%>
-                            <img src="/assets/images/logo-blanco.png" width="150" class="light-logo" alt="homepage" />
+                            <img src="/assets/images/infatlan_blanco.fw.png" width="150" class="light-logo" alt="homepage" />
                         </span>
                     </a>
                 </div>

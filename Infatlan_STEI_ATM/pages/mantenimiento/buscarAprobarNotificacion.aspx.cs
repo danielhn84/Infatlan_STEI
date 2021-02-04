@@ -1,24 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Infatlan_STEI_ATM.clases;
+using System;
+using System.Data;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.Sql;
-using System.Data.SqlClient;
-using Infatlan_STEI_ATM.clases;
 
 namespace Infatlan_STEI_ATM.pages.mantenimiento
 {
     public partial class buscarAprobarNotificacion : System.Web.UI.Page
     {
         bd vConexion = new bd();
-        protected void Page_Load(object sender, EventArgs e){
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!Page.IsPostBack)
+            {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
                     cargarData();
-                }else {
+                }
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
             }
@@ -84,7 +85,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             try
             {
                 DataTable vDataaaa = (DataTable)Session["ATM_APROBNOTIF_CARGAR"];
-                string codNotificacion = e.CommandArgument.ToString();             
+                string codNotificacion = e.CommandArgument.ToString();
 
                 if (e.CommandName == "Aprobar")
                 {
@@ -102,7 +103,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                             Session["ubicacionATM"] = item["Ubicacion"].ToString();
                             Session["SucursalATM"] = item["Sucursal"].ToString();
                             Session["zonaATM"] = item["Zona"].ToString();
-                            Session["IDZona"]= item["IDZona"].ToString();
+                            Session["IDZona"] = item["IDZona"].ToString();
                             Session["fechaMantATM"] = item["FechaMantenimiento"].ToString();
                             Session["hrInicioATM"] = item["HrInicio"].ToString();
                             Session["hrfinATM"] = item["HrFin"].ToString();
@@ -119,17 +120,17 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
                         }
 
-                       
-                            DataTable vDatos2 = new DataTable();
-                            String vQuery2 = "STEISP_AGENCIA_CreacionNotificacion 6,'" + Session["USUCREADORATM"].ToString() + "'";
-                            vDatos2 = vConexion.ObtenerTabla(vQuery2);
-                            foreach (DataRow item in vDatos2.Rows)
-                            {                            
-                                Session["ATM_NOMBRECREADOR"] = item["nombre"].ToString();
-                                Session["ATM_APELLIDOCREADOR"] = item["apellidos"].ToString();
-                                Session["ATM_CORREOCREADOR"] = item["correo"].ToString();
-                            }
-                                
+
+                        DataTable vDatos2 = new DataTable();
+                        String vQuery2 = "STEISP_AGENCIA_CreacionNotificacion 6,'" + Session["USUCREADORATM"].ToString() + "'";
+                        vDatos2 = vConexion.ObtenerTabla(vQuery2);
+                        foreach (DataRow item in vDatos2.Rows)
+                        {
+                            Session["ATM_NOMBRECREADOR"] = item["nombre"].ToString();
+                            Session["ATM_APELLIDOCREADOR"] = item["apellidos"].ToString();
+                            Session["ATM_CORREOCREADOR"] = item["correo"].ToString();
+                        }
+
 
                         TxBuscarTecnicoATM.Text = string.Empty;
                         Response.Redirect("notificacion.aspx?id=2&tipo=3");
@@ -174,19 +175,19 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     DataTable vDatosFiltrados = new DataTable();
                     vDatosFiltrados.Columns.Add("ID");
                     vDatosFiltrados.Columns.Add("Codigo");
-                    vDatosFiltrados.Columns.Add("NomATM");                   
-                    vDatosFiltrados.Columns.Add("Ubicacion");                  
-                    vDatosFiltrados.Columns.Add("Sucursal");                 
-                    vDatosFiltrados.Columns.Add("Tecnico");                   
+                    vDatosFiltrados.Columns.Add("NomATM");
+                    vDatosFiltrados.Columns.Add("Ubicacion");
+                    vDatosFiltrados.Columns.Add("Sucursal");
+                    vDatosFiltrados.Columns.Add("Tecnico");
                     foreach (DataRow item in filtered)
                     {
                         vDatosFiltrados.Rows.Add(
                             item["ID"].ToString(),
                             item["Codigo"].ToString(),
-                            item["NomATM"].ToString(),                           
-                            item["Ubicacion"].ToString(),                           
-                            item["Sucursal"].ToString(),                          
-                            item["Tecnico"].ToString()                          
+                            item["NomATM"].ToString(),
+                            item["Ubicacion"].ToString(),
+                            item["Sucursal"].ToString(),
+                            item["Tecnico"].ToString()
                             );
                     }
 

@@ -1,21 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Infatlan_STEI_CableadoEstructurado.clases;
+using System;
+using System.Data;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using Infatlan_STEI_CableadoEstructurado.clases;
-using System.Data.Sql;
-using System.Text;
-using System.Drawing;
-using System.Threading.Tasks;
-using System.Web.UI.HtmlControls;
-using System.Configuration;
-using System.Web.ApplicationServices;
 using DataTable = System.Data.DataTable;
 using Page = System.Web.UI.Page;
-using System.IO;
 
 namespace Infatlan_STEI_CableadoEstructurado.page.visita
 {
@@ -23,15 +13,20 @@ namespace Infatlan_STEI_CableadoEstructurado.page.visita
     {
         db vConexion = new db();
         Security vSecurity = new Security();
-        protected void Page_Load(object sender, EventArgs e){
-            if (!Page.IsPostBack){
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!Page.IsPostBack)
+            {
 
-                if (Convert.ToBoolean(Session["AUTH"])){
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
                     if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 4).Creacion)
                         btnNuevo.Visible = true;
 
                     CargarProceso();
-                }else {
+                }
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
             }
@@ -42,10 +37,12 @@ namespace Infatlan_STEI_CableadoEstructurado.page.visita
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
 
-        void CargarProceso(){
-            try{
+        void CargarProceso()
+        {
+            try
+            {
                 //DataTable vDatos = new DataTable();
-                String vQueryId = "STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 25" /*,'" + Session["USUARIO"] + "'"*/; 
+                String vQueryId = "STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 25" /*,'" + Session["USUARIO"] + "'"*/;
                 DataTable vDatos = vConexion.obtenerDataTable(vQueryId);
 
                 GVPrincipalVisita.DataSource = vDatos;
@@ -53,10 +50,13 @@ namespace Infatlan_STEI_CableadoEstructurado.page.visita
                 Session["CE_BUSCAQUEDAVISITA"] = vDatos;
                 udpPrincipalVisita.Update();
 
-                if (vDatos.Rows.Count == 0){
+                if (vDatos.Rows.Count == 0)
+                {
                     LbDescripcionEdicion.Text = "No hay estudios pendientes";
                 }
-            }catch (Exception Ex){
+            }
+            catch (Exception Ex)
+            {
                 Mensaje(Ex.Message, WarningType.Danger);
             }
         }

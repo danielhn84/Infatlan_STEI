@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Infatlan_STEI_ATM.clases;
+using System;
+using System.Data;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.Sql;
-using System.Data.SqlClient;
-using Infatlan_STEI_ATM.clases;
 
 namespace Infatlan_STEI_ATM.pages.ATM
 {
@@ -16,15 +12,20 @@ namespace Infatlan_STEI_ATM.pages.ATM
         bd vConexion = new bd();
         bd vConexionATM = new bd();
         Security vSecurity = new Security();
-        protected void Page_Load(object sender, EventArgs e){
+        protected void Page_Load(object sender, EventArgs e)
+        {
             Session["MARCAS_ATM"] = null;
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
+            if (!Page.IsPostBack)
+            {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
                     if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Creacion)
                         btnnewmarcasATM.Visible = true;
 
                     cargarData();
-                }else {
+                }
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
             }
@@ -44,8 +45,10 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     vDatos = vConexionATM.ObtenerTablaATM("SPSTEI_ATM 11");
                     GVBusqueda.DataSource = vDatos;
                     GVBusqueda.DataBind();
-                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Edicion){
-                        foreach (GridViewRow item in GVBusqueda.Rows){
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Edicion)
+                    {
+                        foreach (GridViewRow item in GVBusqueda.Rows)
+                        {
                             LinkButton LbEdit = item.FindControl("BtnEditar") as LinkButton;
                             LbEdit.Visible = true;
                         }
@@ -78,8 +81,8 @@ namespace Infatlan_STEI_ATM.pages.ATM
 
             if (e.CommandName == "Codigo")
             {
-               
-                
+
+
                 try
                 {
                     DataTable vDatos = new DataTable();
@@ -111,7 +114,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
             }
             else
             {
-               
+
                 try
                 {
                     string vQuery = "SPSTEI_ATM 31, '" + Session["codmarca"] + "','" + txtModalNewMarcaATM.Text + "'";
@@ -146,7 +149,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
 
         protected void btnModalNueviMarcaATM_Click(object sender, EventArgs e)
         {
-            
+
             if (txtNewMarcaATM.Text == "" || txtNewMarcaATM.Text == string.Empty)
             {
                 txtAlerta2.Visible = true;
@@ -170,7 +173,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     }
                     else
                     {
-                        txtAlerta1.Text="No se pudo crear la marca";
+                        txtAlerta1.Text = "No se pudo crear la marca";
                         txtAlerta1.Visible = true;
                     }
                 }

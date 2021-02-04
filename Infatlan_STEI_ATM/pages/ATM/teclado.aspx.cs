@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Infatlan_STEI_ATM.clases;
+using System;
+using System.Data;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.Sql;
-using System.Data.SqlClient;
-using Infatlan_STEI_ATM.clases;
 
 namespace Infatlan_STEI_ATM.pages.ATM
 {
@@ -16,15 +12,20 @@ namespace Infatlan_STEI_ATM.pages.ATM
         bd vConexion = new bd();
         bd vConexionATM = new bd();
         Security vSecurity = new Security();
-        protected void Page_Load(object sender, EventArgs e){
+        protected void Page_Load(object sender, EventArgs e)
+        {
             Session["TECLADOS_ATM"] = null;
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
+            if (!Page.IsPostBack)
+            {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
                     if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Creacion)
                         btnnewtecladoATM.Visible = true;
 
                     cargarData();
-                }else {
+                }
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
             }
@@ -43,8 +44,10 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     vDatos = vConexionATM.ObtenerTablaATM("SPSTEI_ATM 7");
                     GVBusqueda.DataSource = vDatos;
                     GVBusqueda.DataBind();
-                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Edicion){
-                        foreach (GridViewRow item in GVBusqueda.Rows){
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Edicion)
+                    {
+                        foreach (GridViewRow item in GVBusqueda.Rows)
+                        {
                             LinkButton LbEdit = item.FindControl("BtnEditar") as LinkButton;
                             LbEdit.Visible = true;
                         }
@@ -72,7 +75,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
             if (e.CommandName == "Codigo")
             {
                 string nom = "";
-                
+
                 try
                 {
                     DataTable vDatos = new DataTable();
@@ -104,7 +107,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
             }
             else
             {
-                
+
                 try
                 {
                     string vQuery = "SPSTEI_ATM 25, '" + Session["codtecladoATM"] + "','" + txtModalNewTecladoATM.Text + "'";
@@ -120,7 +123,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     }
                     else
                     {
-                       txtAlerta1.Text="No se pudo modificar el teclado de ATM";
+                        txtAlerta1.Text = "No se pudo modificar el teclado de ATM";
                         txtAlerta1.Visible = true;
                     }
                 }
@@ -138,7 +141,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
 
         protected void btnModalNueviTecladoATM_Click(object sender, EventArgs e)
         {
-           
+
             if (txtNewTecladoATM.Text == "" || txtNewTecladoATM.Text == string.Empty)
             {
                 txtAlerta2.Visible = true;
@@ -161,7 +164,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     }
                     else
                     {
-                      txtAlerta2.Text="No se pudo crear el teclado de ATM";
+                        txtAlerta2.Text = "No se pudo crear el teclado de ATM";
                         txtAlerta2.Visible = true;
                     }
                 }

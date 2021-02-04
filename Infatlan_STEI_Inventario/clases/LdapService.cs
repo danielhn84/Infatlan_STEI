@@ -4,8 +4,6 @@ using System.DirectoryServices;
 using System.DirectoryServices.AccountManagement;
 using System.DirectoryServices.ActiveDirectory;
 using System.Globalization;
-using System.Linq;
-using System.Web;
 
 namespace Infatlan_STEI_Inventario.clases
 {

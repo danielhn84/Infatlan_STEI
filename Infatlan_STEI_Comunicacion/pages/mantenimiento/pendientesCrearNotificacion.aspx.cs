@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Infatlan_STEI_Comunicacion.classes;
+using System;
+using System.Data;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Infatlan_STEI_Comunicacion.classes;
-using System.Data;
 
 namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
 {
@@ -16,7 +13,7 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
         {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
-        
+
         protected void Page_Load(object sender, EventArgs e)
         {
             String vEx = Request.QueryString["ex"];
@@ -72,12 +69,12 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
             }
 
         }
-        
+
         private void cargarDatos()
         {
             try
             {
-                String vQuery = "STEISP_COMUNICACION_AsignarResponsable 4,'"+ Session["USUARIO"]+"'";
+                String vQuery = "STEISP_COMUNICACION_AsignarResponsable 4,'" + Session["USUARIO"] + "'";
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
                 GvPendientesCrearNotificacion.DataSource = vDatos;
                 GvPendientesCrearNotificacion.DataBind();
@@ -91,7 +88,7 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
-        
+
         protected void GvPendientesCrearNotificacion_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             try
@@ -106,16 +103,16 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
             }
 
         }
-        
+
         protected void GvPendientesCrearNotificacion_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            string vIdMantenimiento= e.CommandArgument.ToString();
+            string vIdMantenimiento = e.CommandArgument.ToString();
             Session["COMUNICACION_ID_MANTENIMIENTO"] = vIdMantenimiento;
 
             if (e.CommandName == "Crear")
             {
                 String vQuery = "STEISP_COMUNICACION_CrearNotificacion 1,'" + vIdMantenimiento + "'";
-                DataTable vDatos = vConexion.obtenerDataTable(vQuery);               
+                DataTable vDatos = vConexion.obtenerDataTable(vQuery);
                 Session["COMUNICACION_PCN_CREAR_NOTIFICACION_INDIVIDUAL"] = vDatos;
 
 
@@ -180,7 +177,7 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
-        
+
         private void validacionesCancelarNotificacion()
         {
             if (DdlMotivo.SelectedValue.Equals(""))
@@ -198,18 +195,18 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
             try
             {
                 validacionesCancelarNotificacion();
-                String vResponsable = DdlMotivo.SelectedValue == "1" ?  Convert.ToString(DDLNombreResponsable.SelectedValue) : Session["USUARIO"].ToString();
+                String vResponsable = DdlMotivo.SelectedValue == "1" ? Convert.ToString(DDLNombreResponsable.SelectedValue) : Session["USUARIO"].ToString();
                 String vEstado = DdlMotivo.SelectedValue == "1" ? "3" : "7";
 
                 string vQuery = "STEISP_COMUNICACION_CrearNotificacion 8," + Session["COMUNICACION_ID_MANTENIMIENTO"].ToString()
-                                + ",'" + TxDetalle.Text + "',"+ vEstado + "," + DdlMotivo.SelectedValue+ ",'" + vResponsable+"'";
-                 Int32 vInformacion1 = vConexion.ejecutarSql(vQuery);
+                                + ",'" + TxDetalle.Text + "'," + vEstado + "," + DdlMotivo.SelectedValue + ",'" + vResponsable + "'";
+                Int32 vInformacion1 = vConexion.ejecutarSql(vQuery);
 
                 if (vInformacion1 == 1)
                 {
                     limpiarModal();
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "cerrarModal();", true);
-            
+
 
                     Response.Redirect("/sites/comunicaciones/pages/mantenimiento/pendientesCrearNotificacion.aspx?ex=3");
                 }

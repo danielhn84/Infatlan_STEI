@@ -1,22 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Data;
 
 namespace Infatlan_STEI_Agencias.classes
 {
-    public class Security{
+    public class Security
+    {
         db vConexion = new db();
-        public permisos ObtenerPermiso(String vUsuario, int idAplicacion){
+        public permisos ObtenerPermiso(String vUsuario, int idAplicacion)
+        {
             permisos vPermiso = new permisos();
-            try{
+            try
+            {
                 String vQuery = "[STEISP_Permisos] 4" +
                     ",'" + vUsuario + "'" +
                     "," + idAplicacion;
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
 
-                foreach (DataRow item in vDatos.Rows){
+                foreach (DataRow item in vDatos.Rows)
+                {
                     if (Convert.ToBoolean(item["consulta"].ToString()))
                         vPermiso.Consulta = true;
                     if (Convert.ToBoolean(item["escritura"].ToString()))
@@ -26,7 +27,9 @@ namespace Infatlan_STEI_Agencias.classes
                     if (Convert.ToBoolean(item["borrar"].ToString()))
                         vPermiso.Borrado = true;
                 }
-            }catch{
+            }
+            catch
+            {
                 vPermiso = new permisos();
             }
             return vPermiso;
@@ -34,7 +37,8 @@ namespace Infatlan_STEI_Agencias.classes
 
     }
 
-    public class permisos{
+    public class permisos
+    {
         public bool Consulta { get; set; } = false;
         public bool Creacion { get; set; } = false;
         public bool Edicion { get; set; } = false;

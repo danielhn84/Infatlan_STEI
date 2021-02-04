@@ -1,26 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Infatlan_STEI_ATM.clases;
+using System;
+using System.Configuration;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.Sql;
-using System.Data.SqlClient;
-using System.Configuration;
-using Infatlan_STEI_ATM.clases;
 
 namespace Infatlan_STEI_ATM.pages.mantenimiento
 {
     public partial class buscarVerificacion : System.Web.UI.Page
     {
         bd vConexion = new bd();
-        protected void Page_Load(object sender, EventArgs e){
+        protected void Page_Load(object sender, EventArgs e)
+        {
             Session["ModalVerif"] = null;
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
+            if (!Page.IsPostBack)
+            {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
                     cargarData();
-                }else {
+                }
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
             }
@@ -33,7 +35,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
         void limpiarModalVerificacion()
         {
-            txtModalATM.Text=string.Empty;
+            txtModalATM.Text = string.Empty;
             DDLModalMotivo.SelectedValue = "0";
             DDLModalcambioPor.SelectedValue = "0";
             DDLModalNewTecnico.SelectedValue = "0";
@@ -41,11 +43,11 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         }
         void cargarData()
         {
-            
+
             try
             {
                 DataTable vDatos = new DataTable();
-                vDatos = vConexion.ObtenerTabla("STEISP_ATM_VERIFICACION 1, '"+ Session["USUARIO"].ToString() + "','"+Session["COD_VERIFMANTE_ATM"]+"'");
+                vDatos = vConexion.ObtenerTabla("STEISP_ATM_VERIFICACION 1, '" + Session["USUARIO"].ToString() + "','" + Session["COD_VERIFMANTE_ATM"] + "'");
                 GVBusqueda.DataSource = vDatos;
                 GVBusqueda.DataBind();
                 Session["ATM_VERIF_CARGAR"] = vDatos;
@@ -75,23 +77,23 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
                     throw;
                 }
-              
-                    try
-                    {
 
-                        String vQuery = "STEISP_ATM_Generales 20,1";
-                        DataTable vDatos = vConexion.ObtenerTabla(vQuery);
-                        DDLModalMotivo.Items.Add(new ListItem { Value = "0", Text = "Seleccione motivo..." });
-                        foreach (DataRow item in vDatos.Rows)
-                        {
-                            DDLModalMotivo.Items.Add(new ListItem { Value = item["idCancelMant"].ToString(), Text = item["nombreCancelar"].ToString() });
+                try
+                {
 
-                        }
-                    }
-                    catch (Exception ex)
+                    String vQuery = "STEISP_ATM_Generales 20,1";
+                    DataTable vDatos = vConexion.ObtenerTabla(vQuery);
+                    DDLModalMotivo.Items.Add(new ListItem { Value = "0", Text = "Seleccione motivo..." });
+                    foreach (DataRow item in vDatos.Rows)
                     {
-                        throw;
+                        DDLModalMotivo.Items.Add(new ListItem { Value = item["idCancelMant"].ToString(), Text = item["nombreCancelar"].ToString() });
+
                     }
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
 
                 try
                 {
@@ -273,7 +275,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 }
             }
             else
-            {              
+            {
                 if (vDatos.Rows.Count > 0)
                 {
                     foreach (DataRow item in vDatos.Rows)
@@ -344,13 +346,13 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         }
         protected void btnMantSinRealizar_Click(object sender, EventArgs e)
         {
-            
+
             try
             {
-                if (txtdetalleCancela.Text == "" || DDLModalMotivo.SelectedValue=="0"|| DDLModalcambioPor.SelectedValue=="0")
-                   
+                if (txtdetalleCancela.Text == "" || DDLModalMotivo.SelectedValue == "0" || DDLModalcambioPor.SelectedValue == "0")
+
                 {
-                   H5Alerta.Visible = true;
+                    H5Alerta.Visible = true;
                     txtAlerta2.Visible = true;
                 }
                 else
@@ -374,7 +376,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                             }
                             else
                             {
-                                H5Alerta.InnerText= "No se pudo realizar la acción";
+                                H5Alerta.InnerText = "No se pudo realizar la acción";
                                 H5Alerta.Visible = true;
                             }
                         }
@@ -394,7 +396,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                                 H5Alerta.Visible = false;
                                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
                                 Mensaje("Verificación cancelada con éxito", WarningType.Success);
-                               // CorreoCancelar();
+                                // CorreoCancelar();
                                 UpdateGridView.Update();
                                 limpiarModalVerificacion();
                                 cargarData();
@@ -441,7 +443,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             try
             {
                 String vQuery = "STEISP_AGENCIA_CreacionNotificacion 6, " + DDLModalNewTecnico.SelectedValue;
-                DataTable vDatos = vConexion.ObtenerTabla(vQuery);                 
+                DataTable vDatos = vConexion.ObtenerTabla(vQuery);
                 Session["ATM_Notif_emailTecnicoResponsable"] = vDatos.Rows[0]["correo"].ToString();
             }
             catch (Exception ex)
@@ -510,7 +512,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                             Session["ATM_USUCREADOR_VERIF_CREAR"] = item["UsuarioCreador"].ToString();
                             Session["ATM_ATMACTIVO_VERIF_CREAR"] = item["ATMActivo"].ToString();
                             Session["ATM_USUARIO_VERIF_CREAR"] = item["UsuResponsable"].ToString();
-                           
+
 
                         }
 
@@ -535,7 +537,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 }
                 if (e.CommandName == "Reprogramar")
                 {
-                    
+
                     try
                     {
                         DataTable vDatos2 = new DataTable();
@@ -545,8 +547,8 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                         {
                             txtModalATM.Text = item["NomATM"].ToString();
                             Session["ATM_ID_CANCELAR_VERIF_MODAL"] = item["IDMant"].ToString();
-                            Session["ATM_USURESPONSABLE_REPROGRAMAR"] = item["CorreoTecnico"].ToString(); 
-                            Session["ATM_RESPONSABLE"] = item["Tecnico"].ToString(); 
+                            Session["ATM_USURESPONSABLE_REPROGRAMAR"] = item["CorreoTecnico"].ToString();
+                            Session["ATM_RESPONSABLE"] = item["Tecnico"].ToString();
                             Session["ATM_USURESPONSABLE"] = item["Usuario"].ToString();
                             Session["ATM_IDZONA_REPROGRAMAR"] = item["IDZona"].ToString();
                         }

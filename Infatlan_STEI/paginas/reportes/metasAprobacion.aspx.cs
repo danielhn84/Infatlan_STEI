@@ -1,16 +1,8 @@
 ﻿using Infatlan_STEI.classes;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Configuration;
-using Infatlan_STEI.paginas;
 
 namespace Infatlan_STEI.paginas.reportes
 {
@@ -29,7 +21,7 @@ namespace Infatlan_STEI.paginas.reportes
 
                         String vId = Session["CUMPL_ID_REPORTE"].ToString();
                         cargarDatos(vId);
-                    }else {
+                    }else{
                         Response.Redirect("/login.aspx");
                     }
                 }
@@ -38,7 +30,7 @@ namespace Infatlan_STEI.paginas.reportes
             }
         }
 
-        public void cargarDatos(String vId) {
+        public void cargarDatos(String vId){
             try{
                 String vQuery = "[STEISP_CUMPLIMIENTO_Reportes] 4," + vId;
                 DataSet vDSet = vConexion.obtenerDataSet(vQuery);
@@ -138,7 +130,7 @@ namespace Infatlan_STEI.paginas.reportes
             }
         }
 
-        private void cargarTextos(DataTable vData) {
+        private void cargarTextos(DataTable vData){
             try{
                 TxCallAtendidas.Text = vData.Rows[0]["callAtendidas"].ToString();
                 TxCallAtendidasNo.Text = vData.Rows[0]["callPerdidas"].ToString();
@@ -172,9 +164,9 @@ namespace Infatlan_STEI.paginas.reportes
                     TxABAPorcentaje.Text = vABAProm.ToString();
                 }else
                     TxABAPorcentaje.Text = "100";
-                
+
                 LitABA.Text = "<div class='chart easy-pie-chart-4' data-percent='" + TxABAPorcentaje.Text + "'><span class='percent'></span></div>";
-                
+
                 TxCajaCumplidas.Text = vData.Rows[0]["cajaCompletos"].ToString();
                 TxCajaCumplidasNo.Text = vData.Rows[0]["cajaIncompletos"].ToString();
                 TxCajaObs.Text = vData.Rows[0]["cajaComentario"].ToString();
@@ -188,7 +180,7 @@ namespace Infatlan_STEI.paginas.reportes
                 LitCaja.Text = "<div class='chart easy-pie-chart-4' data-percent='" + TxCajaPorcentaje.Text + "'><span class='percent'></span></div>";
 
                 TxKPICumplimiento.Text = vData.Rows[0]["kpiCompletas"].ToString();
-                TxKPICumplimientoNo.Text = vData.Rows[0]["kpiCompletas"].ToString();
+                TxKPICumplimientoNo.Text = vData.Rows[0]["kpiIncompletas"].ToString();
                 TxKPIObs.Text = vData.Rows[0]["kpiComentario"].ToString();
                 TxKPITotal.Text = vData.Rows[0]["kpiTotal"].ToString();
                 if (Convert.ToInt32(TxCajaTotal.Text) > 0){
@@ -199,10 +191,10 @@ namespace Infatlan_STEI.paginas.reportes
             }catch (Exception ex){
                 throw new Exception(ex.Message);
             }
-        
+
         }
 
-        public void graficos(DataTable vData) { 
+        public void graficos(DataTable vData){
             try{
                 int vTotTR = 0, vTotTT = 0, vTotRup = 0, vTotNoRup = 0, vSolTareas = 0, vSolRupturas = 0;
                 int vHorasEmpleados = vData.Rows.Count * 360;
@@ -220,14 +212,14 @@ namespace Infatlan_STEI.paginas.reportes
                     Decimal SolPromCR = Convert.ToDecimal(Math.Round(vSolPromCR, 2));
                     Decimal vSolPromSR = 100 - SolPromCR;
                     TxGraf1.Value = SolPromCR.ToString().Replace(",", ".");
-                    TxGraf2.Value = vSolPromSR.ToString().Replace(",",".");
+                    TxGraf2.Value = vSolPromSR.ToString().Replace(",", ".");
                 }
 
                 int vTotPeticiones = vTotNoRup + vTotRup;
                 if (vTotPeticiones > 0){
                     float vRupProm = float.Parse(vTotRup.ToString()) / float.Parse(vTotPeticiones.ToString()) * 100;
                     Decimal vRupPromTotal = Convert.ToDecimal(Math.Round(vRupProm, 2));
-                    TxGraf3.Value = vRupPromTotal.ToString().Replace(",",".");
+                    TxGraf3.Value = vRupPromTotal.ToString().Replace(",", ".");
 
                     float vNoRupProm = float.Parse(vTotNoRup.ToString()) / float.Parse(vTotPeticiones.ToString()) * 100;
                     Decimal vNoRupPromTotal = Convert.ToDecimal(Math.Round(vNoRupProm, 2));
@@ -237,7 +229,7 @@ namespace Infatlan_STEI.paginas.reportes
                 float vTR = float.Parse(vTotTR.ToString()) / float.Parse(vHorasEmpleados.ToString()) * 100;
                 Decimal vTotalTR = Convert.ToDecimal(Math.Round(vTR, 2));
                 TxGraf5.Value = vTotalTR.ToString().Replace(",", ".");
-                    
+
                 float vTT = float.Parse(vTotTT.ToString()) / float.Parse(vHorasEmpleados.ToString()) * 100;
                 Decimal vTotalTT = Convert.ToDecimal(Math.Round(vTT, 2));
                 TxGraf6.Value = vTotalTT.ToString().Replace(",", ".");
@@ -285,7 +277,7 @@ namespace Infatlan_STEI.paginas.reportes
                     vFlag = true;
                     if (vFlag)
                         Response.Redirect("metasPendientes.aspx", false);
-                }else 
+                }else
                     Mensaje("Ha ocurrido un error. Comuníquese con sistemas", WarningType.Danger);
 
             }catch (Exception ex){
@@ -301,7 +293,7 @@ namespace Infatlan_STEI.paginas.reportes
                 TxComentario.Text = string.Empty;
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal();", true);
             }catch (Exception ex){
-                Mensaje(ex.Message, WarningType.Danger);   
+                Mensaje(ex.Message, WarningType.Danger);
             }
         }
     }

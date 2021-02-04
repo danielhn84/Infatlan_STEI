@@ -1,26 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
-using System.Linq;
 using System.Net.Mail;
 using System.Net.Mime;
 using System.Text;
-using System.Web;
 using System.Web.UI;
 
 namespace Infatlan_STEI_ATM.clases
 {
-    public enum typeBody{
+    public enum typeBody
+    {
         ATM,
         Alertas
     }
 
-    public class SmtpService : Page{
+    public class SmtpService : Page
+    {
 
         public SmtpService() { }
 
-        public Boolean EnviarMensaje(String To, typeBody Body, String Titulo, String Nombre, String Descripcion, String vCopia = null, String vLink=null)
+        public Boolean EnviarMensaje(String To, typeBody Body, String Titulo, String Nombre, String Descripcion, String vCopia = null, String vLink = null)
         {
             Boolean vRespuesta = false;
             try
@@ -41,7 +40,7 @@ namespace Infatlan_STEI_ATM.clases
 
                 switch (Body)
                 {
-                   
+
                     case typeBody.ATM:
                         mail.AlternateViews.Add(CreateHtmlMessage(PopulateBody(
                             Titulo,

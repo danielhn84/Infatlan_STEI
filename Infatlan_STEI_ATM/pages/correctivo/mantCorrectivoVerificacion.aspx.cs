@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Infatlan_STEI_ATM.clases;
+using System;
+using System.Configuration;
+using System.Data;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data.Sql;
-using System.Data.SqlClient;
-using Infatlan_STEI_ATM.clases;
-using System.Data;
-using System.IO;
-using System.Configuration;
-using System.Drawing.Imaging;
-using System.Drawing;
 
 namespace Infatlan_STEI_ATM.pages.correctivo
 {
@@ -85,7 +81,7 @@ namespace Infatlan_STEI_ATM.pages.correctivo
             TxFechaInicio.Enabled = false;
             TxFechaRegreso.Enabled = false;
             dropantiskimming.Enabled = false;
-            txtantiSkimming.Enabled = false;           
+            txtantiSkimming.Enabled = false;
             txtobseracionesVerif.Enabled = false;
             DDLmarcaDiscoDuro.Enabled = false;
             DDLtipoCargaVerif.Enabled = false;
@@ -117,14 +113,14 @@ namespace Infatlan_STEI_ATM.pages.correctivo
             {
                 TxFechaInicio.Text = item["HrInicio"].ToString();
                 TxFechaRegreso.Text = item["HrFin"].ToString();
-                txtHllegadaInfatlan.Text= item["HrEntradaInfa"].ToString();
+                txtHllegadaInfatlan.Text = item["HrEntradaInfa"].ToString();
                 txthsalidaInfa.Text = item["HrSalidaInfa"].ToString();
                 dropantiskimming.SelectedValue = item["antiskimming"].ToString();
                 txtantiSkimming.Text = item["ComentarioAntis"].ToString();
-                DDLCambioPiezas.SelectedValue= item["piezas"].ToString();
-                txtCambioMateriales.Text= item["ComentarioPiezas"].ToString();
+                DDLCambioPiezas.SelectedValue = item["piezas"].ToString();
+                txtCambioMateriales.Text = item["ComentarioPiezas"].ToString();
                 DDLCambioDiscoDuro.SelectedValue = item["DiscoDuro"].ToString();
-                txtobseracionesVerif.Text= item["Comentario"].ToString();
+                txtobseracionesVerif.Text = item["Comentario"].ToString();
             }
 
             if (DDLCambioDiscoDuro.SelectedValue == "0")
@@ -191,7 +187,7 @@ namespace Infatlan_STEI_ATM.pages.correctivo
                         HFDiscoDuro.Value = "si";
                     }
                 }
-                
+
                 else
                 {
                     string vImagen5 = item["imgDiscoDuro"].ToString();
@@ -199,7 +195,7 @@ namespace Infatlan_STEI_ATM.pages.correctivo
                     imgDiscoDuro.Src = srcImgen5;
                     HFDiscoDuro.Value = "si";
                 }
-        
+
             }
 
             //UPIMG.Update();
@@ -216,11 +212,11 @@ namespace Infatlan_STEI_ATM.pages.correctivo
                 foreach (DataRow item in vDatos.Rows)
                 {
                     Session["ATM_CORRECTIVO"] = item["Codigo"].ToString();
-                    txtnomATM.Text = item["Codigo"].ToString()+" - "+ item["NomATM"].ToString(); 
+                    txtnomATM.Text = item["Codigo"].ToString() + " - " + item["NomATM"].ToString();
                     txtdireccion.Text = item["Direccion"].ToString();
                     txtip.Text = item["IP"].ToString();
                     txtpuertoVerif.Text = item["Puerto"].ToString();
-                    DDLtipoTeclado.SelectedIndex =  CargarInformacionDDL(DDLtipoTeclado, item["Teclado"].ToString());
+                    DDLtipoTeclado.SelectedIndex = CargarInformacionDDL(DDLtipoTeclado, item["Teclado"].ToString());
                     DDLtipoProc.SelectedValue = item["Procesador"].ToString();
                     DDLtipoCargaVerif.SelectedValue = item["TipoCarga"].ToString();
                     DDLmarcaDiscoDuro.SelectedValue = item["Marca"].ToString();
@@ -243,14 +239,14 @@ namespace Infatlan_STEI_ATM.pages.correctivo
                     txtlatitudATM.Text = item["Latitud"].ToString();
                     txtlongitudATM.Text = item["Longitud"].ToString();
                     txtUbicacionATM.Text = item["Ubicacion"].ToString();
-                     //item["IdUbi"].ToString();
+                    //item["IdUbi"].ToString();
                     txtsucursal.Text = item["Sucursal"].ToString();
                     //Session["ATM_DEPTO_VERIF_CREAR"] = item["Departamento"].ToString();
                     txtzonaVerif.Text = item["Zona"].ToString();
                     //Session["ATM_IDZONA_VERIF_CREAR"] = item["IDZona"].ToString();
                     //Session["ATM_IDMANT_VERIF_CREAR"] = codVerif;
                     //Session["ATM_ESTADO_VERIF_CREAR"] = item["Estado"].ToString();
-                    
+
                     //Session["ATM_HRINICIO_VERIF_CREAR"] = item["HrInicio"].ToString();
                     //Session["ATM_HRFIN_VERIF_CREAR"] = item["HrFin"].ToString();
                     //Session["ATM_AUTORIZADO_VERIF_CREAR"] = item["Autorizado"].ToString();
@@ -258,7 +254,7 @@ namespace Infatlan_STEI_ATM.pages.correctivo
                     txtTecnicoResponsable.Text = item["Tecnico"].ToString();
                     //Session["ATM_USUARIO_VERIF_CREAR"] = item["Usuario"].ToString();
                     txtidentidad.Text = item["Identidad"].ToString();
-                   DDLSo.SelectedValue = item["SO"].ToString();
+                    DDLSo.SelectedValue = item["SO"].ToString();
                     DDLVersionSW.SelectedValue = item["VersionSw"].ToString();
 
                     DataTable vDatos2 = new DataTable();
@@ -275,7 +271,7 @@ namespace Infatlan_STEI_ATM.pages.correctivo
                             imgMapaATM.Src = srcImgen1;
                             HFMapa.Value = "si";
                         }
-                    }  
+                    }
 
                 }
 
@@ -319,7 +315,7 @@ namespace Infatlan_STEI_ATM.pages.correctivo
             {
                 try
                 {
-                    
+
                     String vQuery = "SPSTEI_ATM 7";
                     DataTable vDatos = vConexionATM.ObtenerTablaATM(vQuery);
                     DDLtipoTeclado.Items.Add(new ListItem { Value = "0", Text = "Seleccione teclado..." });
@@ -469,61 +465,61 @@ namespace Infatlan_STEI_ATM.pages.correctivo
             string vArchivo4 = "";
             string vArchivo5 = "";
 
-            if(DDLCambioDiscoDuro.SelectedValue=="2")
-            { 
-            //////////////////////////////////////////////////////////////////////////////
-            //IMAGENES1
-            if (FUDiscoDuro.FileName != "")
+            if (DDLCambioDiscoDuro.SelectedValue == "2")
             {
-                Bitmap originalBMP = new Bitmap(FUDiscoDuro.FileContent);
-                byte[] imageData;
-                Bitmap originalBMPReducido = null; ;
-                long imgTamano;
-                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+                //////////////////////////////////////////////////////////////////////////////
+                //IMAGENES1
+                if (FUDiscoDuro.FileName != "")
                 {
-                    if (originalBMP.RawFormat.Equals(ImageFormat.Jpeg))
+                    Bitmap originalBMP = new Bitmap(FUDiscoDuro.FileContent);
+                    byte[] imageData;
+                    Bitmap originalBMPReducido = null; ;
+                    long imgTamano;
+                    using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
                     {
-                        originalBMP.Save(stream, ImageFormat.Jpeg);
-                        //originalBMP.SetResolution(100, 100);
+                        if (originalBMP.RawFormat.Equals(ImageFormat.Jpeg))
+                        {
+                            originalBMP.Save(stream, ImageFormat.Jpeg);
+                            //originalBMP.SetResolution(100, 100);
+                        }
+                        else
+                        {
+                            originalBMP.Save(stream, ImageFormat.Png);
+                        }
+
+                        imgTamano = stream.Length;
+                        double imgPeso = (double)imgTamano / 1024;
+                        if (imgPeso >= 1000)
+                        {
+                            originalBMP.Save(stream, ImageFormat.Png);
+                            stream.Position = 0;
+                            imageData = new byte[stream.Length];
+                            stream.Read(imageData, 0, imageData.Length);
+                            stream.Close();
+                        }
+                    }
+                    double imgKB = (double)imgTamano / 1024.0;
+                    if (imgKB < 1000)
+                    {
+                        originalBMPReducido = new Bitmap(FUPickerLimpio.FileContent);
                     }
                     else
                     {
-                        originalBMP.Save(stream, ImageFormat.Png);
+                        var newHeight = originalBMP.Height / 2;
+                        var newWidth = originalBMP.Width / 2;
+                        originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
                     }
-
-                    imgTamano = stream.Length;
-                    double imgPeso = (double)imgTamano / 1024;
-                    if (imgPeso >= 1000)
+                    using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
                     {
-                        originalBMP.Save(stream, ImageFormat.Png);
+                        originalBMPReducido.Save(stream, ImageFormat.Jpeg);
                         stream.Position = 0;
                         imageData = new byte[stream.Length];
                         stream.Read(imageData, 0, imageData.Length);
                         stream.Close();
                     }
+                    vArchivo = Convert.ToBase64String(imageData);
                 }
-                double imgKB = (double)imgTamano / 1024.0;
-                if (imgKB < 1000)
-                {
-                    originalBMPReducido = new Bitmap(FUPickerLimpio.FileContent);
-                }
-                else
-                {
-                    var newHeight = originalBMP.Height / 2;
-                    var newWidth = originalBMP.Width / 2;
-                    originalBMPReducido = new Bitmap(originalBMP.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero));
-                }
-                using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
-                {
-                    originalBMPReducido.Save(stream, ImageFormat.Jpeg);
-                    stream.Position = 0;
-                    imageData = new byte[stream.Length];
-                    stream.Read(imageData, 0, imageData.Length);
-                    stream.Close();
-                }
-                vArchivo = Convert.ToBase64String(imageData);
-            }
-            //////////////////////////////////////////////////////////////////////////////
+                //////////////////////////////////////////////////////////////////////////////
             }
             //IMAGENES2
             if (FUPickerLimpio.FileName != "")
@@ -562,8 +558,8 @@ namespace Infatlan_STEI_ATM.pages.correctivo
                 }
                 else
                 {
-                    var newHeight2 = originalBMP2.Height/2;
-                    var newWidth2 = originalBMP2.Width/2;
+                    var newHeight2 = originalBMP2.Height / 2;
+                    var newWidth2 = originalBMP2.Width / 2;
                     originalBMPReducido2 = new Bitmap(originalBMP2.GetThumbnailImage(newWidth2, newHeight2, null, IntPtr.Zero));
                 }
                 using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
@@ -615,11 +611,11 @@ namespace Infatlan_STEI_ATM.pages.correctivo
                 else
                 {
 
-                    var newHeight3 = originalBMP3.Height/2;
-                    var newWidth3 = originalBMP3.Width/2;
+                    var newHeight3 = originalBMP3.Height / 2;
+                    var newWidth3 = originalBMP3.Width / 2;
                     originalBMPReducido3 = new Bitmap(originalBMP3.GetThumbnailImage(newWidth3, newHeight3, null, IntPtr.Zero));
                 }
-                
+
                 using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
                 {
                     originalBMPReducido3.Save(stream, ImageFormat.Jpeg);
@@ -668,8 +664,8 @@ namespace Infatlan_STEI_ATM.pages.correctivo
                 }
                 else
                 {
-                    var newHeight4 = originalBMP4.Height/2;
-                    var newWidth4 = originalBMP4.Width/2;
+                    var newHeight4 = originalBMP4.Height / 2;
+                    var newWidth4 = originalBMP4.Width / 2;
                     originalBMPReducido4 = new Bitmap(originalBMP4.GetThumbnailImage(newWidth4, newHeight4, null, IntPtr.Zero));
                 }
                 using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
@@ -782,7 +778,7 @@ namespace Infatlan_STEI_ATM.pages.correctivo
             }
         }
 
-        
+
         void AgregarImagenDiscoDuro()
         {
             string ID = Request.QueryString["cod"];
@@ -829,7 +825,7 @@ namespace Infatlan_STEI_ATM.pages.correctivo
             HFPicker.Value = "";
             HFPresentador.Value = "";
             HFBandas.Value = "";
-            HFATMSinDesarmar.Value = "";                      
+            HFATMSinDesarmar.Value = "";
         }
 
         void validar()
@@ -913,8 +909,8 @@ namespace Infatlan_STEI_ATM.pages.correctivo
                 if (HFDiscoDuro.Value == string.Empty)
                     throw new Exception("Favor agregar imagen de disco duro.");
             }
-           
-           
+
+
 
         }
 
@@ -954,7 +950,7 @@ namespace Infatlan_STEI_ATM.pages.correctivo
             {
                 Mensaje(Ex.Message, WarningType.Danger);
             }
-            
+
         }
 
         protected void btnRechazarVerif_Click(object sender, EventArgs e)
@@ -1002,8 +998,9 @@ namespace Infatlan_STEI_ATM.pages.correctivo
             string vQueryJefes = "[STEISP_ATM_GeneralesCorrectivo] 13,'" + Session["ATM_CORRECTIVO"] + "','" + txtsysaid.Text + "'";
             DataTable vDatosJefeAgencias = vConexion.ObtenerTabla(vQueryJefes);
 
-            if (vTipo == "2") {
-               
+            if (vTipo == "2")
+            {
+
                 if (vDatos.Rows.Count > 0)
                 {
                     foreach (DataRow item in vDatos.Rows)
@@ -1065,7 +1062,7 @@ namespace Infatlan_STEI_ATM.pages.correctivo
                             typeBody.ATM,
                            "Notificación de Mantenimiento correctivo ATM",
                             "Buen día, se le notifica que se aprobó solicitud de mantenimientocorrectivo, el encargado es " + item["nombre"].ToString() + ", mantenimiento al ATM " + txtnomATM.Text,
-                              "El usuario <b>" + vDatos.Rows[0]["Nombre"].ToString() + "</b> aprobó: <br> Notificación de Mantenimiento de ATM al que ha sido asignado como responsable.",   
+                              "El usuario <b>" + vDatos.Rows[0]["Nombre"].ToString() + "</b> aprobó: <br> Notificación de Mantenimiento de ATM al que ha sido asignado como responsable.",
                                 "",
                             "/login.spx"
                             );
@@ -1097,21 +1094,21 @@ namespace Infatlan_STEI_ATM.pages.correctivo
                     foreach (DataRow item in vDatos.Rows)
                     {
                         //ENVIAR A JEFE CREADOR
-                        
-                            if (!item["correo"].ToString().Trim().Equals(""))
-                            {
-                                vService.EnviarMensaje(item["correo"].ToString(),
-                                typeBody.ATM,
-                                "Notificación de Mantenimiento Correctivo ATM",
-                                "Buen día, se le notifica que se creó una solicitud de mantenimiento correctivo, el encargado es " + vDatosTecnicoResponsable.Rows[0]["nombre"].ToString() + ", mantenimiento al ATM " + txtnomATM.Text,
-                                "El usuario <b>" + item["Nombre"].ToString() + "</b> créo: <br> Notificación de Mantenimiento Correctivo.",
-                                "",
-                                "/sites/ATM/pages/correctivo/crearVerifCorrectivo.aspx"
-                                );
 
-                                //vFlagEnvioSupervisor = true;
-                            }
-                        
+                        if (!item["correo"].ToString().Trim().Equals(""))
+                        {
+                            vService.EnviarMensaje(item["correo"].ToString(),
+                            typeBody.ATM,
+                            "Notificación de Mantenimiento Correctivo ATM",
+                            "Buen día, se le notifica que se creó una solicitud de mantenimiento correctivo, el encargado es " + vDatosTecnicoResponsable.Rows[0]["nombre"].ToString() + ", mantenimiento al ATM " + txtnomATM.Text,
+                            "El usuario <b>" + item["Nombre"].ToString() + "</b> créo: <br> Notificación de Mantenimiento Correctivo.",
+                            "",
+                            "/sites/ATM/pages/correctivo/crearVerifCorrectivo.aspx"
+                            );
+
+                            //vFlagEnvioSupervisor = true;
+                        }
+
 
                         //ENVIAR A EDWIN
                         //string vNombre = "EDWIN ALBERTO URREA PENA";
@@ -1139,8 +1136,8 @@ namespace Infatlan_STEI_ATM.pages.correctivo
                     }
 
 
-                }              
-              
+                }
+
             }
 
         }
@@ -1191,7 +1188,7 @@ namespace Infatlan_STEI_ATM.pages.correctivo
                     vCorreoResponsable = vDatosTecnicoResponsable.Rows[i]["correo"].ToString() + ";";
 
                 }
-              
+
                 for (int i = 0; i < vDatosJefeAgencias.Rows.Count; i++)
                 {
                     string vCorreo = vDatosJefeAgencias.Rows[i]["correo"].ToString() + ";";
@@ -1199,7 +1196,7 @@ namespace Infatlan_STEI_ATM.pages.correctivo
                     if (vCorreosJefes == ";")
                         vCorreosJefes = "";
                 }
-                
+
 
                 string vDepto = "";
                 DataTable vDatosDepto = new DataTable();
@@ -1213,7 +1210,7 @@ namespace Infatlan_STEI_ATM.pages.correctivo
                     vCorreoEncargadoZona = "acalderon@bancatlan.hn;jdgarcia@bancatlan.hn";
 
                 string vReporte = "";
-                if (DDLCambioDiscoDuro.SelectedValue=="1")
+                if (DDLCambioDiscoDuro.SelectedValue == "1")
                 {
                     vReporte = "DiscoDuro";
                 }
@@ -1240,7 +1237,7 @@ namespace Infatlan_STEI_ATM.pages.correctivo
         {
             string ID = Request.QueryString["cod"];
             string vTipo = Request.QueryString["tipo"];
-           
+
 
             if (vTipo == "2") //APROBAR
             {
@@ -1253,7 +1250,7 @@ namespace Infatlan_STEI_ATM.pages.correctivo
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
                     Response.Redirect("aprobarVerifCorrectivo.aspx");
                 }
-            }          
+            }
             else //CREAR Y MODIFICAR
             {
                 string vQuery = "STEISP_ATM_NotificacionCorrectivo 5, '" + ID + "','" + TxFechaInicio.Text + "','" + TxFechaRegreso.Text + "'," +
@@ -1262,7 +1259,7 @@ namespace Infatlan_STEI_ATM.pages.correctivo
                 Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                 if (vInfo == 1)
                 {
-                    
+
                     ActualizarATM();
                     if (DDLCambioDiscoDuro.SelectedValue == "1")
                         AgregarImagenDiscoDuro();
@@ -1275,7 +1272,7 @@ namespace Infatlan_STEI_ATM.pages.correctivo
                 }
             }
 
-            
+
         }
 
         protected void btnCerrarRechazoModal_Click(object sender, EventArgs e)
@@ -1285,7 +1282,7 @@ namespace Infatlan_STEI_ATM.pages.correctivo
         void EnviarCorreoDevolver()
         {
             string ID = Request.QueryString["cod"];
-  
+
             Boolean vFlagEnvio = false;
             String vDestino = "";
             SmtpService vService = new SmtpService();
@@ -1323,7 +1320,7 @@ namespace Infatlan_STEI_ATM.pages.correctivo
                             typeBody.ATM,
                             "Notificación de Mantenimiento Correctivo ATM",
                             "Buen día, se le notifica que se devolvió una solicitud de mantenimiento correctivo, el encargado es " + vDatosTecnicoResponsable.Rows[0]["nombre"].ToString() + ", mantenimiento al ATM " + txtnomATM.Text,
-                            "El usuario <b>" + item["Nombre"].ToString() + "</b> devolvió: <br> Notificación de Mantenimiento Correctivo</br>Motivo de devolución: "+txtmotivoRechazo.Text,
+                            "El usuario <b>" + item["Nombre"].ToString() + "</b> devolvió: <br> Notificación de Mantenimiento Correctivo</br>Motivo de devolución: " + txtmotivoRechazo.Text,
                             vCorreoEncargadoZona,
                             "/sites/ATM/pages/correctivo/aprobarVerifCorrectivo.aspx"
                             );
@@ -1347,8 +1344,8 @@ namespace Infatlan_STEI_ATM.pages.correctivo
                             //vFlagEnvioSupervisor = true;
                         }
                     }
-                    
-                   
+
+
                 }
             }
             if (vDatosTecnicoResponsable.Rows.Count > 0)
@@ -1378,7 +1375,7 @@ namespace Infatlan_STEI_ATM.pages.correctivo
             else
             {
                 string ID = Request.QueryString["cod"];
-                string vQuery = "STEISP_ATM_NotificacionCorrectivo 15, '" + ID + "','" + txtmotivoRechazo.Text + "','" + Session["USUARIO"].ToString() + "'";                               
+                string vQuery = "STEISP_ATM_NotificacionCorrectivo 15, '" + ID + "','" + txtmotivoRechazo.Text + "','" + Session["USUARIO"].ToString() + "'";
                 Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                 if (vInfo == 1)
                 {
@@ -1392,13 +1389,13 @@ namespace Infatlan_STEI_ATM.pages.correctivo
         protected void DDLCambioDiscoDuro_TextChanged(object sender, EventArgs e)
         {
             if (DDLCambioDiscoDuro.SelectedValue == "0")
-                {
-                  TRDiscoDuro.Visible = false;
-                  TRPicker.Visible = true;
-                  TRPresentador.Visible = true;
-                  TRParteSuperior.Visible = true;
-                  TRBandas.Visible = true;
-               }
+            {
+                TRDiscoDuro.Visible = false;
+                TRPicker.Visible = true;
+                TRPresentador.Visible = true;
+                TRParteSuperior.Visible = true;
+                TRBandas.Visible = true;
+            }
             else if (DDLCambioDiscoDuro.SelectedValue == "2")
             {
                 TRDiscoDuro.Visible = true;
@@ -1408,15 +1405,15 @@ namespace Infatlan_STEI_ATM.pages.correctivo
                 TRBandas.Visible = true;
             }
             else
-               {
-                  TRDiscoDuro.Visible = true;
-                  TRPicker.Visible = false;
-                  TRPresentador.Visible = false;
-                  TRParteSuperior.Visible = false;
-                  TRBandas.Visible = false;
-               }
+            {
+                TRDiscoDuro.Visible = true;
+                TRPicker.Visible = false;
+                TRPresentador.Visible = false;
+                TRParteSuperior.Visible = false;
+                TRBandas.Visible = false;
+            }
             UPIMG.Update();
-            
+
         }
     }
 }

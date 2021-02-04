@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Infatlan_STEI_Agencias.classes;
+using System;
+using System.Data;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.IO;
-using System.Data;
-using Infatlan_STEI_Agencias.classes;
-using System.Configuration;
 
 namespace Infatlan_STEI_Agencias.pages.mantenimiento
 {
@@ -18,14 +13,19 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
         {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
-        
-        protected void Page_Load(object sender, EventArgs e){
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
             DDLArticulo.CssClass = "select2 form-control custom-select";
 
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
+            if (!Page.IsPostBack)
+            {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
                     cargarDatos();
-                }else {
+                }
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
             }
@@ -51,7 +51,7 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
-        
+
         protected void GVBusqueda_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             string vIdMantenimiento = e.CommandArgument.ToString();
@@ -77,13 +77,13 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
 
                 String vQuery = "STEISP_AGENCIA_Materiales 2," + vIdMantenimiento;
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
-     
-                TxIdMant.Text = vDatos.Rows[0]["id_Mantenimiento"].ToString(); 
+
+                TxIdMant.Text = vDatos.Rows[0]["id_Mantenimiento"].ToString();
                 TxAgencia.Text = vDatos.Rows[0]["Lugar"].ToString();
                 TxFecha.Text = vDatos.Rows[0]["fecha"].ToString();
                 TxArea.Text = vDatos.Rows[0]["Area"].ToString();
                 TxUbicacion.Text = vDatos.Rows[0]["codigoUbicacion"].ToString();
-                Session["AG_SM_MUNICIPIO"] = vDatos.Rows[0]["idMunicipio"].ToString(); 
+                Session["AG_SM_MUNICIPIO"] = vDatos.Rows[0]["idMunicipio"].ToString();
                 Int32 RbConductorConverido = Convert.ToInt32(vDatos.Rows[0]["requiereConductor"]);
                 RbConductor.SelectedValue = RbConductorConverido.ToString();
                 lbTitulo.Text = "Solicitud de Materiales " + TxAgencia.Text;
@@ -94,7 +94,7 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
                 vDatos = vConexion.obtenerDataTable(vQuery);
                 Session["AG_SM_CODIGO_DESCONTAR"] = vDatos.Rows[0]["idUbicacion"].ToString();
 
-                vQuery = "STEISP_AGENCIA_Materiales 3, '"+ Session["AG_SM_CODIGO_DESCONTAR"] + "'";
+                vQuery = "STEISP_AGENCIA_Materiales 3, '" + Session["AG_SM_CODIGO_DESCONTAR"] + "'";
                 vDatos = vConexion.obtenerDataTable(vQuery);
 
                 if (vDatos.Rows.Count > 0)
@@ -134,7 +134,7 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
                         DDLMotivo.Items.Add(new ListItem { Value = item["id"].ToString(), Text = item["motivo"].ToString() });
                     }
                 }
-               
+
                 tecnicosResponsable();
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModalMaterialCancelar();", true);
 
@@ -145,15 +145,15 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
             }
 
         }
-        
+
         protected void btnAgregar_Click(object sender, EventArgs e)
-        {          
+        {
             try
             {
                 validaciones();
                 if (Convert.ToInt32(TxCantidad.Text) > Convert.ToInt32(Session["AG_SM_CANTIDAD_MATERIALES"]))
-                {                    
-                    lbCantidad.Text = "La cantidad solicitada: "+ TxCantidad.Text + " de " + DDLArticulo.SelectedItem.Text + " excede a la cantidad en existencia, favor verificar la cantidad a solicitar";
+                {
+                    lbCantidad.Text = "La cantidad solicitada: " + TxCantidad.Text + " de " + DDLArticulo.SelectedItem.Text + " excede a la cantidad en existencia, favor verificar la cantidad a solicitar";
                     TxCantidad.Text = string.Empty;
                     DivAlertaCantidad.Visible = true;
                     UpCantidadMaxima.Update();
@@ -207,14 +207,14 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
 
                     DDLArticulo.SelectedIndex = -1;
                     TxCantidad.Text = "";
-                }               
+                }
             }
             catch (Exception ex)
             {
                 lbCantidad.Text = ex.Message;
                 DivAlertaCantidad.Visible = true;
                 UpCantidadMaxima.Update();
-            }  
+            }
         }
 
         protected void TxCantidad_TextChanged(object sender, EventArgs e)
@@ -235,7 +235,7 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
             //STOCK
             String vQuery = "STEISP_AGENCIA_Materiales 4, '" + DDLArticulo.SelectedValue + "'";
             DataTable vDatos = vConexion.obtenerDataTable(vQuery);
-        
+
             Decimal cant = Convert.ToDecimal(vDatos.Rows[0]["cantidad"].ToString());
             Session["AG_SM_CANTIDAD_MATERIALES"] = cant;
 
@@ -266,9 +266,9 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
             DivAlertaCantidad.Visible = false;
             UpCantidadMaxima.Update();
         }
-        
 
-        
+
+
         protected void btnModalEnviar_Click(object sender, EventArgs e)
         {
             try
@@ -280,14 +280,14 @@ namespace Infatlan_STEI_Agencias.pages.mantenimiento
                 {
                     for (int num = 0; num < vDatosMaterialesSolicitar.Rows.Count; num++)
                     {
-                        
+
                         string vIdInventario = vDatosMaterialesSolicitar.Rows[num]["idInventario"].ToString();
                         string vCantidad = vDatosMaterialesSolicitar.Rows[num]["cantidad"].ToString();
 
-                        String vQuery4 = "STEISP_AGENCIA_Materiales 5,'" + vIdMantenimiento + 
-                            "','" + vIdInventario + 
-                            "','"+ vCantidad+
-                            "','"+ Session["USUARIO"]+ "'";
+                        String vQuery4 = "STEISP_AGENCIA_Materiales 5,'" + vIdMantenimiento +
+                            "','" + vIdInventario +
+                            "','" + vCantidad +
+                            "','" + Session["USUARIO"] + "'";
                         Int32 vInfo4 = vConexion.ejecutarSql(vQuery4);
 
                     }

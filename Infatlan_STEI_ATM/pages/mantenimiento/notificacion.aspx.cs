@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Infatlan_STEI_ATM.clases;
+using System;
+using System.Configuration;
+using System.Data;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Configuration;
-using System.Data.Sql;
-using System.Data.SqlClient;
-using Infatlan_STEI_ATM.clases;
 
 namespace Infatlan_STEI_ATM.pages.mantenimiento
 {
@@ -16,15 +12,19 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
     {
         bd vConexion = new bd();
         bd vConexionATM = new bd();
-        protected void Page_Load(object sender, EventArgs e){
+        protected void Page_Load(object sender, EventArgs e)
+        {
             Session["NOTI"] = null;
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
+            if (!Page.IsPostBack)
+            {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
                     txtFechaInicio.TextMode = TextBoxMode.Date;
                     cargarData();
                     string id = Request.QueryString["id"];
                     string tipo = Request.QueryString["tipo"];
-                    switch (tipo){
+                    switch (tipo)
+                    {
                         case "3":
                             txtFechaInicio.TextMode = TextBoxMode.SingleLine;
                             llenarForm();
@@ -35,7 +35,9 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                             H3JefeAgencia.Visible = true;
                             break;
                     }
-                }else {
+                }
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
             }
@@ -86,7 +88,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             btnBuscarJefe.Enabled = false;
             GVBusqueda.Enabled = false;
         }
-        
+
         void validacionesNotificacion()
         {
             if (DLLtecResponsable.SelectedValue == "0")
@@ -131,7 +133,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     DLLTecnicoParticipante.Items.Add(new ListItem { Value = "0", Text = "Seleccione técnico participante..." });
                     foreach (DataRow item in vDatos.Rows)
                     {
-                        DLLTecnicoParticipante.Items.Add(new ListItem { Value = item["idUsuario"].ToString(), Text = item["nombre"].ToString()+" "+ item["apellidos"].ToString() });
+                        DLLTecnicoParticipante.Items.Add(new ListItem { Value = item["idUsuario"].ToString(), Text = item["nombre"].ToString() + " " + item["apellidos"].ToString() });
                     }
 
 
@@ -196,7 +198,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 String vQuery = "STEISP_AGENCIA_CreacionNotificacion 6, " + DLLtecResponsable.SelectedValue;
                 DataTable vDatos = vConexion.ObtenerTabla(vQuery);
                 txtidentidadTecResponsable.Text = vDatos.Rows[0]["identidad"].ToString();
-                Session["ATM_Notif_emailTecnicoResponsable"]= vDatos.Rows[0]["correo"].ToString();
+                Session["ATM_Notif_emailTecnicoResponsable"] = vDatos.Rows[0]["correo"].ToString();
 
             }
             catch (Exception ex)
@@ -313,12 +315,12 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                             vService.EnviarMensaje(item["correo"].ToString(),
                             typeBody.ATM,
                             "Notificación de Mantenimiento ATM",
-                            "Buen día, se le notifica que se aprobó solicitud de mantenimiento, el encargado es "+ vDatosTecnicoResponsable.Rows[0]["nombre"].ToString() +", mantenimiento al ATM "+DDLmantemientoPendiente.SelectedItem.Text+" para la fecha "+txtFechaInicio.Text,
+                            "Buen día, se le notifica que se aprobó solicitud de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["nombre"].ToString() + ", mantenimiento al ATM " + DDLmantemientoPendiente.SelectedItem.Text + " para la fecha " + txtFechaInicio.Text,
                             "El usuario <b>" + item["Nombre"].ToString() + "</b> aprobó: <br> Notificación de Mantenimiento",
                             "",
                             "/sites/ATM/pages/mantenimiento/buscarVerificacion.aspx"
                             );
-                                          
+
                             //vFlagEnvioSupervisor = true;
                         }
                         //ENVIAR A EDWIN
@@ -331,9 +333,9 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                                    vCorreoEncargadoZona,
                                    "/sites/ATM/pages/mantenimiento/buscarVerificacion.aspx"
                                 );
-                       
 
-                       
+
+
                     }
                 }
                 if (vDatosTecnicoResponsable.Rows.Count > 0)
@@ -345,7 +347,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                             typeBody.ATM,
                            "Notificación de Mantenimiento ATM",
                             "Buen día, se le notifica que se aprobó solicitud de mantenimiento, el encargado es " + item["nombre"].ToString() + ", mantenimiento al ATM " + DDLmantemientoPendiente.SelectedItem.Text + " para la fecha " + txtFechaInicio.Text,
-                              "El usuario <b>" + vDatos.Rows[0]["Nombre"].ToString() + "</b> aprobó: <br> Notificación de Mantenimiento de ATM al que ha sido asignado como responsable.",                              
+                              "El usuario <b>" + vDatos.Rows[0]["Nombre"].ToString() + "</b> aprobó: <br> Notificación de Mantenimiento de ATM al que ha sido asignado como responsable.",
                                 "",
                             "/login.spx"
                             );
@@ -513,11 +515,11 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 string vCorreoResponsable = "";
                 for (int i = 0; i < vDatosTecnicoResponsable.Rows.Count; i++)
                 {
-                    vCorreoResponsable = vDatosTecnicoResponsable.Rows[i]["correo"].ToString()+";";
-                   
+                    vCorreoResponsable = vDatosTecnicoResponsable.Rows[i]["correo"].ToString() + ";";
+
                 }
                 for (int i = 0; i < vDatosTecnicos.Rows.Count; i++)
-                {                   
+                {
                     string vCorreo = vDatosTecnicos.Rows[i]["correo"].ToString() + ";";
                     vCorreosTecnicos = vCorreosTecnicos + vCorreo;
                     if (vCorreosTecnicos == ";")
@@ -546,7 +548,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 {
                     vDepto = item["Depto"].ToString();
                 }
-                if(vDepto=="18")
+                if (vDepto == "18")
                     vCorreoEncargadoZona = "acalderon@bancatlan.hn;jdgarcia@bancatlan.hn";
 
                 string vReporteViaticos = "Notificacion";
@@ -569,7 +571,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             string tipo = Request.QueryString["tipo"];
             if (tipo == "3")
             {
-                
+
                 try
                 {
                     //string vEstado = "9";
@@ -601,7 +603,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 }
             }
             else
-            {               
+            {
                 string autorizarATM = "true";
                 int estado = 2;
                 if (DDLrealizarMant.SelectedValue == "1")
@@ -655,7 +657,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     {
                         Mensaje(Ex.Message, WarningType.Danger);
                     }
-                    
+
                 }
                 else
                 {
@@ -713,7 +715,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                               vCorreoEncargadoZona,
                               "/sites/ATM/pages/reprogramar/buscarReprogramar.aspx"
                             );
-                   
+
                 }
             }
             if (vDatosTecnicoResponsable.Rows.Count > 0)
@@ -767,7 +769,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
         void CancelarNotificacion()
         {
-           
+
             string autorizarATM = "";
             int estado = 1;
             try
@@ -785,7 +787,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
                     Mensaje("Mantenimiento cancelado con éxito, ahora está en lista de reprogramación", WarningType.Success);
-                   
+
                     LimpiarNotificacion();
                     UpNotif.Update();
                     cargarData();
@@ -808,18 +810,18 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         {
             try
             {
-                
-                    DataTable vDatos = (DataTable)Session["ATM_EMPLEADOS"];
-                    if (vDatos!= null)
+
+                DataTable vDatos = (DataTable)Session["ATM_EMPLEADOS"];
+                if (vDatos != null)
+                {
+                    for (int i = 0; i < vDatos.Rows.Count; i++)
                     {
-                        for (int i = 0; i < vDatos.Rows.Count; i++)
-                        {
-                            string usuarios = vDatos.Rows[i]["idUsuario"].ToString();
-                            string vQuery = "STEISP_ATM_UsuariosMantenimiento 1, '" + Session["ID"].ToString() + "','" + usuarios + "'";
-                            vConexion.ejecutarSQL(vQuery);
-                        }
+                        string usuarios = vDatos.Rows[i]["idUsuario"].ToString();
+                        string vQuery = "STEISP_ATM_UsuariosMantenimiento 1, '" + Session["ID"].ToString() + "','" + usuarios + "'";
+                        vConexion.ejecutarSQL(vQuery);
                     }
-                
+                }
+
             }
             catch (Exception Ex)
             {
@@ -834,7 +836,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             {
 
                 DataTable vDatos = (DataTable)Session["NotifJefeAgenciaATM"];
-                if (vDatos!= null)
+                if (vDatos != null)
                 {
                     for (int i = 0; i < vDatos.Rows.Count; i++)
                     {
@@ -944,10 +946,10 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
             }
 
-            
+
 
         }
-               
+
         void llenarForm()
         {
             string ver = Session["autorizadoATM"].ToString();
@@ -955,23 +957,23 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 DDLrealizarMant.SelectedValue = "1";
             else
                 DDLrealizarMant.SelectedValue = "2";
-            string Fecha = Session["fechaMantATM"].ToString();           
+            string Fecha = Session["fechaMantATM"].ToString();
             String vFormato = "dd/MM/yyyy"; //"dd/MM/yyyy HH:mm:ss"
-            String vFechaMant = Convert.ToDateTime(Fecha).ToString(vFormato);         
+            String vFechaMant = Convert.ToDateTime(Fecha).ToString(vFormato);
             txtFechaInicio.Text = vFechaMant;
             buscarATM();
             txtcancelarNotif.Text = Session["cancelaATM"].ToString();
             txtHrInicioMant.Text = Session["hrInicioATM"].ToString();
             txtHrFinMant.Text = Session["hrfinATM"].ToString();
             txtsysaid.Text = Session["sysaidATM"].ToString();
-            DDLmantemientoPendiente.SelectedIndex= CargarInformacionDDL(DDLmantemientoPendiente, Session["NomATM"].ToString());           
+            DDLmantemientoPendiente.SelectedIndex = CargarInformacionDDL(DDLmantemientoPendiente, Session["NomATM"].ToString());
             txtcodATMNotif.Text = Session["codATM"].ToString();
             txtUbicacionATM.Text = Session["ubicacionATM"].ToString();
             txtdireccion.Text = Session["direccionATM"].ToString();
             txtsucursalNotif.Text = Session["SucursalATM"].ToString();
             txtipNotif.Text = Session["IPATM"].ToString();
             txtzonaNotif.Text = Session["zonaATM"].ToString();
-            DLLtecResponsable.SelectedIndex = CargarInformacionDDL(DLLtecResponsable, Session["usuarioR"].ToString());           
+            DLLtecResponsable.SelectedIndex = CargarInformacionDDL(DLLtecResponsable, Session["usuarioR"].ToString());
             txtidentidadTecResponsable.Text = Session["identidad"].ToString();
 
         }
@@ -1071,7 +1073,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     throw;
                 }
             }
-        }     
+        }
 
         void limpiarDatosATM()
         {
@@ -1100,7 +1102,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             {
                 String vFormato = "yyyy/MM/dd"; //"dd/MM/yyyy HH:mm:ss"
                 String vFechaMant = Convert.ToDateTime(txtFechaInicio.Text).ToString(vFormato);
-                String vQuery = "STEISP_ATM_SELECCIONES 2,'" + DDLmantemientoPendiente.SelectedValue+"','"+vFechaMant+"'";
+                String vQuery = "STEISP_ATM_SELECCIONES 2,'" + DDLmantemientoPendiente.SelectedValue + "','" + vFechaMant + "'";
                 DataTable vDatos = vConexion.ObtenerTabla(vQuery);
 
                 if (DDLmantemientoPendiente.SelectedValue == "0")
@@ -1139,47 +1141,47 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                     //}
                     //else
                     //{
-                        txtcodATMNotif.Text = vDatos.Rows[0]["Codigo"].ToString();
-                        txtUbicacionATM.Text = vDatos.Rows[0]["Ubicacion"].ToString();
-                        txtdireccion.Text = vDatos.Rows[0]["Direccion"].ToString();
-                        txtsucursalNotif.Text = vDatos.Rows[0]["Sucursal"].ToString();
-                        txtipNotif.Text = vDatos.Rows[0]["IP"].ToString();
-                        txtzonaNotif.Text = vDatos.Rows[0]["Zona"].ToString();
-                        Session["NomATM"] = vDatos.Rows[0]["NomATM"].ToString();
-                        Session["IdUbi"] = vDatos.Rows[0]["IdUbi"].ToString();
-                        Session["ID"] = vDatos.Rows[0]["ID"].ToString();
-                        Session["IDZona"] = vDatos.Rows[0]["IDZona"].ToString();
-                        if (Session["IdUbi"].ToString() == "1")
-                        {
-                            lbSelectJefeAge.Visible = true;
-                            GVjefesAgencias.Visible = true;
-                            DIVBuscarJefes.Visible = true;
-                            H3JefeAgencia.Visible = true;
-                            Session["ATM_EMPLEADOS"] = null;
-                            Session["ATM_EMPLEADOS2"] = null;
-                            Session["NotifJefeAgenciaATM"] = null;
-                            GVjefesAgencias.DataSource = null;
-                            GVjefesAgencias.DataBind();
-                            GVJefesAD.DataSource = null;
-                            GVJefesAD.DataBind();
-                            GVBusqueda.DataSource = null;
-                            GVBusqueda.DataBind();
-                        }
-                        else
-                        {
-                            DIVBuscarJefes.Visible = false;
-                            H3JefeAgencia.Visible = false;
-                            lbSelectJefeAge.Visible = false;
-                            Session["ATM_EMPLEADOS"] = null;
-                            Session["ATM_EMPLEADOS2"] = null;
-                            Session["NotifJefeAgenciaATM"] = null;
-                            GVjefesAgencias.DataSource = null;
-                            GVjefesAgencias.DataBind();
-                            GVJefesAD.DataSource = null;
-                            GVJefesAD.DataBind();
-                            GVBusqueda.DataSource = null;
-                            GVBusqueda.DataBind();
-                        }
+                    txtcodATMNotif.Text = vDatos.Rows[0]["Codigo"].ToString();
+                    txtUbicacionATM.Text = vDatos.Rows[0]["Ubicacion"].ToString();
+                    txtdireccion.Text = vDatos.Rows[0]["Direccion"].ToString();
+                    txtsucursalNotif.Text = vDatos.Rows[0]["Sucursal"].ToString();
+                    txtipNotif.Text = vDatos.Rows[0]["IP"].ToString();
+                    txtzonaNotif.Text = vDatos.Rows[0]["Zona"].ToString();
+                    Session["NomATM"] = vDatos.Rows[0]["NomATM"].ToString();
+                    Session["IdUbi"] = vDatos.Rows[0]["IdUbi"].ToString();
+                    Session["ID"] = vDatos.Rows[0]["ID"].ToString();
+                    Session["IDZona"] = vDatos.Rows[0]["IDZona"].ToString();
+                    if (Session["IdUbi"].ToString() == "1")
+                    {
+                        lbSelectJefeAge.Visible = true;
+                        GVjefesAgencias.Visible = true;
+                        DIVBuscarJefes.Visible = true;
+                        H3JefeAgencia.Visible = true;
+                        Session["ATM_EMPLEADOS"] = null;
+                        Session["ATM_EMPLEADOS2"] = null;
+                        Session["NotifJefeAgenciaATM"] = null;
+                        GVjefesAgencias.DataSource = null;
+                        GVjefesAgencias.DataBind();
+                        GVJefesAD.DataSource = null;
+                        GVJefesAD.DataBind();
+                        GVBusqueda.DataSource = null;
+                        GVBusqueda.DataBind();
+                    }
+                    else
+                    {
+                        DIVBuscarJefes.Visible = false;
+                        H3JefeAgencia.Visible = false;
+                        lbSelectJefeAge.Visible = false;
+                        Session["ATM_EMPLEADOS"] = null;
+                        Session["ATM_EMPLEADOS2"] = null;
+                        Session["NotifJefeAgenciaATM"] = null;
+                        GVjefesAgencias.DataSource = null;
+                        GVjefesAgencias.DataBind();
+                        GVJefesAD.DataSource = null;
+                        GVJefesAD.DataBind();
+                        GVBusqueda.DataSource = null;
+                        GVBusqueda.DataBind();
+                    }
                     //}
                 }
 
@@ -1296,8 +1298,8 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                         }
                     }
 
-                    
-                    
+
+
                     vData.Columns.Add("Correo");
                     vData.Columns.Add("Nombre");
                     vData.Columns.Add("Apellido");
@@ -1306,7 +1308,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                         vDatos = vData.Clone();
                     if (vDatos != null)
                     {
-                        vDatos.Rows.Add(CorreoJefe, vNombre,vApellido);
+                        vDatos.Rows.Add(CorreoJefe, vNombre, vApellido);
 
                     }
                     GVjefesAgencias.DataSource = vDatos;
@@ -1369,7 +1371,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
         protected void btnReprogramarNotif_Click(object sender, EventArgs e)
         {
-           
+
             if (txtcomentarioReprogramaNotif.Text == "" || txtcomentarioReprogramaNotif.Text == string.Empty)
             {
                 txtAlerta1.Visible = true;
@@ -1389,7 +1391,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                         Mensaje("Notificación enviada a reprogramación exitoso", WarningType.Success);
                         ////CORREO
 
-                       CorreoCancelar();
+                        CorreoCancelar();
 
                         ////CORREO
                         LimpiarNotificacion();
@@ -1430,11 +1432,12 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             Session["resta"] = horafinal - horainicio;
             lbhorasAprobNotif.Text = Session["resta"].ToString() + " horas";
             lbRep1.Text = "Los campos con(*) son obligatorios.";
-            
+
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal2();", true);
         }
 
-        protected void btnPrueba_Click(object sender, EventArgs e){
+        protected void btnPrueba_Click(object sender, EventArgs e)
+        {
             //Response.Redirect("verificacion.aspx");
 
             SmtpService vService = new SmtpService();
@@ -1442,7 +1445,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                        "acedillo@bancatlan.hn",
                        typeBody.ATM,
                         "Mantenimiento de ATM Finalizado",
-                       "Problemas encontrados en el mantenimiento",                      
+                       "Problemas encontrados en el mantenimiento",
                        "Errores identificados por el tecnico",
                        "",
                             "/sites/ATM/pages/mantenimiento/buscarVerificacion.aspx"

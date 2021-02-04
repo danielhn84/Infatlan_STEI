@@ -1,18 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.IO;
-using System.Web;
 using System.Xml;
 
 namespace Infatlan_STEI_Inventario.clases
 {
     public class generarxml
     {
-        public String ObtenerMaestroString(Object[] vDatos){
+        public String ObtenerMaestroString(Object[] vDatos)
+        {
             String vResultado = "";
-            try{
-                using (StringWriter sw = new StringWriter()){
+            try
+            {
+                using (StringWriter sw = new StringWriter())
+                {
                     XmlTextWriter vXmlTW = new XmlTextWriter(sw);
                     vXmlTW.Formatting = Formatting.None;
 
@@ -63,16 +63,21 @@ namespace Infatlan_STEI_Inventario.clases
                     vXmlTW.WriteEndDocument();
                     vResultado = sw.ToString();
                 }
-            }catch{
+            }
+            catch
+            {
                 throw;
             }
             return vResultado;
         }
 
-        public String ObtenerMaestroStringEDC(Object[] vDatos){
+        public String ObtenerMaestroStringEDC(Object[] vDatos)
+        {
             String vResultado = "";
-            try{
-                using (StringWriter sw = new StringWriter()){
+            try
+            {
+                using (StringWriter sw = new StringWriter())
+                {
                     XmlTextWriter vXmlTW = new XmlTextWriter(sw);
                     vXmlTW.Formatting = Formatting.None;
 
@@ -135,16 +140,21 @@ namespace Infatlan_STEI_Inventario.clases
                     vXmlTW.WriteEndDocument();
                     vResultado = sw.ToString();
                 }
-            }catch{
+            }
+            catch
+            {
                 throw;
             }
             return vResultado;
         }
 
-        public String ObtenerMaestroStringENL(Object[] vDatos){
+        public String ObtenerMaestroStringENL(Object[] vDatos)
+        {
             String vResultado = "";
-            try{
-                using (StringWriter sw = new StringWriter()){
+            try
+            {
+                using (StringWriter sw = new StringWriter())
+                {
                     XmlTextWriter vXmlTW = new XmlTextWriter(sw);
                     vXmlTW.Formatting = Formatting.None;
 
@@ -207,7 +217,9 @@ namespace Infatlan_STEI_Inventario.clases
                     vXmlTW.WriteEndDocument();
                     vResultado = sw.ToString();
                 }
-            }catch{
+            }
+            catch
+            {
                 throw;
             }
             return vResultado;

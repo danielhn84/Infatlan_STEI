@@ -1,25 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Infatlan_STEI_ATM.clases;
+using System;
+using System.Data;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.Sql;
-using System.Data.SqlClient;
-using Infatlan_STEI_ATM.clases;
 
 namespace Infatlan_STEI_ATM.pages.mantenimiento
 {
     public partial class aprobarNotificacion : System.Web.UI.Page
     {
         bd vConexion = new bd();
-        protected void Page_Load(object sender, EventArgs e){
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!Page.IsPostBack)
+            {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
                     cargarDataNotificacion();
                     llenarForm();
-                }else {
+                }
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
             }
@@ -83,8 +83,8 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
         void llenarForm()
         {
-            txtFechaInicio.Text = Session["fechaMantATM"].ToString();           
-            txtAprobNotifMantenimiento.Text= Session["autorizadoATM"].ToString();
+            txtFechaInicio.Text = Session["fechaMantATM"].ToString();
+            txtAprobNotifMantenimiento.Text = Session["autorizadoATM"].ToString();
             if (txtAprobNotifMantenimiento.Equals(true))
             {
                 txtAprobNotifMantenimiento.Text = "Si";
@@ -93,7 +93,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             {
                 txtAprobNotifMantenimiento.Text = "No";
             }
-           
+
 
             txtcancelarNotif.Text = Session["cancelaATM"].ToString();
             txtHrInicioMant.Text = Session["hrInicioATM"].ToString();
@@ -117,15 +117,15 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             txtcomentarioReprogramaNotif.Text = string.Empty;
             try
             {
-                if (Session["autorizadoATM"].ToString() =="1" )
-                {                  
-                        lbTecnicoResp.Text = "No disponible";
-                        lbHrMantenimiento.Text = "No disponible";
-                        MostrarModal();
+                if (Session["autorizadoATM"].ToString() == "1")
+                {
+                    lbTecnicoResp.Text = "No disponible";
+                    lbHrMantenimiento.Text = "No disponible";
+                    MostrarModal();
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal();", true);
                 }
                 else
-                {                   
+                {
                     TimeSpan horainicio = TimeSpan.Parse(txtHrInicioMant.Text);
                     TimeSpan horafinal = TimeSpan.Parse(txtHrFinMant.Text);
                     Session["restaAprobNotifATM"] = horafinal - horainicio;
@@ -141,7 +141,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
                 Mensaje(ex.Message, WarningType.Danger);
             }
-           
+
         }
         void MostrarModal()
         {
@@ -197,13 +197,13 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
         protected void btnModalAprobNotificacion_Click(object sender, EventArgs e)
         {
-            
+
             try
             {
-                string vQuery = "STEISP_ATM_Aprobaciones 1, '" + Session["codNotificacion"] + "','" + txtcomentarioReprogramaNotif.Text + "', '" + Session["USUARIO"].ToString() + "'";                
+                string vQuery = "STEISP_ATM_Aprobaciones 1, '" + Session["codNotificacion"] + "','" + txtcomentarioReprogramaNotif.Text + "', '" + Session["USUARIO"].ToString() + "'";
                 Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                 if (vInfo == 1)
-                {                   
+                {
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
                     Mensaje("Notificación aprobada con éxito", WarningType.Success);
                     LimpiarNotificacion();
@@ -220,7 +220,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             {
                 Mensaje(Ex.Message, WarningType.Danger);
             }
-           
+
         }
 
         protected void btnModalCerrarAprobNotificacion_Click(object sender, EventArgs e)
@@ -254,7 +254,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
         protected void btnReprogramarNotif_Click(object sender, EventArgs e)
         {
-           
+
             if (txtcomentarioReprogramaNotif.Text == "" || txtcomentarioReprogramaNotif.Text == string.Empty)
             {
                 lbRep1.Text = "No puede dejar el comentario de reprogramación vacio";

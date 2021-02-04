@@ -1,23 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+﻿using Infatlan_STEI_CableadoEstructurado.clases;
+using System;
 using System.Data;
-using Infatlan_STEI_CableadoEstructurado.clases;
+using System.Web.UI;
 
 namespace Infatlan_STEI_CableadoEstructurado
 {
     public partial class main : System.Web.UI.MasterPage
     {
         db vConexion = new db();
-        protected void Page_Load(object sender, EventArgs e){
-            try{
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            try
+            {
                 if (!Convert.ToBoolean(Session["AUTH"]))
                     Response.Redirect("/login.aspx");
-                
-                if (!Page.IsPostBack){
+
+                if (!Page.IsPostBack)
+                {
                     DataTable vDatos = (DataTable)Session["AUTHCLASS"];
                     LitUsuario.Text = vDatos.Rows[0]["nombre"].ToString().ToUpper() + " " + vDatos.Rows[0]["apellidos"].ToString().ToUpper();
 
@@ -25,20 +24,28 @@ namespace Infatlan_STEI_CableadoEstructurado
                     String vQuery = "[STEISP_Mensajes] 3,'" + Session["USUARIO"].ToString() + "'";
                     vDatos = vConexion.obtenerDataTable(vQuery);
 
-                    for (int i = 0; i < vDatos.Rows.Count; i++){
+                    for (int i = 0; i < vDatos.Rows.Count; i++)
+                    {
                         vPointer = "<span class='heartbit'></span><span class='point'></span>";
 
                         String vColor = "", vLogo = "";
-                        if (vDatos.Rows[i]["idAplicacion"].ToString() == "1"){
+                        if (vDatos.Rows[i]["idAplicacion"].ToString() == "1")
+                        {
                             vColor = "primary";
                             vLogo = "ti ti-shopping-cart";
-                        }else if (vDatos.Rows[i]["idAplicacion"].ToString() == "2"){
+                        }
+                        else if (vDatos.Rows[i]["idAplicacion"].ToString() == "2")
+                        {
                             vColor = "success";
                             vLogo = "ti ti-home";
-                        }else if (vDatos.Rows[i]["idAplicacion"].ToString() == "3"){
+                        }
+                        else if (vDatos.Rows[i]["idAplicacion"].ToString() == "3")
+                        {
                             vColor = "info";
                             vLogo = "ti ti-desktop";
-                        }else if (vDatos.Rows[i]["idAplicacion"].ToString() == "4"){
+                        }
+                        else if (vDatos.Rows[i]["idAplicacion"].ToString() == "4")
+                        {
                             vColor = "danger";
                             vLogo = "ti ti-plug";
                         }
@@ -56,7 +63,9 @@ namespace Infatlan_STEI_CableadoEstructurado
                     LitPointer.Text = vPointer;
 
                 }
-            }catch (Exception ex){
+            }
+            catch (Exception ex)
+            {
                 String vError = ex.Message;
             }
         }

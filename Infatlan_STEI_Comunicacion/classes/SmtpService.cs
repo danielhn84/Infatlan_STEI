@@ -1,28 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
-using System.Linq;
 using System.Net.Mail;
 using System.Net.Mime;
 using System.Text;
-using System.Web;
 using System.Web.UI;
 
 
 namespace Infatlan_STEI_Agencias.classes
 {
-    public enum typeBody{
-        EnvioCorreo           
+    public enum typeBody
+    {
+        EnvioCorreo
     }
 
-    public class SmtpService : Page{
+    public class SmtpService : Page
+    {
 
         public SmtpService() { }
 
-        public Boolean EnviarMensaje(String To, typeBody Body, String Usuario, String Nombre, String vMessage = null){
+        public Boolean EnviarMensaje(String To, typeBody Body, String Usuario, String Nombre, String vMessage = null)
+        {
             Boolean vRespuesta = false;
-            try{
+            try
+            {
                 MailMessage mail = new MailMessage("STYC<" + ConfigurationManager.AppSettings["SmtpFrom"] + ">", To);
                 SmtpClient client = new SmtpClient();
                 client.Port = Convert.ToInt32(ConfigurationManager.AppSettings["SmtpPort"]);
@@ -32,8 +33,9 @@ namespace Infatlan_STEI_Agencias.classes
                 mail.Subject = "Recursos Humanos - Información de empleado";
                 mail.IsBodyHtml = true;
 
-                switch (Body){                   
-                     case typeBody.EnvioCorreo:
+                switch (Body)
+                {
+                    case typeBody.EnvioCorreo:
                         mail.AlternateViews.Add(CreateHtmlMessage(PopulateBody(
                             Usuario,
                             "Agencias:",
@@ -44,16 +46,21 @@ namespace Infatlan_STEI_Agencias.classes
                 }
                 client.Send(mail);
                 vRespuesta = true;
-            }catch (System.Net.Mail.SmtpException Ex){
+            }
+            catch (System.Net.Mail.SmtpException Ex)
+            {
                 String vError = Ex.Message;
                 throw;
-            }catch (Exception Ex){
+            }
+            catch (Exception Ex)
+            {
                 throw;
             }
             return vRespuesta;
         }
-        
-        private AlternateView CreateHtmlMessage(string message, string logoPath){
+
+        private AlternateView CreateHtmlMessage(string message, string logoPath)
+        {
             var inline = new LinkedResource(logoPath, "image/png");
             inline.ContentId = "companyLogo";
 
@@ -66,9 +73,11 @@ namespace Infatlan_STEI_Agencias.classes
             return alternateView;
         }
 
-        public string PopulateBody(string vNombre, string vTitulo, string vUrl, string vDescripcion){
+        public string PopulateBody(string vNombre, string vTitulo, string vUrl, string vDescripcion)
+        {
             string body = string.Empty;
-            using (StreamReader reader = new StreamReader(Server.MapPath("/mail/TemplateMail.html"))){
+            using (StreamReader reader = new StreamReader(Server.MapPath("/mail/TemplateMail.html")))
+            {
                 body = reader.ReadToEnd();
             }
 
@@ -80,9 +89,11 @@ namespace Infatlan_STEI_Agencias.classes
             return body;
         }
 
-        public string PopulateBodyES(string vNombre, string vDescripcion){
+        public string PopulateBodyES(string vNombre, string vDescripcion)
+        {
             string body = string.Empty;
-            using (StreamReader reader = new StreamReader(Server.MapPath("/mail/TemplateMail.html"))){
+            using (StreamReader reader = new StreamReader(Server.MapPath("/mail/TemplateMail.html")))
+            {
                 body = reader.ReadToEnd();
             }
 

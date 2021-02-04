@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+﻿using Excel;
 using Infatlan_STEI_Comunicacion.classes;
+using System;
+using System.Configuration;
 using System.Data;
 using System.IO;
-using Excel;
-using System.Configuration;
-using System.Net.Http;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace Infatlan_STEI_Comunicacion.pages.configuraciones
 {
@@ -17,7 +13,7 @@ namespace Infatlan_STEI_Comunicacion.pages.configuraciones
     {
         db vConexion = new db();
 
-  
+
 
         public void Mensaje(string vMensaje, WarningType type)
         {
@@ -39,7 +35,7 @@ namespace Infatlan_STEI_Comunicacion.pages.configuraciones
                 }
 
 
- 
+
             }
         }
 
@@ -99,9 +95,9 @@ namespace Infatlan_STEI_Comunicacion.pages.configuraciones
         {
             try
             {
-                String vQuery = "STEISP_COMUNICACION_AsignarResponsable 7,"+ DDLNodo.SelectedValue;
+                String vQuery = "STEISP_COMUNICACION_AsignarResponsable 7," + DDLNodo.SelectedValue;
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
-                TxLugar.Text= vDatos.Rows[0]["direccion"].ToString();
+                TxLugar.Text = vDatos.Rows[0]["direccion"].ToString();
 
             }
             catch (Exception ex)
@@ -144,13 +140,13 @@ namespace Infatlan_STEI_Comunicacion.pages.configuraciones
                 String vFormato = "yyyy/MM/dd"; //"dd/MM/yyyy HH:mm:ss"
                 String vFechaMant = Convert.ToDateTime(TxFechaMantenimiento.Text).ToString(vFormato);
 
-                String vQuery = "STEISP_COMUNICACION_AsignarResponsable 8," 
-                                + DDLNodo.SelectedValue 
-                                +",'"+ vFechaMant
-                                +"','"+ Session["USUARIO"]
+                String vQuery = "STEISP_COMUNICACION_AsignarResponsable 8,"
+                                + DDLNodo.SelectedValue
+                                + ",'" + vFechaMant
+                                + "','" + Session["USUARIO"]
                                 + "','" + DdlResponsable.SelectedValue
                                 + "','" + Session["USUARIO"]
-                                +"','1','" + TxMotivo.Text + "'";
+                                + "','1','" + TxMotivo.Text + "'";
                 Int32 vInformacion1 = vConexion.ejecutarSql(vQuery);
                 limpiarEmergencia();
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "cerrarModalEmergencia();", true);
@@ -181,7 +177,8 @@ namespace Infatlan_STEI_Comunicacion.pages.configuraciones
             UpdateModal.Update();
 
             Boolean vResultado = false;
-            try{
+            try
+            {
                 FileStream stream = File.Open(DireccionCarga, FileMode.Open, FileAccess.Read);
                 IExcelDataReader excelReader;
                 if (DireccionCarga.Contains("xlsx"))
@@ -194,7 +191,8 @@ namespace Infatlan_STEI_Comunicacion.pages.configuraciones
                 excelReader.Close();
 
                 DataSet vDatosVerificacion = vDatosExcel.Copy();
-                for (int i = 0; i < vDatosVerificacion.Tables[0].Rows.Count; i++){
+                for (int i = 0; i < vDatosVerificacion.Tables[0].Rows.Count; i++)
+                {
                     if (verificarRow(vDatosVerificacion.Tables[0].Rows[i]))
                         vDatosExcel.Tables[0].Rows[i].Delete();
                 }
@@ -204,7 +202,9 @@ namespace Infatlan_STEI_Comunicacion.pages.configuraciones
 
                 vResultado = true;
 
-            }catch (Exception Ex){
+            }
+            catch (Exception Ex)
+            {
                 throw new Exception(Ex.ToString());
             }
             return vResultado;
@@ -237,7 +237,7 @@ namespace Infatlan_STEI_Comunicacion.pages.configuraciones
                     string vQuery = "";
                     Session["COMUNICACION_CAM_COD_SUBIDO"] = "Completo";
                     Session["COMUNICACION_CAM_FECHA_SUBIDO"] = "Completo";
-  
+
                     for (int i = 0; i < vDatos.Rows.Count; i++)
                     {
                         String CodEquipoComu = vDatos.Rows[i]["idStockEDC"].ToString();
@@ -261,7 +261,7 @@ namespace Infatlan_STEI_Comunicacion.pages.configuraciones
                         }
 
                         DateTime vFechaActual = DateTime.Now.Date;
-                        string vAño =Convert.ToString(vFechaActual.Year);
+                        string vAño = Convert.ToString(vFechaActual.Year);
                         if (vFechaMant != vAño)
                         {
                             if (Session["COMUNICACION_CAM_FECHA_SUBIDO"].ToString() == "Completo")
@@ -278,7 +278,7 @@ namespace Infatlan_STEI_Comunicacion.pages.configuraciones
                     if (Session["COMUNICACION_CAM_COD_SUBIDO"].ToString() != "Completo" || Session["COMUNICACION_CAM_FECHA_SUBIDO"].ToString() != "Completo")
                     {
                         throw new Exception("Los mantenimientos preventivos no se guardaron, se detectaron los siguientes inconvenientes: ");
-                    }               
+                    }
                     else
                     {
                         if (TipoProceso == "LISTADO_MANTENIMIENTOS")
@@ -304,7 +304,7 @@ namespace Infatlan_STEI_Comunicacion.pages.configuraciones
                                     String vFechaMant = Convert.ToDateTime(fechaMantenimiento).ToString(vFormato);
 
                                     vQuery = "STEISP_COMUNICACION_AsignarResponsable 10, '" + codigoEDC + "'" +
-                                        ",'" + vFechaMant + "'" ;
+                                        ",'" + vFechaMant + "'";
 
                                     int vRespuesta = vConexion.ejecutarSql(vQuery);
                                     if (vRespuesta == 1)
@@ -323,16 +323,19 @@ namespace Infatlan_STEI_Comunicacion.pages.configuraciones
             }
         }
 
-        protected void BtnEnviar_Click1(object sender, EventArgs e){
+        protected void BtnEnviar_Click1(object sender, EventArgs e)
+        {
             String archivoLog = string.Format("{0}_{1}", Convert.ToString(Session["USUARIO"]), DateTime.Now.ToString("yyyyMMdd"));
-            try{
+            try
+            {
                 Div1.Visible = false;
                 UpdatePanel1.Update();
                 DivAlerta.Visible = false;
                 UpdateModal.Update();
 
                 String vDireccionCarga = ConfigurationManager.AppSettings["RUTA_SERVER"].ToString();
-                if (FUMantenimientosComunicacion.HasFile){
+                if (FUMantenimientosComunicacion.HasFile)
+                {
                     String vNombreArchivo = FUMantenimientosComunicacion.FileName;
                     vDireccionCarga += "/" + archivoLog + "_" + vNombreArchivo;
                     FUMantenimientosComunicacion.SaveAs(vDireccionCarga);
@@ -377,6 +380,6 @@ namespace Infatlan_STEI_Comunicacion.pages.configuraciones
         }
 
 
-       
+
     }
 }

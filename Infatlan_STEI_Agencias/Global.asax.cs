@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
-using System.Web.Security;
-using System.Web.SessionState;
 
 namespace Infatlan_STEI_Agencias
 {
@@ -28,7 +24,7 @@ namespace Infatlan_STEI_Agencias
         }
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-            
+
             HttpContext.Current.Response.AddHeader("X-Frame-Options", "SAMEORIGIN");
         }
 

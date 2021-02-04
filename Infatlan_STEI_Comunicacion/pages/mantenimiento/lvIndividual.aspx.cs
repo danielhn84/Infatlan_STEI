@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using Infatlan_STEI_Comunicacion.classes;
+﻿using Infatlan_STEI_Comunicacion.classes;
+using System;
 using System.Data;
 using System.IO;
-using System.Drawing;
+using System.Web;
+using System.Web.UI;
 
 namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
 {
@@ -28,7 +24,8 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                     if (vEx.Equals("1"))//CREAR NOTIFICACIÓN
                     {
                         cargarDataCompletarLV();
-                    }else if (vEx.Equals("2"))
+                    }
+                    else if (vEx.Equals("2"))
                     {
                         cargarDataAprobarLV();
                         bloquearCamposAprobarLV();
@@ -82,13 +79,13 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                 }
             }
 
-            string vTipo= vDatos.Rows[0]["tipo"].ToString();
+            string vTipo = vDatos.Rows[0]["tipo"].ToString();
             string vdetalle = vDatos.Rows[0]["detalle"].ToString();
 
 
 
 
-            if (vTipo== "ROUTER")
+            if (vTipo == "ROUTER")
             {
                 RowVersionRecomendada.Visible = true;
                 RowEDC_ACS.Visible = true;
@@ -107,13 +104,18 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                 RowPregunta.Visible = true;
 
                 bool vEstadoRouter891 = vdetalle.Contains("891");
-                if (vEstadoRouter891 ==true){
+                if (vEstadoRouter891 == true)
+                {
                     RowShowAuthentication.Visible = true;
-                }else{
+                }
+                else
+                {
                     RowShowAuthentication.Visible = false;
                 }
 
-            }else if  (vTipo == "SWITCH") {
+            }
+            else if (vTipo == "SWITCH")
+            {
                 RowVersionRecomendada.Visible = true;
                 RowEDC_ACS.Visible = true;
                 RowTablaARP.Visible = false;
@@ -129,7 +131,9 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                 RowConfiGuardadaSolarwinds.Visible = true;
                 RowAltaDisponibilidad.Visible = false;
                 RowPregunta.Visible = true;
-             }else if (vTipo == "CORE"){
+            }
+            else if (vTipo == "CORE")
+            {
                 RowVersionRecomendada.Visible = true;
                 RowEDC_ACS.Visible = true;
                 RowTablaARP.Visible = true;
@@ -193,9 +197,9 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                 if (TxConfiGuardadaSolarwinds.Value == string.Empty)
                     throw new Exception("Falta que adjunte imagen de configuración guardada en Solarwinds  (startup-config/running-config).");
 
-                if (RbVerificacionScrip.SelectedValue.Equals("") )
+                if (RbVerificacionScrip.SelectedValue.Equals(""))
                     throw new Exception("Falta que selecciones opción si ha verficado que los scripts iniciales y finales concuerdan  y he realizado las pruebas necesarias para garantizar el funcionamiento normal del equipo.");
-           
+
                 bool vEstadoRouter891 = vdetalle.Contains("891");
                 if (vEstadoRouter891 == true)
                 {
@@ -205,7 +209,7 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
 
             }
             else if (vTipo == "SWITCH")
-            {           
+            {
                 if (TxVersionRecomendada.Value == string.Empty)
                     throw new Exception("Falta que adjunte la imagen de que versión instaslada es la recomendada  por el fabricante al momento de la instalación.");
 
@@ -217,7 +221,7 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
 
                 if (TxVersionEquipo.Value == string.Empty)
                     throw new Exception("Falta que adjunte imagen versión del equipo.");
-               
+
                 if (TxShowAuthentication.Value == string.Empty)
                     throw new Exception("Falta que adjunte imagen del comando “show authentication sessions” ejecutado.");
 
@@ -240,7 +244,7 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                     throw new Exception("Falta que selecciones opción si ha verficado que los scripts iniciales y finales concuerdan  y he realizado las pruebas necesarias para garantizar el funcionamiento normal del equipo.");
             }
             else if (vTipo == "CORE")
-            {            
+            {
                 if (TxVersionRecomendada.Value == string.Empty)
                     throw new Exception("Falta que adjunte la imagen de que versión instaslada es la recomendada  por el fabricante al momento de la instalación.");
 
@@ -260,7 +264,7 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                     throw new Exception("Falta que adjunte imagen de verify de sistema operativo previo a la instalación.");
 
                 if (TxVersionEquipoActualizacion.Value == string.Empty)
-                    throw new Exception("Falta que adjunte imagen de la versión actualizada.");      
+                    throw new Exception("Falta que adjunte imagen de la versión actualizada.");
 
                 if (TxEquipoAgregadoSolarwinds.Value == string.Empty)
                     throw new Exception("Falta que adjunte imagen del equipo agregado a Solarwinds.");
@@ -292,7 +296,7 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
             {
                 Mensaje(ex.Message, WarningType.Danger);
             }
-           
+
         }
         protected void BtnConfirmar_Click(object sender, EventArgs e)
         {
@@ -636,11 +640,11 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                     Int32 vInformacion3 = vConexion.ejecutarSql(vQuery3);
 
 
-                    if (vInformacion1 == 1 && vInformacion2 == 1 && vInformacion3 == 1 )
+                    if (vInformacion1 == 1 && vInformacion2 == 1 && vInformacion3 == 1)
                     {
                         limpiarEnvioLV();
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "cerrarModal();", true);
-                     
+
 
                         Response.Redirect("/sites/comunicaciones/pages/pendientesCompletarLV.aspx?ex=1");
 
@@ -651,16 +655,17 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "cerrarModal();", true);
                         Response.Redirect("/sites/comunicaciones/pages/pendientesCompletarLV.aspx?ex=2");
 
-                        
+
                     }
-                }else if(Session["COMUNICACION_ESTADO_BTN_ENVIAR_MODAL"].ToString() == "Aprobar LV")
+                }
+                else if (Session["COMUNICACION_ESTADO_BTN_ENVIAR_MODAL"].ToString() == "Aprobar LV")
                 {
                     DataTable vDatos = new DataTable();
                     vDatos = (DataTable)Session["COMUNICACION_PALV_COMPLETAR_LV_INDIVIDUAL"];
                     string vidMantenimiento = vDatos.Rows[0]["idMantenimiento"].ToString();
                     string vidStock = vDatos.Rows[0]["idStockEDC"].ToString();
                     string vfechaMantenimiento = Convert.ToDateTime(vDatos.Rows[0]["fechaMantenimiento"]).ToString("yyyy-MM-dd");
-                    
+
                     //ACTUALIZAR TABLA DE MANTENIMIENTO
                     String vQuery1 = "STEISP_COMUNICACION_AprobalLV 4," + vidMantenimiento
                         + "," + RblAprobarLV.SelectedValue
@@ -686,7 +691,7 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                     {
                         for (int num = 0; num < vDatosCorreoParticipantes.Rows.Count; num++)
                         {
-                          vCorreos = vCorreos + vDatosCorreoParticipantes.Rows[0]["correo"].ToString() + ";";
+                            vCorreos = vCorreos + vDatosCorreoParticipantes.Rows[0]["correo"].ToString() + ";";
                         }
                     }
 
@@ -716,7 +721,7 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
 
                         Response.Redirect("/sites/comunicaciones/pages/pendientesAprobarLV.aspx?ex=1");
 
-                
+
                     }
                     else
                     {
@@ -726,7 +731,7 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                         Response.Redirect("/sites/comunicaciones/pages/pendientesAprobarLV.aspx?ex=2");
 
 
-                       
+
                     }
                 }
 
@@ -841,7 +846,7 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                 ImgPreviewConfiGuardadaSolarwinds.Src = "data:image;base64," + vDatos.Rows[0]["confiGuardadaSolarwinds"].ToString();
                 ImgPreviewAltaDisponibilidad.Src = "data:image;base64," + vDatos.Rows[0]["altaDisponibilidadCORE"].ToString();
 
-                RbVerificacionScrip.SelectedValue= vDatos.Rows[0]["verificacionScrips"].ToString();
+                RbVerificacionScrip.SelectedValue = vDatos.Rows[0]["verificacionScrips"].ToString();
                 mostrarCamposImagen();
             }
             catch (Exception ex)
@@ -913,10 +918,10 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
         {
             try
             {
-                validacionesAprobarLV();             
+                validacionesAprobarLV();
                 UpdatePanel4.Update();
                 UpdatePanel6.Update();
-                Session["COMUNICACION_ESTADO_BTN_ENVIAR_MODAL"] = "Aprobar LV";                
+                Session["COMUNICACION_ESTADO_BTN_ENVIAR_MODAL"] = "Aprobar LV";
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "abrirModal();", true);
             }
             catch (Exception ex)

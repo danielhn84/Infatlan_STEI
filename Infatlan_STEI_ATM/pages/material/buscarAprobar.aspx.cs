@@ -1,24 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Infatlan_STEI_ATM.clases;
+using System;
+using System.Data;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.Sql;
-using System.Data.SqlClient;
-using Infatlan_STEI_ATM.clases;
 
 namespace Infatlan_STEI_ATM.pages.material
 {
     public partial class buscarAprobar : System.Web.UI.Page
     {
         bd vConexion = new bd();
-        protected void Page_Load(object sender, EventArgs e){
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!Page.IsPostBack)
+            {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
                     cargarData();
-                }else {
+                }
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
             }
@@ -30,7 +31,7 @@ namespace Infatlan_STEI_ATM.pages.material
         }
         void cargarData()
         {
-            
+
             try
             {
 
@@ -170,8 +171,8 @@ namespace Infatlan_STEI_ATM.pages.material
                         Session["ATM_IDCHOFER_MATERIAL"] = item["IDChofer"].ToString();
                     }
 
-                   
-                        Response.Redirect("material.aspx?id=1&tipo=2");
+
+                    Response.Redirect("material.aspx?id=1&tipo=2");
                 }
                 catch (Exception)
                 {

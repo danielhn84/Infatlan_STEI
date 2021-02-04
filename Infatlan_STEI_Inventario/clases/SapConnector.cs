@@ -1,24 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Configuration;
-using System.Data;
-using Infatlan_STEI_Inventario.clases;
 
 namespace Infatlan_STEI_Inventario.clases
 {
-    public class SapConnector{
+    public class SapConnector
+    {
 
         db vConexion = new db();
-        public SapConnector(){
+        public SapConnector()
+        {
 
         }
 
-        public String getInformacion(String vFechaInicio, String vFechaFin){
+        public String getInformacion(String vFechaInicio, String vFechaFin)
+        {
             String vResultado = String.Empty;
-            try{
+            try
+            {
                 SapService.ZWS_AF_CONSULTA vConsulta = new SapService.ZWS_AF_CONSULTA();
                 vConsulta.FECHA_INICIO = vFechaInicio;
                 vConsulta.FECHA_FINAL = vFechaFin;
@@ -30,7 +27,8 @@ namespace Infatlan_STEI_Inventario.clases
                 SapService.ZWS_AF_TAC[] vResTipo = vResponse.ZAF_DATA_TIPOA;
 
                 int vContador = 0, vCounter = 0;
-                foreach (var item in vResActivo){
+                foreach (var item in vResActivo)
+                {
                     SapService.ZWS_AF_INFT vResul2 = vResActivo[vContador];
                     vContador++;
 
@@ -39,7 +37,7 @@ namespace Infatlan_STEI_Inventario.clases
                         ",'" + item.IDTIPOARTICULO + "'" +
                         ",'" + item.IDACREEDOR + "'" +
                         ",'" + item.DESCRIPCION + "'" +
-                        "," + item.PRECIO.ToString().Replace(",",".") +
+                        "," + item.PRECIO.ToString().Replace(",", ".") +
                         ",'" + vFecha + "'" +
                         ",'" + item.SERIE + "'" +
                         ",'" + item.INVENTARIO + "'";
@@ -47,9 +45,10 @@ namespace Infatlan_STEI_Inventario.clases
                         vCounter++;
                 }
                 vResultado = "Se han ingresado " + vCounter + " registros. ";
-                vContador = 0; 
+                vContador = 0;
                 vCounter = 0;
-                foreach (var item in vResProv){
+                foreach (var item in vResProv)
+                {
                     SapService.ZWS_AF_ACRE vResul2 = vResProv[vContador];
                     vContador++;
 
@@ -63,9 +62,10 @@ namespace Infatlan_STEI_Inventario.clases
                         vCounter++;
                 }
                 vResultado += vCounter + " Proveedores. ";
-                vContador = 0; 
+                vContador = 0;
                 vCounter = 0;
-                foreach (var item in vResTipo){
+                foreach (var item in vResTipo)
+                {
                     SapService.ZWS_AF_TAC vResul2 = vResTipo[vContador];
                     vContador++;
 
@@ -77,7 +77,9 @@ namespace Infatlan_STEI_Inventario.clases
                 }
                 vResultado += vCounter + " Tipos de Artículo.";
 
-            }catch (Exception Ex){
+            }
+            catch (Exception Ex)
+            {
                 String vError = Ex.Message;
                 throw;
             }

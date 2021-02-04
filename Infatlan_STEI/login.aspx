@@ -20,10 +20,10 @@
     @ Html.AntiForgeryToken ()--%>
     
     <section id="wrapper" class="login-register ">
-        <div class="login-box card" style="border-radius: 20px">
+        <div class="login-box card" style="border-radius: 20px; margin-top:-50px">
             <div class="card-body">
-                <form class="form-horizontal form-material m-t-40 text-center" id="loginform" runat="server">
-                    <a class="db"><img src="../assets/images/logo-rojo.png" width="150" alt="Home" /></a>
+                <form class="form-horizontal form-material m-t-10 text-center" id="loginform" runat="server">
+                    <a class="db"><img src="../assets/images/infatlan_azul.fw.png" width="150" alt="Home" /></a>
                     <h3 class="m-t-20"><b>Bienvenidos | STEI</b></h3>
                     <h6 class="font-weight-light">Ingrese sus credenciales.</h6>
                     <br />

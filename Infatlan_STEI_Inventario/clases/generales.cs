@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web;
 
 namespace Infatlan_STEI_Inventario.clases
 {
     public class generales
     {
         public generales() { }
-        
+
         public string MD5Hash(string text)
         {
             MD5 md5 = new MD5CryptoServiceProvider();
@@ -27,35 +24,49 @@ namespace Infatlan_STEI_Inventario.clases
             return strBuilder.ToString();
         }
 
-        public bool PermisosRecursosHumanos(DataTable vDatosLogin){
+        public bool PermisosRecursosHumanos(DataTable vDatosLogin)
+        {
             Boolean vFlag = false;
-            try{
+            try
+            {
                 DataTable vDatos = vDatosLogin;
 
-                if (!vDatos.Rows[0]["tipoEmpleado"].ToString().Equals("")){
-                    if (vDatos.Rows[0]["tipoEmpleado"].ToString().Equals("1")){
+                if (!vDatos.Rows[0]["tipoEmpleado"].ToString().Equals(""))
+                {
+                    if (vDatos.Rows[0]["tipoEmpleado"].ToString().Equals("1"))
+                    {
                         vFlag = true;
                     }
-                }else{
+                }
+                else
+                {
                     vFlag = false;
                 }
-            }catch { vFlag = false; }
+            }
+            catch { vFlag = false; }
             return vFlag;
         }
 
-        public bool PermisosPersonalSeguridad(DataTable vDatosLogin){
+        public bool PermisosPersonalSeguridad(DataTable vDatosLogin)
+        {
             Boolean vFlag = false;
-            try{
+            try
+            {
                 DataTable vDatos = vDatosLogin;
 
-                if (!vDatos.Rows[0]["tipoEmpleado"].ToString().Equals("")){
-                    if (vDatos.Rows[0]["tipoEmpleado"].ToString().Equals("2") || vDatos.Rows[0]["tipoEmpleado"].ToString().Equals("1") || vDatos.Rows[0]["tipoEmpleado"].ToString().Equals("3")){
+                if (!vDatos.Rows[0]["tipoEmpleado"].ToString().Equals(""))
+                {
+                    if (vDatos.Rows[0]["tipoEmpleado"].ToString().Equals("2") || vDatos.Rows[0]["tipoEmpleado"].ToString().Equals("1") || vDatos.Rows[0]["tipoEmpleado"].ToString().Equals("3"))
+                    {
                         vFlag = true;
                     }
-                }else{
+                }
+                else
+                {
                     vFlag = false;
                 }
-            }catch { vFlag = false; }
+            }
+            catch { vFlag = false; }
             return vFlag;
         }
 
@@ -78,7 +89,7 @@ namespace Infatlan_STEI_Inventario.clases
             TimeSpan span = lastDay - firstDay;
             int businessDays = span.Days + 1;
             int fullWeekCount = businessDays / 7;
-     
+
             if (businessDays > fullWeekCount * 7)
             {
                 int firstDayOfWeek = (int)firstDay.DayOfWeek;

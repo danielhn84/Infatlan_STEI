@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Infatlan_STEI_ATM.clases;
+using System;
+using System.Data;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.Sql;
-using System.Data.SqlClient;
-using Infatlan_STEI_ATM.clases;
 
 namespace Infatlan_STEI_ATM.pages.correctivo
 {

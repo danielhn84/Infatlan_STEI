@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Infatlan_STEI_ATM.clases;
+using System;
+using System.Data;
+using System.IO;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.Sql;
-using System.Data.SqlClient;
-using System.IO;
-using Infatlan_STEI_ATM.clases;
 
 namespace Infatlan_STEI_ATM.pages.ATM
 {
@@ -16,15 +12,20 @@ namespace Infatlan_STEI_ATM.pages.ATM
     {
         bd vConexion = new bd();
         bd vConexionATM = new bd();
-        protected void Page_Load(object sender, EventArgs e){
-            
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+            if (!Page.IsPostBack)
+            {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
                     Session["ATM"] = null;
                     //Session["codATM"] = null;
                     cargarDataATM();
                     llenarForm();
-                }else {
+                }
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
             }
@@ -79,14 +80,14 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     DDLversionSw.SelectedIndex = CargarInformacionDDL(DDLversionSw, item["idVersionSw"].ToString());
                     DDLUbicacionATM.SelectedIndex = CargarInformacionDDL(DDLUbicacionATM, item["ubicacionATM"].ToString());
                     txtcodUbicacion.Text = item["codUbicacion"].ToString();
-                    
+
 
                     String vModelo = "";
                     String vQueryModelo = "STEISP_ATM_Generales 37,'" + item["modeloATM"].ToString() + "'";
                     DataTable vDatosModelo = vConexion.ObtenerTabla(vQueryModelo);
                     foreach (DataRow itemMod in vDatosModelo.Rows)
                     {
-                        vModelo= itemMod["idModeloATM"].ToString();
+                        vModelo = itemMod["idModeloATM"].ToString();
                     }
                     DDLModeloATM.SelectedIndex = CargarInformacionDDL(DDLModeloATM, vModelo);
 
@@ -98,10 +99,10 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     //    {
                     //        DDLDetalleModelo.Items.Add(new ListItem { Value = itemDet["idDetalleModeloATM"].ToString(), Text = itemDet["nombreDetalleModeloATM"].ToString() });
                     //    }
-                    
+
                     //DDLDetalleModelo.SelectedIndex = CargarInformacionDDL(DDLDetalleModelo, item["modeloATM"].ToString());
 
-                    
+
                 }
                 limpiarImagen();
 
@@ -425,7 +426,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
             }
         }
         private void validarFromulario()
-        {          
+        {
             if (txtcodATM.Text == "" || txtcodATM.Text == string.Empty)
                 throw new Exception("Favor ingrese código del ATM.");
             if (DDLsucursalATM.SelectedValue == "0")
@@ -463,7 +464,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
             //if (txtIP.Text == "")
             //    throw new Exception("Favor ingrese IP.");
             //if (txtpuerto.Text == "")
-                //throw new Exception("Favor ingrese puerto.");
+            //throw new Exception("Favor ingrese puerto.");
             //if (DDLestado.SelectedValue == "0")
             //    throw new Exception("Favor seleccione estado de ATM.");
             if (txtlatitud.Text == "")
@@ -474,7 +475,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
                 throw new Exception("Favor ingrese inventario.");
             if (txtdireccion.Text == "")
                 throw new Exception("Favor ingrese dirección de ATM.");
-           
+
         }
         protected void btnModificarATM_Click(object sender, EventArgs e)
         {
@@ -501,9 +502,9 @@ namespace Infatlan_STEI_ATM.pages.ATM
 
         protected void btnModalModificarATM_Click(object sender, EventArgs e)
         {
-            
+
             try
-            {                           
+            {
 
                 string vQuery = "STEISP_ATM_CrearATM 1,'" + txtcodATM.Text + "'," +
                     "" + DDLsucursalATM.SelectedValue + "," +
@@ -538,7 +539,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
                         vArchivo = Convert.ToBase64String(vFileDeposito11);
 
                     if (FUMapaATM.HasFile != false)
-                    {                        
+                    {
                         string vQuery2 = "SPSTEI_ATM 34, '" + txtcodATM.Text + "','" + vArchivo + "'";
                         vConexionATM.ejecutarSQLATM(vQuery2);
                     }
@@ -568,7 +569,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     Limpiar();
                     cargarDataATM();
                     limpiarImagen();
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);                   
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
                     Mensaje("ATM modificado con éxito", WarningType.Success);
                     Response.Redirect("update.aspx");
                 }

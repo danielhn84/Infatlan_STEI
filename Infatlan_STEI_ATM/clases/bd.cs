@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
 
 
 namespace Infatlan_STEI_ATM.clases
@@ -16,7 +13,7 @@ namespace Infatlan_STEI_ATM.clases
         Warning,
         Danger
     }
-   
+
     public class bd
     {
         SqlConnection vConexion;

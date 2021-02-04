@@ -1,22 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
-using System.Linq;
 using System.Net.Mail;
 using System.Net.Mime;
 using System.Text;
-using System.Web;
 using System.Web.UI;
 
 namespace Infatlan_STEI.classes
 {
-    public enum typeBody{
+    public enum typeBody
+    {
         Bugs,
         Cumplimiento
     }
 
-    public class SmtpService : Page{
+    public class SmtpService : Page
+    {
 
         public SmtpService() { }
 
@@ -26,7 +25,7 @@ namespace Infatlan_STEI.classes
                 MailMessage mail = new MailMessage("STEI<" + ConfigurationManager.AppSettings["SmtpFrom"] + ">", To);
                 SmtpClient client = new SmtpClient();
                 client.Port = Convert.ToInt32(ConfigurationManager.AppSettings["SmtpPort"]);
-                
+
                 if (!String.IsNullOrEmpty(vCopia)){
                     mail.CC.Add(vCopia);
                 }
@@ -51,7 +50,7 @@ namespace Infatlan_STEI.classes
                             Descripcion
                             ), Server.MapPath("/assets/images/logo.png")));
                         break;
-                    
+
                 }
                 client.Send(mail);
                 vRespuesta = true;
@@ -63,7 +62,7 @@ namespace Infatlan_STEI.classes
             }
             return vRespuesta;
         }
-        
+
         private AlternateView CreateHtmlMessage(string message, string logoPath){
             var inline = new LinkedResource(logoPath, "image/png");
             inline.ContentId = "companyLogo";

@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Infatlan_STEI_Comunicacion.classes;
+using System;
+using System.Data;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Infatlan_STEI_Comunicacion.classes;
-using System.Data;
 
 namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
 {
@@ -72,7 +70,7 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                 {
                     foreach (DataRow item in vDatos.Rows)
                     {
-                        DdlExternos.Items.Add(new ListItem { Value = item["idUsuarioExterno"].ToString(), Text = item["nombre"].ToString()  });
+                        DdlExternos.Items.Add(new ListItem { Value = item["idUsuarioExterno"].ToString(), Text = item["nombre"].ToString() });
                     }
                 }
             }
@@ -97,7 +95,7 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                 }
 
                 String vQuery2 = "STEISP_COMUNICACION_CrearNotificacion 3 ," + DDLNombreParticipantes.SelectedValue;
-                DataTable vDatos = vConexion.obtenerDataTable(vQuery2);               
+                DataTable vDatos = vConexion.obtenerDataTable(vQuery2);
                 DataTable vDatos2 = new DataTable();
 
                 String vId = vDatos.Rows[0]["idUsuario"].ToString();
@@ -170,7 +168,7 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                     GVJefesAD.DataSource = vDatos;
                     GVJefesAD.DataBind();
                     Session["COMUNICACION_CN_CORREO_JEFE_AD"] = vDatos;
-                  
+
                 }
             }
             catch (Exception)
@@ -279,7 +277,7 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
         {
             if (TxSysAid.Text == "" || TxSysAid.Text == string.Empty)
                 throw new Exception("Favor ingrese número de SysAid.");
-         
+
             if (TxControlCambio.Text == "" || TxControlCambio.Text == string.Empty)
                 throw new Exception("Favor ingrese número del control de cambio.");
 
@@ -322,7 +320,7 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
             try
             {
                 validaciones();
-                LbTitulo.Text = "Enviar Notificación "+ TxNodo.Text;
+                LbTitulo.Text = "Enviar Notificación " + TxNodo.Text;
                 UpdatePanel3.Update();
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "abrirModal();", true);
             }
@@ -339,7 +337,7 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                 int vAcumuladorJefes = 0;
                 int vAcumuladorUsuarioExterno = 0;
                 int vTotJefes = 0;
-                int vTotParticipantes= 0;
+                int vTotParticipantes = 0;
                 int vTotUsuariosExternos = 0;
                 string vCorreos = "";
                 DataTable vDatos = new DataTable();
@@ -347,7 +345,7 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                 string vidMantenimiento = vDatos.Rows[0]["idMantenimiento"].ToString();
 
                 String vQuery1 = "STEISP_COMUNICACION_CrearNotificacion 4," + vidMantenimiento +
-                                  ",'"+ TxSysAid.Text + "','" + TxControlCambio.Text+"','"+ TxHoraInicio.Text+ "','"+ TxHoraFin.Text + "','" + TxImpacto.Text + "'";
+                                  ",'" + TxSysAid.Text + "','" + TxControlCambio.Text + "','" + TxHoraInicio.Text + "','" + TxHoraFin.Text + "','" + TxImpacto.Text + "'";
                 Int32 vInfo1 = vConexion.ejecutarSql(vQuery1);
 
 
@@ -364,7 +362,7 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                             String vQuery2 = "STEISP_COMUNICACION_CrearNotificacion 5," + vidMantenimiento + ",'" + vUsuario + "'";
                             Int32 vInfo2 = vConexion.ejecutarSql(vQuery2);
 
-                            String vQueryAcumCorreo = "STEISP_COMUNICACION_CrearNotificacion 13,'"+ vUsuario + "'";
+                            String vQueryAcumCorreo = "STEISP_COMUNICACION_CrearNotificacion 13,'" + vUsuario + "'";
                             DataTable vDatosAcumCorreo = vConexion.obtenerDataTable(vQueryAcumCorreo);
                             vCorreos = vCorreos + vDatosAcumCorreo.Rows[0]["correo"].ToString() + ";";
 
@@ -384,7 +382,7 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                         {
                             string vCorreoJefe = vDatosJefes.Rows[num]["Correo"].ToString();
 
-                            String vQuery2 = "STEISP_COMUNICACION_CrearNotificacion 6," + vidMantenimiento+",'" + vCorreoJefe + "'";
+                            String vQuery2 = "STEISP_COMUNICACION_CrearNotificacion 6," + vidMantenimiento + ",'" + vCorreoJefe + "'";
                             Int32 vInfo2 = vConexion.ejecutarSql(vQuery2);
 
                             vCorreos = vCorreos + vCorreoJefe + ";";
@@ -406,10 +404,10 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                         {
                             string vIdUsuarioExterno = vDatosUsuariosExternos.Rows[num]["idUsuarioExterno"].ToString();
 
-                            String vQuery4 = "STEISP_COMUNICACION_CrearNotificacion 11," + vidMantenimiento + "," + vIdUsuarioExterno ;
+                            String vQuery4 = "STEISP_COMUNICACION_CrearNotificacion 11," + vidMantenimiento + "," + vIdUsuarioExterno;
                             Int32 vInfo4 = vConexion.ejecutarSql(vQuery4);
-                            
-                            if(vInfo4==1)
+
+                            if (vInfo4 == 1)
                                 vAcumuladorUsuarioExterno = vAcumuladorUsuarioExterno + 1;
                         }
                     }
@@ -422,17 +420,17 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                 DataTable vDatosCorreoResponsable = vConexion.obtenerDataTable(vQueryCorreoResponsable);
                 string vCorreoResponsable = vDatosCorreoResponsable.Rows[0]["correo"].ToString();
 
-                String vQuerySuscripcion = "STEISP_COMUNICACION_CrearNotificacion 12,'" +vCorreos+"','"+ vCorreoResponsable+ "','Notificación Mantenimiento Equipo Comunicacion',0,"+ vidMantenimiento;
+                String vQuerySuscripcion = "STEISP_COMUNICACION_CrearNotificacion 12,'" + vCorreos + "','" + vCorreoResponsable + "','Notificación Mantenimiento Equipo Comunicacion',0," + vidMantenimiento;
                 Int32 vInfoSuscripcion = vConexion.ejecutarSql(vQuerySuscripcion);
 
 
 
-                if (vInfo1 == 1 && vAcumuladorParticipantes== vTotParticipantes && vAcumuladorJefes == vTotJefes && vAcumuladorUsuarioExterno== vTotUsuariosExternos)
+                if (vInfo1 == 1 && vAcumuladorParticipantes == vTotParticipantes && vAcumuladorJefes == vTotJefes && vAcumuladorUsuarioExterno == vTotUsuariosExternos)
                 {
-                    limpiarCreacionNotificacion();    
+                    limpiarCreacionNotificacion();
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "cerrarModal();", true);
                     Response.Redirect("/pages/mantenimiento/pendientesCrearNotificacion.aspx?ex=1");
-                    
+
                 }
                 else
                 {
@@ -450,8 +448,8 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
         {
             try
             {
-               limpiarCreacionNotificacion();
-               Response.Redirect("/pages/mantenimiento/pendientesCrearNotificacion.aspx");
+                limpiarCreacionNotificacion();
+                Response.Redirect("/pages/mantenimiento/pendientesCrearNotificacion.aspx");
             }
             catch (Exception Ex)
             {
@@ -491,7 +489,7 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                     vDatos2.Columns.Add("identidad");
                     vDatos2.Columns.Add("empresa");
 
-                    vDatos2.Rows.Add(vId, vNombre, vIdentidad,vEmpresa);
+                    vDatos2.Rows.Add(vId, vNombre, vIdentidad, vEmpresa);
                 }
                 else
                 {
@@ -513,7 +511,8 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                 GvExterno.PageIndex = e.NewPageIndex;
                 GvExterno.DataBind();
             }
-            catch (Exception ex){
+            catch (Exception ex)
+            {
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
@@ -569,7 +568,7 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                                 vRegisteredFilial = true;
 
                                 throw new Exception("Correo ya esta agregado a la lista, favor ingrese otro.");
-                                     
+
 
                             }
                         }

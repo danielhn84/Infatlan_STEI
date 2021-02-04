@@ -1,15 +1,9 @@
 ﻿using Infatlan_STEI_Inventario.clases;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Configuration;
 
 namespace Infatlan_STEI_Inventario.pages.Configuracion
 {
@@ -17,29 +11,39 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
     {
         db vConexion = new db();
         Security vSecurity = new Security();
-        protected void Page_Load(object sender, EventArgs e){
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!Page.IsPostBack)
+            {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
                     if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 1).Creacion)
                         BtnNuevo.Visible = true;
 
                     cargarDatos();
-                }else {
+                }
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
             }
         }
 
-        private void cargarDatos() {
-            try{
+        private void cargarDatos()
+        {
+            try
+            {
                 String vQuery = "[STEISP_INVENTARIO_Contratos] 1";
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
 
-                if (vDatos.Rows.Count > 0){
+                if (vDatos.Rows.Count > 0)
+                {
                     GVBusqueda.DataSource = vDatos;
                     GVBusqueda.DataBind();
-                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 1).Edicion){
-                        foreach (GridViewRow item in GVBusqueda.Rows){
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 1).Edicion)
+                    {
+                        foreach (GridViewRow item in GVBusqueda.Rows)
+                        {
                             LinkButton LbEdit = item.FindControl("BtnMover") as LinkButton;
                             LbEdit.Visible = true;
                         }
@@ -51,10 +55,12 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                 vQuery = "STEISP_INVENTARIO_Generales 4";
                 vDatos = vConexion.obtenerDataTable(vQuery);
 
-                if (vDatos.Rows.Count > 0){
+                if (vDatos.Rows.Count > 0)
+                {
                     DDLProveedores.Items.Clear();
                     DDLProveedores.Items.Add(new ListItem { Value = "0", Text = "Seleccione una opción" });
-                    foreach (DataRow item in vDatos.Rows){
+                    foreach (DataRow item in vDatos.Rows)
+                    {
                         DDLProveedores.Items.Add(new ListItem { Value = item["idProveedor"].ToString(), Text = item["nombre"].ToString() });
                     }
                 }
@@ -63,40 +69,51 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                 vQuery = "STEISP_INVENTARIO_Generales 9";
                 vDatos = vConexion.obtenerDataTable(vQuery);
 
-                if (vDatos.Rows.Count > 0){
+                if (vDatos.Rows.Count > 0)
+                {
                     DDLTipoContrato.Items.Clear();
                     DDLTipoContrato.Items.Add(new ListItem { Value = "0", Text = "Seleccione una opción" });
-                    foreach (DataRow item in vDatos.Rows){
+                    foreach (DataRow item in vDatos.Rows)
+                    {
                         DDLTipoContrato.Items.Add(new ListItem { Value = item["idTipoContrato"].ToString(), Text = item["nombre"].ToString() });
                     }
                 }
 
-            }catch (Exception ex){
+            }
+            catch (Exception ex)
+            {
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
 
-        public void Mensaje(string vMensaje, WarningType type){
+        public void Mensaje(string vMensaje, WarningType type)
+        {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
 
-        protected void TxBusqueda_TextChanged(object sender, EventArgs e){
+        protected void TxBusqueda_TextChanged(object sender, EventArgs e)
+        {
 
         }
 
-        protected void BtnNuevo_Click(object sender, EventArgs e){
-            try{
+        protected void BtnNuevo_Click(object sender, EventArgs e)
+        {
+            try
+            {
                 limpiarModal();
                 LbIdContrato.Text = "Crear Nuevo Contrato";
                 DivEstado.Visible = false;
                 Session["INV_CONTRATO_ID"] = null;
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal();", true);
-            }catch (Exception ex){
+            }
+            catch (Exception ex)
+            {
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
 
-        void limpiarModal(){
+        void limpiarModal()
+        {
             TxContrato.Text = string.Empty;
             DDLTipoContrato.SelectedValue = "0";
             DDLProveedores.SelectedValue = "0";
@@ -107,8 +124,10 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
             DivMensaje.Visible = false;
         }
 
-        protected void BtnAceptar_Click(object sender, EventArgs e){
-            try{
+        protected void BtnAceptar_Click(object sender, EventArgs e)
+        {
+            try
+            {
                 validarDatos();
                 String vQuery = "", vMensaje = "";
                 int vInfo;
@@ -124,29 +143,35 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                         "," + DDLEstado.SelectedValue +
                         "{1}";
 
-                if (HttpContext.Current.Session["INV_CONTRATO_ID"] == null){
+                if (HttpContext.Current.Session["INV_CONTRATO_ID"] == null)
+                {
                     vQuery = string.Format(vQuery, "3", "");
                     vInfo = vConexion.ejecutarSql(vQuery);
                     vMensaje = "Contrato registrado con éxito";
-                }else{
+                }
+                else
+                {
                     vQuery = string.Format(vQuery, "4", "," + Session["INV_CONTRATO_ID"].ToString());
                     vInfo = vConexion.ejecutarSql(vQuery);
                     vMensaje = "Contrato actualizado con éxito";
                 }
 
-                if (vInfo == 1){
+                if (vInfo == 1)
+                {
                     Mensaje(vMensaje, WarningType.Success);
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "cerrarModal();", true);
                     cargarDatos();
                 }
             }
-            catch (Exception ex){
+            catch (Exception ex)
+            {
                 LbAdvertencia.Text = ex.Message;
                 DivMensaje.Visible = true;
             }
         }
 
-        private void validarDatos(){
+        private void validarDatos()
+        {
             if (TxContrato.Text == "" || TxContrato.Text == string.Empty)
                 throw new Exception("Favor ingrese el nombre del contrato.");
             if (DDLTipoContrato.SelectedValue == "0")
@@ -161,19 +186,23 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                 throw new Exception("Favor ingrese las condiciones del contrato.");
         }
 
-        protected void GVBusqueda_RowCommand(object sender, GridViewCommandEventArgs e){
-            try{
+        protected void GVBusqueda_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            try
+            {
                 string vIdContrato = e.CommandArgument.ToString();
                 String vQuery = "[STEISP_INVENTARIO_Contratos] 2," + vIdContrato + "";
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
 
-                if (e.CommandName == "EditarContrato"){
+                if (e.CommandName == "EditarContrato")
+                {
                     DivMensaje.Visible = false;
                     LbIdContrato.Text = "Editar contrato " + vDatos.Rows[0]["contrato"].ToString();
                     Session["INV_CONTRATO_ID"] = vIdContrato;
                     DivEstado.Visible = true;
 
-                    for (int i = 0; i < vDatos.Rows.Count; i++){
+                    for (int i = 0; i < vDatos.Rows.Count; i++)
+                    {
                         TxContrato.Text = vDatos.Rows[i]["contrato"].ToString();
                         DDLTipoContrato.SelectedValue = vDatos.Rows[i]["idTipoContrato"].ToString();
                         DDLProveedores.SelectedValue = vDatos.Rows[i]["idProveedor"].ToString();
@@ -183,17 +212,22 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                         DDLEstado.SelectedValue = vDatos.Rows[i]["estado"].ToString();
                     }
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
-                }else if (e.CommandName == "verCondiciones"){
+                }
+                else if (e.CommandName == "verCondiciones")
+                {
                     LbTituloCondicion.Text = "Condiciones del contrato - " + vDatos.Rows[0]["contrato"].ToString();
                     LbContenido.Text = vDatos.Rows[0]["condiciones"].ToString();
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalCond();", true);
                 }
-            }catch (Exception ex){
+            }
+            catch (Exception ex)
+            {
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
 
-        protected void GVBusqueda_PageIndexChanging(object sender, GridViewPageEventArgs e){
+        protected void GVBusqueda_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
 
         }
     }

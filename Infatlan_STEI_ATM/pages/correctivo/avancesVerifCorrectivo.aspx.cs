@@ -1,14 +1,11 @@
-﻿using System;
+﻿using Infatlan_STEI_ATM.clases;
+using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Data;
+using System.Net;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Net;
-using System.Data.Sql;
-using System.Data.SqlClient;
-using Infatlan_STEI_ATM.clases;
 
 namespace Infatlan_STEI_ATM.pages.correctivo
 {
@@ -42,8 +39,8 @@ namespace Infatlan_STEI_ATM.pages.correctivo
 
             if (HttpContext.Current.Session["AVANCE_COR"] == null)
             {
-               
-               // DDLFiltroEstado.Items.Clear();
+
+                // DDLFiltroEstado.Items.Clear();
                 String vQuery = "[STEISP_ATM_GeneralesCorrectivo] 8";
                 DataTable vDatos = vConexion.ObtenerTabla(vQuery);
                 DDLFiltroEstado.Items.Add(new ListItem { Value = "0", Text = "Seleccione Estado..." });
@@ -51,7 +48,7 @@ namespace Infatlan_STEI_ATM.pages.correctivo
                 {
                     DDLFiltroEstado.Items.Add(new ListItem { Value = item["idEstado"].ToString(), Text = item["nombre"].ToString() });
                 }
-               
+
                 Session["AVANCE_COR"] = "1";
             }
         }

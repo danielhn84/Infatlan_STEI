@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Infatlan_STEI_Agencias.classes;
+using System;
+using System.Data;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.IO;
-using System.Data;
-using Infatlan_STEI_Agencias.classes;
-using System.Drawing;
 
 namespace Infatlan_STEI_Agencias.pages
 {
@@ -19,11 +14,16 @@ namespace Infatlan_STEI_Agencias.pages
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
 
-        protected void Page_Load(object sender, EventArgs e){
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!Page.IsPostBack)
+            {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
                     cargarDatos();
-                }else {
+                }
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
             }

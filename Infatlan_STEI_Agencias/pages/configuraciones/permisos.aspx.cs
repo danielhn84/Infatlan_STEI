@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Infatlan_STEI_Agencias.classes;
+using System;
+using System.Data;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Infatlan_STEI_Agencias.classes;
-using System.Data;
-using System.IO;
-using System.Configuration;
 
 namespace Infatlan_STEI_Agencias.pages.configuraciones
 {

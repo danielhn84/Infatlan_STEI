@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Infatlan_STEI.classes;
+using System;
+using System.Data;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using Infatlan_STEI.classes;
 
 namespace Infatlan_STEI.paginas.configuraciones
 {
@@ -13,9 +10,12 @@ namespace Infatlan_STEI.paginas.configuraciones
     {
         db vConexion = new db();
         Security vSecurity = new Security();
-        protected void Page_Load(object sender, EventArgs e){
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!Page.IsPostBack)
+            {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
                     if (!vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 6).Consulta)
                         Response.Redirect("/default.aspx");
                     if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 6).Edicion)
@@ -25,43 +25,55 @@ namespace Infatlan_STEI.paginas.configuraciones
             }
         }
 
-        private void cargarDatos() {
-            try{
+        private void cargarDatos()
+        {
+            try
+            {
                 String vQuery = "[STEISP_INVENTARIO_Generales] 13";
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
 
-                if (vDatos.Rows.Count > 0){
+                if (vDatos.Rows.Count > 0)
+                {
                     DDLUsuarios.Items.Clear();
                     DDLUsuarios.Items.Add(new ListItem { Value = "0", Text = "Seleccione una opción" });
-                    foreach (DataRow item in vDatos.Rows){
+                    foreach (DataRow item in vDatos.Rows)
+                    {
                         DDLUsuarios.Items.Add(new ListItem { Value = item["idUsuario"].ToString(), Text = item["nombre"].ToString() + " " + item["apellidos"].ToString() });
                     }
                 }
-            }catch (Exception ex){
+            }
+            catch (Exception ex)
+            {
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
 
-        public void Mensaje(string vMensaje, WarningType type){
+        public void Mensaje(string vMensaje, WarningType type)
+        {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
 
-        public void MensajeBlock(string vMensaje, WarningType type){
+        public void MensajeBlock(string vMensaje, WarningType type)
+        {
             ScriptManager.RegisterClientScriptBlock(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
 
-        protected void BtnAceptar_Click(object sender, EventArgs e) {
-            try{
+        protected void BtnAceptar_Click(object sender, EventArgs e)
+        {
+            try
+            {
                 validarDatos();
                 DataTable vDatos = (DataTable)Session["STEI_PERMISOS"];
                 String vQuery = "[STEISP_Permisos] 6,'" + DDLUsuarios.SelectedValue + "'";
                 DataTable vData = vConexion.obtenerDataTable(vQuery);
                 int vInfo = 0;
 
-                if (vData.Rows[0][0].ToString() == "0"){
+                if (vData.Rows[0][0].ToString() == "0")
+                {
                     int vCuenta = 0;
 
-                    foreach (GridViewRow row in GVBusqueda.Rows){
+                    foreach (GridViewRow row in GVBusqueda.Rows)
+                    {
                         CheckBox CBConsulta = row.Cells[2].FindControl("CBxConsulta") as CheckBox;
                         CheckBox CBCrear = row.Cells[2].FindControl("CBxCrear") as CheckBox;
                         CheckBox CBEditar = row.Cells[2].FindControl("CBxEditar") as CheckBox;
@@ -77,15 +89,19 @@ namespace Infatlan_STEI.paginas.configuraciones
                         vInfo = vConexion.ejecutarSql(vQuery);
                         vCuenta++;
                     }
-                    if (vCuenta == vDatos.Rows.Count){
+                    if (vCuenta == vDatos.Rows.Count)
+                    {
                         cargarDatos();
                         GVBusqueda.DataSource = null;
                         GVBusqueda.DataBind();
                         Mensaje("Permisos ingresados con éxito.", WarningType.Success);
                     }
-                }else{ 
+                }
+                else
+                {
                     int vCuenta = 0;
-                    foreach (GridViewRow row in GVBusqueda.Rows){
+                    foreach (GridViewRow row in GVBusqueda.Rows)
+                    {
                         CheckBox CBConsulta = row.Cells[2].FindControl("CBxConsulta") as CheckBox;
                         CheckBox CBCrear = row.Cells[2].FindControl("CBxCrear") as CheckBox;
                         CheckBox CBEditar = row.Cells[2].FindControl("CBxEditar") as CheckBox;
@@ -104,9 +120,12 @@ namespace Infatlan_STEI.paginas.configuraciones
 
                     vQuery = "[STEISP_Permisos] 5";
                     vData = vConexion.obtenerDataTable(vQuery);
-                    if (vData.Rows.Count != vDatos.Rows.Count){
-                        for (int i = 0; i < vData.Rows.Count; i++){
-                            if (vDatos.Rows.Count < i + 1){
+                    if (vData.Rows.Count != vDatos.Rows.Count)
+                    {
+                        for (int i = 0; i < vData.Rows.Count; i++)
+                        {
+                            if (vDatos.Rows.Count < i + 1)
+                            {
                                 vQuery = "[STEISP_Permisos] 1,'" + DDLUsuarios.SelectedValue + "'" +
                                     "," + vData.Rows[i]["idAplicacion"].ToString() +
                                     ",'" + Session["USUARIO"].ToString() + "'" +
@@ -120,33 +139,42 @@ namespace Infatlan_STEI.paginas.configuraciones
                         }
                     }
 
-                    if (vCuenta == vData.Rows.Count){
+                    if (vCuenta == vData.Rows.Count)
+                    {
                         cargarDatos();
                         GVBusqueda.DataSource = null;
                         GVBusqueda.DataBind();
                         Mensaje("Permisos actualizados con éxito.", WarningType.Success);
                     }
                 }
-            }catch (Exception ex){
+            }
+            catch (Exception ex)
+            {
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
 
-        private void validarDatos(){
+        private void validarDatos()
+        {
             if (DDLUsuarios.SelectedValue == "0")
                 throw new Exception("Favor seleccione el usuario");
         }
 
-        protected void DDLUsuarios_SelectedIndexChanged(object sender, EventArgs e){
-            try{
+        protected void DDLUsuarios_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
                 String vQuery = DDLUsuarios.SelectedValue == "0" ? "[STEISP_Permisos] 5" : "[STEISP_Permisos] 3,'" + DDLUsuarios.SelectedValue + "'";
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
 
-                if (vDatos.Rows.Count > 0){
+                if (vDatos.Rows.Count > 0)
+                {
                     GVBusqueda.DataSource = vDatos;
                     GVBusqueda.DataBind();
                     Session["STEI_PERMISOS"] = vDatos;
-                }else {
+                }
+                else
+                {
                     vQuery = "[STEISP_Permisos] 5";
                     vDatos = vConexion.obtenerDataTable(vQuery);
 
@@ -154,8 +182,10 @@ namespace Infatlan_STEI.paginas.configuraciones
                     GVBusqueda.DataBind();
                     Session["STEI_PERMISOS"] = vDatos;
                 }
-            }catch (Exception ex){
-                
+            }
+            catch (Exception ex)
+            {
+
             }
         }
     }

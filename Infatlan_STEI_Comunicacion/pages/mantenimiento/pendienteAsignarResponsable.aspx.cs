@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Infatlan_STEI_Comunicacion.classes;
+using System;
+using System.Data;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Infatlan_STEI_Comunicacion.classes;
-using System.Data;
 
 
 namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
@@ -29,7 +27,7 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                 }
             }
         }
-        
+
         private void cargarDatos()
         {
             try
@@ -45,7 +43,7 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
-        
+
         protected void GVAsignacion_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -74,11 +72,11 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                             }
                         }
                     }
-                    
+
                 }
             }
         }
-        
+
         protected void GVAsignacion_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             try
@@ -111,16 +109,16 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
         {
             int vacios = 0;
             foreach (GridViewRow row in GVAsignacion.Rows)
-            {       
+            {
                 DropDownList DDLResponsableAsignado = (DropDownList)row.Cells[8].FindControl("DDLResponsable");
-               if (DDLResponsableAsignado.Text=="0")
+                if (DDLResponsableAsignado.Text == "0")
                 {
                     vacios = vacios + 1;
-                }                             
+                }
             }
-       
 
-            if (vacios>0)
+
+            if (vacios > 0)
                 throw new Exception("Falta que asigne ingeniero responsable para los mantenimientos programados.");
         }
 
@@ -143,25 +141,25 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
             {
                 int vCont = GVAsignacion.PageIndex != 0 ? GVAsignacion.PageIndex * 10 : 0;
                 DataTable vData = (DataTable)Session["COMUNICACION_ASIGNACION_INGENIERO"];
-                int vCantidad = Convert.ToInt32 (this.GVAsignacion.Rows.Count.ToString());
+                int vCantidad = Convert.ToInt32(this.GVAsignacion.Rows.Count.ToString());
                 int vAcumulador = 0;
 
                 foreach (GridViewRow row in GVAsignacion.Rows)
                 {
                     DropDownList DDLAsignado = (DropDownList)row.Cells[8].FindControl("DDLResponsable");
-                    string vResponsable= DDLAsignado.SelectedValue;
+                    string vResponsable = DDLAsignado.SelectedValue;
                     string vIdMantenimiento = row.Cells[0].Text;
 
                     String vQuery = "STEISP_COMUNICACION_AsignarResponsable 3," + vIdMantenimiento + ",'" + vResponsable + "','" + Session["USUARIO"] + "'";
                     Int32 vInformacion1 = vConexion.ejecutarSql(vQuery);
-                    if (vInformacion1==1)
+                    if (vInformacion1 == 1)
                     {
                         vAcumulador = vAcumulador + 1;
                         vCont++;
                     }
-                                                         
+
                 }
-                if(vAcumulador== vCantidad)
+                if (vAcumulador == vCantidad)
                 {
                     Mensaje("Se guardaron exitosamente los registros.", WarningType.Success);
                 }

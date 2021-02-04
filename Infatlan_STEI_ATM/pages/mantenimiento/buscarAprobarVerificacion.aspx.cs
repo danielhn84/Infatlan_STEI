@@ -1,25 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Infatlan_STEI_ATM.clases;
+using System;
+using System.Data;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.Sql;
-using System.Data.SqlClient;
-using System.IO;
-using Infatlan_STEI_ATM.clases;
 
 namespace Infatlan_STEI_ATM.pages.mantenimiento
 {
     public partial class buscarAprobarVerificacion : System.Web.UI.Page
     {
         bd vConexion = new bd();
-        protected void Page_Load(object sender, EventArgs e){
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!Page.IsPostBack)
+            {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
                     cargarData();
-                }else {
+                }
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
             }
@@ -34,7 +34,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             try
             {
                 DataTable vDatos = new DataTable();
-                vDatos = vConexion.ObtenerTabla("STEISP_ATM_Generales 22, 1");              
+                vDatos = vConexion.ObtenerTabla("STEISP_ATM_Generales 22, 1");
                 GVBusqueda.DataSource = vDatos;
                 GVBusqueda.DataBind();
                 Session["ATM_APROBVERIF_CARGAR"] = vDatos;
@@ -116,9 +116,9 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
         protected void GVBusqueda_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            
-                DataTable vDataaaa = (DataTable)Session["ATM_APROBVERIF_CARGAR"];
-                string codVerificacion = e.CommandArgument.ToString();
+
+            DataTable vDataaaa = (DataTable)Session["ATM_APROBVERIF_CARGAR"];
+            string codVerificacion = e.CommandArgument.ToString();
 
             if (e.CommandName == "Aprobar")
             {
@@ -171,7 +171,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                         Session["ATM_USU_RESPONSABLE_MANT"] = item["UsuResponsable"].ToString();
 
                     }
-                    
+
                     DataTable vDatos4 = new DataTable();
                     String vQuery4 = "STEISP_AGENCIA_CreacionNotificacion 6,'" + Session["ATM_USUCREADOR_VERIF_CREAR"].ToString() + "'";
                     vDatos4 = vConexion.ObtenerTabla(vQuery4);
@@ -235,7 +235,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
 
                     TxBuscarTecnicoATM.Text = string.Empty;
-                     Response.Redirect("verificacion.aspx?id=3&tipo=4");
+                    Response.Redirect("verificacion.aspx?id=3&tipo=4");
                     //Response.Redirect("aprobarVerificacion.aspx");
 
                 }

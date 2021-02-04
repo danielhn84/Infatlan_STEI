@@ -1,19 +1,22 @@
 ﻿using Infatlan_STEI_Agencias.classes;
 using System;
+using System.Configuration;
 using System.Data;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Configuration;
-using System.IO;
 
-namespace Infatlan_STEI_Agencias.pages{
+namespace Infatlan_STEI_Agencias.pages
+{
     public partial class CreacionNotificacion : System.Web.UI.Page
     {
         db vConexion = new db();
-        protected void Page_Load(object sender, EventArgs e){
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!Page.IsPostBack)
+            {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
                     //GVjefesAgencias.DataSource = null;
                     //GVjefesAgencias.DataBind();
                     //GVJefesAD.DataSource = null;
@@ -23,8 +26,10 @@ namespace Infatlan_STEI_Agencias.pages{
                     //Session["AG_CN_TECNICOS_PARTICIPANTES"] = "";
                     //Session["AG_CN_CORREO_JEFE_AD_NOTI"] = "";
 
-                   cargarData();
-                }else {
+                    cargarData();
+                }
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
             }
@@ -54,7 +59,8 @@ namespace Infatlan_STEI_Agencias.pages{
             }
         }
 
-        public void Mensaje(string vMensaje, WarningType type){
+        public void Mensaje(string vMensaje, WarningType type)
+        {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
 
@@ -70,7 +76,7 @@ namespace Infatlan_STEI_Agencias.pages{
                 //GVBusqueda.DataBind();
                 DDLCodigoAgencia.Items.Clear();
                 String vTest = TextBox1.Text;
-                String v2 = Convert.ToDateTime(vTest).ToString("yyyy-MM-dd");            
+                String v2 = Convert.ToDateTime(vTest).ToString("yyyy-MM-dd");
 
                 String vQuery = "STEISP_AGENCIA_CreacionNotificacion 1,'" + v2 + "'";
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
@@ -81,9 +87,9 @@ namespace Infatlan_STEI_Agencias.pages{
                     foreach (DataRow item in vDatos.Rows)
                     {
                         DDLCodigoAgencia.Items.Add(new ListItem { Value = item["idMantenimiento"].ToString(), Text = item["codigoAgencia"].ToString() + " - " + item["nombre"].ToString() });
-                        
+
                     }
-                   
+
                     DDLCodigoAgencia.Enabled = true;
                     TxSysAid.ReadOnly = false;
                     TxHoraInicio.ReadOnly = false;
@@ -97,8 +103,10 @@ namespace Infatlan_STEI_Agencias.pages{
                     TxHoraInicio.Text = "07:00";
                     TxHoraFin.Text = "08:30";
                     UpdatePanel1.Update();
-                }else{
-                    Mensaje("No hay mantenimientos disponibles en la fecha que selecciono: "+ TextBox1.Text+" , ingresar otra fecha.", WarningType.Info);                 
+                }
+                else
+                {
+                    Mensaje("No hay mantenimientos disponibles en la fecha que selecciono: " + TextBox1.Text + " , ingresar otra fecha.", WarningType.Info);
                 }
             }
             catch (Exception ex)
@@ -133,7 +141,7 @@ namespace Infatlan_STEI_Agencias.pages{
 
         protected void DDLNombreResponsable_SelectedIndexChanged(object sender, EventArgs e)
         {
-           try
+            try
             {
                 String vQuery2 = "STEISP_AGENCIA_CreacionNotificacion 6 ,'" + DDLNombreResponsable.SelectedValue + "'";
                 DataTable vDatos2 = vConexion.obtenerDataTable(vQuery2);
@@ -147,7 +155,8 @@ namespace Infatlan_STEI_Agencias.pages{
 
         protected void DDLNombreParticipantes_TextChanged(object sender, EventArgs e)
         {
-            try{
+            try
+            {
                 if (DDLNombreParticipantes.SelectedValue.Equals("0"))
                     throw new Exception("Por favor seleccione tecnico participante.");
                 else
@@ -177,12 +186,12 @@ namespace Infatlan_STEI_Agencias.pages{
                         vDatos2.Columns.Add("identidad");
                         vDatos2.Columns.Add("correo");
 
-                        vDatos2.Rows.Add(vId, vNombre, vIdentidad,vCorreo);
+                        vDatos2.Rows.Add(vId, vNombre, vIdentidad, vCorreo);
                     }
                     else
                     {
                         vDatos2 = (DataTable)Session["AG_CN_TECNICOS_PARTICIPANTES"];
-                        vDatos2.Rows.Add(vId, vNombre, vIdentidad,vCorreo);
+                        vDatos2.Rows.Add(vId, vNombre, vIdentidad, vCorreo);
                     }
                     GVBusqueda.DataSource = vDatos2;
                     GVBusqueda.DataBind();
@@ -265,7 +274,8 @@ namespace Infatlan_STEI_Agencias.pages{
         //    Session["CORREOS"] = vDatos;
         //}
 
-        private void validaciones(){
+        private void validaciones()
+        {
             if (TextBox1.Text == "" || TextBox1.Text == string.Empty)
                 throw new Exception("Favor seleccione fecha del mantenimiento.");
             if (DDLCodigoAgencia.SelectedValue.Equals("0"))
@@ -275,12 +285,14 @@ namespace Infatlan_STEI_Agencias.pages{
             //if (GVCorreoJefeAgencia.Rows.Count==0)
             //    throw new Exception("Favor ingrese correo de jefe de agencia.");
             if (DDLNombreResponsable.SelectedValue.Equals("0"))
-                throw new Exception("Favor seleccione tecnico responsable."); 
+                throw new Exception("Favor seleccione tecnico responsable.");
         }
 
-        protected void BtnEnviarNotificacion_Click(object sender, EventArgs e){
-            try{
-               
+        protected void BtnEnviarNotificacion_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
                 validaciones();
 
                 TxLugar.Text = DDLCodigoAgencia.SelectedItem.Text;
@@ -292,7 +304,9 @@ namespace Infatlan_STEI_Agencias.pages{
                 UpdatePanel2.Update();
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal();", true);
 
-            }catch (Exception ex){
+            }
+            catch (Exception ex)
+            {
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
@@ -319,18 +333,22 @@ namespace Infatlan_STEI_Agencias.pages{
             Session["AG_CN_TECNICOS_PARTICIPANTES"] = vDatos;
         }
 
-        protected void GVBusqueda_PageIndexChanging(object sender, GridViewPageEventArgs e){
-            try{
+        protected void GVBusqueda_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            try
+            {
                 GVBusqueda.DataSource = (DataTable)Session["AG_CN_TECNICOS_PARTICIPANTES"];
                 GVBusqueda.PageIndex = e.NewPageIndex;
                 GVBusqueda.DataBind();
-            }catch (Exception ex){
+            }
+            catch (Exception ex)
+            {
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
 
         void EnviarCorreo()
-        {           
+        {
             SmtpService vService = new SmtpService();
             string vZonaAgencia = "";
             string vIDMantenimiento = DDLCodigoAgencia.SelectedValue;
@@ -445,9 +463,9 @@ namespace Infatlan_STEI_Agencias.pages{
         {
             try
             {
-                String vQuery2 = "STEISP_AGENCIA_CreacionNotificacion 10, '" + TxHoraInicio.Text + "','" + TxHoraFin.Text + "','" + DDLNombreResponsable.SelectedValue + "','"+TxSysAid.Text+"','" + DDLCodigoAgencia.SelectedValue + "'";
-                Int32 vInfo2 = vConexion.ejecutarSql(vQuery2);                                      
-                
+                String vQuery2 = "STEISP_AGENCIA_CreacionNotificacion 10, '" + TxHoraInicio.Text + "','" + TxHoraFin.Text + "','" + DDLNombreResponsable.SelectedValue + "','" + TxSysAid.Text + "','" + DDLCodigoAgencia.SelectedValue + "'";
+                Int32 vInfo2 = vConexion.ejecutarSql(vQuery2);
+
                 if (Session["AG_CN_CORREO_JEFE_AD_NOTI"] != null)
                 {
                     DataTable vDatosJefesAgencia = (DataTable)Session["AG_CN_CORREO_JEFE_AD_NOTI"];
@@ -498,7 +516,7 @@ namespace Infatlan_STEI_Agencias.pages{
             {
                 Mensaje(Ex.Message, WarningType.Danger);
             }
-           
+
         }
 
         protected void btnModalCerrarNotificacion_Click(object sender, EventArgs e)
@@ -593,7 +611,7 @@ namespace Infatlan_STEI_Agencias.pages{
 
                 Mensaje(Ex.Message, WarningType.Danger);
             }
-           
+
         }
 
         protected void GVJefesAD_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -662,12 +680,12 @@ namespace Infatlan_STEI_Agencias.pages{
 
 
 
-                    GVjefesAgencias.DataSource= vDatos;
+                    GVjefesAgencias.DataSource = vDatos;
                     GVjefesAgencias.DataBind();
                     Session["AG_CN_CORREO_JEFE_AD_NOTI"] = vDatos;
                     UpdatePanel1.Update();
-                    txtbuscarJefeNotif.Text  = "";
-                    
+                    txtbuscarJefeNotif.Text = "";
+
 
                     //GVJefesAD.DataSource = null;
                     //GVJefesAD.DataBind();

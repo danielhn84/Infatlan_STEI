@@ -1,25 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Infatlan_STEI_ATM.clases;
+using System;
+using System.Configuration;
+using System.Data;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.Sql;
-using System.Data.SqlClient;
-using System.Configuration;
-using Infatlan_STEI_ATM.clases;
 
 namespace Infatlan_STEI_ATM.pages.reprogramar
 {
     public partial class buscarReprogramar : System.Web.UI.Page
     {
         bd vConexion = new bd();
-        protected void Page_Load(object sender, EventArgs e){
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!Page.IsPostBack)
+            {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
                     cargarData();
-                }else {
+                }
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
             }
@@ -116,7 +117,7 @@ namespace Infatlan_STEI_ATM.pages.reprogramar
             }
         }
 
-        
+
         protected void GVBusqueda_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             H5Alerta.Visible = false;
@@ -135,15 +136,15 @@ namespace Infatlan_STEI_ATM.pages.reprogramar
                         String vQuery = "STEISP_ATM_Generales 19,'" + codReprogramacion + "'";
                         vDatos = vConexion.ObtenerTabla(vQuery);
                         foreach (DataRow item in vDatos.Rows)
-                        {                           
+                        {
                             Session["codNotificacionRE"] = item["ID"].ToString();
-                            lbModalNomATM.Text = item["NomATM"].ToString();                            
-                            lbModalFechaMan.Text = Convert.ToDateTime(item["FechaMantenimiento"]).ToString("yyyy/MM/dd");                           
+                            lbModalNomATM.Text = item["NomATM"].ToString();
+                            lbModalFechaMan.Text = Convert.ToDateTime(item["FechaMantenimiento"]).ToString("yyyy/MM/dd");
                             lbModalCodATM.Text = item["Codigo"].ToString();
-                            lbQuienCancelo.Text= item["CanceladoPor"].ToString();
-                            lbMotivoCancelo.Text= item["NCancelar"].ToString();
-                            lbdetalle.Text= item["DetMotivo"].ToString();
-                            Session["ATM_IDZONA_REPROGRAMAR"]= item["IDZona"].ToString();
+                            lbQuienCancelo.Text = item["CanceladoPor"].ToString();
+                            lbMotivoCancelo.Text = item["NCancelar"].ToString();
+                            lbdetalle.Text = item["DetMotivo"].ToString();
+                            Session["ATM_IDZONA_REPROGRAMAR"] = item["IDZona"].ToString();
                             Session["UsuResponsable"] = item["UsuResponsable"].ToString();
                         }
                         TxBuscarTecnicoATM.Text = string.Empty;
@@ -182,7 +183,7 @@ namespace Infatlan_STEI_ATM.pages.reprogramar
             DataTable vDatosTecnicos = vConexion.ObtenerTabla(vQueryTecnicos);
             string vQueryJefes = "STEISP_ATM_Generales 38,'" + Session["codNotificacionRE"] + "'";
             DataTable vDatosJefeAgencias = vConexion.ObtenerTabla(vQueryJefes);
-            
+
             if (vDatos.Rows.Count > 0)
             {
                 foreach (DataRow item in vDatos.Rows)
@@ -275,7 +276,7 @@ namespace Infatlan_STEI_ATM.pages.reprogramar
         }
         protected void btnReprogramarNotif_Click(object sender, EventArgs e)
         {
-            
+
             //lbModalFechaMan.Text = "";
             if (txtNewFechaInicio.Text == "" || txtNewFechaInicio.Text == string.Empty)
             {
@@ -284,7 +285,7 @@ namespace Infatlan_STEI_ATM.pages.reprogramar
             }
             else
             {
-                
+
                 String vFormato = "yyyy/MM/dd";
                 string NewFecha = Convert.ToDateTime(txtNewFechaInicio.Text).ToString(vFormato);
                 try
@@ -293,14 +294,14 @@ namespace Infatlan_STEI_ATM.pages.reprogramar
                     Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                     if (vInfo != 0)
                     {
-                         CorreoReprogramar();
+                        CorreoReprogramar();
                         //string vQuery2 = "STEISP_ATM_VerificacionTotal 8, '" + Session["codNotificacionRE"] + "'";
                         // vConexion.ejecutarSQL(vQuery2);
                         string vQuery3 = "STEISP_ATM_Reprogramacion 4, '" + Session["codNotificacionRE"] + "'";
                         vConexion.ejecutarSQL(vQuery3);
 
                         H5Alerta.Visible = false;
-                        txtAlerta1.Visible = false;                       
+                        txtAlerta1.Visible = false;
                         H5Alerta.Visible = false;
                         Session["ATM_IDZONA_REPROGRAMAR"] = null;
                         Session["UsuResponsable"] = null;
@@ -310,13 +311,13 @@ namespace Infatlan_STEI_ATM.pages.reprogramar
                         UpdateGridView.Update();
                         //EnviarCorreo();
                         cargarData();
-                }
+                    }
                     else
-                {
-                    H5Alerta.InnerText = "No se pudo reprogramar mantenimiento";
-                    H5Alerta.Visible = true;
+                    {
+                        H5Alerta.InnerText = "No se pudo reprogramar mantenimiento";
+                        H5Alerta.Visible = true;
+                    }
                 }
-            }
                 catch (Exception Ex)
                 {
                     Mensaje(Ex.Message, WarningType.Danger);

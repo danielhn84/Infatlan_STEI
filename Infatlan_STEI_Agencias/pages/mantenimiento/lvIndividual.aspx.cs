@@ -1,32 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Infatlan_STEI_Agencias.classes;
+using System;
+using System.Configuration;
+using System.Data;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.IO;
-using System.Data;
-using Infatlan_STEI_Agencias.classes;
-using System.Configuration;
-using System.Drawing.Imaging;
-using System.Drawing;
 
 namespace Infatlan_STEI_Agencias.pages
 {
     public partial class LvIndividual : System.Web.UI.Page
     {
         db vConexion = new db();
-        public void Mensaje(string vMensaje, WarningType type){
+        public void Mensaje(string vMensaje, WarningType type)
+        {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
 
-        protected void Page_Load(object sender, EventArgs e){
+        protected void Page_Load(object sender, EventArgs e)
+        {
             String vEx = Request.QueryString["ex"];
-            
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
-                    if (vEx != null){
-                        if (vEx.Equals("2")){
+
+            if (!Page.IsPostBack)
+            {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
+                    if (vEx != null)
+                    {
+                        if (vEx.Equals("2"))
+                        {
                             modoVistaCampos(true);
                             cargarDataVista();
                             BtnEnviarLv.Visible = false;
@@ -38,7 +42,8 @@ namespace Infatlan_STEI_Agencias.pages
                             TxLongitud.ReadOnly = true;
                             txtDireccion.ReadOnly = true;
                         }
-                        else if (vEx.Equals("1")){
+                        else if (vEx.Equals("1"))
+                        {
                             cargarDataLlenado();
                             //OcultarTarjeta();
                             mostrarAsteriscos();
@@ -49,7 +54,8 @@ namespace Infatlan_STEI_Agencias.pages
                             RblRoboDaño.SelectedValue = "1";
                             RblElementosAjenos.SelectedValue = "1";
                         }
-                        else if (vEx.Equals("3")){
+                        else if (vEx.Equals("3"))
+                        {
                             cargarDataModificar();
                             //OcultarTarjeta();
                             mostrarAsteriscos();
@@ -57,7 +63,9 @@ namespace Infatlan_STEI_Agencias.pages
                         }
                     }
                     cargar();
-                }else {
+                }
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
             }
@@ -86,11 +94,11 @@ namespace Infatlan_STEI_Agencias.pages
             TxCantImpresoraFinanciera.ReadOnly = vActivo;
             TxCantEscaner.ReadOnly = vActivo;
             TxCantDatacard.ReadOnly = vActivo;
-            
+
             //RBLManEquipoComu.Enabled = false;
-            FuImageNoMantEquipoComu.Visible = false;            
+            FuImageNoMantEquipoComu.Visible = false;
             TxMotivoNoMantEquipoComu.ReadOnly = true;
-          
+
 
             RBProbaronEquipo.Enabled = false;
             TxMotivoNoProbaronEquipo.ReadOnly = true;
@@ -113,13 +121,13 @@ namespace Infatlan_STEI_Agencias.pages
             RblElementosAjenos.Enabled = false;
             FuElementosAjenos.Visible = false;
 
-            FuRack.Visible = false; 
+            FuRack.Visible = false;
             FuEspacioFisico.Visible = false;
 
             TxObservacionesGenerales.ReadOnly = true;
-           
+
             BtnEnviarLv.Visible = false;
-           
+
         }
 
         void cargar()
@@ -132,11 +140,11 @@ namespace Infatlan_STEI_Agencias.pages
             {
                 foreach (DataRow item in vDatos.Rows)
                 {
-                    DDLTipoAgencia.Items.Add(new ListItem { Value = item["idTipoAgencia"].ToString(), Text = item["nombre"].ToString() });                  
+                    DDLTipoAgencia.Items.Add(new ListItem { Value = item["idTipoAgencia"].ToString(), Text = item["nombre"].ToString() });
                 }
             }
 
-            String vQuery2 = "[STEISP_AGENCIA_CompletarListaVerificacion] 13,'"+TxCodigoAgencia.Text+"'";
+            String vQuery2 = "[STEISP_AGENCIA_CompletarListaVerificacion] 13,'" + TxCodigoAgencia.Text + "'";
             DataTable vDatos2 = vConexion.obtenerDataTable(vQuery2);
             foreach (DataRow item in vDatos2.Rows)
             {
@@ -147,7 +155,7 @@ namespace Infatlan_STEI_Agencias.pages
                 TxLongitud.Text = item["lng"].ToString();
             }
         }
-        
+
         void cargarDataVista()
         {
             try
@@ -155,7 +163,7 @@ namespace Infatlan_STEI_Agencias.pages
                 //DATOS GENERALESs
                 DataTable vDatos = new DataTable();
                 vDatos = (DataTable)Session["AG_LvPA_DATOS_GENERALES"];
-                TxFechaMant.Text = vDatos.Rows[0]["fecha"].ToString();        
+                TxFechaMant.Text = vDatos.Rows[0]["fecha"].ToString();
                 TxSysAid.Text = vDatos.Rows[0]["sysAid"].ToString();
                 TxLugar.Text = vDatos.Rows[0]["Lugar"].ToString();
                 TxArea.Text = vDatos.Rows[0]["Area"].ToString();
@@ -165,30 +173,33 @@ namespace Infatlan_STEI_Agencias.pages
                 TxHoraInicioMant.Text = vDatos.Rows[0]["horaMantenimientoInicio"].ToString();
                 TxHoraFinMant.Text = vDatos.Rows[0]["horaManteniminetoFinal"].ToString();
                 TxNombreTecnicoResponsable.Text = vDatos.Rows[0]["Responsable"].ToString();
-            
 
-            //TECNICO RESPONSABLE  
+
+                //TECNICO RESPONSABLE  
                 DataTable vDatos1 = new DataTable();
                 vDatos1 = (DataTable)Session["AG_LvPA_DATOS_TECNICO_RESPONSABLE"];
                 TxIdentidadTecnicoResponsable.Text = vDatos1.Rows[0]["identidad"].ToString();
 
 
-            //TECNICOS PARTICIPANTES
+                //TECNICOS PARTICIPANTES
                 DataTable vDatosTecnicosParticipantes = (DataTable)Session["AG_LvPA_DATOS_TECNICOS_PARTICIPANTES"];
                 GVTecnicosParticipantes.DataSource = vDatosTecnicosParticipantes;
-           
-                if (vDatosTecnicosParticipantes.Rows.Count > 0){
+
+                if (vDatosTecnicosParticipantes.Rows.Count > 0)
+                {
                     GVTecnicosParticipantes.DataBind();
                     UPTecnicosParticipantes.Update();
 
                     DivTecnicosParticipantes.Visible = true;
                     DivAlertaTecnicosParticipantes.Visible = false;
-                }else{
+                }
+                else
+                {
                     DivTecnicosParticipantes.Visible = true;
                     DivAlertaTecnicosParticipantes.Visible = true;
                 }
 
-            //SECCION DATOS TECNICOS PREGUNTA
+                //SECCION DATOS TECNICOS PREGUNTA
                 DataTable vDatos2 = new DataTable();
                 vDatos2 = (DataTable)Session["AG_LvPA_DATOS_TECNICOS_PREGUNTAS"];
 
@@ -220,22 +231,25 @@ namespace Infatlan_STEI_Agencias.pages
                 DataTable vDatos3 = new DataTable();
                 vDatos3 = (DataTable)Session["AG_LvPA_DATOS_PRUEBAS_PC"];
 
-                string RBProbaronEquipoRespuesta= vDatos3.Rows[0]["proboTodoEquipo"].ToString();
+                string RBProbaronEquipoRespuesta = vDatos3.Rows[0]["proboTodoEquipo"].ToString();
                 TxMotivoNoProbaronEquipo.Text = vDatos3.Rows[0]["motivoNoProboTodoEquipo"].ToString();
-                if (RBProbaronEquipoRespuesta.Equals("True")){
+                if (RBProbaronEquipoRespuesta.Equals("True"))
+                {
                     RBProbaronEquipo.SelectedValue = "1";
-                    TxMotivoNoProbaronEquipo.Visible = false;           
-                } else {
+                    TxMotivoNoProbaronEquipo.Visible = false;
+                }
+                else
+                {
                     RBProbaronEquipo.SelectedValue = "0";
                     TxMotivoNoProbaronEquipo.Visible = true;
                 }
 
 
-            //SECCION EQUIPO DE COMUNICACION
+                //SECCION EQUIPO DE COMUNICACION
                 DataTable vDatos4 = new DataTable();
                 vDatos4 = (DataTable)Session["AG_LvPA_DATOS_EQUIPO_COMUNICACION"];
 
-                string RblClimatizacionAdecuadaRespuesta= vDatos4.Rows[0]["climatizacionAdecuada"].ToString();
+                string RblClimatizacionAdecuadaRespuesta = vDatos4.Rows[0]["climatizacionAdecuada"].ToString();
                 String vDocumentoClimatizacion = vDatos4.Rows[0]["fotoClimatizacionAdecuada"].ToString();
                 string srcClimatizacion = "data:image;base64," + vDocumentoClimatizacion;
                 ImgPreviewClimatizacion.Src = srcClimatizacion;
@@ -309,7 +323,7 @@ namespace Infatlan_STEI_Agencias.pages
 
                 string RblRoboDañoRespuesta = vDatos5.Rows[0]["expuestoRoboDaño"].ToString();
                 String vDocumentoRoboDaño = vDatos5.Rows[0]["fotoExpuestoRoboDaño"].ToString();
-                string srcRoboDaño= "data:image;base64," + vDocumentoRoboDaño;
+                string srcRoboDaño = "data:image;base64," + vDocumentoRoboDaño;
                 ImgPreviewRoboDaño.Src = srcRoboDaño;
 
                 if (RblRoboDañoRespuesta.Equals("True"))
@@ -346,7 +360,7 @@ namespace Infatlan_STEI_Agencias.pages
                 vDatos6 = (DataTable)Session["AG_LvPA_DATOS_IMAGENES_OBLIGATORIAS"];
 
                 String vDocumentoRack = vDatos6.Rows[0]["fotoRackComunicacion"].ToString();
-                string srcRack= "data:image;base64," + vDocumentoRack;
+                string srcRack = "data:image;base64," + vDocumentoRack;
                 ImgPreviewRack.Src = srcRack;
                 //ImgPreviewRack.Visible = true;
 
@@ -366,16 +380,16 @@ namespace Infatlan_STEI_Agencias.pages
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
-        
+
         //private void validacionesAprobarLV()
         //{
-            //if (RblAprobarLV.SelectedValue.Equals(""))
-            //    throw new Exception("Falta completar opción ¿Desea aprobar LV?.");
+        //if (RblAprobarLV.SelectedValue.Equals(""))
+        //    throw new Exception("Falta completar opción ¿Desea aprobar LV?.");
 
-            //if (RblAprobarLV.SelectedValue.Equals("0") && (TxMotivoCancelacionLV.Text == "" || TxMotivoCancelacionLV.Text == string.Empty))
-            //    throw new Exception("Falta que ingrese el motivo de cancelacion de la lista de verificación");
+        //if (RblAprobarLV.SelectedValue.Equals("0") && (TxMotivoCancelacionLV.Text == "" || TxMotivoCancelacionLV.Text == string.Empty))
+        //    throw new Exception("Falta que ingrese el motivo de cancelacion de la lista de verificación");
         //}
-        
+
         protected void BtnEnviarAprobacion_Click(object sender, EventArgs e)
         {
             try
@@ -388,23 +402,27 @@ namespace Infatlan_STEI_Agencias.pages
                 TxResponsableModal.Text = TxNombreTecnicoResponsable.Text;
                 //TxMotivoRegreso.Text = TxMotivoCancelacionLV.Text;
 
-                if (Titulo.Text == "Regresar LV") {
+                if (Titulo.Text == "Regresar LV")
+                {
                     DivMotivo.Visible = true;
-                   
-                } else {
-                    DivMotivo.Visible = false;
-                    
+
                 }
-             
+                else
+                {
+                    DivMotivo.Visible = false;
+
+                }
+
                 UpTituloAprobar.Update();
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModalAprobacionLv();", true);
 
             }
-            catch (Exception ex){
-                    Mensaje(ex.Message, WarningType.Danger);
+            catch (Exception ex)
+            {
+                Mensaje(ex.Message, WarningType.Danger);
             }
         }
-        
+
         //protected void RblAprobarLV_SelectedIndexChanged(object sender, EventArgs e)
         //{
         //    if (RblAprobarLV.SelectedValue.Equals("1"))
@@ -422,7 +440,7 @@ namespace Infatlan_STEI_Agencias.pages
         //        TxMotivoCancelacionLV.Text = String.Empty;
         //    }
         //}
-        
+
         //private void LimpiarAprobarLV()
         //{
         //    RblAprobarLV.SelectedIndex = -1;
@@ -470,7 +488,7 @@ namespace Infatlan_STEI_Agencias.pages
                 vService.EnviarMensaje(
                               vCorreoAlerta,
                               typeBody.Alertas,
-                               "<b>Buen día.<br> Se le notifica que Agencia (" + TxLugar.Text + ")<b> NO cuenta con una serie de protecciones que debe ser analizada, datos proporcionados por el técnico responsable: " + TxNombreTecnicoResponsable.Text + " al completar la lista de verificación del mantenimiento preventivo programado realizado el día: " + DateTime.Now.ToString(Formato) + "<br><b>Alertas detectadas en mantenimiento:<br>" + Alerta+ "<br> Favor tomar nota de la alerta para evitar inconvenientes futuros.",
+                               "<b>Buen día.<br> Se le notifica que Agencia (" + TxLugar.Text + ")<b> NO cuenta con una serie de protecciones que debe ser analizada, datos proporcionados por el técnico responsable: " + TxNombreTecnicoResponsable.Text + " al completar la lista de verificación del mantenimiento preventivo programado realizado el día: " + DateTime.Now.ToString(Formato) + "<br><b>Alertas detectadas en mantenimiento:<br>" + Alerta + "<br> Favor tomar nota de la alerta para evitar inconvenientes futuros.",
                               "OBSERVACIONES A MANTENIMINETO DE AGENCIAS",
                               "Observaciones realizadas por el técnico responsable:<br>" + TxObservacionesGenerales.Text
                               );
@@ -482,10 +500,10 @@ namespace Infatlan_STEI_Agencias.pages
             String vQuery1 = "STEISP_AGENCIA_CompletarListaVerificacion 12,'" + TxCodigoAgencia.Text + "','" + DDLTipoAgencia.SelectedValue + "','" + TxtTelefono.Text + "','" + txtDireccion.Text + "','" + TxLatitud.Text + "','" + TxLongitud.Text + "'";
             Int32 vInformacion1 = vConexion.ejecutarSql(vQuery1);
         }
-        
+
         protected void btnModalAprobarLV_Click(object sender, EventArgs e)
         {
-            
+
             try
             {
                 if (Titulo.Text == "Regresar LV")
@@ -495,9 +513,12 @@ namespace Infatlan_STEI_Agencias.pages
                         ",'" + TxMotivoRegreso.Text + "'";
                     Int32 vInformacion1 = vConexion.ejecutarSql(vQuery1);
 
-                    if (vInformacion1 == 1){
+                    if (vInformacion1 == 1)
+                    {
                         Mensaje("Lista de verificación regresada con exito.", WarningType.Success);
-                    }else {
+                    }
+                    else
+                    {
                         Mensaje("Favor contactarse con el administrador, lista de verificación no se regreso exitosamente.", WarningType.Danger);
                     }
                 }
@@ -507,12 +528,15 @@ namespace Infatlan_STEI_Agencias.pages
                          "," + Session["USUARIO"];
                     Int32 vInformacion2 = vConexion.ejecutarSql(vQuery2);
 
-                    if (vInformacion2 == 1){
+                    if (vInformacion2 == 1)
+                    {
                         CorreoSuscripcion();
                         EnviarCorreoAprobar();
                         CorreoAlerta();
                         Mensaje("Lista de verificación aprobada con exito.", WarningType.Success);
-                    } else{
+                    }
+                    else
+                    {
                         Mensaje("Favor contactarse con el administrador, lista de verificación no se pudo aprobar con exito.", WarningType.Danger);
                     }
                 }
@@ -523,18 +547,19 @@ namespace Infatlan_STEI_Agencias.pages
             }
             //LimpiarAprobarLV();
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModalAprobarRegresarLv();", true);
-            Response.Redirect("/sites/agencias/pages/mantenimiento/lvPendientesAprobarJefes.aspx");          
+            Response.Redirect("/sites/agencias/pages/mantenimiento/lvPendientesAprobarJefes.aspx");
         }
-        
-        protected void BtnRegresarPendienteAprobar_Click(object sender, EventArgs e){
+
+        protected void BtnRegresarPendienteAprobar_Click(object sender, EventArgs e)
+        {
             //LimpiarAprobarLV();
             Response.Redirect("/sites/agencias/pages/mantenimiento/lvPendientesModificar.aspx");
         }
-        
+
         //**********************************************************************************************************************//
         //*******************************************  ENVIO LISTA DE VERIFICACION  ********************************************//
         //*********************************************************************************************************************//
-        
+
         private void cargarDataLlenado()
         {
             try
@@ -558,12 +583,15 @@ namespace Infatlan_STEI_Agencias.pages
                 DataTable vDatosTecnicosParticipantes = (DataTable)Session["AG_LvPC_TECNICOS_PARTICIPANTES"];
                 GVTecnicosParticipantes.DataSource = vDatosTecnicosParticipantes;
 
-                if (vDatosTecnicosParticipantes.Rows.Count > 0){
+                if (vDatosTecnicosParticipantes.Rows.Count > 0)
+                {
                     GVTecnicosParticipantes.DataBind();
                     UPTecnicosParticipantes.Update();
                     DivTecnicosParticipantes.Visible = true;
                     DivAlertaTecnicosParticipantes.Visible = false;
-                } else{
+                }
+                else
+                {
                     DivTecnicosParticipantes.Visible = true;
                     DivAlertaTecnicosParticipantes.Visible = true;
                 }
@@ -574,14 +602,14 @@ namespace Infatlan_STEI_Agencias.pages
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
-        
+
         //void OcultarTarjeta()
         //{
         //    //DivAprobacion.Visible = false;
         //    //ocultarBotonVolver1.Visible = true;
         //    UpdatePanel5.Update();
         //}
-        
+
         void mostrarAsteriscos()
         {
             lbHoraSalida.Visible = true;
@@ -677,26 +705,26 @@ namespace Infatlan_STEI_Agencias.pages
                 TxMotivoNoProbaronEquipo.Visible = false;
                 //lbAsteriscoProbaronEquipo.Visible = false;
                 //UpNoProbaronEquipo.Update();
-            
+
             }
             else
             {
-              //LbMotivoNoProbaronEquipo.Visible = true;
+                //LbMotivoNoProbaronEquipo.Visible = true;
                 TxMotivoNoProbaronEquipo.Visible = true;
                 //lbAsteriscoProbaronEquipo.Visible = true;
                 UpNoProbaronEquipo.Update();
-      
+
             }
 
         }
-        
-        
+
+
         protected void BtnEnviarLv_Click(object sender, EventArgs e)
-        {          
+        {
             try
             {
                 String vEx = Request.QueryString["ex"];
-               
+
                 validacionesEnvioLV();
                 TxFechaModalEnviarLV.Text = TxFechaMant.Text;
                 TxLugarModalEnviarLV.Text = TxCodigoAgencia.Text + " - " + TxLugar.Text;
@@ -706,20 +734,21 @@ namespace Infatlan_STEI_Agencias.pages
 
                 if (vEx.Equals("3"))
 
-                    
+
                 {
                     TxIdMantenimientoModalEnviarLV.Text = Session["AG_LvPM_ID_MANTENIMIENTO_LV_MODIFICAR"].ToString();
                     TituloModalEnviarLV.Text = "Enviar " + TxLugar.Text;
                 }
-                else{
+                else
+                {
                     TxIdMantenimientoModalEnviarLV.Text = Session["AG_LvPC_ID_MANTENIMIENTO_LV_COMPLETAR"].ToString();
                     TituloModalEnviarLV.Text = "Enviar " + TxLugar.Text;
                 }
-                   
+
 
 
                 UpdatePanel3.Update();
-               
+
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModalEnvioLv();", true);
             }
             catch (Exception ex)
@@ -730,7 +759,7 @@ namespace Infatlan_STEI_Agencias.pages
                 //UpdateModal.Update();
             }
         }
-        
+
         private string GetExtension(string Extension)
         {
             switch (Extension)
@@ -777,10 +806,10 @@ namespace Infatlan_STEI_Agencias.pages
                     return "application/octet-stream";
             }
         }
-        
+
         private void validacionesEnvioLV()
         {
-          
+
 
             if (TxHoraSalidaINFA.Text == "" || TxHoraSalidaINFA.Text == string.Empty)
                 throw new Exception("Falta completar el campo hora Salida de Infatlan.");
@@ -814,14 +843,14 @@ namespace Infatlan_STEI_Agencias.pages
 
             if (TxCantImpresoraFinanciera.Text == "" || TxCantImpresoraFinanciera.Text == string.Empty)
                 throw new Exception("Falta completar el campo (Cant Impresoras Financieras).");
-            
+
             if (TxCantEscaner.Text == "" || TxCantEscaner.Text == string.Empty)
                 throw new Exception("Falta completar el campo (Cant Escaner Fenix).");
 
             if (TxCantDatacard.Text == "" || TxCantDatacard.Text == string.Empty)
                 throw new Exception("Falta completar el campo (Cant Datacards).");
 
-           
+
             if (RBProbaronEquipo.SelectedValue.Equals(""))
                 throw new Exception("Falta completar opción (¿Se probaron todos los equipos?).");
 
@@ -836,7 +865,7 @@ namespace Infatlan_STEI_Agencias.pages
 
             if (RbPolvoSuciedad.SelectedValue.Equals(""))
                 throw new Exception("Falta completar opción (¿El equipo de comunicaciones esta expuesto a polvo o suciedad?).");
-            
+
             if (RblHumedadSustancias.SelectedValue.Equals(""))
                 throw new Exception("Falta completar opción (¿Se observan rastros de humedad u otras substancias en las paredes o piso?).");
 
@@ -845,33 +874,33 @@ namespace Infatlan_STEI_Agencias.pages
 
             if (RblElementosAjenos.SelectedValue.Equals(""))
                 throw new Exception("Falta completar opción (¿Se encuentran elementos ajenos a los equipos de comunicación en el cuarto de comunicaciones? (Ejemplo: sillas, papeles, basura, electrodomesticos, etc)?).");
-          
-           
 
-            if (RblClimatizacionAdecuada.SelectedValue.Equals("1") && TxClimatizacion1.Value== string.Empty)
+
+
+            if (RblClimatizacionAdecuada.SelectedValue.Equals("1") && TxClimatizacion1.Value == string.Empty)
                 throw new Exception("Falta que adjunte imagen del equipo de comunicación cuenta con una climatización adecuada.");
-            
-            if (RblUPS.SelectedValue.Equals("1") && TxUPS1.Value== string.Empty)
+
+            if (RblUPS.SelectedValue.Equals("1") && TxUPS1.Value == string.Empty)
                 throw new Exception("Falta que adjunte imagen del equipo de comunicación cuenta con protección de energía eléctrica (UPS).");
 
-            if (TxRack1.Value== string.Empty)
+            if (TxRack1.Value == string.Empty)
                 throw new Exception("Falta que adjunte imagen del Rack de comunicaciones.");
 
-            if (RbPolvoSuciedad.SelectedValue.Equals("1") && TxPolvoSuciedad1.Value== string.Empty)
+            if (RbPolvoSuciedad.SelectedValue.Equals("1") && TxPolvoSuciedad1.Value == string.Empty)
                 throw new Exception("Falta que adjunte imagen que el equipo de comunicaciones esta expuesto a polvo o suciedad.");
-         
-            if (RblHumedadSustancias.SelectedValue.Equals("1") && TxHumedadSustancias1.Value== string.Empty)
+
+            if (RblHumedadSustancias.SelectedValue.Equals("1") && TxHumedadSustancias1.Value == string.Empty)
                 throw new Exception("Falta que adjunte imagen de los rastros de humedad u otras substancias en las paredes o piso que observo.");
-            
-            if (RblRoboDaño.SelectedValue.Equals("1") && TxRoboDaño1.Value== string.Empty)
+
+            if (RblRoboDaño.SelectedValue.Equals("1") && TxRoboDaño1.Value == string.Empty)
                 throw new Exception("Falta que adjunte imagen del equipo de comunicaciones esta expuesto a robos o daño.");
-        
-            if (RblElementosAjenos.SelectedValue.Equals("1") && TxElementosAjenos1.Value== string.Empty)
+
+            if (RblElementosAjenos.SelectedValue.Equals("1") && TxElementosAjenos1.Value == string.Empty)
                 throw new Exception("Falta que adjunte imagen de los elementos ajenos que encontro en el cuarto de comunicaciones? (Ejemplo: sillas, papeles, basura, electrodomesticos, etc).");
-     
+
             if (TxEspacioFisico1.Value == string.Empty)
-                throw new Exception("Falta que adjunte imagen del espacio fisico en donde se encuentra el equipo de comunicaciones (Entorno).");   
-            if(TxResNoManEquipoComu1.Value==string.Empty)
+                throw new Exception("Falta que adjunte imagen del espacio fisico en donde se encuentra el equipo de comunicaciones (Entorno).");
+            if (TxResNoManEquipoComu1.Value == string.Empty)
                 throw new Exception("Favor subir imagen de mantenimiento de equipo");
             if (TxClimatizacion1.Value == string.Empty)
                 throw new Exception("Favor subir imagen de climatización");
@@ -1066,7 +1095,7 @@ namespace Infatlan_STEI_Agencias.pages
                 String vQueryEs = "STEISP_AGENCIA_ModificarListaVerificacion 12," + vIDMantenimiento +
                                             ",'" + vEspacio +
                                             "','" + vExtEntorno + "'";
-                 vConexion.ejecutarSql(vQueryEs);
+                vConexion.ejecutarSql(vQueryEs);
             }
             if (vManteEquipo != "")
             {
@@ -1081,7 +1110,7 @@ namespace Infatlan_STEI_Agencias.pages
             if (vUPS != "")
             {
                 String vQueryUPS = "[STEISP_AGENCIA_ModificarListaVerificacion] 15, '" + vIDMantenimiento + "','" + RblUPS.SelectedValue + "','" + vExtUPS + "','" + vUPS + "'";
-                 vConexion.ejecutarSql(vQueryUPS);
+                vConexion.ejecutarSql(vQueryUPS);
             }
             if (vPolvoSuciedad != "")
             {
@@ -1375,7 +1404,7 @@ namespace Infatlan_STEI_Agencias.pages
                 vHumedadSustancias = Convert.ToBase64String(imageData);
             }
 
-           
+
             //////////////////////////////////////////////////////////////////////////////
             //IMAGENES5
             String vRoboDaño = String.Empty;
@@ -2321,33 +2350,33 @@ namespace Infatlan_STEI_Agencias.pages
             {
                 foreach (DataRow item in vDatos.Rows)
                 {
-                    
-                        //ENVIAR A JEFE
-                        if (!item["correo"].ToString().Trim().Equals(""))
-                        {
-                            vService.EnviarMensaje(item["correo"].ToString(),
+
+                    //ENVIAR A JEFE
+                    if (!item["correo"].ToString().Trim().Equals(""))
+                    {
+                        vService.EnviarMensaje(item["correo"].ToString(),
+                        typeBody.EnvioCorreo,
+                        "Verificación de Mantenimiento Agencia",
+                        "Buen día, se le notifica que se creó verificación de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["Nombre"].ToString() + ", mantenimiento a Agencia " + TxLugarModalEnviarLV.Text,
+                        "El usuario <b>" + item["Nombre"].ToString() + "</b> creó: <br> Verificación de Mantenimiento",
+                        "",
+                        "/sites/agencias/pages/mantenimiento/lvPendientesAprobarJefes.aspx"
+                        );
+
+                        //vFlagEnvioSupervisor = true;
+                    }
+                    //ENVIAR A EDWIN
+                    //string vNombre = "EDWIN ALBERTO URREA PENA";
+                    vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIMail"],
                             typeBody.EnvioCorreo,
                             "Verificación de Mantenimiento Agencia",
                             "Buen día, se le notifica que se creó verificación de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["Nombre"].ToString() + ", mantenimiento a Agencia " + TxLugarModalEnviarLV.Text,
-                            "El usuario <b>" + item["Nombre"].ToString() + "</b> creó: <br> Verificación de Mantenimiento",
-                            "",
-                            "/sites/agencias/pages/mantenimiento/lvPendientesAprobarJefes.aspx"
+                              "El usuario <b>" + item["Nombre"].ToString() + "</b> creó: <br> Verificación de Mantenimiento",
+                               vCorreoEncargadoZona,
+                               "/sites/agencias/pages/mantenimiento/lvPendientesAprobarJefes.aspx"
                             );
 
-                            //vFlagEnvioSupervisor = true;
-                        }
-                        //ENVIAR A EDWIN
-                        //string vNombre = "EDWIN ALBERTO URREA PENA";
-                        vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIMail"],
-                                typeBody.EnvioCorreo,
-                                "Verificación de Mantenimiento Agencia",
-                                "Buen día, se le notifica que se creó verificación de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["Nombre"].ToString() + ", mantenimiento a Agencia " + TxLugarModalEnviarLV.Text,
-                                  "El usuario <b>" + item["Nombre"].ToString() + "</b> creó: <br> Verificación de Mantenimiento",
-                                   vCorreoEncargadoZona,
-                                   "/sites/agencias/pages/mantenimiento/lvPendientesAprobarJefes.aspx"
-                                );
 
-                    
 
                 }
             }
@@ -2549,15 +2578,15 @@ namespace Infatlan_STEI_Agencias.pages
                 {
                     //if (Session["USUARIO"].ToString() == "eurrea" || Session["USUARIO"].ToString() == "emontoya" || Session["USUARIO"].ToString() == "jdgarcia" || Session["USUARIO"].ToString() == "acalderon")
                     //{
-                        vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIMail"],
-                           typeBody.EnvioCorreo,
-                           "Verificación de Mantenimiento Agencia",
-                           "Buen día, se le notifica que se devolvió verificación de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["Nombre"].ToString() + ", mantenimiento a Agencia " + TxLugar.Text,
-                             "El usuario <b>" + item["Nombre"].ToString() + "</b> devolvió: <br> Verificación de Mantenimiento<br>Motivo: "+TxtMotivoDevolver.Text,
-                              vCorreoEncargadoZona,
-                              "/sites/agencias/pages/mantenimiento/lvPendientesAprobarJefes.aspx"
-                           );
-                   
+                    vService.EnviarMensaje(ConfigurationManager.AppSettings["STEIMail"],
+                       typeBody.EnvioCorreo,
+                       "Verificación de Mantenimiento Agencia",
+                       "Buen día, se le notifica que se devolvió verificación de mantenimiento, el encargado es " + vDatosTecnicoResponsable.Rows[0]["Nombre"].ToString() + ", mantenimiento a Agencia " + TxLugar.Text,
+                         "El usuario <b>" + item["Nombre"].ToString() + "</b> devolvió: <br> Verificación de Mantenimiento<br>Motivo: " + TxtMotivoDevolver.Text,
+                          vCorreoEncargadoZona,
+                          "/sites/agencias/pages/mantenimiento/lvPendientesAprobarJefes.aspx"
+                       );
+
 
                 }
             }
@@ -2709,13 +2738,15 @@ namespace Infatlan_STEI_Agencias.pages
         protected void btnModalEnviarLv_Click(object sender, EventArgs e)
         {
             String vEx = Request.QueryString["ex"];
-            try {
+            try
+            {
                 if (vEx.Equals("1"))
                 {
                     //INSERTAR ID DEL MANTENIMIENTO EN LA TABLA DE PREGUNTAS
                     String vQuery1 = "STEISP_AGENCIA_CompletarListaVerificacion 5," + Session["AG_LvPC_ID_MANTENIMIENTO_LV_COMPLETAR"];
                     Int32 vInformacion1 = vConexion.ejecutarSql(vQuery1);
-                    if(vInformacion1 > 0){
+                    if (vInformacion1 > 0)
+                    {
                         //Insertar "DATOS TECNICOS" en la tabla de preguntas
                         String vQuery3 = "STEISP_AGENCIA_CompletarListaVerificacion 7," + Session["AG_LvPC_ID_MANTENIMIENTO_LV_COMPLETAR"] +
                                                         "," + RBProbaronEquipo.SelectedValue +
@@ -2744,10 +2775,10 @@ namespace Infatlan_STEI_Agencias.pages
                                                 "," + TxCantImpresoraFinanciera.Text +
                                                 "," + TxCantDatacard.Text +
                                                 "," + TxCantEscaner.Text +
-                                                ",'"+ TxObservacionesGenerales.Text + "'";
+                                                ",'" + TxObservacionesGenerales.Text + "'";
                     Int32 vInformacion1 = vConexion.ejecutarSql(vQuery1);
 
-                   
+
 
                     //ACTUALIZAR TARJETA PRUEBAS
                     //Insertar "DATOS PRUEBAS" en la tabla de preguntas
@@ -2756,7 +2787,7 @@ namespace Infatlan_STEI_Agencias.pages
                                                     ",'" + TxMotivoNoProbaronEquipo.Text + "'";
                     Int32 vInformacion3 = vConexion.ejecutarSql(vQuery3);
 
-                    
+
                     ////DATOS GENERALES
                     String vQuery12 = "STEISP_AGENCIA_ModificarListaVerificacion 13,'" + Session["AG_LvPM_ID_MANTENIMIENTO_LV_MODIFICAR"] +
                                                "','" + TxHoraInicioMant.Text +
@@ -2775,9 +2806,9 @@ namespace Infatlan_STEI_Agencias.pages
             catch (Exception ex)
             {
                 Mensaje(ex.Message, WarningType.Danger);
-            }           
-        }     
-        
+            }
+        }
+
         private void limpiar()
         {
 
@@ -2800,7 +2831,7 @@ namespace Infatlan_STEI_Agencias.pages
             TxCantDatacard.Text = String.Empty;
 
 
-            
+
             TxMotivoNoMantEquipoComu.Text = String.Empty;
 
             RBProbaronEquipo.SelectedIndex = -1;
@@ -2837,7 +2868,7 @@ namespace Infatlan_STEI_Agencias.pages
             TxEspacioFisico1.Value = String.Empty;
 
         }
-        
+
         //protected void BtnRegresarCompletarLV_Click(object sender, EventArgs e)
         //{
         //    try
@@ -2874,7 +2905,7 @@ namespace Infatlan_STEI_Agencias.pages
                 String vQueryProbar = "[STEISP_AGENCIA_ModificarListaVerificacion] 21," + Session["AG_LvPM_ID_MANTENIMIENTO_LV_MODIFICAR"];
                 DataTable vDatosProbar = vConexion.obtenerDataTable(vQueryProbar);
                 //RBProbaronEquipo.SelectedValue= vDatosProbar.Rows[0]["proboTodoEquipo"].ToString();
-                TxMotivoNoProbaronEquipo.Text= vDatosProbar.Rows[0]["motivoNoProboTodoEquipo"].ToString();
+                TxMotivoNoProbaronEquipo.Text = vDatosProbar.Rows[0]["motivoNoProboTodoEquipo"].ToString();
 
                 if (vDatosProbar.Rows[0]["proboTodoEquipo"].ToString().Equals("True"))
                 {
@@ -2929,13 +2960,14 @@ namespace Infatlan_STEI_Agencias.pages
                 TxResNoManEquipoComu1.Value = "si";
                 if (RBLManEquipoComuRespuesta.Equals("True"))
                 {
-                    
+
                     //ImgPreviewNoMantEquipoComu.Visible = true;
                     //TxResNoManEquipoComu.Text = "si";
                     TxResNoManEquipoComu1.Value = "si";
                 }
-                else{
-                    
+                else
+                {
+
                     //ImgPreviewNoMantEquipoComu.Visible = false;
                     TxMotivoNoMantEquipoComu.Visible = true;
                 }
@@ -3038,7 +3070,7 @@ namespace Infatlan_STEI_Agencias.pages
                     RblHumedadSustancias.SelectedValue = "1";
                     //ImgPreviewHumedadSustancias.Visible = true;
                     //TxHumedadSustancias.Text = "si";
-                    TxHumedadSustancias1.Value= "si";
+                    TxHumedadSustancias1.Value = "si";
                 }
                 else
                 {
@@ -3117,8 +3149,9 @@ namespace Infatlan_STEI_Agencias.pages
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
-        
-        void habilitarFU() {
+
+        void habilitarFU()
+        {
             FuClimatizacion.Visible = true;
             FuUPS.Visible = true;
             FuPolvoSuciedad.Visible = true;
@@ -3131,7 +3164,7 @@ namespace Infatlan_STEI_Agencias.pages
         {
             DIVAlerta.Visible = false;
             TxIdMantDevolver.Text = Session["AG_LvPC_ID_MANTENIMIENTO_LV_APROBAR_JEFE"].ToString();
-            LbTituloDevolver.Text = "Devolver "+TxLugar.Text;
+            LbTituloDevolver.Text = "Devolver " + TxLugar.Text;
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModalDevolverLv();", true);
         }
 
@@ -3150,12 +3183,12 @@ namespace Infatlan_STEI_Agencias.pages
                 if (Titulo.Text == "Regresar LV")
                 {
                     DivMotivo.Visible = true;
-                   
+
                 }
                 else
                 {
                     DivMotivo.Visible = false;
-                   
+
                 }
 
                 UpTituloAprobar.Update();
@@ -3172,7 +3205,8 @@ namespace Infatlan_STEI_Agencias.pages
         {
             if (TxtMotivoDevolver.Text == "")
                 DIVAlerta.Visible = true;
-            else {
+            else
+            {
                 DIVAlerta.Visible = false;
                 String vQuery1 = "STEISP_AGENCIA_AprobarLvJefesSuplentes 11," + Session["AG_LvPC_ID_MANTENIMIENTO_LV_APROBAR_JEFE"] +
                             "," + Session["USUARIO"] +

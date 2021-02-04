@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Infatlan_STEI_ATM.clases;
+using System;
+using System.Data;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.Sql;
-using System.Data.SqlClient;
-using Infatlan_STEI_ATM.clases;
 
 namespace Infatlan_STEI_ATM.pages.ATM
 {
@@ -15,15 +11,20 @@ namespace Infatlan_STEI_ATM.pages.ATM
     {
         bd vConexion = new bd();
         Security vSecurity = new Security();
-        protected void Page_Load(object sender, EventArgs e){
+        protected void Page_Load(object sender, EventArgs e)
+        {
             Session["SO_ATM"] = null;
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
+            if (!Page.IsPostBack)
+            {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
                     if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Creacion)
                         btnnewsoATM.Visible = true;
 
                     cargarData();
-                }else {
+                }
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
             }
@@ -43,8 +44,10 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     vDatos = vConexion.ObtenerTabla("STEISP_ATM_Generales 9, 1");
                     GVBusqueda.DataSource = vDatos;
                     GVBusqueda.DataBind();
-                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Edicion){
-                        foreach (GridViewRow item in GVBusqueda.Rows){
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Edicion)
+                    {
+                        foreach (GridViewRow item in GVBusqueda.Rows)
+                        {
                             LinkButton LbEdit = item.FindControl("BtnEditar") as LinkButton;
                             LbEdit.Visible = true;
                         }
@@ -63,7 +66,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
 
         protected void btnnewsoATM_Click(object sender, EventArgs e)
         {
-           
+
             txtAlerta1.Visible = false;
             txtAlerta2.Visible = false;
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal2();", true);
@@ -77,7 +80,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
             }
             else
             {
-             
+
                 try
                 {
                     string vQuery = "STEISP_ATMAdminComponentesATM 18, '" + Session["codsoATM"] + "','" + txtModalNewSOATM.Text + "', '" + Session["USUARIO"].ToString() + "'";
@@ -93,7 +96,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     }
                     else
                     {
-                       txtAlerta1.Text="No se pudo modificar el sistema operativo";
+                        txtAlerta1.Text = "No se pudo modificar el sistema operativo";
                         txtAlerta1.Visible = true;
                     }
                 }
@@ -111,7 +114,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
 
         protected void GVBusqueda_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-           
+
             txtAlerta1.Visible = false;
             txtAlerta2.Visible = false;
             DataTable vDataa = (DataTable)Session["soATM"];
@@ -120,8 +123,8 @@ namespace Infatlan_STEI_ATM.pages.ATM
 
             if (e.CommandName == "Codigo")
             {
-                
-                
+
+
                 try
                 {
                     DataTable vDatos = new DataTable();
@@ -147,7 +150,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
 
         protected void btnModalNueviSOATM_Click(object sender, EventArgs e)
         {
-           
+
             if (txtNewSOATM.Text == "" || txtNewSOATM.Text == string.Empty)
             {
                 txtAlerta2.Visible = true;
@@ -170,7 +173,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     }
                     else
                     {
-                       txtAlerta2.Text="No se pudo crear el sistema operativo";
+                        txtAlerta2.Text = "No se pudo crear el sistema operativo";
                         txtAlerta2.Visible = true;
                     }
                 }

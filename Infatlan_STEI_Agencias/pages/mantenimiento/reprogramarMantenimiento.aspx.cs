@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Infatlan_STEI_Agencias.classes;
+using System;
+using System.Configuration;
+using System.Data;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.IO;
-using System.Data;
-using System.Configuration;
-using Infatlan_STEI_Agencias.classes;
 namespace Infatlan_STEI_Agencias.pages
 {
     public partial class reprogramarMantenimiento : System.Web.UI.Page
@@ -18,16 +14,21 @@ namespace Infatlan_STEI_Agencias.pages
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
 
-        protected void Page_Load(object sender, EventArgs e){
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!Page.IsPostBack)
+            {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
                     cargarDatos();
-                }else {
+                }
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
             }
         }
-        
+
         private void cargarDatos()
         {
             try
@@ -46,7 +47,7 @@ namespace Infatlan_STEI_Agencias.pages
         }
 
         private void validaciones()
-        {         
+        {
             if (TxNuevaFecha.Text.Equals(""))
                 throw new Exception("Favor ingresar la nueva fecha del  mantenimiento preventivo de agencias.");
         }
@@ -127,7 +128,7 @@ namespace Infatlan_STEI_Agencias.pages
 
                 }
             }
-            
+
 
         }
 
@@ -149,10 +150,10 @@ namespace Infatlan_STEI_Agencias.pages
                     TxLugar.Text = item["Lugar1"].ToString();
                     TxFecha.Text = item["fecha"].ToString();
                     TxArea.Text = item["Area"].ToString();
-                    TxMotivo.Text= item["motivoCancelacion"].ToString();
+                    TxMotivo.Text = item["motivoCancelacion"].ToString();
                     TxDetalle.Text = item["detalleCancelación"].ToString();
 
-                    TituloModalReprogramar.Text= item["Lugar1"].ToString();
+                    TituloModalReprogramar.Text = item["Lugar1"].ToString();
 
                 }
 
@@ -180,7 +181,7 @@ namespace Infatlan_STEI_Agencias.pages
                 String vFechaMant = Convert.ToDateTime(TxNuevaFecha.Text).ToString(vFormato);
 
                 EnviarCorreo();
-                String vQuery = "STEISP_AGENCIA_ReprogramarMantenimiento  3," + Session["AG_RM_ID_MANTENIMIENTO"] + ",'" + Session["USUARIO"] + "','" + vFechaMant+"'";
+                String vQuery = "STEISP_AGENCIA_ReprogramarMantenimiento  3," + Session["AG_RM_ID_MANTENIMIENTO"] + ",'" + Session["USUARIO"] + "','" + vFechaMant + "'";
                 Int32 vInfo = vConexion.ejecutarSql(vQuery);
                 if (vInfo == 1)
                 {
@@ -190,7 +191,7 @@ namespace Infatlan_STEI_Agencias.pages
                     {
                         Mensaje("Mantenimiento reprogramado con exito.", WarningType.Success);
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModalReprogramarMantenimiento();", true);
-                    }      
+                    }
                 }
                 LimpiarModalReprogramarMantenimiento();
                 cargarDatos();

@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Infatlan_STEI_ATM.clases;
+using System;
+using System.Data;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Configuration;
-using System.Data.Sql;
-using System.Data.SqlClient;
-using Infatlan_STEI_ATM.clases;
 
 namespace Infatlan_STEI_ATM.pages.mantenimiento
 {
-   
+
     public partial class cancelarMantenimiento : System.Web.UI.Page
     {
         bd vConexion = new bd();
@@ -80,8 +75,8 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                         {
                             Session["ID_MANT_CANCELAR"] = item["ID"].ToString();
                             LBTitleModal.InnerText = "¿Desea cancelar mantenimiento No. " + item["ID"].ToString() + "?";
-                            LbATM.Text = item["Codigo"].ToString()+" - "+ item["Nombre"].ToString();
-                            
+                            LbATM.Text = item["Codigo"].ToString() + " - " + item["Nombre"].ToString();
+
                         }
                         txtAlerta.Visible = false;
                         txtMotivo.Text = string.Empty;
@@ -173,7 +168,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 txtAlerta.Visible = false;
                 try
                 {
-                    string vQuery = "STEISP_ATM_CancelarMantenimiento 3,'"+txtMotivo.Text+"','"+ Session["USUARIO"] + "', '" + Session["ID_MANT_CANCELAR"] + "'";
+                    string vQuery = "STEISP_ATM_CancelarMantenimiento 3,'" + txtMotivo.Text + "','" + Session["USUARIO"] + "', '" + Session["ID_MANT_CANCELAR"] + "'";
                     Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                     if (vInfo == 1)
                     {
@@ -280,7 +275,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                             H1VerMotivo.InnerText = "Mantenimiento cancelado No. " + item["ID"].ToString();
                             LbATMCancelado.Text = item["Codigo"].ToString() + " - " + item["Nombre"].ToString();
                             txtMotivoCancelado.Text = item["Motivo"].ToString();
-                        }                    
+                        }
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openVerMotivo();", true);
                         //Response.Redirect("aprobarNotificacionATM.aspx");
                     }

@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Infatlan_STEI_Agencias.classes;
+using System;
+using System.Data;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Infatlan_STEI_Agencias.classes;
-using System.Data;
 
 namespace Infatlan_STEI_Agencias.pages.configuraciones
 {
@@ -41,7 +39,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 vDatos = vConexion.obtenerDataTable("STEISP_AGENCIA_Generales 8");
                 GVMantenimientos.DataSource = vDatos;
                 GVMantenimientos.DataBind();
-       
+
                 Session["AG_CAMBIAR_FECHA"] = vDatos;
             }
             catch (Exception Ex)

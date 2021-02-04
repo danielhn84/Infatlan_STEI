@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Infatlan_STEI_ATM.clases;
+using System;
+using System.Data;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.SqlClient;
-using System.Data.Sql;
-using Infatlan_STEI_ATM.clases;
 
 namespace Infatlan_STEI_ATM.pages.ATM
 {
@@ -16,15 +12,20 @@ namespace Infatlan_STEI_ATM.pages.ATM
         bd vConexion = new bd();
         bd vConexionATM = new bd();
         Security vSecurity = new Security();
-        protected void Page_Load(object sender, EventArgs e){
+        protected void Page_Load(object sender, EventArgs e)
+        {
             Session["PROCESADOR_ATM"] = null;
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
+            if (!Page.IsPostBack)
+            {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
                     if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Creacion)
                         btnguardarProcesadorATM.Visible = true;
 
                     cargarData();
-                }else {
+                }
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
             }
@@ -43,8 +44,10 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     vDatos = vConexionATM.ObtenerTablaATM("SPSTEI_ATM 6");
                     GVBusqueda.DataSource = vDatos;
                     GVBusqueda.DataBind();
-                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Edicion){
-                        foreach (GridViewRow item in GVBusqueda.Rows){
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Edicion)
+                    {
+                        foreach (GridViewRow item in GVBusqueda.Rows)
+                        {
                             LinkButton LbEdit = item.FindControl("BtnEditar") as LinkButton;
                             LbEdit.Visible = true;
                         }
@@ -62,7 +65,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
         }
         protected void GVBusqueda_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-           
+
             txtAlerta1.Visible = false;
             txtAlerta2.Visible = false;
             DataTable vDataa = (DataTable)Session["procesadorATM"];
@@ -71,8 +74,8 @@ namespace Infatlan_STEI_ATM.pages.ATM
 
             if (e.CommandName == "Codigo")
             {
-              
-                
+
+
                 try
                 {
                     DataTable vDatos = new DataTable();
@@ -98,16 +101,16 @@ namespace Infatlan_STEI_ATM.pages.ATM
 
         protected void btnguardarProcesadorATM_Click(object sender, EventArgs e)
         {
-           
+
             txtAlerta1.Visible = false;
             txtAlerta2.Visible = false;
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal2();", true);
-           
+
         }
 
         protected void btnModalCerrarprocesadorATM_Click(object sender, EventArgs e)
         {
-           
+
             txtAlerta1.Visible = false;
             txtAlerta2.Visible = false;
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
@@ -121,7 +124,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
             }
             else
             {
-                
+
                 try
                 {
                     string vQuery = "SPSTEI_ATM 22, '" + Session["codprocesadorATM"] + "','" + txtModalNewprocesadorATM.Text + "'";
@@ -137,7 +140,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     }
                     else
                     {
-                       txtAlerta1.Text="No se pudo modificar el procesador ATM";
+                        txtAlerta1.Text = "No se pudo modificar el procesador ATM";
                         txtAlerta1.Visible = true;
                     }
                 }
@@ -150,7 +153,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
 
         protected void btnModalNueviProcesadorATM_Click(object sender, EventArgs e)
         {
-            
+
             if (txtNewProcesadorATM.Text == "" || txtNewProcesadorATM.Text == string.Empty)
             {
                 txtAlerta2.Visible = true;
@@ -173,7 +176,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     }
                     else
                     {
-                       txtAlerta2.Text="No se pudo crear elprocesador ATM";
+                        txtAlerta2.Text = "No se pudo crear elprocesador ATM";
                         txtAlerta2.Visible = true;
                     }
                 }

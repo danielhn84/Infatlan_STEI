@@ -1,34 +1,36 @@
-﻿using Infatlan_STEI_Inventario.clases;
+﻿using Excel;
+using Infatlan_STEI_Inventario.clases;
 using System;
-using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Web;
-using Excel;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Configuration;
 
 namespace Infatlan_STEI_Inventario.pages.Configuracion
 {
     public partial class cargaRegistros : System.Web.UI.Page
     {
         db vConexion = new db();
-        protected void Page_Load(object sender, EventArgs e){
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!Page.IsPostBack)
+            {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
                     cargarDatos();
-                }else {
+                }
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
             }
         }
 
-        private void cargarDatos(){
-            try{
+        private void cargarDatos()
+        {
+            try
+            {
                 DataTable vDatos = new DataTable();
                 vDatos.Columns.Add("id");
                 vDatos.Columns.Add("proceso");
@@ -39,45 +41,63 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                 vDatos.Rows.Add("4", "Proveedores");
                 vDatos.Rows.Add("5", "Contratos");
 
-                if (vDatos.Rows.Count > 0){
+                if (vDatos.Rows.Count > 0)
+                {
                     GvBusqueda.DataSource = vDatos;
                     GvBusqueda.DataBind();
                     Session["INV_CARGA"] = vDatos;
                 }
-                
-            }catch (Exception ex){
+
+            }
+            catch (Exception ex)
+            {
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
 
-        public void Mensaje(string vMensaje, WarningType type){
+        public void Mensaje(string vMensaje, WarningType type)
+        {
             ScriptManager.RegisterClientScriptBlock(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
 
-        protected void GvBusqueda_RowCommand(object sender, GridViewCommandEventArgs e){
-            try{
+        protected void GvBusqueda_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            try
+            {
                 string vId = e.CommandArgument.ToString();
-                if (e.CommandName == "DescargarPlantilla"){
-                    if (vId == "1"){
+                if (e.CommandName == "DescargarPlantilla")
+                {
+                    if (vId == "1")
+                    {
                         Response.Redirect("/sites/inventario/pages/plantillas/plantillaArticulos.xlsx");
-                    }else if (vId == "2") { 
+                    }
+                    else if (vId == "2")
+                    {
                         Response.Redirect("/sites/inventario/pages/plantillas/plantillaEDC.xlsx");
-                    }else if (vId == "3") { 
+                    }
+                    else if (vId == "3")
+                    {
                         Response.Redirect("/sites/inventario/pages/plantillas/plantillaEnlaces.xlsx");
-                    }else if (vId == "4") { 
+                    }
+                    else if (vId == "4")
+                    {
                         Response.Redirect("/sites/inventario/pages/plantillas/plantillaProveedores.xlsx");
-                    }else if (vId == "5") { 
+                    }
+                    else if (vId == "5")
+                    {
                         Response.Redirect("/sites/inventario/pages/plantillas/plantillaContratos.xlsx");
                     }
-                }else if (e.CommandName == "CargarRegistros"){
+                }
+                else if (e.CommandName == "CargarRegistros")
+                {
                     DivMensajeCarga.Visible = false;
                     if (vId == "1")
                         Session["INV_PROCESO_CARGA"] = "STOCK";
-                    else if (vId == "2")  
+                    else if (vId == "2")
                         Session["INV_PROCESO_CARGA"] = "EDC";
-                    else if (vId == "3") 
+                    else if (vId == "3")
                         Session["INV_PROCESO_CARGA"] = "ENLACE";
-                    else if (vId == "4") 
+                    else if (vId == "4")
                         Session["INV_PROCESO_CARGA"] = "PROVEEDOR";
                     else if (vId == "5")
                         Session["INV_PROCESO_CARGA"] = "CONTRATO";
@@ -85,16 +105,21 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalCarga();", true);
                 }
                 Session["INV_STOCK_ID"] = vId;
-            }catch (Exception Ex){
+            }
+            catch (Exception Ex)
+            {
                 Mensaje(Ex.Message, WarningType.Danger);
             }
         }
 
-        protected void BtnCargar_Click(object sender, EventArgs e){
+        protected void BtnCargar_Click(object sender, EventArgs e)
+        {
             String archivoLog = string.Format("{0}_{1}", Convert.ToString(Session["USUARIO"]), DateTime.Now.ToString("yyyyMMddHHmmss"));
-            try{
+            try
+            {
                 String vDireccionCarga = ConfigurationManager.AppSettings["RUTA_SERVER"].ToString();
-                if (FUCarga.HasFile){
+                if (FUCarga.HasFile)
+                {
                     String vNombreArchivo = FUCarga.FileName;
                     vDireccionCarga += "/" + archivoLog + "_" + vNombreArchivo;
 
@@ -105,21 +130,28 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                     if (File.Exists(vDireccionCarga))
                         vCargado = cargarArchivo(vDireccionCarga, ref vSuccess, ref vError, Convert.ToString(Session["USUARIO"]), vTipoProceso);
 
-                    if (vCargado) {
+                    if (vCargado)
+                    {
                         Mensaje("Archivo cargado con éxito!", WarningType.Success);
                     }
-                }else{
+                }
+                else
+                {
                     DivMensajeCarga.Visible = true;
                     LbAdvertenciaCarga.Text = "No se encontró ningún archivo a cargar.";
                 }
-            }catch (Exception Ex){
+            }
+            catch (Exception Ex)
+            {
                 Mensaje(Ex.Message, WarningType.Danger);
             }
         }
 
-        public Boolean cargarArchivo(String DireccionCarga, ref int vSuccess, ref int vError, String vUsuario, String TipoProceso){
+        public Boolean cargarArchivo(String DireccionCarga, ref int vSuccess, ref int vError, String vUsuario, String TipoProceso)
+        {
             Boolean vResultado = false;
-            try{
+            try
+            {
                 FileStream stream = File.Open(DireccionCarga, FileMode.Open, FileAccess.Read);
                 IExcelDataReader excelReader;
                 if (DireccionCarga.Contains("xlsx"))
@@ -132,7 +164,8 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                 excelReader.Close();
 
                 DataSet vDatosVerificacion = vDatosExcel.Copy();
-                for (int i = 0; i < vDatosVerificacion.Tables[0].Rows.Count; i++){
+                for (int i = 0; i < vDatosVerificacion.Tables[0].Rows.Count; i++)
+                {
                     if (verificarRow(vDatosVerificacion.Tables[0].Rows[i]))
                         vDatosExcel.Tables[0].Rows[i].Delete();
                 }
@@ -140,16 +173,21 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                 procesarArchivo(vDatosExcel, ref vSuccess, DireccionCarga, TipoProceso);
                 vResultado = true;
 
-            }catch (Exception Ex){
+            }
+            catch (Exception Ex)
+            {
                 throw new Exception(Ex.ToString());
             }
             return vResultado;
         }
 
-        private bool verificarRow(DataRow dr){
+        private bool verificarRow(DataRow dr)
+        {
             int contador = 0;
-            foreach (var value in dr.ItemArray){
-                if (value.ToString() != ""){
+            foreach (var value in dr.ItemArray)
+            {
+                if (value.ToString() != "")
+                {
                     contador++;
                 }
             }
@@ -160,10 +198,13 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                 return true;
         }
 
-        public void procesarArchivo(DataSet vArchivo, ref int vSuccess, string DireccionCarga, string TipoProceso){
-            try{
+        public void procesarArchivo(DataSet vArchivo, ref int vSuccess, string DireccionCarga, string TipoProceso)
+        {
+            try
+            {
                 db vConexion = new db();
-                if (vArchivo.Tables[0].Rows.Count > 0){
+                if (vArchivo.Tables[0].Rows.Count > 0)
+                {
                     generarxml vMaestro = new generarxml();
                     DataTable vDatos = vArchivo.Tables[0];
                     string vQuery = "";
@@ -171,16 +212,18 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                     par7 = false, par8 = false, par9 = false, par10 = false, par11 = false, par12 = false;
 
                     //STOCK
-                    if (TipoProceso == "STOCK"){
-                        foreach (DataColumn item in vDatos.Columns){
+                    if (TipoProceso == "STOCK")
+                    {
+                        foreach (DataColumn item in vDatos.Columns)
+                        {
                             if (item.ColumnName.ToString() == "ID_TIPO_STOCK")
                                 par1 = true;
                             if (item.ColumnName.ToString() == "ID_PROVEEDOR")
                                 par2 = true;
                             if (item.ColumnName.ToString() == "MODELO")
-                                par3 = true;                            
+                                par3 = true;
                             if (item.ColumnName.ToString() == "ID_MARCA")
-                                par4 = true;                            
+                                par4 = true;
                             if (item.ColumnName.ToString() == "DESCRIPCION")
                                 par5 = true;
                             if (item.ColumnName.ToString() == "SERIE")
@@ -197,8 +240,10 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                                 par11 = true;
                         }
 
-                        if (par1 && par2 && par3 && par4 && par5 && par6 && par7 && par8 && par9 && par10 && par11){
-                            for (int i = 0; i < vDatos.Rows.Count; i++){
+                        if (par1 && par2 && par3 && par4 && par5 && par6 && par7 && par8 && par9 && par10 && par11)
+                        {
+                            for (int i = 0; i < vDatos.Rows.Count; i++)
+                            {
                                 vQuery = "[STEISP_INVENTARIO_Stock] 3" +
                                         "," + vDatos.Rows[i]["ID_TIPO_STOCK"].ToString() +
                                         "," + vDatos.Rows[i]["ID_PROVEEDOR"].ToString() +
@@ -210,8 +255,8 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                                         ",'" + Session["USUARIO"].ToString() + "'" +
                                         "," + vDatos.Rows[i]["ID_ESTADO"].ToString() +
                                         ",'" + vDatos.Rows[i]["ATM"].ToString() + "'" +
-                                        ",'" + vDatos.Rows[i]["AGENCIA"].ToString()  + "'" +
-                                        ",'" + vDatos.Rows[i]["CABLEADO"].ToString()  + "'";
+                                        ",'" + vDatos.Rows[i]["AGENCIA"].ToString() + "'" +
+                                        ",'" + vDatos.Rows[i]["CABLEADO"].ToString() + "'";
 
                                 int vRespuesta = vConexion.ejecutarSql(vQuery);
                                 if (vRespuesta == 1)
@@ -221,8 +266,10 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                     }
 
                     // EDC
-                    if (TipoProceso == "EDC"){
-                        foreach (DataColumn item in vDatos.Columns){
+                    if (TipoProceso == "EDC")
+                    {
+                        foreach (DataColumn item in vDatos.Columns)
+                        {
                             if (item.ColumnName.ToString() == "NOMBRE_NODO")
                                 par1 = true;
                             if (item.ColumnName.ToString() == "ID_TIPO")
@@ -249,8 +296,10 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                                 par12 = true;
                         }
 
-                        if (par1 && par2 && par3 && par4 && par5 && par6 && par7 && par8 && par9 && par10 && par11 && par12){
-                            for (int i = 0; i < vDatos.Rows.Count; i++){
+                        if (par1 && par2 && par3 && par4 && par5 && par6 && par7 && par8 && par9 && par10 && par11 && par12)
+                        {
+                            for (int i = 0; i < vDatos.Rows.Count; i++)
+                            {
                                 Object[] vDatosMaestro = new object[13];
                                 vDatosMaestro[0] = vDatos.Rows[i]["ID_CONTRATO"].ToString();
                                 vDatosMaestro[1] = vDatos.Rows[i]["NOMBRE_NODO"].ToString();
@@ -274,8 +323,10 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
 
                                 vInfo = vConexion.ejecutarSql1(vQuery);
                                 articulos vArt = new articulos();
-                                if (vInfo > 0){
-                                    if (vArt.insertarInventario(vInfo, vDatos.Rows[i]["UBICACION"].ToString(), "CREACION DE EDC", vDatos.Rows[i]["SERIE"].ToString()) == 2){
+                                if (vInfo > 0)
+                                {
+                                    if (vArt.insertarInventario(vInfo, vDatos.Rows[i]["UBICACION"].ToString(), "CREACION DE EDC", vDatos.Rows[i]["SERIE"].ToString()) == 2)
+                                    {
                                         vSuccess++;
                                     }
                                 }
@@ -284,8 +335,10 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                     }
 
                     // Enlaces
-                    if (TipoProceso == "ENLACE"){
-                        foreach (DataColumn item in vDatos.Columns){
+                    if (TipoProceso == "ENLACE")
+                    {
+                        foreach (DataColumn item in vDatos.Columns)
+                        {
                             if (item.ColumnName.ToString() == "NOMBRE")
                                 par1 = true;
                             if (item.ColumnName.ToString() == "DESCRIPCION")
@@ -310,8 +363,10 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                                 par11 = true;
                         }
 
-                        if (par1 && par2 && par3 && par4 && par5 && par6 && par7 && par8 && par9 && par10 && par11){
-                            for (int i = 0; i < vDatos.Rows.Count; i++){
+                        if (par1 && par2 && par3 && par4 && par5 && par6 && par7 && par8 && par9 && par10 && par11)
+                        {
+                            for (int i = 0; i < vDatos.Rows.Count; i++)
+                            {
                                 Object[] vDatosMaestro = new object[13];
                                 vDatosMaestro[0] = vDatos.Rows[i]["ID_TIPO"].ToString();
                                 vDatosMaestro[1] = vDatos.Rows[i]["ID_PROVEEDOR"].ToString();
@@ -335,8 +390,10 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
 
                                 vInfo = vConexion.ejecutarSql1(vQuery);
                                 articulos vArt = new articulos();
-                                if (vInfo > 0){
-                                    if (vArt.insertarInventario(vInfo, "0", "CREACION DE ENLACE", "") == 2){
+                                if (vInfo > 0)
+                                {
+                                    if (vArt.insertarInventario(vInfo, "0", "CREACION DE ENLACE", "") == 2)
+                                    {
                                         vSuccess++;
                                     }
                                 }
@@ -345,8 +402,10 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                     }
 
                     // Proveedor
-                    if (TipoProceso == "PROVEEDOR"){
-                        foreach (DataColumn item in vDatos.Columns){
+                    if (TipoProceso == "PROVEEDOR")
+                    {
+                        foreach (DataColumn item in vDatos.Columns)
+                        {
                             if (item.ColumnName.ToString() == "NOMBRE")
                                 par1 = true;
                             if (item.ColumnName.ToString() == "DIRECCION")
@@ -357,8 +416,10 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                                 par4 = true;
                         }
 
-                        if (par1 && par2 && par3 && par4){
-                            for (int i = 0; i < vDatos.Rows.Count; i++){
+                        if (par1 && par2 && par3 && par4)
+                        {
+                            for (int i = 0; i < vDatos.Rows.Count; i++)
+                            {
                                 Int32 vInfo;
                                 vQuery = "STEISP_INVENTARIO_Proveedores 3" +
                                 ",'" + vDatos.Rows[i]["NOMBRE"].ToString().ToUpper() + "'" +
@@ -366,7 +427,8 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                                 ",'" + vDatos.Rows[i]["TELEFONO"].ToString() + "'" +
                                 ",'" + vDatos.Rows[i]["RESPONSABLE"].ToString() + "'";
                                 vInfo = vConexion.ejecutarSql(vQuery);
-                                if (vInfo == 1){
+                                if (vInfo == 1)
+                                {
                                     vSuccess++;
                                 }
                             }
@@ -374,8 +436,10 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                     }
 
                     // Contrato
-                    if (TipoProceso == "CONTRATO"){
-                        foreach (DataColumn item in vDatos.Columns){
+                    if (TipoProceso == "CONTRATO")
+                    {
+                        foreach (DataColumn item in vDatos.Columns)
+                        {
                             if (item.ColumnName.ToString() == "NOMBRE_CONTRATO")
                                 par1 = true;
                             if (item.ColumnName.ToString() == "ID_TIPO")
@@ -390,8 +454,10 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                                 par6 = true;
                         }
 
-                        if (par1 && par2 && par3 && par4 && par5 && par6){
-                            for (int i = 0; i < vDatos.Rows.Count; i++){
+                        if (par1 && par2 && par3 && par4 && par5 && par6)
+                        {
+                            for (int i = 0; i < vDatos.Rows.Count; i++)
+                            {
                                 int vInfo;
                                 vQuery = "[STEISP_INVENTARIO_Contratos] 3" +
                                         "," + vDatos.Rows[i]["ID_PROVEEDOR"].ToString() +
@@ -403,16 +469,20 @@ namespace Infatlan_STEI_Inventario.pages.Configuracion
                                         ",'" + Session["USUARIO"].ToString() + "'" +
                                         ",1";
                                 vInfo = vConexion.ejecutarSql(vQuery);
-                                if (vInfo == 1){
+                                if (vInfo == 1)
+                                {
                                     vSuccess++;
                                 }
                             }
                         }
                     }
 
-                }else
+                }
+                else
                     throw new Exception("No contiene ninguna hoja de excel.");
-            }catch (Exception){
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

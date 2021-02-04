@@ -1,18 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Xml;
 using System.IO;
+using System.Xml;
 
 namespace Infatlan_STEI.classes
 {
     public class GenerarXML
     {
-        public String ObtenerCumplimiento(Object[] vDatos){
+        public String ObtenerCumplimiento(Object[] vDatos)
+        {
             String vResultado = "";
-            try{
-                using (StringWriter sw = new StringWriter()){
+            try
+            {
+                using (StringWriter sw = new StringWriter())
+                {
                     XmlTextWriter vXmlTW = new XmlTextWriter(sw);
                     vXmlTW.Formatting = Formatting.None;
 
@@ -58,7 +58,7 @@ namespace Infatlan_STEI.classes
                     vXmlTW.WriteStartElement("cajaCompletos");
                     vXmlTW.WriteString(Convert.ToString(vDatos[9]));
                     vXmlTW.WriteEndElement();
-                    
+
                     vXmlTW.WriteStartElement("cajaIncompletos");
                     vXmlTW.WriteString(Convert.ToString(vDatos[10]));
                     vXmlTW.WriteEndElement();
@@ -69,38 +69,43 @@ namespace Infatlan_STEI.classes
 
                     vXmlTW.WriteStartElement("kpiCompletas");
                     vXmlTW.WriteString(Convert.ToString(vDatos[12]));
-                    vXmlTW.WriteEndElement();                    
-                    
+                    vXmlTW.WriteEndElement();
+
                     vXmlTW.WriteStartElement("kpiIncompletas");
                     vXmlTW.WriteString(Convert.ToString(vDatos[13]));
                     vXmlTW.WriteEndElement();
-                    
+
                     vXmlTW.WriteStartElement("kpiComentario");
                     vXmlTW.WriteString(Convert.ToString(vDatos[14]));
                     vXmlTW.WriteEndElement();
-                    
+
                     vXmlTW.WriteStartElement("estado");
                     vXmlTW.WriteString(Convert.ToString(vDatos[15]));
                     vXmlTW.WriteEndElement();
-                    
+
                     vXmlTW.WriteStartElement("usuarioRegistro");
                     vXmlTW.WriteString(Convert.ToString(vDatos[16]));
                     vXmlTW.WriteEndElement();
-                    
+
                     vXmlTW.WriteEndElement();
                     vXmlTW.WriteEndDocument();
                     vResultado = sw.ToString();
                 }
-            }catch{
+            }
+            catch
+            {
                 throw;
             }
             return vResultado;
         }
 
-        public String ObtenerCumplimientoKPI(Object[] vDatos){
+        public String ObtenerCumplimientoKPI(Object[] vDatos)
+        {
             String vResultado = "";
-            try{
-                using (StringWriter sw = new StringWriter()){
+            try
+            {
+                using (StringWriter sw = new StringWriter())
+                {
                     XmlTextWriter vXmlTW = new XmlTextWriter(sw);
                     vXmlTW.Formatting = Formatting.None;
 
@@ -135,16 +140,21 @@ namespace Infatlan_STEI.classes
                     vXmlTW.WriteEndDocument();
                     vResultado = sw.ToString();
                 }
-            }catch{
+            }
+            catch
+            {
                 throw;
             }
             return vResultado;
         }
 
-        public String ObtenerCumplimientoOSER(Object[] vDatos){
+        public String ObtenerCumplimientoOSER(Object[] vDatos)
+        {
             String vResultado = "";
-            try{
-                using (StringWriter sw = new StringWriter()){
+            try
+            {
+                using (StringWriter sw = new StringWriter())
+                {
                     XmlTextWriter vXmlTW = new XmlTextWriter(sw);
                     vXmlTW.Formatting = Formatting.None;
 
@@ -179,16 +189,21 @@ namespace Infatlan_STEI.classes
                     vXmlTW.WriteEndDocument();
                     vResultado = sw.ToString();
                 }
-            }catch{
+            }
+            catch
+            {
                 throw;
             }
             return vResultado;
         }
 
-        public String ObtenerCumplimientoRupturas(Object[] vDatos){
+        public String ObtenerCumplimientoRupturas(Object[] vDatos)
+        {
             String vResultado = "";
-            try{
-                using (StringWriter sw = new StringWriter()){
+            try
+            {
+                using (StringWriter sw = new StringWriter())
+                {
                     XmlTextWriter vXmlTW = new XmlTextWriter(sw);
                     vXmlTW.Formatting = Formatting.None;
 
@@ -213,8 +228,8 @@ namespace Infatlan_STEI.classes
 
                     vXmlTW.WriteStartElement("responsable");
                     vXmlTW.WriteString(Convert.ToString(vDatos[4]));
-                    vXmlTW.WriteEndElement(); 
-                    
+                    vXmlTW.WriteEndElement();
+
                     vXmlTW.WriteStartElement("satisfaccionCliente");
                     vXmlTW.WriteString(Convert.ToString(vDatos[5]));
                     vXmlTW.WriteEndElement();
@@ -231,16 +246,21 @@ namespace Infatlan_STEI.classes
                     vXmlTW.WriteEndDocument();
                     vResultado = sw.ToString();
                 }
-            }catch{
+            }
+            catch
+            {
                 throw;
             }
             return vResultado;
         }
 
-        public String ObtenerCumplimientoSatisfaccion(Object[] vDatos){
+        public String ObtenerCumplimientoSatisfaccion(Object[] vDatos)
+        {
             String vResultado = "";
-            try{
-                using (StringWriter sw = new StringWriter()){
+            try
+            {
+                using (StringWriter sw = new StringWriter())
+                {
                     XmlTextWriter vXmlTW = new XmlTextWriter(sw);
                     vXmlTW.Formatting = Formatting.None;
 
@@ -265,8 +285,8 @@ namespace Infatlan_STEI.classes
 
                     vXmlTW.WriteStartElement("comentario");
                     vXmlTW.WriteString(Convert.ToString(vDatos[4]));
-                    vXmlTW.WriteEndElement(); 
-                    
+                    vXmlTW.WriteEndElement();
+
                     vXmlTW.WriteStartElement("observaciones");
                     vXmlTW.WriteString(Convert.ToString(vDatos[5]));
                     vXmlTW.WriteEndElement();
@@ -275,16 +295,21 @@ namespace Infatlan_STEI.classes
                     vXmlTW.WriteEndDocument();
                     vResultado = sw.ToString();
                 }
-            }catch{
+            }
+            catch
+            {
                 throw;
             }
             return vResultado;
         }
 
-        public String ObtenerCumplimientoUsuarios(Object[] vDatos){
+        public String ObtenerCumplimientoUsuarios(Object[] vDatos)
+        {
             String vResultado = "";
-            try{
-                using (StringWriter sw = new StringWriter()){
+            try
+            {
+                using (StringWriter sw = new StringWriter())
+                {
                     XmlTextWriter vXmlTW = new XmlTextWriter(sw);
                     vXmlTW.Formatting = Formatting.None;
 
@@ -309,8 +334,8 @@ namespace Infatlan_STEI.classes
 
                     vXmlTW.WriteStartElement("rupturas");
                     vXmlTW.WriteString(Convert.ToString(vDatos[4]));
-                    vXmlTW.WriteEndElement(); 
-                    
+                    vXmlTW.WriteEndElement();
+
                     vXmlTW.WriteStartElement("noRupturas");
                     vXmlTW.WriteString(Convert.ToString(vDatos[5]));
                     vXmlTW.WriteEndElement();
@@ -355,7 +380,9 @@ namespace Infatlan_STEI.classes
                     vXmlTW.WriteEndDocument();
                     vResultado = sw.ToString();
                 }
-            }catch{
+            }
+            catch
+            {
                 throw;
             }
             return vResultado;

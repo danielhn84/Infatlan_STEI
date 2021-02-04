@@ -16,24 +16,31 @@ namespace Infatlan_STEI.classes
     {
         SqlConnection vConexion = new SqlConnection(ConfigurationManager.AppSettings["SQLServer"]);
         SqlConnection vConexionSysAid = new SqlConnection(ConfigurationManager.AppSettings["SQLServerSysAid"]);
-        public db(){
+        public db()
+        {
             vConexion = new SqlConnection(ConfigurationManager.AppSettings["SQLServer"]);
         }
 
-        public DataTable obtenerDataTable(String vQuery){
+        public DataTable obtenerDataTable(String vQuery)
+        {
             DataTable vDatos = new DataTable();
-            try{
+            try
+            {
                 SqlDataAdapter vDataAdapter = new SqlDataAdapter(vQuery, vConexion);
                 vDataAdapter.Fill(vDatos);
-            }catch{
+            }
+            catch
+            {
                 throw;
             }
             return vDatos;
         }
 
-        public int ejecutarSql(String vQuery){
+        public int ejecutarSql(String vQuery)
+        {
             int vResultado = 0;
-            try{
+            try
+            {
                 SqlCommand vSqlCommand = new SqlCommand(vQuery, vConexion);
                 vSqlCommand.CommandType = CommandType.Text;
 
@@ -41,7 +48,9 @@ namespace Infatlan_STEI.classes
                 vResultado = vSqlCommand.ExecuteNonQuery();
                 vConexion.Close();
 
-            }catch (Exception Ex){
+            }
+            catch (Exception Ex)
+            {
                 String vError = Ex.Message;
                 vConexion.Close();
                 throw;
@@ -49,47 +58,63 @@ namespace Infatlan_STEI.classes
             return vResultado;
         }
 
-        public int obtenerId(String vQuery){
+        public int obtenerId(String vQuery)
+        {
             DataTable vDatos = new DataTable();
             int vId;
-            try{
+            try
+            {
                 SqlDataAdapter vDataAdapter = new SqlDataAdapter(vQuery, vConexion);
                 vDataAdapter.Fill(vDatos);
                 vId = Convert.ToInt32(vDatos.Rows[0][0].ToString());
-            }catch{
+            }
+            catch
+            {
                 throw;
             }
             return vId;
         }
 
-        public DataSet obtenerDataSet(String vQuery){
+        public DataSet obtenerDataSet(String vQuery)
+        {
             DataSet vDatos = new DataSet();
-            try{
+            try
+            {
                 SqlDataAdapter vDataAdapter = new SqlDataAdapter(vQuery, vConexion);
                 vDataAdapter.Fill(vDatos);
-            }catch{
+            }
+            catch
+            {
                 throw;
             }
             return vDatos;
         }
 
-        public DataTable obtenerDataTableSA(String vQuery){
+        public DataTable obtenerDataTableSA(String vQuery)
+        {
             DataTable vDatos = new DataTable();
-            try{
+            try
+            {
                 SqlDataAdapter vDataAdapter = new SqlDataAdapter(vQuery, vConexionSysAid);
                 vDataAdapter.Fill(vDatos);
-            }catch{
+            }
+            catch
+            {
                 throw;
             }
             return vDatos;
         }
 
-        public DataSet obtenerDataSetSA(String vQuery){
+        public DataSet obtenerDataSetSA(String vQuery)
+        {
             DataSet vDatos = new DataSet();
-            try{
+            try
+            {
                 SqlDataAdapter vDataAdapter = new SqlDataAdapter(vQuery, vConexionSysAid);
                 vDataAdapter.Fill(vDatos);
-            }catch{
+            }
+            catch
+            {
                 throw;
             }
             return vDatos;

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Infatlan_STEI_Agencias.classes;
+using System;
+using System.Data;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.IO;
-using System.Data;
-using Infatlan_STEI_Agencias.classes;
 
 namespace Infatlan_STEI_Agencias.pages
 {
@@ -18,11 +14,16 @@ namespace Infatlan_STEI_Agencias.pages
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
 
-        protected void Page_Load(object sender, EventArgs e){
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!Page.IsPostBack)
+            {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
                     cargarDatos();
-                }else {
+                }
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
             }
@@ -46,7 +47,8 @@ namespace Infatlan_STEI_Agencias.pages
 
         protected void GvLvPendentesAprobar_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName == "Aprobar"){
+            if (e.CommandName == "Aprobar")
+            {
                 string vIdMantenimientoAprobar = e.CommandArgument.ToString();
                 Session["AG_LvPC_ID_MANTENIMIENTO_LV_APROBAR_JEFE"] = vIdMantenimientoAprobar;
                 try
@@ -55,7 +57,7 @@ namespace Infatlan_STEI_Agencias.pages
                     String vQuery = "STEISP_AGENCIA_AprobarLvJefesSuplentes 2," + vIdMantenimientoAprobar;
                     DataTable vDatos = vConexion.obtenerDataTable(vQuery);
                     Session["AG_LvPA_DATOS_GENERALES"] = vDatos;
-                    Session["AG_LvPA_USUARIO_RESPONSABLE"] = vDatos.Rows[0]["idUsuario"].ToString();               
+                    Session["AG_LvPA_USUARIO_RESPONSABLE"] = vDatos.Rows[0]["idUsuario"].ToString();
 
                     //TECNICO RESPONSABLE
                     String vQuery1 = "STEISP_AGENCIA_AprobarLvJefesSuplentes 3," + Session["AG_LvPA_USUARIO_RESPONSABLE"];
@@ -76,7 +78,7 @@ namespace Infatlan_STEI_Agencias.pages
                     String vQuery4 = "STEISP_AGENCIA_AprobarLvJefesSuplentes 6," + vIdMantenimientoAprobar;
                     DataTable vDatos4 = vConexion.obtenerDataTable(vQuery4);
                     Session["AG_LvPA_DATOS_PRUEBAS_PC"] = vDatos4;
-             
+
                     //DATOS EQUIPO DE COMUNICACION
                     String vQuery5 = "STEISP_AGENCIA_AprobarLvJefesSuplentes 7," + vIdMantenimientoAprobar;
                     DataTable vDatos5 = vConexion.obtenerDataTable(vQuery5);
@@ -86,20 +88,22 @@ namespace Infatlan_STEI_Agencias.pages
                     String vQuery6 = "STEISP_AGENCIA_AprobarLvJefesSuplentes 8," + vIdMantenimientoAprobar;
                     DataTable vDatos6 = vConexion.obtenerDataTable(vQuery6);
                     Session["AG_LvPA_DATOS_ENTORNO_COMUNICACION"] = vDatos6;
-                   
+
                     //IMAGENES OBLIGATORIAS
                     String vQuery7 = "STEISP_AGENCIA_AprobarLvJefesSuplentes 9," + vIdMantenimientoAprobar;
                     DataTable vDatos7 = vConexion.obtenerDataTable(vQuery7);
                     Session["AG_LvPA_DATOS_IMAGENES_OBLIGATORIAS"] = vDatos7;
-                  
+
                     Response.Redirect("/sites/agencias/pages/mantenimiento/lvIndividual.aspx?ex=2");
-                    
-                }catch (Exception ex){
+
+                }
+                catch (Exception ex)
+                {
                     Mensaje(ex.Message, WarningType.Danger);
                 }
 
             }
-        
+
         }
 
         protected void TxBuscarAgencia_TextChanged(object sender, EventArgs e)

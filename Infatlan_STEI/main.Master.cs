@@ -1,8 +1,7 @@
-﻿using System;
+﻿using Infatlan_STEI.classes;
+using System;
 using System.Data;
-using System.Web.Security;
 using System.Web.UI;
-using Infatlan_STEI.classes;
 
 namespace Infatlan_STEI
 {
@@ -10,14 +9,18 @@ namespace Infatlan_STEI
     {
         db vConexion = new db();
         Security vSecurity = new Security();
-        protected void Page_Load(object sender, EventArgs e){
-            if (!Convert.ToBoolean(Session["AUTH"])){
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!Convert.ToBoolean(Session["AUTH"]))
+            {
                 Response.Redirect("/login.aspx");
             }
 
-            if (!Page.IsPostBack){
+            if (!Page.IsPostBack)
+            {
                 String vError = "";
-                try{
+                try
+                {
                     DataTable vDatos = (DataTable)Session["AUTHCLASS"];
                     LitUsuario.Text = vDatos.Rows[0]["nombre"].ToString().ToUpper() + " " + vDatos.Rows[0]["apellidos"].ToString().ToUpper();
                     TxUser.Value = vDatos.Rows[0]["idUsuario"].ToString();
@@ -26,20 +29,28 @@ namespace Infatlan_STEI
                     String vQuery = "[STEISP_Mensajes] 3,'" + Session["USUARIO"].ToString() + "'";
                     vDatos = vConexion.obtenerDataTable(vQuery);
 
-                    for (int i = 0; i < vDatos.Rows.Count; i++){
+                    for (int i = 0; i < vDatos.Rows.Count; i++)
+                    {
                         vPointer = "<span class='heartbit'></span><span class='point'></span>";
 
                         String vColor = "", vLogo = "";
-                        if (vDatos.Rows[i]["idAplicacion"].ToString() == "1"){
+                        if (vDatos.Rows[i]["idAplicacion"].ToString() == "1")
+                        {
                             vColor = "primary";
                             vLogo = "ti ti-package";
-                        }else if (vDatos.Rows[i]["idAplicacion"].ToString() == "2"){
+                        }
+                        else if (vDatos.Rows[i]["idAplicacion"].ToString() == "2")
+                        {
                             vColor = "success";
                             vLogo = "icon icon-home";
-                        }else if (vDatos.Rows[i]["idAplicacion"].ToString() == "3"){
+                        }
+                        else if (vDatos.Rows[i]["idAplicacion"].ToString() == "3")
+                        {
                             vColor = "info";
                             vLogo = "icon icon-screen-desktop";
-                        }else if (vDatos.Rows[i]["idAplicacion"].ToString() == "4"){
+                        }
+                        else if (vDatos.Rows[i]["idAplicacion"].ToString() == "4")
+                        {
                             vColor = "danger";
                             vLogo = "ti ti-plug";
                         }
@@ -67,7 +78,8 @@ namespace Infatlan_STEI
                         LICableado.Visible = true;
                     if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 5).Consulta)
                         LiCumplimiento.Visible = true;
-                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 5).Creacion) { 
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 5).Creacion)
+                    {
                         LIFormulario.Visible = true;
                         LIModificar.Visible = true;
                     }
@@ -77,8 +89,10 @@ namespace Infatlan_STEI
                         LIConfiguracion.Visible = true;
                     if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 7).Consulta)
                         LIComunicaciones.Visible = true;
-                    
-                }catch (Exception ex){
+
+                }
+                catch (Exception ex)
+                {
                     vError = ex.Message;
                 }
             }

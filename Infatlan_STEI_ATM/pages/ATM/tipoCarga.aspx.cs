@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Infatlan_STEI_ATM.clases;
+using System;
+using System.Data;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.Sql;
-using System.Data.SqlClient;
-using Infatlan_STEI_ATM.clases;
 
 namespace Infatlan_STEI_ATM.pages.ATM
 {
@@ -16,15 +12,20 @@ namespace Infatlan_STEI_ATM.pages.ATM
         bd vConexion = new bd();
         bd vConexionATM = new bd();
         Security vSecurity = new Security();
-        protected void Page_Load(object sender, EventArgs e){
+        protected void Page_Load(object sender, EventArgs e)
+        {
             Session["TIPO_CARGA_ATM"] = null;
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
+            if (!Page.IsPostBack)
+            {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
                     if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Creacion)
                         btnguardartipocargaATM.Visible = true;
 
                     cargarData();
-                }else {
+                }
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
             }
@@ -43,8 +44,10 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     vDatos = vConexionATM.ObtenerTablaATM("SPSTEI_ATM 5");
                     GVBusqueda.DataSource = vDatos;
                     GVBusqueda.DataBind();
-                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Edicion){
-                        foreach (GridViewRow item in GVBusqueda.Rows){
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Edicion)
+                    {
+                        foreach (GridViewRow item in GVBusqueda.Rows)
+                        {
                             LinkButton LbEdit = item.FindControl("BtnEditar") as LinkButton;
                             LbEdit.Visible = true;
                         }
@@ -63,7 +66,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
 
         protected void GVBusqueda_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            
+
             txtAlerta1.Visible = false;
             txtAlerta2.Visible = false;
             DataTable vDataa = (DataTable)Session["tipoCargaATM"];
@@ -73,7 +76,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
             if (e.CommandName == "Codigo")
             {
                 string nom = "";
-               
+
                 try
                 {
                     DataTable vDatos = new DataTable();
@@ -101,12 +104,12 @@ namespace Infatlan_STEI_ATM.pages.ATM
         {
             if (txtModalNewTipoCargaATM.Text == "" || txtModalNewTipoCargaATM.Text == string.Empty)
             {
-                              
+
                 txtAlerta1.Visible = true;
             }
             else
             {
-               
+
                 try
                 {
                     string vQuery = "SPSTEI_ATM 19, '" + Session["codtipocargaATM"] + "','" + txtModalNewTipoCargaATM.Text + "'";
@@ -122,7 +125,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     }
                     else
                     {
-                      txtAlerta1.Text="No se pudo modificar el tipo de carga ATM";
+                        txtAlerta1.Text = "No se pudo modificar el tipo de carga ATM";
                         txtAlerta1.Visible = true;
                     }
                 }
@@ -140,15 +143,15 @@ namespace Infatlan_STEI_ATM.pages.ATM
 
         protected void btnguardartipocargaATM_Click(object sender, EventArgs e)
         {
-           txtAlerta1.Visible = false;
+            txtAlerta1.Visible = false;
             txtAlerta2.Visible = false;
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal2();", true);
-            
+
         }
 
         protected void btnModalNueviTipoCargaATM_Click(object sender, EventArgs e)
         {
-            
+
             if (txtNewtipocargaATM.Text == "" || txtNewtipocargaATM.Text == string.Empty)
             {
                 txtAlerta2.Visible = true;
@@ -171,7 +174,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     }
                     else
                     {
-                       txtAlerta2.Text="No se pudo crear el tipo de carga ATM";
+                        txtAlerta2.Text = "No se pudo crear el tipo de carga ATM";
                         txtAlerta2.Visible = true;
                     }
                 }

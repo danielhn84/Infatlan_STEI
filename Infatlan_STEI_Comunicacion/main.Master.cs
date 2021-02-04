@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+﻿using Infatlan_STEI_Comunicacion.classes;
+using System;
 using System.Data;
-using Infatlan_STEI_Comunicacion.classes;
-using System.Web.Security;
+using System.Web.UI;
 
 
 
@@ -17,7 +12,7 @@ namespace Infatlan_STEI_Comunicacion
         db vConexion = new db();
         Security vSecurity = new Security();
 
-       
+
 
         //private const string AntiXsrfTokenKey = "__AntiXsrfToken";
         //private const string AntiXsrfUserNameKey = "__AntiXsrfUserName";
@@ -73,20 +68,25 @@ namespace Infatlan_STEI_Comunicacion
         //        }
         //    }
         //}
-        protected void Page_Load(object sender, EventArgs e){
-            try{
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            try
+            {
                 if (!Convert.ToBoolean(Session["AUTH"]))
                     Response.Redirect("/login.aspx");
-        
-                if (!Page.IsPostBack){
+
+                if (!Page.IsPostBack)
+                {
                     if (!vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 7).Consulta)
                         Response.Redirect("/default.aspx");
-                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 7).Creacion) { 
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 7).Creacion)
+                    {
                         LiCrear.Visible = true;
                         LiCompletar.Visible = true;
                         LiModificar.Visible = true;
                     }
-                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 7).Edicion) { 
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 7).Edicion)
+                    {
                         LiConfig.Visible = true;
                         LiAsignar.Visible = true;
                         LiAprobar.Visible = true;
@@ -100,20 +100,28 @@ namespace Infatlan_STEI_Comunicacion
                     String vQuery = "[STEISP_Mensajes] 3,'" + Session["USUARIO"].ToString() + "'";
                     vDatos = vConexion.obtenerDataTable(vQuery);
 
-                    for (int i = 0; i < vDatos.Rows.Count; i++){
+                    for (int i = 0; i < vDatos.Rows.Count; i++)
+                    {
                         vPointer = "<span class='heartbit'></span><span class='point'></span>";
 
                         String vColor = "", vLogo = "";
-                        if (vDatos.Rows[i]["idAplicacion"].ToString() == "1"){
+                        if (vDatos.Rows[i]["idAplicacion"].ToString() == "1")
+                        {
                             vColor = "primary";
                             vLogo = "ti ti-shopping-cart";
-                        }else if (vDatos.Rows[i]["idAplicacion"].ToString() == "2"){
+                        }
+                        else if (vDatos.Rows[i]["idAplicacion"].ToString() == "2")
+                        {
                             vColor = "success";
                             vLogo = "ti ti-home";
-                        }else if (vDatos.Rows[i]["idAplicacion"].ToString() == "3"){
+                        }
+                        else if (vDatos.Rows[i]["idAplicacion"].ToString() == "3")
+                        {
                             vColor = "info";
                             vLogo = "ti ti-desktop";
-                        }else if (vDatos.Rows[i]["idAplicacion"].ToString() == "4"){
+                        }
+                        else if (vDatos.Rows[i]["idAplicacion"].ToString() == "4")
+                        {
                             vColor = "danger";
                             vLogo = "ti ti-plug";
                         }
@@ -131,7 +139,9 @@ namespace Infatlan_STEI_Comunicacion
                     LitPointer.Text = vPointer;
 
                 }
-            }catch (Exception ex){
+            }
+            catch (Exception ex)
+            {
                 String vError = ex.Message;
             }
         }

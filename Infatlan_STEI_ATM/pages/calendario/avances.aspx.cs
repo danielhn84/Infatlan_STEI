@@ -1,14 +1,11 @@
-﻿using System;
+﻿using Infatlan_STEI_ATM.clases;
+using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Data;
+using System.Net;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Infatlan_STEI_ATM.clases;
-using System.Data;
-using System.Net;
-using System.IO;
-using System.Configuration;
 
 namespace Infatlan_STEI_ATM.pages.calendario
 {
@@ -48,11 +45,11 @@ namespace Infatlan_STEI_ATM.pages.calendario
                 DDLFiltroEstado.Items.Add(new ListItem { Value = "0", Text = "Seleccione Estado..." });
                 foreach (DataRow item in vDatos.Rows)
                 {
-                    DDLFiltroEstado.Items.Add(new ListItem { Value = item["idEstadoMantenimiento"].ToString(), Text = item["nombreEstado"].ToString()});
+                    DDLFiltroEstado.Items.Add(new ListItem { Value = item["idEstadoMantenimiento"].ToString(), Text = item["nombreEstado"].ToString() });
                 }
                 Session["AVANCE"] = "1";
             }
-            }
+        }
 
         protected void GVAvances_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
@@ -70,7 +67,7 @@ namespace Infatlan_STEI_ATM.pages.calendario
 
         protected void DDLFiltroEstado_TextChanged(object sender, EventArgs e)
         {
-            if(DDLFiltroEstado.SelectedValue=="0")
+            if (DDLFiltroEstado.SelectedValue == "0")
             {
                 DataTable vDatos2 = new DataTable();
                 vDatos2 = vConexion.ObtenerTabla("[STEISP_ATM_Generales] 41");
@@ -81,11 +78,11 @@ namespace Infatlan_STEI_ATM.pages.calendario
             else
             {
                 DataTable vDatos2 = new DataTable();
-                vDatos2 = vConexion.ObtenerTabla("[STEISP_ATM_Generales] 45,'"+DDLFiltroEstado.SelectedValue+"'");
+                vDatos2 = vConexion.ObtenerTabla("[STEISP_ATM_Generales] 45,'" + DDLFiltroEstado.SelectedValue + "'");
                 GVAvances.DataSource = vDatos2;
                 GVAvances.DataBind();
                 Session["ATM_AVANCES"] = vDatos2;
-            }          
+            }
         }
 
         protected void GVAvances_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -101,8 +98,8 @@ namespace Infatlan_STEI_ATM.pages.calendario
                     vDatos = vConexion.ObtenerTabla(vQuery);
                     foreach (DataRow item in vDatos.Rows)
                     {
-                        vEstado = item["Estado"].ToString();                       
-                    }                   
+                        vEstado = item["Estado"].ToString();
+                    }
                 }
             }
             catch (Exception)
@@ -213,7 +210,7 @@ namespace Infatlan_STEI_ATM.pages.calendario
                     //Response.AppendHeader("Content-Type", "application/pdf");
                     byte[] bytFile = vResultado;
                     Response.OutputStream.Write(bytFile, 0, bytFile.Length);
-                    Response.AddHeader("Content-disposition", "attachment;filename=EstadoMantenimientoPrev"+DDLFiltroEstado.SelectedItem.Text+".xls");
+                    Response.AddHeader("Content-disposition", "attachment;filename=EstadoMantenimientoPrev" + DDLFiltroEstado.SelectedItem.Text + ".xls");
                     //Response.AddHeader("Content-disposition", "attachment;filename=DescargaPDFArea.pdf");
                     Response.End();
                 }

@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Infatlan_STEI_CableadoEstructurado.clases;
+using System;
 using System.Data;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Infatlan_STEI_CableadoEstructurado.clases;
 
 namespace Infatlan_STEI_CableadoEstructurado.page.visitaTecnica
 {
@@ -14,40 +12,54 @@ namespace Infatlan_STEI_CableadoEstructurado.page.visitaTecnica
         db vConexion = new db();
         Security vSecurity = new Security();
 
-        protected void Page_Load(object sender, EventArgs e){
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!Page.IsPostBack)
+            {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
                     CargarProceso();
                     //String vQuery = "STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 29 ,'" + Session["USUARIO"] + "'";
                     //DataTable vDatos = vConexion.obtenerDataTable(vQuery);
                     //lbRevisionesPendientes.Text = vDatos.Rows[0]["revisionpendiente"].ToString();
                     //lbEstudiosRevisados.Text = vDatos.Rows[0]["revisados"].ToString();
                     // EstudiosRevisados.Style.Width = 60 %;
-                }else {
+                }
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
             }
         }
 
-        void CargarProceso(){
-            try{
+        void CargarProceso()
+        {
+            try
+            {
                 String vQuery = "STEISP_CABLESTRUCTURADO_Aprobacion 4 ";
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
-                if (vDatos.Rows.Count > 0){
+                if (vDatos.Rows.Count > 0)
+                {
                     GVAprobacion.DataSource = vDatos;
                     GVAprobacion.DataBind();
-                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 4).Edicion){
-                        foreach (GridViewRow item in GVAprobacion.Rows){
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 4).Edicion)
+                    {
+                        foreach (GridViewRow item in GVAprobacion.Rows)
+                        {
                             LinkButton LbEdit = item.FindControl("BtnEditar") as LinkButton;
                             LbEdit.Visible = true;
                         }
                     }
                     Session["CE_DATOSAPROBACION"] = vDatos;
                     udpAprobacion.Update();
-                }else{
+                }
+                else
+                {
                     LbDescripcionGV.Text = "No hay estudios pendientes";
                 }
-            }catch (Exception Ex) {
+            }
+            catch (Exception Ex)
+            {
                 Mensaje(Ex.Message, WarningType.Danger);
             }
         }
@@ -74,7 +86,7 @@ namespace Infatlan_STEI_CableadoEstructurado.page.visitaTecnica
             if (e.CommandName == "Aprobar")
             {
                 String vId = e.CommandArgument.ToString();
-                
+
                 int vCondicion = 2;
 
                 Response.Redirect("/sites/cableado/page/visita/visitaTecnica.aspx?a=" + vCondicion + "&ia=" + vId);

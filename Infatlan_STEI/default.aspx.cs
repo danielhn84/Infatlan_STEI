@@ -1,9 +1,8 @@
-﻿using System;
-using System.Data;
-using Infatlan_STEI.classes;
-using System.Web.UI;
+﻿using Infatlan_STEI.classes;
+using System;
 using System.Configuration;
-using System.Web.Helpers;
+using System.Data;
+using System.Web.UI;
 
 
 
@@ -13,13 +12,16 @@ namespace Infatlan_STEI
     {
         db vConexion = new db();
 
-        protected void Page_Load(object sender, EventArgs e){
-            try{
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            try
+            {
                 string usu = Convert.ToString(Session["USUARIO"]);
                 bool au = Convert.ToBoolean(Session["AUTH"]);
 
                 classes.rolAplicacion[] vRolAplicacion = new classes.rolAplicacion[2];
-                vRolAplicacion[0] = new classes.rolAplicacion(){
+                vRolAplicacion[0] = new classes.rolAplicacion()
+                {
                     NombreAplicacion = "Agencias",
                     Aplicacion = 1,
                     escritura = 1,
@@ -27,7 +29,8 @@ namespace Infatlan_STEI
                     consulta = 1,
                     borrar = 0
                 };
-                vRolAplicacion[1] = new classes.rolAplicacion(){
+                vRolAplicacion[1] = new classes.rolAplicacion()
+                {
                     NombreAplicacion = "ATMs",
                     Aplicacion = 2,
                     escritura = 1,
@@ -36,7 +39,8 @@ namespace Infatlan_STEI
                     borrar = 0
                 };
 
-                classes.roles vRol = new classes.roles(){
+                classes.roles vRol = new classes.roles()
+                {
                     Nombre = "Daniel Henriquez",
                     Usuario = "dehenriquez",
                     Correo = "dehenriquez@hotmail.com",
@@ -52,12 +56,15 @@ namespace Infatlan_STEI
                 cargarInventario();
                 cargarAgencias();
                 cargarCableado();
-            }catch (Exception ex){
+            }
+            catch (Exception ex)
+            {
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
-        
-        public void Mensaje(string vMensaje, WarningType type){
+
+        public void Mensaje(string vMensaje, WarningType type)
+        {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
 
@@ -79,17 +86,20 @@ namespace Infatlan_STEI
 
         }
 
-        protected void BtnEnviarBug_Click(object sender, EventArgs e){
-            try{
+        protected void BtnEnviarBug_Click(object sender, EventArgs e)
+        {
+            try
+            {
                 DataTable vDatos = (DataTable)Session["AUTHCLASS"];
-                if (vDatos.Rows.Count > 0){
+                if (vDatos.Rows.Count > 0)
+                {
                     SmtpService vService = new SmtpService();
                     Boolean vFlagEnvio = false;
                     String vDestino = "";
 
                     if (DDLTipo.SelectedValue == "1")
                         vDestino = ConfigurationManager.AppSettings["SmtpSTEI"].ToString();
-                    else if(DDLTipo.SelectedValue == "2")
+                    else if (DDLTipo.SelectedValue == "2")
                         vDestino = ConfigurationManager.AppSettings["SmtpAGENCIAS"].ToString();
                     else if (DDLTipo.SelectedValue == "3")
                         vDestino = ConfigurationManager.AppSettings["SmtpATM"].ToString();
@@ -98,7 +108,8 @@ namespace Infatlan_STEI
                     else if (DDLTipo.SelectedValue == "5")
                         vDestino = ConfigurationManager.AppSettings["SmtpINVENTARIO"].ToString();
 
-                    foreach (DataRow item in vDatos.Rows){
+                    foreach (DataRow item in vDatos.Rows)
+                    {
                         vService.EnviarMensaje(
                             vDestino,
                             typeBody.Bugs,
@@ -113,22 +124,26 @@ namespace Infatlan_STEI
                         Mensaje("Incidencia enviada con éxito.", WarningType.Success);
                     else
                         Mensaje("El Mensaje no se pudo enviar. Favor intente de nuevo.", WarningType.Success);
-                    
+
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
                 }
-            }catch (Exception ex){
+            }
+            catch (Exception ex)
+            {
                 Mensaje(ex.Message, WarningType.Danger);
             }
         }
 
-        private void cargarCableado() {
+        private void cargarCableado()
+        {
             String vQueryUsuario = "STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 28 ,'" + Session["USUARIO"] + "'";
             DataTable vDatosUsuario = vConexion.obtenerDataTable(vQueryUsuario);
-                    
+
             int vUsuario = 1;
             String vQuery = "";
             DataTable vDatos = new DataTable();
-            if (vUsuario == 1){
+            if (vUsuario == 1)
+            {
                 vQuery = "STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 28 ,'" + Session["USUARIO"].ToString() + "'";
                 vDatos = vConexion.obtenerDataTable(vQuery);
 
@@ -139,30 +154,33 @@ namespace Infatlan_STEI
                 LbFechaDashboard.Text = DateTime.Now.ToString("dd-MM-yyyy");
             }
 
-            if (vUsuario == 2){
+            if (vUsuario == 2)
+            {
                 vQuery = "STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 29 ,'" + Session["USUARIO"].ToString() + "'";
                 vDatos = vConexion.obtenerDataTable(vQuery);
 
                 txtCreadas.Text = "Estudio Revisados";
                 txtPendientes.Text = "Revisiones Pendientes";
-                lbCreadas.Text = vDatos.Rows[0]["revisados"].ToString(); 
+                lbCreadas.Text = vDatos.Rows[0]["revisados"].ToString();
                 lbPendientes.Text = vDatos.Rows[0]["revisionpendiente"].ToString();
                 LbFechaDashboard.Text = DateTime.Now.ToString("dd-MM-yyyy");
             }
 
-            if (vUsuario == 3){
+            if (vUsuario == 3)
+            {
                 vQuery = "STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 27 ,'" + Session["USUARIO"].ToString() + "'";
                 vDatos = vConexion.obtenerDataTable(vQuery);
 
                 txtCreadas.Text = "Cotizaciones Realizadas";
                 txtPendientes.Text = "Cotizaciones Pendientes";
                 lbCreadas.Text = vDatos.Rows[0]["realizados"].ToString(); ;
-                lbPendientes.Text = vDatos.Rows[0]["pendientes"].ToString(); 
+                lbPendientes.Text = vDatos.Rows[0]["pendientes"].ToString();
                 LbFechaDashboard.Text = DateTime.Now.ToString("dd-MM-yyyy");
             }
         }
 
-        private void cargarInventario() {
+        private void cargarInventario()
+        {
             String vQuery = "[STEISP_INVENTARIO_Generales] 15";
             DataTable vDatos = vConexion.obtenerDataTable(vQuery);
             LbStock.Text = vDatos.Rows[0]["Stock"].ToString();
@@ -171,7 +189,8 @@ namespace Infatlan_STEI
             LbTran.Text = vDatos.Rows[0]["Trans"].ToString();
         }
 
-        private void cargarAgencias() {
+        private void cargarAgencias()
+        {
             String vQuery = "[STEISP_INVENTARIO_Generales] 15";
             DataTable vDatos = vConexion.obtenerDataTable(vQuery);
             LbStock.Text = vDatos.Rows[0]["Stock"].ToString();

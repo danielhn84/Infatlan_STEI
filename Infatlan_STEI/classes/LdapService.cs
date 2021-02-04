@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.DirectoryServices;
 using System.DirectoryServices.AccountManagement;
 using System.DirectoryServices.ActiveDirectory;
 using System.Globalization;
-using System.Linq;
-using System.Web;
-using System.Data;
 
 namespace Infatlan_STEI.classes
 {
@@ -14,9 +12,11 @@ namespace Infatlan_STEI.classes
     {
         public LdapService() { }
 
-        public System.Data.DataTable GetDatosUsuario(string domain, string username){
+        public System.Data.DataTable GetDatosUsuario(string domain, string username)
+        {
             DataTable vDatosAD = new DataTable();
-            try{
+            try
+            {
                 DirectorySearcher search = new DirectorySearcher(domain);
                 //search.Filter = "(&(objectClass=user)(anr=" + username + "))";
                 search.Filter = "(&(objectClass=user)(DisplayName=*" + username + "*))";
@@ -29,8 +29,10 @@ namespace Infatlan_STEI.classes
                 vDatosAD.Columns.Add("sn");
                 vDatosAD.Columns.Add("mail");
 
-                foreach (SearchResult item in result){
-                    try{
+                foreach (SearchResult item in result)
+                {
+                    try
+                    {
                         vDatosAD.Rows.Add(
                             item.Properties["givenName"][0].ToString(),
                             item.Properties["sn"][0].ToString(),
@@ -40,7 +42,9 @@ namespace Infatlan_STEI.classes
                     }
                     catch { }
                 }
-            }catch{
+            }
+            catch
+            {
                 throw;
             }
             return vDatosAD;
@@ -48,14 +52,17 @@ namespace Infatlan_STEI.classes
 
         public bool ValidateCredentials(string domain, string username, string password)
         {
-            using (var context = new PrincipalContext(ContextType.Domain, domain)){
+            using (var context = new PrincipalContext(ContextType.Domain, domain))
+            {
                 return context.ValidateCredentials(username, password);
             }
         }
 
-        public bool IsUserInAdGroup(string domain, string username, string adGroupName){
+        public bool IsUserInAdGroup(string domain, string username, string adGroupName)
+        {
             bool result = false;
-            using (var context = new PrincipalContext(ContextType.Domain, domain)){
+            using (var context = new PrincipalContext(ContextType.Domain, domain))
+            {
                 var user = UserPrincipal.FindByIdentity(context, username);
                 if (user != null)
                 {
@@ -67,7 +74,8 @@ namespace Infatlan_STEI.classes
             return result;
         }
 
-        public String[] GetGroups(String username, String password){
+        public String[] GetGroups(String username, String password)
+        {
             String vDomain = Domain.GetCurrentDomain().Name;
             var allRoles = new List<string>();
             var root = new DirectoryEntry(vDomain, username, password);

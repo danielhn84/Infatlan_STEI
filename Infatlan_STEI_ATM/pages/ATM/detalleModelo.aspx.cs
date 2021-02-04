@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Infatlan_STEI_ATM.clases;
+using System;
+using System.Data;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.Sql;
-using System.Data.SqlClient;
-using Infatlan_STEI_ATM.clases;
 
 
 namespace Infatlan_STEI_ATM.pages.ATM
@@ -16,25 +12,30 @@ namespace Infatlan_STEI_ATM.pages.ATM
     {
         bd vConexion = new bd();
         Security vSecurity = new Security();
-        protected void Page_Load(object sender, EventArgs e){
+        protected void Page_Load(object sender, EventArgs e)
+        {
             Session["DETALLE_MODELO_ATM"] = null;
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
+            if (!Page.IsPostBack)
+            {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
                     if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Creacion)
                         btnnewdetModeloATM.Visible = true;
 
                     cargarData();
-                }else {
+                }
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
             }
         }
-        
+
         public void Mensaje(string vMensaje, WarningType type)
         {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
-        
+
         int CargarInformacionDDL(DropDownList vList, String vValue)
         {
             int vIndex = 0;
@@ -53,37 +54,39 @@ namespace Infatlan_STEI_ATM.pages.ATM
             catch { throw; }
             return vIndex;
         }
-        
+
         void cargarData()
         {
             if (HttpContext.Current.Session["DETALLE_MODELO_ATM"] == null)
             {
-                
+
                 //lbdetalle1.Visible = false;
                 //lbdetalle2.Visible = false;
-                string det ="";
-           
-            try
-            {
-                DataTable vDatos = new DataTable();
-                vDatos = vConexion.ObtenerTabla("STEISP_ATM_DetalleModelo 4,1,1,'"+det+"','"+ Session["USUARIO"].ToString() + "'");
-                GVBusqueda.DataSource = vDatos;
-                GVBusqueda.DataBind();
-                if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Edicion){
-                    foreach (GridViewRow item in GVBusqueda.Rows){
-                        LinkButton LbEdit = item.FindControl("BtnEditar") as LinkButton;
-                        LbEdit.Visible = true;
-                    }
-                }
-                Session["detMATM"] = vDatos;
-                Session["UPDATEATM"] = 1;
+                string det = "";
 
-            }
-            catch (Exception Ex)
-            {
+                try
+                {
+                    DataTable vDatos = new DataTable();
+                    vDatos = vConexion.ObtenerTabla("STEISP_ATM_DetalleModelo 4,1,1,'" + det + "','" + Session["USUARIO"].ToString() + "'");
+                    GVBusqueda.DataSource = vDatos;
+                    GVBusqueda.DataBind();
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Edicion)
+                    {
+                        foreach (GridViewRow item in GVBusqueda.Rows)
+                        {
+                            LinkButton LbEdit = item.FindControl("BtnEditar") as LinkButton;
+                            LbEdit.Visible = true;
+                        }
+                    }
+                    Session["detMATM"] = vDatos;
+                    Session["UPDATEATM"] = 1;
+
+                }
+                catch (Exception Ex)
+                {
                     throw;
-            }
-           
+                }
+
                 try
                 {
                     String vQuery = "STEISP_ATM_Generales 2,1";
@@ -126,8 +129,8 @@ namespace Infatlan_STEI_ATM.pages.ATM
 
             if (e.CommandName == "Codigo")
             {
-               
-                
+
+
                 try
                 {
                     DataTable vDatos = new DataTable();
@@ -148,7 +151,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
 
                 lbcoddetMATM.Text = coddetM;
                 lbNombredetMATM.Text = Convert.ToString(Session["nombredetM"]);
-                DDLModeloATM.SelectedIndex= CargarInformacionDDL(DDLModeloATM, Session["idModelo"].ToString());
+                DDLModeloATM.SelectedIndex = CargarInformacionDDL(DDLModeloATM, Session["idModelo"].ToString());
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal();", true);
             }
         }
@@ -157,16 +160,16 @@ namespace Infatlan_STEI_ATM.pages.ATM
         {
             if (txtModalNewdetMATM.Text == "" || txtModalNewdetMATM.Text == string.Empty || DDLModeloATM.SelectedValue == "0")
             {
-              
+
                 //H5Alerta1.Visible = true;
                 txtAlerta1.Visible = true;
             }
             else
             {
-                
+
                 try
                 {
-                    string vQuery = "STEISP_ATM_DetalleModelo 3, '" + DDLModeloATM.SelectedValue + "','"+ Session["coddetM"] + "','" + txtModalNewdetMATM.Text + "','" + Session["USUARIO"].ToString() + "'";
+                    string vQuery = "STEISP_ATM_DetalleModelo 3, '" + DDLModeloATM.SelectedValue + "','" + Session["coddetM"] + "','" + txtModalNewdetMATM.Text + "','" + Session["USUARIO"].ToString() + "'";
                     Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                     if (vInfo == 1)
                     {
@@ -180,7 +183,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
                     }
                     else
                     {
-                        txtAlerta1.Text="No se pudo modificar el detalle de modelo";
+                        txtAlerta1.Text = "No se pudo modificar el detalle de modelo";
                         txtAlerta1.Visible = true;
                     }
                 }
@@ -199,11 +202,11 @@ namespace Infatlan_STEI_ATM.pages.ATM
 
         protected void btnModalNuevidetMATM_Click(object sender, EventArgs e)
         {
-            
-            
+
+
             if (txtNewdetMATM.Text == "" || txtNewdetMATM.Text == string.Empty || DDLNewModelo.SelectedValue == "0")
             {
-              
+
                 //H5Alerta2.Visible = true;
                 txtAlerta2.Visible = true;
             }

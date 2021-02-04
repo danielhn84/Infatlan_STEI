@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Infatlan_STEI_ATM.clases;
+using System;
+using System.Data;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.Sql;
-using System.Data.SqlClient;
-using Infatlan_STEI_ATM.clases;
 
 namespace Infatlan_STEI_ATM.pages.correctivo
 {
@@ -153,7 +149,7 @@ namespace Infatlan_STEI_ATM.pages.correctivo
             try
             {
                 string vEstado = "";
-                string codATMs = e.CommandArgument.ToString();             
+                string codATMs = e.CommandArgument.ToString();
                 if (e.CommandName == "Modificar")
                 {
                     DataTable vDatos = new DataTable();
@@ -164,14 +160,14 @@ namespace Infatlan_STEI_ATM.pages.correctivo
                         vEstado = item["estado"].ToString();
                     }
 
-                    if (vEstado == "5" || vEstado == "4" || vEstado=="")
+                    if (vEstado == "5" || vEstado == "4" || vEstado == "")
                     {
                         TxBuscarATM.Text = string.Empty;
                         Response.Redirect("mantCorrectivoNotificacion.aspx?cod=" + codATMs);
-                    }            
+                    }
                     else
                     {
-                        Mensaje("¡ALERTA! ATM "+ codATMs+" ya está en proceso de mantenimiento, no puede seleccionarlo hasta finalizar mantenimiento pendiente.",WarningType.Danger);
+                        Mensaje("¡ALERTA! ATM " + codATMs + " ya está en proceso de mantenimiento, no puede seleccionarlo hasta finalizar mantenimiento pendiente.", WarningType.Danger);
                     }
                 }
 

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Infatlan_STEI_Comunicacion.classes;
+using System;
+using System.Data;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Infatlan_STEI_Comunicacion.classes;
-using System.Data;
 
 namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
 {
@@ -60,7 +57,7 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
         {
             try
             {
-                String vQuery = "STEISP_COMUNICACION_AprobalLV 1" ;
+                String vQuery = "STEISP_COMUNICACION_AprobalLV 1";
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
                 GvPendientesAprobarLV.DataSource = vDatos;
                 GvPendientesAprobarLV.DataBind();

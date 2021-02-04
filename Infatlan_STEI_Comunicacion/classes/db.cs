@@ -1,25 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
 
 namespace Infatlan_STEI_Comunicacion.classes
 {
-    public enum WarningType { 
+    public enum WarningType
+    {
         Success,
         Info,
         Warning,
         Danger
     }
-    
+
     public class db
     {
         SqlConnection vConexion;
         public db()
-        { 
+        {
             vConexion = new SqlConnection(ConfigurationManager.AppSettings["SqlServer"]);
         }
 

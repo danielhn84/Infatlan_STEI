@@ -1,28 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Infatlan_STEI_CableadoEstructurado.clases;
+using Infatlan_STEI_Inventario.clases;
+using Microsoft.Office.Interop.Word;
+using System;
+using System.Data;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using Infatlan_STEI_CableadoEstructurado.clases;
-using System.Data.Sql;
-using System.Text;
-using System.Drawing;
-using System.Threading.Tasks;
-using System.Web.UI.HtmlControls;
-using System.Configuration;
-using System.Web.ApplicationServices;
-
-using Word = Microsoft.Office.Interop.Word;
-using iTextSharp.text.pdf;
-using iTextSharp.text;
-using Microsoft.Office.Interop.Word;
-
 using DataTable = System.Data.DataTable;
 using Page = System.Web.UI.Page;
-using System.IO;
-using Infatlan_STEI_Inventario.clases;
+using Word = Microsoft.Office.Interop.Word;
 
 namespace Infatlan_STEI_CableadoEstructurado.page.cotizacion
 {
@@ -31,49 +17,63 @@ namespace Infatlan_STEI_CableadoEstructurado.page.cotizacion
         db vConexion = new db();
         Security vSecurity = new Security();
 
-        protected void Page_Load(object sender, EventArgs e){
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!Page.IsPostBack)
+            {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
                     CargarProceso();
-                }else {
+                }
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
             }
         }
 
-        public void Mensaje(string vMensaje, WarningType type){
+        public void Mensaje(string vMensaje, WarningType type)
+        {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
 
-        void CargarProceso(){
-            try{
+        void CargarProceso()
+        {
+            try
+            {
                 string vIdEstudio = Request.QueryString["i"];
                 string vCondicion = Request.QueryString["a"];
 
-                if (vCondicion == Convert.ToString(2)){
+                if (vCondicion == Convert.ToString(2))
+                {
                     DataTable vDatos = new DataTable();
                     vDatos = vConexion.obtenerDataTable("STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 23," + vIdEstudio);
                     LbDescripcionOferta.Text = "Detalle de la oferta creada.";
                     udpContabilidad.Update();
-                   
+
                     GVOfertaEconomica.DataSource = vDatos;
                     GVOfertaEconomica.DataBind();
                     Session["CE_DATOSESTUDIOOFERTA"] = vDatos;
 
-                    foreach (GridViewRow row in GVOfertaEconomica.Rows){
+                    foreach (GridViewRow row in GVOfertaEconomica.Rows)
+                    {
                         LinkButton button = row.FindControl("BtnAprobar") as LinkButton;
                         button.Enabled = false;
                         button.CssClass = "btn btn-secondary";
                     }
-                }else{
+                }
+                else
+                {
                     LbDescripcion.Visible = true;
                     DataTable vDatos = new DataTable();
                     vDatos = vConexion.obtenerDataTable("STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 24");
 
                     GVOfertaEconomica.DataSource = vDatos;
                     GVOfertaEconomica.DataBind();
-                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 4).Edicion){
-                        foreach (GridViewRow item in GVOfertaEconomica.Rows){
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 4).Edicion)
+                    {
+                        foreach (GridViewRow item in GVOfertaEconomica.Rows)
+                        {
                             LinkButton LbEdit = item.FindControl("BtnModificar") as LinkButton;
                             LinkButton LbEdit2 = item.FindControl("BtnAprobar") as LinkButton;
                             LbEdit.Visible = true;
@@ -83,12 +83,15 @@ namespace Infatlan_STEI_CableadoEstructurado.page.cotizacion
                     Session["CE_DATOSESTUDIOOFERTA"] = vDatos;
                     updBuscarAprobacion.Visible = true;
 
-                    foreach (GridViewRow row in GVOfertaEconomica.Rows){
-                        string  vQuery = "STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 34,'" + row.Cells[0].Text + "'";
+                    foreach (GridViewRow row in GVOfertaEconomica.Rows)
+                    {
+                        string vQuery = "STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 34,'" + row.Cells[0].Text + "'";
                         DataTable vDatosBusqueda = vConexion.obtenerDataTable(vQuery);
 
-                        foreach (DataRow item in vDatosBusqueda.Rows){
-                            if (item["estado"].ToString() == "OfertaAprobada"){
+                        foreach (DataRow item in vDatosBusqueda.Rows)
+                        {
+                            if (item["estado"].ToString() == "OfertaAprobada")
+                            {
                                 LinkButton button = row.FindControl("BtnAprobar") as LinkButton;
                                 button.Enabled = false;
                                 button.CssClass = "btn btn-secondary";
@@ -96,7 +99,9 @@ namespace Infatlan_STEI_CableadoEstructurado.page.cotizacion
                                 LinkButton button1 = row.FindControl("BtnModificar") as LinkButton;
                                 button1.Enabled = false;
                                 button1.CssClass = "btn btn-secondary";
-                            }else{
+                            }
+                            else
+                            {
                                 LinkButton button = row.FindControl("BtnAprobar") as LinkButton;
                                 button.Enabled = true;
 
@@ -106,7 +111,9 @@ namespace Infatlan_STEI_CableadoEstructurado.page.cotizacion
                         }
                     }
                 }
-            }catch (Exception Ex){
+            }
+            catch (Exception Ex)
+            {
                 Mensaje(Ex.Message, WarningType.Danger);
             }
         }
@@ -176,9 +183,9 @@ namespace Infatlan_STEI_CableadoEstructurado.page.cotizacion
                     //catch (Exception Ex) { vError = Ex.Message; }
                 }
 
-                   
 
-                
+
+
 
                 if (e.CommandName == "Aprobar")
                 {
@@ -395,4 +402,4 @@ namespace Infatlan_STEI_CableadoEstructurado.page.cotizacion
 
         }
     }
- }
+}

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Infatlan_STEI_Comunicacion.classes;
+using System;
+using System.Data;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Infatlan_STEI_Comunicacion.classes;
-using System.Data;
 
 namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
 {
@@ -49,11 +46,11 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                 }
             }
 
-                //}
-                //else
-                //{
-                //    Response.Redirect("/login.aspx");
-                //}
+            //}
+            //else
+            //{
+            //    Response.Redirect("/login.aspx");
+            //}
 
         }
 
@@ -95,8 +92,8 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
                 string vIdMantenimientoCompletarLV = e.CommandArgument.ToString();
                 String vQuery = "STEISP_COMUNICACION_CompletarLV 2,'" + vIdMantenimientoCompletarLV + "'";
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
-                Session["COMUNICACION_PCLV_COMPLETAR_LV_INDIVIDUAL"] = vDatos;               
-            
+                Session["COMUNICACION_PCLV_COMPLETAR_LV_INDIVIDUAL"] = vDatos;
+
                 Response.Redirect("/sites/comunicaciones/pages/mantenimiento/lvIndividual.aspx?ex=1");
             }
         }

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+﻿using Infatlan_STEI_ATM.clases;
+using System;
 using System.Data;
-using Infatlan_STEI_ATM.clases;
+using System.Web.UI;
 
 namespace Infatlan_STEI
 {
@@ -13,25 +9,30 @@ namespace Infatlan_STEI
     {
         bd vConexion = new bd();
         Security vSecurity = new Security();
-        protected void Page_Load(object sender, EventArgs e){
-            try{
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            try
+            {
                 if (!Convert.ToBoolean(Session["AUTH"]))
                     Response.Redirect("/login.aspx");
 
                 DataTable vDatosP = (DataTable)Session["AUTHCLASS"];
                 string ver = Session["USUARIO"].ToString();
 
-                if (!Page.IsPostBack){
+                if (!Page.IsPostBack)
+                {
                     if (!vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Consulta)
                         Response.Redirect("/default.aspx");
-                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Creacion){
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Creacion)
+                    {
                         //LIAgregar.Visible = true;
                         LIModCrear.Visible = true;
                         LIVerCrear.Visible = true;
                         LIMatSolicitar.Visible = true;
                         LIDevoluciones.Visible = true;
                     }
-                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Edicion){
+                    if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Edicion)
+                    {
                         LIModAprobar.Visible = true;
                         LIVerAprobar.Visible = true;
                         LIMatAprobar.Visible = true;
@@ -46,20 +47,28 @@ namespace Infatlan_STEI
                     String vQuery = "[STEISP_Mensajes] 3,'" + Session["USUARIO"].ToString() + "'";
                     vDatos = vConexion.ObtenerTabla(vQuery);
 
-                    for (int i = 0; i < vDatos.Rows.Count; i++){
+                    for (int i = 0; i < vDatos.Rows.Count; i++)
+                    {
                         vPointer = "<span class='heartbit'></span><span class='point'></span>";
 
                         String vColor = "", vLogo = "";
-                        if (vDatos.Rows[i]["idAplicacion"].ToString() == "1"){
+                        if (vDatos.Rows[i]["idAplicacion"].ToString() == "1")
+                        {
                             vColor = "primary";
                             vLogo = "ti ti-shopping-cart";
-                        }else if (vDatos.Rows[i]["idAplicacion"].ToString() == "2"){
+                        }
+                        else if (vDatos.Rows[i]["idAplicacion"].ToString() == "2")
+                        {
                             vColor = "success";
                             vLogo = "ti ti-home";
-                        }else if (vDatos.Rows[i]["idAplicacion"].ToString() == "3"){
+                        }
+                        else if (vDatos.Rows[i]["idAplicacion"].ToString() == "3")
+                        {
                             vColor = "info";
                             vLogo = "ti ti-desktop";
-                        }else if (vDatos.Rows[i]["idAplicacion"].ToString() == "4"){
+                        }
+                        else if (vDatos.Rows[i]["idAplicacion"].ToString() == "4")
+                        {
                             vColor = "danger";
                             vLogo = "ti ti-plug";
                         }
@@ -110,7 +119,7 @@ namespace Infatlan_STEI
                     vDatosMain = vConexion.ObtenerTabla(vQueryMain);
                     foreach (DataRow item in vDatosMain.Rows)
                     {
-                        if (item["permisos"].ToString()=="True")
+                        if (item["permisos"].ToString() == "True")
                         {
                             LIPermisos.Visible = true;
                             LICancelar.Visible = true;
@@ -173,13 +182,15 @@ namespace Infatlan_STEI
                     //    LINotifATM.Visible = true;
                     //    LIVerAprobar.Visible = false;
                     //}
-                   
+
                 }
-            }catch (Exception ex){
+            }
+            catch (Exception ex)
+            {
                 String vError = ex.Message;
             }
         }
 
-      
+
     }
 }

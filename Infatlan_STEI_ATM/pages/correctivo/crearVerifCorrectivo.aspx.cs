@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+﻿using Infatlan_STEI_ATM.clases;
+using System;
 using System.Configuration;
 using System.Data;
-using System.Data.Sql;
-using System.Data.SqlClient;
-using Infatlan_STEI_ATM.clases;
+using System.Linq;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace Infatlan_STEI_ATM.pages.correctivo
 {
@@ -35,7 +31,7 @@ namespace Infatlan_STEI_ATM.pages.correctivo
             try
             {
                 DataTable vDatos = new DataTable();
-                vDatos = vConexion.ObtenerTabla("STEISP_ATM_GeneralesCorrectivo 1,'"+Session["USUARIO"]+"'");
+                vDatos = vConexion.ObtenerTabla("STEISP_ATM_GeneralesCorrectivo 1,'" + Session["USUARIO"] + "'");
                 GVBusqueda.DataSource = vDatos;
                 GVBusqueda.DataBind();
                 Session["ATM_CREAVERIFCOR"] = vDatos;
@@ -121,9 +117,9 @@ namespace Infatlan_STEI_ATM.pages.correctivo
             {
                 string ID = e.CommandArgument.ToString();
                 if (e.CommandName == "Aprobar")
-                {                   
-                        TxBuscarTecnicoATM.Text = string.Empty;
-                        Response.Redirect("mantCorrectivoVerificacion.aspx?cod=" + ID);                    
+                {
+                    TxBuscarTecnicoATM.Text = string.Empty;
+                    Response.Redirect("mantCorrectivoVerificacion.aspx?cod=" + ID);
                 }
                 if (e.CommandName == "Cancelar")
                 {
@@ -136,8 +132,8 @@ namespace Infatlan_STEI_ATM.pages.correctivo
                         txtModalATM.Text = item["Codigo"].ToString() + " - " + item["NomATM"].ToString();
                         Session["COD_COR"] = item["Codigo"].ToString();
                     }
-                    myLargeModalLabel.InnerText = "Cancelar Mantenimiento No. "+ID;
-                   
+                    myLargeModalLabel.InnerText = "Cancelar Mantenimiento No. " + ID;
+
                     Session["ID_COR"] = ID;
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "openModal();", true);
                 }
@@ -177,7 +173,7 @@ namespace Infatlan_STEI_ATM.pages.correctivo
 
             String vQuery6 = "[STEISP_ATM_GeneralesCorrectivo] 14, '" + Session["ID_COR"] + "'";
             DataTable vDatos6 = vConexion.ObtenerTabla(vQuery6);
-            
+
 
             string vQueryD = "STEISP_ATM_Generales 33,'" + Session["USUARIO"] + "'";
             DataTable vDatosTecnicoResponsable = vConexion.ObtenerTabla(vQueryD);
@@ -209,7 +205,7 @@ namespace Infatlan_STEI_ATM.pages.correctivo
                             typeBody.ATM,
                             "Notificación de Mantenimiento correctivo ATM",
                             "Buen día, se le notifica que se canceló solicitud de mantenimiento correctivo, el encargado es " + vDatosTecnicoResponsable.Rows[0]["nombre"].ToString() + ", mantenimiento al ATM " + txtModalATM.Text,
-                              "El usuario <b>" + item["Nombre"].ToString() + "</b> canceló: <br> Notificación de Mantenimiento</br>Motivo cancela mantenimiento: "+txtMotivo.Text,
+                              "El usuario <b>" + item["Nombre"].ToString() + "</b> canceló: <br> Notificación de Mantenimiento</br>Motivo cancela mantenimiento: " + txtMotivo.Text,
                                vCorreoEncargadoZona,
                                "/sites/ATM/pages/correctivo/crearVerifCorrectivo.aspx"
                             );
@@ -227,7 +223,7 @@ namespace Infatlan_STEI_ATM.pages.correctivo
 
 
                 }
-            }         
+            }
             if (vDatosJefeAgencias.Rows.Count > 0)
             {
                 foreach (DataRow item in vDatosJefeAgencias.Rows)
@@ -252,7 +248,7 @@ namespace Infatlan_STEI_ATM.pages.correctivo
 
         protected void btnMantSinRealizar_Click(object sender, EventArgs e)
         {
-           
+
             if (txtMotivo.Text == "")
             {
                 txtAlerta.Visible = true;
@@ -267,7 +263,7 @@ namespace Infatlan_STEI_ATM.pages.correctivo
                     txtMotivo.Text = "";
                     cargarData();
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "Pop", "closeModal();", true);
-                    Mensaje("Mantenimiento fue cancelado exitosamente.",WarningType.Success);
+                    Mensaje("Mantenimiento fue cancelado exitosamente.", WarningType.Success);
                 }
             }
         }

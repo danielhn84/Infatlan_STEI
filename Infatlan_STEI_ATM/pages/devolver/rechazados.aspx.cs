@@ -1,24 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Infatlan_STEI_ATM.clases;
+using System;
+using System.Data;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.Sql;
-using System.Data.SqlClient;
-using Infatlan_STEI_ATM.clases;
 
 namespace Infatlan_STEI_ATM.pages.devolver
 {
     public partial class rechazados : System.Web.UI.Page
     {
         bd vConexion = new bd();
-        protected void Page_Load(object sender, EventArgs e){
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!Page.IsPostBack)
+            {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
                     cargarData();
-                }else {
+                }
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
             }
@@ -30,7 +30,7 @@ namespace Infatlan_STEI_ATM.pages.devolver
         }
         void cargarData()
         {
-            
+
             try
             {
                 DataTable vDatos = new DataTable();
@@ -113,7 +113,7 @@ namespace Infatlan_STEI_ATM.pages.devolver
                         Session["ATM_ATMACTIVO_VERIF_CREAR"] = item["ATMActivo"].ToString();
                     }
 
-                    
+
                     DataTable vDatos4 = new DataTable();
                     String vQuery4 = "STEISP_AGENCIA_CreacionNotificacion 6,'" + Session["ATM_USUCREADOR_VERIF_CREAR"].ToString() + "'";
                     vDatos4 = vConexion.ObtenerTabla(vQuery4);

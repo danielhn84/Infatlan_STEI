@@ -1,14 +1,12 @@
-﻿using System;
+﻿using Infatlan_STEI_ATM.clases;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Net;
-using System.Data.Sql;
-using System.Data.SqlClient;
-using Infatlan_STEI_ATM.clases;
 
 namespace Infatlan_STEI_ATM.pages.ATM
 {
@@ -17,12 +15,17 @@ namespace Infatlan_STEI_ATM.pages.ATM
         bd vConexion = new bd();
         bd vConexionATM = new bd();
         Security vSecurity = new Security();
-        protected void Page_Load(object sender, EventArgs e){
+        protected void Page_Load(object sender, EventArgs e)
+        {
             Session["UPDATEATM"] = null;
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
+            if (!Page.IsPostBack)
+            {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
                     cargarData();
-                }else {
+                }
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
             }
@@ -32,7 +35,7 @@ namespace Infatlan_STEI_ATM.pages.ATM
         {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
-        
+
         int CargarInformacionDDL(DropDownList vList, String vValue)
         {
             int vIndex = 0;
@@ -51,23 +54,27 @@ namespace Infatlan_STEI_ATM.pages.ATM
             catch { throw; }
             return vIndex;
         }
-        
-        void cargarData(){
-            try{
+
+        void cargarData()
+        {
+            try
+            {
                 DataTable vDatos = new DataTable();
                 vDatos = vConexionATM.ObtenerTablaATM("SPSTEI_ATM 2");
                 GVBusqueda.DataSource = vDatos;
                 GVBusqueda.DataBind();
-               
-                if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Edicion){
-                    foreach (GridViewRow item in GVBusqueda.Rows){
+
+                if (vSecurity.ObtenerPermiso(Session["USUARIO"].ToString(), 3).Edicion)
+                {
+                    foreach (GridViewRow item in GVBusqueda.Rows)
+                    {
                         //LinkButton LbEdit = item.FindControl("btnbajaATM") as LinkButton;
                         LinkButton LbEdit2 = item.FindControl("btnmodificarATM") as LinkButton;
                         //LbEdit.Visible = true;
                         LbEdit2.Visible = true;
                     }
                 }
-                 Session["ATM"] = vDatos;
+                Session["ATM"] = vDatos;
                 Session["UPDATEATM"] = 1;
 
             }
@@ -75,10 +82,11 @@ namespace Infatlan_STEI_ATM.pages.ATM
             {
                 Mensaje(Ex.Message, WarningType.Danger);
             }
-            
+
         }
 
-        protected void GVBusqueda_RowCommand(object sender, GridViewCommandEventArgs e){
+        protected void GVBusqueda_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
             try
             {
                 DataTable vDataaaa = (DataTable)Session["ATM"];
@@ -123,7 +131,9 @@ namespace Infatlan_STEI_ATM.pages.ATM
                 }
 
 
-            }catch (Exception Ex){
+            }
+            catch (Exception Ex)
+            {
                 Mensaje(Ex.Message, WarningType.Danger);
             }
         }
@@ -178,7 +188,8 @@ namespace Infatlan_STEI_ATM.pages.ATM
             }
         }
 
-        protected void GVBusqueda_PageIndexChanging(object sender, GridViewPageEventArgs e){
+        protected void GVBusqueda_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
             try
             {
                 GVBusqueda.PageIndex = e.NewPageIndex;

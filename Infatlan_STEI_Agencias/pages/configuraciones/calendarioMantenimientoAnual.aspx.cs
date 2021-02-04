@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Configuration;
-using System.IO;
-using System.Data;
+﻿using Excel;
 using Infatlan_STEI_Agencias.classes;
-using Excel;
+using System;
+using System.Configuration;
+using System.Data;
+using System.IO;
+using System.Web.UI;
 
 namespace Infatlan_STEI_Agencias.pages.configuraciones
 {
@@ -19,25 +15,30 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
         {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
-        
-        protected void Page_Load(object sender, EventArgs e){
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
 
-                }else {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!Page.IsPostBack)
+            {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
+
+                }
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
             }
         }
-        
+
         public Boolean cargarArchivo(String DireccionCarga, ref int vSuccess, ref int vError, String vUsuario, String TipoProceso)
         {
 
-            Div1.Visible = false;           
+            Div1.Visible = false;
             DivAlerta.Visible = false;
 
             Boolean vResultado = false;
-           
+
             try
             {
                 FileStream stream = File.Open(DireccionCarga, FileMode.Open, FileAccess.Read);
@@ -70,7 +71,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             }
             return vResultado;
         }
-        
+
         private bool verificarRow(DataRow dr)
         {
             int contador = 0;
@@ -87,7 +88,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             else
                 return true;
         }
-        
+
         public void procesarArchivo(DataSet vArchivo, ref int vSuccess, string DireccionCarga, string TipoProceso)
         {
             try
@@ -144,7 +145,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
 
                             Session["AG_CMA_AREA_SUBIDO"] = Session["AG_CMA_AREA_SUBIDO"] + ", " + Area;
                         }
-                        
+
                         if (vFechaMant != vAño)
                         {
                             if (Session["AG_CMA_FECHA_SUBIDO"].ToString() == "Completo")
@@ -153,7 +154,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
 
                             Session["AG_CMA_FECHA_SUBIDO"] = Session["AG_CMA_FECHA_SUBIDO"] + ", " + CodAgencia;
                         }
-                      
+
 
                     }
 
@@ -208,8 +209,8 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
             {
                 LbMensaje.Text = ex.Message;
             }
-        }      
-        
+        }
+
         protected void BtnEnviar_Click1(object sender, EventArgs e)
         {
             String archivoLog = string.Format("{0}_{1}", Convert.ToString(Session["USUARIO"]), DateTime.Now.ToString("yyyyMMdd"));
@@ -262,7 +263,7 @@ namespace Infatlan_STEI_Agencias.pages.configuraciones
                 Div1.Visible = true;
             }
         }
-        
+
         protected void BtnCancelar_Click1(object sender, EventArgs e)
         {
             try

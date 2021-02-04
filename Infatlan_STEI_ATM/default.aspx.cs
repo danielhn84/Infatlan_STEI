@@ -1,50 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+﻿using Infatlan_STEI_ATM.clases;
+using System;
 using System.Data;
-using System.Data.Sql;
-using System.Data.SqlClient;
-using Infatlan_STEI_ATM.clases;
+using System.Web.UI;
 
 namespace Infatlan_STEI_ATM
 {
     public partial class @default : System.Web.UI.Page
     {
         bd vConexion = new bd();
-        protected void Page_Load(object sender, EventArgs e){
-            try{
-                if (!Page.IsPostBack){
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!Page.IsPostBack)
+                {
                     String vUsuario = Request.QueryString["u"];
                     String vQuery = "[STEISP_Login] 3, '" + vUsuario + "'";
                     DataTable vDatos = vConexion.ObtenerTabla(vQuery);
-                    if (vDatos.Rows.Count > 0){
-                        if (vDatos.Rows[0]["auth"].ToString() != "1"){
+                    if (vDatos.Rows.Count > 0)
+                    {
+                        if (vDatos.Rows[0]["auth"].ToString() != "1")
+                        {
                             Response.Redirect("/login.aspx");
-                        }else {
+                        }
+                        else
+                        {
                             Session["AUTHCLASS"] = vDatos;
                             Session["USUARIO"] = vDatos.Rows[0]["idUsuario"].ToString();
                             Session["AUTH"] = true;
                             Contar();
                         }
-                    }else {
+                    }
+                    else
+                    {
                         Response.Redirect("/login.aspx");
                     }
                 }
-            }catch (Exception ex){
+            }
+            catch (Exception ex)
+            {
                 String vError = ex.Message;
             }
         }
 
-        void Contar(){
-            try{
+        void Contar()
+        {
+            try
+            {
                 String vQuery = "STEISP_ATM_ConteosDefault 1";
                 DataTable vDatos = vConexion.ObtenerTabla(vQuery);
                 h2ATMDisp.InnerText = vDatos.Rows[0]["Contar"].ToString();
-           
-                String vQuery2 = "STEISP_ATM_ConteosDefault 2, '"+ Session["USUARIO"].ToString() + "'";
+
+                String vQuery2 = "STEISP_ATM_ConteosDefault 2, '" + Session["USUARIO"].ToString() + "'";
                 DataTable vDatos2 = vConexion.ObtenerTabla(vQuery2);
                 H2MantAsignados.InnerText = vDatos2.Rows[0]["Contar"].ToString();
 

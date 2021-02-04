@@ -1,21 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Infatlan_STEI_CableadoEstructurado.clases;
+using System;
+using System.Data;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using Infatlan_STEI_CableadoEstructurado.clases;
-using System.Data.Sql;
-using System.Text;
-using System.Drawing;
-using System.Threading.Tasks;
-using System.Web.UI.HtmlControls;
-using System.Configuration;
-using System.Web.ApplicationServices;
 using DataTable = System.Data.DataTable;
 using Page = System.Web.UI.Page;
-using System.IO;
 
 
 namespace Infatlan_STEI_CableadoEstructurado.paginas
@@ -24,9 +14,12 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
     {
         //private object Content;
         db vConexion = new db();
-        protected void Page_Load(object sender, EventArgs e){
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!Page.IsPostBack)
+            {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
                     CargarProceso();
                     //String vQuery = "STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 27 ,'" + Session["USUARIO"] + "'";
                     //DataTable vDatos = vConexion.obtenerDataTable(vQuery);
@@ -35,18 +28,23 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
                     //LbFechaDashboard.Text = DateTime.Now.ToString("dd-MM-yyyy");
                     //CSSCotizacion.Style.Size.width = 300;
                     //CSSCotizacion.Style.Value = width:300;
-                }else {
+                }
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
             }
         }
-        
-        public void Mensaje(string vMensaje, WarningType type){
+
+        public void Mensaje(string vMensaje, WarningType type)
+        {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
 
-        void CargarProceso(){
-            try{
+        void CargarProceso()
+        {
+            try
+            {
                 DataTable vDatos = new DataTable();
                 vDatos = vConexion.obtenerDataTable("STEISP_CABLESTRUCTURADO_ConsultaDatosEstudio 15 ");
 
@@ -55,10 +53,13 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
                 Session["CE_BUSCAQUEDAESTUDIO"] = vDatos;
                 udpContabilidad.Update();
 
-                if (vDatos.Rows.Count == 0){
+                if (vDatos.Rows.Count == 0)
+                {
                     LbDescripcionAprobacion.Text = "No hay estudios pendientes";
                 }
-            }catch (Exception Ex){
+            }
+            catch (Exception Ex)
+            {
                 Mensaje(Ex.Message, WarningType.Danger);
             }
         }
@@ -98,7 +99,7 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
 
                 }
 
-            //    string vDatoPrincipal = e.CommandArgument.ToString();
+                //    string vDatoPrincipal = e.CommandArgument.ToString();
 
                 //    string vIdEstudio = e.CommandArgument.ToString();
                 //    if (e.CommandName == "Descargar")
@@ -346,7 +347,7 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
                             item["nombre"].ToString(),
                             item["agencia"].ToString(),
                             item["responsable"].ToString(),
-                            item["fechaCreacion"].ToString()                            
+                            item["fechaCreacion"].ToString()
                             );
                     }
 
@@ -375,7 +376,7 @@ namespace Infatlan_STEI_CableadoEstructurado.paginas
         //        Session["CE_BUSCAQUEDAESTUDIO"] = vDatos;
 
         //        //vDatos = vConexion.obtenerDataTable("RSP_ObtenerGenerales 12");
-               
+
         //    }
         //    catch (Exception Ex)
         //    {

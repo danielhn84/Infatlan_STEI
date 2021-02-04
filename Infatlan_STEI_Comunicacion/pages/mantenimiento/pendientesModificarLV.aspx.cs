@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using Infatlan_STEI_Comunicacion.classes;
+﻿using Infatlan_STEI_Comunicacion.classes;
+using System;
 using System.Data;
+using System.Web.UI;
 
 namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
 {
@@ -16,9 +12,12 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
         {
             String vEx = Request.QueryString["ex"];
 
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
-                    if (vEx == null){
+            if (!Page.IsPostBack)
+            {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
+                    if (vEx == null)
+                    {
                         cargarDatos();
                         UpPendientesModificarLV.Update();
                     }
@@ -35,7 +34,7 @@ namespace Infatlan_STEI_Comunicacion.pages.mantenimiento
         {
             try
             {
-                String vQuery = "STEISP_COMUNICACION_ModificarLV 1,'"+Session["USUARIO"].ToString()+"'";
+                String vQuery = "STEISP_COMUNICACION_ModificarLV 1,'" + Session["USUARIO"].ToString() + "'";
                 DataTable vDatos = vConexion.obtenerDataTable(vQuery);
                 GvPendientesModificarLV.DataSource = vDatos;
                 GvPendientesModificarLV.DataBind();

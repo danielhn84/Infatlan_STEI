@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Configuration;
-using System.IO;
-using Excel;
+﻿using Excel;
 using Infatlan_STEI_ATM.clases;
+using System;
+using System.Configuration;
 using System.Data;
+using System.IO;
+using System.Web.UI;
 
 namespace Infatlan_STEI_ATM.pages.calendario
 {
@@ -16,19 +12,26 @@ namespace Infatlan_STEI_ATM.pages.calendario
     {
         bd vConexion = new bd();
         bd vConexionATM = new bd();
-        protected void Page_Load(object sender, EventArgs e){
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!Page.IsPostBack)
+            {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
 
-                }else {
+                }
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
             }
         }
 
-        public Boolean cargarArchivo(String DireccionCarga, ref int vSuccess, ref int vError, String vUsuario, String TipoProceso){
+        public Boolean cargarArchivo(String DireccionCarga, ref int vSuccess, ref int vError, String vUsuario, String TipoProceso)
+        {
             Boolean vResultado = false;
-            try{
+            try
+            {
                 FileStream stream = File.Open(DireccionCarga, FileMode.Open, FileAccess.Read);
                 IExcelDataReader excelReader;
                 if (DireccionCarga.Contains("xlsx"))
@@ -41,7 +44,8 @@ namespace Infatlan_STEI_ATM.pages.calendario
                 excelReader.Close();
 
                 DataSet vDatosVerificacion = vDatosExcel.Copy();
-                for (int i = 0; i < vDatosVerificacion.Tables[0].Rows.Count; i++){
+                for (int i = 0; i < vDatosVerificacion.Tables[0].Rows.Count; i++)
+                {
                     if (verificarRow(vDatosVerificacion.Tables[0].Rows[i]))
                         vDatosExcel.Tables[0].Rows[i].Delete();
                 }
@@ -51,16 +55,21 @@ namespace Infatlan_STEI_ATM.pages.calendario
 
                 vResultado = true;
 
-            }catch (Exception Ex){
+            }
+            catch (Exception Ex)
+            {
                 throw new Exception(Ex.ToString());
             }
             return vResultado;
         }
 
-        private bool verificarRow(DataRow dr){
+        private bool verificarRow(DataRow dr)
+        {
             int contador = 0;
-            foreach (var value in dr.ItemArray){
-                if (value.ToString() != ""){
+            foreach (var value in dr.ItemArray)
+            {
+                if (value.ToString() != "")
+                {
                     contador++;
                 }
             }
@@ -74,9 +83,12 @@ namespace Infatlan_STEI_ATM.pages.calendario
         {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
         }
-        public void procesarArchivo(DataSet vArchivo, ref int vSuccess, string DireccionCarga, string TipoProceso){
-            try{
-                if (vArchivo.Tables[0].Rows.Count > 0){
+        public void procesarArchivo(DataSet vArchivo, ref int vSuccess, string DireccionCarga, string TipoProceso)
+        {
+            try
+            {
+                if (vArchivo.Tables[0].Rows.Count > 0)
+                {
                     DataTable vDatos = vArchivo.Tables[0];
                     string vQuery = "";
                     //Boolean idEmpleado = false;
@@ -84,7 +96,7 @@ namespace Infatlan_STEI_ATM.pages.calendario
                     Session["FECHA_SUBIDO"] = "Completo";
                     for (int i = 0; i < vDatos.Rows.Count; i++)
                     {
-                        
+
                         String CodATM = vDatos.Rows[i]["CodigoATM"].ToString();
                         String Fecha = vDatos.Rows[i]["FECHA"].ToString();
                         //String vFormato = "yyyy/MM/dd"; //"dd/MM/yyyy HH:mm:ss"
@@ -96,7 +108,7 @@ namespace Infatlan_STEI_ATM.pages.calendario
                         foreach (DataRow item in vDatos2.Rows)
                         {
                             Session["CODATM_MANT"] = item["codATM"].ToString();
-                            vCodATM= item["codATM"].ToString();
+                            vCodATM = item["codATM"].ToString();
                         }
 
                         if (Session["CODATM_MANT"].ToString() != CodATM)
@@ -105,16 +117,16 @@ namespace Infatlan_STEI_ATM.pages.calendario
                                 Session["CODATM_SUBIDO"] = "";
 
 
-                            Session["CODATM_SUBIDO"] = Session["CODATM_SUBIDO"] +", "+ CodATM;
-                          
+                            Session["CODATM_SUBIDO"] = Session["CODATM_SUBIDO"] + ", " + CodATM;
+
                         }
                         DateTime today = DateTime.Today;
                         string vYear = Convert.ToString(today.Year);
-                        if (vFechaMant!=vYear)
+                        if (vFechaMant != vYear)
                         {
                             if (Session["FECHA_SUBIDO"].ToString() == "Completo")
                                 Session["FECHA_SUBIDO"] = "";
-                            
+
 
                             Session["FECHA_SUBIDO"] = Session["FECHA_SUBIDO"] + ", " + CodATM;
                         }
@@ -123,7 +135,7 @@ namespace Infatlan_STEI_ATM.pages.calendario
 
 
 
-                    if (Session["CODATM_SUBIDO"].ToString()!="Completo" || Session["FECHA_SUBIDO"].ToString() != "Completo")
+                    if (Session["CODATM_SUBIDO"].ToString() != "Completo" || Session["FECHA_SUBIDO"].ToString() != "Completo")
                         throw new Exception();
                     else
                     {
@@ -163,9 +175,10 @@ namespace Infatlan_STEI_ATM.pages.calendario
 
                                     if (ATM == CodATM && FECHA == vFechaMant)
                                     {
-                                        Session["FechaRepetida"] = Session["FechaRepetida"] + ", " + CodATM+"-"+ vFechaMant;
+                                        Session["FechaRepetida"] = Session["FechaRepetida"] + ", " + CodATM + "-" + vFechaMant;
                                     }
-                                    else {
+                                    else
+                                    {
                                         vQuery = "STEISP_ATM_Mantenimientos '" + vFechaMant + "'" +
                                             ",'" + CodATM + "'" +
                                             ",'" + Session["USUARIO"].ToString() + "'";
@@ -179,28 +192,33 @@ namespace Infatlan_STEI_ATM.pages.calendario
                                         {
                                             vSuccess++;
                                         }
-                                    }   
+                                    }
 
                                 }
                             }
                         }
                     }
 
-                
+
                 }
                 else
-                  
-                throw new Exception("No contiene ninguna hoja de excel.");
-            }catch (Exception ex){
-                LbMensaje.Text=ex.Message;
+
+                    throw new Exception("No contiene ninguna hoja de excel.");
+            }
+            catch (Exception ex)
+            {
+                LbMensaje.Text = ex.Message;
             }
         }
-        protected void BtnEnviar_Click1(object sender, EventArgs e){
+        protected void BtnEnviar_Click1(object sender, EventArgs e)
+        {
             String archivoLog = string.Format("{0}_{1}", Convert.ToString(Session["USUARIO"]), DateTime.Now.ToString("yyyyMMdd"));
 
-            try{
+            try
+            {
                 String vDireccionCarga = ConfigurationManager.AppSettings["RUTA_SERVER"].ToString();
-                if (FUMantenimientos.HasFile){
+                if (FUMantenimientos.HasFile)
+                {
                     String vNombreArchivo = FUMantenimientos.FileName;
                     vDireccionCarga += "/" + archivoLog + "_" + vNombreArchivo;
                     FUMantenimientos.SaveAs(vDireccionCarga);
@@ -210,21 +228,23 @@ namespace Infatlan_STEI_ATM.pages.calendario
                     if (File.Exists(vDireccionCarga))
                         vCargado = cargarArchivo(vDireccionCarga, ref vSuccess, ref vError, Convert.ToString(Session["USUARIO"]), vTipoPermiso);
 
-                    if (vCargado)  
-                        LbMensaje.Text = "Archivo cargado con exito." + "<br>" + "<b style='color:green;'>Success:</b> " + vSuccess.ToString() + "&emsp;<br>ATM con fecha repetida: "+Session["FechaRepetida"];
-                    if(Session["CODATM_SUBIDO"].ToString()!= "Completo" && Session["FECHA_SUBIDO"].ToString() == "Completo")
+                    if (vCargado)
+                        LbMensaje.Text = "Archivo cargado con exito." + "<br>" + "<b style='color:green;'>Success:</b> " + vSuccess.ToString() + "&emsp;<br>ATM con fecha repetida: " + Session["FechaRepetida"];
+                    if (Session["CODATM_SUBIDO"].ToString() != "Completo" && Session["FECHA_SUBIDO"].ToString() == "Completo")
                         LbMensaje.Text = "Código " + Session["CODATM_SUBIDO"].ToString() + " no existe." + "<br>" + "<b style='color:green;'>Success:</b> " + vSuccess.ToString() + "&emsp;";
                     if (Session["CODATM_SUBIDO"].ToString() == "Completo" && Session["FECHA_SUBIDO"].ToString() != "Completo")
                         LbMensaje.Text = "Fecha erronea de código " + Session["FECHA_SUBIDO"].ToString() + "<br>" + "<b style='color:green;'>Success:</b> " + vSuccess.ToString() + "&emsp;";
                     if (Session["CODATM_SUBIDO"].ToString() != "Completo" && Session["FECHA_SUBIDO"].ToString() != "Completo")
                         LbMensaje.Text = "Código " + Session["CODATM_SUBIDO"].ToString() + " no existe." + "<br>" + "Fecha erronea de código " + Session["FECHA_SUBIDO"].ToString() + "<br>" + "<b style='color:green;'>Success:</b> " + vSuccess.ToString() + "&emsp;";
-                    
-                        
-                    
+
+
+
                 }
                 else
                     LbMensaje.Text = "No se encontró ningún archivo a cargar.";
-            }catch (Exception Ex){
+            }
+            catch (Exception Ex)
+            {
                 LbMensaje.Text = Ex.Message;
             }
         }

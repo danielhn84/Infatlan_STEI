@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Infatlan_STEI_ATM.clases;
+using System;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.Sql;
-using System.Data.SqlClient;
-using System.IO;
-using Infatlan_STEI_ATM.clases;
 
 
 namespace Infatlan_STEI_ATM.pages.mantenimiento
@@ -16,11 +8,16 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
     public partial class aprobarVerificacion : System.Web.UI.Page
     {
         bd vConexion = new bd();
-        protected void Page_Load(object sender, EventArgs e){
-            if (!Page.IsPostBack){
-                if (Convert.ToBoolean(Session["AUTH"])){
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!Page.IsPostBack)
+            {
+                if (Convert.ToBoolean(Session["AUTH"]))
+                {
 
-                }else {
+                }
+                else
+                {
                     Response.Redirect("/login.aspx");
                 }
             }
@@ -30,7 +27,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         //{
 
         //    //////////////////CONVERTIR IMAGENES///////////////////
-            
+
 
         //    //MemoryStream ms = new MemoryStream();
         //    //byte[] bytes = Convert.FromBase64String(Session["ATM_VERIF_IMG21"].ToString());
@@ -42,12 +39,12 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
         //    //{
         //    //    imgDisco.ImageUrl = Image.FromStream(ms);
         //    //}
-            
+
         //    //////////////////CONVERTIR IMAGENES///////////////////
-            
+
         //}
         void llenarForm()
-        {                     
+        {
             //IMAGEN1
             string vImagen1 = Session["ATM_VERIF_IMG1"].ToString();
             string srcImgen1 = "data:image;base64," + vImagen1;
@@ -90,7 +87,7 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             imgTeclado.Src = srcImgen10;
             //IMAGEN11
             string vImagen11 = Session["ATM_VERIF_IMG21"].ToString();
-            string srcImgen11= "data:image;base64," + vImagen11;
+            string srcImgen11 = "data:image;base64," + vImagen11;
             imgClimatizacion.Src = srcImgen11;
             //IMAGEN12
             string vImagen12 = Session["ATM_VERIF_IMG22"].ToString();
@@ -98,35 +95,35 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
             imgEnergia.Src = srcImgen12;
 
             // Session["ATM_CODVERIF"].ToString(); 
-            txtnomATM.Text= Session["ATM_NOMBREVERIF"].ToString();
-           txtdireccion.Text= Session["ATM_DIRECCIONVERIF"].ToString();
-           txtip.Text= Session["ATM_IPVERIF"].ToString();
-           txtUbicacionATM.Text= Session["ATM_UBICACIONVERIF"].ToString();
-           txtsucursal.Text= Session["ATM_SUCURSALVERIF"].ToString();
-           txtzonaVerif.Text= Session["ATM_ZONAVERIF"].ToString();        
-           TxFechaInicio.Text= Session["ATM_HRINICIOVERIF"].ToString();
-           TxFechaRegreso.Text= Session["ATM_HRFINVERIF"].ToString();
-           txtsysaid.Text= Session["ATM_SYSAIDVERIF"].ToString();
-           txtTecnicoResponsable.Text= Session["ATM_TECNICOVERIF"].ToString();
-           txtidentidad.Text= Session["ATM_IDENTIDADVERIF"].ToString();
-           txtcodATM.Text= Session["ATM_CODATMVERIF"].ToString();
-           txtobseracionesVerif.Text= Session["ATM_OBSERVACIONESVERIF"].ToString();
-           txthsalidaInfa.Text= Session["ATM_HRSALIDAINFAVERIF"].ToString();
-           txtHllegadaInfatlan.Text= Session["ATM_HRENTRADAINFAVERIF"].ToString();
-            txtpuertoVerif.Text= Session["ATM_PUERTOVERIF"].ToString();
-           txtSerieDiscoDuro.Text= Session["ATM_SERIEDISCOVERIF"].ToString();
-           txtcapacidadDiscoVerif.Text= Session["ATM_CAPACIDADDISCODUROVERIF"].ToString();
-           txtserieATM.Text= Session["ATM_SERIEATMVERIF"].ToString();
-           txtinventarioVerif.Text= Session["ATM_INVENTARIOVERIF"].ToString();
-           txtramVerif.Text= Session["ATM_RAMVERIF"].ToString();
-           txtlongitudATM.Text= Session["ATM_LONGITUDVERIF"].ToString();
-           txtlatitudATM.Text= Session["ATM_LATITUDVERIF"].ToString();
-           txtsoVerif.Text= Session["ATM_SOVERIF"].ToString();
-           txtversionswVerif.Text= Session["ATM_VERSIONVERIF"].ToString();
-           txtTecladoVerif.Text= Session["ATM_TECLADOVERIF"].ToString();
-           txtTipoProcesadorVerif.Text= Session["ATM_PROCESADORVERIF"].ToString();
-           txtTipoCargaVerif.Text= Session["ATM_TIPOCARGAVERIF"].ToString();
-           txtmarcaVerif.Text= Session["ATM_MARCAVERIF"].ToString();
+            txtnomATM.Text = Session["ATM_NOMBREVERIF"].ToString();
+            txtdireccion.Text = Session["ATM_DIRECCIONVERIF"].ToString();
+            txtip.Text = Session["ATM_IPVERIF"].ToString();
+            txtUbicacionATM.Text = Session["ATM_UBICACIONVERIF"].ToString();
+            txtsucursal.Text = Session["ATM_SUCURSALVERIF"].ToString();
+            txtzonaVerif.Text = Session["ATM_ZONAVERIF"].ToString();
+            TxFechaInicio.Text = Session["ATM_HRINICIOVERIF"].ToString();
+            TxFechaRegreso.Text = Session["ATM_HRFINVERIF"].ToString();
+            txtsysaid.Text = Session["ATM_SYSAIDVERIF"].ToString();
+            txtTecnicoResponsable.Text = Session["ATM_TECNICOVERIF"].ToString();
+            txtidentidad.Text = Session["ATM_IDENTIDADVERIF"].ToString();
+            txtcodATM.Text = Session["ATM_CODATMVERIF"].ToString();
+            txtobseracionesVerif.Text = Session["ATM_OBSERVACIONESVERIF"].ToString();
+            txthsalidaInfa.Text = Session["ATM_HRSALIDAINFAVERIF"].ToString();
+            txtHllegadaInfatlan.Text = Session["ATM_HRENTRADAINFAVERIF"].ToString();
+            txtpuertoVerif.Text = Session["ATM_PUERTOVERIF"].ToString();
+            txtSerieDiscoDuro.Text = Session["ATM_SERIEDISCOVERIF"].ToString();
+            txtcapacidadDiscoVerif.Text = Session["ATM_CAPACIDADDISCODUROVERIF"].ToString();
+            txtserieATM.Text = Session["ATM_SERIEATMVERIF"].ToString();
+            txtinventarioVerif.Text = Session["ATM_INVENTARIOVERIF"].ToString();
+            txtramVerif.Text = Session["ATM_RAMVERIF"].ToString();
+            txtlongitudATM.Text = Session["ATM_LONGITUDVERIF"].ToString();
+            txtlatitudATM.Text = Session["ATM_LATITUDVERIF"].ToString();
+            txtsoVerif.Text = Session["ATM_SOVERIF"].ToString();
+            txtversionswVerif.Text = Session["ATM_VERSIONVERIF"].ToString();
+            txtTecladoVerif.Text = Session["ATM_TECLADOVERIF"].ToString();
+            txtTipoProcesadorVerif.Text = Session["ATM_PROCESADORVERIF"].ToString();
+            txtTipoCargaVerif.Text = Session["ATM_TIPOCARGAVERIF"].ToString();
+            txtmarcaVerif.Text = Session["ATM_MARCAVERIF"].ToString();
 
             if (Session["ATM_VERIF_PREG1"].ToString() == "Si")
                 ckpasos1.SelectedValue = "1";
@@ -168,11 +165,11 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
                 ckpasos19.SelectedValue = "19";
             if (Session["ATM_VERIF_PREG20"].ToString() == "Si")
                 ckpasos20.SelectedValue = "20";
-           
+
             txtPreguntaAntiskimming.Text = Session["ATM_VERIF_PREG23"].ToString();
             txtantiSkimming.Text = Session["ATM_VERIF_RESP23"].ToString();
         }
-       
+
         public void Mensaje(string vMensaje, WarningType type)
         {
             ScriptManager.RegisterStartupScript(this.Page, typeof(Page), "text", "infatlan.showNotification('top','center','" + vMensaje + "','" + type.ToString().ToLower() + "')", true);
@@ -189,10 +186,10 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
         protected void btnModalVerif_Click(object sender, EventArgs e)
         {
-            
+
             try
             {
-                string vQuery = "STEISP_ATM_VERIFICACION 5, '" + Session["USUARIO"].ToString() + "','" + Session["ATM_CODVERIF"] + "'";                   
+                string vQuery = "STEISP_ATM_VERIFICACION 5, '" + Session["USUARIO"].ToString() + "','" + Session["ATM_CODVERIF"] + "'";
                 Int32 vInfo = vConexion.ejecutarSQL(vQuery);
                 if (vInfo == 1)
                 {
@@ -218,14 +215,14 @@ namespace Infatlan_STEI_ATM.pages.mantenimiento
 
         protected void btnRechazarModal_Click(object sender, EventArgs e)
         {
-            if(txtmotivoRechazo.Text=="" || txtmotivoRechazo.Text == string.Empty)
+            if (txtmotivoRechazo.Text == "" || txtmotivoRechazo.Text == string.Empty)
             {
                 lbValidarModal2.Text = "Especifique motivo por el que devuelve lista de verificación.";
                 lbValidarModal2.Visible = true;
             }
             else
             {
-                
+
                 try
                 {
                     string vQuery = "STEISP_ATM_VERIFICACION 6, '" + Session["USUARIO"].ToString() + "','" + Session["ATM_CODVERIF"] + "'";

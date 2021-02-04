@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Infatlan_STEI_ATM.clases;
+using System;
+using System.Data;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Infatlan_STEI_ATM.clases;
-using System.Data;
-using System.IO;
-using System.Configuration;
 
 namespace Infatlan_STEI_ATM.pages.permisos
 {
@@ -76,7 +71,7 @@ namespace Infatlan_STEI_ATM.pages.permisos
             try
             {
                 string vUsuario = "";
-                if (DDLUsuarios.SelectedValue=="0")
+                if (DDLUsuarios.SelectedValue == "0")
                 {
                     limpiar();
                     DIVTable.Visible = false;
@@ -84,11 +79,11 @@ namespace Infatlan_STEI_ATM.pages.permisos
                 }
                 else
                 {
-                   limpiar();
+                    limpiar();
                     DIVTable.Visible = true;
                     BtnAceptar.Visible = true;
 
-                    
+
                     DataTable vDatos = new DataTable();
                     String vQuery = "[STEISP_ATM_Generales] 46,'" + DDLUsuarios.SelectedValue + "'";
                     vDatos = vConexion.ObtenerTabla(vQuery);
@@ -108,7 +103,7 @@ namespace Infatlan_STEI_ATM.pages.permisos
 
                 }
 
-                
+
 
             }
             catch (Exception ex)
@@ -123,7 +118,8 @@ namespace Infatlan_STEI_ATM.pages.permisos
             {
                 Mensaje("Seleccione un usuario", WarningType.Success);
             }
-            else {
+            else
+            {
                 String vUsuario = "";
                 DataTable vDatos2 = new DataTable();
                 String vQuery2 = "[STEISP_ATM_Generales] 46,'" + DDLUsuarios.SelectedValue + "'";
