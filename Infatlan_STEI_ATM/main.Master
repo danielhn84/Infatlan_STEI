@@ -54,11 +54,10 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="/default.aspx" >
                         <b style="margin-left: 10px">
-                            <%--<img src="/assets/images/logo-text.png" alt="homepage" class="dark-logo" />
-                            <img src="/assets/images/logo_mini.png" alt="homepage" class="light-logo" />--%>
+                            <img src="/assets/images/favicon_blanco.fw.png" width="30" alt="homepage" class="light-logo" />
                         </b>
-                        <span >
-                            <img src="/assets/images/infatlan_blanco.fw.png" width="150" class="light-logo" alt="homepage" />
+                        <span>
+                            <img src="/assets/images/Imagen2S.png" width="120" class="light-logo mt-2" alt="homepage" />
                         </span>
                     </a>
                 </div>
