@@ -15,6 +15,15 @@ namespace Infatlan_STEI.paginas.reportes
     {
 
         /// <summary>
+        /// Control LitFormulario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal LitFormulario;
+
+        /// <summary>
         /// Control UPCalls.
         /// </summary>
         /// <remarks>

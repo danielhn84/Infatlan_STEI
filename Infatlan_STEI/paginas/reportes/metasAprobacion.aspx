@@ -25,7 +25,9 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Reportes</a></li>
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Cumplimiento</a></li>
-                    <li class="breadcrumb-item active">Formulario</li>
+                    <li class="breadcrumb-item active">
+                        <asp:Literal Text="" ID ="LitFormulario" runat="server" />
+                    </li>
                 </ol>
             </div>
         </div>

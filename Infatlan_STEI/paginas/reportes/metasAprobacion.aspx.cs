@@ -20,6 +20,7 @@ namespace Infatlan_STEI.paginas.reportes
                             Response.Redirect("/default.aspx");
 
                         String vId = Session["CUMPL_ID_REPORTE"].ToString();
+                        LitFormulario.Text = "Reporte " + vId;
                         cargarDatos(vId);
                     }else{
                         Response.Redirect("/login.aspx");

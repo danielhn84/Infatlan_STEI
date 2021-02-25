@@ -7,14 +7,10 @@ namespace Infatlan_STEI
     public partial class login : System.Web.UI.Page
     {
         db vConexion = new db();
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            try
-            {
+        protected void Page_Load(object sender, EventArgs e){
+            try{
 
-            }
-            catch (Exception ex)
-            {
+            }catch (Exception ex){
                 throw new Exception(ex.Message);
             }
         }
